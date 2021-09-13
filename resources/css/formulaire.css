@@ -1,0 +1,91 @@
+input {
+	border: none;
+	background:unset;
+	color:inherit;
+}
+input:focus {
+	border:none;
+	outline:none;
+}
+textarea {
+	border:none;
+	background: unset;
+	resize:none;
+    color:inherit;
+}
+textarea:focus {
+	outline:none;
+}
+
+.champs_conteneur {
+	border: none;
+	display: table;
+    padding: 13px 25px;
+    border-radius: 25px;
+    font-size: 1em;
+	color:inherit;
+    margin:10px 0px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.champs.flex {
+    display:flex;
+    width:100%;
+    white-space: nowrap;
+}
+.champs.flex .input{
+    width:100%;
+}
+.champs > span.titre {
+	transition: opacity 0.2s cubic-bezier(0.8,0,0,0.8), font-size 0.2s cubic-bezier(0.8,0,0,0.8);
+	user-select: none;
+	font-size: 1.1em;
+}
+.champs:focus-within > span.titre{
+	opacity: 0.6;
+}
+.champs > .input {
+	display: inline-block;
+	margin-left:5px;
+	font-size: 1em;
+	min-width:10ex;
+    border-bottom: 1px solid transparent;
+	font-family: system-ui;
+}
+.champs > .input:hover {
+	cursor:text;
+}
+.champs > .input:focus, .champs.border:not([empty="false"]) > .input {
+	outline:none;
+	border-bottom: 1px dashed rgba(128,128,128,0.5);
+}
+.champs > .input::placeholder{
+	color:inherit;
+	opacity:0.6;
+}
+.champs[empty="false"] span.titre {
+	/* font-size:0px; */
+	opacity:0.6;
+}
+.champs textarea {
+    width:100%;
+	margin-top:3px;
+	padding-top:3px;
+	font-size:1em;
+	font-family: inherit;
+	border: 1px solid transparent;
+	/* border-top:1px solid rgba(128,128,128,0.5); */
+}
+.champs.radio {
+	display:grid;
+}
+
+
+body.dark-theme .champs_conteneur {
+	background-color: #292929;
+	box-shadow:3px 3px 8px 1px rgb(0,0,0,0.7) inset, -2px -3px 6px 1px rgba(255,255,255,0.2) inset; 
+}
+body.light-theme .champs_conteneur {
+	background-color: #F6F6F7;
+	box-shadow:3px 3px 8px 1px rgba(0,0,0,0.2) inset, -4px -5px 4px 1px #ffffff inset; 
+}

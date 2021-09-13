@@ -1,0 +1,339 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+.panneau {
+=======
+.modal-container {
+>>>>>>> e511545 (interface de connexion)
+=======
+.panneau {
+>>>>>>> e664cfc (ajout de la page cookies)
+  display: flex;
+  width: 100%;
+  max-width: 720px;
+  border-radius: 20px;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  background: var(--gris_3);
+}
+
+.titre {
+<<<<<<< HEAD
+  font-size: 26px;
+  margin: 0;
+  font-weight: 400;
+  color: var(--couleur_accentuation_air);
+}
+
+.description {
+  margin: 6px 0 30px 0;
+}
+
+.panneau_gauche {
+=======
+  background: var(--sombre_gris_3);
+=======
+  background: var(--gris_3);
+>>>>>>> a81ef2f (variables de couleurs)
+}
+
+.modal-title {
+=======
+>>>>>>> e664cfc (ajout de la page cookies)
+  font-size: 26px;
+  margin: 0;
+  font-weight: 400;
+  color: var(--couleur_accentuation_air);
+}
+
+.description {
+  margin: 6px 0 30px 0;
+}
+
+<<<<<<< HEAD
+.modal-left {
+>>>>>>> e511545 (interface de connexion)
+=======
+.panneau_gauche {
+>>>>>>> e664cfc (ajout de la page cookies)
+  padding: 30px;
+  flex: 2;
+  transition-duration: 0.5s;
+}
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+.panneau_droite {
+=======
+.modal-right {
+>>>>>>> e511545 (interface de connexion)
+=======
+.panneau_droite {
+>>>>>>> e664cfc (ajout de la page cookies)
+  flex: 2;
+  font-size: 0;
+  transition: 0.3s;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+.panneau_droite img {
+=======
+.modal-right img {
+>>>>>>> e511545 (interface de connexion)
+=======
+.panneau_droite img {
+>>>>>>> e664cfc (ajout de la page cookies)
+  width: 100%;
+  transition-duration: 1.2s;
+}
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+.groupe_boutons {
+=======
+.modal-buttons {
+>>>>>>> e511545 (interface de connexion)
+=======
+.groupe_boutons {
+>>>>>>> e664cfc (ajout de la page cookies)
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+.input_groupe {
+=======
+.input-block {
+>>>>>>> e511545 (interface de connexion)
+=======
+.input_groupe {
+>>>>>>> e664cfc (ajout de la page cookies)
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  transition: 0.3s;
+  border: 0.3px solid transparent;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  background: var(--gris_2);
+}
+
+.input_groupe label {
+<<<<<<< HEAD
+=======
+=======
+  background: var(--gris_2);
+>>>>>>> a81ef2f (variables de couleurs)
+}
+
+.input-block label {
+>>>>>>> e511545 (interface de connexion)
+=======
+>>>>>>> e664cfc (ajout de la page cookies)
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  transition: 0.3s;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  color: var(--couleur_accentuation_air);
+}
+
+.input_groupe input {
+<<<<<<< HEAD
+=======
+=======
+  color: var(--couleur_accentuation_air);
+>>>>>>> a81ef2f (variables de couleurs)
+}
+
+.input-block input {
+>>>>>>> e511545 (interface de connexion)
+=======
+>>>>>>> e664cfc (ajout de la page cookies)
+  outline: 0;
+  border: 0;
+  padding: 4px 0 0;
+  font-size: 1em;
+}
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+.input_groupe::-moz-placeholder {
+  color: #ccc;
+}
+
+.input_groupe:-ms-input-placeholder {
+  color: #ccc;
+}
+
+.input_groupe::placeholder {
+  color: #ccc;
+}
+
+.input_groupe:focus-within {
+  border: 0.3px solid var(--couleur_accentuation_air);
+=======
+.input-block::-moz-placeholder {
+=======
+.input_groupe::-moz-placeholder {
+>>>>>>> e664cfc (ajout de la page cookies)
+  color: #ccc;
+}
+
+.input_groupe:-ms-input-placeholder {
+  color: #ccc;
+}
+
+.input_groupe::placeholder {
+  color: #ccc;
+}
+
+<<<<<<< HEAD
+.input-block:focus-within {
+<<<<<<< HEAD
+  border: 0.3px solid;
+>>>>>>> e511545 (interface de connexion)
+=======
+=======
+.input_groupe:focus-within {
+>>>>>>> e664cfc (ajout de la page cookies)
+  border: 0.3px solid var(--couleur_accentuation_air);
+>>>>>>> a81ef2f (variables de couleurs)
+}
+
+#nuage {
+  stroke-width: 35px;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 2030;
+  stroke-dashoffset: 2030;
+  fill: none;
+  -webkit-animation: dash 3s ease-in-out infinite;
+          animation: dash 3s ease-in-out infinite;
+<<<<<<< HEAD
+<<<<<<< HEAD
+  stroke: var(--couleur_accentuation_air);
+=======
+>>>>>>> e511545 (interface de connexion)
+=======
+  stroke: var(--couleur_accentuation_air);
+>>>>>>> a81ef2f (variables de couleurs)
+}
+
+@-webkit-keyframes dash {
+  50% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -2030;
+  }
+}
+
+@keyframes dash {
+  50% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -2030;
+  }
+}
+
+@media (max-width: 750px) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+  .panneau {
+    width: 90%;
+  }
+
+  .panneau_droite {
+    display: none;
+  }
+
+  .groupe_boutons {
+=======
+  .modal-container {
+=======
+  .panneau {
+>>>>>>> e664cfc (ajout de la page cookies)
+    width: 90%;
+  }
+
+  .panneau_droite {
+    display: none;
+  }
+
+<<<<<<< HEAD
+  .modal-buttons {
+>>>>>>> e511545 (interface de connexion)
+=======
+  .groupe_boutons {
+>>>>>>> e664cfc (ajout de la page cookies)
+    display: block;
+  }
+}
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+body.dark-theme .modal-container {
+  background: var(--sombre_gris_3);
+}
+
+body.dark-theme .modal-title {
+  color: var(--sombre_couleur_accentuation_air);
+}
+
+body.dark-theme .input-block {
+  background: var(--sombre_gris_2);
+}
+
+body.dark-theme .input-block label {
+  color: var(--sombre_couleur_accentuation_air);
+}
+
+body.dark-theme .input-block:focus-within {
+  border-color: var(--sombre_couleur_accentuation_air);
+}
+
+body.dark-theme #nuage {
+  stroke: var(--sombre_couleur_accentuation_air);
+}
+
+body.light-theme .modal-container {
+  background: var(--clair_gris_3);
+}
+
+body.light-theme .modal-title {
+  color: var(--clair_couleur_accentuation_air);
+}
+
+body.light-theme .input-block {
+  background: var(--clair_gris_2);
+}
+
+body.light-theme .input-block label {
+  color: var(--clair_couleur_accentuation_air);
+}
+
+body.light-theme .input-block:focus-within {
+  border-color: var(--clair_couleur_accentuation_air);
+}
+
+body.light-theme #nuage {
+  stroke: var(--clair_couleur_accentuation_air);
+}
+
+>>>>>>> e511545 (interface de connexion)
+=======
+>>>>>>> a81ef2f (variables de couleurs)

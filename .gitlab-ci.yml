@@ -1,0 +1,22 @@
+stages:
+  - deploy
+
+# NE PAS MODIFIER
+# À moins de savoir très précisément ce que vous faites, et c'est probablement pas le cas.
+# Si vous avez vraiment besoin de changer quelque chose, demandez à Victor Chapalain. Si il est trop vieux, décédé, pas interessé,
+# Retrouvez le document qui explique comment mirage a été configuré.
+# NE PAS MODIFIER
+production:
+  # !Archi sensible!
+  stage: deploy
+  script:
+    - cd /var/www/html/site-air/
+    - git stash
+    - git pull
+    - npm run prod
+  environment:
+    name: Site AIR
+    url: https://air.etu.imt-lille-douai.fr/
+  only:
+    - main
+  allow_failure: true

@@ -1,0 +1,232 @@
+html, body {
+	margin: 0;
+	padding:0;
+	left:0;
+	top:0;
+	height:100%;
+	box-sizing:border-box;
+	font-family: system-ui;
+	background-attachment: fixed !important;
+}
+
+a {
+	text-decoration:none;
+	color:inherit;
+	&:hover {
+		text-decoration:none;
+		color:inherit;
+	}
+}
+
+@font-face {
+	font-family: 'GearsOfPeace';
+	src: url('../fonts/GearsOfPeace.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+/* Main Content */
+#wrapper{
+	width: 100%;
+	min-height: 100%;
+	position: absolute;
+	box-sizing:border-box;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+#contenu {
+	@media (max-width: 499.98px) {
+		&.tres_petit{
+		width:100%;
+		}
+	}
+	@media (min-width: 500px) {
+		&.tres_petit{
+		max-width:500px;
+		padding:30px;
+		}
+	}
+
+	@media (max-width: 767.98px) {
+		&.petit{
+		width:100%;
+		}
+	}
+	@media (min-width: 768px) {
+		&.petit{
+		max-width:768px;
+		padding:30px;
+		}
+	}
+
+	@media (max-width: 1049.98px) {
+		&.moyen{
+			width:100%;
+		}
+	}
+	@media (min-width: 1050px) {
+		&.moyen{
+			max-width:1050px;
+			padding:30px;
+		}
+	}
+
+	@media (max-width: 1299.98px) {
+		&.grand{
+			width:100%;
+		}
+	}
+	@media (min-width: 1300px) {
+		&.grand{
+			max-width:1300px;
+			padding:30px;
+		}
+	}
+
+	&.entier{
+		width:100%;
+	}
+}
+
+h1{
+	text-align: center;
+}
+p.explication {
+	text-align: justify;
+	text-align-last: left;
+	margin-bottom: 30px;
+}
+
+.centre-element {
+	margin-left:auto !important;
+	margin-right:auto !important;
+	display:block;
+}
+.centre-enfants {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+.centre-vertical-enfant {
+	align-items: center;
+}
+
+.texte_petit {
+	font-size:0.7em;
+}
+
+.bouton {
+	padding: 10px 25px 12px 25px;
+	font-size:1.1em;
+	border-radius:50px;
+	min-width: 100px;
+	width: fit-content;
+	display:block;
+	cursor:pointer;
+	user-select: none;
+	text-align: center;
+	font-family: system-ui;
+	
+	&[class^="iconsax-"]:before,&[class^="iconsax-"]:after {
+		font-size:1.3em;
+	}
+	&[disabled] {
+		opacity:0.4;
+		cursor:not-allowed;
+	}
+	&:hover {
+		color:var(--couleur_accentuation);
+	}
+	& span {
+		vertical-align: middle;
+	}
+	
+	&.margin_tout {
+		margin:15px;
+	}
+	&.margin_vertical {
+		margin:15px 0px;
+	}
+
+	&.primaire {
+		color:var(--couleur_police_accentuation);
+		background-color: var(--couleur_accentuation);
+		transition: opacity 0.1s ease-in-out;
+		border:none;
+		text-transform: uppercase;
+		&:hover {
+			opacity: 0.7;
+		}
+	}
+	&.secondaire {
+		border:1px solid var(--couleur_accentuation);
+		background: transparent;
+		color: var(--couleur_accentuation);
+		transition: background 0.1s ease-in-out;
+	}
+	&.tertiaire {
+		background: transparent;
+		color: var(--couleur_accentuation);
+		transition: background 0.1s ease-in-out;
+	}
+}
+
+body.dark-theme {
+	background: var(--gris_3);
+	color: #fff;
+
+	--gris_1: #2e2e33;
+	--gris_2: #212227;
+	--gris_3: #17191b;
+	--couleur_accentuation_air:#cc3345;
+	--couleur_accentuation:#cc3345;
+	--couleur_police_accentuation_air:#ffffff;
+	--couleur_police_accentuation:#ffffff;
+	--couleur_police_primaire:#ffffff;
+	--couleur_police_secondaire:#d8d8d8;
+
+	& .ombre_grande {
+		box-shadow:0px 13px 26px 0px rgba(0, 0, 0, 0.4);
+	}
+	& .ombre_petite {
+		box-shadow:0px 5px 15px 0px rgba(0, 0, 0, 0.2); 
+	}
+	& .ombre_inset {
+		box-shadow:0px 2px 5px 1px rgb(0,0,0,0.2) inset; 
+	}
+	& .bouton.secondaire:hover, & .bouton.tertiaire:hover {
+		background-color: #c8152a38;
+	}
+}
+ 
+body.light-theme {
+	background: var(--gris_3);
+	color:#000;
+
+	--gris_1: #ececec;
+	--gris_2: #fcfcfc;
+	--gris_3: #f5f5f5;
+	--couleur_accentuation_air:#c6152a;
+	--couleur_accentuation:#c6152a;
+	--couleur_police_accentuation_air:#ffffff;
+	--couleur_police_accentuation:#ffffff;
+	--couleur_police_primaire:#000000;
+	--couleur_police_secondaire:#2b2b2b;
+
+	& .ombre_grande {
+		box-shadow:0px 13px 26px 0px rgba(0, 0, 0, 0.15);
+	}
+	& .ombre_petite {
+		box-shadow:0px 5px 15px 0px rgba(0, 0, 0, 0.15); 
+	}
+	& .ombre_inset {
+		box-shadow:0px 2px 5px 1px rgba(0, 0, 0, 0.2) inset;
+	}
+	& .bouton.secondaire:hover, & .bouton.tertiaire:hover {
+		background-color: #c8152a38;
+	}
+}

@@ -1,0 +1,162 @@
+:root{
+	--taille_nav: 230px;
+}
+
+@font-face {
+	font-family: 'GearsOfPeace';
+	src: url('../fonts/GearsOfPeace.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+#logo_air {
+	transition: all 0.3s cubic-bezier(0.7, 0, 0, 0.7);
+}
+#logo_air:hover {
+	transform: scale(1.1,1.1);
+	cursor:pointer; 
+}
+.sidebar-nav-icon {
+	font-family: 'GearsOfPeace';
+	font-size:3em;
+	line-height: 1.1;
+	user-select: none;
+}
+
+/* Sidebar */
+#sidebar-wrapper{
+	z-index:1;
+	position: fixed;
+	width: var(--taille_nav);
+	height:100%;
+	padding:20px 0px;
+	box-sizing: border-box;
+}
+#sidenav{
+	width:100%;
+	height: 100%;
+	display:flex;
+	align-items:center;
+	overflow-y:auto;
+	border-radius:0px 25px 25px 0px;
+	position:relative;
+	background-color: var(--gris_3);
+}
+
+/* Sidebar styling */
+.sidebar-nav{
+	padding:0;
+	list-style:none;
+	text-align:left;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.sidebar-nav li{
+	line-height:40px;  
+	max-width:220px; /* taille_nav */
+	padding: 10px 5px 10px 0px;
+	font-weight: 500;
+}
+.sidebar-nav li:hover{
+	color:rgb(133, 133, 133);
+}
+.sidebar-nav li:hover:before{
+	color:var(--couleur_accentuation);
+}
+.sidebar-nav li span{
+	vertical-align: middle;
+}
+#sidenav [class^="iconsax-"]:before {
+	font-size: 1.4rem;
+	vertical-align: middle;
+	margin-right:0.5em;
+}
+
+
+
+
+/* tablette, téléphone, téléphone en portrait */
+@media (max-width: 767.98px) {
+	#hamburger {
+		width: 40px;
+		height: 40px;
+		border:inherit;
+		position:fixed;
+		top:20px;
+		left:20px;
+		border-radius:5px;
+		z-index:999;
+		cursor:pointer;
+		background-color: var(--gris_3);
+	}
+	#hamburger span {
+		width: 80%;
+		height: 2px;
+		margin: 0 auto;
+		display: block;
+		transition: all 0.3s cubic-bezier(0.9, 0, 0, 0.9);
+		
+		transform: none;
+		opacity: 1;
+		margin: 5px auto;
+	}
+
+	#sidebar-wrapper.expand #hamburger span:first-of-type {transform: rotate(45deg) translate(5px, 4px);}
+	#sidebar-wrapper.expand #hamburger span:nth-of-type(2) {opacity: 0;}
+	#sidebar-wrapper.expand #hamburger span:last-of-type {transform: rotate(-45deg) translate(6px, -5px);}
+
+	#sidebar-wrapper #sidenav{
+		display: none;
+	}
+	#sidebar-wrapper.expand #sidenav{
+		display: flex;
+	}
+	#sidebar-wrapper.expand #hamburger{
+		background-color: transparent;
+	}
+}
+
+@media (min-width: 768px) {
+	#wrapper{
+		padding-left:calc(var(--taille_nav) + 20px);
+	}
+	#hamburger{
+		display: none;
+	}
+}
+
+/* téléphone en portrait */
+@media (max-height: 500px) {
+	.sidebar-nav-icon{
+		display:none;
+	}
+	.sidebar-nav-bottom{
+		position:relative;
+	}
+	#sidenav{
+		align-items: inherit !important;
+	}
+}
+@media (min-device-height: 500px) {
+	.sidebar-nav-icon{
+		position:absolute;
+		top:20px;
+		text-align:center;
+		width:100%;
+	}
+
+	.sidebar-nav-bottom{
+		position:absolute;
+		bottom:5px;
+	}
+}
+
+
+
+body.dark-theme #hamburger span {
+	background-color: rgb(200, 200, 200);
+}
+body.light-theme #hamburger span {
+	background-color: #555;
+}

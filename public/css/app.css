@@ -66,6 +66,7 @@ html, body {
 	font-family: system-ui;
 	background-attachment: fixed !important;
 }
+
 a {
 	text-decoration:none;
 	color:inherit;
@@ -74,7 +75,25 @@ a:hover {
 	text-decoration:none;
 	color:inherit;
 }
-
+a[href^="mailto:"], a[href^="http"]{
+	text-decoration: underline;
+	position: relative;
+	padding: 1px 5px;
+	margin-right:1.6em;
+}
+a[href^="mailto:"]:after, a[href^="http"]:after{
+	font-family: 'icomoon' !important;
+	font-style: normal;
+	position:absolute;
+	margin-top: 0.25em;
+	margin-left:0.5em;
+}
+a[href^="mailto:"]:after{
+	content: "\E91F" !important;
+}
+a[href^="http"]:after{
+	content: "\E91C" !important;
+}
 
 /* Main Content */
 #wrapper{
@@ -163,43 +182,6 @@ p.explication {
 }
 
 
-@font-face {
-	font-family: 'icomoon';
-	src: url(/fonts/icomoon.ttf?0223f56c9c5a3a7f33a0820728552c90) format('truetype');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
-}
-
-[class^="icon-before-"]:before, [class*=" icon-before-"]:before {
-	font-family: 'icomoon' !important;
-	margin-right:20px;
-	vertical-align: middle;
-}
-
-[class^="icon-after-"]:after, [class*=" icon-after-"]:after {
-	font-family: 'icomoon' !important;
-	margin-left:20px;
-	vertical-align: middle;
-}
-
-.icon-before-mail:before,.icon-after-mail:after {content: "\E900";}
-.icon-before-document:before,.icon-after-document:after {content: "\E901";}
-.icon-before-document1:before,.icon-after-document1:after {content: "\E902";}
-.icon-before-envoyer:before,.icon-after-envoyer:after {content: "\E903";}
-.icon-before-profil:before,.icon-after-profil:after {content: "\E904";}
-.icon-before-ampoule:before,.icon-after-ampoule:after {content: "\E905";}
-.icon-before-lune:before,.icon-after-lune:after {content: "\E906";}
-.icon-before-tulipe:before,.icon-after-tulipe:after {content: "\E907";}
-.icon-before-montagne:before,.icon-after-montagne:after {content: "\E908";}
-.icon-before-pin:before,.icon-after-pin:after {content: "\E909";}
-.icon-before-avion:before,.icon-after-avion:after {content: "\E90A";}
-.icon-before-maison:before,.icon-after-maison:after {content: "\E90B";}
-.icon-before-terre:before,.icon-after-terre:after {content: "\E90C";}
-
-
-
-
 
 body.dark-theme {
 	background: linear-gradient(103deg, rgba(30,30,30,1) 0%, rgba(19,19,19,1) 100%);
@@ -210,12 +192,6 @@ body.light-theme {
 	color:#000;
 }
 
-body.dark-theme [class^="icon-"]:before, [class*=" icon-"]:before {
-	color:rgb(255, 255, 255);
-}
-body.light-theme [class^="icon-"]:before, [class*=" icon-"]:before {
-	color:#000;
-}
 
 
 body.dark-theme .fond {
@@ -518,8 +494,11 @@ textarea:focus {
     border-bottom: 1px solid transparent;
 	font-family: system-ui;
 }
+.champs > .input[type=text]:hover {
+	cursor:text !important;
+}
 .champs > .input:hover {
-	cursor:text;
+	cursor:pointer;
 }
 .champs > .input:focus, .champs.border:not([empty="false"]) > .input {
 	outline:none;
@@ -600,4 +579,100 @@ body.light-theme .champs_conteneur {
 }
 .documentation_liste:hover .titre {
 	color: var(--couleur_accentuation);
+}@font-face {
+	font-family: 'icomoon';
+	src: url(/fonts/icomoon.ttf?d60049544914fc30a783f483c23de058) format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
 }
+
+[class^="icon-before-"]:before, [class*=" icon-before-"]:before {
+	font-family: 'icomoon' !important;
+	margin-right:1em;
+	vertical-align: middle;
+}
+
+[class^="icon-after-"]:after, [class*=" icon-after-"]:after {
+	font-family: 'icomoon' !important;
+	margin-left:1em;
+	vertical-align: middle;
+}
+body.dark-theme [class^="icon-"]:before, [class*=" icon-"]:before {
+	color:rgb(255, 255, 255);
+}
+body.light-theme [class^="icon-"]:before, [class*=" icon-"]:before {
+	color:#000;
+}
+
+.icon-before-ampoule-off:before {content: "\E90D";}
+.icon-before-fleche-circulaire:before {content: "\E90E";}
+.icon-before-fleche-carre:before {content: "\E90F";}
+.icon-before-fleche-simple:before {content: "\E910";}
+.icon-before-fleche:before {content: "\E911";}
+.icon-before-loupe:before {content: "\E912";}
+.icon-before-video:before {content: "\E913";}
+.icon-before-plus-carre:before {content: "\E914";}
+.icon-before-filtre:before {content: "\E915";}
+.icon-before-image:before {content: "\E916";}
+.icon-before-telephone:before {content: "\E917";}
+.icon-before-croix-carre:before {content: "\E918";}
+.icon-before-coche-carre:before {content: "\E919";}
+.icon-before-croix:before {content: "\E91A";}
+.icon-before-coche:before {content: "\E91B";}
+.icon-before-web:before {content: "\E91C";}
+.icon-before-poubelle:before {content: "\E91D";}
+.icon-before-cloche:before {content: "\E91E";}
+.icon-before-arobase:before {content: "\E91F";}
+.icon-before-event-ajouter:before {content: "\E920";}
+.icon-before-event-supprimer:before {content: "\E921";}
+.icon-before-event-valider:before {content: "\E922";}
+.icon-before-mail:before {content: "\E900";}
+.icon-before-document:before {content: "\E901";}
+.icon-before-document1:before {content: "\E902";}
+.icon-before-envoyer:before {content: "\E903";}
+.icon-before-profil:before {content: "\E904";}
+.icon-before-ampoule-on:before {content: "\E905";}
+.icon-before-lune:before {content: "\E906";}
+.icon-before-tulipe:before {content: "\E907";}
+.icon-before-montagne:before {content: "\E908";}
+.icon-before-pin:before {content: "\E909";}
+.icon-before-avion:before {content: "\E90A";}
+.icon-before-maison:before {content: "\E90B";}
+.icon-before-terre:before {content: "\E90C";}
+
+.icon-after-ampoule-off:after {content: "\E90D";}
+.icon-after-fleche-circulaire:after {content: "\E90E";}
+.icon-after-fleche-carre:after {content: "\E90F";}
+.icon-after-fleche-simple:after {content: "\E910";}
+.icon-after-fleche:after {content: "\E911";}
+.icon-after-loupe:after {content: "\E912";}
+.icon-after-video:after {content: "\E913";}
+.icon-after-plus-carre:after {content: "\E914";}
+.icon-after-filtre:after {content: "\E915";}
+.icon-after-image:after {content: "\E916";}
+.icon-after-telephone:after {content: "\E917";}
+.icon-after-croix-carre:after {content: "\E918";}
+.icon-after-coche-carre:after {content: "\E919";}
+.icon-after-croix:after {content: "\E91A";}
+.icon-after-coche:after {content: "\E91B";}
+.icon-after-web:after {content: "\E91C";}
+.icon-after-poubelle:after {content: "\E91D";}
+.icon-after-cloche:after {content: "\E91E";}
+.icon-after-arobase:after {content: "\E91F";}
+.icon-after-event-ajouter:after {content: "\E920";}
+.icon-after-event-supprimer:after {content: "\E921";}
+.icon-after-event-valider:after {content: "\E922";}
+.icon-after-mail:after {content: "\E900";}
+.icon-after-document:after {content: "\E901";}
+.icon-after-document1:after {content: "\E902";}
+.icon-after-envoyer:after {content: "\E903";}
+.icon-after-profil:after {content: "\E904";}
+.icon-after-ampoule-on:after {content: "\E905";}
+.icon-after-lune:after {content: "\E906";}
+.icon-after-tulipe:after {content: "\E907";}
+.icon-after-montagne:after {content: "\E908";}
+.icon-after-pin:after {content: "\E909";}
+.icon-after-avion:after {content: "\E90A";}
+.icon-after-maison:after {content: "\E90B";}
+.icon-after-terre:after {content: "\E90C";}

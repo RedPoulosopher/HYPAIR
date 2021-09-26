@@ -22,7 +22,13 @@ Route::get('accueil', function() {  return view('accueil'); });
 Route::get('commande', function() {  return view('commande'); });
 Route::get('connexion', function() {  return view('connexion'); });
 Route::get('markdown', function() {  return view('markdown'); });
-Route::get('documentation', function() { return  view('documentation'); });
-Route::get('documentations', function() { return  view('documentations'); });
-// Route::get('documentations', [\App\Http\Controllers\DocumentationController::class, 'index'])->name('documentations.index');
-// Route::get('documentations/{slug}', [\App\Http\Controllers\DocumentationController::class, 'show'])->name('documentations.show');
+
+Route::get('doc', function() {  return view('documentation.creation_moche'); });
+
+use App\Http\Controllers\DocumentationController;
+Route::get('nouvelle_documentation', [DocumentationController::class, 'create']);
+Route::post('nouvelle_documentation', [DocumentationController::class, 'store']);
+Route::get('nouvelle_documentation/{slug}', [DocumentationController::class, 'edit']);
+Route::post('nouvelle_documentation/{slug}', [DocumentationController::class, 'update']);
+Route::get('documentations', [DocumentationController::class, 'index']);
+Route::get('documentation/{slug}', [DocumentationController::class, 'show']);

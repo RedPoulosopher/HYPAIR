@@ -12,6 +12,7 @@ html, body {
 	font-family: system-ui;
 	background-attachment: fixed !important;
 }
+
 a {
 	text-decoration:none;
 	color:inherit;
@@ -20,7 +21,25 @@ a:hover {
 	text-decoration:none;
 	color:inherit;
 }
-
+a[href^="mailto:"], a[href^="http"]{
+	text-decoration: underline;
+	position: relative;
+	padding: 1px 5px;
+	margin-right:1.6em;
+}
+a[href^="mailto:"]:after, a[href^="http"]:after{
+	font-family: 'icomoon' !important;
+	font-style: normal;
+	position:absolute;
+	margin-top: 0.25em;
+	margin-left:0.5em;
+}
+a[href^="mailto:"]:after{
+	content: "\e91f" !important;
+}
+a[href^="http"]:after{
+	content: "\e91c" !important;
+}
 
 /* Main Content */
 #wrapper{
@@ -101,43 +120,6 @@ p.explication {
 }
 
 
-@font-face {
-	font-family: 'icomoon';
-	src: url('../fonts/icomoon.ttf?xpyhqp') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-	font-display: block;
-}
-
-[class^="icon-before-"]:before, [class*=" icon-before-"]:before {
-	font-family: 'icomoon' !important;
-	margin-right:20px;
-	vertical-align: middle;
-}
-
-[class^="icon-after-"]:after, [class*=" icon-after-"]:after {
-	font-family: 'icomoon' !important;
-	margin-left:20px;
-	vertical-align: middle;
-}
-
-.icon-before-mail:before,.icon-after-mail:after {content: "\e900";}
-.icon-before-document:before,.icon-after-document:after {content: "\e901";}
-.icon-before-document1:before,.icon-after-document1:after {content: "\e902";}
-.icon-before-envoyer:before,.icon-after-envoyer:after {content: "\e903";}
-.icon-before-profil:before,.icon-after-profil:after {content: "\e904";}
-.icon-before-ampoule:before,.icon-after-ampoule:after {content: "\e905";}
-.icon-before-lune:before,.icon-after-lune:after {content: "\e906";}
-.icon-before-tulipe:before,.icon-after-tulipe:after {content: "\e907";}
-.icon-before-montagne:before,.icon-after-montagne:after {content: "\e908";}
-.icon-before-pin:before,.icon-after-pin:after {content: "\e909";}
-.icon-before-avion:before,.icon-after-avion:after {content: "\e90a";}
-.icon-before-maison:before,.icon-after-maison:after {content: "\e90b";}
-.icon-before-terre:before,.icon-after-terre:after {content: "\e90c";}
-
-
-
-
 
 body.dark-theme {
 	background: linear-gradient(103deg, rgba(30,30,30,1) 0%, rgba(19,19,19,1) 100%);
@@ -148,12 +130,6 @@ body.light-theme {
 	color:#000;
 }
 
-body.dark-theme [class^="icon-"]:before, [class*=" icon-"]:before {
-	color:rgb(255, 255, 255);
-}
-body.light-theme [class^="icon-"]:before, [class*=" icon-"]:before {
-	color:#000;
-}
 
 
 body.dark-theme .fond {

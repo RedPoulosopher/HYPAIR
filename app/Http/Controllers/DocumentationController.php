@@ -3,71 +3,119 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use \App\Models\Documentations;
 
 class DocumentationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $documentations = [
-            "titre 01",
-            "titre 01",
-            "titre 01",
-            "titre 01",
-            "titre 01",
-            "titre 01",
-            "titre 01",
-        ];
 
-        return view ('documentations.index', compact('documentations'));
-    }
+	public function create()
+	{
+		return view('documentation.creation', ['title' => "Nouvelle documentation"]);
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($slug)
-    {
-        dd($slug);
-    }
+	public function index()
+	{
+		$doc = Documentations::select('titre','categories','slug')->get();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+		return view('documentation.index', ['documentations' => $doc]);
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+	public function fomulaire_traitement(Request $request, $is_creation){
+		$request->categories = explode(",",$request->categories);
+		sort($request->categories);
+
+		$validation = [
+			'confidentialite' => ['filled','numeric'],
+			'titre' => ['filled','max:128'],
+			'contenu' => ['filled','max:65000'],
+			'categories' => ['filled','distinct'],
+			'debut_mise_en_avant' => 'nullable|date_format:Y-m-d',
+			'fin_mise_en_avant' => 'nullable|date_format:Y-m-d'
+		];
+		if($is_creation){
+			$validation['langue'] = ['filled','max:3'];
+			$validation['ID_asso'] = ['filled','numeric'];//  ,Rule::in(['liste des ID asso'])
+		}
+		$this->validate($request, $validation);
+
+		if($request->has('mise_en_avant')){
+			$mise_en_avant=true;
+		}else{
+			$mise_en_avant=false;
+		}
+
+		$resultat = [
+			"confidentialite" => $request->confidentialite,
+			"titre" => $request->titre,
+			"slug" => Str::slug($request->titre, '-'),
+			"contenu" => $request->contenu,
+			"categories" => $request->categories,
+			"mise_en_avant" => $mise_en_avant,
+			"debut_mise_en_avant" => strlen($request->debut_mise_en_avant) ? $request->debut_mise_en_avant : null,
+			"fin_mise_en_avant" => strlen($request->fin_mise_en_avant) ? $request->fin_mise_en_avant : null
+		];
+		if($is_creation){
+			$resultat['langue'] = $request->langue;
+			$resultat['ID_asso'] = $request->ID_asso;
+		}
+		return $resultat;
+	}
+
+
+	public function store(Request $request)
+	{
+		$traitement = $this->fomulaire_traitement($request, true);
+
+		Documentations::create($traitement);
+
+   		return back()->with('success');
+	}
+
+
+	public function show($slug)
+	{
+		$doc = Documentations::where('slug', $slug);
+		if($doc->exists()){
+			$doc=$doc->first();
+		}else{
+			unset($doc);
+			$doc = (object) array();
+			$doc->titre = "";
+			$doc->contenu = "la documentation que vous demandez n'existe pas ou n'existe plus";
+		}
+		return view('documentation.show', ['documentation' => $doc]);
+	}
+
+
+	public function edit($slug)
+	{
+		$doc = Documentations::where('slug', $slug);
+		if($doc->exists()){
+			$doc=$doc->first();
+		}else{
+			unset($doc);
+			$doc = (object) array();
+			$doc->titre = "";
+			$doc->contenu = "la documentation que vous demandez n'existe pas ou n'existe plus";
+		}
+		return view('documentation.creation', ['documentation' => $doc, 'title' => "Modifier la documentation"]);
+	}
+
+
+	public function update(Request $request, $slug)
+	{
+		$traitement = $this->fomulaire_traitement($request, false);
+
+		Documentations::where('slug', $slug)->update($traitement);
+
+		return back()->with('success');
+	}
+
+
+	public function destroy($id)
+	{
+		Documentations::where('id', $id)->delete();
+	}
 }

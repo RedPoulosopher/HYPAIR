@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','passer une commande - AIR')
+@section('title','Passer une commande')
 
 @section('content')
 

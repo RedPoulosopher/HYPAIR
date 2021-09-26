@@ -52,8 +52,11 @@ textarea:focus {
     border-bottom: 1px solid transparent;
 	font-family: system-ui;
 }
+.champs > .input[type=text]:hover {
+	cursor:text !important;
+}
 .champs > .input:hover {
-	cursor:text;
+	cursor:pointer;
 }
 .champs > .input:focus, .champs.border:not([empty="false"]) > .input {
 	outline:none;

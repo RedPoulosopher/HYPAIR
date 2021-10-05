@@ -62,7 +62,7 @@
 
 			<h1>LE SITE ARRIVE</h1>
 
-			<a href="mailto:air@etu.imt-lille-douai.fr?subject=J ai un soucis / j'ai une question&body=Votre chambre : %0D%0A%0D%0AMacOS ou Windows ? : %0D%0A%0D%0AVotre question : "><div class="bouton primaire centre-element">nous contacter / contact us</div></a>
+			<a href="mailto:air@etu.imt-lille-douai.fr?subject=J ai un soucis / j'ai une question&body=Votre chambre : %0D%0A%0D%0AMacOS ou Windows ? : %0D%0A%0D%0AVotre question : " class="no-icon"><div class="bouton primaire centre-element">nous contacter / contact us</div></a>
 
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 762.5 459.1" width="600px" style="margin-top:40px;">
 				<g id="logo_plat" data-name="logo plat">

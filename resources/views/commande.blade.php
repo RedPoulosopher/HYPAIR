@@ -18,7 +18,7 @@
 }
 </style>
 
-<div id="wrapper" style="display:flex;align-items:center;justify-content:center;">
+<div id="wrapper">
 		<div id="contenu">
 			<h1>- Commande -</h1>
 			<p class="explication">L'AIR propose de faire une commande groupée de cables et d'adaptateur afin de vous faire payer moins. Profitez-en !</p>

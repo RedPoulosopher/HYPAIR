@@ -51,7 +51,7 @@ class DocumentationController extends Controller
 			"titre" => $request->titre,
 			"slug" => Str::slug($request->titre, '-'),
 			"contenu" => $request->contenu,
-			"categories" => $request->categories,
+			"categories" => json_encode($request->categories),
 			"mise_en_avant" => $mise_en_avant,
 			"debut_mise_en_avant" => strlen($request->debut_mise_en_avant) ? $request->debut_mise_en_avant : null,
 			"fin_mise_en_avant" => strlen($request->fin_mise_en_avant) ? $request->fin_mise_en_avant : null
@@ -67,7 +67,7 @@ class DocumentationController extends Controller
 	public function store(Request $request)
 	{
 		$traitement = $this->fomulaire_traitement($request, true);
-
+		
 		Documentations::create($traitement);
 
    		return back()->with('success');

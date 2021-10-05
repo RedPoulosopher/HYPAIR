@@ -18,7 +18,7 @@
 	}
 </style>
 
-<div id="wrapper" style="display:flex;align-items:center;justify-content:center;">
+<div id="wrapper">
 	<div id="contenu">
 		<h1>- Nous contacter -</h1>
 		@if(Session::has('success'))

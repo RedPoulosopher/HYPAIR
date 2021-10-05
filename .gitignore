@@ -11,4 +11,5 @@ yarn-error.log
 /vendor
 .env
 
+questions.md
 *.lnk

@@ -21,23 +21,23 @@ a:hover {
 	text-decoration:none;
 	color:inherit;
 }
-a[href^="mailto:"], a[href^="http"]{
+a[href^="mailto:"]:not(.no-icon), a[href^="http"]:not(.no-icon){
 	text-decoration: underline;
 	position: relative;
 	padding: 1px 5px;
 	margin-right:1.6em;
 }
-a[href^="mailto:"]:after, a[href^="http"]:after{
+a[href^="mailto:"]:not(.no-icon):after, a[href^="http"]:not(.no-icon):after{
 	font-family: 'icomoon' !important;
 	font-style: normal;
 	position:absolute;
 	margin-top: 0.25em;
 	margin-left:0.5em;
 }
-a[href^="mailto:"]:after{
+a[href^="mailto:"]:not(.no-icon):after{
 	content: "\e91f" !important;
 }
-a[href^="http"]:after{
+a[href^="http"]:not(.no-icon):after{
 	content: "\e91c" !important;
 }
 
@@ -47,6 +47,9 @@ a[href^="http"]:after{
 	min-height: 100%;
 	position: absolute;
 	box-sizing:border-box;
+	display:flex;
+	align-items:center;
+	justify-content:center;
 }
 #contenu{
 	padding:30px

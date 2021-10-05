@@ -1,16 +1,35 @@
 .projet {
-    width:220px;
+    width:230px;
     height:140px;
-    overflow: hidden;
-    text-overflow: ellipsis;
     border-radius: 25px;
     padding:25px;
     box-sizing: border-box;
+    position:relative;
 }
 .projet span {
     text-align: justify;
     display: inline-block;
-    vertical-align: middle;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 100%;
+}
+.projet .voir-plus {
+    content:"+";
+    position:absolute;
+    line-height: 0px;
+    bottom:0px;
+    left:50%;
+    transform: translate(-50%,50%);
+    padding:20px;
+    border-radius:50px;
+    border: 1px solid var(--couleur_accentuation);
+    cursor:pointer;
+}
+body.dark-theme  .voir-plus {
+	background-color: #292929;
+}
+body.light-theme  .voir-plus {
+	background-color: #F6F6F7;
 }
 
 .membres > div {
@@ -24,8 +43,20 @@
     left: 50%;
     transform: translate(-50%,-50%);
 }
+.membres .photo {
+    position: relative;
+}
 .membres .photo img {
     border-radius: 500px;
+}
+.membres .photo .cercle {
+    border-radius: 500px;
+    border:2px solid;
+    position:absolute;
+    left:calc(5% - 2px);
+    top:calc(5% - 3px);
+    width:90%;
+    height:90%;
 }
 
 @media (max-width: 767.98px) {
@@ -33,7 +64,6 @@
     margin:15px;
     }
     .membres .photo img {
-    border-radius: 500px;
     width:130px;
     height:130px;
     }
@@ -75,23 +105,23 @@ a:hover {
 	text-decoration:none;
 	color:inherit;
 }
-a[href^="mailto:"], a[href^="http"]{
+a[href^="mailto:"]:not(.no-icon), a[href^="http"]:not(.no-icon){
 	text-decoration: underline;
 	position: relative;
 	padding: 1px 5px;
 	margin-right:1.6em;
 }
-a[href^="mailto:"]:after, a[href^="http"]:after{
+a[href^="mailto:"]:not(.no-icon):after, a[href^="http"]:not(.no-icon):after{
 	font-family: 'icomoon' !important;
 	font-style: normal;
 	position:absolute;
 	margin-top: 0.25em;
 	margin-left:0.5em;
 }
-a[href^="mailto:"]:after{
+a[href^="mailto:"]:not(.no-icon):after{
 	content: "\E91F" !important;
 }
-a[href^="http"]:after{
+a[href^="http"]:not(.no-icon):after{
 	content: "\E91C" !important;
 }
 
@@ -101,6 +131,9 @@ a[href^="http"]:after{
 	min-height: 100%;
 	position: absolute;
 	box-sizing:border-box;
+	display:flex;
+	align-items:center;
+	justify-content:center;
 }
 #contenu{
 	padding:30px

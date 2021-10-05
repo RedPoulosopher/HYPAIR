@@ -4,35 +4,62 @@
 
 @section('content')
 
+<style>
+	@media (max-width: 1299.98px) {
+		#contenu{
+			width:100%;
+		}
+	}
+
+	@media (min-width: 1300px) {
+		#contenu{
+			width:1000px;
+		}
+	}
+</style>
+
 <div id="wrapper">
 	<div id="contenu">
 		<h1>- ACTUALITÉS -</h1>
 		<div style="margin:70px 0px;">
 			<div class="centre-element">
-				<a href="commande"><div class="bouton primaire icon-after-document ombre_petite"><span>Passer une commande de câble / adaptateur</span></div></a>
+				<a href="/commande"><div class="bouton primaire icon-after-document ombre_petite"><span>Passer une commande de câble / adaptateur</span></div></a>
 			</div>
 		</div>
 		
 		<h1>- NOS PROJETS -</h1>
 		<div class="centre-element centre-enfant">
 			<div class="projet ombre_inset fond">
-				<span>Finir le site internet de l'AIR</span>
+				<span>Faire le site internet de l'AIR.</span>
+				<a class="voir-plus" href="#">+</a>
 			</div>
 			<div class="projet ombre_inset fond">
-				<span>Notification de courrier par OCR avec un raspberrypi et openCV</span>
+				<span>Newsletter hebdo avec les posts facebook important.</span>
+				<a class="voir-plus" href="#">+</a>
 			</div>
 			<div class="projet ombre_inset fond">
-				<span>GPS pour la MEUD (quelle chambre est où)</span>
+				<span>Remise en place d'un serveur de stockage pour les archives, les logiciels crackés, les serveurs de jeux. ça passe ou pas ?</span>
+				<a class="voir-plus" href="#">+</a>
 			</div>
 			<div class="projet ombre_inset fond">
-				<span>Webscrapping pour récupérer les vidéos de Just Dance</span>
+				<span>Courr'imt : Notification de courrier par OCR avec un raspberrypi et openCV.</span>
+				<a class="voir-plus" href="#">+</a>
+			</div>
+			<div class="projet ombre_inset fond">
+				<span>GPS pour la MEUD (quelle chambre est où).</span>
+				<a class="voir-plus" href="#">+</a>
+			</div>
+			<div class="projet ombre_inset fond">
+				<span>Webscrapping pour récupérer les vidéos de Just Dance (2 parties indépendantes).</span>
+				<a class="voir-plus" href="#">+</a>
 			</div>
 		</div>
-		
+
 		<h1>- NOS MEMBRES -</h1>
 		<div class="membres centre-element centre-enfant">
 			<div>
 				<div class="photo centre-element">
+					<div class="cercle" style="border-color: rgb(240, 20, 20)"></div>
 					<img class="ombre_petite" src="images/photo_membres/marc.png"/>
 				</div>
 				<div class="info" style="text-align:center;">
@@ -44,6 +71,7 @@
 
 			<div>
 				<div class="photo centre-element">
+					<div class="cercle" style="border-color: rgb(240, 20, 20)"></div>
 					<img class="ombre_petite" src="images/photo_membres/benjamin.png"/>
 				</div>
 				<div class="info" style="text-align:center;">
@@ -55,6 +83,7 @@
 			
 			<div>
 				<div class="photo centre-element">
+					<div class="cercle" style="border-color: rgb(236, 240, 20)"></div>
 					<img class="ombre_petite" src="images/photo_membres/lara.png"/>
 				</div>
 				<div class="info" style="text-align:center;">
@@ -66,6 +95,7 @@
 			
 			<div>
 				<div class="photo centre-element">
+					<div class="cercle" style="border-color: rgb(20, 240, 49)"></div>
 					<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
 				</div>
 				<div class="info" style="text-align:center;">
@@ -77,6 +107,7 @@
 			
 			<div>
 				<div class="photo centre-element">
+					<div class="cercle" style="border-color: rgb(20, 240, 49)"></div>
 					<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
 				</div>
 				<div class="info" style="text-align:center;">

@@ -45,7 +45,7 @@
 				@endif
 				<label class="champs flex border">
 					<span class="titre">* Confidentialité :</span>
-					<select name="confidentialite" class="input affichage_empty" spellcheck="false" required select="{{$documentation->confidentialite}}">
+					<select name="confidentialite" class="input affichage_empty" spellcheck="false" required select="{{$documentation->confidentialite ?? '' }}">
                         <option value="0" selected>0 => public</option>
                         <option value="1">1 => membres de l'association</option>
                         <option value="2">2</option>
@@ -62,33 +62,33 @@
 			<div class="champs_conteneur focus_elargi" style="width:100%;" for="titre">
 				<label class="champs flex border">
 					<span class="titre">* Titre :</span>
-					<input type="text" name="titre" class="input affichage_empty" required value="{{$documentation->titre}}"/>
+					<input type="text" name="titre" class="input affichage_empty" required value="{{$documentation->titre ?? '' }}"/>
 				</label>
 			</div>
 			<div class="champs_conteneur focus_elargi" style="width:100%;" for="contenu">
 				<label class="champs">
 					<span class="titre">* Contenu de la documentation :</span>
-					<textarea name="contenu" class="affichage_empty" pattern=".{100,}" required title="au moins 60 caractères dans la réponse" rows="13">{{$documentation->contenu}}</textarea>
+					<textarea name="contenu" class="affichage_empty" pattern=".{100,}" required title="au moins 60 caractères dans la réponse" rows="13">{{$documentation->contenu ?? '' }}</textarea>
 				</label>
 			</div>
 			<div class="champs_conteneur focus_elargi" style="width:100%;" for="categories">
 				<label class="champs flex border">
 					<span class="titre">* Catégories (séparer par des virgules) :</span>
-					<input type="text" name="categories" class="input affichage_empty" required value="{{implode(", ",json_decode($documentation->categories))}}"/>
+					<input type="text" name="categories" class="input affichage_empty" required value="{{implode(", ",json_decode($documentation->categories ?? '[]' ))}}"/>
 				</label>
 			</div>
 			<div class="champs_conteneur" style="width:100%;">
 				<label class="champs flex border">
 					<span class="titre">Mettre en avant ?</span>
-					<input type="checkbox" name="mise_en_avant" class="input" {{$documentation->mise_en_avant ? "checked" : ""}}/>
+					<input type="checkbox" name="mise_en_avant" class="input" {{$documentation->mise_en_avant ?? '' ? "checked" : ""}}/>
 				</label>
 				<label class="champs flex border">
 					<span class="titre">Début de la période de mise en avant :</span>
-					<input type="date" name="debut_mise_en_avant" class="input affichage_empty" value="{{$documentation->debut_mise_en_avant}}"/>
+					<input type="date" name="debut_mise_en_avant" class="input affichage_empty" value="{{$documentation->debut_mise_en_avant ?? '' }}"/>
 				</label>
 				<label class="champs flex border">
 					<span class="titre">Fin de la période de mise en avant :</span>
-					<input type="date" name="fin_mise_en_avant" class="input affichage_empty" value="{{$documentation->fin_mise_en_avant}}"/>
+					<input type="date" name="fin_mise_en_avant" class="input affichage_empty" value="{{$documentation->fin_mise_en_avant ?? '' }}"/>
 				</label>
                 @error('mise_en_avant')
                 {{$message}}
@@ -110,7 +110,7 @@
                 @enderror
 			</div>
             <span>les champs marqués d'une asterisque sont obligatoires</span>
-			<button type="submit" class="bouton primaire icon-after-plus-carre ombre_petite" style="float:right;"><span>{{$documentation->slug ? "MODIFIER" : "CRÉER"}}</span></button>
+			<button type="submit" class="bouton primaire icon-after-plus-carre ombre_petite" style="float:right;"><span>{{$documentation->slug ?? '' ? "MODIFIER" : "CRÉER"}}</span></button>
 		{!! Form::close() !!}
 	</div>
 

@@ -4,26 +4,12 @@
 
 @section('content')
 
-<style>
-@media (max-width: 767.98px) {
-		#contenu{
-		width:100%;
-		}
-}
-
-@media (min-width: 768px) {
-		#contenu{
-		width:500px;
-		}
-}
-</style>
-
 <div id="wrapper">
-		<div id="contenu">
+		<div id="contenu" class="moyen">
 			<h1>- Commande -</h1>
 			<p class="explication">L'AIR propose de faire une commande groupée de cables et d'adaptateur afin de vous faire payer moins. Profitez-en !</p>
 
-			<div class="champs_conteneur" style="width:100%;">
+			<div class="champs_conteneur ombre_inset" style="width:100%;">
 				<label class="champs border focus_elargi" for="courriel">
 					<span class="titre">courriel :</span>
 					<span class="input affichage_empty" id="courriel" contenteditable role="textbox" spellcheck="false"></span>
@@ -35,7 +21,7 @@
 					<span class="input affichage_empty" id="telephone" contenteditable role="textbox" spellcheck="false"></span>
 				</label>
 			</div>
-			<div class="champs_conteneur border" style="width:100%;">
+			<div class="champs_conteneur ombre_inset border" style="width:100%;">
 				<div class="champs radio">
 					<span class="titre">quelle est votre résidence ?</span>
 					<label class="">
@@ -64,7 +50,7 @@
 				</div>
 			</div>
 
-			<div class="champs_conteneur border" style="width:100%;">
+			<div class="champs_conteneur ombre_inset border" style="width:100%;">
 				<div class="champs border focus_elargi" for="cable">
 					<span class="titre">quelle quantité de câbles RJ45 (5m) voulez-vous ? (3.50€/unité)</span>
 					<span class="input affichage_empty" id="cable" contenteditable role="textbox" spellcheck="false" onkeyup="maj_prix()"></span>
@@ -79,7 +65,7 @@
 				</div>
 			</div>
 
-			<div class="champs_conteneur border" style="width:100%;">
+			<div class="champs_conteneur ombre_inset border" style="width:100%;">
 				<span class="titre">prix total :</span>
 				<div style="float:right">
 					<span id="prix">0€</span>

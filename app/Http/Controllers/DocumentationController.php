@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use \App\Models\Documentations;
+use \App\Models\Documentation;
 
 class DocumentationController extends Controller
 {
@@ -17,7 +17,7 @@ class DocumentationController extends Controller
 
 	public function index()
 	{
-		$doc = Documentations::select('titre','categories','slug')->get();
+		$doc = Documentation::select('titre','categories','slug')->where("associations_id", request()->get('association_id'))->get();
 
 		return view('documentation.index', ['documentations' => $doc]);
 	}
@@ -58,7 +58,7 @@ class DocumentationController extends Controller
 		];
 		if($is_creation){
 			$resultat['langue'] = $request->langue;
-			$resultat['ID_asso'] = $request->ID_asso;
+			$resultat['associations_id'] = intval($request->associations_id);
 		}
 		return $resultat;
 	}
@@ -68,7 +68,7 @@ class DocumentationController extends Controller
 	{
 		$traitement = $this->fomulaire_traitement($request, true);
 		
-		Documentations::create($traitement);
+		Documentation::create($traitement);
 
    		return back()->with('success');
 	}
@@ -76,7 +76,7 @@ class DocumentationController extends Controller
 
 	public function show($slug)
 	{
-		$doc = Documentations::where('slug', $slug);
+		$doc = Documentation::where('slug', $slug);
 		if($doc->exists()){
 			$doc=$doc->first();
 		}else{
@@ -91,7 +91,7 @@ class DocumentationController extends Controller
 
 	public function edit($slug)
 	{
-		$doc = Documentations::where('slug', $slug);
+		$doc = Documentation::where('slug', $slug);
 		if($doc->exists()){
 			$doc=$doc->first();
 		}else{
@@ -108,7 +108,7 @@ class DocumentationController extends Controller
 	{
 		$traitement = $this->fomulaire_traitement($request, false);
 
-		Documentations::where('slug', $slug)->update($traitement);
+		Documentation::where('slug', $slug)->update($traitement);
 
 		return back()->with('success');
 	}
@@ -116,6 +116,6 @@ class DocumentationController extends Controller
 
 	public function destroy($id)
 	{
-		Documentations::where('id', $id)->delete();
+		Documentation::where('id', $id)->delete();
 	}
 }

@@ -4,22 +4,8 @@
 
 @section('content')
 
-<style>
-    @media (max-width: 1099.98px) {
-		#contenu{
-			width:100%;
-		}
-	}
-
-	@media (min-width: 1100px) {
-		#contenu{
-			width:800px;
-		}
-	}
-</style>
-
 <div id="wrapper" style="display:flex;align-items:center;justify-content:center;">
-	<div id="contenu">
+	<div id="contenu" class="moyen">
 		<h1>- Créer une nouvelle documentation -</h1>
 		@if(Session::has('success'))
 			<p class="explication">Merci pour la documentation ! Elle est disponible.</p>
@@ -38,8 +24,8 @@
 					</label>
 					<label class="champs flex border">
 						<span class="titre">* Association :</span>
-						<select name="ID_asso" class="input affichage_empty" spellcheck="false" required>
-							<option value="0">AIR</option>
+						<select name="associations_id" class="input affichage_empty" spellcheck="false" required>
+							<option value="1">AIR</option>
 						</select>
 					</label>
 				@endif
@@ -54,8 +40,6 @@
                         <option value="5">5 => bureau</option>
                         <option value="6">6 => président⸱e⸱s et vice-président⸱e</option>
                         <option value="7">7 => président⸱e⸱s</option>
-                        <option value="8">8</option>
-                        <option value="9">9 => bureau de l'AIR</option>
                     </select>
 				</label>
 			</div>

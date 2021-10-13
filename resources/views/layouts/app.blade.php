@@ -11,9 +11,7 @@
 	<script src="/js/jquery-3.3.1.slim.min.js"></script>
 	
 	<body class="light-theme">
-		@include('partials.menu')
+		@include((null !== request()->get('association_slug')) ? 'menus_asso.' . request()->get('association_slug') : 'partials.menu')
 		@yield('content')
-
-		<script src="{{ mix('js/app.js') }}"></script>
 	</body>
 </html>

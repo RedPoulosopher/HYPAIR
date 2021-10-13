@@ -3,18 +3,40 @@
 @section('title','Doc - '.$documentation->titre)
 
 @section('content')
-<style>
-	@media (max-width: 1099.98px) {
-		#contenu{
-			width:100%;
-		}
-	}
+<script>
+window.MathJax = {
+  loader: {
+    load: ['input/asciimath', "output/svg"]
+  },
+  asciimath: {
+    delimiters: [['$','$'], ['`','`']]
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+<script src="ASCIIMathML.js"></script>
 
-	@media (min-width: 1100px) {
-		#contenu{
-			width:1000px;
-		}
-	}
+
+<style>
+a[href^="mailto:"]:not(.no-icon), a[href^="http"]:not(.no-icon){
+	text-decoration: underline;
+	position: relative;
+	padding: 1px 5px;
+	margin-right:1.6em;
+}
+a[href^="mailto:"]:not(.no-icon):after, a[href^="http"]:not(.no-icon):after{
+	font-family: 'icomoon' !important;
+	font-style: normal;
+	position:absolute;
+	margin-top: 0.25em;
+	margin-left:0.5em;
+}
+a[href^="mailto:"]:not(.no-icon):after{
+	content: "\e91f" !important;
+}
+a[href^="http"]:not(.no-icon):after{
+	content: "\e91c" !important;
+}
 
 	.documentation {
 		display: flex;
@@ -42,17 +64,21 @@
 </style>
 
 <div id="wrapper" style="display:flex;align-items:center;justify-content:center;">
-	<div id="contenu">
+	<div id="contenu" class="grand">
 
 		<a href="/documentations"><div class="bouton secondaire ombre_petite">< retour aux documentations</div></a>
 
 		<div class="documentation ombre_inset fond">
-			<div class="contenu_doc">
+			<div class="contenu_doc" id="contenu_doc">
 				<h1>{{$documentation->titre}}</h1>
-				{!! \Illuminate\Support\Str::markdown($documentation->contenu); !!}
+				{{ $documentation->contenu }}
 			</div>
 		</div>
-
+		<script src="{{asset('js/asciidoctor.js')}}"></script>
+		<script>
+			var asciidoctor = Asciidoctor()
+			document.getElementById("contenu_doc").innerHTML(asciidoctor.convert(document.getElementById("contenu_doc").innerText))
+		</script>
 	</div>
 </div>
 	

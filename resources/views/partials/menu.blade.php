@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/css/sidenav.css" type="text/css" >
+
 <div id="sidebar-wrapper">
 		<div id="sidenav" class="ombre_grande">
 			<div class="sidebar-nav-icon">
@@ -24,15 +26,13 @@
 
 <script>
 function set_theme(theme){
-		document.body.classList.value="";
-		if (theme=="dark") {
-		document.body.classList.add("dark-theme");
-		} else {
-		document.body.classList.add("light-theme");
-		}
+	document.body.classList.value="";
+	if (theme=="dark") {
+	document.body.classList.add("dark-theme");
+	} else {
+	document.body.classList.add("light-theme");
+	}
 }
-
-const btn = document.querySelector("#logo_air");
 
 currentTheme = localStorage.getItem("theme");
 if (currentTheme == null){
@@ -45,6 +45,7 @@ if (currentTheme == null){
 }
 set_theme(currentTheme)
 
+const btn = document.querySelector("#logo_air");
 btn.addEventListener("click", function () {
 		ancien_theme = localStorage.getItem("theme");
 		if(ancien_theme=="dark"){

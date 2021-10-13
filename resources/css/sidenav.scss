@@ -56,13 +56,14 @@
 	max-width:220px; /* taille_nav */
 	padding: 10px 5px 10px 0px;
 	font-weight: 500;
-	vertical-align: sub;
 }
 .sidebar-nav li span{
-	vertical-align: sub;
+	vertical-align: middle;
 }
-#sidenav [class^="icon-before-"]:before, #sidenav [class*="icon-before-"]:before {
-	font-size: 2rem;
+#sidenav [class^="iconsax-"]:before {
+	font-size: 1.4rem;
+	vertical-align: middle;
+	margin-right:0.5em;
 }
 
 

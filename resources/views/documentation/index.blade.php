@@ -4,22 +4,8 @@
 
 @section('content')
 
-<style>
-	@media (max-width: 767.98px) {
-		#contenu{
-			width:100%;
-		}
-	}
-
-	@media (min-width: 768px) {
-		#contenu{
-			width:800px;
-		}
-	}
-</style>
-
 <div id="wrapper" style="display:flex;align-items:center;justify-content:center;">
-	<div id="contenu">
+	<div id="contenu" class="moyen">
 		<h1>- Documentation -</h1>
 		<div id="search" class="icon-before-ampoule-on ombre_inset centre-element" style="margin-bottom:60px;"><span class="input" placeholder="rechercher dans la documentation" contenteditable>rechercher dans la documentation</span></div>
 

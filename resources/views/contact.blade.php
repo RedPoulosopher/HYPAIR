@@ -4,22 +4,8 @@
 
 @section('content')
 
-<style>
-	@media (max-width: 1099.98px) {
-		#contenu{
-			width:100%;
-		}
-	}
-
-	@media (min-width: 1100px) {
-		#contenu{
-			width:800px;
-		}
-	}
-</style>
-
 <div id="wrapper">
-	<div id="contenu">
+	<div id="contenu" class="moyen">
 		<h1>- Nous contacter -</h1>
 		@if(Session::has('success'))
 			<p class="explication">Votre problème va être résolu ! A bientôt.</p>

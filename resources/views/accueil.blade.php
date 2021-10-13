@@ -4,22 +4,8 @@
 
 @section('content')
 
-<style>
-	@media (max-width: 1299.98px) {
-		#contenu{
-			width:100%;
-		}
-	}
-
-	@media (min-width: 1300px) {
-		#contenu{
-			width:1000px;
-		}
-	}
-</style>
-
 <div id="wrapper">
-	<div id="contenu">
+	<div id="contenu" class="moyen">
 		<h1>- ACTUALITÉS -</h1>
 		<div style="margin:70px 0px;">
 			<div class="centre-element">

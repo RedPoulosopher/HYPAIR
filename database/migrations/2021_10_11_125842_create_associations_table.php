@@ -19,6 +19,7 @@ class CreateAssociationsTable extends Migration
 	        $table->string('slug',128)->unique();
             $table->string('bureau_de_ratachement',9)->nullable()->default(null);
             $table->boolean('est_bureau')->default(0);
+            $table->string('site')->default('douai');
             $table->string('email')->nullable()->default(null);
             $table->boolean('public')->default(1); //pour les listes
             $table->year('annee_creation')->nullable()->default(null);

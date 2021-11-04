@@ -15,9 +15,9 @@ class CreateMembresTable extends Migration
     {
         Schema::create('membres', function (Blueprint $table) {
             $table->id();
-	        $table->foreignId('associations_id')->constrained();
-	        $table->foreignId('users_id')->constrained();
-	        $table->foreignId('roles_id')->constrained();
+	        $table->foreignId('association_id')->constrained();
+	        $table->foreignId('user_id')->constrained();
+	        $table->foreignId('role_id')->constrained();
             $table->json('competences')->nullable();
             $table->date('date_rejoint')->nullable()->useCurrent();
             $table->tinyInteger('niveau_admin')->unsigned()->nullable()->default(null);

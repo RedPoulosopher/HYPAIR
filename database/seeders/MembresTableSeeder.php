@@ -16,9 +16,9 @@ class MembresTableSeeder extends Seeder
     {
         DB::table('membres')->insert([
             [
-                'users_id' => 1,
-                'associations_id' => 1,
-                'roles_id' => 1,
+                'user_id' => 1,
+                'association_id' => 1,
+                'role_id' => 1,
                 'competences' => '["php","js","css","html","python"]',
                 'date_rejoint' => '2020-08-17',
             ]

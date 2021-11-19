@@ -24,7 +24,7 @@
 					</label>
 					<label class="champs flex border">
 						<span class="titre">* Association :</span>
-						<select name="associations_id" class="input affichage_empty" spellcheck="false" required>
+						<select name="association_id" class="input affichage_empty" spellcheck="false" required>
 							<option value="1">AIR</option>
 						</select>
 					</label>

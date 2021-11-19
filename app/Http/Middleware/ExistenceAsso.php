@@ -26,7 +26,7 @@ class ExistenceAsso
             $input["association_slug"] = $request->route('slug_asso');
 			$request->replace($input);
 		}else{
-			return abort("405");
+			return abort(405);
 		}
 
         return $next($request);

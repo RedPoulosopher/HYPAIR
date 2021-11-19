@@ -17,12 +17,15 @@ class DocumentationController extends Controller
 
 	public function index()
 	{
-		$doc = Documentation::select('titre','categories','slug')->where("associations_id", request()->get('association_id'))->get();
+		$association_id = request()->get('association_id');
+		$doc = Documentation::select('titre','categories','slug')->where("association_id", $association_id)->get();
 
 		return view('documentation.index', ['documentations' => $doc]);
 	}
 
-	public function fomulaire_traitement(Request $request, $is_creation){
+
+	public function fomulaire_traitement(Request $request, $is_creation)
+	{
 		$request->categories = explode(",",$request->categories);
 		sort($request->categories);
 
@@ -58,7 +61,7 @@ class DocumentationController extends Controller
 		];
 		if($is_creation){
 			$resultat['langue'] = $request->langue;
-			$resultat['associations_id'] = intval($request->associations_id);
+			$resultat['association_id'] = intval($request->association_id);
 		}
 		return $resultat;
 	}
@@ -74,41 +77,35 @@ class DocumentationController extends Controller
 	}
 
 
-	public function show($slug)
+	public function show(Request $request)
 	{
-		$doc = Documentation::where('slug', $slug);
+		$doc = Documentation::where('slug', $request->route('slug'));
 		if($doc->exists()){
 			$doc=$doc->first();
 		}else{
-			unset($doc);
-			$doc = (object) array();
-			$doc->titre = "";
-			$doc->contenu = "la documentation que vous demandez n'existe pas ou n'existe plus";
+			abort(404);
 		}
 		return view('documentation.show', ['documentation' => $doc]);
 	}
 
 
-	public function edit($slug)
+	public function edit(Request $request)
 	{
-		$doc = Documentation::where('slug', $slug);
+		$doc = Documentation::where('slug', $request->route('slug'));
 		if($doc->exists()){
 			$doc=$doc->first();
 		}else{
-			unset($doc);
-			$doc = (object) array();
-			$doc->titre = "";
-			$doc->contenu = "la documentation que vous demandez n'existe pas ou n'existe plus";
+			abort(404);
 		}
 		return view('documentation.creation', ['documentation' => $doc, 'title' => "Modifier la documentation"]);
 	}
 
 
-	public function update(Request $request, $slug)
+	public function update(Request $request)
 	{
 		$traitement = $this->fomulaire_traitement($request, false);
 
-		Documentation::where('slug', $slug)->update($traitement);
+		Documentation::where('slug', $request->route('slug'))->update($traitement);
 
 		return back()->with('success');
 	}

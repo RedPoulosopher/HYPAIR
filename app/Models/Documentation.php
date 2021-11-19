@@ -8,5 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Documentation extends Model
 {
     use HasFactory;
-    protected $fillable = ['langue', 'associations_id', 'confidentialite', 'titre', 'slug', 'contenu', 'mise_en_avant', 'categories', 'debut_mise_en_avant', 'fin_mise_en_avant'];
+    protected $fillable = [
+        'langue',
+        'association_id',
+        'confidentialite',
+        'titre',
+        'slug',
+        'contenu',
+        'mise_en_avant',
+        'categories',
+        'debut_mise_en_avant',
+        'fin_mise_en_avant'
+    ];
+
+    public function association(){
+        return $this->belongsTo(Association::class);
+    }
+
+    public function traductions(){
+        return $this->hasMany(Documentation::class);
+    }
 }

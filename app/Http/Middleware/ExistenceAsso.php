@@ -21,9 +21,13 @@ class ExistenceAsso
 
         $asso = Association::where('slug', $request->route('slug_asso'));
         if($asso->exists()){
-            $asso_id = $asso->get('id')->first()["id"];
-            $input["association_id"] = $asso_id;
             $input["association_slug"] = $request->route('slug_asso');
+
+            $input["association_id"] = $asso->get('id')->first()["id"];
+            $input["couleur"] = $asso->get('couleur')->first()["couleur"];
+            $input["accueil_perso"] = $asso->get('accueil_perso')->first()["accueil_perso"];
+            $input["menu_perso"] = $asso->get('menu_perso')->first()["menu_perso"];
+            
 			$request->replace($input);
 		}else{
 			return abort(405);

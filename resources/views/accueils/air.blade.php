@@ -1,4 +1,4 @@
-@extends('layouts.accueil_asso')
+@extends('accueils.#accueil')
 
 @section('accueil_asso')
 

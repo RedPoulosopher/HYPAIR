@@ -1,16 +1,20 @@
-<link rel="stylesheet" href="/css/sidenav.css" type="text/css" >
+<link rel="stylesheet" href="{{ mix('css/sidenav.css') }}" type="text/css" >
 
 <div id="sidebar-wrapper">
 		<div id="sidenav" class="ombre_grande">
 			<div class="sidebar-nav-icon">
-				<img id="logo_air" src="/images/logo_air.png" width="120px" alt="logo de l'AIR"/>
-				<span>AIR</span>
+				@if (null === request()->get('association_slug'))
+					@yield('logo')
+				@endif
 			</div>
 			<ul class="sidebar-nav">
-				<a href="/accueil"><li class="icon-before-maison"><span>Accueil</span></li></a>
-				<a href="/documentations"><li class="icon-before-document"><span>Documentation</span></li></a>
-				<a href="/contact"><li class="icon-before-envoyer"><span>Nous contacter</span></li></a>
-				{{-- <a href="#"><li class="icon-before-profil sidebar-nav-bottom"><span>Se déconnecter</span></li></a> --}}
+				@if (request()->get('menu_perso'))
+					@yield('liens')
+				@else
+					<a href="/accueil"><li class="icon-before-maison"><span>Accueil</span></li></a>
+					<a href="/documentations"><li class="icon-before-document"><span>Documentation</span></li></a>
+					<a href="/contact"><li class="icon-before-envoyer"><span>Nous contacter</span></li></a>
+				@endif
 			</ul>
 		</div>
 		<a href="#">

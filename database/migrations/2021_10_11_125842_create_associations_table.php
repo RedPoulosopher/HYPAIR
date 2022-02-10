@@ -15,8 +15,8 @@ class CreateAssociationsTable extends Migration
     {
         Schema::create('associations', function (Blueprint $table) {
             $table->id();
+            $table->string('uid',128)->unique();
 	        $table->string('nom',128)->unique();
-	        $table->string('slug',128)->unique();
             $table->string('bureau_de_ratachement')->nullable()->default(null);
             $table->string('site')->default('douai');
             $table->string('email')->nullable()->default(null);
@@ -26,7 +26,8 @@ class CreateAssociationsTable extends Migration
             $table->year('annee_creation')->nullable()->default(null);
             $table->year('annee_fin')->nullable()->default(null);
             $table->text('description');
-            $table->string('couleur_clair');
+            $table->string('type', 20);
+            $table->string('couleur_claire');
             $table->string('couleur_sombre');
             $table->boolean('accueil_perso')->default(0);
             $table->boolean('menu_perso')->default(0);

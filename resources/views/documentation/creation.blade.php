@@ -4,7 +4,9 @@
 
 @section('content')
 
-<div id="wrapper" style="display:flex;align-items:center;justify-content:center;">
+<link rel="stylesheet" href="css/formulaire.css" type="text/css" >
+
+<div id="wrapper">
 	<div id="contenu" class="moyen">
 		<h1>- Créer une nouvelle documentation -</h1>
 		@if(Session::has('success'))

@@ -1,0 +1,101 @@
+h1 {
+  -webkit-margin-before: 1em;
+          margin-block-start: 1em;
+  -webkit-margin-after: 1em;
+          margin-block-end: 1em;
+}
+
+.projet {
+  width: 230px;
+  height: 140px;
+  border-radius: 25px;
+  padding: 25px;
+  box-sizing: border-box;
+  position: relative;
+  background: var(--gris_2);
+}
+
+.projet span {
+  text-align: justify;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 100%;
+}
+
+.projet .voir-plus {
+  content: "+";
+  position: absolute;
+  line-height: 0px;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  padding: 20px;
+  border-radius: 50px;
+  border: 1px solid var(--couleur_accentuation);
+  cursor: pointer;
+  background: var(--gris_1);
+}
+
+.membres > div {
+  position: relative;
+}
+
+.membres .pixel_couleur {
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.membres .photo {
+  position: relative;
+}
+
+.membres .photo img {
+  border-radius: 500px;
+  background: var(--gris_2);
+}
+
+.membres .photo .cercle {
+  border-radius: 500px;
+  border: 2px solid;
+  position: absolute;
+  left: calc(5% - 2px);
+  top: calc(5% - 3px);
+  width: 90%;
+  height: 90%;
+}
+
+@media (max-width: 767.98px) {
+  .membres > div {
+    margin: 15px;
+  }
+
+  .membres .photo img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .projet {
+    margin: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .membres > div {
+    margin: 20px;
+  }
+
+  .membres .photo img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .projet {
+    margin: 20px;
+  }
+}
+

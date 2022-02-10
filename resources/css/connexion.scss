@@ -60,6 +60,9 @@
 	justify-content: space-between;
 	align-items: center;
 }
+.bouton.primaire {
+	background-color:var(--couleur_accentuation_air);
+}
 
 .input_groupe {
 	display: flex;

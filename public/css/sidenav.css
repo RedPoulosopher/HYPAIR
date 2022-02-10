@@ -65,8 +65,7 @@
 
 .sidebar-nav li {
   line-height: 40px;
-  max-width: 220px;
-  /* taille_nav */
+  max-width: var(--taille_nav);
   padding: 10px 5px 10px 0px;
   font-weight: 500;
 }
@@ -143,7 +142,7 @@
 
 @media (min-width: 768px) {
   #wrapper {
-    padding-left: calc(var(--taille_nav) + 20px);
+    padding-left: calc(var(--taille_nav));
   }
 
   #hamburger {

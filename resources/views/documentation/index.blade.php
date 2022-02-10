@@ -4,7 +4,9 @@
 
 @section('content')
 
-<div id="wrapper" style="display:flex;align-items:center;justify-content:center;">
+<link rel="stylesheet" href="css/documentation.css" type="text/css" >
+
+<div id="wrapper">
 	<div id="contenu" class="moyen">
 		<h1>- Documentation -</h1>
 		<div id="search" class="icon-before-ampoule-on ombre_inset centre-element" style="margin-bottom:60px;"><span class="input" placeholder="rechercher dans la documentation" contenteditable>rechercher dans la documentation</span></div>

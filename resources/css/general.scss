@@ -92,6 +92,7 @@ a {
 }
 
 h1{
+	margin-block-start: 0em;
 	text-align: center;
 }
 p.explication {
@@ -108,8 +109,16 @@ p.explication {
 .centre-enfants {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	flex-wrap: nowrap;
+	justify-content: center;
+	align-content: center;
+}
+.grille-enfants {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
 }
 .centre-vertical-enfant {
 	align-items: center;
@@ -183,7 +192,7 @@ body.dark-theme {
 	--gris_2: #212227;
 	--gris_3: #17191b;
 	--couleur_accentuation_air:#cc3345;
-	--couleur_accentuation:#cc3345;
+	--couleur_accentuation:#5e25ef;
 	--couleur_police_accentuation_air:#ffffff;
 	--couleur_police_accentuation:#ffffff;
 	--couleur_police_primaire:#ffffff;
@@ -199,7 +208,15 @@ body.dark-theme {
 		box-shadow:0px 2px 5px 1px rgb(0,0,0,0.2) inset; 
 	}
 	& .bouton.secondaire:hover, & .bouton.tertiaire:hover {
-		background-color: #c8152a38;
+		background-color: #7715c838;
+	}
+	
+	& a.couleur {
+		text-decoration:underline;
+		color: #98a2ff;
+	}
+	& a.couleur:hover {
+		color: #7582ff;
 	}
 }
  
@@ -211,7 +228,7 @@ body.light-theme {
 	--gris_2: #fcfcfc;
 	--gris_3: #f5f5f5;
 	--couleur_accentuation_air:#c6152a;
-	--couleur_accentuation:#c6152a;
+	--couleur_accentuation:#4b14d6;
 	--couleur_police_accentuation_air:#ffffff;
 	--couleur_police_accentuation:#ffffff;
 	--couleur_police_primaire:#000000;
@@ -227,6 +244,14 @@ body.light-theme {
 		box-shadow:0px 2px 5px 1px rgba(0, 0, 0, 0.2) inset;
 	}
 	& .bouton.secondaire:hover, & .bouton.tertiaire:hover {
-		background-color: #c8152a38;
+		background-color: #7715c838;
+	}
+
+	& a.couleur {
+		text-decoration:underline;
+		color: #414fd8;
+	}
+	& a.couleur:hover {
+		color: #7f8bf7;
 	}
 }

@@ -3,19 +3,8 @@
 @section('title','Doc - '.$documentation->titre)
 
 @section('content')
-<script>
-window.MathJax = {
-  loader: {
-    load: ['input/asciimath', "output/svg"]
-  },
-  asciimath: {
-    delimiters: [['$','$'], ['`','`']]
-  }
-};
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
-<script src="ASCIIMathML.js"></script>
 
+<link rel="stylesheet" href="css/documentation.css" type="text/css" >
 
 <style>
 a[href^="mailto:"]:not(.no-icon), a[href^="http"]:not(.no-icon){
@@ -63,7 +52,7 @@ a[href^="http"]:not(.no-icon):after{
 }
 </style>
 
-<div id="wrapper" style="display:flex;align-items:center;justify-content:center;">
+<div id="wrapper">
 	<div id="contenu" class="grand">
 
 		<a href="/documentations"><div class="bouton secondaire ombre_petite">< retour aux documentations</div></a>

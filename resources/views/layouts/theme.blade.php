@@ -3,10 +3,8 @@ function set_theme(theme){
 	document.body.classList.value="";
 	if (theme=="dark") {
 		document.body.classList.add("dark-theme");
-		set_var("sombre");
 	} else {
 		document.body.classList.add("light-theme");
-		set_var("clair");
 	}
 }
 

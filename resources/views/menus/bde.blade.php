@@ -1,8 +1,8 @@
-@extends('partials.menu_asso')
+@extends('menus.#menu')
 
 @section('logo')
-    <img id="logo_air" src="images/photo_membres/marc.png" width="120px" alt="logo de l'AIR"/>
-    <span>AIR</span>
+    <img id="logo_menu" src="images/photo_membres/marc.png" width="120px" alt="logo de l'AIR"/>
+    <span id="nom_menu">AIR</span>
 @endsection
 
 @section('liens')

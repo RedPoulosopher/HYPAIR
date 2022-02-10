@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use \App\Models\Documentation;
 
+use Illuminate\Support\Facades\Auth;
+
 class DocumentationController extends Controller
 {
 
@@ -114,5 +116,9 @@ class DocumentationController extends Controller
 	public function destroy($id)
 	{
 		Documentation::where('id', $id)->delete();
+	}
+
+	public function test(){
+		print_r( session()->all());
 	}
 }

@@ -15,13 +15,13 @@ class CreateMembresTable extends Migration
     {
         Schema::create('membres', function (Blueprint $table) {
             $table->id();
-	        $table->foreignId('association_id')->constrained();
 	        $table->foreignId('user_id')->constrained();
+            $table->foreignId('association_id')->constrained();
 	        $table->foreignId('role_id')->constrained();
-            $table->json('competences')->nullable();
             $table->date('date_rejoint')->nullable()->useCurrent();
-            $table->tinyInteger('niveau_admin')->unsigned()->nullable()->default(null);
-            $table->timestamps();
+            $table->json('competences')->nullable(); // vérifier l'utilité
+            $table->tinyInteger('niveau_admin')->unsigned()->nullable()->default(null); // idem
+            $table->timestamps(); // idem
         });
     }
 

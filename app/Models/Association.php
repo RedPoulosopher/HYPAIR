@@ -22,4 +22,7 @@ class Association extends Model
     public function documentations(){
         return $this->hasMany(Documentation::class);
     }
+    public function projets(){
+        return $this->hasMany(projets::class);
+    }
 }

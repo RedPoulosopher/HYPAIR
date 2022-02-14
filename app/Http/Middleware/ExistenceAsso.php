@@ -19,7 +19,7 @@ class ExistenceAsso
     {
         $input =$request->all();
 
-        $asso = Association::where('slug', $request->route('slug_asso'));
+        $asso = Association::where('uid', $request->route('slug_asso'));
         if($asso->exists()){
             $asso_id = $asso->get('id')->first()["id"];
             $input["association_id"] = $asso_id;

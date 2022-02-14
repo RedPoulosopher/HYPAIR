@@ -15,8 +15,8 @@ class CreateAssociationsTable extends Migration
     {
         Schema::create('associations', function (Blueprint $table) {
             $table->id();
+            $table->string('uid',128)->unique();
 	        $table->string('nom',128)->unique();
-	        $table->string('slug',128)->unique();
             $table->string('bureau_de_ratachement',9)->nullable()->default(null);
             $table->boolean('est_bureau')->default(0);
             $table->string('site')->default('douai');

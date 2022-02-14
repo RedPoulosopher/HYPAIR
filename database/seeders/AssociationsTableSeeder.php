@@ -17,7 +17,7 @@ class AssociationsTableSeeder extends Seeder
         DB::table('associations')->insert([
             [
                 'nom' => 'AIR',
-                'slug' => 'AIR',
+                'uid' => 'AIR',
                 'est_bureau' => true,
                 'bureau_de_ratachement' => 'BDE',
                 'email' => 'air@etu.imt-nord-europe.fr',
@@ -26,7 +26,7 @@ class AssociationsTableSeeder extends Seeder
             ],
             [
                 'nom' => 'BDE',
-                'slug' => 'BDE',
+                'uid' => 'BDE',
                 'est_bureau' => true,
                 'bureau_de_ratachement' => null,
                 'email' => 'bde@etu.imt-nord-europe.fr',

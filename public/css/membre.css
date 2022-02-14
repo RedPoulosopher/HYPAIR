@@ -1,0 +1,8 @@
+body{
+    background-color: darkred;
+    color: #ffffff;
+    max-width: 600px;
+    margin: auto;
+    font-family:Arial;
+    line-height: 1.5;
+}

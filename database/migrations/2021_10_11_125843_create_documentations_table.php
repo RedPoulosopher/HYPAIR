@@ -15,18 +15,18 @@ class CreateDocumentationsTable extends Migration
     {
         Schema::create('documentations', function (Blueprint $table) {
             $table->id();
-	        $table->foreignId('association_id')->constrained();
-	        $table->string('langue')->default("fr");
-            $table->tinyInteger('confidentialite')->unsigned()->default(0);
+	        $table->foreignId('association_id');
             $table->string('titre',128);
-            $table->string('slug',128)->unique();
-            $table->text('description'); //courte description pour le moteur de recherche
+            $table->string('slug',128)->index();
+            $table->text('description');
             $table->text('contenu_md');
             $table->json('categories')->nullable();
-            $table->tinyInteger('visible')->default(0); // 0 => affichée dans l'index 1 => recherchable mais pas affichée dans l'index 2 => ni recherchable ni affichée dans l'index (pratique pour compléter d'autres documentations)
-            $table->boolean('mise_en_avant')->default(0); //possible affichage sur la page d'accueil
-            $table->date('debut_mise_en_avant')->nullable()->default(null); //possible affichage automatique sur la page d'accueil
-            $table->date('fin_mise_en_avant')->nullable()->default(null); //possible affichage automatique sur la page d'accueil
+	        $table->string('langue')->default("fr");
+            $table->tinyInteger('confidentialite')->unsigned()->default(0);
+            $table->tinyInteger('visibilite')->default(0);
+            $table->boolean('mise_en_avant')->default(0);
+            $table->date('debut_mise_en_avant')->nullable()->default(null);
+            $table->date('fin_mise_en_avant')->nullable()->default(null);
             $table->unsignedBigInteger('derive_de')->nullable()->default(null);
             $table->timestamps();
         });

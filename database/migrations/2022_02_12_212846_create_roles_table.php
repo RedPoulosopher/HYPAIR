@@ -15,7 +15,7 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-	        $table->string('label',128)->unique();
+	        $table->string('label',128);
             $table->tinyInteger('niveau_admin')->unsigned()->default(0);
             $table->boolean('gerer_actualite')->default(0);
             $table->boolean('gerer_association')->default(0);

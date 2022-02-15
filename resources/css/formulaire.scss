@@ -30,7 +30,7 @@ textarea:focus {
     border-radius: 25px;
     font-size: 1em;
 	color:inherit;
-    margin:10px 0px;
+    margin:40px 0px;
     max-width: 100%;
     box-sizing: border-box;
 	border: 1px solid var(--gris_1);
@@ -58,6 +58,9 @@ fieldset legend {
 	border-left:1px solid transparent;
 	transition: border 0.15s ease-in-out;
 }
+.input_groupe.flex {
+	display: flex;
+}
 .input_groupe > .titre {
 	transition: opacity 0.15s cubic-bezier(0.8,0,0,0.8);
 	user-select: none;
@@ -72,16 +75,16 @@ fieldset legend {
 }
 .input_groupe > .description {
 	color: var(--couleur_police_secondaire);
-	font-size: 0.8em;
+	font-size: 0.95em;
 }
 
 .input_groupe > .input {
 	display: inline-block;
-	margin-left:5px;
+	box-sizing: border-box;
+	width:100%;
 	padding:5px;
 	border-radius: 8px;
 	font-size: 1em;
-	min-width:10ex;
 	background-color: var(--gris_2);
 	color: var(--couleur_police_secondaire);
 	border: 1px solid transparent;
@@ -95,6 +98,43 @@ fieldset legend {
 	color:inherit;
 	opacity:0.6;
 }
+.input_groupe [type="checkbox"]{
+	display: grid;
+	place-content: center;
+	align-self: center;
+	appearance: none;
+	cursor:pointer;
+	margin: 0px 8px;
+	width: 1.15em;
+	height: 1.15em;
+	border-radius: 0.3em;
+	color: currentColor;
+	background-color: var(--gris_2);
+	border: 1px solid currentColor;
+}
+.input_groupe [type="checkbox"]::before {
+	content: "";
+	width: 0.65em;
+	height: 0.65em;
+	border-radius: 0.2em;
+	background: var(--couleur_accentuation);
+	transform: scale(0);
+	opacity: 0;
+	transition: transform 80ms ease-in-out, opacity 80ms ease-in-out;
+}
+.input_groupe [type="checkbox"]:hover::before {
+	transform: scale(0.5);
+	opacity: 0.6;
+}
+.input_groupe [type="checkbox"]:hover:checked::before {
+	transform: scale(0.8);
+	opacity: 0.8;
+}
+.input_groupe [type="checkbox"]:checked::before {
+	transform: scale(1);
+	opacity: 1;
+}
+
 .input_groupe textarea {
     width:100%;
 	margin-top:8px;

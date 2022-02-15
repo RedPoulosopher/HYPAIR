@@ -11,11 +11,3 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
-
-class ArticleController extends Controller
-{
-    public function show($n)
-	{
-		return view('article')->with('numero', $n);
-	}
-}

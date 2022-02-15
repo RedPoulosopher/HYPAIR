@@ -15,22 +15,20 @@ class CreateAssociationsTable extends Migration
     {
         Schema::create('associations', function (Blueprint $table) {
             $table->id();
-            $table->string('uid',128)->unique();
-	        $table->string('nom',128)->unique();
+            $table->string('uid',128)->unique(); //ce qui est dans le LDAP
+	        $table->string('nom',128);
             $table->string('bureau_de_ratachement')->nullable()->default(null);
-            $table->string('site')->default('douai');
-            $table->string('email')->nullable()->default(null);
-            $table->string('alias')->nullable()->default(null);
-            $table->boolean('public')->default(1); //pour les listes
-            $table->boolean('ouvert')->default(1); //pour les listes, les bureaux, le téléthon
+            $table->json('lieux')->default('["douai"]');
+            $table->string('email')->nullable()->default(null); //pour la DISI
+            $table->string('alias')->nullable()->default(null); //pour la DISI
+            $table->boolean('public')->default(1); //pour que les listes puissent se cacher
+            $table->boolean('ouvert')->default(1); //pour les listes, les bureaux, le téléthon 
             $table->year('annee_creation')->nullable()->default(null);
             $table->year('annee_fin')->nullable()->default(null);
             $table->text('description');
             $table->string('type', 20);
             $table->string('couleur_claire');
             $table->string('couleur_sombre');
-            $table->boolean('accueil_perso')->default(0);
-            $table->boolean('menu_perso')->default(0);
             $table->timestamps();
         });
     }

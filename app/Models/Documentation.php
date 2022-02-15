@@ -9,14 +9,17 @@ class Documentation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'langue',
         'association_id',
+        'langue',
         'confidentialite',
+        'visibilite',
+        'derive_de',
         'titre',
         'slug',
-        'contenu',
-        'mise_en_avant',
+        'description',
+        'contenu_md',
         'categories',
+        'mise_en_avant',
         'debut_mise_en_avant',
         'fin_mise_en_avant'
     ];

@@ -18,6 +18,8 @@ Route::get('/connexion', function() {  return view('connexion'); })->name("conne
 Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
 
+
+//les routes pour les associations, les clubs et les listes
 $routes_asso = function () {
     Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'contact'])->name('ContactController.contact');
     Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'contactPost'])->name('ContactController.contactPost');
@@ -25,14 +27,14 @@ $routes_asso = function () {
     Route::get('/', function() { return view('accueils.#accueil'); });
     Route::get('/accueil', function() { return view('accueils.#accueil'); });
 
-    Route::get('/test', [DocumentationController::class, 'test']);
-
-    Route::get('/nouvelle_documentation', [DocumentationController::class, 'create']);
-    Route::post('/nouvelle_documentation', [DocumentationController::class, 'store']);
-    Route::get('/nouvelle_documentation/{slug}', [DocumentationController::class, 'edit']);
-    Route::post('/nouvelle_documentation/{slug}', [DocumentationController::class, 'update']);
-    Route::get('/documentations', [DocumentationController::class, 'index']);
-    Route::get('/documentation/{slug}', [DocumentationController::class, 'show']);
+    Route::controller(DocumentationController::class)->group(function(){
+        Route::get('/documentation/nouvelle', 'create');
+        Route::post('/documentation/nouvelle', 'store');
+        Route::get('/documentation/modifier/{id}', 'edit');
+        Route::post('/documentation/modifier/{id}', 'update');
+        Route::get('/documentation', 'index');
+        Route::get('/documentation/{slug}', 'show');
+    });
 };
 
 Route::domain('liste.' . env('SITE_URL')) //pour les listes

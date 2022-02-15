@@ -17,14 +17,14 @@ class AIR
      */
     public function handle(Request $request, Closure $next)
     {
-        if( Auth::check() ){
-            if ( Auth::user()->uid=="air" ) {
-                return $next($request);
-            }
-            else {
-                abort(403);
-            }
+        if( !Auth::check() ){
+            abort(401);
         }
-        abort(401);
+
+        if ( Auth::user()->uid!="air" ) {
+            abort(403);
+        }
+        
+        return $next($request);
     }
 }

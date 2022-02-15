@@ -9,10 +9,10 @@
 	font-style: normal;
 	font-display: block;
 }
-#logo_air {
+#logo_menu {
 	transition: all 0.3s cubic-bezier(0.7, 0, 0, 0.7);
 }
-#logo_air:hover {
+#logo_menu:hover {
 	transform: scale(1.1,1.1);
 	cursor:pointer; 
 }
@@ -53,7 +53,7 @@
 }
 
 .sidebar-nav li{
-	line-height:40px;  
+	line-height:20px;  
 	max-width:var(--taille_nav);
 	padding: 10px 5px 10px 0px;
 	font-weight: 500;

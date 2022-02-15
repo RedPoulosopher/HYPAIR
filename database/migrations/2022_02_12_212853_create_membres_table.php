@@ -15,7 +15,7 @@ class CreateMembresTable extends Migration
     {
         Schema::create('membres', function (Blueprint $table) {
             $table->id();
-	        $table->string('association_uid',128)->references('uid')->on('associations')->onUpdate('cascade')->onDelete('cascade');
+	        $table->foreignId('association_id');
 	        $table->foreignId('user_id')->constrained();
 	        $table->foreignId('role_id')->constrained();
             $table->json('competences')->nullable();

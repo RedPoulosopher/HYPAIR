@@ -1,15 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Documentations')
+@section('titre', 'Documentations')
 
 @section('content')
 
 <link rel="stylesheet" href="css/documentation.css" type="text/css" >
 
 <div id="wrapper">
-	<div id="contenu" class="moyen">
+	<div id="contenu" class="petit">
 		<h1>- Documentation -</h1>
-		<div id="search" class="icon-before-ampoule-on ombre_inset centre-element" style="margin-bottom:60px;"><span class="input" placeholder="rechercher dans la documentation" contenteditable>rechercher dans la documentation</span></div>
+		
+		<div id="search" class="ombre_inset centre-element" style="margin-bottom:60px;"><span class="input" placeholder="rechercher dans la documentation" contenteditable>rechercher dans la documentation</span></div>
+
+		@if($gerer_documentation)
+		<a href="/documentation/nouvelle" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Créer une documentation</a>
+		@endif
 
 		<script>
 			const ele = document.getElementById('search').firstChild;
@@ -27,13 +32,15 @@
 		</script>
         
         @foreach ($documentations as $documentation)
-		<a class="documentation_liste ombre_inset" href="documentation/{{ $documentation->slug }}">
+		<a class="documentation_liste" href="documentation/{{ $documentation->slug }}">
 			<div style="width:inherit;">
-				<p class="titre" style="font-size: 1.1em;margin-block:0;">{{ $documentation->titre }}</p>
-				<p style="font-size: 0.8em;margin-block:0;"><span>Catégorie : </span><span>{{ implode(", ",json_decode($documentation->categories)) }}</span></p>
-			</div>
-			<div class="picto centre-enfant centre-vertical-enfant" style="width:fit-content">
-				<p>&#xe916;&#xe913;</p>
+				<p class="titre">{{ $documentation->titre }}</p>
+				<p class="description">{{ substr($documentation->contenu_md, 0, 350) }}</p>
+				<div class="categories">
+					@foreach(json_decode($documentation->categories) as $categorie)
+						<span>#{{$categorie}}</span>
+					@endforeach
+				</div>
 			</div>
 		</a>
         @endforeach

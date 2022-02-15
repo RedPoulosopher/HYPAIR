@@ -25,8 +25,6 @@ class AssociationsTableSeeder extends Seeder
                 'description' => 'Association d\'informatique et réseau',
                 'couleur_claire' => '#C20502',
                 'couleur_sombre' => '#FF1210',
-                'menu_perso' => 1,
-                'accueil_perso' => 1,
             ],
             [
                 'nom' => 'BDE',
@@ -38,8 +36,6 @@ class AssociationsTableSeeder extends Seeder
                 'type' => 'association',
                 'couleur_claire' => '#C20502',
                 'couleur_sombre' => '#FF1210',
-                'menu_perso' => 1,
-                'accueil_perso' => 1,
             ],
             [
                 'nom' => 'cartnaval',
@@ -51,8 +47,6 @@ class AssociationsTableSeeder extends Seeder
                 'description' => 'liste BDA',
                 'couleur_claire' => '#7132a8',
                 'couleur_sombre' => '#7132a8',
-                'menu_perso' => 0,
-                'accueil_perso' => 0,
             ],
         ]);
     }

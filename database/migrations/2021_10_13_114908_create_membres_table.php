@@ -20,8 +20,8 @@ class CreateMembresTable extends Migration
 	        $table->foreignId('role_id')->constrained();
             $table->date('date_rejoint')->nullable()->useCurrent();
             $table->json('competences')->nullable(); // vérifier l'utilité
-            $table->tinyInteger('niveau_admin')->unsigned()->nullable()->default(null); // idem
-            $table->timestamps(); // idem
+            $table->tinyInteger('niveau_admin')->unsigned()->nullable()->default(null);
+            $table->timestamps();
         });
     }
 

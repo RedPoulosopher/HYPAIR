@@ -19,8 +19,9 @@ class MembresTableSeeder extends Seeder
                 'user_id' => 1,
                 'association_id' => 1,
                 'role_id' => 1,
-                'competences' => '["php","js","css","html","python"]',
                 'date_rejoint' => '2020-08-17',
+                'competences' => '["php","js","css","html","python"]',
+                'niveau_admin' => 7,
             ]
         ]);
     }

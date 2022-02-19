@@ -21,7 +21,6 @@ class CreateDocumentationsTable extends Migration
             $table->text('description');
             $table->text('contenu_md');
             $table->json('categories')->nullable();
-	        $table->string('langue')->default("fr");
             $table->tinyInteger('confidentialite')->unsigned()->default(0);
             $table->tinyInteger('visibilite')->default(0);
             $table->boolean('mise_en_avant')->default(0);

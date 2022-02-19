@@ -29,14 +29,6 @@
 				</label>
 				
 				<label class="input_groupe">
-					<p class="titre">* Langue :</p>
-					<select name="langue" class="input" spellcheck="false" required select="{{old('langue') ?? $documentation->langue ?? ''}}">
-						<option value="fr">Français</option>
-						<option value="en">English</option>
-					</select>
-				</label>
-				
-				<label class="input_groupe">
 					<p class="titre">* Confidentialité :</p>
 					<select name="confidentialite" class="input" spellcheck="false" required select="{{old('confidentialite') ?? $documentation->confidentialite ?? ''}}">
                         <option value="0" selected>public</option>
@@ -111,7 +103,7 @@
 			</div>
 
             <span>* les champs marqués d'une astérisque sont obligatoires</span>
-			<button type="submit" class="bouton primaire icon-after-plus-carre ombre_petite" style="float:right;"><span>{{$documentation->id ?? false ? "MODIFIER" : "CRÉER"}}</span></button>
+			<button type="submit" class="bouton primaire ombre_petite" style="float:right;"><span>{{$documentation->id ?? false ? "MODIFIER" : "CRÉER"}}</span></button>
 		</form>
 	</div>
 </div>

@@ -16,6 +16,12 @@
 	font-size:1.6em;
 	/* color:inherit; */
 }
+
+.index_docs {
+	display: flex;
+    flex-direction: column;
+}
+
 .documentation_liste {
 	display: flex;
 	flex-wrap: nowrap;
@@ -45,6 +51,9 @@
 	text-transform: capitalize;
 }
 .documentation_liste .description {
+	display:none;
+}
+.documentation_liste .contenu_md {
 	font-size: 0.95em;
 	margin-block:0;
 	color:var(--couleur_police_secondaire);
@@ -53,7 +62,7 @@
 	mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 	overflow: hidden;
 }
-.documentation_liste .description::first-letter {
+.documentation_liste .contenu_md::first-letter {
 	text-transform: capitalize;
 }
 .documentation_liste .categories {

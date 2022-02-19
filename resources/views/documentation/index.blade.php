@@ -10,116 +10,133 @@
 	<div id="contenu" class="petit">
 		<h1>- Documentation -</h1>
 		
-		<div id="search" class="ombre_inset centre-element" style="margin-bottom:60px;"><span class="input" placeholder="rechercher dans la documentation" id="search_input" contenteditable>rechercher dans la documentation</span></div>
+		<div id="search" class="ombre_inset centre-element" style="margin-bottom:60px;"><span class="input" placeholder="Rechercher dans la documentation" id="search_input" contenteditable>Rechercher dans la documentation</span></div>
 
 		@if($gerer_documentation)
 		<a href="/documentation/nouvelle" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Créer une documentation</a>
 		@endif
-
-		<script>
-			const ele = document.getElementById('search').firstChild;
-			const placeholder = ele.getAttribute('placeholder');
-
-			ele.addEventListener('focus', function(e) {
-					const value = e.target.innerHTML;
-					value === placeholder && (e.target.innerHTML = '');
-			});
-
-			ele.addEventListener('blur', function(e) {
-					const value = e.target.innerHTML;
-					value === '' && (e.target.innerHTML = placeholder);
-			});
-		</script>
         
         <div id="index_docs">
-		</div>
+        
+			@foreach ($documentations as $documentation)
+			<a class="documentation_liste" href="documentation/{{ $documentation->slug }}" visibilite="{{ $documentation->visibilite }}">
+				<div>
+					<p class="titre">{{ $documentation->titre }}</p>
+					<p class="description">{{ $documentation->description }}</p>
+					<p class="contenu_md">{{ $documentation->contenu_md }}</p>
+					<div class="categories" raw="{{ implode(" ", json_decode($documentation->categories)) }}">
+						@foreach(json_decode($documentation->categories) as $categorie)
+							<span>#{{$categorie}}</span>
+						@endforeach
+					</div>
+				</div>
+			</a>
+			@endforeach
 
+		</div>
 	</div>
 </div>
 
 <script type="text/javascript" src="/js/elasticlunr.js"></script>
 <script>
-var index = elasticlunr(function () {
-    this.addField('titre');
-    this.addField('description');
-    this.setRef('id');
+const champ_recherche = document.getElementById('search_input');
+const placeholder = champ_recherche.getAttribute('placeholder');
+
+champ_recherche.addEventListener('focus', function(e) {
+	const value = e.target.innerHTML;
+	value === placeholder && (e.target.innerHTML = '');
+});
+
+champ_recherche.addEventListener('blur', function(e) {
+	const value = e.target.innerHTML;
+	value === '' && (e.target.innerHTML = placeholder);
 });
 
 
-let headers = new Headers();
-headers.append('X-CSRF-TOKEN', "{!! csrf_token() !!}");
-headers.append('Content-Type', 'text/json');
 
-function recuperer_doc() {
-    let recupDocObjet = {
-        method: 'GET',
-        headers: headers,
-    };
-    var recupDocRequete = new Request('/documentation/index/json', recupDocObjet);
-    
-    fetch(recupDocRequete)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Quelque chose n'a pas fonctionné.")
-            }
-        })
-        .then(data => {
-			data.forEach(function(doc_data){
-				affichage_data(doc_data);
-				index.addDoc({"id":doc_data["id"], "titre":doc_data["titre"], "description":doc_data["description"]})
-			})
-        })
-        .catch(err => {
-            console.log(err.message)
-        })
+//génère l'index
+var index = elasticlunr(function () {
+    this.addField('titre');
+    this.addField('description');
+    this.addField('categories');
+    this.setRef('index');
+});
+
+
+
+//rentre les données dans l'index
+doc_inv_rech_els = document.querySelectorAll('.documentation_liste[visibilite="1"]') //les docs visibles que par la recherche
+doc_els = document.getElementsByClassName("documentation_liste")
+for(var i = 0; i < doc_els.length; i++){
+	doc_el = doc_els[i]
+
+	titre = doc_el.querySelector(".titre").innerText
+	description = doc_el.querySelector(".description").innerText
+	categories = doc_el.querySelector(".categories").getAttribute("raw")
+
+	index.addDoc({"index":i, "titre":titre, "description":description, "categories": categories})
+}
+for(var i = 0; i < doc_inv_rech_els.length; i++){
+	doc_inv_rech_els[i].style.display = "none"
 }
 
-index_docs = document.getElementById("index_docs");
-function affichage_data(doc_data){
-    doc_html = document.createElement('a')
-	doc_html.innerHTML = 
-		'<a class="documentation_liste" href="documentation/' + doc_data["slug"] + '">' +
-			'<div style="width:inherit;">' +
-				'<p class="titre">' + doc_data["titre"] + '</p>' +
-				'<p class="description">' + doc_data["contenu_md"] + '</p>' +
-				'<div class="categories">' +
-					affichage_categories(doc_data["categories"])
-				'</div>' +
-			'</div>' +
-		'</a>'
-
-	index_docs.appendChild(doc_html)
-}
-function affichage_categories(categories){
-	categories_html = ""
-	categories = JSON.parse(categories)
-	categories.forEach(categorie => categories_html+="<span>#" + categorie + "</span>")
-	
-	return categories_html
-}
-
-recuperer_doc()
-
+//recherche si y'a pas eu d'input dans les dernieres 500ms
 var _changeInterval = null;
 document.getElementById("search_input").addEventListener("keyup", function(){
 	a_rechercher = this.innerText
-	
+
 	clearInterval(_changeInterval)
-    _changeInterval = setInterval(function() {
+	_changeInterval = setInterval(function() {
 
-		resultat = index.search(a_rechercher, {
-			fields: {
-				titre: {boost: 2},
-				description: {boost: 1}
-			},
-			expand: true
-		});
-		console.log(resultat)
+		if(a_rechercher==""){
+			for(i=0; i<doc_els.length; i++){
+				doc_els[i].style.display = "block"
+			}
+			for(var i = 0; i < doc_inv_rech_els.length; i++){
+				doc_inv_rech_els[i].style.display = "none"
+			}
+		} else {
+			rechercher(a_rechercher)
+		}
 
-        clearInterval(_changeInterval)
-    }, 500);
+		history.replaceState({"recherche": a_rechercher}, '', '')
+		
+		clearInterval(_changeInterval)
+	}, 500);
 })
+
+function rechercher(a_rechercher){
+	resultat = index.search(a_rechercher, {
+		fields: {
+			titre: {boost: 2},
+			description: {boost: 1},
+			categories: {boost: 4},
+		},
+		expand: true
+	});
+	trier_afficher_resultats(resultat)
+}
+
+//affiche les bons résultats pour la recherche
+function trier_afficher_resultats(resultats){
+	for(i=0; i<doc_els.length; i++){
+		doc_els[i].style.display = "none"
+	}
+	for(i=0; i<resultats.length; i++){
+		index_resultat = resultats[i]["ref"]
+		doc_els[parseInt(index_resultat)].style.display = "block"
+		doc_els[parseInt(index_resultat)].style.order = i+1
+	}
+}
+
+
+//restore la recherche à partir de l'historique
+if(history.state != null){
+	a_rechercher = history.state["recherche"]
+	if(typeof a_rechercher !== 'undefined' && a_rechercher != ""){
+		rechercher(a_rechercher)
+		champ_recherche.innerText = a_rechercher
+	}
+}
 </script>
 @endsection

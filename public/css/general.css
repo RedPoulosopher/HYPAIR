@@ -54,6 +54,10 @@ a[target=_blank]:before {
   justify-content: center;
 }
 
+#contenu {
+  padding: 0px 15px;
+}
+
 @media (max-width: 499.98px) {
   #contenu.tres_petit {
     width: 100%;
@@ -63,7 +67,6 @@ a[target=_blank]:before {
 @media (min-width: 500px) {
   #contenu.tres_petit {
     width: 500px;
-    padding: 30px;
   }
 }
 
@@ -76,7 +79,6 @@ a[target=_blank]:before {
 @media (min-width: 768px) {
   #contenu.petit {
     width: 768px;
-    padding: 30px;
   }
 }
 
@@ -89,7 +91,6 @@ a[target=_blank]:before {
 @media (min-width: 1050px) {
   #contenu.moyen {
     width: 1050px;
-    padding: 30px;
   }
 }
 
@@ -102,7 +103,6 @@ a[target=_blank]:before {
 @media (min-width: 1300px) {
   #contenu.grand {
     width: 1300px;
-    padding: 30px;
   }
 }
 

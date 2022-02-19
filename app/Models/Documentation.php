@@ -10,7 +10,6 @@ class Documentation extends Model
     use HasFactory;
     protected $fillable = [
         'association_id',
-        'langue',
         'confidentialite',
         'visibilite',
         'derive_de',
@@ -28,7 +27,11 @@ class Documentation extends Model
         return $this->belongsTo(Association::class);
     }
 
-    public function traductions(){
+    public function derivation(){
         return $this->hasMany(Documentation::class);
+    }
+
+    public function derive_de(){
+        return $this->belongsTo(Documentation::class);
     }
 }

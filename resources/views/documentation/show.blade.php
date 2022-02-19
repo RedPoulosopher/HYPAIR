@@ -3,7 +3,6 @@
 @section('titre','Doc - '.$documentation->titre)
 
 @section('content')
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
 
 <style>
 .documentation {
@@ -33,7 +32,12 @@ p {
 	<div id="contenu" class="petit">
 
 		<div style="display:flex;">
+			@if (substr(url()->previous(), -13)=="documentation")
+			<a onclick="history.go(-1)" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
+			@else
 			<a href="/documentation" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
+			@endif
+
 			@if($gerer_documentation)
 			<a href="/documentation/modifier/{{$documentation->id}}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
 			@endif

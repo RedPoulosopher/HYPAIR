@@ -31,14 +31,13 @@ $routes_asso = function () {
         Route::get('/documentation/modifier/{id}', 'edit');
         Route::post('/documentation/modifier/{id}', 'update');
         Route::get('/documentation', 'index');
-        Route::get('/documentation/index/json', 'index_json');
         Route::get('/documentation/{slug}', 'show');
     });
 
-    Route::controller(AssociationController::class)->group(function(){
-        Route::get('/association/modifier', 'edit');
-        Route::post('/association/modifier', 'update');
-    });
+    // Route::controller(AssociationController::class)->group(function(){
+    //     Route::get('/association/modifier', 'edit');
+    //     Route::post('/association/modifier', 'update');
+    // });
 };
 
 Route::domain('liste.' . env('SITE_URL')) //pour les listes
@@ -59,16 +58,16 @@ Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bure
         });
     });
 
-Route::domain('air.' . env('SITE_URL')) //les routes réservées à l'AIR
-    ->middleware('existence_asso:association')
-    ->group(function(){
-        Route::controller(AssociationController::class)->group(function(){
-            Route::get('/association/nouvelle', 'create');
-            Route::post('/association/nouvelle', 'store');
-            Route::get('/association/modifier/{id}', 'edit');
-            Route::post('/association/modifier/{id}', 'update');
-        });
-    });
+// Route::domain('air.' . env('SITE_URL')) //les routes réservées à l'AIR
+//     ->middleware('existence_asso:association')
+//     ->group(function(){
+//         Route::controller(AssociationController::class)->group(function(){
+//             Route::get('/association/nouvelle', 'create');
+//             Route::post('/association/nouvelle', 'store');
+//             Route::get('/association/modifier/{id}', 'edit');
+//             Route::post('/association/modifier/{id}', 'update');
+//         });
+//     });
 
 // easter eggs
 Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });

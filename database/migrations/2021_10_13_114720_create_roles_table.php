@@ -17,7 +17,7 @@ class CreateRolesTable extends Migration
             $table->id();
 	        $table->string('label',128)->unique();
             $table->tinyInteger('niveau_admin')->unsigned()->default(0);
-            $table->boolean('gerer_ticket')->default(false); // Màj du 13/02/2022
+            $table->boolean('gerer_ticket')->default(false);
             $table->boolean('gerer_projet')->default(false);
             $table->boolean('gerer_evenement')->default(false);
             $table->boolean('gerer_actualite')->default(false);

@@ -21,6 +21,8 @@ let getFiles = function (dir) {
  |
  */
 
+mix.js('resources/js/elasticlunr.js', 'public/js')
+
 getFiles('resources/css/').forEach(function (filepath) {
     mix.sass('resources/css/' + filepath, 'public/css');
 });

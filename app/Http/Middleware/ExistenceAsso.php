@@ -22,19 +22,21 @@ class ExistenceAsso
     {
         $input =$request->all();
 
-        if($type == "liste"){
-            $operateur = "=";
-        } else {
-            $operateur = "!=";
-        }
-
-        $asso = Association::where('uid', $request->route('uid_asso'))->where("type", $operateur, "liste");
+        $asso = Association::where('uid', $request->route('uid_asso'));
 
         if(!$asso->exists()){
             return abort(405);
         }
         
         $asso = $asso->first();
+
+        if($asso["type"] == "liste" && $type != "liste"){ //essaye d'acceder a une liste via {liste}.imt-ne.fr/
+            abort(405, "les listes sont seulement accessibles via liste.imt-ne.fr/{nom_de_la_liste}");
+        }
+        else if($type == "bureau" && $asso["type"] != "bureau"){ //les routes réservées aux bureaux
+            abort(403);
+        }
+
         session([
             "association_id" => $asso["id"],
             "association_couleur_claire" => $asso["couleur_claire"],

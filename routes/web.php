@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
+use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -21,9 +22,6 @@ Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
 
 //les routes pour les associations, les clubs et les listes
 $routes_asso = function () {
-    Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'contact'])->name('ContactController.contact');
-    Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'contactPost'])->name('ContactController.contactPost');
-
     Route::get('/', function() { return view('accueils.#accueil'); });
     Route::get('/accueil', function() { return view('accueils.#accueil'); });
 
@@ -33,12 +31,18 @@ $routes_asso = function () {
         Route::get('/documentation/modifier/{id}', 'edit');
         Route::post('/documentation/modifier/{id}', 'update');
         Route::get('/documentation', 'index');
+        Route::get('/documentation/index/json', 'index_json');
         Route::get('/documentation/{slug}', 'show');
+    });
+
+    Route::controller(AssociationController::class)->group(function(){
+        Route::get('/association/modifier', 'edit');
+        Route::post('/association/modifier', 'update');
     });
 };
 
 Route::domain('liste.' . env('SITE_URL')) //pour les listes
-    ->prefix('{uid_asso}')
+    ->prefix('{uid_asso}-{id_asso}')
     ->middleware('existence_asso:liste')
     ->group($routes_asso);
 
@@ -46,6 +50,25 @@ Route::domain('{uid_asso}.' . env('SITE_URL')) //pour le reste
     ->middleware('existence_asso:association')
     ->group($routes_asso);
 
+Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bureaux
+    ->middleware('existence_asso:bureau')
+    ->group(function(){
+        Route::controller(AssociationController::class)->group(function(){
+            Route::get('/association', 'index');
+            Route::get('/association/{slug}', 'show');
+        });
+    });
+
+Route::domain('air.' . env('SITE_URL')) //les routes réservées à l'AIR
+    ->middleware('existence_asso:association')
+    ->group(function(){
+        Route::controller(AssociationController::class)->group(function(){
+            Route::get('/association/nouvelle', 'create');
+            Route::post('/association/nouvelle', 'store');
+            Route::get('/association/modifier/{id}', 'edit');
+            Route::post('/association/modifier/{id}', 'update');
+        });
+    });
 
 // easter eggs
 Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });

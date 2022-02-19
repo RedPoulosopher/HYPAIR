@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use \App\Models\Documentation;
 use \App\Services\AutorisationGestion;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class DocumentationController extends Controller
@@ -30,17 +31,21 @@ class DocumentationController extends Controller
 
 	public function index()
 	{
+		return view('documentation.index', [
+			'gerer_documentation' => AutorisationGestion::gestion("gerer_documentation")
+		]);
+	}
+
+	public function index_json()
+	{
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$doc = Documentation::select('titre','contenu_md','categories','slug')
+		$doc = Documentation::select('id','titre',DB::raw('SUBSTR(contenu_md, 1, 300) as contenu_md'),'description','categories','slug','confidentialite','visibilite')
 			->where("association_id", session('association_id'))
 			->where("confidentialite", "<=", $niveau_administration)
 			->get();
 
-		return view('documentation.index', [
-			'documentations' => $doc,
-			'gerer_documentation' => AutorisationGestion::gestion("gerer_documentation")
-		]);
+		return Response()->json($doc->toArray());
 	}
 
 
@@ -111,7 +116,7 @@ class DocumentationController extends Controller
 			abort(404);
 		}
 		$doc = $doc->first();
-		if(!$doc["confidentialite"] > $niveau_administration){
+		if($doc["confidentialite"] > $niveau_administration){
 			abort(403);
 		}
 		
@@ -133,7 +138,7 @@ class DocumentationController extends Controller
 		}
 		
 		$doc = $doc->first();
-		if(!$doc["confidentialite"] > $niveau_administration){
+		if($doc["confidentialite"] > $niveau_administration){
 			abort(403);
 		}
 

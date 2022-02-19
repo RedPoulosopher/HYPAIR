@@ -33,7 +33,7 @@ class AssociationsTableSeeder extends Seeder
                 'email' => 'bde@etu.imt-nord-europe.fr',
                 'annee_creation' => '2010',
                 'description' => 'Bureau des élèves',
-                'type' => 'association',
+                'type' => 'bureau',
                 'couleur_claire' => '#C20502',
                 'couleur_sombre' => '#FF1210',
             ],

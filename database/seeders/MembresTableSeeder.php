@@ -22,6 +22,7 @@ class MembresTableSeeder extends Seeder
                 'date_rejoint' => '2020-08-17',
                 'competences' => '["php","js","css","html","python"]',
                 'niveau_admin' => 7,
+                'photo' => 0,
             ]
         ]);
     }

@@ -21,6 +21,7 @@ class CreateMembresTable extends Migration
             $table->date('date_rejoint')->nullable()->useCurrent();
             $table->json('competences')->nullable(); // vérifier l'utilité
             $table->tinyInteger('niveau_admin')->unsigned()->nullable()->default(null);
+            $table->boolean('photo')->default(false);
             $table->timestamps();
         });
     }

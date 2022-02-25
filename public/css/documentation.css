@@ -1,0 +1,96 @@
+#search {
+  padding: 13px 25px;
+  border-radius: 50px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background: var(--gris_2);
+}
+
+#search .input {
+  font-size: 1.1em;
+  min-width: 30ex;
+  display: inline-block;
+}
+
+#search .input:focus {
+  outline: none;
+}
+
+#search:before {
+  font-size: 1.6em;
+  /* color:inherit; */
+}
+
+.index_docs {
+  display: flex;
+  flex-direction: column;
+}
+
+.documentation_liste {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  border-radius: 15px;
+  padding: 15px 20px;
+  margin-top: 15px;
+  background: var(--gris_2);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--gris_1);
+  border-left-color: var(--gris_1);
+  box-sizing: border-box;
+  transition: border-left-color 0.1s ease-in-out;
+}
+
+.documentation_liste:hover {
+  border-left-color: var(--couleur_accentuation);
+}
+
+.documentation_liste .titre {
+  font-weight: 500;
+  font-size: 1.1em;
+  margin-block: 0;
+  color: var(--couleur_accentuation);
+}
+
+.documentation_liste .titre::first-letter {
+  text-transform: capitalize;
+}
+
+.documentation_liste .description {
+  display: none;
+}
+
+.documentation_liste .contenu_md {
+  font-size: 0.95em;
+  margin-block: 0;
+  color: var(--couleur_police_secondaire);
+  line-height: 1.15em;
+  max-height: 3.45em;
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+          mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  overflow: hidden;
+}
+
+.documentation_liste .contenu_md::first-letter {
+  text-transform: capitalize;
+}
+
+.documentation_liste .categories {
+  font-size: 0.95em;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--couleur_police_secondaire);
+}
+
+.categories span {
+  background: var(--gris_1);
+  padding: 4px 15px 5px 15px;
+  margin-right: 5px;
+  margin-top: 5px;
+  border-radius: 50px;
+  text-transform: capitalize;
+}
+

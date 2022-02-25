@@ -1,0 +1,113 @@
+.panneau {
+	display: flex;
+	width: 100%;
+	max-width: 720px;
+	border-radius: 20px;
+	background: var(--gris_3);
+}
+
+.titre {
+	font-size: 26px;
+	margin: 0;
+	font-weight: 600;
+	color: var(--couleur_accentuation_air);
+}
+
+.description {
+	margin: 6px 0 30px 0;
+}
+
+.panneau_gauche {
+	padding: 30px;
+	flex: 2;
+	transition-duration: 0.5s;
+}
+
+.panneau_droite {
+	flex: 2;
+	display: grid;
+	place-items: center;
+	grid-template-rows: 50% 50%;
+}
+
+.panneau_droite img {
+	width: 75%;
+	align-self: self-end;
+	animation-duration: 1.2s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+	animation-direction: alternate;
+}
+.panneau_droite img.respiration {
+	animation-name: respiration;
+}
+.panneau_droite .nom {
+	font-family: 'GearsOfPeace';
+	font-size: 100px;
+	opacity: 0.85;
+	align-self: self-start;
+}
+@keyframes respiration {
+	from{
+		width:75%;
+	} to {
+		width:85%;
+	}
+}
+
+.groupe_boutons {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.bouton.primaire {
+	background-color:var(--couleur_accentuation_air);
+}
+
+.input_groupe {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 20px;
+	border-radius: 50px;
+	margin-bottom: 20px;
+	transition: 0.3s;
+	border:0.3px solid transparent;
+	background: var(--gris_2);
+
+	& label {
+		font-size: 11px;
+		text-transform: uppercase;
+		font-weight: 600;
+		letter-spacing: 0.7px;
+		transition: 0.3s;
+		color:var(--couleur_accentuation_air);
+	}
+
+	& input {
+		outline: 0;
+		border: 0;
+		padding: 4px 0 0;
+		font-size: 1em;
+		background-color: unset;
+		color:var(--couleur_police);
+	}
+
+	&::placeholder {
+		color: #ccc;
+	}
+	&:focus-within {
+		border: 0.3px solid var(--couleur_accentuation_air);
+	}
+}
+
+@media(max-width: 750px) {
+	.panneau {
+		width: 90%;
+	}
+	.panneau_droite {
+		display: none;
+	}
+	.groupe_boutons {
+		display: block;
+	}
+}

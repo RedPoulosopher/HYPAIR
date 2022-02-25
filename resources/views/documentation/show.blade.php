@@ -1,85 +1,60 @@
 @extends('layouts.app')
 
-@section('title','Doc - '.$documentation->titre)
+@section('titre','Doc - '.$documentation->titre)
 
 @section('content')
-<script>
-window.MathJax = {
-  loader: {
-    load: ['input/asciimath', "output/svg"]
-  },
-  asciimath: {
-    delimiters: [['$','$'], ['`','`']]
-  }
-};
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
-<script src="ASCIIMathML.js"></script>
-
 
 <style>
-a[href^="mailto:"]:not(.no-icon), a[href^="http"]:not(.no-icon){
-	text-decoration: underline;
-	position: relative;
-	padding: 1px 5px;
-	margin-right:1.6em;
+.documentation {
+	width:100%;
+	background:var(--gris_2);
+	padding:25px;
+	border-radius:25px;
+	box-sizing:border-box;
+	border:1px solid var(--gris_1);
+	box-sizing: ;
 }
-a[href^="mailto:"]:not(.no-icon):after, a[href^="http"]:not(.no-icon):after{
-	font-family: 'icomoon' !important;
-	font-style: normal;
-	position:absolute;
-	margin-top: 0.25em;
-	margin-left:0.5em;
+h1.titre {
+	margin-block-start:0;
+	text-decoration:underline;
+	text-decoration-color: var(--couleur_accentuation);
 }
-a[href^="mailto:"]:not(.no-icon):after{
-	content: "\e91f" !important;
+h1.titre::first-letter {
+	text-transform: capitalize;
 }
-a[href^="http"]:not(.no-icon):after{
-	content: "\e91c" !important;
-}
-
-	.documentation {
-		display: flex;
-		flex-wrap: nowrap;
-		width:100%;
-		border-radius: 25px;
-		padding: 20px;
-		margin-top:15px;
-		box-sizing: border-box;
-	}
-	.documentation .contenu_doc a {
-		text-decoration: underline;
-		position: relative;
-		padding: 1px 5px;
-		margin-right:1.6em;
-	}
-	.documentation .contenu_doc a::after {
-		font-family: 'icomoon' !important;
-		content: "\e91c";
-		position:absolute;
-		margin-top: 0.25em;
-		margin-left:0.5em;
-	}
+p {
+	color: var(--couleur_police_secondaire);
+	text-align:justify;
 }
 </style>
+	
+<div id="wrapper">
+	<div id="contenu" class="petit">
 
-<div id="wrapper" style="display:flex;align-items:center;justify-content:center;">
-	<div id="contenu" class="grand">
+		<div style="display:flex;">
+			@if (substr(url()->previous(), -13)=="documentation")
+			<a onclick="history.go(-1)" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
+			@else
+			<a href="/documentation" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
+			@endif
 
-		<a href="/documentations"><div class="bouton secondaire ombre_petite">< retour aux documentations</div></a>
+			@if($gerer_documentation)
+			<a href="/documentation/modifier/{{$documentation->id}}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
+			@endif
+		</div>
 
-		<div class="documentation ombre_inset fond">
+		<div class="documentation ombre_petite">
 			<div class="contenu_doc" id="contenu_doc">
-				<h1>{{$documentation->titre}}</h1>
-				{{ $documentation->contenu }}
+		
+				<h1 class="titre">{{$documentation->titre}}</h1>
+
+				{!! Str::markdown($documentation->contenu_md); !!}
 			</div>
 		</div>
-		<script src="{{asset('js/asciidoctor.js')}}"></script>
-		<script>
-			var asciidoctor = Asciidoctor()
-			document.getElementById("contenu_doc").innerHTML(asciidoctor.convert(document.getElementById("contenu_doc").innerText))
-		</script>
 	</div>
 </div>
-	
+
+<script>
+	document.querySelectorAll(".documentation a").forEach(ceci => ceci.classList.toggle("couleur", true))
+</script>
 @endsection

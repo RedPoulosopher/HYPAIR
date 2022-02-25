@@ -1,3 +1,8 @@
+h1 {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
 .projet {
     width:230px;
     height:140px;
@@ -5,6 +10,7 @@
     padding:25px;
     box-sizing: border-box;
     position:relative;
+    background: var(--gris_2);
 }
 .projet span {
     text-align: justify;
@@ -24,12 +30,7 @@
     border-radius:50px;
     border: 1px solid var(--couleur_accentuation);
     cursor:pointer;
-}
-body.dark-theme  .voir-plus {
-	background-color: #292929;
-}
-body.light-theme  .voir-plus {
-	background-color: #F6F6F7;
+    background: var(--gris_1);
 }
 
 .membres > div {
@@ -48,6 +49,7 @@ body.light-theme  .voir-plus {
 }
 .membres .photo img {
     border-radius: 500px;
+    background: var(--gris_2);
 }
 .membres .photo .cercle {
     border-radius: 500px;

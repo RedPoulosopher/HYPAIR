@@ -16,12 +16,15 @@ class MembresTableSeeder extends Seeder
     {
         DB::table('membres')->insert([
             [
-                'user_id' => 1,
-                'association_id' => 1,
-                'role_id' => 1,
-                'competences' => '["php","js","css","html","python"]',
-                'date_rejoint' => '2020-08-17',
-            ]
+                'association_id' => '1',
+                'user_id' => '1',
+                'role_id' => '1',
+            ],
+            [
+                'association_id' => '2',
+                'user_id' => '1',
+                'role_id' => '5',
+            ],
         ]);
     }
 }

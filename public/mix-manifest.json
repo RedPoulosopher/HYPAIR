@@ -1,5 +1,9 @@
 {
-    "/js/asciidoctor.js": "/js/asciidoctor.js",
-    "/css/app.css": "/css/app.css",
-    "/css/sidenav.css": "/css/sidenav.css"
+    "/css/accueil.css": "/css/accueil.css",
+    "/css/connexion.css": "/css/connexion.css",
+    "/css/documentation.css": "/css/documentation.css",
+    "/css/formulaire.css": "/css/formulaire.css",
+    "/css/general.css": "/css/general.css",
+    "/css/sidenav.css": "/css/sidenav.css",
+    "/css/test.css": "/css/test.css"
 }

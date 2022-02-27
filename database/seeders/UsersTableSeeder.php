@@ -18,24 +18,14 @@ class UsersTableSeeder extends Seeder
             [
                 'nom' => 'Marc',
                 'prenom' => 'Bresson',
-                'email' => 'marc.bresson@etu.imt-nord-europe.fr',
-                'password' => '',
+                'uid' => 'marc.bresson',
                 'langue_pref' => 'fr',
-                'promo' => 'FISE2023',
-                'chambre' => 'st 0004',
-                'residence' => 'L',
-                'telephone' => '+33692545632',
             ],
             [
                 'nom' => 'Michel',
                 'prenom' => 'Dupont',
-                'email' => 'michel.dupont@etu.imt-nord-europe.fr',
-                'password' => '',
+                'uid' => 'michel.dupont',
                 'langue_pref' => 'en',
-                'promo' => 'FISE2021',
-                'chambre' => '1018',
-                'residence' => 'L',
-                'telephone' => '+33589465132',
             ],
         ]);
     }

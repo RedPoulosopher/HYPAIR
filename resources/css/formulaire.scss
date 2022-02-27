@@ -7,86 +7,145 @@ input:focus {
 	border:none;
 	outline:none;
 }
+p {
+	margin-block-start: inherit;
+	margin-block-end: inherit;
+	margin-inline-start: inherit;
+	margin-block-end: inherit;
+}
 textarea {
 	border:none;
 	background: unset;
 	resize:none;
     color:inherit;
+	font-family: inherit;
 }
 textarea:focus {
 	outline:none;
 }
 
-.champs_conteneur {
-	border: none;
-	display: table;
-    padding: 13px 25px;
+.groupe {
+	display: grid;
+    padding: 13px 18px;
     border-radius: 25px;
     font-size: 1em;
 	color:inherit;
-    margin:10px 0px;
+    margin:40px 0px;
     max-width: 100%;
     box-sizing: border-box;
+	border: 1px solid var(--gris_1);
 }
-.champs.flex {
-    display:flex;
-    width:100%;
-    white-space: nowrap;
+.groupe .erreurs {
+	border-left : 3px solid #e20000;
+	padding-left : 5px;
+	margin-bottom:15px;
 }
-.champs.flex .input{
-    width:100%;
+
+fieldset {
+	margin: 9px 0px;
+	display: grid;
+	border-radius: 10px;
+	border: 1px solid rgba(127,127,127,1);
 }
-.champs > span.titre {
-	transition: opacity 0.2s cubic-bezier(0.8,0,0,0.8), font-size 0.2s cubic-bezier(0.8,0,0,0.8);
+fieldset legend {
+	font-size: 1.3em;
+	font-weight: 600;
+}
+
+.input_groupe {
+	padding: 5px 5px;
+	margin: 3px 0px;
+	border-left:1px solid transparent;
+	transition: border 0.15s ease-in-out;
+}
+.input_groupe.flex {
+	display: flex;
+}
+.input_groupe > .titre {
+	transition: opacity 0.15s cubic-bezier(0.8,0,0,0.8);
 	user-select: none;
 	font-size: 1.1em;
 }
-.champs:focus-within > span.titre{
-	opacity: 0.6;
+.input_groupe:focus-within {
+	border-left: 1px solid var(--couleur_accentuation);
+
+	& > .titre{
+		opacity: 0.8;
+	}
 }
-.champs > .input {
+.input_groupe > .description {
+	color: var(--couleur_police_secondaire);
+	font-size: 0.95em;
+}
+
+.input_groupe > .input {
 	display: inline-block;
-	margin-left:5px;
+	box-sizing: border-box;
+	width:100%;
+	padding:5px;
+	border-radius: 8px;
 	font-size: 1em;
-	min-width:10ex;
-    border-bottom: 1px solid transparent;
-	font-family: system-ui;
+	background-color: var(--gris_2);
+	color: var(--couleur_police_secondaire);
+	border: 1px solid transparent;
+	transition: border 0.2s ease-in-out;
 }
-.champs > .input[type=text]:hover {
-	cursor:text !important;
+
+.input_groupe > .input.erreur {
+	border:1px solid #c70e0e;
 }
-.champs > .input:hover {
-	cursor:pointer;
-}
-.champs > .input:focus, .champs.border:not([empty="false"]) > .input {
-	outline:none;
-	border-bottom: 1px dashed rgba(128,128,128,0.5);
-}
-.champs > .input::placeholder{
+.input_groupe > .input::placeholder{
 	color:inherit;
 	opacity:0.6;
 }
-.champs[empty="false"] span.titre {
-	/* font-size:0px; */
-	opacity:0.6;
+.input_groupe [type="checkbox"]{
+	display: grid;
+	place-content: center;
+	align-self: center;
+	appearance: none;
+	cursor:pointer;
+	margin: 0px 8px;
+	width: 1.15em;
+	height: 1.15em;
+	border-radius: 0.3em;
+	color: currentColor;
+	background-color: var(--gris_2);
+	border: 1px solid currentColor;
 }
-.champs textarea {
+.input_groupe [type="checkbox"]::before {
+	content: "";
+	width: 0.65em;
+	height: 0.65em;
+	border-radius: 0.2em;
+	background: var(--couleur_accentuation);
+	transform: scale(0);
+	opacity: 0;
+	transition: transform 80ms ease-in-out, opacity 80ms ease-in-out;
+}
+.input_groupe [type="checkbox"]:hover::before {
+	transform: scale(0.5);
+	opacity: 0.6;
+}
+.input_groupe [type="checkbox"]:hover:checked::before {
+	transform: scale(0.8);
+	opacity: 0.8;
+}
+.input_groupe [type="checkbox"]:checked::before {
+	transform: scale(1);
+	opacity: 1;
+}
+
+.input_groupe textarea {
     width:100%;
-	margin-top:3px;
-	padding-top:3px;
+	margin-top:8px;
+	padding:5px;
+	box-sizing: border-box;
 	font-size:1em;
-	font-family: inherit;
-	border: 1px solid transparent;
-	/* border-top:1px solid rgba(128,128,128,0.5); */
+	background-color: var(--gris_2);
+	border-radius: 8px;
+	color: var(--couleur_police_secondaire);
 }
-.champs.radio {
+.input_groupe.radio {
 	display:grid;
-}
-
-
-body.dark-theme .champs_conteneur {
-	background-color: #292929;
-}
-body.light-theme .champs_conteneur {
-	background-color: #F6F6F7;
+	color: var(--couleur_police_secondaire);
 }

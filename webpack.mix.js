@@ -1,5 +1,15 @@
 const mix = require('laravel-mix');
 
+let fs = require('fs');
+
+let getFiles = function (dir) {
+    // get all 'files' in this directory
+    // filter directories
+    return fs.readdirSync(dir).filter(file => {
+        return fs.statSync(`${dir}/${file}`).isFile();
+    });
+};
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,6 +21,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/asciidoctor.js', 'public/js')
-    .sass('resources/css/app.scss', 'public/css')
-    .sass('resources/css/sidenav.scss', 'public/css');
+
+getFiles('resources/css/').forEach(function (filepath) {
+    mix.sass('resources/css/' + filepath, 'public/css');
+});

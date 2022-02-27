@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>En Attente</title>
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}" type="text/css" >
+        <link rel="stylesheet" href="css/general.css" type="text/css" >
     </head>
 	<body class="light-theme" style="display:flex;align-items:center;justify-content:center;">
 		<div>

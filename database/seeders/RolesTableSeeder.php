@@ -17,27 +17,69 @@ class RolesTableSeeder extends Seeder
         DB::table('roles')->insert([
             [
                 'label' => 'président·e',
-                'niveau_admin' => 7
+                'niveau_admin' => 7,
+                "gerer_actualite" => 1,
+                "gerer_association" => 1,
+                "gerer_documentation" => 1,
+                "gerer_evenement" => 1,
+                "gerer_membre" => 1,
+                "gerer_projet" => 1,
+                "gerer_ticket" => 1,
             ],
             [
                 'label' => 'vice-président·e',
-                'niveau_admin' => 6
+                'niveau_admin' => 7,
+                "gerer_actualite" => 1,
+                "gerer_association" => 1,
+                "gerer_documentation" => 1,
+                "gerer_evenement" => 1,
+                "gerer_membre" => 1,
+                "gerer_projet" => 1,
+                "gerer_ticket" => 1,
             ],
             [
                 'label' => 'trésorier·e',
-                'niveau_admin' => 5
+                'niveau_admin' => 5,
+                "gerer_actualite" => 1,
+                "gerer_association" => 1,
+                "gerer_documentation" => 1,
+                "gerer_evenement" => 0,
+                "gerer_membre" => 0,
+                "gerer_projet" => 0,
+                "gerer_ticket" => 1,
             ],
             [
                 'label' => 'secrétaire',
-                'niveau_admin' => 5
+                'niveau_admin' => 5,
+                "gerer_actualite" => 1,
+                "gerer_association" => 1,
+                "gerer_documentation" => 1,
+                "gerer_evenement" => 1,
+                "gerer_membre" => 1,
+                "gerer_projet" => 1,
+                "gerer_ticket" => 1,
             ],
             [
                 'label' => 'responsable communication',
-                'niveau_admin' => 4
+                'niveau_admin' => 4,
+                "gerer_actualite" => 1,
+                "gerer_association" => 0,
+                "gerer_documentation" => 1,
+                "gerer_evenement" => 1,
+                "gerer_membre" => 0,
+                "gerer_projet" => 1,
+                "gerer_ticket" => 0,
             ],
             [
                 'label' => 'membre',
-                'niveau_admin' => 1
+                'niveau_admin' => 1,
+                "gerer_actualite" => 0,
+                "gerer_association" => 0,
+                "gerer_documentation" => 0,
+                "gerer_evenement" => 0,
+                "gerer_membre" => 0,
+                "gerer_projet" => 0,
+                "gerer_ticket" => 0,
             ]
         ]);
     }

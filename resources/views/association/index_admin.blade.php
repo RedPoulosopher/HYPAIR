@@ -4,26 +4,6 @@
 
 @section('content')
 <style>
-.nom {
-	font-weight: 500;
-	font-size: 1.1em;
-	margin-block: 0;
-}
-
-.sites {
-	font-size: 0.95em;
-	color:var(--couleur_police_secondaire);
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap:5px;
-}
-.sites span {
-	background: var(--gris_1);
-	padding: 4px 15px 5px 15px;
-	border-radius: 50px;
-	text-transform: capitalize;
-}
 
 div.table {
     border: 1px solid var(--gris_1);
@@ -54,13 +34,31 @@ table th {
 table td {
     padding: 10px 15px;
 }
+
+td.sites {
+	font-size: 0.95em;
+	color:var(--couleur_police_secondaire);
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:5px;
+}
+td.sites span {
+	background: var(--gris_1);
+	padding: 4px 15px 5px 15px;
+	border-radius: 50px;
+	text-transform: capitalize;
+}
+td.type {
+    text-transform: capitalize;
+}
 </style>
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
 		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Associations -</h1>
 
-		<a href="/association/nouvelle" class="bouton tertiaire" style="margin:15px;">Créer une association</a>
+		<a href="/association/nouvelle" class="bouton tertiaire icon-security-safe" style="margin:15px;">Créer une association</a>
 
         <div class="table ombre_petite">
             <table id="index_assos">
@@ -134,7 +132,7 @@ function affichage_data(asso_data){
 	asso_html.innerHTML = 
 		'<td><a class="couleur" href="'+ lien +'">' + asso_data["nom"] + '</a></td>' +
 		'<td class="sites">' + affichage_sites(asso_data["sites"]) + '</td>' +
-        '<td>' + asso_data["type"] + '</td>' +
+        '<td class="type">' + asso_data["type"] + '</td>' +
 		'<td><a href="/association/modifier/' + asso_data["id"] + '" class="icon-edit-2" title="modifier"></a></td>'
 
     index_el.appendChild(asso_html)

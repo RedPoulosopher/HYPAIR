@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="{{ mix('css/sidenav.css') }}" type="text/css" >
-
 <div id="sidebar-wrapper">
 		<div id="sidenav" class="ombre_grande">
 			<div class="sidebar-nav-icon">

@@ -33,12 +33,12 @@
 	border-width:1px;
 	border-style:solid;
 	border-color:var(--gris_1);
-	border-left-color:var(--gris_1);
+	border-top-color:var(--gris_1);
 	box-sizing: border-box;
-	transition: border-left-color 0.1s ease-in-out;
+	transition: border-top-color 0.1s ease-in-out;
 }
 .documentation_liste:hover {
-	border-left-color: var(--couleur_accentuation);
+	border-top-color: var(--couleur_accentuation);
 }
 
 .documentation_liste .titre {

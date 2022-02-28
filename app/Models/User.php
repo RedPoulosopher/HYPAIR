@@ -44,4 +44,12 @@ class User extends Authenticatable
     function membres(){
         return $this->hasMany(Membre::class);
     }
+
+    public static function existe($user_uid){
+        $user = self::where('uid', $user_uid);
+
+        if(!$user->exists()){return false;}
+        
+        return $user->first()["id"];
+    }
 }

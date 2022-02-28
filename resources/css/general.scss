@@ -49,7 +49,7 @@ a[target="_blank"]:before {
 }
 
 #contenu {
-	padding: 0px 15px;
+	padding: 35px 15px;
 
 	@media (max-width: 499.98px) {
 		&.tres_petit{
@@ -103,6 +103,8 @@ a[target="_blank"]:before {
 h1{
 	margin-block-start: 0em;
 	text-align: center;
+	text-decoration: underline;
+	text-decoration-color: var(--couleur_accentuation);
 }
 p.explication {
 	text-align: justify;
@@ -138,27 +140,33 @@ p.explication {
 }
 
 .bouton {
-	padding: 10px 25px 12px 25px;
+	padding: 11px 25px 12px 25px;
 	font-size:1.1em;
 	border-radius:50px;
 	min-width: 100px;
+	line-height: 1;
 	width: fit-content;
 	display:block;
 	cursor:pointer;
 	user-select: none;
 	text-align: center;
 	font-family: system-ui;
-	transition: padding 0.15s ease-in-out;
+	transform:translateY(0px);
+	box-shadow: var(--ombre_petite);
+	transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 	
-	&[class^="iconsax-"]:before,&[class^="iconsax-"]:after {
-		font-size:1.3em;
+	&[class*="icon-"]:before {
+		font-size:1.1em;
+		vertical-align: top;
+		margin-right: 0.5em;
 	}
 	&[disabled] {
 		opacity:0.4;
 		cursor:not-allowed;
 	}
 	&:hover {
-		padding: 10px 20px 12px 30px;
+		transform:translateY(-3px);
+		box-shadow: var(--ombre_grande);
 	}
 	& span {
 		vertical-align: middle;
@@ -193,29 +201,34 @@ p.explication {
 	}
 }
 
+.ombre_grande {
+	box-shadow: var(--ombre_grande);
+}
+.ombre_petite {
+	box-shadow: var(--ombre_petite);
+}
+.ombre_inset {
+	box-shadow: var(--ombre_inset);
+}
+
 body.dark-theme {
-	background: var(--gris_3);
+	background: var(--couleur_fond);
 	color: #fff;
 
 	--gris_1: #2e2e33;
 	--gris_2: #212227;
-	--gris_3: #17191b;
+	--gris_3: #1c1e20;
+	--couleur_fond: #17191b;
 	--couleur_accentuation_air:#cc3345;
-	--couleur_accentuation:#5e25ef;
+	--couleur_accentuation:#cc3345;
 	--couleur_police_accentuation_air:#ffffff;
 	--couleur_police_accentuation:#ffffff;
 	--couleur_police_primaire:#ffffff;
 	--couleur_police_secondaire:#c5c5c5;
 
-	& .ombre_grande {
-		box-shadow:0px 13px 26px 0px rgba(0, 0, 0, 0.4);
-	}
-	& .ombre_petite {
-		box-shadow:0px 5px 15px 0px rgba(0, 0, 0, 0.2); 
-	}
-	& .ombre_inset {
-		box-shadow:0px 2px 5px 1px rgb(0,0,0,0.2) inset; 
-	}
+	--ombre_grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
+	--ombre_petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+	--ombre_inset: 0px 2px 5px 1px rgb(0,0,0,0.5) inset;
 	
 	& a.couleur {
 		text-decoration:underline;
@@ -227,28 +240,23 @@ body.dark-theme {
 }
  
 body.light-theme {
-	background: var(--gris_3);
+	background: var(--couleur_fond);
 	color:#000;
 
 	--gris_1: #ececec;
 	--gris_2: #fcfcfc;
-	--gris_3: #f5f5f5;
+	--gris_3: #eceaea;
+	--couleur_fond: #f5f5f5;
 	--couleur_accentuation_air:#c6152a;
-	--couleur_accentuation:#4b14d6;
+	--couleur_accentuation:#c6152a;
 	--couleur_police_accentuation_air:#ffffff;
 	--couleur_police_accentuation:#ffffff;
 	--couleur_police_primaire:#000000;
 	--couleur_police_secondaire:#3d3d3d;
 
-	& .ombre_grande {
-		box-shadow:0px 13px 26px 0px rgba(0, 0, 0, 0.15);
-	}
-	& .ombre_petite {
-		box-shadow:0px 5px 15px 0px rgba(0, 0, 0, 0.15); 
-	}
-	& .ombre_inset {
-		box-shadow:0px 2px 5px 1px rgba(0, 0, 0, 0.2) inset;
-	}
+	--ombre_grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.15);
+	--ombre_petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+	--ombre_inset: 0px 2px 5px 1px rgb(0,0,0,0.2) inset;
 
 	& a.couleur {
 		text-decoration:underline;

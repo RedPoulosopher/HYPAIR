@@ -22,7 +22,14 @@ class ExistenceAsso
     {
         $input =$request->all();
 
-        $asso = Association::where('uid', $request->route('uid_asso'));
+        if($type == "air"){ //pour les routes réservées à l'AIR
+            $uid_asso = "air";
+            $request->route()->setParameter('uid_asso', "air");
+        } else {
+            $uid_asso = $request->route('uid_asso');
+        }
+
+        $asso = Association::where('uid', $uid_asso);
 
         if(!$asso->exists()){
             return abort(405);

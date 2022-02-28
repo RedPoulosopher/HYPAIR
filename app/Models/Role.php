@@ -12,4 +12,8 @@ class Role extends Model
     public function membres(){
         return $this->hasMany(Membre::class);
     }
+
+    public static function role_id($role_label){
+        return self::where('label', $role_label)->first()["id"];
+    }
 }

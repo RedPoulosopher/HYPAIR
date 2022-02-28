@@ -70,6 +70,7 @@ fieldset legend {
 
 .input_groupe.flex {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .input_groupe > .titre {

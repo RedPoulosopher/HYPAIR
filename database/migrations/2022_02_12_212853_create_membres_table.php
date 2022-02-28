@@ -18,8 +18,6 @@ class CreateMembresTable extends Migration
 	        $table->foreignId('association_id');
 	        $table->foreignId('user_id')->constrained();
 	        $table->foreignId('role_id')->constrained();
-            $table->json('competences')->nullable();
-            $table->date('date_rejoint')->nullable()->useCurrent();
             $table->boolean('photo')->default(false);
             $table->timestamps();
         });

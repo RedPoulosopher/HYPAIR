@@ -8,7 +8,6 @@ use \App\Models\Documentation;
 use \App\Services\AutorisationGestion;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
 class DocumentationController extends Controller
 {
@@ -34,6 +33,12 @@ class DocumentationController extends Controller
 		AutorisationGestion::protectionPage("gerer_documentation");
 
 		$traitement = $this->fomulaire_traitement($request);
+
+		$doc = Documentation::where('slug', $traitement["slug"])->where('association_id', $traitement['association_id']);
+		if($doc->exists()){
+			return back()->withErrors(["msg","Cette documentation existe déjà pour votre association."]);
+		}
+
 		Documentation::create($traitement);
 
 		return redirect("/documentation/" . $traitement["slug"]);
@@ -47,7 +52,6 @@ class DocumentationController extends Controller
 		$doc = Documentation::select('id', 'titre',DB::raw('SUBSTR(contenu_md, 1, 300) as contenu_md'),'description','categories','slug','confidentialite','visibilite')
 			->where("association_id", session('association_id'))
 			->where("confidentialite", "<=", $niveau_administration)
-			->where("visibilite", "<", 2)
 			->orderBy('confidentialite', 'desc')
 			->get();
 

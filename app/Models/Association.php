@@ -10,13 +10,17 @@ class Association extends Model
     use HasFactory;
     protected $fillable = [
         'nom',
+        'uid',
         'bureau_de_ratachement',
-        'est_bureau',
-        'email',
-        'public',
+        'type',
+        'courriel',
+        'alias',
+        'sites',
+        'privee',
+        'annee_creation',
         'annee_creation',
         'annee_fin',
-        'description'
+        'description',
     ];
     
     public function documentations(){

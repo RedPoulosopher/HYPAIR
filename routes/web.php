@@ -20,6 +20,27 @@ Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
 
 
+Route::domain('air.' . env('SITE_URL')) //les routes réservées à l'AIR
+    ->middleware('existence_asso:air')
+    ->group(function(){
+        Route::controller(AssociationController::class)->group(function(){
+            Route::get('/associations', 'index_admin');
+            Route::get('/association/index/json', 'index_admin_json');
+            Route::get('/association/nouvelle', 'create');
+            Route::post('/association/nouvelle', 'store');
+            Route::get('/association/modifier/{id}', 'edit');
+            Route::post('/association/modifier/{id}', 'update');
+        });
+    });
+
+Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bureaux
+    ->middleware('existence_asso:bureau')
+    ->group(function(){
+        Route::controller(AssociationController::class)->group(function(){
+            Route::get('/association', 'index');
+        });
+    });
+    
 //les routes pour les associations, les clubs et les listes
 $routes_asso = function () {
     Route::get('/', function() { return view('accueils.#accueil'); });
@@ -34,10 +55,11 @@ $routes_asso = function () {
         Route::get('/documentation/{slug}', 'show');
     });
 
-    // Route::controller(AssociationController::class)->group(function(){
-    //     Route::get('/association/modifier', 'edit');
-    //     Route::post('/association/modifier', 'update');
-    // });
+    Route::controller(AssociationController::class)->group(function(){
+        Route::get('/a_propos', 'show');
+        Route::get('/association/modifier/{id}', 'edit');
+        Route::post('/association/modifier/{id}', 'update');
+    });
 };
 
 Route::domain('liste.' . env('SITE_URL')) //pour les listes
@@ -48,26 +70,6 @@ Route::domain('liste.' . env('SITE_URL')) //pour les listes
 Route::domain('{uid_asso}.' . env('SITE_URL')) //pour le reste
     ->middleware('existence_asso:association')
     ->group($routes_asso);
-
-Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bureaux
-    ->middleware('existence_asso:bureau')
-    ->group(function(){
-        Route::controller(AssociationController::class)->group(function(){
-            Route::get('/association', 'index');
-            Route::get('/association/{slug}', 'show');
-        });
-    });
-
-// Route::domain('air.' . env('SITE_URL')) //les routes réservées à l'AIR
-//     ->middleware('existence_asso:association')
-//     ->group(function(){
-//         Route::controller(AssociationController::class)->group(function(){
-//             Route::get('/association/nouvelle', 'create');
-//             Route::post('/association/nouvelle', 'store');
-//             Route::get('/association/modifier/{id}', 'edit');
-//             Route::post('/association/modifier/{id}', 'update');
-//         });
-//     });
 
 // easter eggs
 Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });

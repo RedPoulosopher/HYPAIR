@@ -60,6 +60,7 @@ fieldset legend {
 }
 .input_groupe.flex {
 	display: flex;
+	flex-wrap: wrap;
 }
 .input_groupe > .titre {
 	transition: opacity 0.15s cubic-bezier(0.8,0,0,0.8);

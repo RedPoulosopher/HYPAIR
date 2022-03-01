@@ -15,10 +15,10 @@ class CreateProjetsTable extends Migration
     {
         Schema::create('projets', function (Blueprint $table) {
             $table->id();
-            $table->String('association_id')->constrained();
+            $table->string('association_uid',128)->references('uid')->on('associations')->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('confidentialite');
             $table->string('titre');
-            $table->string('slug');
+            $table->string('uid',128)->unique();
             $table->string('chef_projet');
             $table->text('description_courte'); 
             $table->timestamps();

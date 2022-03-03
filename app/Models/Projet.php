@@ -17,20 +17,26 @@ class Projet extends Model
         'chef_projet'
     ];
     public function Projet(){
-        return $this->belongsTo(Association::class||user::class);
-}
+        return $this->belongsTo(Association::class||User::class);
+    }
     public function Avancee(){
         return $this->hasMany(Avancee::class);
     }
 }
+//test
 Route::get('/',function(){
     return view('Projet',[
-        'Projet' -> Post::all()
+        'Projet' -> Post::with('association')->get()
     ]);  
 });
 
-Route::get('Projet/{Projet}', function ($id){
+Route::get('Projet/{Projet:projet_id}', function (Projet $Projet ){
     return view('projet',[
-        'projet'-> Post::findOrFaill($id)
+        'projet'-> Post::findOrFaill($Projet)
+    ]);
+});
+Route::get('associations/{association:association_id}',function (Association $association){
+    return view('projets',[
+        'projets'->$association->projets
     ]);
 });

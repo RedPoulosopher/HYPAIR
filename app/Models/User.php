@@ -44,4 +44,7 @@ class User extends Authenticatable
     function membres(){
         return $this->hasMany(Membre::class);
     }
+    function projets(){
+        return $this->hasMany(Projet::class);
+    }
 }

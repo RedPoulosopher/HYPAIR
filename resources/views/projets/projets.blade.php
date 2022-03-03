@@ -3,7 +3,7 @@
     <article>
         <h1>
             <a href="/projets/{{ $projet->id}}">
-                {{ $projet->title}}
+                {{!! $projet->title !!}}
             </a>
         </h1>
         <div>

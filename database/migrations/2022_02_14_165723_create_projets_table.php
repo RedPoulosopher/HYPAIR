@@ -17,9 +17,10 @@ class CreateProjetsTable extends Migration
             $table->id();
             $table->string('association_uid',128)->references('uid')->on('associations')->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('confidentialite');
+            $table->foreignId('chef_id')->unique();
             $table->string('titre');
             $table->string('uid',128)->unique();
-            $table->string('chef_projet');
+            $table->string('chef_projet')->unique();
             $table->text('description_courte'); 
             $table->timestamps();
         });

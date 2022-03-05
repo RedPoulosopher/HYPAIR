@@ -8,6 +8,10 @@
 		<link rel="stylesheet" href="/css/app.css" type="text/css" >
 	</head>
 	
+	<style>
+		#wrapper {padding-left:inherit;}
+	</style>
+	
 	<body class="dark-theme">
 		@include('layouts.theme')
 		

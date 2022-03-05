@@ -37,7 +37,7 @@ Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bure
     ->middleware('existence_asso:bureau')
     ->group(function(){
         Route::controller(AssociationController::class)->group(function(){
-            Route::get('/association', 'index');
+            Route::get('/associations', 'index');
         });
     });
     

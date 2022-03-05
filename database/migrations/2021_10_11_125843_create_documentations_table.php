@@ -15,7 +15,7 @@ class CreateDocumentationsTable extends Migration
     {
         Schema::create('documentations', function (Blueprint $table) {
             $table->id();
-	        $table->foreignId('association_id');
+	        $table->foreignId('association_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('titre',128);
             $table->string('slug',128)->index();
             $table->text('description');

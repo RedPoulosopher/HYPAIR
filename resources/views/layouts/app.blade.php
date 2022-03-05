@@ -12,9 +12,11 @@
 		<style>
 			body.light-theme{
 				--couleur_accentuation: {{session('association_couleur_claire')}};
+				--couleur_police_accentuation: {{session('association_couleur_police_accentuation_claire')}};
 			}
 			body.dark-theme{
 				--couleur_accentuation: {{session('association_couleur_sombre')}};
+				--couleur_police_accentuation: {{session('association_couleur_police_accentuation_sombre')}};
 			}
 		</style>
 		@include('layouts.theme')

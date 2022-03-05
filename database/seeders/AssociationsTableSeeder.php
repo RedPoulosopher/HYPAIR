@@ -28,7 +28,17 @@ class AssociationsTableSeeder extends Seeder
             [
                 'nom' => 'BDE',
                 'uid' => 'bde',
-                'bureau_de_ratachement' => null,
+                'bureau_de_ratachement' => 'bde',
+                'annee_creation' => '2010',
+                'type' => 'bureau',
+                'sites' => '["douai"]',
+                'couleur_claire' => '#C20502',
+                'couleur_sombre' => '#FF1210',
+            ],
+            [
+                'nom' => 'BDE Lille',
+                'uid' => 'bde-lille',
+                'bureau_de_ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'sites' => '["lille"]',
@@ -68,7 +78,7 @@ class AssociationsTableSeeder extends Seeder
             [
                 'nom' => "BDS",
                 'uid' => 'bds',
-                'bureau_de_ratachement' => null,
+                'bureau_de_ratachement' => 'bds',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'sites' => '["douai"]',
@@ -78,7 +88,7 @@ class AssociationsTableSeeder extends Seeder
             [
                 'nom' => "BDA",
                 'uid' => 'bda',
-                'bureau_de_ratachement' => null,
+                'bureau_de_ratachement' => 'bda',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'sites' => '["douai"]',
@@ -88,7 +98,7 @@ class AssociationsTableSeeder extends Seeder
             [
                 'nom' => "BDH",
                 'uid' => 'bdh',
-                'bureau_de_ratachement' => null,
+                'bureau_de_ratachement' => 'bdh',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'sites' => '["douai"]',

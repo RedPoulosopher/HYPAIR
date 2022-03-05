@@ -7,9 +7,11 @@ use \App\Models\Association;
 use \App\Models\User;
 use \App\Models\Membre;
 use \App\Models\Role;
+use \App\Models\Logo;
 
 use Illuminate\Support\Str;
 use \App\Services\AutorisationGestion;
+use \App\Services\GestionLogo;
 use Illuminate\Validation\Rule;
 
 class AssociationController extends Controller
@@ -24,13 +26,17 @@ class AssociationController extends Controller
 
 	public function store(Request $request){
 		AutorisationGestion::protectionPage("gerer_association");
-		
+
 		$traitement = $this->fomulaire_traitement_admin($request);
+		GestionLogo::validation_logo($request->logo);
+
 		
-		$asso = Association::where('uid', $traitement["uid"])->where('type', '!=', 'liste'); //le lien des listes est unique, odnc on peut avoir des doublons
+		//on se moque d'avoir des doublons d'uid pour les listes
+		$asso = Association::where('uid', $traitement["uid"])->where('type', '!=', 'liste');
 		if($asso->exists()){
 			return back()->withErrors(["msg"=>"Cette association existe déjà."]);
 		}
+
 
 		$role_id_president = Role::role_id("président·e");
 		$user_id = User::existe($request["uid_president"]);
@@ -38,7 +44,16 @@ class AssociationController extends Controller
 			return back()->withErrors(["msg"=>"L'uid du président ne correspond à aucun utilisateur."]);
 		}
 		
+
 		$asso_id = Association::create($traitement)->id;
+
+		list($image_nom, $ext) = GestionLogo::stocker_logo($request->file('logo'), $asso_id);
+
+        Logo::create([
+            'association_id' => $asso_id,
+            'nom' => $image_nom,
+            'extension' => $ext,
+        ]);
 
 		Membre::create([
 			'association_id' => $asso_id,
@@ -60,6 +75,8 @@ class AssociationController extends Controller
 			'alias' => ['nullable','max:191','email:rfc'],
 			'sites' => ['filled','array',Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes'])],
 			'annee_creation' => ['filled','numeric'],
+			'couleur_claire' => ['filled'],
+			'couleur_sombre' => ['filled'],
 		];
 		$this->validate($request, $validation);
 
@@ -78,9 +95,24 @@ class AssociationController extends Controller
 			"ouvert" => $ouvert,
 			"annee_creation" => $request->annee_creation,
 			"annee_fin" => $request->annee_fin,
+			"couleur_claire" => $request->couleur_claire,
+			"couleur_sombre" => $request->couleur_sombre,
 		];
 
 		return $resultat;
+	}
+
+	public function index(){
+		$bureau = Association::find(session('association_id'));
+
+		$site_bureau = json_decode($bureau->sites)[0];
+
+		$assos_dependantes = Association::where('bureau_de_ratachement', $bureau->bureau_de_ratachement)
+							->where('sites','LIKE', '%'. $site_bureau .'%')
+							->where('type','!=', 'bureau')
+							->get();
+
+		return view('association.index', ["bureau" => $bureau, "assos_dependantes" => $assos_dependantes]);
 	}
 
 	public function index_admin(){

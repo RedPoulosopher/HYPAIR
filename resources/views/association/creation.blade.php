@@ -10,6 +10,10 @@ $annee_actuelle = Carbon::now()->format("Y");
 @endphp
 
 <link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
+<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
+
+<style id="style_clair"></style>
+<style id="style_sombre"></style>
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
@@ -17,7 +21,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 		@if(Session::has('success'))
 			<p class="explication">L'association a été créée correctement ! Elle est disponible.</p>
 		@endif
-		<form method="POST">
+		<form method="POST" enctype="multipart/form-data">
 			@csrf
 			@if ($errors->any())
 				<div class="erreurs">
@@ -70,8 +74,46 @@ $annee_actuelle = Carbon::now()->format("Y");
 				<label class="input_groupe">
 					<p class="titre">* Président :</p>
 					<p class="description">Rentrez l'uid du président. L'uid est le début de son adresse courriel étudiante (e.g. marc.bresson).</p>
-					<input type="text" name="uid_president" class="input" value="{{old('uid_president') ?? ''}}"/>
+					<input type="text" name="uid_president" required class="input" value="{{old('uid_president') ?? ''}}"/>
 				</label>
+			</div>
+
+			<div class="groupe ombre_petite">
+				<label class="input_groupe">
+					<p class="titre">* Logotype :</p>
+					<p class="description">Soit un svg de moins de 70ko, soit un png de ratio 1 et de plus de 512px.</p>
+					<input type="file" name="logo" class="input" required accept=".png,.svg">
+				</label>
+
+				<label class="input_groupe">
+					<p class="titre">* Couleur principale sur thème clair :</p>
+					<input type="color" name="couleur_claire" class="input" required id="couleur_claire">
+				</label>
+
+				<label class="input_groupe">
+					<p class="titre">* Couleur principale sur thème sombre :</p>
+					<input type="color" name="couleur_sombre" class="input" required id="couleur_sombre">
+				</label>
+
+				<details style="margin-top:2em;">
+					<summary>Afficher les tests de couleurs.</summary>
+					<p>La couleur de la police sera déterminée automatiquement entre le blanc et le noir en fonction du meilleur contraste.</p>
+					<h1>CECI EST TEST</h1>
+					<a class="documentation_liste" href="#" style="margin-bottom:2em;">
+						<div>
+							<span class="icon-security" title="documentation privée"></span>
+							<span class="titre">C'est juste un élément de test</span>
+							<p class="contenu_md"># Comment se déroule le test ? ## changer la couleur. Pour changer la couleur, il suffit de cliquer sur le champ prévu à cet effet.</p>
+							<div class="categories" raw="reseau test tech">
+									<span>#reseau</span>
+									<span>#test</span>
+									<span>#tech</span>
+							</div>
+						</div>
+					</a>
+					<div class="bouton primaire" style="float:right;">COUCOU</div>
+					<div class="bouton secondaire" style="float:right;margin-right:1em;">Coucou ?</div>
+				</details>
 			</div>
 
 			<div class="groupe ombre_petite">
@@ -106,7 +148,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 
 				<label class="input_groupe">
 					<p class="titre">Alias :</p>
-					<p class="description">Certaines associations ont un alias, qui rédirige les courriels vers les membres qu'on indique à la DISI.</p>
+					<p class="description">Certaines associations ont un alias, qui rédirige les courriels vers les membres indiqués à la DISI.</p>
 					<input type="text" name="alias" class="input" value="{{old('alias') ?? $association->alias ?? ''}}"/>
 				</label>
 			</div>
@@ -118,6 +160,23 @@ $annee_actuelle = Carbon::now()->format("Y");
 </div>
 
 <script>
+body = document.getElementsByTagName('body')[0]
+
+style_clair = document.getElementById('style_clair')
+el_couleur_claire = document.getElementById("couleur_claire")
+el_couleur_claire.addEventListener("change", function(){
+	body.classList.toggle('light-theme', true)
+	body.classList.toggle('dark-theme', false)
+	style_clair.innerHTML = 'body.light-theme{--couleur_accentuation:'+ this.value +'}'
+})
+style_sombre = document.getElementById('style_sombre')
+el_couleur_sombre = document.getElementById("couleur_sombre")
+el_couleur_sombre.addEventListener("change", function(){
+	body.classList.toggle('dark-theme', true)
+	body.classList.toggle('light-theme', false)
+	style_sombre.innerHTML = 'body.dark-theme{--couleur_accentuation:'+ this.value +'}'
+})
+
 document.querySelectorAll("select[select]").forEach(function(ceci){
 	to_select = ceci.getAttribute("select");
 	ceci.querySelector('[value="'+ to_select +'"]').setAttribute("selected","true")

@@ -18,12 +18,21 @@ class Association extends Model
         'sites',
         'privee',
         'annee_creation',
-        'annee_creation',
         'annee_fin',
         'description',
+        'couleur_claire',
+        'couleur_sombre',
     ];
     
     public function documentations(){
         return $this->hasMany(Documentation::class);
+    }
+    
+    public function logos(){
+        return $this->hasMany(Logo::class);
+    }
+    
+    public function logo_actuel(){
+        return $this->logos()->orderBy('nom', 'desc')->first();
     }
 }

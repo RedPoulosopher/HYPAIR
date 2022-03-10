@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
 
 <div id="wrapper">
-    <div id="contenu" class="moyen">
+    <div id="contenu" class="petit">
         <h1>- Créer un nouvel évènement -</h1>
         @if(Session::has('success'))
         <p class="explication">Bienvenue ! Ici vous pourrez créer un évènement.</p>

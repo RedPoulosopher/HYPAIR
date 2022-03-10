@@ -35,10 +35,10 @@ $routes_asso = function () {
         Route::get('/documentation/{slug}', 'show');
     });
 
-    // Route::controller(AssociationController::class)->group(function(){
-    //     Route::get('/association/modifier', 'edit');
-    //     Route::post('/association/modifier', 'update');
-    // });
+    Route::controller(EvenementController::class)->group(function(){
+        Route::get('/evenement', function() {  return view('evenements.formulaire'); });
+        Route::post('/evenement', 'formulaire_evenement');
+    });
 };
 
 Route::domain('liste.' . env('SITE_URL')) //pour les listes
@@ -57,28 +57,8 @@ Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bure
             Route::get('/association', 'index');
             Route::get('/association/{slug}', 'show');
         });
-        Route::controller(EvenementController::class)->group(function(){
-            Route::get('/evenement', 'formulaire_evenement');
-        });
     });
 
-
-
-Route::controller(EvenementController::class)->group(function(){
-    Route::get('/evenement', function() {  return view('evenements.formulaire'); });
-    Route::post('/evenement', 'formulaire_evenement');
-});
-
-// Route::domain('air.' . env('SITE_URL')) //les routes réservées à l'AIR
-//     ->middleware('existence_asso:association')
-//     ->group(function(){
-//         Route::controller(AssociationController::class)->group(function(){
-//             Route::get('/association/nouvelle', 'create');
-//             Route::post('/association/nouvelle', 'store');
-//             Route::get('/association/modifier/{id}', 'edit');
-//             Route::post('/association/modifier/{id}', 'update');
-//         });
-//     });
 
 // easter eggs
 Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });

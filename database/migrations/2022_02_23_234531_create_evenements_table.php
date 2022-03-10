@@ -23,9 +23,9 @@ class CreateEvenementsTable extends Migration
             $table->datetime('temps_fin');
             $table->text('lieu');
             $table->integer('max_participation')->nullable()->default(null);
-            $table->tinyIntEGER('confidentialite');
-            $table->boolean('pour_cotisant');
-            $table->boolean('important');
+            $table->tinyInteger('confidentialite')->default(0);
+            $table->boolean('pour_cotisant')->default(0);
+            $table->boolean('important')->default(0);
             $table->timestamps();
         });
     }

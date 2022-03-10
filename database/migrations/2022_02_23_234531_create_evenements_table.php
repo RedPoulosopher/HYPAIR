@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventsTable extends Migration
+class CreateEvenementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('evenements', function (Blueprint $table) {
             $table->id();
 	        $table->foreignId('association_id')->constrained();
             $table->string('titre');
@@ -22,8 +22,8 @@ class CreateEventsTable extends Migration
             $table->datetime('temps_debut');
             $table->datetime('temps_fin');
             $table->text('lieu');
-            $table->int('max_participation')->nullable()->default(null);
-            $table->tinyint('confidentialite');
+            $table->integer('max_participation')->nullable()->default(null);
+            $table->tinyIntEGER('confidentialite');
             $table->boolean('pour_cotisant');
             $table->boolean('important');
             $table->timestamps();

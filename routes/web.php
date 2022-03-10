@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EvenementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +57,17 @@ Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bure
             Route::get('/association', 'index');
             Route::get('/association/{slug}', 'show');
         });
+        Route::controller(EvenementController::class)->group(function(){
+            Route::get('/evenement', 'formulaire_evenement');
+        });
     });
+
+
+
+Route::controller(EvenementController::class)->group(function(){
+    Route::get('/evenement', function() {  return view('evenements.formulaire'); });
+    Route::post('/evenement', 'formulaire_evenement');
+});
 
 // Route::domain('air.' . env('SITE_URL')) //les routes réservées à l'AIR
 //     ->middleware('existence_asso:association')
@@ -74,5 +85,5 @@ Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });
 Route::get('/ecriture', function() {  return view('oeufs_de_paques.ecriture'); });
 Route::get('/cookies', function() {  return view('cookies'); });
 
-// accéder aux erreurs
+// accéder aux erreur
 Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['erreur'=>'401|403|404|405|419|429|500|503']);

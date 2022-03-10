@@ -7,13 +7,16 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
 
 class GestionLogo {
-    public static function validation_logo($image){
-        Validator::make(["logo" => $image], ['logo' => ['required','file','mimes:svg,png']])->validate();
+    public static function validation_logo($image, $required=true){
+        if($required){$required='required';}
+        else{$require='nullable';}
+        
+        Validator::make(["logo" => $image], ['logo' => [$required,'file','mimes:svg,png']])->validate();
 
         if($image->extension() == "png"){
-            Validator::make(["logo" => $image], ['logo' => ['dimensions:min_width=512,min_height=512,ratio=1']])->validate();
+            Validator::make(["logo" => $image], ['logo' => [$required,'dimensions:min_width=512,min_height=512,ratio=1']])->validate();
         } else if($image->extension() == "svg"){
-            Validator::make(["logo" => $image], ['logo' => ['max:70']])->validate();
+            Validator::make(["logo" => $image], ['logo' => [$required,'max:70']])->validate();
         }
     }
 

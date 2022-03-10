@@ -16,6 +16,7 @@ class Association extends Model
         'courriel',
         'alias',
         'sites',
+        'categories',
         'privee',
         'annee_creation',
         'annee_fin',
@@ -34,5 +35,16 @@ class Association extends Model
     
     public function logo_actuel(){
         return $this->logos()->orderBy('nom', 'desc')->first();
+    }
+
+    public function url(){
+        if($this->type == "liste"){
+            return "https://liste.". env('SITE_URL') ."/". $this->uid .'-'. $this->id;
+        } else {
+            //local
+            return $this->uid .".". env('SITE_URL') .":8000";
+            //deployé
+            return "https://". $this->uid .".". env('SITE_URL');
+        }
     }
 }

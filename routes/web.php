@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\AssociationController;
+use App\Http\Controllers\MembreController;
+use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -26,10 +28,19 @@ Route::domain('air.' . env('SITE_URL')) //les routes réservées à l'AIR
         Route::controller(AssociationController::class)->group(function(){
             Route::get('/associations', 'index_admin');
             Route::get('/association/index/json', 'index_admin_json');
+
             Route::get('/association/nouvelle', 'create');
             Route::post('/association/nouvelle', 'store');
-            Route::get('/association/modifier/{id}', 'edit');
-            Route::post('/association/modifier/{id}', 'update');
+            Route::get('/association/modifier/{asso_id}', 'edit')->name('modifier');
+            Route::post('/association/modifier/{asso_id}', 'update');
+        });
+        Route::controller(LogoController::class)->group(function(){
+            Route::get('/association/logotype/{asso_id}', 'create')->name('logotype');
+            Route::post('/association/logotype/{asso_id}', 'store');
+        });
+        Route::controller(MembreController::class)->group(function(){
+            Route::get('/association/passation/{asso_id}', 'passation')->name('passation');
+            Route::post('/association/passation/{asso_id}', 'passation_store');
         });
     });
 
@@ -38,6 +49,8 @@ Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bure
     ->group(function(){
         Route::controller(AssociationController::class)->group(function(){
             Route::get('/associations', 'index');
+            Route::get('/association/passation/{asso_id}', 'passation');
+            Route::post('/association/passation/{asso_id}', 'passation_post');
         });
     });
     
@@ -57,8 +70,10 @@ $routes_asso = function () {
 
     Route::controller(AssociationController::class)->group(function(){
         Route::get('/a_propos', 'show');
-        Route::get('/association/modifier/{id}', 'edit');
-        Route::post('/association/modifier/{id}', 'update');
+        Route::get('/association/description/', 'description_edit');
+        Route::post('/association/description/', 'description_update');
+        Route::get('/association/reseaux_sociaux/', 'reseaux_sociaux');
+        Route::post('/association/reseaux_sociaux/', 'reseaux_sociaux');
     });
 };
 

@@ -14,6 +14,12 @@ class Role extends Model
     }
 
     public static function role_id($role_label){
-        return self::where('label', $role_label)->first()["id"];
+        $role = self::where('label', $role_label);
+
+        if($role->exists()){
+            return $role->first()["id"];
+        }
+
+        throw new \ErrorException("Le rôle '".$role_label."' n'existe pas.");
     }
 }

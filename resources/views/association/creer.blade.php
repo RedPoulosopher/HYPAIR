@@ -52,7 +52,6 @@ $annee_actuelle = Carbon::now()->format("Y");
 					<select name="type" class="input" spellcheck="false" required select="{{old('type') ?? $association->type ?? ''}}">
                         <option selected disabled="disabled"></option>
                         <option value="bureau">Bureau</option>
-                        <option value="club">Club</option>
                         <option value="comité">Comité</option>
                         <option value="fakeliste">Fausse liste</option>
                         <option value="liste">Liste</option>

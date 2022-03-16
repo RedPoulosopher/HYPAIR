@@ -1,0 +1,69 @@
+@extends('layouts.app')
+
+@section('titre', 'Gestion de l\'association')
+
+@section('content')
+
+<style>
+.logo {
+	position: relative;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	width:220px;
+	height:220px;
+}
+.logo img {
+	width:100%;
+	border-radius:300px;
+}
+.logo a:before {
+	position: absolute;
+	z-index: 2;
+	top:170px;
+	left:170px;
+	padding:10px;
+	font-size:20px;
+	border-radius:100px;
+	background: var(--couleur_fond);
+}
+.description {
+	margin-top:40px;
+}
+.conteneur_boutons {
+	margin-top:40px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap:20px;
+}
+.gros_bouton {
+	width:200px;
+	height:200px;
+	border: 1px solid var(--gris_1);
+	border-radius: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: var(--gris_3);
+	transition: background 0.15s ease-in-out;
+}
+.gros_bouton:hover {
+	background: var(--gris_2);
+}
+</style>
+
+<div id="wrapper">
+	<div id="contenu" class="moyen">
+		<h1>- <span class="icon-security-safe" title="page réservée aux administrateurs"></span> Gestion de l'association -</h1>
+		<div class="logo">
+			<img src="{{session("association_logo_petit")}}" alt="logo"/>
+			<a class="icon-edit-2" href="air.imt-ne.fr/contact?sujet='demande de modification du logo ou des couleurs'"></a>
+		</div>
+		<div class="conteneur_boutons">
+			<a class="gros_bouton" href="/association/description">Modifier la description</a>
+			<a class="gros_bouton" href="/association/membres">Gérer les membres</a>
+		</div>
+	</div>
+</div>
+@endsection

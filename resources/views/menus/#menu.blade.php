@@ -1,7 +1,11 @@
 <div id="sidebar-wrapper">
 		<div id="sidenav" class="ombre_grande">
 			<div class="sidebar-nav-icon">
-				@yield('logo')
+				@hasSection('logo')
+					@yield('logo')
+				@else
+					<img id="logo_menu" class="arrondi" src="{{session("association_logo_petit")}}" alt="logo"/>
+				@endif
 			</div>
 			<ul class="sidebar-nav">
 				@yield('liens')

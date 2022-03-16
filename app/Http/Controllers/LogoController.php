@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Models\Logo;
 use \App\Models\Association;
 
 use \App\Services\AutorisationGestion;
 use \App\Services\GestionLogo;
+
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class LogoController extends Controller
 {
@@ -15,10 +17,7 @@ class LogoController extends Controller
     {
 		AutorisationGestion::protectionPage("gerer_association");
 
-		$asso = Association::find($request->route('asso_id'));
-		if(is_null($asso)){
-			abort(404);
-		}
+		$asso = Association::existe($request->route('asso_id'));
 
 		return view('association.logo', [
 			'association' => $asso,
@@ -30,34 +29,25 @@ class LogoController extends Controller
 		AutorisationGestion::protectionPage("gerer_association");
 
         $request->query('creation') ? $creation=true : $creation=false;
+        $presence_logo = $request->has('logo');
 
-        //on valide les données
-		$validation = [
+		$this->validate($request, [
 			'couleur_claire' => ['filled'],
 			'couleur_sombre' => ['filled'],
-		];
-		$this->validate($request, $validation);
-		GestionLogo::validation_logo($request->logo, $creation); //pas oligatoire si pas creation
+		]);
 
-        //on récup le modèle de l'asso qu'on est entrain de modif
-        $asso_id = $request->route('asso_id');
-		$asso = Association::find($asso_id);
-		if(is_null($asso)){
-			abort(404);
-		}
-
-        //on stock le logo dans le storage et dans la base de données
-		list($image_nom, $ext) = GestionLogo::stocker_logo($request->file('logo'), $asso_id);
-        $logo = new Logo;
-        $logo->association_id = $asso_id;
-        $logo->nom = $image_nom;
-        $logo->extension = $ext;
-        $logo->save();
+		$asso = Association::existe($request->route('asso_id'));
 
         //on sauvegarde les couleurs de l'asso
 		$asso->couleur_claire = $request->couleur_claire;
 		$asso->couleur_sombre = $request->couleur_sombre;
 		$asso->save();
+
+        //on stock le logo dans le storage et dans la base de données
+		if($creation || $presence_logo){
+			GestionLogo::validation_logo($request->logo);
+			GestionLogo::stocker_logo($request->file('logo'), $request->route('asso_id'));
+		}
 
 		if($request->query('creation')){
 			return redirect()->route('passation', ['asso_id' => $asso->id, 'creation' => true]);

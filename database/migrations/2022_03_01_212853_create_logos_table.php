@@ -17,7 +17,6 @@ class CreateLogosTable extends Migration
             $table->id();
 	        $table->foreignId('association_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
 	        $table->date('nom');
-	        $table->string('extension', 10);
         });
     }
 

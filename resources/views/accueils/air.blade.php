@@ -1,3 +1,5 @@
+<div style="aspect-ratio:2.5;width:80%;margin-left:10%;background:#000000;"></div>
+
 <h1>- ACTUALITÉS -</h1>
 <div style="margin:70px 0px;">
 	<a href="/commande"><div class="centre-element bouton primaire icon-after-document ombre_petite"><span>Passer une commande de câble / adaptateur</span></div></a>

@@ -44,7 +44,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 				
 				<label class="input_groupe">
 					<p class="titre">* Description :</p>
-					<p class="description">Pour créer de la documentation, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
+					<p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
 					<textarea name="description" class="input" required rows="8">{{old('description') ?? $association->description ?? ''}}</textarea>
 				</label>
 

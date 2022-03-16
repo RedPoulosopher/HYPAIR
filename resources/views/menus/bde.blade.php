@@ -1,10 +1,5 @@
 @extends('menus.#menu')
 
-@section('logo')
-    <img id="logo_menu" src="images/photo_membres/marc.png" width="120px" alt="logo de l'AIR"/>
-    <span id="nom_menu">AIR</span>
-@endsection
-
 @section('liens')
 <a href="/accueil"><li class="icon-before-maison"><span>Accueil</span></li></a>
 <a href="/projets"><li class="icon-before-document"><span>Nos projets</span></li></a>

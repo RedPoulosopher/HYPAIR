@@ -17,27 +17,30 @@ div.table {
     overflow: hidden;
     background-color: var(--gris_2);
 }
-#liste_assos {
+#liste_comite {
     display: flex;
-    gap: 40px;
+    gap: 20px 20px;
     justify-content: center;
     flex-wrap: wrap;
 }
-.asso {
-    width:200px;
+.comite {
+    width:240px;
 }
-.asso .logo {
+.comite .logo {
     position: relative;
-    width:100%;
+    width:200px;
+    height:200px;
+    margin-left:auto;
+    margin-right:auto;
     border-radius: 500px;
     background: var(--gris_2);
 }
-.asso .logo img {
+.comite .logo img {
     width:84%;
     margin: 8%;
     border-radius: 500px;
 }
-.asso .logo .cercle {
+.comite .logo .cercle {
     border-radius: 500px;
     border:2px solid;
     position:absolute;
@@ -48,24 +51,56 @@ div.table {
     box-sizing: border-box;
     transition: border 0.1s ease-in-out;
 }
-.asso .logo:hover .cercle {
+.comite .logo:hover .cercle {
     border: 5px solid;
+}
+
+.comite .info .nom {
+    font-size:2em;
+    line-height: 0.8em;
+    margin-block-start: 0.3em;
+    margin-block-end: 0.3em;
+    text-transform: capitalize;
+}
+.comite .info .categories {
+
+}
+.comite .info .categories {
+	font-size: 0.85em;
+	color:var(--couleur_police_secondaire);
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:5px;
+}
+.categories > span {
+	background: var(--gris_1);
+	padding: 4px 15px 5px 15px;
+	border-radius: 50px;
+	text-transform: capitalize;
 }
 </style>
 
 <div id="wrapper">
-	<div id="contenu" class="petit">
+	<div id="contenu" class="grand">
 		<h1>- Associations du {{ $bureau->nom }} -</h1>
 
-        <div id="liste_assos">
-            @foreach ($assos_dependantes as $asso)
-                <a class="asso" href="https://{{ $asso->uid }}.imt-ne.fr">
+        <div id="liste_comite">
+            @foreach ($comites_dependants as $comite)
+                <a class="comite" href="{{$comite->url()}}">
                     <div class="logo ombre_petite">
-                        <div class="cercle" style="border-color: {{ $asso->couleur_sombre }}"></div>
-                        <img src="{{ GestionLogo::recuperer_dernier_logo("moyen",$asso->id) }}"/>
+                        <div class="cercle" style="border-color: {{ $comite->couleur_sombre }}"></div>
+                        <img src="{{ $comite->logo_url("petit") }}"/>
                     </div>
                     <div class="info" style="text-align:center;">
-                        <span>{{ $asso->nom }}</span>
+                        <p class="nom">{{ $comite->nom }}</p>
+                        @if (!is_null($comite->categories))
+                            <div class="categories">
+                                @foreach (json_decode($comite->categories) as $categorie)
+                                    <span>#{{$categorie}}</span>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </a>
             @endforeach

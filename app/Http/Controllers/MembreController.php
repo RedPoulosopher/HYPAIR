@@ -40,12 +40,11 @@ class MembreController extends Controller
 			return back()->withErrors(["msg"=>"L'uid du président ne correspond à aucun utilisateur."]);
 		}
 
-		Membre::create([
-			'association_id' => $request->route('asso_id'),
-			'user_id' => $user_id,
-			'role_id' => $role_id_president,
-		]);
-
+		Membre::updateOrCreate(
+			['association_id' => $request->route('asso_id'), 'user_id' => $user_id,],
+			['role_id' => $role_id_president,]
+		);
+		
 		return redirect($asso->url());
     }
 }

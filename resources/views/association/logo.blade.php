@@ -34,7 +34,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 				<label class="input_groupe">
 					<p class="titre">* Logotype :</p>
 					<p class="description">Soit un svg de moins de 70ko, soit un png de ratio 1 et de plus de 512px.</p>
-					<input type="file" name="logo" class="input" {{$creation==1 ? "required" : ""}} accept=".png,.svg">
+					<input type="file" name="logo" class="input" {{$creation==1 ? "required" : ""}} accept=".png">
 				</label>
 
 				<label class="input_groupe">

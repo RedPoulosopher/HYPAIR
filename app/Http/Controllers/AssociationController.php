@@ -3,16 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Enums\AssoBureauEnum;
+use App\Enums\AssoTypeEnum;
 use \App\Models\Association;
 use \App\Models\Logo;
 
 use Illuminate\Support\Str;
 use \App\Services\AutorisationGestion;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
+
+use Carbon\Carbon;
 
 class AssociationController extends Controller
 {
-    public function create(){ //réservé à l'AIR
+	public function show()
+	{
+		$asso = Association::existe(session('association_id'));
+
+		return view('association.a_propos')->with('asso', $asso);
+	}
+
+	public function gestion(Request $request)
+	{
+		AutorisationGestion::protectionPage("gerer_association");
+
+		$asso = Association::existe(session('association_id'));
+
+		return view('association.gestion')->with('asso', $asso);
+	}
+
+    public function create() //réservé à l'AIR
+	{
 		AutorisationGestion::protectionPage("gerer_association");
 
 		$assos_existantes = Association::get();
@@ -20,19 +42,20 @@ class AssociationController extends Controller
 		return view('association.creer', ['assos_existantes' => $assos_existantes]);
 	}
 
-	public function store(Request $request){
+	public function store(Request $request) //réservé à l'AIR
+	{
 		AutorisationGestion::protectionPage("gerer_association");
 		
-		$validation = [
+		$this->validate($request, [
 			'nom' => ['filled','max:120'],
-			'bureau_de_ratachement' => ['filled', Rule::in(['bda', 'bde', 'bdh', 'bds'])],
-			'type' => ['filled',Rule::in(['bureau', 'club', 'comité', 'liste', 'fakeliste'])],
-		];
-		$this->validate($request, $validation);
+			'bureau_de_ratachement' => ['filled', new Enum(AssoBureauEnum::class)],
+			'type' => ['filled', new Enum(AssoTypeEnum::class)],
+		]);
 
 		//on se moque d'avoir des doublons d'uid pour les listes
 		$asso_uid = Str::slug($request->nom, '.');
-		$asso = Association::where('uid', $asso_uid)->where('type', '!=', 'liste');
+		$asso = Association::where('uid', $asso_uid)->where('type', '!=', AssoTypeEnum::Liste);
+		
 		if($asso->exists()){
 			$asso = $asso->first();
 		}
@@ -45,18 +68,14 @@ class AssociationController extends Controller
 			$asso->save();
 		}
 
-
 		return redirect()->route('modifier', ['asso_id' => $asso->id, 'creation' => true]);
 	}
 
-	public function edit(Request $request)
+	public function edit(Request $request) //réservé à l'AIR
 	{
 		AutorisationGestion::protectionPage("gerer_association");
 
-		$asso = Association::find($request->route('asso_id'));
-		if(is_null($asso)){
-			abort(404);
-		}
+		$asso = Association::existe($request->route('asso_id'));
 
 		return view('association.modifier', [
 			'association' => $asso,
@@ -65,14 +84,39 @@ class AssociationController extends Controller
 		]);
 	}
 
-	public function update(Request $request)
+	public function description_edit(){
+		AutorisationGestion::protectionPage("gerer_association");
+
+		$asso = Association::existe(session('association_id'));
+
+		return view('association.description')->with('association', $asso);
+	}
+
+	public function description_update(Request $request){
+		AutorisationGestion::protectionPage("gerer_association");
+
+		$asso = Association::existe(session('association_id'));
+		
+		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
+		sort($request->categories);
+		
+		$this->validate($request, [
+			'description' => ['filled','min:300'],
+			'categories' => ['filled','distinct'],
+		]);
+
+		$asso->description = $request->description;
+		$asso->categories = json_encode($request->categories);
+		$asso->save();
+
+		return redirect()->route('a_propos', ['uid_asso' => $asso->uid]);
+	}
+
+	public function update(Request $request) //réservé à l'AIR
 	{
 		AutorisationGestion::protectionPage("gerer_association");
 		
-		$asso = Association::find($request->route('asso_id'));
-		if(is_null($asso)){
-			abort(404);
-		}
+		$asso = Association::existe($request->route('asso_id'));
 
 		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
 		sort($request->categories);
@@ -108,40 +152,47 @@ class AssociationController extends Controller
 		}
 	}
 
-	public function index(){
+	public function index() //réservé aux bureaux
+	{
 		$bureau = Association::find(session('association_id'));
 
 		$site_bureau = json_decode($bureau->sites)[0];
 
 		$assos_dependantes = Association::where('bureau_de_ratachement', $bureau->bureau_de_ratachement)
-							->where('sites','LIKE', '%'. $site_bureau .'%')
-							->where('type','!=', 'bureau')
-							->get();
+							->where('sites','LIKE', '%'. $site_bureau .'%');
 
-		return view('association.index', ["bureau" => $bureau, "assos_dependantes" => $assos_dependantes]);
+		$comites_dependants = clone $assos_dependantes->where('type', AssoTypeEnum::Comite)->orderBy('nom');;
+		$listes_dependantes = clone $assos_dependantes->where('type', AssoTypeEnum::Liste)->where('annee_creation', Carbon::now()->year);
+
+		return view('association.index', ["bureau" => $bureau, "comites_dependants" => $comites_dependants->get(), "listes_dependantes" => $listes_dependantes->get()]);
 	}
 
-	public function index_admin(){
+	public function index_admin() //réservé à l'AIR
+	{
 		AutorisationGestion::protectionPage("gerer_association");
 
 		return view('association.index_admin');
 	}
 
-	public function index_admin_json(Request $request){
+	public function index_admin_json(Request $request) //réservé à l'AIR
+	{
 		AutorisationGestion::protectionPage("gerer_association");
 
 		$assos = Association::select('id','uid','nom','bureau_de_ratachement','type','annee_fin','sites');
 
-		if($request["type"] == "liste"){
-			$assos->where('type', 'liste')
-					->orderBy('annee_creation', 'desc')
-					->orderBy('nom', 'asc');
-		} else {
-			$assos->where('type', "!=", 'liste')
-					->orderBy('nom', 'asc');
+		if($request["type"] == AssoTypeEnum::Liste){
+			$assos->where('type', AssoTypeEnum::Liste)
+					->orWhere('type', AssoTypeEnum::Fakeliste)
+					->orderBy('annee_creation', 'desc');
+		}
+		else if($request["type"] == AssoTypeEnum::Bureau) {
+			$assos->where('type', AssoTypeEnum::Comite);
+		}
+		else if($request["type"] == AssoTypeEnum::Comite) {
+			$assos->where('type', AssoTypeEnum::Comite);
 		}
 
-		return Response()->json($assos->get()->toArray());
+		return Response()->json($assos->orderBy('nom', 'asc')->get()->toArray());
 	}
 
 }

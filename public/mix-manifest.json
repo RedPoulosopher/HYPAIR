@@ -1,7 +1,7 @@
 {
     "/css/accueil.css": "/css/accueil.css",
+    "/css/app.css": "/css/app.css",
     "/css/connexion.css": "/css/connexion.css",
     "/css/documentation.css": "/css/documentation.css",
-    "/css/formulaire.css": "/css/formulaire.css",
-    "/css/app.css": "/css/app.css"
+    "/css/formulaire.css": "/css/formulaire.css"
 }

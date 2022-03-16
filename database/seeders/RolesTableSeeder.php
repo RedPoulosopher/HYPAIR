@@ -80,6 +80,17 @@ class RolesTableSeeder extends Seeder
                 "gerer_membre" => 0,
                 "gerer_projet" => 0,
                 "gerer_ticket" => 0,
+            ],
+            [
+                'label' => 'public',
+                'niveau_admin' => 0,
+                "gerer_actualite" => 0,
+                "gerer_association" => 0,
+                "gerer_documentation" => 0,
+                "gerer_evenement" => 0,
+                "gerer_membre" => 0,
+                "gerer_projet" => 0,
+                "gerer_ticket" => 0,
             ]
         ]);
     }

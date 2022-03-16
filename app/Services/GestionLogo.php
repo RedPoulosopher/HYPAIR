@@ -2,75 +2,58 @@
 namespace App\Services;
 
 use \App\Models\Association;
+use \App\Models\Logo;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
 
 class GestionLogo {
-    public static function validation_logo($image, $required=true){
-        if($required){$required='required';}
-        else{$require='nullable';}
-        
-        Validator::make(["logo" => $image], ['logo' => [$required,'file','mimes:svg,png']])->validate();
+    public static function validation_logo($image){
+        Validator::make(["logo" => $image], ['logo' => ['required','file','mimes:png','dimensions:min_width=512,min_height=512,ratio=1']])->validate();
+    }
 
-        if($image->extension() == "png"){
-            Validator::make(["logo" => $image], ['logo' => [$required,'dimensions:min_width=512,min_height=512,ratio=1']])->validate();
-        } else if($image->extension() == "svg"){
-            Validator::make(["logo" => $image], ['logo' => [$required,'max:70']])->validate();
-        }
+    static function stocker_fichier_logo($image, $chemin){
+        $image_nom = date("Y-m-d");
+        $image_chemin = $chemin . $image_nom;
+
+        $image_rz = Image::make($image);
+        $image_rz->resize(512, 512);
+        Storage::put($image_chemin ."-moyen.png", $image_rz->encode("png"));
+        Storage::put($chemin ."moyen", $image_rz->encode("png"));
+        $image_rz->resize(256, 256);
+        Storage::put($image_chemin ."-petit.png", $image_rz->encode("png"));
+        Storage::put($chemin ."petit", $image_rz->encode("png"));
+        $image_rz->resize(128, 128);
+        Storage::put($image_chemin ."-tres-petit.png", $image_rz->encode("png"));
+        Storage::put($chemin ."tres-petit", $image_rz->encode("png"));
+        
+        return $image_nom;
     }
 
     public static function stocker_logo($image, $asso_id){
-        $image_nom = date("Y-m-d");
-        
-        $asso = Association::find($asso_id);
-        $chemin = self::chemin_logo($asso->uid, $asso_id, $asso->type);
-        $ext = $image->extension();
+        $asso = Association::existe($asso_id);
+        $chemin = self::chemin_logos($asso->uid, $asso_id, $asso->type);
 
-        if($ext == "png"){
-            $image_rz = Image::make($image);
-            $image_rz->resize(512, 512);
-            Storage::put($chemin . $image_nom ."-moyen.". $ext, $image_rz->encode("png"));
-            $image_rz->resize(256, 256);
-            Storage::put($chemin . $image_nom ."-petit.". $ext, $image_rz->encode("png"));
-            $image_rz->resize(128, 128);
-            Storage::put($chemin . $image_nom ."-tres-petit.". $ext, $image_rz->encode("png"));
-        } else {
-            Storage::put($chemin . $image_nom .'.'. $ext);
-        }
-
-        return array($image_nom, $ext);
+        $image_nom = self::stocker_fichier_logo($image, $chemin);
+        $logo = new Logo;
+        $logo->association_id = $asso_id;
+        $logo->nom = $image_nom;
+        $logo->save();
     }
 
-    public static function recuperer_dernier_logo($taille = 'petit', $asso_id){
-        if(is_null($asso_id)){
-            $asso_id = session('association_id');
-        }
-
-        $asso = Association::find($asso_id);
-        
-        $logo = $asso->logo_actuel();
-        if(is_null($logo)){
-            return '/images/asso_inconnue.png';
-        }
-
-        if($logo->extension == "png"){
-            $nom_logo = $logo->nom .'-'. $taille .'.'. $logo->extension;
-        } else {
-            $nom_logo = $logo->nom .'.'. $logo->extension;
-        }
-        $url_logo = Storage::url(self::chemin_logo($asso->uid, $asso_id, $asso->type));
-
-        return $url_logo . $nom_logo;
-    }
-
-    static function chemin_logo($uid, $id, $type){
+    static function chemin_logos($uid, $id, $type){
         if($type == 'liste'){
             $type = 'listes';
         } else {
             $type = 'associations';
         }
 
-        return 'images/'. $type .'/'. $uid .'-'. $id .'/logos/';   
+        return Storage::url('images/'. $type .'/'. $uid .'-'. $id .'/logos/');   
+    }
+
+    public static function stocker_logo_depuis_url($url, $asso_id){
+        $logo = file_get_contents($url);
+
+        self::stocker_logo($logo, $asso_id);
     }
 }

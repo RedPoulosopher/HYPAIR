@@ -36,7 +36,7 @@ class AutorisationGestion {
     public static function recuperer_role(){
         if( !Auth::check() ) return "non authentifié";
 
-        if( !session("role_id") ) abort(500); //erreur serveur, l'id de la session n'a pas été écrit
+        if( is_null(session("role_id")) ) abort(500, "L'identifiant de votre rôle n'a pas été écrit correctement."); //erreur serveur, l'id de la session n'a pas été écrit
 
         if(session("role_id") === false) return "non membre";
 

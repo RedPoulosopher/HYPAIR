@@ -67,9 +67,10 @@ $routes_asso = function () {
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show');
     });
-
+    
     Route::controller(AssociationController::class)->group(function(){
-        Route::get('/a_propos', 'show');
+        Route::get('/a_propos', 'show')->name('a_propos');
+        Route::get('/association', 'gestion');
         Route::get('/association/description/', 'description_edit');
         Route::post('/association/description/', 'description_update');
         Route::get('/association/reseaux_sociaux/', 'reseaux_sociaux');

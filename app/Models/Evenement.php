@@ -23,4 +23,9 @@ class Evenement extends Model
     public function association(){
         return $this->belongsTo(Association::class);
     }
+
+    public static function index () {
+        return self::get();
+
+    }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\CalendrierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ use App\Http\Controllers\EvenementController;
 Route::get('/connexion', function() {  return view('connexion'); })->name("connexion");
 Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
+
+Route::get('/calendrier', [CalendrierController::class, 'calendrier_asso']);
 
 
 //les routes pour les associations, les clubs et les listes

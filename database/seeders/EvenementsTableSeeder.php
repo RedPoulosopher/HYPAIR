@@ -24,6 +24,15 @@ class EvenementsTableSeeder extends Seeder
                 'temps_fin' => '2021-12-31 16:00:00',
                 'lieu' => 'Meud',
                 'max_participation' => 20,
+            ],[
+                'association_id' => 2,
+                'titre' => "soirée BDE",
+                'slug' => "hello",
+                'description' => 'soirée du bde',
+                'temps_debut' => '2021-12-31 18:00:00',
+                'temps_fin' => '2021-12-31 23:00:00',
+                'lieu' => 'Meud',
+                'max_participation' => 200,
             ]
         ]);
     }

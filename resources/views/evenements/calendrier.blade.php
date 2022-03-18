@@ -4,6 +4,7 @@
 
 @section('content')
 
+<style>
 html {
     font-family: system-ui;
 }
@@ -35,15 +36,18 @@ border-left: var(--border);
 }
 
 #calendrier .jour.desactive{
-    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f9f9fa' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='rgba(127,127,127,0.15)' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
     cursor: not-allowed;
 }
 </style>
 
-<html>
-    <div id="calendrier">
+
+<div id="wrapper">
+    <div id="contenu" class="grand">
+        <div id="calendrier">
+        </div>
     </div>
-</html>
+</div>
 
 <script>
 el_calendrier = document.getElementById("calendrier");

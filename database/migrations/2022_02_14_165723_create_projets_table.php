@@ -20,7 +20,7 @@ class CreateProjetsTable extends Migration
             $table->foreignId('chef_id')->unique();
             $table->string('titre');
             $table->string('uid',128)->unique();
-            $table->string('chef_projet')->unique();
+            $table->string('chef_projet');
             $table->text('description_courte'); 
             $table->timestamps();
         });

@@ -69,6 +69,23 @@ Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bure
 //         });
 //     });
 
+/*Route::get('/',function(){
+    return view('Projet',[
+        'Projet' -> Post::with('association')->get()
+    ]);  
+});
+
+Route::get('Projet/{Projet:projet_id}', function (Projet $Projet ){
+    return view('projet',[
+        'projet'-> Post::findOrFaill($Projet)
+    ]);
+});
+Route::get('associations/{association:association_id}',function (Association $association){
+    return view('projets',[
+        'projets'->$association->projets
+    ]);
+});
+*/
 // easter eggs
 Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });
 Route::get('/ecriture', function() {  return view('oeufs_de_paques.ecriture'); });
@@ -76,3 +93,12 @@ Route::get('/cookies', function() {  return view('cookies'); });
 
 // accéder aux erreurs
 Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['erreur'=>'401|403|404|405|419|429|500|503']);
+
+Route::controller(ProjetController::class)->group(function(){
+    Route::get('/projet/nouveau', 'create');
+    Route::post('/projet/nouveau', 'store');
+    Route::get('/projet/modifier/{projet_id}', 'edit');
+    Route::post('/projet/modifier/{projet_id}', 'update');
+    Route::get('/projet', 'index');
+    Route::get('/projet/{slug}', 'show');
+});

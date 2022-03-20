@@ -11,7 +11,10 @@ class Avancee extends Model
     protected $fillable=[
         'projet_id',
         'description',
-        'date_publicatio'
+        'date_publication'
     ];
+    public function Avancee(){
+        return $this->belongsTo(Projet::class);
+}
     
 }

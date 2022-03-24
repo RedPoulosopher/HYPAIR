@@ -9,7 +9,7 @@ class CalendrierController extends Controller
 {
     public static function calendrier_asso(){
         $evenements= Evenement::index();
-        return view("evenements.calendrier", ["event" => $evenements]);
+        return view("evenements.calendrier", ["events" => $evenements->toArray()]);
 
     }
     //

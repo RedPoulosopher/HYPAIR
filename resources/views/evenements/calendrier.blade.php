@@ -50,6 +50,9 @@ border-left: var(--border);
 </div>
 
 <script>
+
+events = {!!json_encode($events)!!}
+
 el_calendrier = document.getElementById("calendrier");
 
 function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {

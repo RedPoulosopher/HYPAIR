@@ -3,16 +3,23 @@
 @section('titre', 'Associations')
 
 @section('content')
+<link rel="stylesheet" type="text/css" href="/css/jstable.css">
+<script type="text/javascript" src="/js/jstable.min.js"></script>
+
 <style>
 
 div.table {
-    border: 1px solid var(--gris_1);
-    border-top-color: var(--couleur_accentuation);
     box-sizing: border-box;
-    border-radius: 15px;
+    border-radius: 25px;
     margin-top:40px;
     overflow: hidden;
-    background-color: var(--gris_2);
+    padding: 13px 18px;
+    border: 1px solid var(--gris_1);
+    border-color: var(--gris_1);
+    transition: border-color 0.1s ease-in-out;
+}
+div.table:hover {
+    border-color: var(--couleur_accentuation);
 }
 table {
     border-collapse: collapse;
@@ -21,11 +28,10 @@ table {
 table tr {
     text-align:center;
     color: var(--couleur_police);
-    transition: color 0.1s ease-in-out;
-    /* border-bottom: 1px solid var(--gris_1); */
+    border-bottom: 1px solid transparent;
 }
-table > tr:hover {
-    color: var(--couleur_police_secondaire);
+table tbody tr:hover {
+    border-bottom: 1px solid var(--gris_1);
 }
 table th {
     padding: 15px 15px;
@@ -61,24 +67,47 @@ td.type {
 		<a href="/association/nouvelle" class="bouton tertiaire icon-security-safe" style="margin:15px;">Créer une association</a>
 
         <div class="table ombre_petite">
-            <table id="index_assos">
-                <tr>
-                    <th width="35%">Nom</th>
-                    <th>Sites</th>
-                    <th>Type</th>
-                    <th width="5%">-</th>
-                </tr>
+            <table id="index_bureau">
+                <thead>
+                    <tr>
+                        <th width="35%">Nom</th>
+                        <th>Sites</th>
+                        <th>Type</th>
+                        <th width="5%">-</th>
+                        <th width="5%">-</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
         </div>
 
         <div class="table ombre_petite">
-            <table id="index_listes">
-                <tr>
-                    <th width="35%">Nom</th>
-                    <th>Sites</th>
-                    <th>Type</th>
-                    <th width="5%">-</th>
-                </tr>
+            <table id="index_comité">
+                <thead>
+                    <tr>
+                        <th width="35%">Nom</th>
+                        <th>Sites</th>
+                        <th>Type</th>
+                        <th width="5%">-</th>
+                        <th width="5%">-</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="table ombre_petite">
+            <table id="index_liste">
+                <thead>
+                    <tr>
+                        <th width="35%">Nom</th>
+                        <th>Sites</th>
+                        <th>Type</th>
+                        <th width="5%">-</th>
+                        <th width="5%">-</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
         </div>
 
@@ -86,16 +115,31 @@ td.type {
 </div>
 
 <script>
+    
+datatable_options = {
+    "perPage" : 10,
+    "columns" : [{
+            select: [1,2],
+            sortable: false,
+            searchable: true,
+        },{
+            select: [3,4],
+            sortable: false,
+            searchable: false,
+        },
+    ]
+}
+
 let headers = new Headers();
 headers.append('X-CSRF-TOKEN', "{!! csrf_token() !!}");
 headers.append('Content-Type', 'text/json');
 
-function recuperer_doc(type) {
+function recuperer_asso(type) {
     let recupAssoObjet = {
         method: 'GET',
         headers: headers,
     };
-    var recupAssoRequete = new Request('/association/index/json?type=' + type, recupAssoObjet);
+    var recupAssoRequete = new Request('/associations/index/json?type=' + type, recupAssoObjet);
     
     fetch(recupAssoRequete)
         .then(response => {
@@ -106,34 +150,35 @@ function recuperer_doc(type) {
             }
         })
         .then(data => {
+            index_el = document.querySelector("#index_" + type + " tbody");
             data.forEach(data_asso => 
-                affichage_data(data_asso)
+                affichage_data(data_asso, index_el)
             )
+            new JSTable("#index_" + type, { ...datatable_options });
         })
         .catch(err => {
             console.log(err.message)
         })
 }
-index_assos = document.getElementById("index_assos");
-index_listes = document.getElementById("index_listes");
-function affichage_data(asso_data){
+
+var index_el = ""
+function affichage_data(asso_data, index_el){
     asso_html = document.createElement('tr')
     asso_html.classList.add("association_liste")
 
     if(asso_data["type"] == "liste"){
 		lien = "https://liste.imt-ne.fr/" + asso_data["uid"] + '-' + asso_data["id"]
-        index_el = index_listes
     }
     else {
 		lien = "https://" + asso_data["uid"] + ".imt-ne.fr/"
-        index_el = index_assos
     }
 
 	asso_html.innerHTML = 
 		'<td><a class="couleur" href="'+ lien +'">' + asso_data["nom"] + '</a></td>' +
 		'<td class="sites">' + affichage_sites(asso_data["sites"]) + '</td>' +
         '<td class="type">' + asso_data["type"] + '</td>' +
-		'<td><a href="/association/modifier/' + asso_data["id"] + '" class="icon-edit-2" title="modifier"></a></td>'
+		'<td><a href="/association/modifier/' + asso_data["id"] + '" class="icon-edit-2" title="modifier"></a></td>' +
+		'<td><a href="/association/membres/' + asso_data["id"] + '" class="icon-user-edit" title="membres"></a></td>'
 
     index_el.appendChild(asso_html)
 }
@@ -148,7 +193,8 @@ function affichage_sites(sites){
 	return sites_html
 }
 
-recuperer_doc("reste")
-recuperer_doc("liste")
+recuperer_asso("comité")
+recuperer_asso("bureau")
+recuperer_asso("liste")
 </script>
 @endsection

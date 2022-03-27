@@ -22,39 +22,55 @@ Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
 
 
-Route::domain('air.' . env('SITE_URL')) //les routes réservées à l'AIR
-    ->middleware('existence_asso:air')
+//les routes réservées à l'AIR
+//============================
+Route::domain('air.' . env('SITE_URL')) 
+    ->middleware('existence.asso:air')
     ->group(function(){
-        Route::controller(AssociationController::class)->group(function(){
-            Route::get('/associations', 'index_admin');
-            Route::get('/association/index/json', 'index_admin_json');
+        Route::get('/associations/{site}', [AssociationController::class, 'index_site'])->where(['site'=>'douai','lille','valencienne','dunkerke']); //liste de toutes les asso d'un site de l'école (e.g. Douai)
 
-            Route::get('/association/nouvelle', 'create');
-            Route::post('/association/nouvelle', 'store');
-            Route::get('/association/modifier/{asso_id}', 'edit')->name('modifier');
-            Route::post('/association/modifier/{asso_id}', 'update');
-        });
-        Route::controller(LogoController::class)->group(function(){
-            Route::get('/association/logotype/{asso_id}', 'create')->name('logotype');
-            Route::post('/association/logotype/{asso_id}', 'store');
-        });
-        Route::controller(MembreController::class)->group(function(){
-            Route::get('/association/passation/{asso_id}', 'passation')->name('passation');
-            Route::post('/association/passation/{asso_id}', 'passation_store');
+        //les routes pour les administrateurs (ceux qui peuvent gerer l AIR pourront gerer toutes les asso)
+        //================================================================================================
+        Route::middleware('protection.autorisation:gerer_association')->group(function(){
+
+            Route::controller(AssociationController::class)->group(function(){
+                Route::get('/associations/gestion', 'index_admin');
+                Route::get('/associations/index/json', 'index_admin_json');
+    
+                Route::get('/association/nouvelle', 'create');
+                Route::post('/association/nouvelle', 'store');
+                Route::get('/association/modifier/{asso_id}', 'edit')->name('modifier');
+                Route::post('/association/modifier/{asso_id}', 'update');
+            });
+
+            Route::controller(LogoController::class)->group(function(){
+                Route::get('/association/logotype/{asso_id}', 'create')->name('logotype');
+                Route::post('/association/logotype/{asso_id}', 'store');
+            });
+            
+            Route::controller(MembreController::class)->group(function(){
+                Route::get('/association/passation/{asso_id}', 'passation')->name('passation');
+                Route::post('/association/passation/{asso_id}', 'passation_store');
+            });
         });
     });
 
-Route::domain('{uid_asso}.' . env('SITE_URL')) //les routes réservées aux bureaux
-    ->middleware('existence_asso:bureau')
+
+//les routes réservées aux différents bureaux
+//===========================================
+Route::domain('{uid_asso}.' . env('SITE_URL'))
+    ->middleware('existence.asso:bureau')
     ->group(function(){
         Route::controller(AssociationController::class)->group(function(){
-            Route::get('/associations', 'index');
+            Route::get('/associations', 'index_bureau');
             Route::get('/association/passation/{asso_id}', 'passation');
             Route::post('/association/passation/{asso_id}', 'passation_post');
         });
     });
     
+
 //les routes pour les associations, les clubs et les listes
+//=========================================================
 $routes_asso = function () {
     Route::get('/', function() { return view('accueils.#accueil'); });
     Route::get('/accueil', function() { return view('accueils.#accueil'); });
@@ -73,24 +89,26 @@ $routes_asso = function () {
         Route::get('/association', 'gestion');
         Route::get('/association/description/', 'description_edit');
         Route::post('/association/description/', 'description_update');
-        Route::get('/association/reseaux_sociaux/', 'reseaux_sociaux');
-        Route::post('/association/reseaux_sociaux/', 'reseaux_sociaux');
+        // Route::get('/association/reseaux_sociaux/', 'reseaux_sociaux');
+        // Route::post('/association/reseaux_sociaux/', 'reseaux_sociaux');
     });
 };
-
 Route::domain('liste.' . env('SITE_URL')) //pour les listes
     ->prefix('{uid_asso}-{id_asso}')
-    ->middleware('existence_asso:liste')
+    ->middleware('existence.asso:liste')
     ->group($routes_asso);
-
 Route::domain('{uid_asso}.' . env('SITE_URL')) //pour le reste
-    ->middleware('existence_asso:association')
+    ->middleware('existence.asso:association')
     ->group($routes_asso);
 
-// easter eggs
+
+
+//easter eggs
+//============
 Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });
 Route::get('/ecriture', function() {  return view('oeufs_de_paques.ecriture'); });
 Route::get('/cookies', function() {  return view('cookies'); });
 
-// accéder aux erreurs
+//accéder aux erreurs
+//====================
 Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['erreur'=>'401|403|404|405|419|429|500|503']);

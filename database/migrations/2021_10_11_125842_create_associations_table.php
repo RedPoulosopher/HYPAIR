@@ -19,7 +19,8 @@ class CreateAssociationsTable extends Migration
 	        $table->string('nom',128);
             $table->string('bureau_de_ratachement');
             $table->string('type', 20);
-            $table->text('description')->nullable()->default(null);
+            $table->text('description_courte', 300)->nullable()->default(null);
+            $table->text('description_md')->nullable()->default(null);
             $table->json('sites')->nullable()->default(null);
             $table->json('categories')->nullable()->default(null);
             $table->boolean('privee')->default(0); //pour que les listes puissent se cacher

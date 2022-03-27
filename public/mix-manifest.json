@@ -1,7 +1,11 @@
 {
+    "/js/elasticlunr.min.js": "/js/elasticlunr.min.js",
     "/css/accueil.css": "/css/accueil.css",
     "/css/app.css": "/css/app.css",
+    "/css/association.index.css": "/css/association.index.css",
     "/css/connexion.css": "/css/connexion.css",
     "/css/documentation.css": "/css/documentation.css",
-    "/css/formulaire.css": "/css/formulaire.css"
+    "/css/formulaire.css": "/css/formulaire.css",
+    "/css/jstable.css": "/css/jstable.css",
+    "/js/jstable.min.js": "/js/jstable.min.js"
 }

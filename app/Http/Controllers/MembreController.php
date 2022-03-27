@@ -16,10 +16,7 @@ class MembreController extends Controller
     public function passation(Request $request){
 		AutorisationGestion::protectionPage("gerer_association");
 
-		$asso = Association::find($request->route('asso_id'));
-		if(is_null($asso)){
-			abort(404);
-		}
+		$asso = Association::existe($request->route('asso_id'));
 
 		return view('association.passation', [
 			'association' => $asso,
@@ -29,11 +26,8 @@ class MembreController extends Controller
 
     public function passation_store(Request $request){
 		//on vérifie que l'asso existe
-		$asso = Association::find($request->route('asso_id'));
-		if(is_null($asso)){
-			abort(404);
-		}
-        
+		$asso = Association::existe($request->route('asso_id'));
+		
 		$role_id_president = Role::role_id("président·e");
 		$user_id = User::existe($request["uid_president"]);
 		if(!$user_id){

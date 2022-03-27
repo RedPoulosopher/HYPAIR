@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Créer une association')
+@section('titre', $creation==1 ? "Créer" : "Modifier" . ' une association')
 
 @section('content')
 
@@ -43,9 +43,14 @@ $annee_actuelle = Carbon::now()->format("Y");
 				</label>
 				
 				<label class="input_groupe">
+					<p class="titre">* Description courte :</p>
+					<textarea name="description_courte" class="input" required rows="8">{{old('description_courte') ?? $association->description_courte ?? ''}}</textarea>
+				</label>
+				
+				<label class="input_groupe">
 					<p class="titre">* Description :</p>
 					<p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
-					<textarea name="description" class="input" required rows="8">{{old('description') ?? $association->description ?? ''}}</textarea>
+					<textarea name="description_md" class="input" required rows="8">{{old('description_md') ?? $association->description_md ?? ''}}</textarea>
 				</label>
 
 				<label class="input_groupe">
@@ -94,7 +99,12 @@ $annee_actuelle = Carbon::now()->format("Y");
 			</div>
 				
 			<span>* les champs marqués d'une astérisque sont obligatoires</span>
-			<button type="submit" class="bouton primaire" style="float:right;"><span>{{$creation==1 ? "SUIVANT" : "MODIFIER"}}</span></button>
+			<div style="float:right; display:flex;gap:10px;">
+				@if ($creation==0)
+				<a class="bouton secondaire" href="/association/logotype/{{request('asso_id')}}"><span>Changer le logotype</span></a>
+				@endif
+				<button type="submit" class="bouton primaire"><span>{{$creation==1 ? "SUIVANT" : "MODIFIER"}}</span></button>
+			</div>
 		</form>
 	</div>
 </div>

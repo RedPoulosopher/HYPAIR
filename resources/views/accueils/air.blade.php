@@ -1,4 +1,4 @@
-<div style="aspect-ratio:2.5;width:80%;margin-left:10%;background:#000000;"></div>
+{{-- <div style="aspect-ratio:2.5;width:80%;margin-left:10%;background:#000000;"></div> --}}
 
 <h1>- ACTUALITÉS -</h1>
 <div style="margin:70px 0px;">
@@ -8,27 +8,23 @@
 <h1>- NOS PROJETS -</h1>
 <div class="grille-enfants">
 	<div class="projet ombre_inset fond">
-		<span>Faire le site internet de l'AIR.</span>
+		<span>Finir HypAIR, le site pour la vie associative.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>Newsletter hebdo avec les posts facebook important.</span>
+		<span>Newsletter hebdomadaire avec les actualités phares.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>Remise en place d'un serveur de stockage pour les archives, les logiciels crackés, les serveurs de jeux. ça passe ou pas ?</span>
+		<span>Remise en place d'un serveur de stockage pour les archives, les logiciels crackés, les serveurs de jeux.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>Courr'imt : Notification de courrier par OCR avec un raspberrypi et openCV.</span>
+		<span>Courr'imt : Notification de courrier.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>GPS pour la MEUD (quelle chambre est où).</span>
-		<a class="voir-plus" href="#">+</a>
-	</div>
-	<div class="projet ombre_inset fond">
-		<span>Webscrapping pour récupérer les vidéos de Just Dance (2 parties indépendantes).</span>
+		<span>Accès aux locaus par la carte étudiante.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 </div>

@@ -73,15 +73,6 @@ fieldset legend {
   flex-wrap: wrap;
 }
 
-.input_groupe > .titre {
-  transition: opacity 0.15s cubic-bezier(0.8, 0, 0, 0.8);
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  font-size: 1.1em;
-}
-
 .input_groupe:focus-within {
   border-left: 1px solid var(--couleur_accentuation);
 }
@@ -90,12 +81,21 @@ fieldset legend {
   opacity: 0.8;
 }
 
-.input_groupe > .description {
+.input_groupe .titre {
+  transition: opacity 0.15s cubic-bezier(0.8, 0, 0, 0.8);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-size: 1.1em;
+}
+
+.input_groupe .description {
   color: var(--couleur_police_secondaire);
   font-size: 0.95em;
 }
 
-.input_groupe > .input {
+.input_groupe .input {
   display: inline-block;
   box-sizing: border-box;
   width: 100%;
@@ -108,26 +108,26 @@ fieldset legend {
   transition: border 0.2s ease-in-out;
 }
 
-.input_groupe > .input.erreur {
+.input_groupe .input.erreur {
   border: 1px solid #c70e0e;
 }
 
-.input_groupe > .input::-moz-placeholder {
+.input_groupe .input::-moz-placeholder {
   color: inherit;
   opacity: 0.6;
 }
 
-.input_groupe > .input:-ms-input-placeholder {
+.input_groupe .input:-ms-input-placeholder {
   color: inherit;
   opacity: 0.6;
 }
 
-.input_groupe > .input::placeholder {
+.input_groupe .input::placeholder {
   color: inherit;
   opacity: 0.6;
 }
 
-.input_groupe [type=checkbox] {
+.input_groupe .input[type=checkbox] {
   display: grid;
   place-content: center;
   align-self: center;
@@ -144,7 +144,7 @@ fieldset legend {
   border: 1px solid currentColor;
 }
 
-.input_groupe [type=checkbox]::before {
+.input_groupe .input[type=checkbox]::before {
   content: "";
   width: 0.65em;
   height: 0.65em;
@@ -155,17 +155,17 @@ fieldset legend {
   transition: transform 80ms ease-in-out, opacity 80ms ease-in-out;
 }
 
-.input_groupe [type=checkbox]:hover::before {
+.input_groupe .input[type=checkbox]:hover::before {
   transform: scale(0.5);
   opacity: 0.6;
 }
 
-.input_groupe [type=checkbox]:hover:checked::before {
+.input_groupe .input[type=checkbox]:hover:checked::before {
   transform: scale(0.8);
   opacity: 0.8;
 }
 
-.input_groupe [type=checkbox]:checked::before {
+.input_groupe .input[type=checkbox]:checked::before {
   transform: scale(1);
   opacity: 1;
 }

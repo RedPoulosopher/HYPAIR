@@ -6,6 +6,8 @@ use App\Enums\AssoBureauEnum;
 use App\Enums\AssoTypeEnum;
 use \App\Services\GestionLogo;
 
+use Carbon\Carbon;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +26,8 @@ class Association extends Model
         'privee',
         'annee_creation',
         'annee_fin',
-        'description',
+        'description_courte',
+        'description_md',
         'couleur_claire',
         'couleur_sombre',
     ];
@@ -40,6 +43,48 @@ class Association extends Model
 		if(is_null($asso)){abort(405);}
         
         return $asso;
+    }
+
+    public static function bureaux_site($site){
+        $bureaux = Association::where('type', AssoTypeEnum::Bureau)
+                ->where('sites','LIKE', '%'. $site .'%');
+        
+        return $bureaux;
+    }
+
+    public function comites_clubs_dependants(){
+        if($this->type != AssoTypeEnum::Bureau){
+            abort(500, "Vous essayez de récupérer les entités qui dépendent de quelque chose qui n'est pas un bureau.");
+        }
+
+        $site_bureau = json_decode($this->sites)[0];
+        $comites_clubs_dependants = Association::where('bureau_de_ratachement', $this->bureau_de_ratachement)
+                                ->where('sites','LIKE', '%'. $site_bureau .'%')
+                                ->where('type', AssoTypeEnum::Comite)
+                                ->orWhere('type', AssoTypeEnum::Club)
+                                ->orderBy('nom');
+        
+        return $comites_clubs_dependants;
+    }
+
+    public function listes_dependantes($annee=null){
+        if($this->type != AssoTypeEnum::Bureau){
+            abort(500, "Vous essayez de récupérer les entités qui dépendent de quelque chose qui n'est pas un bureau.");
+        }
+
+        $site_bureau = json_decode($this->sites)[0];
+        $listes_dependantes = Association::where('bureau_de_ratachement', $this->bureau_de_ratachement)
+                                ->where('sites','LIKE', '%'. $site_bureau .'%')
+                                ->where('type', AssoTypeEnum::Liste)
+                                ->orderBy('nom');
+
+        if($annee === null){
+            $annee = Carbon::now()->year;
+        }
+        
+        $listes_dependantes->where('annee_creation', $annee);
+        
+        return $listes_dependantes;
     }
     
     public function documentations(){

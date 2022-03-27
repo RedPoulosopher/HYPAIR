@@ -9,7 +9,6 @@ use \App\Models\Association;
 use \App\Models\Logo;
 
 use Illuminate\Support\Str;
-use \App\Services\AutorisationGestion;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
@@ -26,8 +25,6 @@ class AssociationController extends Controller
 
 	public function gestion(Request $request)
 	{
-		AutorisationGestion::protectionPage("gerer_association");
-
 		$asso = Association::existe(session('association_id'));
 
 		return view('association.gestion')->with('asso', $asso);
@@ -35,8 +32,6 @@ class AssociationController extends Controller
 
     public function create() //réservé à l'AIR
 	{
-		AutorisationGestion::protectionPage("gerer_association");
-
 		$assos_existantes = Association::get();
 
 		return view('association.creer', ['assos_existantes' => $assos_existantes]);
@@ -44,8 +39,6 @@ class AssociationController extends Controller
 
 	public function store(Request $request) //réservé à l'AIR
 	{
-		AutorisationGestion::protectionPage("gerer_association");
-		
 		$this->validate($request, [
 			'nom' => ['filled','max:120'],
 			'bureau_de_ratachement' => ['filled', new Enum(AssoBureauEnum::class)],
@@ -73,8 +66,6 @@ class AssociationController extends Controller
 
 	public function edit(Request $request) //réservé à l'AIR
 	{
-		AutorisationGestion::protectionPage("gerer_association");
-
 		$asso = Association::existe($request->route('asso_id'));
 
 		return view('association.modifier', [
@@ -84,28 +75,26 @@ class AssociationController extends Controller
 		]);
 	}
 
-	public function description_edit(){
-		AutorisationGestion::protectionPage("gerer_association");
-
+	public function description_edit(){ //pour l'entité
 		$asso = Association::existe(session('association_id'));
 
 		return view('association.description')->with('association', $asso);
 	}
 
-	public function description_update(Request $request){
-		AutorisationGestion::protectionPage("gerer_association");
-
+	public function description_update(Request $request){ //pour l'entité
 		$asso = Association::existe(session('association_id'));
 		
 		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
 		sort($request->categories);
 		
 		$this->validate($request, [
-			'description' => ['filled','min:300'],
+			'description_courte' => ['filled','max:300'],
+			'description_md' => ['filled','min:300'],
 			'categories' => ['filled','distinct'],
 		]);
 
-		$asso->description = $request->description;
+		$asso->description_courte = $request->description_courte;
+		$asso->description_md = $request->description_md;
 		$asso->categories = json_encode($request->categories);
 		$asso->save();
 
@@ -114,8 +103,6 @@ class AssociationController extends Controller
 
 	public function update(Request $request) //réservé à l'AIR
 	{
-		AutorisationGestion::protectionPage("gerer_association");
-		
 		$asso = Association::existe($request->route('asso_id'));
 
 		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
@@ -123,7 +110,8 @@ class AssociationController extends Controller
 		$validation = [
 			'sites' => ['filled','array',Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes'])],
 			'categories' => ['filled','distinct'],
-			'description' => ['filled'],
+			'description_courte' => ['filled','max:300'],
+			'description_md' => ['filled','min:300'],
 			'annee_creation' => ['filled','numeric'],
 			'annee_fin' => ['nullable','numeric'],
 			'courriel' => ['nullable','max:191','email:rfc'],
@@ -134,7 +122,8 @@ class AssociationController extends Controller
 		$request->has('privee') ? $privee=true : $privee=false;
 		$request->has('ouvert') ? $ouvert=true : $ouvert=false;
 
-		$asso->description = $request->description;
+		$asso->description_courte = $request->description_courte;
+		$asso->description_md = $request->description_md;
 		$asso->sites = json_encode($request->sites);
 		$asso->categories = json_encode($request->categories);
 		$asso->privee = $request->has('privee');
@@ -152,44 +141,61 @@ class AssociationController extends Controller
 		}
 	}
 
-	public function index() //réservé aux bureaux
+	public function index_site(Request $request) //réservé aux bureaux
 	{
-		$bureau = Association::find(session('association_id'));
+		$site = $request["site"];
 
-		$site_bureau = json_decode($bureau->sites)[0];
+		$bureaux = Association::bureaux_site($site)->get();
 
-		$assos_dependantes = Association::where('bureau_de_ratachement', $bureau->bureau_de_ratachement)
-							->where('sites','LIKE', '%'. $site_bureau .'%');
+		$comites_clubs_dependants = array();
+		foreach($bureaux as $bureau){
+			$bureau_ratachement = $bureau->bureau_de_ratachement->value;
+			$comites_clubs_dependants[$bureau_ratachement] = $bureau->comites_clubs_dependants()->get();
+		}
 
-		$comites_dependants = clone $assos_dependantes->where('type', AssoTypeEnum::Comite)->orderBy('nom');;
-		$listes_dependantes = clone $assos_dependantes->where('type', AssoTypeEnum::Liste)->where('annee_creation', Carbon::now()->year);
+		return view('association.index_site', [
+			"bureaux" => $bureaux,
+			"comites_clubs_dependants" => $comites_clubs_dependants,
+			]
+		);
+	}
 
-		return view('association.index', ["bureau" => $bureau, "comites_dependants" => $comites_dependants->get(), "listes_dependantes" => $listes_dependantes->get()]);
+	public function index_bureau() //réservé aux bureaux
+	{
+		$bureau = Association::existe(session('association_id'));
+
+		$comites_clubs_dependants = $bureau->comites_clubs_dependants();
+
+		$listes_dependantes = $bureau->listes_dependantes();
+
+		return view('association.index_bureau', [
+			"bureau" => $bureau,
+			"comites_clubs_dependants" => $comites_clubs_dependants->get(),
+			"listes_dependantes" => $listes_dependantes->get()
+			]
+		);
 	}
 
 	public function index_admin() //réservé à l'AIR
 	{
-		AutorisationGestion::protectionPage("gerer_association");
-
 		return view('association.index_admin');
 	}
 
 	public function index_admin_json(Request $request) //réservé à l'AIR
 	{
-		AutorisationGestion::protectionPage("gerer_association");
-
 		$assos = Association::select('id','uid','nom','bureau_de_ratachement','type','annee_fin','sites');
 
-		if($request["type"] == AssoTypeEnum::Liste){
-			$assos->where('type', AssoTypeEnum::Liste)
+		if($request["type"] == AssoTypeEnum::Liste->value){
+			$assos = $assos->where('type', AssoTypeEnum::Liste)
 					->orWhere('type', AssoTypeEnum::Fakeliste)
 					->orderBy('annee_creation', 'desc');
 		}
-		else if($request["type"] == AssoTypeEnum::Bureau) {
-			$assos->where('type', AssoTypeEnum::Comite);
+		else if($request["type"] == AssoTypeEnum::Bureau->value) {
+			$assos = $assos->where('type', AssoTypeEnum::Bureau);
 		}
-		else if($request["type"] == AssoTypeEnum::Comite) {
-			$assos->where('type', AssoTypeEnum::Comite);
+		else if($request["type"] == AssoTypeEnum::Comite->value) {
+			$assos = $assos->where('type', AssoTypeEnum::Comite)	
+						->orWhere('type', AssoTypeEnum::Club);
 		}
 
 		return Response()->json($assos->orderBy('nom', 'asc')->get()->toArray());

@@ -8,8 +8,23 @@ use \App\Models\Evenement;
 class CalendrierController extends Controller
 {
     public static function calendrier_asso(){
-        $evenements= Evenement::index();
+        //on doit recuperer l annee et le mois courant. ca sera l affichage par defaut
+        $annee = date('Y');
+        $mois = date('m');
+        $evenements= Evenement::index($annee, $mois);
+        return  $evenements;
         return view("evenements.calendrier", ["events" => $evenements->toArray()]);
+
+    }
+
+    public static function calendrier_index_json(Request $request){
+        $annee = $request["annee"];
+        $mois = $request["mois"];
+
+        //on recupere les events demandes
+
+        //on retourne un tableau JSON
+        return Response()->json(["test"=>$annee]);
 
     }
     //

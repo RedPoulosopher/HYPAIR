@@ -80,17 +80,38 @@ function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
 
 var nbr_jours_dans_mois = 0
 var index_jour_debut = 0
-function remplissage(){
-    let aujourdhui = new Date();
-    let mois = aujourdhui.getMonth();
-    let annee = aujourdhui.getFullYear();
+function remplissage(annee, mois){
     nbr_jours_dans_mois = new Date(annee, mois+1, 0).getDate();
-
     index_jour_debut = new Date(annee, mois, 1).getUTCDay();
+
+    creation_calendrier(index_jour_debut, nbr_jours_dans_mois)
 }
 
-remplissage()
-creation_calendrier(index_jour_debut, nbr_jours_dans_mois)
+//genere le calendrier du mois courant
+let aujourdhui = new Date();
+let mois = aujourdhui.getMonth();
+let annee = aujourdhui.getFullYear();
+remplissage(annee, mois)
+
+//place les events dans le calendrier
+function event_dans_calendrier(evenements){
+    for(var i=0; i < evenements.length ; i++){
+        temps_debut = new Date (evenements[i]["temps_debut"])
+        jour_debut = temps_debut.getDate()
+        console.log(jour_debut)
+        el_jour = document.querySelector('[num_jour="' + jour_debut + '"]')
+        el_jour.append(evenements[i]["titre"])
+    }
+
+}
+event_dans_calendrier (events)
+
+//a faire : requete asynchrone pour recup les events du mois demande par l utilisateur. la requete est generee quand l utilisateur demande un mois particulier
+//a faire : reconstruire le calendrier du bon mois et de la vbonne année
+//pour simuler une demande de l utilisateur, appeler la requqte asynchrone avec un mois et une annee random
+
+//un listener click pour chaque evenement du calendrier, qui affiche un ecnadre avec les infos complementaires
+
 </script>
 
 

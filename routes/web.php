@@ -22,6 +22,7 @@ Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
 
 Route::get('/calendrier', [CalendrierController::class, 'calendrier_asso']);
+Route::get('/calendrier/index_mois_json/{annee}-{mois}', [CalendrierController::class, 'calendrier_index_json']);
 
 
 //les routes pour les associations, les clubs et les listes

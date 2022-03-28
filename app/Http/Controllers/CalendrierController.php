@@ -12,7 +12,6 @@ class CalendrierController extends Controller
         $annee = date('Y');
         $mois = date('m');
         $evenements= Evenement::index($annee, $mois);
-        return  $evenements;
         return view("evenements.calendrier", ["events" => $evenements->toArray()]);
 
     }

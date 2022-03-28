@@ -25,12 +25,10 @@ class Evenement extends Model
     }
 
     public static function index($annee, $mois) {
-        global $mois;
-        global $annee;
         //ca doit retourner tous les evenements de l annee et du mois demandes. Faudra regarder la doc sur eloquent
         $evenements_mois_courant = self::whereMonth("temps_debut", $mois)
             ->whereYear("temps_debut", $annee)
-            ->orWhere(function($query){
+            ->orWhere(function($query) use($annee, $mois){
                 $query->whereMonth("temps_fin", $mois)
                     ->whereYear("temps_fin", $annee)
                     ->whereTime("temps_fin", ">=","08:00:00");

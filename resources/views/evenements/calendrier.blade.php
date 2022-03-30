@@ -94,17 +94,41 @@ let annee = aujourdhui.getFullYear();
 remplissage(annee, mois)
 
 //place les events dans le calendrier
-function event_dans_calendrier(evenements){
-    for(var i=0; i < evenements.length ; i++){
-        temps_debut = new Date (evenements[i]["temps_debut"])
-        jour_debut = temps_debut.getDate()
-        console.log(jour_debut)
-        el_jour = document.querySelector('[num_jour="' + jour_debut + '"]')
-        el_jour.append(evenements[i]["titre"])
-    }
+function event_dans_calendrier(evenements, mois, annee){
+    nbr_jours_dans_mois = new Date(annee, mois+1, 0).getDate();
 
+    for(var i=0; i < evenements.length ; i++){
+        date_temps_debut = new Date (evenements[i]["temps_debut"])
+        date_temps_fin = new Date (evenements[i]["temps_fin"])
+
+        jour_debut = date_debut.getDate()
+        jour_fin = date_fin.getDate()
+
+        id_mois_affiche = mois+annee*12
+        if(id_mois(date_temps_debut)<id_mois_affiche){
+            //on genere un tableau qui va de 1er jusqu a jour_fin (https://dev.to/namirsab/comment/2050)
+            //si l'heure de date_temps_fin < 8h, on pop le dernier element
+        } else if (id_mois(date_temps_fin)>id_mois_affiche){
+            //on genere un tableau qui va de jour_fin jusqua la fin du mois
+        } else if (jour_debut < jour_fin) {
+            //on genere un tableau qui va de jour_debut jusqua jour_fin
+            //si l'heure de date_temps_fin < 8h, on pop le dernier element
+        } else {
+            //on genere le tableau qu'avec un jour dedans
+        }
+        
+        //on parcours le tableau qu'on vient de creer, on appelle placer_evenement_dans_jour a chaque fois
+    }
 }
-event_dans_calendrier (events)
+funtction id_mois(date){
+    return date.getMonth()+date.getFullYear()*12
+}
+function placer_evenemnt_dans_jour(jour, index_evenement, evenements){
+    el_jour = document.querySelector('[num_jour="' + jour_debut + '"]')
+    el_jour.append(evenements[index_evenement]["titre"])
+}
+
+event_dans_calendrier(events, mois, annee)
 
 //a faire : requete asynchrone pour recup les events du mois demande par l utilisateur. la requete est generee quand l utilisateur demande un mois particulier
 //a faire : reconstruire le calendrier du bon mois et de la vbonne année

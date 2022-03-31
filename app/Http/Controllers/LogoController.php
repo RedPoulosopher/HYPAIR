@@ -19,7 +19,7 @@ class LogoController extends Controller
 
 		$asso = Association::existe($request->route('asso_id'));
 
-		return view('association.logo', [
+		return view('association.modifier_logotype', [
 			'association' => $asso,
 			'creation' => $request->query('creation', 0),
 		]);

@@ -64,7 +64,7 @@
 			<a class="icon-edit-2" title="Modifier le logo et les couleurs." href="air.imt-ne.fr/contact?sujet='demande de modification du logo ou des couleurs'"></a>
 		</div>
 		<div class="conteneur_boutons">
-			<a class="gros_bouton" href="/association/description">Modifier les descriptions et catégories</a>
+			<a class="gros_bouton" href="/association/modifier/description">Modifier les descriptions et catégories</a>
 			<a class="gros_bouton" href="/association/membres">Gérer les membres</a>
 			@if ($asso["type"]=="bureau" || $asso["uid"]=="air")
 				<a class="gros_bouton" href="/associations/gestion">Gérer les associations</a>

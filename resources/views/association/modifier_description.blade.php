@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Créer une association')
+@section('titre', 'Modifier la description')
 
 @section('content')
 
@@ -44,6 +44,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 
 				<label class="input_groupe">
 					<p class="titre">* Catégories :</p>
+					<p class="description">Séparez les catégories par des virgules (e.g. informatique, réseau, web)</p>
 					<input type="text" name="categories" class="input" required value="{{old('categories') ?? implode(", ",json_decode($association->categories ?? '[]'))}}"/>
 				</label>
 			</div>

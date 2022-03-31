@@ -64,27 +64,63 @@ class AssociationController extends Controller
 			$asso->save();
 		}
 
-		return redirect()->route('modifier', ['asso_id' => $asso->id, 'creation' => true]);
+		return redirect()->route('modifier_infos', ['asso_id' => $asso->id, 'creation' => true]);
 	}
 
-	public function edit(Request $request) //réservé à l'AIR
+	public function modifier_infos(Request $request) //réservé à l'AIR
 	{
 		$asso = Association::existe($request->route('asso_id'));
 
-		return view('association.modifier', [
+		return view('association.modifier_infos', [
 			'association' => $asso,
 			'titre' => "Modifier une association",
 			'creation' => $request->query('creation', 0),
 		]);
 	}
+	
+	public function maj_infos(Request $request) //réservé à l'AIR
+	{
+		$asso = Association::existe($request->route('asso_id'));
 
-	public function description_edit(){ //pour l'entité
-		$asso = Association::existe(session('association_id'));
+		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
+		sort($request->categories);
+		$validation = [
+			'annee_creation' => ['filled','numeric'],
+			'annee_fin' => ['nullable','numeric'],
+			'courriel' => ['nullable','max:191','email:rfc'],
+			'alias' => ['nullable','max:191','email:rfc'],
+		];
+		$this->validate($request, $validation);
 
-		return view('association.description')->with('association', $asso);
+		$request->has('privee') ? $privee=true : $privee=false;
+		$request->has('ouvert') ? $ouvert=true : $ouvert=false;
+
+		$asso->privee = $request->has('privee');
+		$asso->ouvert = $request->has('ouvert');
+		$asso->annee_creation = $request->annee_creation;
+		$asso->annee_fin = $request->annee_fin;
+		$asso->courriel = $request->courriel;
+		$asso->alias = $request->alias;
+		$asso->save();
+
+		if($request->query('creation')){
+			return redirect()->route('modifier_description', ['asso_id' => $asso->id, 'creation' => true]);
+		} else {
+			return redirect($asso->url());
+		}
 	}
 
-	public function description_update(Request $request){ //pour l'entité
+	public function modifier_description(){ //pour l'entité
+		$asso_id = $request->route('asso_id') ?? session('association_id');
+
+		$asso = Association::existe($asso_id);
+
+		return view('association.modifier_description')->with('association', $asso);
+	}
+
+	public function maj_description(Request $request){ //pour l'entité
+		$asso_id = $request->route('asso_id') ?? session('association_id');
+
 		$asso = Association::existe(session('association_id'));
 		
 		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
@@ -101,44 +137,10 @@ class AssociationController extends Controller
 		$asso->categories = json_encode($request->categories);
 		$asso->save();
 
-		return redirect()->route('a_propos', ['uid_asso' => $asso->uid]);
-	}
-
-	public function update(Request $request) //réservé à l'AIR
-	{
-		$asso = Association::existe($request->route('asso_id'));
-
-		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
-		sort($request->categories);
-		$validation = [
-			'categories' => ['filled','distinct'],
-			'description_courte' => ['filled','max:300'],
-			'description_md' => ['filled','min:300'],
-			'annee_creation' => ['filled','numeric'],
-			'annee_fin' => ['nullable','numeric'],
-			'courriel' => ['nullable','max:191','email:rfc'],
-			'alias' => ['nullable','max:191','email:rfc'],
-		];
-		$this->validate($request, $validation);
-
-		$request->has('privee') ? $privee=true : $privee=false;
-		$request->has('ouvert') ? $ouvert=true : $ouvert=false;
-
-		$asso->description_courte = $request->description_courte;
-		$asso->description_md = $request->description_md;
-		$asso->categories = json_encode($request->categories);
-		$asso->privee = $request->has('privee');
-		$asso->ouvert = $request->has('ouvert');
-		$asso->annee_creation = $request->annee_creation;
-		$asso->annee_fin = $request->annee_fin;
-		$asso->courriel = $request->courriel;
-		$asso->alias = $request->alias;
-		$asso->save();
-
 		if($request->query('creation')){
-			return redirect()->route('logotype', ['asso_id' => $asso->id, 'creation' => true]);
+			return redirect()->route('modifier_logotype', ['asso_id' => $asso->id, 'creation' => true]);
 		} else {
-			return redirect($asso->url());
+			return redirect()->route('a_propos', ['uid_asso' => $asso->uid]);
 		}
 	}
 

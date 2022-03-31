@@ -39,15 +39,17 @@ Route::domain('air.' . env('SITE_URL'))
     
                 Route::get('/association/nouvelle', 'create');
                 Route::post('/association/nouvelle', 'store');
-                Route::get('/association/modifier/{asso_id}', 'edit')->name('modifier');
-                Route::post('/association/modifier/{asso_id}', 'update');
+                Route::get('/association/modifier/informations/{asso_id}', 'modifier_infos')->name('modifier_infos');
+                Route::post('/association/modifier/informations/{asso_id}', 'maj_infos');
+                Route::get('/association/modifier/description/{asso_id}', 'modifier_description')->name('modifier_description');
+                Route::post('/association/modifier/description/{asso_id}', 'maj_description');
             });
 
             Route::controller(LogoController::class)->group(function(){
-                Route::get('/association/logotype/{asso_id}', 'create')->name('logotype');
+                Route::get('/association/logotype/{asso_id}', 'create')->name('modifier_logotype');
                 Route::post('/association/logotype/{asso_id}', 'store');
             });
-            
+
             Route::controller(MembreController::class)->group(function(){
                 Route::get('/association/membres/{asso_id}', 'passation')->name('passation');
                 Route::post('/association/membres/{asso_id}', 'passation_store');
@@ -64,10 +66,10 @@ Route::domain('{uid_asso}.' . env('SITE_URL'))
         Route::controller(AssociationController::class)->group(function(){
             Route::get('/associations', 'index_bureau');
             Route::get('/associations/gestion', 'index_admin');
-            Route::get('/association/passation/{asso_id}', 'passation');
-            Route::post('/association/passation/{asso_id}', 'passation_post');
-            Route::get('/association/modifier/{asso_id}', 'edit')->name('modifier');
-            Route::post('/association/modifier/{asso_id}', 'update');
+            Route::get('/association/modifier/informations/{asso_id}', 'modifier_infos');
+            Route::post('/association/modifier/informations/{asso_id}', 'maj_infos');
+            Route::get('/association/modifier/description/{asso_id}', 'modifier_description');
+            Route::post('/association/modifier/description/{asso_id}', 'maj_description');
         });
     });
     
@@ -90,8 +92,8 @@ $routes_asso = function () {
     Route::controller(AssociationController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
         Route::get('/association', 'gestion');
-        Route::get('/association/description/', 'description_edit');
-        Route::post('/association/description/', 'description_update');
+        Route::get('/association/modifier/description/', 'modifier_description');
+        Route::post('/association/modifier/description/', 'maj_description');
         // Route::get('/association/reseaux_sociaux/', 'reseaux_sociaux');
         // Route::post('/association/reseaux_sociaux/', 'reseaux_sociaux');
     });

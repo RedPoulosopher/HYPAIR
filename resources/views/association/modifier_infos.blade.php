@@ -31,26 +31,6 @@ $annee_actuelle = Carbon::now()->format("Y");
 				</div>
 			@endif
 			<div class="groupe ombre_petite">
-				<label class="input_groupe">
-					<p class="titre">* Description courte :</p>
-					<textarea name="description_courte" class="input" required rows="8">{{old('description_courte') ?? $association->description_courte ?? ''}}</textarea>
-				</label>
-				
-				<label class="input_groupe">
-					<p class="titre">* Description :</p>
-					<p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
-					<textarea name="description_md" class="input" required rows="8">{{old('description_md') ?? $association->description_md ?? ''}}</textarea>
-				</label>
-
-				<label class="input_groupe">
-					<p class="titre">* Catégories :</p>
-					<input type="text" name="categories" class="input" required value="{{old('categories') ?? implode(", ",json_decode($association->categories ?? '[]'))}}"/>
-				</label>
-			</div>
-
-
-			<div class="groupe ombre_petite">
-
 				<label class="input_groupe flex">
 					<p class="titre">* Privée ?</p>
 					<input type="checkbox" name="privee" class="input" {{old('privee') ?? $documentation->privee ?? '' ? "checked" : ""}}/>

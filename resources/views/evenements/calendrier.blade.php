@@ -103,27 +103,46 @@ function event_dans_calendrier(evenements, mois, annee){
 
         jour_debut = date_debut.getDate()
         jour_fin = date_fin.getDate()
+        //détermine l'heure du jour de fin
+        heure_jour_fin = temps_fin.getHours()
 
         id_mois_affiche = mois+annee*12
         if(id_mois(date_temps_debut)<id_mois_affiche){
             //on genere un tableau qui va de 1er jusqu a jour_fin (https://dev.to/namirsab/comment/2050)
+            const range = (1, jour_fin , length = end - start + 1) =>
+            Array.from({ length }, (_, i) => start + i)
             //si l'heure de date_temps_fin < 8h, on pop le dernier element
+            if (heure_jour_fin < "08:00:00"){
+                range.pop()
+            }
         } else if (id_mois(date_temps_fin)>id_mois_affiche){
             //on genere un tableau qui va de jour_fin jusqua la fin du mois
+            const range = (jour_fin, nbr_jour_dans_mois , length = end - start + 1) =>
+            Array.from({ length }, (_, i) => start + i)
         } else if (jour_debut < jour_fin) {
             //on genere un tableau qui va de jour_debut jusqua jour_fin
+            const range = (jour_debut, jour_fin , length = end - start + 1) =>
+            Array.from({ length }, (_, i) => start + i)
             //si l'heure de date_temps_fin < 8h, on pop le dernier element
+            if (heure_jour_fin < "08:00:00"){
+                range.pop()
+            }
         } else {
             //on genere le tableau qu'avec un jour dedans
+            const range = (jour_debut, jour_debut , length = end - start + 1) =>
+            Array.from({ length }, (_, i) => start + i)
         }
-        
+        console.log(range)
         //on parcours le tableau qu'on vient de creer, on appelle placer_evenement_dans_jour a chaque fois
+        for (var j= 1 ; j <= range.length ; j++){
+            placer_evenement_dans_jour (range[j],i,evenements)
+        }
     }
 }
 funtction id_mois(date){
     return date.getMonth()+date.getFullYear()*12
 }
-function placer_evenemnt_dans_jour(jour, index_evenement, evenements){
+function placer_evenement_dans_jour(jour, index_evenement, evenements){
     el_jour = document.querySelector('[num_jour="' + jour_debut + '"]')
     el_jour.append(evenements[index_evenement]["titre"])
 }

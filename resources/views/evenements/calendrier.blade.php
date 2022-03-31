@@ -44,6 +44,25 @@ border-left: var(--border);
 
 <div id="wrapper">
     <div id="contenu" class="grand">
+        <select>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        <select>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+        </select>
         <div id="calendrier">
         </div>
     </div>
@@ -69,7 +88,7 @@ function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
 
     // remplissage
     for(var i=1; i<=nbr_jours_dans_mois; i++) {
-        el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''>" + i + "</div>")
+        el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''><div>" + i + "</div></div>")
     }
 
     // remplissage du calendrier apres la fin du mois
@@ -80,7 +99,8 @@ function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
 
 var nbr_jours_dans_mois = 0
 var index_jour_debut = 0
-function remplissage(annee, mois){
+function remplissage(annee, mois){ //mois : 0=>11
+    el_calendrier.innerHTML=""
     nbr_jours_dans_mois = new Date(annee, mois+1, 0).getDate();
     index_jour_debut = new Date(annee, mois, 1).getUTCDay();
 
@@ -95,62 +115,51 @@ remplissage(annee, mois)
 
 //place les events dans le calendrier
 function event_dans_calendrier(evenements, mois, annee){
-    nbr_jours_dans_mois = new Date(annee, mois+1, 0).getDate();
+    const range = (start, end, length = end - start + 1) => Array.from({ length }, (_, i) => start + i)
 
     for(var i=0; i < evenements.length ; i++){
         date_temps_debut = new Date (evenements[i]["temps_debut"])
         date_temps_fin = new Date (evenements[i]["temps_fin"])
 
-        jour_debut = date_debut.getDate()
-        jour_fin = date_fin.getDate()
+        jour_debut = date_temps_debut.getDate()
+        jour_fin = date_temps_fin.getDate()
         //détermine l'heure du jour de fin
-        heure_jour_fin = temps_fin.getHours()
+        heure_jour_fin = date_temps_fin.getHours()
 
         id_mois_affiche = mois+annee*12
         if(id_mois(date_temps_debut)<id_mois_affiche){
-            //on genere un tableau qui va de 1er jusqu a jour_fin (https://dev.to/namirsab/comment/2050)
-            const range = (1, jour_fin , length = end - start + 1) =>
-            Array.from({ length }, (_, i) => start + i)
-            //si l'heure de date_temps_fin < 8h, on pop le dernier element
-            if (heure_jour_fin < "08:00:00"){
-                range.pop()
+            tableau = range(1, jour_fin)
+            if (heure_jour_fin < 8){
+                tableau.pop()
             }
         } else if (id_mois(date_temps_fin)>id_mois_affiche){
-            //on genere un tableau qui va de jour_fin jusqua la fin du mois
-            const range = (jour_fin, nbr_jour_dans_mois , length = end - start + 1) =>
-            Array.from({ length }, (_, i) => start + i)
+            tableau = range(jour_debut, nbr_jours_dans_mois)
         } else if (jour_debut < jour_fin) {
-            //on genere un tableau qui va de jour_debut jusqua jour_fin
-            const range = (jour_debut, jour_fin , length = end - start + 1) =>
-            Array.from({ length }, (_, i) => start + i)
-            //si l'heure de date_temps_fin < 8h, on pop le dernier element
-            if (heure_jour_fin < "08:00:00"){
-                range.pop()
+            tableau = range(jour_debut, jour_fin)
+            if (heure_jour_fin < 8){
+                tableau.pop()
             }
         } else {
-            //on genere le tableau qu'avec un jour dedans
-            const range = (jour_debut, jour_debut , length = end - start + 1) =>
-            Array.from({ length }, (_, i) => start + i)
+            tableau = [jour_debut]
         }
-        console.log(range)
         //on parcours le tableau qu'on vient de creer, on appelle placer_evenement_dans_jour a chaque fois
-        for (var j= 1 ; j <= range.length ; j++){
-            placer_evenement_dans_jour (range[j],i,evenements)
+        for (var j=0 ; j<tableau.length ; j++){
+            placer_evenement_dans_jour(tableau[j], i, evenements)
         }
     }
 }
-funtction id_mois(date){
+function id_mois(date){
     return date.getMonth()+date.getFullYear()*12
 }
 function placer_evenement_dans_jour(jour, index_evenement, evenements){
-    el_jour = document.querySelector('[num_jour="' + jour_debut + '"]')
-    el_jour.append(evenements[index_evenement]["titre"])
+    el_jour = document.querySelector('[num_jour="' + jour + '"]')
+    el_jour.innerHTML += "<div>" + evenements[index_evenement]["titre"] + "</div>"
 }
 
 event_dans_calendrier(events, mois, annee)
 
 //a faire : requete asynchrone pour recup les events du mois demande par l utilisateur. la requete est generee quand l utilisateur demande un mois particulier
-//a faire : reconstruire le calendrier du bon mois et de la vbonne année
+//a faire : reconstruire le calendrier du bon mois et de la bonne année
 //pour simuler une demande de l utilisateur, appeler la requqte asynchrone avec un mois et une annee random
 
 //un listener click pour chaque evenement du calendrier, qui affiche un ecnadre avec les infos complementaires

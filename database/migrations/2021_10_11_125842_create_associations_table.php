@@ -29,6 +29,8 @@ class CreateAssociationsTable extends Migration
             $table->year('annee_fin')->nullable()->default(null);
             $table->string('couleur_claire')->nullable()->default(null);
             $table->string('couleur_sombre')->nullable()->default(null);
+            $table->string('couleur_police_accentuation_claire')->nullable()->default(null);
+            $table->string('couleur_police_accentuation_sombre')->nullable()->default(null);
             $table->string('courriel')->nullable()->default(null); //pour la DISI
             $table->string('alias')->nullable()->default(null); //pour la DISI
             $table->timestamps();

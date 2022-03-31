@@ -52,14 +52,30 @@ class Association extends Model
         return $bureaux;
     }
 
+    public function bureaux(){
+        if($this->uid!="air"){
+            abort(403, "Hophophop, vous n'avez pas le droit de faire ça. C'est réservé à l'AIR");
+        }
+
+        $comites_clubs_dependants = Association::where('type', AssoTypeEnum::Bureau)
+                                ->orderBy('nom');
+        
+        return $comites_clubs_dependants;
+    }
+
     public function comites_clubs_dependants(){
-        if($this->type != AssoTypeEnum::Bureau){
+        if($this->uid!="air" && $this->type != AssoTypeEnum::Bureau){
             abort(500, "Vous essayez de récupérer les entités qui dépendent de quelque chose qui n'est pas un bureau.");
         }
 
-        $site_bureau = json_decode($this->sites)[0];
-        $comites_clubs_dependants = Association::where('bureau_de_ratachement', $this->bureau_de_ratachement)
-                                ->where('sites','LIKE', '%'. $site_bureau .'%')
+        if($this->type == AssoTypeEnum::Bureau){
+            $site_bureau = json_decode($this->sites)[0];
+            $comites_clubs_dependants = Association::where('bureau_de_ratachement', $this->bureau_de_ratachement)
+                        ->where('sites','LIKE', '%'. $site_bureau .'%');
+        } else {
+            $comites_clubs_dependants = new Association;
+        }
+        $comites_clubs_dependants = $comites_clubs_dependants
                                 ->where('type', AssoTypeEnum::Comite)
                                 ->orWhere('type', AssoTypeEnum::Club)
                                 ->orderBy('nom');
@@ -68,22 +84,26 @@ class Association extends Model
     }
 
     public function listes_dependantes($annee=null){
-        if($this->type != AssoTypeEnum::Bureau){
+        if($this->uid!="air" && $this->type != AssoTypeEnum::Bureau){
             abort(500, "Vous essayez de récupérer les entités qui dépendent de quelque chose qui n'est pas un bureau.");
         }
 
-        $site_bureau = json_decode($this->sites)[0];
-        $listes_dependantes = Association::where('bureau_de_ratachement', $this->bureau_de_ratachement)
-                                ->where('sites','LIKE', '%'. $site_bureau .'%')
-                                ->where('type', AssoTypeEnum::Liste)
-                                ->orderBy('nom');
+        if($this->type == AssoTypeEnum::Bureau){
+            $site_bureau = json_decode($this->sites)[0];
+            $listes_dependantes = Association::where('bureau_de_ratachement', $this->bureau_de_ratachement)
+                        ->where('sites','LIKE', '%'. $site_bureau .'%')
+                        ->where('type', AssoTypeEnum::Liste);
+        } else {
+            $listes_dependantes = Association::where('type', AssoTypeEnum::Liste)
+                                        ->orWhere('type', AssoTypeEnum::Fakeliste);
+        }
 
-        if($annee === null){
-            $annee = Carbon::now()->year;
+        if($annee !== null){
+            $listes_dependantes->where('annee_creation', $annee);
         }
         
-        $listes_dependantes->where('annee_creation', $annee);
-        
+        $listes_dependantes = $listes_dependantes->orderBy('nom');
+
         return $listes_dependantes;
     }
     

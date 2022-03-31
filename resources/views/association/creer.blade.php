@@ -35,6 +35,10 @@ $annee_actuelle = Carbon::now()->format("Y");
 					<p class="titre">* Nom :</p>
 					<input type="text" name="nom" class="input" required value="{{old('nom') ?? $association->nom ?? ''}}"/>
 				</label>
+				<label class="input_groupe">
+					<p class="titre">* Uid :</p>
+					<input type="text" name="uid" class="input" required value="{{old('uid') ?? $association->uid ?? ''}}"/>
+				</label>
 				
 				<label class="input_groupe">
 					<p class="titre">* Bureau de ratachement :</p>
@@ -57,6 +61,17 @@ $annee_actuelle = Carbon::now()->format("Y");
                         <option value="liste">Liste</option>
                     </select>
 				</label>
+
+				<label class="input_groupe">
+					<p class="titre">* Sites :</p>
+					<p class="description">Les sites sur lesquels l'association est présente. Ctrl + clic pour sélectionner plusieurs sites.</p>
+					<select name="sites[]" class="input" spellcheck="false" multiple required select_mutliple="{{old('sites') ?? $association->sites ?? ''}}" style="overflow-y: auto;">
+                        <option value="douai">Douai</option>
+                        <option value="dunkerque">Dunkerque</option>
+                        <option value="lille">Lille</option>
+                        <option value="valenciennes">Valenciennes</option>
+                    </select>
+				</label>
 			</div>
 				
 			<span>* les champs marqués d'une astérisque sont obligatoires</span>
@@ -69,6 +84,12 @@ $annee_actuelle = Carbon::now()->format("Y");
 document.querySelectorAll("select[select]").forEach(function(ceci){
 	to_select = ceci.getAttribute("select");
 	ceci.querySelector('[value="'+ to_select +'"]').setAttribute("selected","true")
+})
+document.querySelectorAll("select[select_multiple]").forEach(function(ceci){
+	to_select = JSON.parse(ceci.getAttribute("select_multiple"))
+	to_select.forEach(function(a_selectionner){
+		ceci.querySelector('[value="'+ a_selectionner +'"]').setAttribute("selected","true")
+	})
 })
 </script>
 @endsection

@@ -32,17 +32,6 @@ $annee_actuelle = Carbon::now()->format("Y");
 			@endif
 			<div class="groupe ombre_petite">
 				<label class="input_groupe">
-					<p class="titre">* Sites :</p>
-					<p class="description">Les sites sur lesquels l'association est présente. Ctrl + clic pour sélectionner plusieurs sites.</p>
-					<select name="sites[]" class="input" spellcheck="false" multiple required select_mutliple="{{old('sites') ?? $association->sites ?? ''}}" style="overflow-y: auto;">
-                        <option value="douai">Douai</option>
-                        <option value="dunkerque">Dunkerque</option>
-                        <option value="lille">Lille</option>
-                        <option value="valenciennes">Valenciennes</option>
-                    </select>
-				</label>
-				
-				<label class="input_groupe">
 					<p class="titre">* Description courte :</p>
 					<textarea name="description_courte" class="input" required rows="8">{{old('description_courte') ?? $association->description_courte ?? ''}}</textarea>
 				</label>

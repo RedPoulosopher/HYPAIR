@@ -49,8 +49,8 @@ Route::domain('air.' . env('SITE_URL'))
             });
             
             Route::controller(MembreController::class)->group(function(){
-                Route::get('/association/passation/{asso_id}', 'passation')->name('passation');
-                Route::post('/association/passation/{asso_id}', 'passation_store');
+                Route::get('/association/membres/{asso_id}', 'passation')->name('passation');
+                Route::post('/association/membres/{asso_id}', 'passation_store');
             });
         });
     });
@@ -63,8 +63,11 @@ Route::domain('{uid_asso}.' . env('SITE_URL'))
     ->group(function(){
         Route::controller(AssociationController::class)->group(function(){
             Route::get('/associations', 'index_bureau');
+            Route::get('/associations/gestion', 'index_admin');
             Route::get('/association/passation/{asso_id}', 'passation');
             Route::post('/association/passation/{asso_id}', 'passation_post');
+            Route::get('/association/modifier/{asso_id}', 'edit')->name('modifier');
+            Route::post('/association/modifier/{asso_id}', 'update');
         });
     });
     

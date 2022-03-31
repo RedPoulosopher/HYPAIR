@@ -66,6 +66,9 @@
 		<div class="conteneur_boutons">
 			<a class="gros_bouton" href="/association/description">Modifier les descriptions et catégories</a>
 			<a class="gros_bouton" href="/association/membres">Gérer les membres</a>
+			@if ($asso["type"]=="bureau" || $asso["uid"]=="air")
+				<a class="gros_bouton" href="/associations/gestion">Gérer les associations</a>
+			@endif
 		</div>
 	</div>
 </div>

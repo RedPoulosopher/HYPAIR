@@ -7,15 +7,20 @@
 <script type="text/javascript" src="/js/jstable.min.js"></script>
 
 <style>
-
+#choix_entite {
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:25px;
+}
 div.table {
     box-sizing: border-box;
     border-radius: 25px;
-    margin-top:40px;
+    margin-top:10px;
     overflow: hidden;
     padding: 13px 18px;
     border: 1px solid var(--gris_1);
-    border-color: var(--gris_1);
+    background-color: var(--gris_2);
     transition: border-color 0.1s ease-in-out;
 }
 div.table:hover {
@@ -58,143 +63,131 @@ td.sites span {
 td.type {
     text-transform: capitalize;
 }
+
+.meatballs {
+    display:flex;
+    gap:2px;
+    cursor:pointer;
+}
+.meatballs > div {
+    border-radius: 5px;
+    width:5px;
+    height:5px;
+    background:var(--couleur_police_secondaire);
+}
+#menu_meatballs {
+    /* display:none; */
+    position: absolute;
+    border-radius:15px;
+    background:var(--gris_1);
+    padding-inline-start: 0px;
+}
+#menu_meatballs li {
+    display:block;
+    width:100%;
+    list-style-type: none;
+}
+#menu_meatballs li a {
+    padding:10px 20px;
+    width:100%;
+    display: inline-block;
+}
+#menu_meatballs li a:hover {
+    color: var(--couleur_police_secondaire);
+}
 </style>
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
 		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Associations -</h1>
 
-		<a href="/association/nouvelle" class="bouton tertiaire icon-security-safe" style="margin:15px;">Créer une association</a>
+		<a href="/association/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une association</a>
 
-        <div class="table ombre_petite">
-            <table id="index_bureau">
-                <thead>
-                    <tr>
-                        <th width="35%">Nom</th>
-                        <th>Sites</th>
-                        <th>Type</th>
-                        <th width="5%">-</th>
-                        <th width="5%">-</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <div id="choix_entite">
+            @if (!$est_bureau)
+                <a href="?type=bureau" class="bouton secondaire">Bureaux</a>
+            @endif
+            <a href="?type=comité" class="bouton secondaire">Comités</a>
+            <a href="?type=liste" class="bouton secondaire">Listes</a>
         </div>
 
-        <div class="table ombre_petite">
-            <table id="index_comité">
-                <thead>
-                    <tr>
-                        <th width="35%">Nom</th>
-                        <th>Sites</th>
-                        <th>Type</th>
-                        <th width="5%">-</th>
-                        <th width="5%">-</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
+        @if(isset($entites) && count($entites)>0)
+            <div class="table ombre_petite">
+                <table id="index">
+                    <thead>
+                        <tr>
+                            <th width="35%">Nom</th>
+                            <th>Sites</th>
+                            <th>Type</th>
+                            <th width="5%">-</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($entites as $entite)
+                            <tr class="ligne_entite">
+                                <td><a class="couleur" href="{{ $entite->url() }}">{{ $entite["nom"] }}</a></td>
+                                <td class="sites">
+                                    @foreach (json_decode($entite["sites"]) as $site)
+                                        <span class="site">: {{ $site }}</span>
+                                    @endforeach
+                                </td>
+                                <td class="type">{{ $entite["type"]->value }}</td>
+                                <td class="meatballs" onclick="javascript:menu_meatballs(this)" entite_id="{{ $entite["id"] }}"><div></div><div></div><div></div></td>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="table ombre_petite">
-            <table id="index_liste">
-                <thead>
-                    <tr>
-                        <th width="35%">Nom</th>
-                        <th>Sites</th>
-                        <th>Type</th>
-                        <th width="5%">-</th>
-                        <th width="5%">-</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
+            <ul id="menu_meatballs" class="ombre_grande">
+                <li><a id="menu_modifier" href="" url="/association/modifier/">Modifier les infos</a></li>
+                <li><a id="menu_modifier_logo" href="" url="/association/logotype/">Modifier le logo</a></li>
+                <li><a id="menu_membres" href="" url="/association/membres/">Gérer les membres</a></li>
+            </ul>
+        @endif
 	</div>
 </div>
 
 <script>
     
 datatable_options = {
-    "perPage" : 10,
+    "perPage" : 15,
     "columns" : [{
             select: [1,2],
             sortable: false,
             searchable: true,
         },{
-            select: [3,4],
+            select: [3],
             sortable: false,
             searchable: false,
         },
     ]
 }
+new JSTable("#index", { ...datatable_options });
 
-let headers = new Headers();
-headers.append('X-CSRF-TOKEN', "{!! csrf_token() !!}");
-headers.append('Content-Type', 'text/json');
+dernier_appuie = null;
+el_menu_meatballs = document.getElementById("menu_meatballs")
+taille_x_menu_meatballs = el_menu_meatballs.getBoundingClientRect().width
+taille_x_meatballs = document.querySelector(".meatballs").getBoundingClientRect().width
+el_menu_meatballs.style.display = "none"
+function menu_meatballs(ceci){
+    if(dernier_appuie == ceci){
+        el_menu_meatballs.style.display = "none"
+        dernier_appuie = null
+    } else {
+        el_menu_meatballs.style.display = "block"
+        dernier_appuie = ceci
+    }
+    left = ceci.getBoundingClientRect().x
+    topp = ceci.getBoundingClientRect().y
 
-function recuperer_asso(type) {
-    let recupAssoObjet = {
-        method: 'GET',
-        headers: headers,
+    entite_id = ceci.getAttribute("entite_id")
+    for(let element of el_menu_meatballs.querySelectorAll("a")){
+        url = element.getAttribute("url")
+        element.href = url + entite_id
     };
-    var recupAssoRequete = new Request('/associations/index/json?type=' + type, recupAssoObjet);
-    
-    fetch(recupAssoRequete)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Quelque chose n'a pas fonctionné.")
-            }
-        })
-        .then(data => {
-            index_el = document.querySelector("#index_" + type + " tbody");
-            data.forEach(data_asso => 
-                affichage_data(data_asso, index_el)
-            )
-            new JSTable("#index_" + type, { ...datatable_options });
-        })
-        .catch(err => {
-            console.log(err.message)
-        })
+
+    el_menu_meatballs.style.top = topp + 10 + "px";
+    el_menu_meatballs.style.left = left - taille_x_menu_meatballs + taille_x_meatballs + "px";
 }
-
-var index_el = ""
-function affichage_data(asso_data, index_el){
-    asso_html = document.createElement('tr')
-    asso_html.classList.add("association_liste")
-
-    if(asso_data["type"] == "liste"){
-		lien = "https://liste.imt-ne.fr/" + asso_data["uid"] + '-' + asso_data["id"]
-    }
-    else {
-		lien = "https://" + asso_data["uid"] + ".imt-ne.fr/"
-    }
-
-	asso_html.innerHTML = 
-		'<td><a class="couleur" href="'+ lien +'">' + asso_data["nom"] + '</a></td>' +
-		'<td class="sites">' + affichage_sites(asso_data["sites"]) + '</td>' +
-        '<td class="type">' + asso_data["type"] + '</td>' +
-		'<td><a href="/association/modifier/' + asso_data["id"] + '" class="icon-edit-2" title="modifier"></a></td>' +
-		'<td><a href="/association/membres/' + asso_data["id"] + '" class="icon-user-edit" title="membres"></a></td>'
-
-    index_el.appendChild(asso_html)
-}
-
-function affichage_sites(sites){
-	sites_html = ""
-    if(sites !== null){
-	    sites = JSON.parse(sites)
-	    sites.forEach(site => sites_html+="<span>: " + site + "</span>")
-    }
-
-	return sites_html
-}
-
-recuperer_asso("comité")
-recuperer_asso("bureau")
-recuperer_asso("liste")
 </script>
 @endsection

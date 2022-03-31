@@ -51,8 +51,8 @@ class ExistenceAsso
             "association_logo_tres_petit" => $asso->logo_url("tres-petit"),
             "association_couleur_claire" => $asso["couleur_claire"],
             "association_couleur_sombre" => $asso["couleur_sombre"],
-            "association_couleur_police_accentuation_claire" => self::couleur_ecriture($asso["couleur_claire"]),
-            "association_couleur_police_accentuation_sombre" => self::couleur_ecriture($asso["couleur_sombre"]),
+            "association_couleur_police_accentuation_claire" => $asso["couleur_police_accentuation_claire"],
+            "association_couleur_police_accentuation_sombre" => $asso["couleur_police_accentuation_sombre"],
         ]);
         
         if( Auth::check() ){
@@ -73,35 +73,5 @@ class ExistenceAsso
         }
 
         return $next($request);
-    }
-
-    static function couleur_ecriture($couleur_accent){
-        $blanc = self::lum_diff($couleur_accent, '#ffffff');
-        $noir = self::lum_diff($couleur_accent, '#000000');
-
-        if($blanc > $noir){
-            return '#ffffff';
-        } else {
-            return '#000000';
-        }
-    }
-    
-    static function lum_diff($couleur_1, $couleur_2){
-        list($R1, $G1, $B1) = sscanf($couleur_1, "#%02x%02x%02x");
-        list($R2, $G2, $B2) = sscanf($couleur_2, "#%02x%02x%02x");
-
-        $L1 = 0.2126 * pow($R1/255, 2.2) +
-              0.7152 * pow($G1/255, 2.2) +
-              0.0722 * pow($B1/255, 2.2);
-     
-        $L2 = 0.2126 * pow($R2/255, 2.2) +
-              0.7152 * pow($G2/255, 2.2) +
-              0.0722 * pow($B2/255, 2.2);
-     
-        if($L1 > $L2){
-            return ($L1+0.05) / ($L2+0.05);
-        }else{
-            return ($L2+0.05) / ($L1+0.05);
-        }
     }
 }

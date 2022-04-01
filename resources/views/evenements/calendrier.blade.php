@@ -91,8 +91,10 @@ function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
         el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''><div>" + i + "</div></div>")
     }
 
+    console.log(nbr_jours_dans_mois)
+    console.log(index_jour_debut)
     // remplissage du calendrier apres la fin du mois
-    for (var i = 1; i < (nbr_jours_dans_mois+index_jour_debut)%7; i++) {
+    for (var i = 0; i < 7 - (nbr_jours_dans_mois+index_jour_debut)%7; i++) {
         el_calendrier.innerHTML += ("<div class='jour desactive'></div>");
     }
 }

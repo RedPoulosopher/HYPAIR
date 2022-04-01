@@ -44,7 +44,7 @@ border-left: var(--border);
 
 <div id="wrapper">
     <div id="contenu" class="grand">
-        <select>
+        {{-- <select>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -62,7 +62,7 @@ border-left: var(--border);
             <option value="2020">2020</option>
             <option value="2021">2021</option>
             <option value="2022">2022</option>
-        </select>
+        </select> --}}
         <div id="calendrier">
         </div>
     </div>
@@ -153,7 +153,7 @@ function id_mois(date){
 }
 function placer_evenement_dans_jour(jour, index_evenement, evenements){
     el_jour = document.querySelector('[num_jour="' + jour + '"]')
-    el_jour.innerHTML += "<div>" + evenements[index_evenement]["titre"] + "</div>"
+    el_jour.innerHTML += "<div style='background-color:"+evenements[index_evenement]["couleur_claire"]+"'>" + evenements[index_evenement]["titre"] + "</div>"
 }
 
 event_dans_calendrier(events, mois, annee)

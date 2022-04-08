@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('titre', 'Associations')
+@section('titre', 'Entites')
 
 @section('content')
 
-<link rel="stylesheet" href="/css/association.index.css" type="text/css" >
+<link rel="stylesheet" href="/css/entite.index.css" type="text/css" >
 
 <div id="wrapper">
 	<div id="contenu" class="grand">
-		<h1>- Associations du {{ $bureau->nom }} -</h1>
+		<h1>- Entites du {{ $bureau->nom }} -</h1>
 
         <div class="liste_comite_club">
             @foreach ($comites_clubs_dependants as $comite_club)

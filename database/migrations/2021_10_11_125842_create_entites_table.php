@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAssociationsTable extends Migration
+class CreateEntitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAssociationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('associations', function (Blueprint $table) {
+        Schema::create('entites', function (Blueprint $table) {
             $table->id();
             $table->string('uid',128)->unique(); //ce qui est dans le LDAP
 	        $table->string('nom',128);
@@ -27,10 +27,10 @@ class CreateAssociationsTable extends Migration
             $table->boolean('ouvert')->default(1); //pour les listes, les bureaux, le téléthon 
             $table->year('annee_creation')->nullable()->default(null);
             $table->year('annee_fin')->nullable()->default(null);
-            $table->string('couleur_claire')->nullable()->default(null);
-            $table->string('couleur_sombre')->nullable()->default(null);
-            $table->string('couleur_police_accentuation_claire')->nullable()->default(null);
-            $table->string('couleur_police_accentuation_sombre')->nullable()->default(null);
+            $table->string('couleur_claire',10)->nullable()->default(null);
+            $table->string('couleur_sombre',10)->nullable()->default(null);
+            $table->string('couleur_police_accentuation_claire',10)->nullable()->default(null);
+            $table->string('couleur_police_accentuation_sombre',10)->nullable()->default(null);
             $table->string('courriel')->nullable()->default(null); //pour la DISI
             $table->string('alias')->nullable()->default(null); //pour la DISI
             $table->timestamps();
@@ -44,6 +44,6 @@ class CreateAssociationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('associations');
+        Schema::dropIfExists('entites');
     }
 }

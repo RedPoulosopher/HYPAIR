@@ -16,12 +16,12 @@ class MembresTableSeeder extends Seeder
     {
         DB::table('membres')->insert([
             [
-                'association_id' => '1',
+                'entite_id' => '1',
                 'user_id' => '1',
                 'role_id' => '1',
             ],
             [
-                'association_id' => '2',
+                'entite_id' => '2',
                 'user_id' => '1',
                 'role_id' => '5',
             ],

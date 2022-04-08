@@ -2,12 +2,11 @@
 namespace App\Services;
 
 use \App\Models\Entite;
-use \App\Models\Logo;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
 
-class GestionLogo {
+class GestionPhotoDeProfil {
     public static function validation_logo($image){
         Validator::make(["logo" => $image], ['logo' => ['required','file','mimes:png','dimensions:min_width=512,min_height=512,ratio=1']])->validate();
     }
@@ -41,14 +40,35 @@ class GestionLogo {
         $logo->save();
     }
 
-    static function chemin_logos($uid, $id, $type){
-        if($type->value == 'liste'){
+    static function chemin_membre_photo($membre, $defaut_nuage=false){
+        if(!$membre->photo && $defaut_nuage==true){
+            return self::chemin_photo_defaut();
+        }
+        elseif(!$membre->photo && $defaut_nuage==false){
+            return self::chemin_utilisateur_photo($membre->user()->first(), true);
+        }
+
+        $entite = $membre->entite()->first($membre);
+
+        if($entite->type->value == 'liste'){
             $type = 'listes';
         } else {
             $type = 'entites';
         }
 
-        return Storage::url('images/'. $type .'/'. $uid .'-'. $id .'/logos/');
+        return Storage::url('images/'. $type .'/'. $entite->uid .'-'. $entite->id .'/membres/'. $membre->id);
+    }
+
+    static function chemin_utilisateur_photo($user, $defaut_nuage=false){
+        if(!$user->photo && $defaut_nuage==true){
+            return self::chemin_photo_defaut();
+        }
+
+        return Storage::url('images/utilisateurs/'. $user->id .'/photo_de_profil');
+    }
+
+    static function chemin_photo_defaut(){
+        return "/images/inconnu.png";
     }
 
     public static function stocker_logo_depuis_url($url, $asso_id){

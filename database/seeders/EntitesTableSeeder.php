@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use \App\Models\Association;
+use \App\Models\Entite;
 use \App\Services\GestionLogo;
 
-class AssociationsTableSeeder extends Seeder
+class EntitesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -234,9 +234,9 @@ class AssociationsTableSeeder extends Seeder
             ],
         ];
 
-        DB::table('associations')->insert($asso_bde);
-        DB::table('associations')->insert($bureaux);
-        DB::table('associations')->insert($listes);
+        DB::table('entites')->insert($asso_bde);
+        DB::table('entites')->insert($bureaux);
+        DB::table('entites')->insert($listes);
 
         $lien_logos = [
             "bde"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/bde.png",
@@ -254,9 +254,9 @@ class AssociationsTableSeeder extends Seeder
             "brasseurs"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/brasseur.png",
         ];
 
-        foreach($asso_bde as $asso){
-            $asso_uid = $asso["uid"];
-            $asso_id = Association::where('uid', $asso_uid)->first()->id;
+        foreach($asso_bde as $entite){
+            $asso_uid = $entite["uid"];
+            $asso_id = Entite::where('uid', $asso_uid)->first()->id;
             GestionLogo::stocker_logo_depuis_url($lien_logos[$asso_uid], $asso_id);
         }
     }

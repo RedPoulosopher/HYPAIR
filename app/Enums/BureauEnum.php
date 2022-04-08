@@ -1,7 +1,7 @@
 <?php
 namespace App\Enums;
 
-enum AssoBureauEnum:string
+enum BureauEnum:string
 {
     case BDA = 'bda';
     case BDE = 'bde';

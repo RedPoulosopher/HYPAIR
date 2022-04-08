@@ -17,7 +17,7 @@ class DocumentationController extends Controller
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
 		$docs_existantes = Documentation::select('id','titre')
-			->where('association_id', session('association_id'))
+			->where('entite_id', session('entite_id'))
 			->where("confidentialite", "<=", $niveau_administration)
 			->get();
 		
@@ -34,9 +34,9 @@ class DocumentationController extends Controller
 
 		$traitement = $this->fomulaire_traitement($request);
 
-		$doc = Documentation::where('slug', $traitement["slug"])->where('association_id', $traitement['association_id']);
+		$doc = Documentation::where('slug', $traitement["slug"])->where('entite_id', $traitement['entite_id']);
 		if($doc->exists()){
-			return back()->withErrors(["msg","Cette documentation existe déjà pour votre association."]);
+			return back()->withErrors(["msg","Cette documentation existe déjà pour votre entite."]);
 		}
 
 		Documentation::create($traitement);
@@ -50,7 +50,7 @@ class DocumentationController extends Controller
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
 		$doc = Documentation::select('id', 'titre',DB::raw('SUBSTR(contenu_md, 1, 300) as contenu_md'),'description','categories','slug','confidentialite','visibilite')
-			->where("association_id", session('association_id'))
+			->where("entite_id", session('entite_id'))
 			->where("confidentialite", "<=", $niveau_administration)
 			->orderBy('confidentialite', 'desc')
 			->get();
@@ -67,7 +67,7 @@ class DocumentationController extends Controller
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
 		$doc = Documentation::where('slug', $request->route('slug'))
-			->where('association_id', session('association_id'));
+			->where('entite_id', session('entite_id'));
 		
 		if(!$doc->exists()){
 			abort(404);
@@ -99,7 +99,7 @@ class DocumentationController extends Controller
 			abort(403);
 		}
 
-		$docs_existantes = Documentation::select('id','titre')->where('association_id', session('association_id'))->get();
+		$docs_existantes = Documentation::select('id','titre')->where('entite_id', session('entite_id'))->get();
 
 		return view('documentation.creation', [
 			'documentation' => $doc,
@@ -153,7 +153,7 @@ class DocumentationController extends Controller
 
 		//formate les résultats pour leur entrée dans la table
 		$resultat = [
-			'association_id' => session("association_id"),
+			'entite_id' => session("entite_id"),
 			"titre" => $request->titre,
 			"slug" => Str::slug($request->titre, '-'),
 			"confidentialite" => $request->confidentialite,

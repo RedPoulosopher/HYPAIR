@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Models\Association;
+use \App\Models\Entite;
 
 use \App\Services\AutorisationGestion;
 use \App\Services\GestionLogo;
@@ -15,18 +15,18 @@ class LogoController extends Controller
 {
     public function create(Request $request)
     {
-		AutorisationGestion::protectionPage("gerer_association");
+		AutorisationGestion::protectionPage("gerer_entite");
 
-		$asso = Association::existe($request->route('asso_id'));
+		$entite = Entite::existe($request->route('asso_id'));
 
-		return view('association.modifier_logotype', [
-			'association' => $asso,
+		return view('entite.modifier_logotype', [
+			'entite' => $entite,
 			'creation' => $request->query('creation', 0),
 		]);
     }
 
     public function store(Request $request){
-		AutorisationGestion::protectionPage("gerer_association");
+		AutorisationGestion::protectionPage("gerer_entite");
 
         $request->query('creation') ? $creation=true : $creation=false;
         $presence_logo = $request->has('logo');
@@ -36,14 +36,14 @@ class LogoController extends Controller
 			'couleur_sombre' => ['filled'],
 		]);
 
-		$asso = Association::existe($request->route('asso_id'));
+		$entite = Entite::existe($request->route('asso_id'));
 
-        //on sauvegarde les couleurs de l'asso
-		$asso->couleur_claire = $request->couleur_claire;
-		$asso->couleur_sombre = $request->couleur_sombre;
-		$asso->couleur_police_accentuation_claire = self::couleur_ecriture($request->couleur_claire);
-		$asso->couleur_police_accentuation_sombre = self::couleur_ecriture($request->couleur_sombre);
-		$asso->save();
+        //on sauvegarde les couleurs de l'entite
+		$entite->couleur_claire = $request->couleur_claire;
+		$entite->couleur_sombre = $request->couleur_sombre;
+		$entite->couleur_police_accentuation_claire = self::couleur_ecriture($request->couleur_claire);
+		$entite->couleur_police_accentuation_sombre = self::couleur_ecriture($request->couleur_sombre);
+		$entite->save();
 
         //on stock le logo dans le storage et dans la base de données
 		if($creation || $presence_logo){
@@ -52,9 +52,9 @@ class LogoController extends Controller
 		}
 
 		if($request->query('creation')){
-			return redirect()->route('passation', ['asso_id' => $asso->id, 'creation' => true]);
+			return redirect()->route('passation', ['asso_id' => $entite->id, 'creation' => true]);
 		} else {
-			return redirect($asso->url());
+			return redirect($entite->url());
 		}
     }
 

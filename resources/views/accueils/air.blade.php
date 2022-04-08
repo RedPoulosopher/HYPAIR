@@ -2,7 +2,7 @@
 
 <h1>- ACTUALITÉS -</h1>
 <div style="margin:70px 0px;">
-	<a href="/commande"><div class="centre-element bouton primaire icon-after-document ombre_petite"><span>Passer une commande de câble / adaptateur</span></div></a>
+	<a href="commande"><div class="centre-element bouton primaire icon-after-document ombre_petite"><span>Passer une commande de câble / adaptateur</span></div></a>
 </div>
 
 <h1>- NOS PROJETS -</h1>
@@ -34,7 +34,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(240, 20, 20)"></div>
-			<img class="ombre_petite" src="images/photo_membres/marc.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/marc.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Marc Bresson</span>
@@ -46,7 +46,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(240, 20, 20)"></div>
-			<img class="ombre_petite" src="images/photo_membres/benjamin.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/benjamin.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Benjamin Duchiron</span>
@@ -58,7 +58,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(236, 240, 20)"></div>
-			<img class="ombre_petite" src="images/photo_membres/lara.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/lara.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Lara Sirecki</span>
@@ -70,7 +70,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(20, 240, 49)"></div>
-			<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Hajra Anwar Beg</span>
@@ -82,7 +82,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(20, 240, 49)"></div>
-			<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Nilavan Deva</span>

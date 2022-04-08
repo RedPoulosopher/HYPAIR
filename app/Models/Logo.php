@@ -12,13 +12,13 @@ class Logo extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'association_id',
+        'entite_id',
         'nom',
         'extension',
     ];
 
     
-    public function association(){
-        return $this->belongsTo(Association::class);
+    public function entite(){
+        return $this->belongsTo(Entite::class);
     }
 }

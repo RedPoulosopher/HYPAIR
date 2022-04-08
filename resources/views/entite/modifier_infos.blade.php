@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', $creation==1 ? "Créer" : "Modifier" . ' une association')
+@section('titre', $creation==1 ? "Créer" : "Modifier" . ' une entite')
 
 @section('content')
 
@@ -17,9 +17,9 @@ $annee_actuelle = Carbon::now()->format("Y");
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> {{$creation==1 ? "Créer" : "Modifier"}} une association -</h1>
+		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> {{$creation==1 ? "Créer" : "Modifier"}} une entite -</h1>
 		@if(Session::has('success'))
-			<p class="explication">L'association a été modifiée correctement !</p>
+			<p class="explication">L'entite a été modifiée correctement !</p>
 		@endif
 		<form method="POST" enctype="multipart/form-data">
 			@csrf
@@ -39,38 +39,38 @@ $annee_actuelle = Carbon::now()->format("Y");
 				<label class="input_groupe flex">
 					<p class="titre">* Ouverte aux membres ?</p>
 					<input type="checkbox" name="ouvert" class="input" {{old('ouvert') ?? $documentation->ouvert ?? '' ? "" : "checked"}}/>
-					<p class="description">Certaines associations, listes ou bureaux peuvent ne pas accepter qu'un utilisateur puisse se déclarer membre.</p>
+					<p class="description">Certaines entites, listes ou bureaux peuvent ne pas accepter qu'un utilisateur puisse se déclarer membre.</p>
 				</label>
 
 				<label class="input_groupe">
 					<p class="titre">* Année de création :</p>
-					<input type="number" name="annee_creation" class="input" required min="1980" max="{{ $annee_actuelle }}" value="{{old('annee_creation') ?? $association->annee_creation ?? $annee_actuelle}}"/>
+					<input type="number" name="annee_creation" class="input" required min="1980" max="{{ $annee_actuelle }}" value="{{old('annee_creation') ?? $entite->annee_creation ?? $annee_actuelle}}"/>
 				</label>
 
 				<label class="input_groupe">
 					<p class="titre">Année de fin :</p>
-					<input type="number" name="annee_fin" class="input" min="1980" max="{{ $annee_actuelle }}" value="{{old('annee_fin') ?? $association->annee_fin ?? ''}}"/>
+					<input type="number" name="annee_fin" class="input" min="1980" max="{{ $annee_actuelle }}" value="{{old('annee_fin') ?? $entite->annee_fin ?? ''}}"/>
 				</label>
 			</div>
 
 			<div class="groupe ombre_petite">
 				<label class="input_groupe">
 					<p class="titre">Courriel :</p>
-					<p class="description">Certaines associations possèdent un compte courriel fourni par la DISI.</p>
-					<input type="text" name="courriel" class="input" value="{{old('courriel') ?? $association->courriel ?? ''}}"/>
+					<p class="description">Certaines entites possèdent un compte courriel fourni par la DISI.</p>
+					<input type="text" name="courriel" class="input" value="{{old('courriel') ?? $entite->courriel ?? ''}}"/>
 				</label>
 
 				<label class="input_groupe">
 					<p class="titre">Alias :</p>
-					<p class="description">Certaines associations ont un alias, qui rédirige les courriels vers les membres indiqués à la DISI.</p>
-					<input type="text" name="alias" class="input" value="{{old('alias') ?? $association->alias ?? ''}}"/>
+					<p class="description">Certaines entites ont un alias, qui rédirige les courriels vers les membres indiqués à la DISI.</p>
+					<input type="text" name="alias" class="input" value="{{old('alias') ?? $entite->alias ?? ''}}"/>
 				</label>
 			</div>
 				
 			<span>* les champs marqués d'une astérisque sont obligatoires</span>
 			<div style="float:right; display:flex;gap:10px;">
 				@if ($creation==0)
-				<a class="bouton secondaire" href="/association/logotype/{{request('asso_id')}}"><span>Changer le logotype</span></a>
+				<a class="bouton secondaire" href="entite/logotype/{{request('asso_id')}}"><span>Changer le logotype</span></a>
 				@endif
 				<button type="submit" class="bouton primaire"><span>{{$creation==1 ? "SUIVANT" : "MODIFIER"}}</span></button>
 			</div>

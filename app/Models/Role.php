@@ -22,4 +22,8 @@ class Role extends Model
 
         throw new \ErrorException("Le rôle '".$role_label."' n'existe pas.");
     }
+
+    public static function index(){
+        return self::orderBy('niveau_admin', 'desc')->orderBy('label')->where('niveau_admin','>','0')->get();
+    }
 }

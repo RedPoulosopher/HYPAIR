@@ -1,9 +1,9 @@
 <?php
 namespace App\Enums;
 
-enum AssoTypeEnum:string
+enum EntiteTypeEnum:string
 {
-    case Association = 'association';
+    case Entite = 'association';
     case Bureau = 'bureau';
     case Club = 'club';
     case Comite = 'comité';

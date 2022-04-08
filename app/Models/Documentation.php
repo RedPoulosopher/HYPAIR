@@ -9,7 +9,7 @@ class Documentation extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'association_id',
+        'entite_id',
         'confidentialite',
         'visibilite',
         'derive_de',
@@ -23,8 +23,8 @@ class Documentation extends Model
         'fin_mise_en_avant'
     ];
 
-    public function association(){
-        return $this->belongsTo(Association::class);
+    public function entite(){
+        return $this->belongsTo(Entite::class);
     }
 
     public function derivation(){

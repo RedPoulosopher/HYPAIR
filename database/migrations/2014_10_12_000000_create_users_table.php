@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('prenom');
             $table->string('langue_pref', 9)->default("fr");
             $table->text('troncho')->nullable();
+            $table->boolean('photo')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

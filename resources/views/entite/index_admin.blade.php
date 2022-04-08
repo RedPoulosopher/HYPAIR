@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Associations')
+@section('titre', 'Entites')
 
 @section('content')
 <link rel="stylesheet" type="text/css" href="/css/jstable.css">
@@ -71,8 +71,8 @@ td.type {
 }
 .meatballs > div {
     border-radius: 5px;
-    width:5px;
-    height:5px;
+    width:3px;
+    height:3px;
     background:var(--couleur_police_secondaire);
 }
 #menu_meatballs {
@@ -99,9 +99,9 @@ td.type {
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Associations -</h1>
+		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Entites -</h1>
 
-		<a href="/association/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une association</a>
+		<a href="entite/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une entite</a>
 
         <div id="choix_entite">
             @if (!$est_bureau)
@@ -125,7 +125,7 @@ td.type {
                     <tbody>
                         @foreach ($entites as $entite)
                             <tr class="ligne_entite">
-                                <td><a class="couleur" href="{{ $entite->url() }}">{{ $entite["nom"] }}</a></td>
+                                <td><a class="couleur" href="{{ $entite->lien_relatif() }}">{{ $entite["nom"] }}</a></td>
                                 <td class="sites">
                                     @foreach (json_decode($entite["sites"]) as $site)
                                         <span class="site">: {{ $site }}</span>
@@ -139,9 +139,10 @@ td.type {
             </div>
 
             <ul id="menu_meatballs" class="ombre_grande">
-                <li><a id="menu_modifier" href="" url="/association/modifier/">Modifier les infos</a></li>
-                <li><a id="menu_modifier_logo" href="" url="/association/logotype/">Modifier le logo</a></li>
-                <li><a id="menu_membres" href="" url="/association/membres/">Gérer les membres</a></li>
+                <li><a id="menu_modifier" href="" url="entite/modifier/informations/">Modifier les infos</a></li>
+                <li><a id="menu_modifier" href="" url="entite/modifier/description/">Modifier la description</a></li>
+                <li><a id="menu_modifier_logo" href="" url="entite/modifier/logotype/">Modifier le logo</a></li>
+                <li><a id="menu_membres" href="" url="entite/membres/">Gérer les membres</a></li>
             </ul>
         @endif
 	</div>

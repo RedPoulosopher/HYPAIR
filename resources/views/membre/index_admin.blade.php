@@ -1,0 +1,169 @@
+@extends('layouts.app')
+
+@section('titre', 'Membres')
+
+@section('content')
+<link rel="stylesheet" type="text/css" href="/css/jstable.css">
+<link rel="stylesheet" type="text/css" href="/css/formulaire.css">
+<script type="text/javascript" src="/js/jstable.min.js"></script>
+
+<style>
+#choix_role {
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:25px;
+}
+div.table {
+    box-sizing: border-box;
+    border-radius: 25px;
+    margin-top:10px;
+    overflow: hidden;
+    padding: 13px 18px;
+    border: 1px solid var(--gris_1);
+    background-color: var(--gris_2);
+    transition: border-color 0.1s ease-in-out;
+}
+div.table:hover {
+    border-color: var(--couleur_accentuation);
+}
+table {
+    border-collapse: collapse;
+    width:100%;
+}
+table tr {
+    text-align:center;
+    color: var(--couleur_police);
+    border-bottom: 1px solid transparent;
+}
+table tbody tr:hover {
+    border-bottom: 1px solid var(--gris_1);
+}
+table th {
+    padding: 15px 15px;
+    border-bottom: 1px solid var(--gris_1);
+}
+table td {
+    padding: 10px 15px;
+}
+
+td span.role {
+	font-size: 0.95em;
+	color:var(--couleur_police_secondaire);
+	background: var(--gris_1);
+	padding: 4px 15px 5px 15px;
+	border-radius: 50px;
+	text-transform: capitalize;
+}
+td.type {
+    text-transform: capitalize;
+}
+
+#menu_membre{
+    /* max-width:400px;
+    margin-left:auto;
+    margin-right:auto; */
+}
+</style>
+
+<div id="wrapper">
+	<div id="contenu" class="petit">
+		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des Membres -</h1>
+
+        <div id="gestion_membre">
+            <div id="choix_role">
+                <a href="?type=membre" class="bouton secondaire">Membres</a>
+                <a href="?type=abonne" class="bouton secondaire">Abonnés</a>
+            </div>
+
+            @if(!is_null($personnes_a_responsabilites) && count($personnes_a_responsabilites)>0)
+                <div class="table ombre_petite">
+                    <table id="index">
+                        <thead>
+                            <tr>
+                                <th width="35%">Prénom</th>
+                                <th>Nom</th>
+                                <th>Rôle</th>
+                                <th width="5%">-</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($personnes_a_responsabilites as $membre)
+                                <tr class="ligne_membre">
+                                    <td>{{$membre["prenom"]}}</td>
+                                    <td>{{$membre["nom"]}}</td>
+                                    <td>
+                                        <span class="role">{{ $membre["label"] }}</span>
+                                    </td>
+                                    <td><a href="#" membre_id="{{ $membre["membre.id"] }}" role_id="{{ $membre["role.id"] }}" membre_prenom="{{$membre["prenom"]}}" membre_nom="{{$membre["nom"]}}" class="icon-edit-2" title="modifier" onclick="afficher_menu_membre(this)"></a></td>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+        </div>
+
+        <div id="menu_membre" style="display:none;" class="groupe ombre_petite">
+            <h2>Gérer <span id="membre_prenom_nom"></span></h2>
+            <div class="input_groupe">
+                <select class="input" id="select_role">
+                    @foreach ($roles as $role)
+                        <option value="{{$role->id}}">{{$role->label}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div style="display:flex;justify-content: flex-end;;gap:10px;">
+                <div id="menu_membre_annuler" class="bouton secondaire">Annuler</div>
+                <div id="menu_membre_modifier" class="bouton primaire">modifier</div>
+            </div>
+        </div>
+	</div>
+</div>
+
+
+<script>
+
+datatable_options = {
+    "perPage" : 15,
+    "columns" : [{
+            select: [2],
+            sortable: false,
+            searchable: true,
+        },{
+            select: [3],
+            sortable: false,
+            searchable: false,
+        },
+    ]
+}
+new JSTable("#index", { ...datatable_options });
+
+el_menu_membre = document.getElementById("menu_membre")
+el_gestion_membre = document.getElementById("gestion_membre")
+el_membre_prenom_nom = document.getElementById("membre_prenom_nom")
+el_select_role = document.getElementById("select_role")
+function afficher_menu_membre(ceci){
+    membre_id = ceci.getAttribute("membre_id")
+    membre_prenom = ceci.getAttribute("membre_prenom")
+    membre_nom = ceci.getAttribute("membre_nom")
+    role_id = ceci.getAttribute("role_id")
+
+    el_menu_membre.style.display = "block"
+    el_gestion_membre.style.display = "none"
+
+    el_membre_prenom_nom.innerText = membre_prenom+" "+membre_nom
+    el_select_role.querySelector('[value="'+role_id+'"]').selected = true
+}
+el_menu_membre_annuler = document.getElementById("menu_membre_annuler")
+el_menu_membre_annuler.addEventListener("click",function(){
+    el_menu_membre.style.display = "none"
+    el_gestion_membre.style.display = "block"
+})
+el_menu_membre_modifier = document.getElementById("menu_membre_modifier")
+el_menu_membre_modifier.addEventListener("click",function(){
+    el_menu_membre.style.display = "none"
+    el_gestion_membre.style.display = "block"
+})
+
+</script>
+@endsection

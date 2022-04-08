@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('titre', 'Associations')
+@section('titre', 'Entites')
 
 @section('content')
 
-<link rel="stylesheet" href="/css/association.index.css" type="text/css" >
+<link rel="stylesheet" href="/css/entite.index.css" type="text/css" >
 
 <div id="wrapper">
 	<div id="contenu" class="grand">
         @foreach($bureaux as $bureau)
-            <h1>- Associations du {{ $bureau->nom }} -</h1>
+            <h1>- Entites du {{ $bureau->nom }} -</h1>
             <div class="liste_comite_club">
-                <a class="comite_club" href="{{$bureau->url()}}">
+                <a class="comite_club" href="{{$bureau->lien_relatif()}}">
                     <div class="logo ombre_petite">
                         <div class="cercle" style="border-color: {{ $bureau->couleur_sombre }}"></div>
                         <img src="{{ $bureau->logo_url("petit") }}"/>
@@ -24,7 +24,7 @@
 
             <div class="liste_comite_club">
                 @foreach ($comites_clubs_dependants[$bureau->bureau_de_ratachement->value] as $comite_club)
-                    <a class="comite_club" href="{{$comite_club->url()}}">
+                    <a class="comite_club" href="{{$comite_club->lien_relatif()}}">
                         <div class="logo ombre_petite">
                             <div class="cercle" style="border-color: {{ $comite_club->couleur_sombre }}"></div>
                             <img src="{{ $comite_club->logo_url("petit") }}"/>

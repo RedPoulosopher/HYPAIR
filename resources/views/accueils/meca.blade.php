@@ -10,7 +10,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: #71d0dd"></div>
-			<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Clément Kieffer</span>
@@ -21,7 +21,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: #71d0dd"></div>
-			<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Clément Kieffer</span>
@@ -32,7 +32,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: #71d0dd"></div>
-			<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Clément Kieffer</span>

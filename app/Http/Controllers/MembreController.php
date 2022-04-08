@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Models\Association;
+use \App\Models\Entite;
 use \App\Models\User;
 use \App\Models\Membre;
 use \App\Models\Role;
@@ -14,19 +14,19 @@ use Illuminate\Validation\Rule;
 class MembreController extends Controller
 {
     public function passation(Request $request){
-		AutorisationGestion::protectionPage("gerer_association");
+		AutorisationGestion::protectionPage("gerer_entite");
 
-		$asso = Association::existe($request->route('asso_id'));
+		$entite = Entite::existe($request->route('asso_id'));
 
-		return view('association.passation', [
-			'association' => $asso,
+		return view('entite.passation', [
+			'entite' => $entite,
 			'creation' => $request->query('creation', 0),
 		]);
     }
 
     public function passation_store(Request $request){
-		//on vérifie que l'asso existe
-		$asso = Association::existe($request->route('asso_id'));
+		//on vérifie que l'entite existe
+		$entite = Entite::existe($request->route('asso_id'));
 		
 		$role_id_president = Role::role_id("président·e");
 		$user_id = User::existe($request["uid_president"]);
@@ -35,10 +35,40 @@ class MembreController extends Controller
 		}
 
 		Membre::updateOrCreate(
-			['association_id' => $request->route('asso_id'), 'user_id' => $user_id,],
+			['entite_id' => $request->route('asso_id'), 'user_id' => $user_id,],
 			['role_id' => $role_id_president,]
 		);
 		
-		return redirect($asso->url());
+		return redirect($entite->url());
     }
+
+	public function mandat(){
+		$entite = Entite::existe(session('entite_id'));
+
+		return $entite->mandat()->get();
+	}
+
+	public function index_admin(Request $request){
+		$asso_id = $request->route('asso_id') ?? session('entite_id');
+
+		$entite = Entite::existe($asso_id);
+
+		if(isset($request["type"])){
+
+			if($request["type"] == "membre"){ //seule l'AIR peut gérer les bureaux
+				$personnes_a_responsabilites = $entite->personnes_a_responsabilites();
+			}
+			else if($request["type"] == "abonne") {
+				$personnes_a_responsabilites = $entite->abonnes();
+			}
+
+			$personnes_a_responsabilites = $personnes_a_responsabilites->get();
+
+			$roles = Role::index();
+		} else {
+			$personnes_a_responsabilites = null;
+		}
+
+		return view('membre.index_admin', ["personnes_a_responsabilites" => $personnes_a_responsabilites, "roles"=>$roles]);
+	}
 }

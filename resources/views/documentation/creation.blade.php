@@ -32,10 +32,10 @@
 					<p class="titre">* Confidentialité :</p>
 					<select name="confidentialite" class="input" spellcheck="false" required select="{{old('confidentialite') ?? $documentation->confidentialite ?? ''}}">
                         <option value="0" selected>public</option>
-                        <option value="1">membres de l'association</option>
+                        <option value="1">membres de l'entite</option>
                         <option value="4">responsables & bureau</option>
-                        <option value="5">bureau</option>
-                        <option value="6">président⸱e⸱s et vice-président⸱e</option>
+                        <option value="6">bureau</option>
+                        <option value="8">président⸱e⸱s et vice-président⸱e</option>
                     </select>
 				</label>
 				

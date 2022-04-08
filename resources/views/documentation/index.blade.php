@@ -13,7 +13,7 @@
 		<div id="search" class="ombre_inset centre-element icon-search-normal-1" style="margin-bottom:60px;"><span class="input" placeholder="Rechercher dans la documentation" id="search_input" contenteditable>Rechercher dans la documentation</span></div>
 
 		@if($gerer_documentation)
-		<a href="/documentation/nouvelle" class="bouton tertiaire ombre_petite icon-security-safe" style="margin:15px;">Créer une documentation</a>
+		<a href="documentation/nouvelle" class="bouton tertiaire ombre_petite icon-security-safe" style="margin:15px;">Créer une documentation</a>
 		@endif
         
         <div id="index_docs">

@@ -15,7 +15,7 @@ class CreateLogosTable extends Migration
     {
         Schema::create('logos', function (Blueprint $table) {
             $table->id();
-	        $table->foreignId('association_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+	        $table->foreignId('entite_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
 	        $table->date('nom');
         });
     }

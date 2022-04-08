@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Créer une association')
+@section('titre', 'Créer une entite')
 
 @section('content')
 
@@ -17,9 +17,9 @@ $annee_actuelle = Carbon::now()->format("Y");
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page réservée aux administrateurs"></span> Créer une nouvelle association -</h1>
+		<h1>- <span class="icon-security-safe" title="page réservée aux administrateurs"></span> Créer une nouvelle entite -</h1>
 		@if(Session::has('success'))
-			<p class="explication">L'association a été créée correctement ! Elle est disponible.</p>
+			<p class="explication">L'entite a été créée correctement ! Elle est disponible.</p>
 		@endif
 		<form method="POST" enctype="multipart/form-data">
 			@csrf
@@ -33,16 +33,16 @@ $annee_actuelle = Carbon::now()->format("Y");
 			<div class="groupe ombre_petite">
 				<label class="input_groupe">
 					<p class="titre">* Nom :</p>
-					<input type="text" name="nom" class="input" required value="{{old('nom') ?? $association->nom ?? ''}}"/>
+					<input type="text" name="nom" class="input" required value="{{old('nom') ?? $entite->nom ?? ''}}"/>
 				</label>
 				<label class="input_groupe">
 					<p class="titre">* Uid :</p>
-					<input type="text" name="uid" class="input" required value="{{old('uid') ?? $association->uid ?? ''}}"/>
+					<input type="text" name="uid" class="input" required value="{{old('uid') ?? $entite->uid ?? ''}}"/>
 				</label>
 				
 				<label class="input_groupe">
 					<p class="titre">* Bureau de ratachement :</p>
-					<select name="bureau_de_ratachement" class="input" spellcheck="false" required select="{{old('bureau_de_ratachement') ?? $association->bureau_de_ratachement ?? ''}}">
+					<select name="bureau_de_ratachement" class="input" spellcheck="false" required select="{{old('bureau_de_ratachement') ?? $entite->bureau_de_ratachement ?? ''}}">
                         <option selected disabled="disabled"></option>
                         <option value="bda">BDA</option>
                         <option value="bde">BDE</option>
@@ -53,7 +53,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 				
 				<label class="input_groupe">
 					<p class="titre">* Type :</p>
-					<select name="type" class="input" spellcheck="false" required select="{{old('type') ?? $association->type ?? ''}}">
+					<select name="type" class="input" spellcheck="false" required select="{{old('type') ?? $entite->type ?? ''}}">
                         <option selected disabled="disabled"></option>
                         <option value="bureau">Bureau</option>
                         <option value="comité">Comité</option>
@@ -64,8 +64,8 @@ $annee_actuelle = Carbon::now()->format("Y");
 
 				<label class="input_groupe">
 					<p class="titre">* Sites :</p>
-					<p class="description">Les sites sur lesquels l'association est présente. Ctrl + clic pour sélectionner plusieurs sites.</p>
-					<select name="sites[]" class="input" spellcheck="false" multiple required select_mutliple="{{old('sites') ?? $association->sites ?? ''}}" style="overflow-y: auto;">
+					<p class="description">Les sites sur lesquels l'entite est présente. Ctrl + clic pour sélectionner plusieurs sites.</p>
+					<select name="sites[]" class="input" spellcheck="false" multiple required select_mutliple="{{old('sites') ?? $entite->sites ?? ''}}" style="overflow-y: auto;">
                         <option value="douai">Douai</option>
                         <option value="dunkerque">Dunkerque</option>
                         <option value="lille">Lille</option>

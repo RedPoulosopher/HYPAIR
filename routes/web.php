@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
-use App\Http\Controllers\AssociationController;
+use App\Http\Controllers\EntiteController;
 use App\Http\Controllers\MembreController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
@@ -21,62 +21,58 @@ Route::get('/connexion', function() {  return view('connexion'); })->name("conne
 Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
 
+Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai','lille','valencienne','dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
 
 //les routes réservées à l'AIR
 //============================
-Route::domain('air.' . env('SITE_URL')) 
-    ->middleware('existence.asso:air')
-    ->group(function(){
-        Route::get('/associations/{site}', [AssociationController::class, 'index_site'])->where(['site'=>'douai','lille','valencienne','dunkerke']); //liste de toutes les asso d'un site de l'école (e.g. Douai)
-
-        //les routes pour les administrateurs (ceux qui peuvent gerer l AIR pourront gerer toutes les asso)
+$routes_AIR = function(){
+        //les routes pour les administrateurs (ceux qui peuvent gerer l AIR pourront gerer toutes les entite)
         //================================================================================================
-        Route::middleware('protection.autorisation:gerer_association')->group(function(){
+        Route::middleware('protection.autorisation:gerer_entite')->group(function(){
 
-            Route::controller(AssociationController::class)->group(function(){
-                Route::get('/associations/gestion', 'index_admin');
-                Route::get('/associations/index/json', 'index_admin_json');
+            Route::controller(EntiteController::class)->group(function(){
+                Route::get('/entites/gestion', 'index_admin');
+                Route::get('/entites/index/json', 'index_admin_json');
     
-                Route::get('/association/nouvelle', 'create');
-                Route::post('/association/nouvelle', 'store');
-                Route::get('/association/modifier/informations/{asso_id}', 'modifier_infos')->name('modifier_infos');
-                Route::post('/association/modifier/informations/{asso_id}', 'maj_infos');
-                Route::get('/association/modifier/description/{asso_id}', 'modifier_description')->name('modifier_description');
-                Route::post('/association/modifier/description/{asso_id}', 'maj_description');
+                Route::get('/entite/nouvelle', 'create');
+                Route::post('/entite/nouvelle', 'store');
+                Route::get('/entite/modifier/informations/{asso_id}', 'modifier_infos')->name('modifier_infos');
+                Route::post('/entite/modifier/informations/{asso_id}', 'maj_infos');
+                Route::get('/entite/modifier/description/{asso_id}', 'modifier_description')->name('modifier_description');
+                Route::post('/entite/modifier/description/{asso_id}', 'maj_description');
             });
 
             Route::controller(LogoController::class)->group(function(){
-                Route::get('/association/logotype/{asso_id}', 'create')->name('modifier_logotype');
-                Route::post('/association/logotype/{asso_id}', 'store');
+                Route::get('/entite/logotype/{asso_id}', 'create')->name('modifier_logotype');
+                Route::post('/entite/logotype/{asso_id}', 'store');
             });
 
             Route::controller(MembreController::class)->group(function(){
-                Route::get('/association/membres/{asso_id}', 'passation')->name('passation');
-                Route::post('/association/membres/{asso_id}', 'passation_store');
+                Route::get('/entite/membres/{asso_id}', 'index_admin');
+                Route::post('/entite/membres/{asso_id}', 'passation_store');
             });
         });
-    });
+    };
 
 
 //les routes réservées aux différents bureaux
 //===========================================
-Route::domain('{uid_asso}.' . env('SITE_URL'))
-    ->middleware('existence.asso:bureau')
-    ->group(function(){
-        Route::controller(AssociationController::class)->group(function(){
-            Route::get('/associations', 'index_bureau');
-            Route::get('/associations/gestion', 'index_admin');
-            Route::get('/association/modifier/informations/{asso_id}', 'modifier_infos');
-            Route::post('/association/modifier/informations/{asso_id}', 'maj_infos');
-            Route::get('/association/modifier/description/{asso_id}', 'modifier_description');
-            Route::post('/association/modifier/description/{asso_id}', 'maj_description');
+$routes_bureaux = function(){
+        Route::controller(EntiteController::class)->group(function(){
+            Route::get('/entites', 'index_bureau');
+            Route::get('/entites/gestion', 'index_admin');
+
+            Route::get('/entite/modifier/informations/{asso_id}', 'modifier_infos');
+            Route::post('/entite/modifier/informations/{asso_id}', 'maj_infos');
+            Route::get('/entite/modifier/description/{asso_id}', 'modifier_description');
+            Route::post('/entite/modifier/description/{asso_id}', 'maj_description');
         });
-    });
+    };
     
 
-//les routes pour les associations, les clubs et les listes
+//les routes pour les entites, les clubs et les listes
 //=========================================================
-$routes_asso = function () {
+$routes_entites = function () {
     Route::get('/', function() { return view('accueils.#accueil'); });
     Route::get('/accueil', function() { return view('accueils.#accueil'); });
 
@@ -89,22 +85,33 @@ $routes_asso = function () {
         Route::get('/documentation/{slug}', 'show');
     });
     
-    Route::controller(AssociationController::class)->group(function(){
+    Route::controller(EntiteController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
-        Route::get('/association', 'gestion');
-        Route::get('/association/modifier/description/', 'modifier_description');
-        Route::post('/association/modifier/description/', 'maj_description');
-        // Route::get('/association/reseaux_sociaux/', 'reseaux_sociaux');
-        // Route::post('/association/reseaux_sociaux/', 'reseaux_sociaux');
+        Route::middleware('protection.autorisation:gerer_entite')->group(function(){
+            Route::get('/gestion', 'gestion');
+            Route::get('/modifier/description/', 'modifier_description');
+            Route::post('/modifier/description/', 'maj_description');
+        });
+        // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+        // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
     });
 };
-Route::domain('liste.' . env('SITE_URL')) //pour les listes
-    ->prefix('{uid_asso}-{id_asso}')
-    ->middleware('existence.asso:liste')
-    ->group($routes_asso);
-Route::domain('{uid_asso}.' . env('SITE_URL')) //pour le reste
-    ->middleware('existence.asso:association')
-    ->group($routes_asso);
+
+Route::prefix('{entite_uid}-{liste_id}') //pour les listes
+    ->middleware('existence.entite:liste')
+    ->group($routes_entites);
+
+Route::prefix('{entite_uid}') //pour toutes les autres entités
+    ->middleware('existence.entite:entite')
+    ->group($routes_entites);
+
+Route::prefix('{entite_uid}') //pour les bureaux
+    ->middleware('existence.entite:bureau')
+    ->group($routes_bureaux);
+
+Route::prefix('{entite_uid}') //pour l'AIR
+    ->middleware('existence.entite:air')
+    ->group($routes_AIR);
 
 
 

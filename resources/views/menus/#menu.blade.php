@@ -4,12 +4,14 @@
 				@hasSection('logo')
 					@yield('logo')
 				@else
-					<img id="logo_menu" class="arrondi" src="{{session("association_logo_petit")}}" alt="logo"/>
+					<img id="logo_menu" class="arrondi" src="{{session("entite_logo_petit")}}" alt="logo"/>
 				@endif
 			</div>
 			<ul class="sidebar-nav">
 				@yield('liens')
-				{{-- <a href="#"><li class="icon-before-profil sidebar-nav-bottom"><span>Se déconnecter</span></li></a> --}}
+				@if (session('gerer_entite'))
+					<a href="gestion"><li><span>Gestion</span></li></a>
+				@endif
 			</ul>
 		</div>
 		<a href="#">

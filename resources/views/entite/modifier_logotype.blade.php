@@ -39,12 +39,12 @@ $annee_actuelle = Carbon::now()->format("Y");
 
 				<label class="input_groupe">
 					<p class="titre">* Couleur principale sur thème clair :</p>
-					<input type="color" name="couleur_claire" class="input" required id="couleur_claire"value="{{old('couleur_claire') ?? $association->couleur_claire ?? ''}}">
+					<input type="color" name="couleur_claire" class="input" required id="couleur_claire"value="{{old('couleur_claire') ?? $entite->couleur_claire ?? ''}}">
 				</label>
 
 				<label class="input_groupe">
 					<p class="titre">* Couleur principale sur thème sombre :</p>
-					<input type="color" name="couleur_sombre" class="input" required id="couleur_sombre" value="{{old('couleur_sombre') ?? $association->couleur_sombre ?? ''}}">
+					<input type="color" name="couleur_sombre" class="input" required id="couleur_sombre" value="{{old('couleur_sombre') ?? $entite->couleur_sombre ?? ''}}">
 				</label>
 
 				<details style="margin-top:2em;">

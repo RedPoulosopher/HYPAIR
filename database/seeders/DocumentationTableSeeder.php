@@ -16,7 +16,7 @@ class DocumentationTableSeeder extends Seeder
     {
         DB::table('documentations')->insert([
             [
-                'association_id' => 1,
+                'entite_id' => 1,
                 'confidentialite' => 0,
                 'titre' => "coucou",
                 'slug' => "coucou",
@@ -28,7 +28,7 @@ class DocumentationTableSeeder extends Seeder
                 'fin_mise_en_avant' => '2020-09-12',
             ],
             [
-                'association_id' => 1,
+                'entite_id' => 1,
                 'confidentialite' => 5,
                 'titre' => "coucou privé",
                 'slug' => "coucou-prive",
@@ -40,7 +40,7 @@ class DocumentationTableSeeder extends Seeder
                 'fin_mise_en_avant' => '2020-09-12',
             ],
             [
-                'association_id' => 2,
+                'entite_id' => 2,
                 'confidentialite' => 0,
                 'titre' => "coucou-bde",
                 'slug' => "coucou-bde",

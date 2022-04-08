@@ -1,7 +1,7 @@
 <h1>- LE ROLE DU BDE -</h1>
 <div class="grille-enfants" style="width:50%;margin-left:auto;margin-right:auto;">
 Yo les fillots !<br>
-Bienvenue dans cette belle région qu’est le Nord et bravo à toi pour avoir intégré notre très chère École ! Alors le BDE c’est quoi ? Le Bureau Des Élèves (ou BDE en 3 lettres) est sûrement une association dont tu as déjà entendue parler et que l’on retrouve dans toutes les écoles. C’est ainsi que les Men IMT Black et ses meilleurs agents se chargeront de te faire passer une année que tu n’es pas prêt d’oublier ! Tu te sentiras tellement bien à la Maison Des Élèves (aka la MEUD) que tu finiras par te promener pieds nus, en sous-vêtement dans les couloirs.
+Bienvenue dans cette belle région qu’est le Nord et bravo à toi pour avoir intégré notre très chère École ! Alors le BDE c’est quoi ? Le Bureau Des Élèves (ou BDE en 3 lettres) est sûrement une entite dont tu as déjà entendue parler et que l’on retrouve dans toutes les écoles. C’est ainsi que les Men IMT Black et ses meilleurs agents se chargeront de te faire passer une année que tu n’es pas prêt d’oublier ! Tu te sentiras tellement bien à la Maison Des Élèves (aka la MEUD) que tu finiras par te promener pieds nus, en sous-vêtement dans les couloirs.
 <br>
 Kiss in Black
 </div>
@@ -27,7 +27,7 @@ Kiss in Black
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: #0384fc"></div>
-			<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Jules berthier</span>
@@ -39,7 +39,7 @@ Kiss in Black
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: #0384fc"></div>
-			<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Elise Eckstein</span>

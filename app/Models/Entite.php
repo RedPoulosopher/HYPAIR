@@ -37,8 +37,8 @@ class Entite extends Model
         'type' => EntiteTypeEnum::class,
     ];
 
-    public static function existe($asso_id){
-        $entite = Entite::find($asso_id);
+    public static function existe($entite_id){
+        $entite = Entite::find($entite_id);
 
 		if(is_null($entite)){abort(405);}
         

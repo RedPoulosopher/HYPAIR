@@ -256,8 +256,8 @@ class EntitesTableSeeder extends Seeder
 
         foreach($asso_bde as $entite){
             $asso_uid = $entite["uid"];
-            $asso_id = Entite::where('uid', $asso_uid)->first()->id;
-            GestionLogo::stocker_logo_depuis_url($lien_logos[$asso_uid], $asso_id);
+            $entite_id = Entite::where('uid', $asso_uid)->first()->id;
+            GestionLogo::stocker_logo_depuis_url($lien_logos[$asso_uid], $entite_id);
         }
     }
 }

@@ -36,20 +36,20 @@ $routes_AIR = function(){
     
                 Route::get('/entite/nouvelle', 'create');
                 Route::post('/entite/nouvelle', 'store');
-                Route::get('/entite/modifier/informations/{asso_id}', 'modifier_infos')->name('modifier_infos');
-                Route::post('/entite/modifier/informations/{asso_id}', 'maj_infos');
-                Route::get('/entite/modifier/description/{asso_id}', 'modifier_description')->name('modifier_description');
-                Route::post('/entite/modifier/description/{asso_id}', 'maj_description');
+                Route::get('/entite/modifier/informations/{entite_id}', 'modifier_infos')->name('modifier_infos');
+                Route::post('/entite/modifier/informations/{entite_id}', 'maj_infos');
+                Route::get('/entite/modifier/description/{entite_id}', 'modifier_description')->name('modifier_description');
+                Route::post('/entite/modifier/description/{entite_id}', 'maj_description');
             });
 
             Route::controller(LogoController::class)->group(function(){
-                Route::get('/entite/logotype/{asso_id}', 'create')->name('modifier_logotype');
-                Route::post('/entite/logotype/{asso_id}', 'store');
+                Route::get('/entite/logotype/{entite_id}', 'create')->name('modifier_logotype');
+                Route::post('/entite/logotype/{entite_id}', 'store');
             });
 
             Route::controller(MembreController::class)->group(function(){
-                Route::get('/entite/membres/{asso_id}', 'index_admin');
-                Route::post('/entite/membres/{asso_id}', 'passation_store');
+                Route::get('/entite/membres/{entite_id}', 'index_admin');
+                Route::post('/entite/membres/{entite_id}', 'passation_store');
             });
         });
     };
@@ -62,10 +62,10 @@ $routes_bureaux = function(){
             Route::get('/entites', 'index_bureau');
             Route::get('/entites/gestion', 'index_admin');
 
-            Route::get('/entite/modifier/informations/{asso_id}', 'modifier_infos');
-            Route::post('/entite/modifier/informations/{asso_id}', 'maj_infos');
-            Route::get('/entite/modifier/description/{asso_id}', 'modifier_description');
-            Route::post('/entite/modifier/description/{asso_id}', 'maj_description');
+            Route::get('/entite/modifier/informations/{entite_id}', 'modifier_infos');
+            Route::post('/entite/modifier/informations/{entite_id}', 'maj_infos');
+            Route::get('/entite/modifier/description/{entite_id}', 'modifier_description');
+            Route::post('/entite/modifier/description/{entite_id}', 'maj_description');
         });
     };
     

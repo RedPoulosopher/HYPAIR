@@ -29,13 +29,13 @@ class GestionPhotoDeProfil {
         return $image_nom;
     }
 
-    public static function stocker_logo($image, $asso_id){
-        $entite = Entite::existe($asso_id);
-        $chemin = self::chemin_logos($entite->uid, $asso_id, $entite->type);
+    public static function stocker_logo($image, $entite_id){
+        $entite = Entite::existe($entite_id);
+        $chemin = self::chemin_logos($entite->uid, $entite_id, $entite->type);
 
         $image_nom = self::stocker_fichier_logo($image, $chemin);
         $logo = new Logo;
-        $logo->entite_id = $asso_id;
+        $logo->entite_id = $entite_id;
         $logo->nom = $image_nom;
         $logo->save();
     }
@@ -71,9 +71,9 @@ class GestionPhotoDeProfil {
         return "/images/inconnu.png";
     }
 
-    public static function stocker_logo_depuis_url($url, $asso_id){
+    public static function stocker_logo_depuis_url($url, $entite_id){
         $logo = file_get_contents($url);
 
-        self::stocker_logo($logo, $asso_id);
+        self::stocker_logo($logo, $entite_id);
     }
 }

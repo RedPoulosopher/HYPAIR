@@ -71,12 +71,12 @@ class EntiteController extends Controller
 			$entite->save();
 		}
 
-		return redirect()->route('modifier_infos', ['asso_id' => $entite->id, 'creation' => true]);
+		return redirect()->route('modifier_infos', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 	}
 
 	public function modifier_infos(Request $request) //réservé à l'AIR
 	{
-		$entite = Entite::existe($request->route('asso_id'));
+		$entite = Entite::existe($request->route('entite_id'));
 
 		return view('entite.modifier_infos', [
 			'entite' => $entite,
@@ -87,7 +87,7 @@ class EntiteController extends Controller
 	
 	public function maj_infos(Request $request) //réservé à l'AIR
 	{
-		$entite = Entite::existe($request->route('asso_id'));
+		$entite = Entite::existe($request->route('entite_id'));
 
 		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
 		sort($request->categories);
@@ -111,24 +111,24 @@ class EntiteController extends Controller
 		$entite->save();
 
 		if($request->query('creation')){
-			return redirect()->route('modifier_description', ['asso_id' => $entite->id, 'creation' => true]);
+			return redirect()->route('modifier_description', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect($entite->url());
 		}
 	}
 
-	public function modifier_description(){ //pour l'entité
-		$asso_id = $request->route('asso_id') ?? session('entite_id');
+	public function modifier_description(Request $request){ //pour l'entité
+		$entite_id = $request->route('entite_id') ?? session('entite_id');
 
-		$entite = Entite::existe($asso_id);
+		$entite = Entite::existe($entite_id);
 
 		return view('entite.modifier_description')->with('entite', $entite);
 	}
 
 	public function maj_description(Request $request){ //pour l'entité
-		$asso_id = $request->route('asso_id') ?? session('entite_id');
+		$entite_id = $request->route('entite_id') ?? session('entite_id');
 
-		$entite = Entite::existe(session('entite_id'));
+		$entite = Entite::existe($entite_id);
 		
 		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
 		sort($request->categories);
@@ -145,9 +145,9 @@ class EntiteController extends Controller
 		$entite->save();
 
 		if($request->query('creation')){
-			return redirect()->route('modifier_logotype', ['asso_id' => $entite->id, 'creation' => true]);
+			return redirect()->route('modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
-			return redirect()->route('a_propos', ['uid_asso' => $entite->uid]);
+			return redirect()->route('a_propos', ['entite_uid' => $entite->uid]);
 		}
 	}
 

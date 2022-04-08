@@ -17,7 +17,7 @@ class LogoController extends Controller
     {
 		AutorisationGestion::protectionPage("gerer_entite");
 
-		$entite = Entite::existe($request->route('asso_id'));
+		$entite = Entite::existe($request->route('entite_id'));
 
 		return view('entite.modifier_logotype', [
 			'entite' => $entite,
@@ -36,7 +36,7 @@ class LogoController extends Controller
 			'couleur_sombre' => ['filled'],
 		]);
 
-		$entite = Entite::existe($request->route('asso_id'));
+		$entite = Entite::existe($request->route('entite_id'));
 
         //on sauvegarde les couleurs de l'entite
 		$entite->couleur_claire = $request->couleur_claire;
@@ -48,11 +48,11 @@ class LogoController extends Controller
         //on stock le logo dans le storage et dans la base de données
 		if($creation || $presence_logo){
 			GestionLogo::validation_logo($request->logo);
-			GestionLogo::stocker_logo($request->file('logo'), $request->route('asso_id'));
+			GestionLogo::stocker_logo($request->file('logo'), $request->route('entite_id'));
 		}
 
 		if($request->query('creation')){
-			return redirect()->route('passation', ['asso_id' => $entite->id, 'creation' => true]);
+			return redirect()->route('passation', ['entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect($entite->url());
 		}

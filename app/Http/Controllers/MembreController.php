@@ -16,7 +16,7 @@ class MembreController extends Controller
     public function passation(Request $request){
 		AutorisationGestion::protectionPage("gerer_entite");
 
-		$entite = Entite::existe($request->route('asso_id'));
+		$entite = Entite::existe($request->route('entite_id'));
 
 		return view('entite.passation', [
 			'entite' => $entite,
@@ -26,7 +26,7 @@ class MembreController extends Controller
 
     public function passation_store(Request $request){
 		//on vérifie que l'entite existe
-		$entite = Entite::existe($request->route('asso_id'));
+		$entite = Entite::existe($request->route('entite_id'));
 		
 		$role_id_president = Role::role_id("président·e");
 		$user_id = User::existe($request["uid_president"]);
@@ -35,7 +35,7 @@ class MembreController extends Controller
 		}
 
 		Membre::updateOrCreate(
-			['entite_id' => $request->route('asso_id'), 'user_id' => $user_id,],
+			['entite_id' => $request->route('entite_id'), 'user_id' => $user_id,],
 			['role_id' => $role_id_president,]
 		);
 		
@@ -49,9 +49,9 @@ class MembreController extends Controller
 	}
 
 	public function index_admin(Request $request){
-		$asso_id = $request->route('asso_id') ?? session('entite_id');
+		$entite_id = $request->route('entite_id') ?? session('entite_id');
 
-		$entite = Entite::existe($asso_id);
+		$entite = Entite::existe($entite_id);
 
 		if(isset($request["type"])){
 

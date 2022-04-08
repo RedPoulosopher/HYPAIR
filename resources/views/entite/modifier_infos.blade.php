@@ -70,7 +70,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 			<span>* les champs marqués d'une astérisque sont obligatoires</span>
 			<div style="float:right; display:flex;gap:10px;">
 				@if ($creation==0)
-				<a class="bouton secondaire" href="entite/logotype/{{request('asso_id')}}"><span>Changer le logotype</span></a>
+				<a class="bouton secondaire" href="entite/logotype/{{request('entite_id')}}"><span>Changer le logotype</span></a>
 				@endif
 				<button type="submit" class="bouton primaire"><span>{{$creation==1 ? "SUIVANT" : "MODIFIER"}}</span></button>
 			</div>

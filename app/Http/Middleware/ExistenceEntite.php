@@ -53,7 +53,7 @@ class ExistenceEntite
         ]);
         
         if( Auth::check() ){
-            $membre = Auth::user()->membres()->where("entite_id", $entite["id"]);
+            $membre = Auth::user()->membres_actuel()->where("entite_id", $entite["id"]);
 
             if($membre->exists()){
                 $role = $membre->first()->role();
@@ -61,7 +61,9 @@ class ExistenceEntite
                     "membre_id" => $membre->first()["id"],
                     "role_id" => $role->first()["id"],
                 ]);
-                session(["gerer_entite" => AutorisationGestion::gestion("gerer_entite")]);
+                session([
+                    "gerer_entite" => AutorisationGestion::gestion("gerer_entite"),
+                ]);
             } else {
                 session([
                     "membre_id" => false,

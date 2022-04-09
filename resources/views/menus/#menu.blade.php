@@ -14,7 +14,7 @@
 				@endif
 			</ul>
 		</div>
-		<a href="#">
+		<a>
 			<button id="hamburger">
 				<span></span>
 				<span></span>

@@ -17,6 +17,8 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function(){return session('gerer_entite');});
+
 Route::get('/connexion', function() {  return view('connexion'); })->name("connexion");
 Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
@@ -26,8 +28,6 @@ Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['
 //les routes réservées à l'AIR
 //============================
 $routes_AIR = function(){
-        //les routes pour les administrateurs (ceux qui peuvent gerer l AIR pourront gerer toutes les entite)
-        //================================================================================================
         Route::middleware('protection.autorisation:gerer_entite')->group(function(){
 
             Route::controller(EntiteController::class)->group(function(){
@@ -49,7 +49,7 @@ $routes_AIR = function(){
 
             Route::controller(MembreController::class)->group(function(){
                 Route::get('/entite/membres/{entite_id}', 'index_admin');
-                Route::post('/entite/membres/{entite_id}', 'passation_store');
+                Route::post('/entite/membres/{entite_id}', 'ajout_membre');
             });
         });
     };
@@ -60,12 +60,15 @@ $routes_AIR = function(){
 $routes_bureaux = function(){
         Route::controller(EntiteController::class)->group(function(){
             Route::get('/entites', 'index_bureau');
-            Route::get('/entites/gestion', 'index_admin');
 
-            Route::get('/entite/modifier/informations/{entite_id}', 'modifier_infos');
-            Route::post('/entite/modifier/informations/{entite_id}', 'maj_infos');
-            Route::get('/entite/modifier/description/{entite_id}', 'modifier_description');
-            Route::post('/entite/modifier/description/{entite_id}', 'maj_description');
+            Route::middleware('protection.autorisation:gerer_entite')->group(function(){
+                Route::get('/entites/gestion', 'index_admin');
+
+                Route::get('/entite/modifier/informations/{entite_id}', 'modifier_infos');
+                Route::post('/entite/modifier/informations/{entite_id}', 'maj_infos');
+                Route::get('/entite/modifier/description/{entite_id}', 'modifier_description');
+                Route::post('/entite/modifier/description/{entite_id}', 'maj_description');
+            });
         });
     };
     
@@ -77,12 +80,14 @@ $routes_entites = function () {
     Route::get('/accueil', function() { return view('accueils.#accueil'); });
 
     Route::controller(DocumentationController::class)->group(function(){
-        Route::get('/documentation/nouvelle', 'create');
-        Route::post('/documentation/nouvelle', 'store');
-        Route::get('/documentation/modifier/{id}', 'edit');
-        Route::post('/documentation/modifier/{id}', 'update');
+        Route::middleware('protection.autorisation:gerer_documentation')->group(function(){
+            Route::get('/documentation/nouvelle', 'create');
+            Route::post('/documentation/nouvelle', 'store');
+            Route::get('/documentation/modifier/{id}', 'edit');
+            Route::post('/documentation/modifier/{id}', 'update');
+        });
         Route::get('/documentation', 'index');
-        Route::get('/documentation/{slug}', 'show');
+        Route::get('/documentation/{slug}', 'show')->name('documentation_afficher');
     });
     
     Route::controller(EntiteController::class)->group(function(){

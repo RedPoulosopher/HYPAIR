@@ -4,6 +4,12 @@
 
 @section('content')
 
+@php
+use Carbon\Carbon;
+Carbon::setLocale('fr');
+$date = $documentation->updated_at->setTimezone(new DateTimeZone("EUROPE/PARIS"))->diffForHumans()
+@endphp
+
 <style>
 .documentation {
 	width:100%;
@@ -47,7 +53,7 @@ p {
 			<div class="contenu_doc" id="contenu_doc">
 		
 				<h1 class="titre">{{$documentation->titre}}</h1>
-				<p>dernière mise à jour : <span>{{$documentation->updated_at}}</span></p>
+				<p>Dernière mise à jour <span>{{$date}}</span></p>
 
 				{!! Str::markdown($documentation->contenu_md); !!}
 			</div>

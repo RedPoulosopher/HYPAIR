@@ -13,7 +13,6 @@ class DocumentationController extends Controller
 {
 	public function create()
 	{
-		AutorisationGestion::protectionPage("gerer_documentation");
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
 		$docs_existantes = Documentation::select('id','titre')
@@ -30,8 +29,6 @@ class DocumentationController extends Controller
 
 	public function store(Request $request)
 	{
-		AutorisationGestion::protectionPage("gerer_documentation");
-
 		$traitement = $this->fomulaire_traitement($request);
 
 		$doc = Documentation::where('slug', $traitement["slug"])->where('entite_id', $traitement['entite_id']);
@@ -41,7 +38,7 @@ class DocumentationController extends Controller
 
 		Documentation::create($traitement);
 
-		return redirect("/documentation/" . $traitement["slug"]);
+		return redirect()->route('documentation_afficher', ['entite_uid' => $request->route('entite_uid'), 'slug' => $traitement["slug"]]);
 	}
 
 
@@ -86,7 +83,6 @@ class DocumentationController extends Controller
 
 	public function edit(Request $request)
 	{
-		AutorisationGestion::protectionPage("gerer_documentation");
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
 		$doc = Documentation::where('id', $request->route('id'));
@@ -111,19 +107,10 @@ class DocumentationController extends Controller
 
 	public function update(Request $request)
 	{
-		AutorisationGestion::protectionPage("gerer_documentation");
-
 		$traitement = $this->fomulaire_traitement($request);
 		Documentation::where('id', $request->route('id'))->update($traitement);
 
-		return redirect("/documentation/" . $traitement["slug"]);
-	}
-
-
-	public function destroy($id) //inutilisé pour le moment
-	{
-		AutorisationGestion::protectionPage("gerer_documentation");
-		Documentation::where('id', $id)->delete();
+		return redirect()->route('documentation_afficher', ['entite_uid' => $request->route('entite_uid'), 'slug' => $traitement["slug"]]);
 	}
 
 

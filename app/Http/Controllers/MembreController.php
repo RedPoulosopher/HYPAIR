@@ -24,22 +24,23 @@ class MembreController extends Controller
 		]);
     }
 
-    public function passation_store(Request $request){
+    public function ajout_membre(Request $request){
 		//on vérifie que l'entite existe
 		$entite = Entite::existe($request->route('entite_id'));
 		
-		$role_id_president = Role::role_id("président·e");
-		$user_id = User::existe($request["uid_president"]);
-		if(!$user_id){
-			return back()->withErrors(["msg"=>"L'uid du président ne correspond à aucun utilisateur."]);
+		$membre_role_id = Role::role_id("membre");
+		$user = User::existe($request["user_uid"]);
+		if(!$user){
+			return back()->withErrors(["msg"=>"L'uid fourni ne correspond à aucun utilisateur."]);
 		}
 
-		Membre::updateOrCreate(
-			['entite_id' => $request->route('entite_id'), 'user_id' => $user_id,],
-			['role_id' => $role_id_president,]
-		);
-		
-		return redirect($entite->url());
+		$membre_model = new Membre;
+		$membre_model->entite_id = $request->route('entite_id');
+		$membre_model->user_id =  $user->id;
+		$membre_model->role_id =  $membre_role_id;
+		$membre_model->nouveau_membre();
+
+		return back();
     }
 
 	public function mandat(){
@@ -67,6 +68,8 @@ class MembreController extends Controller
 			$roles = Role::index();
 		} else {
 			$personnes_a_responsabilites = null;
+
+			$roles = array();
 		}
 
 		return view('membre.index_admin', ["personnes_a_responsabilites" => $personnes_a_responsabilites, "roles"=>$roles]);

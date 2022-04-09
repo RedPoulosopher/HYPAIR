@@ -105,10 +105,10 @@ td.type {
 
         <div id="choix_entite">
             @if (!$est_bureau)
-                <a href="?type=bureau" class="bouton secondaire">Bureaux</a>
+                <a href="entites/gestion?type=bureau" class="bouton secondaire">Bureaux</a>
             @endif
-            <a href="?type=comité" class="bouton secondaire">Comités</a>
-            <a href="?type=liste" class="bouton secondaire">Listes</a>
+            <a href="entites/gestion?type=comité" class="bouton secondaire">Comités</a>
+            <a href="entites/gestion?type=liste" class="bouton secondaire">Listes</a>
         </div>
 
         @if(isset($entites) && count($entites)>0)

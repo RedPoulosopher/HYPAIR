@@ -72,6 +72,17 @@ class RolesTableSeeder extends Seeder
             ],
             [
                 'label' => 'membre',
+                'niveau_admin' => 2,
+                "gerer_actualite" => 0,
+                "gerer_entite" => 0,
+                "gerer_documentation" => 0,
+                "gerer_evenement" => 0,
+                "gerer_membre" => 0,
+                "gerer_projet" => 0,
+                "gerer_ticket" => 0,
+            ],
+            [
+                'label' => 'abonné·e',
                 'niveau_admin' => 1,
                 "gerer_actualite" => 0,
                 "gerer_entite" => 0,

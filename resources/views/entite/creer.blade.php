@@ -4,11 +4,6 @@
 
 @section('content')
 
-@php
-use Carbon\Carbon;
-$annee_actuelle = Carbon::now()->format("Y");
-@endphp
-
 <link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
 <link rel="stylesheet" href="/css/documentation.css" type="text/css" >
 

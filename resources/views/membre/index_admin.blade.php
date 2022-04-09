@@ -58,11 +58,8 @@ td span.role {
 td.type {
     text-transform: capitalize;
 }
-
-#menu_membre{
-    /* max-width:400px;
-    margin-left:auto;
-    margin-right:auto; */
+td a.icon-edit-2 {
+    cursor:pointer;
 }
 </style>
 
@@ -71,9 +68,24 @@ td.type {
 		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des Membres -</h1>
 
         <div id="gestion_membre">
+            <form method="POST">
+                @csrf
+                <div class="groupe ombre_petite">
+                    <label class="input_groupe">
+                        <p class="titre">Rajouter un membre :</p>
+                        <p class="description">Rentrez l'uid de la personne ou son adresse étudiante. Faites attention à ce que ce soit bien son adresse, elles ne sont pas toutes construites en prenom.nom !</p>
+                        <p class="description">Vous pourrez modifier son rôle par la suite.</p>
+                        <input type="text" name="user_uid" required class="input" value="{{old('user_uid') ?? ''}}"/>
+                    </label>
+                    <div style="display:flex;justify-content: flex-end;margin-top:15px;">
+                        <button type="submit" class="bouton primaire">VALIDER</span></button>
+                    </div>
+                </div>
+            </form>
+
             <div id="choix_role">
-                <a href="?type=membre" class="bouton secondaire">Membres</a>
-                <a href="?type=abonne" class="bouton secondaire">Abonnés</a>
+                <a href="entite/membres/{{Request::route('entite_id')}}?type=membre" class="bouton secondaire">Membres</a>
+                <a href="entite/membres/{{Request::route('entite_id')}}?type=abonne" class="bouton secondaire">Abonnés</a>
             </div>
 
             @if(!is_null($personnes_a_responsabilites) && count($personnes_a_responsabilites)>0)
@@ -95,7 +107,7 @@ td.type {
                                     <td>
                                         <span class="role">{{ $membre["label"] }}</span>
                                     </td>
-                                    <td><a href="#" membre_id="{{ $membre["membre.id"] }}" role_id="{{ $membre["role.id"] }}" membre_prenom="{{$membre["prenom"]}}" membre_nom="{{$membre["nom"]}}" class="icon-edit-2" title="modifier" onclick="afficher_menu_membre(this)"></a></td>
+                                    <td><a membre_id="{{ $membre["membre.id"] }}" role_id="{{ $membre["role.id"] }}" membre_prenom="{{$membre["prenom"]}}" membre_nom="{{$membre["nom"]}}" class="icon-edit-2" title="modifier" onclick="afficher_menu_membre(this)"></a></td>
                             @endforeach
                         </tbody>
                     </table>
@@ -112,7 +124,7 @@ td.type {
                     @endforeach
                 </select>
             </div>
-            <div style="display:flex;justify-content: flex-end;;gap:10px;">
+            <div style="display:flex;justify-content:flex-end;gap:10px;">
                 <div id="menu_membre_annuler" class="bouton secondaire">Annuler</div>
                 <div id="menu_membre_modifier" class="bouton primaire">modifier</div>
             </div>

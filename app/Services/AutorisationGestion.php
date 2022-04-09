@@ -18,7 +18,7 @@ class AutorisationGestion {
     public static function protectionPage($gestion){
         $role = self::recuperer_role();
 
-        if($role == "non authentifié") abort(401);
+        if($role == "non authentifié") return redirect()->route('connexion');
         else if($role == "non membre") abort(403);
 
         if( $role[$gestion] != 1) abort(403);

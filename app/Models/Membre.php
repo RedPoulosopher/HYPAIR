@@ -14,6 +14,8 @@ class Membre extends Model
         'entite_id',
         'user_id',
         'role_id',
+        'fin_mandat',
+        'created_at',
     ];
 
     public function user(){
@@ -24,6 +26,28 @@ class Membre extends Model
     }
     public function role(){
         return $this->belongsTo(Role::class);
+    }
+
+    public function nouveau_membre($annee=null){
+        $info = ['role_id' => $this->role_id,];
+
+        if(!is_null($annee) && $annee != date('y')){ //on rajoute une date de début de mandat
+            $annee_fin_mandat = $annee;
+            $created_at = $annee-1 . "-03-01";
+            $info["created_at"] = $created_at;
+        } else {
+            $annee_fin_mandat = date('Y');
+        }
+
+		$fin_mandat = $annee_fin_mandat."-05-01";
+
+        return self::updateOrCreate([
+			'entite_id' => $this->entite_id,
+			'user_id' => $this->user_id,
+			'fin_mandat' => $fin_mandat,
+			],
+			$info
+		);
     }
     
     public function promouvoir(){

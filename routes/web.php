@@ -23,7 +23,17 @@ Route::get('/connexion', function() {  return view('connexion'); })->name("conne
 Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
 
-Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai','lille','valencienne','dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
+//easter eggs
+//============
+Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });
+Route::get('/ecriture', function() {  return view('oeufs_de_paques.ecriture'); });
+Route::get('/cookies', function() {  return view('cookies'); });
+
+//accéder aux erreurs
+//====================
+Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['erreur'=>'401|403|404|405|419|429|500|503']);
+
+Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
 
 //les routes réservées à l'AIR
 //============================
@@ -117,15 +127,3 @@ Route::prefix('{entite_uid}') //pour les bureaux
 Route::prefix('{entite_uid}') //pour l'AIR
     ->middleware('existence.entite:air')
     ->group($routes_AIR);
-
-
-
-//easter eggs
-//============
-Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });
-Route::get('/ecriture', function() {  return view('oeufs_de_paques.ecriture'); });
-Route::get('/cookies', function() {  return view('cookies'); });
-
-//accéder aux erreurs
-//====================
-Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['erreur'=>'401|403|404|405|419|429|500|503']);

@@ -28,18 +28,19 @@ class Membre extends Model
         return $this->belongsTo(Role::class);
     }
 
-    public function nouveau_membre($annee=null){
+    public function changer_role($annee=null){
         $info = ['role_id' => $this->role_id,];
 
-        if(!is_null($annee) && $annee != date('y')){ //on rajoute une date de début de mandat
+        if(!is_null($annee) && $annee != date('y')){ //on rajoute une date de début de mandat si c'est une création d'archive
             $annee_fin_mandat = $annee;
-            $created_at = $annee-1 . "-03-01";
+            $created_at = $annee-1 . "-".config('mandat.date_defaut_creation');
             $info["created_at"] = $created_at;
         } else {
             $annee_fin_mandat = date('Y');
         }
+        if(date('m') >= config('mandat.mois_debut_passation')){$annee_fin_mandat++;}
 
-		$fin_mandat = $annee_fin_mandat."-05-01";
+		$fin_mandat = $annee_fin_mandat."-".config('mandat.date_fin_mandat'); //on désactive toutes les fiches membres après cette date
 
         return self::updateOrCreate([
 			'entite_id' => $this->entite_id,
@@ -49,14 +50,8 @@ class Membre extends Model
 			$info
 		);
     }
-    
-    public function promouvoir(){
-        //s'il est juste membre, on recreer une fiche avec son nouveau role
-        //sinon, on met à jour son entrée
-    }
 
-    public function demettre(){
-        //si on le repasse juste membre, et que date_fin > mai de l'année courrante, on supprime l'entrée, et on met à jour l'ancienne entrée avec la bonne date de fin
-        //sinon, on met juste l entrée à jour
+    function date_fin_mandat($annee=null){
+
     }
 }

@@ -139,7 +139,7 @@ class Entite extends Model
 
     public function mandat($annee=null){
         $annee_scolaire = $annee ?? date('Y');
-        if(date('m')>=4){$annee_scolaire++;} //en avril, on change le mandat pour afficher le nouveau
+        if(date('m') >= config('mandat.mois_affichage_nouveau_mandat')){$annee_scolaire++;} //en avril, on change le mandat pour afficher le nouveau
 
         return $this::membres()
         ->select('membres.id','membres.user_id','membres.entite_id','membres.created_at','membres.fin_mandat','membres.photo','roles.label','roles.niveau_admin','users.uid','users.nom','users.prenom')
@@ -151,7 +151,7 @@ class Entite extends Model
 
     public function personnes_a_responsabilites(){
         return $this::membres()
-        ->select('membres.id','membres.user_id','membres.created_at','membres.fin_mandat','roles.id as role.id','roles.label','roles.niveau_admin','users.uid','users.nom','users.prenom')
+        ->select('membres.id','membres.user_id','membres.created_at','membres.fin_mandat','roles.id as roles.id','roles.label','roles.niveau_admin','users.uid','users.nom','users.prenom')
         ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`")
         ->join('roles','roles.id','=','membres.role_id')
         ->join('users','users.id','=','membres.user_id')
@@ -162,7 +162,7 @@ class Entite extends Model
 
     public function abonnes(){
         return $this::membres()
-        ->select('membres.id','membres.user_id','membres.created_at','membres.fin_mandat','roles.id as role.id','roles.label','roles.niveau_admin','users.uid','users.nom','users.prenom')
+        ->select('membres.id','membres.user_id','membres.created_at','membres.fin_mandat','roles.id as roles.id','roles.label','roles.niveau_admin','users.uid','users.nom','users.prenom')
         ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`")
         ->join('roles','roles.id','=','membres.role_id')
         ->join('users','users.id','=','membres.user_id')

@@ -28,7 +28,7 @@ class MembreController extends Controller
 		//on vérifie que l'entite existe
 		$entite = Entite::existe($request->route('entite_id'));
 		
-		$membre_role_id = Role::role_id("membre");
+		$membre_role_id = $request["role_id"];
 		$user = User::existe($request["user_uid"]);
 		if(!$user){
 			return back()->withErrors(["msg"=>"L'uid fourni ne correspond à aucun utilisateur."]);
@@ -38,7 +38,7 @@ class MembreController extends Controller
 		$membre_model->entite_id = $request->route('entite_id');
 		$membre_model->user_id =  $user->id;
 		$membre_model->role_id =  $membre_role_id;
-		$membre_model->nouveau_membre();
+		$membre_model->changer_role();
 
 		return back();
     }
@@ -64,6 +64,8 @@ class MembreController extends Controller
 			}
 
 			$personnes_a_responsabilites = $personnes_a_responsabilites->get();
+
+			// Entiteee::test();
 
 			$roles = Role::index();
 		} else {

@@ -72,11 +72,19 @@ td a.icon-edit-2 {
                 @csrf
                 <div class="groupe ombre_petite">
                     <label class="input_groupe">
-                        <p class="titre">Rajouter un membre :</p>
+                        <p class="titre">Uid du membre :</p>
                         <p class="description">Rentrez l'uid de la personne ou son adresse étudiante. Faites attention à ce que ce soit bien son adresse, elles ne sont pas toutes construites en prenom.nom !</p>
-                        <p class="description">Vous pourrez modifier son rôle par la suite.</p>
-                        <input type="text" name="user_uid" required class="input" value="{{old('user_uid') ?? ''}}"/>
+                        <input id="user_uid" type="text" name="user_uid" required class="input" value="{{old('user_uid') ?? ''}}"/>
                     </label>
+                    <div class="input_groupe">
+                        <p class="titre">Rôle du membre :</p>
+                        <select class="input" id="select_role" name="role_id">
+                            <option disabled selected></option>
+                            @foreach ($roles as $role)
+                                <option value="{{$role->id}}">{{$role->label}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div style="display:flex;justify-content: flex-end;margin-top:15px;">
                         <button type="submit" class="bouton primaire">VALIDER</span></button>
                     </div>
@@ -104,30 +112,14 @@ td a.icon-edit-2 {
                                 <tr class="ligne_membre">
                                     <td>{{$membre["prenom"]}}</td>
                                     <td>{{$membre["nom"]}}</td>
-                                    <td>
-                                        <span class="role">{{ $membre["label"] }}</span>
-                                    </td>
-                                    <td><a membre_id="{{ $membre["membre.id"] }}" role_id="{{ $membre["role.id"] }}" membre_prenom="{{$membre["prenom"]}}" membre_nom="{{$membre["nom"]}}" class="icon-edit-2" title="modifier" onclick="afficher_menu_membre(this)"></a></td>
+                                    <td><span class="role">{{ $membre["label"] }}</span></td>
+                                    <td><a membre_id="{{ $membre["id"] }}" role_id="{{ $membre["roles.id"] }}" user_uid="{{$membre["uid"]}}" class="icon-edit-2" title="modifier" onclick="afficher_menu_membre(this)"></a></td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             @endif
-        </div>
-
-        <div id="menu_membre" style="display:none;" class="groupe ombre_petite">
-            <h2>Gérer <span id="membre_prenom_nom"></span></h2>
-            <div class="input_groupe">
-                <select class="input" id="select_role">
-                    @foreach ($roles as $role)
-                        <option value="{{$role->id}}">{{$role->label}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div style="display:flex;justify-content:flex-end;gap:10px;">
-                <div id="menu_membre_annuler" class="bouton secondaire">Annuler</div>
-                <div id="menu_membre_modifier" class="bouton primaire">modifier</div>
-            </div>
         </div>
 	</div>
 </div>
@@ -150,32 +142,26 @@ datatable_options = {
 }
 new JSTable("#index", { ...datatable_options });
 
-el_menu_membre = document.getElementById("menu_membre")
-el_gestion_membre = document.getElementById("gestion_membre")
-el_membre_prenom_nom = document.getElementById("membre_prenom_nom")
+el_user_uid = document.getElementById("user_uid")
 el_select_role = document.getElementById("select_role")
 function afficher_menu_membre(ceci){
     membre_id = ceci.getAttribute("membre_id")
-    membre_prenom = ceci.getAttribute("membre_prenom")
-    membre_nom = ceci.getAttribute("membre_nom")
+    user_uid = ceci.getAttribute("user_uid")
     role_id = ceci.getAttribute("role_id")
 
-    el_menu_membre.style.display = "block"
-    el_gestion_membre.style.display = "none"
-
-    el_membre_prenom_nom.innerText = membre_prenom+" "+membre_nom
+    el_user_uid.value = user_uid
     el_select_role.querySelector('[value="'+role_id+'"]').selected = true
 }
-el_menu_membre_annuler = document.getElementById("menu_membre_annuler")
-el_menu_membre_annuler.addEventListener("click",function(){
-    el_menu_membre.style.display = "none"
-    el_gestion_membre.style.display = "block"
-})
-el_menu_membre_modifier = document.getElementById("menu_membre_modifier")
-el_menu_membre_modifier.addEventListener("click",function(){
-    el_menu_membre.style.display = "none"
-    el_gestion_membre.style.display = "block"
-})
+// el_menu_membre_annuler = document.getElementById("menu_membre_annuler")
+// el_menu_membre_annuler.addEventListener("click",function(){
+//     el_menu_membre.style.display = "none"
+//     el_gestion_membre.style.display = "block"
+// })
+// el_menu_membre_modifier = document.getElementById("menu_membre_modifier")
+// el_menu_membre_modifier.addEventListener("click",function(){
+//     el_menu_membre.style.display = "none"
+//     el_gestion_membre.style.display = "block"
+// })
 
 </script>
 @endsection

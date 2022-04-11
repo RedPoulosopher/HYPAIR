@@ -1,0 +1,37 @@
+.fenetre_contextuelle {
+	display: flex;
+	width: 95%;
+	max-width: 450px;
+	border-radius: 20px;
+	background: var(--couleur_fond);
+
+	& .panneau {
+		padding: 30px;
+		flex: 2;
+		transition-duration: 0.5s;
+
+		& .titre {
+			font-size: 26px;
+			margin: 0;
+			font-weight: 600;
+			color: var(--couleur_accentuation_air);
+		}
+		& .description {
+			margin: 6px 0 30px 0;
+		}
+		& .groupe_boutons {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		& .bouton.primaire {
+			background-color:var(--couleur_accentuation_air);
+		}
+	}
+}
+
+@media(max-width: 750px) {
+	.groupe_boutons {
+		display: block;
+	}
+}

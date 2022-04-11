@@ -5,6 +5,7 @@
     margin-bottom:1.6em;
 
     & .comite_club {
+        flex-grow: 1;
 
         & .logo {
             position: relative;
@@ -14,8 +15,6 @@
             background: var(--gris_2);
 
             & img {
-                width:84%;
-                margin: 8%;
                 border-radius: 500px;
             }
             & .cercle {
@@ -28,9 +27,6 @@
                 height:90%;
                 box-sizing: border-box;
                 transition: border 0.1s ease-in-out;
-            }
-            &:hover .cercle {
-                border: 5px solid;
             }
         }
         
@@ -61,6 +57,15 @@
             & .logo{
                 width:200px;
                 height:200px;
+
+                & img {
+                    width:84%;
+                    margin: 8%;
+                }
+
+                &:hover .cercle {
+                    border: 5px solid;
+                }
             }
             & .info .nom{
                 font-size:2em;
@@ -86,27 +91,26 @@
     .liste_comite_club {
         gap: 10px 10px;
         & .comite_club{
-            width:120px;
+            width:160px;
 
             & .logo{
-                width:100px;
-                height:100px;
+                width:130px;
+                height:130px;
+                
+                & img {
+                    width:80%;
+                    margin: 10%;
+                }
+
+                &:hover .cercle {
+                    border: 3.5px solid;
+                }
             }
             & .info .nom{
                 font-size:1.3em;
             }
             & .info .categories {
                 font-size: 0.55em;
-                // display:flex;
-                // flex-wrap: wrap;
-                // justify-content: center;
-                // gap:5px;
-
-                & > span {
-                    // background: var(--gris_1);
-                    // padding: 4px 15px 5px 15px;
-                    // border-radius: 50px;
-                }
             }
         }
     }

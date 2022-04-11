@@ -22,12 +22,13 @@ Route::get('/', function(){return session('gerer_entite');});
 Route::get('/connexion', function() {  return view('connexion'); })->name("connexion");
 Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
+Route::get('/cookies', function() {  return view('cookies'); });
+Route::get('/rgpd', function() {  return view('rgpd'); });
 
 //easter eggs
 //============
 Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });
 Route::get('/ecriture', function() {  return view('oeufs_de_paques.ecriture'); });
-Route::get('/cookies', function() {  return view('cookies'); });
 
 //accéder aux erreurs
 //====================

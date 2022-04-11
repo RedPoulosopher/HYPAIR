@@ -5,6 +5,10 @@
   margin-bottom: 1.6em;
 }
 
+.liste_comite_club .comite_club {
+  flex-grow: 1;
+}
+
 .liste_comite_club .comite_club .logo {
   position: relative;
   margin-left: auto;
@@ -14,8 +18,6 @@
 }
 
 .liste_comite_club .comite_club .logo img {
-  width: 84%;
-  margin: 8%;
   border-radius: 500px;
 }
 
@@ -29,10 +31,6 @@
   height: 90%;
   box-sizing: border-box;
   transition: border 0.1s ease-in-out;
-}
-
-.liste_comite_club .comite_club .logo:hover .cercle {
-  border: 5px solid;
 }
 
 .liste_comite_club .comite_club .info .nom {
@@ -66,6 +64,15 @@
     height: 200px;
   }
 
+  .liste_comite_club .comite_club .logo img {
+    width: 84%;
+    margin: 8%;
+  }
+
+  .liste_comite_club .comite_club .logo:hover .cercle {
+    border: 5px solid;
+  }
+
   .liste_comite_club .comite_club .info .nom {
     font-size: 2em;
   }
@@ -91,12 +98,21 @@
   }
 
   .liste_comite_club .comite_club {
-    width: 120px;
+    width: 160px;
   }
 
   .liste_comite_club .comite_club .logo {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
+  }
+
+  .liste_comite_club .comite_club .logo img {
+    width: 80%;
+    margin: 10%;
+  }
+
+  .liste_comite_club .comite_club .logo:hover .cercle {
+    border: 3.5px solid;
   }
 
   .liste_comite_club .comite_club .info .nom {

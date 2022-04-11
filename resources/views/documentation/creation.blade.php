@@ -5,6 +5,8 @@
 @section('content')
 
 <link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
+<link rel="stylesheet" href="/css/simpleMDE.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <div id="wrapper">
 	<div id="contenu" class="moyen">
@@ -107,8 +109,12 @@
 		</form>
 	</div>
 </div>
-
 <script>
+var simplemde = new SimpleMDE({
+	toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
+	spellChecker: false,
+});
+
 function string_to_slug(str) {
 	str = str.replace(/^\s+|\s+$/g, ""); // trim
 	str = str.toLowerCase();

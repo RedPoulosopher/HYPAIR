@@ -1,5 +1,46 @@
 @charset "UTF-8";
 
+.fenetre_contextuelle {
+  display: flex;
+  width: 95%;
+  max-width: 450px;
+  border-radius: 20px;
+  background: var(--couleur_fond);
+}
+
+.fenetre_contextuelle .panneau {
+  padding: 30px;
+  flex: 2;
+  transition-duration: 0.5s;
+}
+
+.fenetre_contextuelle .panneau .titre {
+  font-size: 26px;
+  margin: 0;
+  font-weight: 600;
+  color: var(--couleur_accentuation_air);
+}
+
+.fenetre_contextuelle .panneau .description {
+  margin: 6px 0 30px 0;
+}
+
+.fenetre_contextuelle .panneau .groupe_boutons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fenetre_contextuelle .panneau .bouton.primaire {
+  background-color: var(--couleur_accentuation_air);
+}
+
+@media (max-width: 750px) {
+  .groupe_boutons {
+    display: block;
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -313,7 +354,7 @@ body.light-theme a.couleur:hover {
 }
 
 #logo_menu:hover {
-  transform: scale(1.1, 1.1);
+  transform: scale(1.05, 1.05);
   cursor: pointer;
 }
 
@@ -370,18 +411,89 @@ body.light-theme a.couleur:hover {
   color: #858585;
 }
 
-.sidebar-nav li:hover:before {
-  color: var(--couleur_accentuation);
-}
-
 .sidebar-nav li span {
   vertical-align: middle;
 }
 
-#sidenav [class^=iconsax-]:before {
-  font-size: 1.4rem;
-  vertical-align: middle;
-  margin-right: 0.5em;
+#bascule-mode {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  position: absolute;
+  bottom: 22px;
+  right: 1%;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+#bascule-mode .label-clair,
+#bascule-mode .label-sombre {
+  padding: 8px 12px;
+  min-width: 32px;
+}
+
+#bascule-mode .label-sombre {
+  letter-spacing: -0.03em;
+}
+
+#bascule-mode .label-clair {
+  letter-spacing: 0.1em;
+}
+
+#bascule-mode #bascule-theme {
+  margin: 0;
+  padding: 0;
+  width: 48px;
+  height: 28px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  border-radius: 14px;
+  display: inline-block;
+  background: var(--couleur_police_secondaire);
+}
+
+#bascule-mode #bascule-theme:before {
+  content: "";
+  top: 4px;
+  left: 24px;
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  border-radius: 12px;
+  background: var(--gris_2);
+  transition: left 0.2s ease-in-out;
+}
+
+#bascule-mode #bascule-theme:after {
+  content: "";
+  top: 12px;
+  right: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 16px;
+  display: block;
+  position: absolute;
+  background: var(--couleur_police_secondaire);
+  transition: top 0.2s ease-in-out, right 0.2s ease-in-out, width 0.2s ease-in-out, height 0.2s ease-in-out;
+}
+
+body.dark-theme #bascule-mode #bascule-theme {
+  width: 48px;
+}
+
+body.dark-theme #bascule-mode #bascule-theme:before {
+  left: 4px;
+}
+
+body.dark-theme #bascule-mode #bascule-theme:after {
+  top: -3px;
+  right: 11px;
+  width: 25px;
+  height: 25px;
 }
 
 /* tablette, téléphone, téléphone en portrait */
@@ -423,16 +535,24 @@ body.light-theme a.couleur:hover {
     transform: rotate(-45deg) translate(6px, -5px);
   }
 
-  #sidebar-wrapper #sidenav {
-    display: none;
+  #sidebar-wrapper.expand #hamburger {
+    background-color: transparent;
   }
 
   #sidebar-wrapper.expand #sidenav {
     display: flex;
   }
 
-  #sidebar-wrapper.expand #hamburger {
-    background-color: transparent;
+  #sidebar-wrapper.expand #bascule-theme {
+    display: inline-block;
+  }
+
+  #sidebar-wrapper #sidenav {
+    display: none;
+  }
+
+  #sidebar-wrapper #bascule-theme {
+    display: none;
   }
 }
 

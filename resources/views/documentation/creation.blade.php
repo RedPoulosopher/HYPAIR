@@ -58,7 +58,7 @@
 				<label class="input_groupe">
 					<p class="titre">* Contenu de la documentation :</p>
 					<p class="description">Pour créer de la documentation, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
-					<textarea id="contenu_md" name="contenu_md" pattern=".{100,}" required title="au moins 100 caractères pour le contenu" rows="13">{{old('contenu_md') ?? $documentation->contenu_md ?? ''}}</textarea>
+					<textarea id="contenu_md" name="contenu_md" title="au moins 100 caractères pour le contenu" rows="13">{{old('contenu_md') ?? $documentation->contenu_md ?? ''}}</textarea>
 				</label>
 
 				<label class="input_groupe">

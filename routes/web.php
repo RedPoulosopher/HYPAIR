@@ -94,8 +94,8 @@ $routes_entites = function () {
         Route::middleware('protection.autorisation:gerer_documentation')->group(function(){
             Route::get('/documentation/nouvelle', 'create');
             Route::post('/documentation/nouvelle', 'store');
-            Route::get('/documentation/modifier/{id}', 'edit');
-            Route::post('/documentation/modifier/{id}', 'update');
+            Route::get('/documentation/modifier/{documentation_id}', 'edit');
+            Route::post('/documentation/modifier/{documentation_id}', 'update');
         });
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show')->name('documentation_afficher');

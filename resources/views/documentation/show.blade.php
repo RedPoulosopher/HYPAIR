@@ -4,12 +4,6 @@
 
 @section('content')
 
-@php
-use Carbon\Carbon;
-Carbon::setLocale('fr');
-$date = $documentation->updated_at->setTimezone(new DateTimeZone("EUROPE/PARIS"))->diffForHumans()
-@endphp
-
 <style>
 .documentation {
 	width:100%;

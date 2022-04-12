@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+use Illuminate\Support\Facades\Hash;
+
 class SeederProduction extends Seeder
 {
     /**
@@ -29,7 +31,7 @@ class SeederProduction extends Seeder
             'alias' => 'air@etu.imt-nord-europe.fr',
 
             'description_courte' => 'air@etu.imt-nord-europe.fr',
-            'description' => 'air@etu.imt-nord-europe.fr',
+            'description_md' => 'air@etu.imt-nord-europe.fr',
         ]);
 
         $entite_id = Entite::where('uid', "air")->first()->id;

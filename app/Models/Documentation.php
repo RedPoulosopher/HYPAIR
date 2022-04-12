@@ -31,7 +31,11 @@ class Documentation extends Model
         return $this->hasMany(Documentation::class);
     }
 
-    public function derive_de(){
-        return $this->belongsTo(Documentation::class);
+    public function existe(){
+        $doc = Entite::find($this->id);
+
+		if(is_null($doc)){abort(404);}
+        
+        return $doc; 
     }
 }

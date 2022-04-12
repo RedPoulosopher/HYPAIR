@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use \App\Models\Documentation;
 use \App\Services\AutorisationGestion;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
 
@@ -15,15 +16,9 @@ class DocumentationController extends Controller
 	{
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$docs_existantes = Documentation::select('id','titre')
-			->where('entite_id', session('entite_id'))
-			->where("confidentialite", "<=", $niveau_administration)
-			->get();
+		$confidentialites = config('roles');
 		
-		return view('documentation.creation', [
-			'titre' => 'Nouvelle documentation',
-			'docs_existantes' => $docs_existantes,
-		]);
+		return view('documentation.creation')->with('titre','Nouvelle documentation')->with('confidentialites',$confidentialites);
 	}
 
 
@@ -74,8 +69,12 @@ class DocumentationController extends Controller
 			abort(403);
 		}
 		
+		Carbon::setLocale('fr');
+		$date = $documentation->updated_at->setTimezone(new DateTimeZone("EUROPE/PARIS"))->diffForHumans();
+		
 		return view('documentation.show', [
 			'documentation' => $doc,
+			'date' => $date,
 			'gerer_documentation' => AutorisationGestion::gestion("gerer_documentation")
 		]);
 	}
@@ -132,28 +131,19 @@ class DocumentationController extends Controller
 		];
 		$this->validate($request, $validation);
 
-		if($request->has('mise_en_avant')){
-			$mise_en_avant=true;
-		}else{
-			$mise_en_avant=false;
-		}
+		$doc = new Documentation;
+		$doc->entite_id = session("entite_id");
+		$doc->titre = $request->titre;
+		$doc->slug = $request->Str::slug($request->titre, '-');
+		$doc->confidentialite = $request->confidentialite;
+		$doc->visibilite = $request->visibilite;
+		$doc->description = $request->description;
+		$doc->contenu_md = $request->contenu_md;
+		$doc->categories = json_encode($request->categories);
+		$doc->mise_en_avant = $request->has('mise_en_avant');
+		$doc->titre = strlen($request->debut_mise_en_avant) ? $request->debut_mise_en_avant : null;
+		$doc->titre = strlen($request->fin_mise_en_avant) ? $request->fin_mise_en_avant : null;
 
-		//formate les résultats pour leur entrée dans la table
-		$resultat = [
-			'entite_id' => session("entite_id"),
-			"titre" => $request->titre,
-			"slug" => Str::slug($request->titre, '-'),
-			"confidentialite" => $request->confidentialite,
-			"visibilite" => $request->visibilite,
-			"derive_de" => $request->derive_de,
-			"description" => $request->description,
-			"contenu_md" => $request->contenu_md,
-			"categories" => json_encode($request->categories),
-			"mise_en_avant" => $mise_en_avant,
-			"debut_mise_en_avant" => strlen($request->debut_mise_en_avant) ? $request->debut_mise_en_avant : null,
-			"fin_mise_en_avant" => strlen($request->fin_mise_en_avant) ? $request->fin_mise_en_avant : null,
-		];
-
-		return $resultat;
+		return $doc;
 	}
 }

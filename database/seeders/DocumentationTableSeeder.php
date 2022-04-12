@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DocumentationTableSeeder extends Seeder
 {
@@ -26,6 +27,8 @@ class DocumentationTableSeeder extends Seeder
                 'mise_en_avant' => 0,
                 'debut_mise_en_avant' => '2020-08-17',
                 'fin_mise_en_avant' => '2020-09-12',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'entite_id' => 1,
@@ -38,6 +41,8 @@ class DocumentationTableSeeder extends Seeder
                 'mise_en_avant' => 0,
                 'debut_mise_en_avant' => '2020-08-17',
                 'fin_mise_en_avant' => '2020-09-12',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
                 'entite_id' => 2,
@@ -50,6 +55,8 @@ class DocumentationTableSeeder extends Seeder
                 'mise_en_avant' => 0,
                 'debut_mise_en_avant' => '2020-08-17',
                 'fin_mise_en_avant' => '2020-09-12',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ]);
     }

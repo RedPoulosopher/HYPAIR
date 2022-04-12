@@ -183,8 +183,8 @@ body.dark-theme #bascule-mode #bascule-theme {
 		& #sidenav{
 			display: flex;
 		}
-		& #bascule-theme{
-			display: inline-block;
+		& #bascule-mode{
+			display: flex;
 		}
 	}
 
@@ -192,7 +192,7 @@ body.dark-theme #bascule-mode #bascule-theme {
 		& #sidenav{
 			display: none;
 		}
-		& #bascule-theme {
+		& #bascule-mode {
 			display:none;
 		}
 	}

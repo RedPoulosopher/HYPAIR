@@ -543,15 +543,15 @@ body.dark-theme #bascule-mode #bascule-theme:after {
     display: flex;
   }
 
-  #sidebar-wrapper.expand #bascule-theme {
-    display: inline-block;
+  #sidebar-wrapper.expand #bascule-mode {
+    display: flex;
   }
 
   #sidebar-wrapper #sidenav {
     display: none;
   }
 
-  #sidebar-wrapper #bascule-theme {
+  #sidebar-wrapper #bascule-mode {
     display: none;
   }
 }

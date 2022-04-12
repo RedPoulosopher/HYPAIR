@@ -32,12 +32,10 @@
 				
 				<label class="input_groupe">
 					<p class="titre">* Confidentialité :</p>
-					<select name="confidentialite" class="input" spellcheck="false" required select="{{old('confidentialite') ?? $documentation->confidentialite ?? ''}}">
-                        <option value="0" selected>public</option>
-                        <option value="1">membres de l'entite</option>
-                        <option value="4">responsables & bureau</option>
-                        <option value="6">bureau</option>
-                        <option value="8">président⸱e⸱s et vice-président⸱e</option>
+					<select name="confidentialite" class="input" spellcheck="false" required select="{{old('confidentialite') ?? $documentation->confidentialite ?? 0}}">
+                        @foreach ($confidentialites as $label => $niveau_confidentialite)
+							<option value="{{ $niveau_confidentialite }}">{{ $label }}</option>
+						@endforeach
                     </select>
 				</label>
 				
@@ -47,19 +45,6 @@
                         <option value="0" selected>affichée dans l'index</option>
                         <option value="1">affichée lors d'une recherche, mais pas dans l'index</option>
                         <option value="2">pas affichée (pour compléter les autres doc)</option>
-                    </select>
-				</label>
-
-				<label class="input_groupe">
-					<p class="titre">Dérive de :</p>
-					<p class="description">Si votre documentation est une traduction, ou s'il s'agit d'un complément à une autre documentation, il faut l'indiquer ici</p>
-					<select name="derive_de" class="input" spellcheck="false" select="{{old('derive_de') ??$documentation->derive_de ?? ''}}">
-                        <option value="" selected></option>
-						@foreach ($docs_existantes as $doc)
-							@if($doc["id"] != Request::route('id'))
-							<option value="{{ $doc["id"] }}">{{ $doc["titre"] }}</option>
-							@endif
-						@endforeach
                     </select>
 				</label>
 			</div>
@@ -73,7 +58,7 @@
 				<label class="input_groupe">
 					<p class="titre">* Contenu de la documentation :</p>
 					<p class="description">Pour créer de la documentation, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
-					<textarea name="contenu_md" pattern=".{100,}" required title="au moins 100 caractères pour le contenu" rows="13">{{old('contenu_md') ?? $documentation->contenu_md ?? ''}}</textarea>
+					<textarea id="contenu_md" name="contenu_md" pattern=".{100,}" required title="au moins 100 caractères pour le contenu" rows="13">{{old('contenu_md') ?? $documentation->contenu_md ?? ''}}</textarea>
 				</label>
 
 				<label class="input_groupe">
@@ -111,6 +96,7 @@
 </div>
 <script>
 var simplemde = new SimpleMDE({
+	element: document.getElementById("contenu_md"),
 	toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
 	spellChecker: false,
 });

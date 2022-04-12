@@ -26,12 +26,7 @@ class CreateDocumentationsTable extends Migration
             $table->boolean('mise_en_avant')->default(0);
             $table->date('debut_mise_en_avant')->nullable()->default(null);
             $table->date('fin_mise_en_avant')->nullable()->default(null);
-            $table->unsignedBigInteger('derive_de')->nullable()->default(null);
             $table->timestamps();
-        });
-
-        Schema::table('documentations', function (Blueprint $table) {
-            $table->foreign('derive_de')->references('id')->on('documentations')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

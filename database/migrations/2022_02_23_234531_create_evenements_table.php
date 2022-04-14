@@ -15,19 +15,26 @@ class CreateEvenementsTable extends Migration
     {
         Schema::create('evenements', function (Blueprint $table) {
             $table->id();
-	        $table->foreignId('association_id')->constrained();
+	        $table->foreignId('association_id');
             $table->string('titre');
-            $table->string('slug',128)->unique();
+            $table->string('slug',128);
             $table->text('description');
             $table->datetime('temps_debut');
             $table->datetime('temps_fin');
-            $table->text('lieu');
-            $table->integer('max_participation')->nullable()->default(null);
+            $table->text('lieu')->nullable();
+            $table->integer('max_participation')->nullable()->default(0);
             $table->tinyInteger('confidentialite')->default(0);
             $table->boolean('pour_cotisant')->default(0);
             $table->boolean('important')->default(0);
+            $table->boolean('validation')->default(0);
+            $table->unsignedBigInteger('derive_de')->nullable()->default(null);
             $table->timestamps();
         });
+
+        Schema::table('evenements', function (Blueprint $table) {
+            $table->foreign('derive_de')->references('id')->on('evenements')->onUpdate('cascade')->onDelete('cascade');
+        });
+
     }
 
     /**
@@ -37,6 +44,6 @@ class CreateEvenementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('events');
+        Schema::dropIfExists('evenements');
     }
 }

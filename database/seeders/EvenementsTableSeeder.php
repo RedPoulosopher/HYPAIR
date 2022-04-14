@@ -16,14 +16,15 @@ class EvenementsTableSeeder extends Seeder
     {
         DB::table('evenements')->insert([
             [
-                'association_id' => 1,
-                'titre' => "Evenement",
-                'slug' => "coucou",
-                'description' => 'doc pour préciser le contenu',
+                'association_id' => '1',
+                'titre' => "Soirée",
+                'slug' => "soiree",
+                'description' => 'Soirée de folie',
                 'temps_debut' => '2021-12-31 11:00:00',
                 'temps_fin' => '2021-12-31 16:00:00',
                 'lieu' => 'Meud',
                 'max_participation' => 20,
+                'validation' => "1",
             ]
         ]);
     }

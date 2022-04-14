@@ -36,8 +36,12 @@ $routes_asso = function () {
     });
 
     Route::controller(EvenementController::class)->group(function(){
-        Route::get('/evenement', function() {  return view('evenements.formulaire'); });
-        Route::post('/evenement', 'formulaire_evenement');
+        Route::get('/evenement', 'show_home');
+        Route::get('/evenement/formulaire', 'create');
+        Route::post('/evenement/formulaire', 'store');
+        Route::get('/evenement/modifier/{id}', 'edit');
+        Route::post('/evenement/modifier/{id}', 'update');
+        Route::get('/evenement/{slug}', 'show');
     });
 };
 

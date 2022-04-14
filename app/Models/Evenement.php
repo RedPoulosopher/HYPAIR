@@ -10,6 +10,8 @@ class Evenement extends Model
     use HasFactory;
     protected $fillable = [
         'titre',
+        'association_id',
+        'slug',
         'description',
         'temps_debut',
         'temps_fin',
@@ -17,7 +19,8 @@ class Evenement extends Model
         'max_participation',
         'confidentialite',
         'pour_cotisant',
-        'important'
+        'important',
+        'validation',
     ];
     
     public function association(){

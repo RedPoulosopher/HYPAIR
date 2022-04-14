@@ -15,13 +15,13 @@ class CreateProjetsTable extends Migration
     {
         Schema::create('projets', function (Blueprint $table) {
             $table->id();
-            $table->string('association_uid',128)->references('uid')->on('associations')->onUpdate('cascade')->onDelete('cascade');
-            $table->boolean('confidentialite');
-            $table->foreignId('chef_id')->unique();
+            $table->foreignId('association_id')->references('id')->on('associations')->onUpdate('cascade')->onDelete('cascade');
+            $table->tinyInteger('confidentialite');
             $table->string('titre');
-            $table->string('uid',128)->unique();
-            $table->string('chef_projet');
-            $table->text('description_courte'); 
+            $table->string('slug')->index();
+            $table->foreignId('chef_projet')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->text('description_courte');
+            $table->date('date_fin');
             $table->timestamps();
         });
     }

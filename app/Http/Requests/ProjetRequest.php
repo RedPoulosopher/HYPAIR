@@ -30,6 +30,7 @@ class ProjetRequest extends FormRequest
             'projet_id' => 'bail|required|integer',
             'description_courte' => 'bail|required|string',
             'chef_projet' => 'bail|nullable|string',
+            'date_creation'=>'bail|required|date'
         ];
     }
 }

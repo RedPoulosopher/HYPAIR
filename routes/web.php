@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\ProjetController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +32,14 @@ $routes_asso = function () {
         Route::post('/documentation/modifier/{id}', 'update');
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show');
+    });
+    Route::controller(ProjetController::class)->group(function(){
+        Route::get('/projet/nouveau', 'create');
+        Route::post('/projet/nouveau', 'store');
+        Route::get('/projet/modifier/{projet_id}', 'edit');
+        Route::post('/projet/modifier/{projet_id}', 'update');
+        Route::get('/projet', 'index');
+        Route::get('/projet/{slug}', 'show');
     });
 
     // Route::controller(AssociationController::class)->group(function(){
@@ -94,11 +102,4 @@ Route::get('/cookies', function() {  return view('cookies'); });
 // accéder aux erreurs
 Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['erreur'=>'401|403|404|405|419|429|500|503']);
 
-Route::controller(ProjetController::class)->group(function(){
-    Route::get('/projet/nouveau', 'create');
-    Route::post('/projet/nouveau', 'store');
-    Route::get('/projet/modifier/{projet_id}', 'edit');
-    Route::post('/projet/modifier/{projet_id}', 'update');
-    Route::get('/projet', 'index');
-    Route::get('/projet/{slug}', 'show');
-});
+

@@ -9,12 +9,14 @@ class Projet extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'titre',
+        'slug',
         'association_id',
         'confidentialite',
-        'titre',
-        'projet_id',
+        'chef_projet',
         'description_courte',
-        'chef_projet'
+        'date_creation',
+        'date_fin'
     ];
     public function Projet(){
         return $this->belongsTo(Association::class||User::class);
@@ -23,20 +25,3 @@ class Projet extends Model
         return $this->hasMany(Avancee::class);
     }
 }
-//test
-Route::get('/',function(){
-    return view('Projet',[
-        'Projet' -> Post::with('association')->get()
-    ]);  
-});
-
-Route::get('Projet/{Projet:projet_id}', function (Projet $Projet ){
-    return view('projet',[
-        'projet'-> Post::findOrFaill($Projet)
-    ]);
-});
-Route::get('associations/{association:association_id}',function (Association $association){
-    return view('projets',[
-        'projets'->$association->projets
-    ]);
-});

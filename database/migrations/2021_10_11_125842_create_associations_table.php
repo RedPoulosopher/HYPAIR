@@ -18,7 +18,7 @@ class CreateAssociationsTable extends Migration
             $table->string('uid',128)->unique(); //ce qui est dans le LDAP
 	        $table->string('nom',128);
             $table->string('bureau_de_ratachement')->nullable()->default(null);
-            $table->json('lieux')->default('["douai"]');
+            $table->string('lieux')->default('["douai"]');
             $table->string('email')->nullable()->default(null); //pour la DISI
             $table->string('alias')->nullable()->default(null); //pour la DISI
             $table->boolean('public')->default(1); //pour que les listes puissent se cacher

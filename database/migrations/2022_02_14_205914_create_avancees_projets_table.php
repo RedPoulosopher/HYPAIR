@@ -15,7 +15,7 @@ class CreateAvanceesProjetsTable extends Migration
     {
         Schema::create('avancees_projets', function (Blueprint $table) {
             $table->id();
-            $table->string('projets_uid',128)->references('uid')->on('projets')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('projets_id')->references('id')->on('projets')->onUpdate('cascade')->onDelete('cascade');
             $table->text('description');
             $table->timestamps();
         });

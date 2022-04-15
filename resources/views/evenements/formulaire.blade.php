@@ -40,7 +40,7 @@
             <div class="groupe ombre_petite">
                 <label class="input_groupe">
                     <p class="titre">* Début de l'évènement :</p>
-                    <input type="datetime-local" name="temps_debut" class="input" required value="{{old('temps_debut') ?? $evenement->fin_mise_en_avant ?? '' }}" min="2000-01-01" max="2100-12-31"/>
+                    <input type="datetime-local" name="temps_debut" class="input" required value="{{old('temps_debut') ?? $evenement->fin_mise_en_avant ?? '' }}" min="01-01-2000" max="12-31-2099"/>
                 </label>
 
 
@@ -88,12 +88,22 @@
                     </select>
                 </label>
                 
-
                 <label class="input_groupe">
                     <p class="titre">* Important :</p>
                     <select name="important" class="input" spellcheck="false" required select="{{old('important') ?? $evenement->important ?? ''}}">
                         <option value="0" selected>Oui</option>
                         <option value="1">Non</option>
+                    </select>
+                </label>
+            </div>
+
+
+            <div class="groupe ombre_petite">
+                <label class="input_groupe">
+                    <p class="titre">* Validé par le PVE :</p>
+                    <select name="validation" class="input" spellcheck="false" required select="{{old('validation') ?? $evenement->validation ?? ''}}">
+                        <option value="0" selected>Non</option>
+                        <option value="1">Oui</option>
                     </select>
                 </label>
             </div>

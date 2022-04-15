@@ -108,6 +108,7 @@ $routes_entites = function () {
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show')->name('documentation_afficher');
     });
+<<<<<<< HEAD
     
     Route::controller(EntiteController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
@@ -118,6 +119,16 @@ $routes_entites = function () {
         });
         // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
         // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+=======
+
+    Route::controller(EvenementController::class)->group(function(){
+        Route::get('/evenement', 'show_home');
+        Route::get('/evenement/formulaire', 'create');
+        Route::post('/evenement/formulaire', 'store');
+        Route::get('/evenement/modifier/{id}', 'edit');
+        Route::post('/evenement/modifier/{id}', 'update');
+        Route::get('/evenement/{slug}', 'show');
+>>>>>>> 7e6a79dd565f67af8804460efb1494b0a5200ac5
     });
 };
 

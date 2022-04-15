@@ -16,6 +16,7 @@ class EvenementsTableSeeder extends Seeder
     {
         DB::table('evenements')->insert([
             [
+<<<<<<< HEAD
                 'association_id' => 1,
                 'titre' => "Evenement",
                 'slug' => "coucou",
@@ -42,6 +43,17 @@ class EvenementsTableSeeder extends Seeder
                 'temps_fin' => '2022-04-02 23:00:00',
                 'lieu' => 'Meud',
                 'max_participation' => 200,
+=======
+                'association_id' => '1',
+                'titre' => "Soirée",
+                'slug' => "soiree",
+                'description' => 'Soirée de folie',
+                'temps_debut' => '2021-12-31 11:00:00',
+                'temps_fin' => '2021-12-31 16:00:00',
+                'lieu' => 'Meud',
+                'max_participation' => 20,
+                'validation' => "1",
+>>>>>>> 7e6a79dd565f67af8804460efb1494b0a5200ac5
             ]
         ]);
     }

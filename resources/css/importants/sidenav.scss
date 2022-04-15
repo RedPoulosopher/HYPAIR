@@ -148,7 +148,7 @@ body.dark-theme #bascule-mode #bascule-theme {
 
 
 /* tablette, téléphone, téléphone en portrait */
-@media (max-width: 767.98px) {
+@media (min-width: 767.98px) {
 	#hamburger {
 		width: 40px;
 		height: 40px;
@@ -198,7 +198,7 @@ body.dark-theme #bascule-mode #bascule-theme {
 	}
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
 	#wrapper{
 		padding-left:calc(var(--taille_nav));
 	}

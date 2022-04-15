@@ -17,7 +17,9 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){return session('gerer_entite');});
+Route::get('/', function(){return redirect('/entites/douai');});
+
+Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
 
 Route::get('/connexion', function() {  return view('connexion'); })->name("connexion");
 Route::post('/connexion', [AuthController::class, 'connexion']);
@@ -34,7 +36,10 @@ Route::get('/ecriture', function() {  return view('oeufs_de_paques.ecriture'); }
 //====================
 Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['erreur'=>'401|403|404|405|419|429|500|503']);
 
-Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
+//fenêtres contextuelles
+//====================
+Route::get('/fenetre_contextuelle/cookies', function(){return view('fenetre_contextuelle.cookies');});
+Route::get('/fenetre_contextuelle/rgpd', function(){return view('fenetre_contextuelle.rgpd');});
 
 //les routes réservées à l'AIR
 //============================

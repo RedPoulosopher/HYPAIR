@@ -23,8 +23,11 @@ h1.titre::first-letter {
 	text-transform: capitalize;
 }
 p {
-	color: var(--couleur_police_secondaire);
 	text-align:justify;
+}
+.derniere_maj {
+	font-size:0.9em;
+	color: var(--couleur_police_secondaire);
 }
 </style>
 	
@@ -47,7 +50,7 @@ p {
 			<div class="contenu_doc" id="contenu_doc">
 		
 				<h1 class="titre">{{$documentation->titre}}</h1>
-				<p>Dernière mise à jour <span>{{$date}}</span></p>
+				<p class="derniere_maj">Dernière mise à jour <span>{{$date}}</span></p>
 
 				{!! Str::markdown($documentation->contenu_md); !!}
 			</div>

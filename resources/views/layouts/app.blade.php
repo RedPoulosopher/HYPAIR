@@ -23,6 +23,8 @@
 		@include('layouts.theme')
 
 		@includeFirst(['menus.' . Request::route('entite_uid'), 'menus.#defaut'])
+
+		@include('fenetre_contextuelle.#defaut')
 		
 		@yield('content')
 	</body>

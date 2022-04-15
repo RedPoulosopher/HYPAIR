@@ -76,7 +76,6 @@ class DocumentationController extends Controller
 		$doc = Documentation::existe($request->route('documentation_id'));
 		if(!$doc){abort(404);}
 		
-		$doc = $doc->first();
 		if($doc->confidentialite > $niveau_administration){abort(403);}
 
 		$confidentialites = config('roles');

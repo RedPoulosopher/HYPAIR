@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class DocumentationTableSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class DocumentationTableSeeder extends Seeder
     {
         DB::table('documentations')->insert([
             [
-                'association_id' => 1,
+                'entite_id' => 1,
                 'confidentialite' => 0,
                 'titre' => "coucou",
                 'slug' => "coucou",
@@ -26,9 +27,11 @@ class DocumentationTableSeeder extends Seeder
                 'mise_en_avant' => 0,
                 'debut_mise_en_avant' => '2020-08-17',
                 'fin_mise_en_avant' => '2020-09-12',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'association_id' => 1,
+                'entite_id' => 1,
                 'confidentialite' => 5,
                 'titre' => "coucou privé",
                 'slug' => "coucou-prive",
@@ -38,9 +41,11 @@ class DocumentationTableSeeder extends Seeder
                 'mise_en_avant' => 0,
                 'debut_mise_en_avant' => '2020-08-17',
                 'fin_mise_en_avant' => '2020-09-12',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
             [
-                'association_id' => 2,
+                'entite_id' => 2,
                 'confidentialite' => 0,
                 'titre' => "coucou-bde",
                 'slug' => "coucou-bde",
@@ -50,6 +55,8 @@ class DocumentationTableSeeder extends Seeder
                 'mise_en_avant' => 0,
                 'debut_mise_en_avant' => '2020-08-17',
                 'fin_mise_en_avant' => '2020-09-12',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ]);
     }

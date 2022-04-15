@@ -43411,7 +43411,7 @@ SafeMode.getNames = function () {
 // Callouts API
 
 /**
- * Maintains a catalog of callouts and their associations.
+ * Maintains a catalog of callouts and their entites.
  * @namespace
  */
 var Callouts = Opal.Asciidoctor.Callouts

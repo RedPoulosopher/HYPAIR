@@ -4,7 +4,7 @@
 
 @section('content')
 <canvas width="500" height="200" id="canv"></canvas>
-<a href="/accueil"><div class="bouton primaire icon-after-maison" style="position: absolute;bottom: 30px ;left:50%;transform:translateX(-50%);"><span>Accueil</span></div></a>
+<a href="accueil"><div class="bouton primaire icon-after-maison" style="position: absolute;bottom: 30px ;left:50%;transform:translateX(-50%);"><span>Accueil</span></div></a>
 <script>
 const canvas = document.getElementById('canv');
 const ctx = canvas.getContext('2d');

@@ -16,14 +16,18 @@ class MembresTableSeeder extends Seeder
     {
         DB::table('membres')->insert([
             [
-                'association_id' => '1',
+                'entite_id' => '1',
                 'user_id' => '1',
                 'role_id' => '1',
+                'fin_mandat' => "2023-05-01",
+                'created_at' => "2022-03-01",
             ],
             [
-                'association_id' => '2',
+                'entite_id' => '2',
                 'user_id' => '1',
-                'role_id' => '5',
+                'role_id' => '2',
+                'fin_mandat' => "2023-05-01",
+                'created_at' => "2022-03-01",
             ],
         ]);
     }

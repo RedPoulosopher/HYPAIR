@@ -1,27 +1,23 @@
+<h1>- LE ROLE DU BDE -</h1>
+<div class="grille-enfants" style="width:50%;margin-left:auto;margin-right:auto;">
+Yo les fillots !<br>
+Bienvenue dans cette belle région qu’est le Nord et bravo à toi pour avoir intégré notre très chère École ! Alors le BDE c’est quoi ? Le Bureau Des Élèves (ou BDE en 3 lettres) est sûrement une entite dont tu as déjà entendue parler et que l’on retrouve dans toutes les écoles. C’est ainsi que les Men IMT Black et ses meilleurs agents se chargeront de te faire passer une année que tu n’es pas prêt d’oublier ! Tu te sentiras tellement bien à la Maison Des Élèves (aka la MEUD) que tu finiras par te promener pieds nus, en sous-vêtement dans les couloirs.
+<br>
+Kiss in Black
+</div>
+
 <h1>- NOS PROJETS -</h1>
 <div class="grille-enfants">
 	<div class="projet ombre_inset fond">
-		<span>Faire le site internet de l'AIR.</span>
+		<span>Soirée étudiante à Lille.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>Newsletter hebdo avec les posts facebook important.</span>
+		<span>Ré-écriture des status.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>Remise en place d'un serveur de stockage pour les archives, les logiciels crackés, les serveurs de jeux. ça passe ou pas ?</span>
-		<a class="voir-plus" href="#">+</a>
-	</div>
-	<div class="projet ombre_inset fond">
-		<span>Courr'imt : Notification de courrier par OCR avec un raspberrypi et openCV.</span>
-		<a class="voir-plus" href="#">+</a>
-	</div>
-	<div class="projet ombre_inset fond">
-		<span>GPS pour la MEUD (quelle chambre est où).</span>
-		<a class="voir-plus" href="#">+</a>
-	</div>
-	<div class="projet ombre_inset fond">
-		<span>Webscrapping pour récupérer les vidéos de Just Dance (2 parties indépendantes).</span>
+		<span>Ajout de 1000€ au budget de l'AIR.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 </div>
@@ -30,11 +26,11 @@
 <div class="membres grille-enfants">
 	<div>
 		<div class="photo centre-element">
-			<div class="cercle" style="border-color: rgb(240, 20, 20)"></div>
-			<img class="ombre_petite" src="images/photo_membres/marc.png"/>
+			<div class="cercle" style="border-color: #0384fc"></div>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
-			<span>Mathieu Constant</span>
+			<span>Jules berthier</span>
 			<br>
 			<span>Président</span>
 		</div>
@@ -42,13 +38,13 @@
 
 	<div>
 		<div class="photo centre-element">
-			<div class="cercle" style="border-color: rgb(240, 20, 20)"></div>
-			<img class="ombre_petite" src="images/photo_membres/benjamin.png"/>
+			<div class="cercle" style="border-color: #0384fc"></div>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
-			<span>Marc Bresson</span>
+			<span>Elise Eckstein</span>
 			<br>
-			<span>Vice-Président</span>
+			<span>Vice-Présidente</span>
 		</div>
 	</div>
 </div>

@@ -12,4 +12,18 @@ class Role extends Model
     public function membres(){
         return $this->hasMany(Membre::class);
     }
+
+    public static function role_id($role_label){
+        $role = self::where('label', $role_label);
+
+        if($role->exists()){
+            return $role->first()["id"];
+        }
+
+        throw new \ErrorException("Le rôle '".$role_label."' n'existe pas.");
+    }
+
+    public static function index(){
+        return self::orderBy('niveau_admin', 'desc')->orderBy('label')->where('niveau_admin','>','0')->get();
+    }
 }

@@ -10,10 +10,10 @@
 	<div id="contenu" class="petit">
 		<h1>- Documentation -</h1>
 		
-		<div id="search" class="ombre_inset centre-element" style="margin-bottom:60px;"><span class="input" placeholder="Rechercher dans la documentation" id="search_input" contenteditable>Rechercher dans la documentation</span></div>
+		<div id="search" class="ombre_inset centre-element icon-search-normal-1" style="margin-bottom:60px;"><span class="input" placeholder="Rechercher dans la documentation" id="search_input" contenteditable>Rechercher dans la documentation</span></div>
 
 		@if($gerer_documentation)
-		<a href="/documentation/nouvelle" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Créer une documentation</a>
+		<a href="documentation/nouvelle" class="bouton tertiaire ombre_petite icon-security-safe" style="margin:15px;">Créer une documentation</a>
 		@endif
         
         <div id="index_docs">
@@ -21,7 +21,16 @@
 			@foreach ($documentations as $documentation)
 			<a class="documentation_liste" href="documentation/{{ $documentation->slug }}" visibilite="{{ $documentation->visibilite }}">
 				<div>
-					<p class="titre">{{ $documentation->titre }}</p>
+					@if ($documentation->visibilite > 0)
+					<span class="icon-eye-slash" title="documentation masquée"></span>
+					@endif
+					@if ($documentation->visibilite == 1)
+					<span class="icon-search-normal-1" title="documentation recherchable"></span>
+					@endif
+					@if ($documentation->confidentialite > 0)
+					<span class="icon-security" title="documentation privée"></span>
+					@endif
+					<span class="titre">{{ $documentation->titre }}</span>
 					<p class="description">{{ $documentation->description }}</p>
 					<p class="contenu_md">{{ $documentation->contenu_md }}</p>
 					<div class="categories" raw="{{ implode(" ", json_decode($documentation->categories)) }}">
@@ -66,7 +75,8 @@ var index = elasticlunr(function () {
 
 //rentre les données dans l'index
 doc_inv_rech_els = document.querySelectorAll('.documentation_liste[visibilite="1"]') //les docs visibles que par la recherche
-doc_els = document.getElementsByClassName("documentation_liste")
+doc_inv_els = document.querySelectorAll('.documentation_liste[visibilite="2"]') //les docs invisibles
+doc_els = document.querySelectorAll('.documentation_liste:not([visibilite="2"])')
 for(var i = 0; i < doc_els.length; i++){
 	doc_el = doc_els[i]
 
@@ -76,9 +86,14 @@ for(var i = 0; i < doc_els.length; i++){
 
 	index.addDoc({"index":i, "titre":titre, "description":description, "categories": categories})
 }
+@if(!$gerer_documentation)
 for(var i = 0; i < doc_inv_rech_els.length; i++){
 	doc_inv_rech_els[i].style.display = "none"
 }
+for(var i = 0; i < doc_inv_els.length; i++){
+	doc_inv_els[i].style.display = "none"
+}
+@endif
 
 //recherche si y'a pas eu d'input dans les dernieres 500ms
 var _changeInterval = null;

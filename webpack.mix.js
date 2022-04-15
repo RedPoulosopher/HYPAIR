@@ -25,3 +25,7 @@ let getFiles = function (dir) {
 getFiles('resources/css/').forEach(function (filepath) {
     mix.sass('resources/css/' + filepath, 'public/css');
 });
+
+getFiles('resources/js/').forEach(function (filepath) {
+    mix.js('resources/js/' + filepath, 'public/js');
+});

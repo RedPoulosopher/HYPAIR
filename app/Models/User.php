@@ -44,4 +44,17 @@ class User extends Authenticatable
     function membres(){
         return $this->hasMany(Membre::class);
     }
+
+    function membres_actuel(){
+        return $this->membres()
+                    ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`");
+    }
+
+    public static function existe($user_uid){
+        $user = self::where('uid', $user_uid);
+
+        if(!$user->exists()){return false;}
+        
+        return $user->first();
+    }
 }

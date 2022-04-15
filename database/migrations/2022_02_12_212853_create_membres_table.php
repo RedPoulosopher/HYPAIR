@@ -15,11 +15,12 @@ class CreateMembresTable extends Migration
     {
         Schema::create('membres', function (Blueprint $table) {
             $table->id();
-	        $table->foreignId('association_id');
-	        $table->foreignId('user_id')->constrained();
-	        $table->foreignId('role_id')->constrained();
-            $table->json('competences')->nullable();
-            $table->date('date_rejoint')->nullable()->useCurrent();
+	        $table->foreignId('entite_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+	        $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+	        $table->foreignId('role_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->boolean('photo')->default(false);
+            $table->boolean('recevoir_infos')->default(false);
+            $table->date('fin_mandat')->nullable()->default(null);
             $table->timestamps();
         });
     }

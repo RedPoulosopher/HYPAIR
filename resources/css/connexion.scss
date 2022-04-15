@@ -3,7 +3,7 @@
 	width: 100%;
 	max-width: 720px;
 	border-radius: 20px;
-	background: var(--gris_3);
+	background: var(--couleur_fond);
 }
 
 .titre {
@@ -31,7 +31,7 @@
 }
 
 .panneau_droite img {
-	width: 75%;
+	width: 55%;
 	align-self: self-end;
 	animation-duration: 1.2s;
 	animation-iteration-count: infinite;
@@ -43,15 +43,15 @@
 }
 .panneau_droite .nom {
 	font-family: 'GearsOfPeace';
-	font-size: 100px;
+	font-size: 80px;
 	opacity: 0.85;
 	align-self: self-start;
 }
 @keyframes respiration {
 	from{
-		width:75%;
+		width:55%;
 	} to {
-		width:85%;
+		width:70%;
 	}
 }
 

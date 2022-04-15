@@ -10,12 +10,12 @@ function set_theme(theme){
 
 currentTheme = localStorage.getItem("theme");
 if (currentTheme == null){
-		if(window.matchMedia("(prefers-color-scheme: dark)").matches){
-		currentTheme = "dark"
-		} else {
-		currentTheme = "light"
-		}
-		localStorage.setItem("theme", currentTheme);
+	if(window.matchMedia("(prefers-color-scheme: dark)").matches){
+	currentTheme = "dark"
+	} else {
+	currentTheme = "light"
+	}
+	localStorage.setItem("theme", currentTheme);
 }
 set_theme(currentTheme)
 </script>

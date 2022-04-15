@@ -15,7 +15,7 @@ class CreateDocumentationsTable extends Migration
     {
         Schema::create('documentations', function (Blueprint $table) {
             $table->id();
-	        $table->foreignId('association_id');
+	        $table->foreignId('entite_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('titre',128);
             $table->string('slug',128)->index();
             $table->text('description');
@@ -26,12 +26,7 @@ class CreateDocumentationsTable extends Migration
             $table->boolean('mise_en_avant')->default(0);
             $table->date('debut_mise_en_avant')->nullable()->default(null);
             $table->date('fin_mise_en_avant')->nullable()->default(null);
-            $table->unsignedBigInteger('derive_de')->nullable()->default(null);
             $table->timestamps();
-        });
-
-        Schema::table('documentations', function (Blueprint $table) {
-            $table->foreign('derive_de')->references('id')->on('documentations')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

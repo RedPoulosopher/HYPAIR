@@ -1,32 +1,30 @@
+{{-- <div style="aspect-ratio:2.5;width:80%;margin-left:10%;background:#000000;"></div> --}}
+
 <h1>- ACTUALITÉS -</h1>
 <div style="margin:70px 0px;">
-	<a href="/commande"><div class="centre-element bouton primaire icon-after-document ombre_petite"><span>Passer une commande de câble / adaptateur</span></div></a>
+	<a href="commande"><div class="centre-element bouton primaire icon-after-document ombre_petite"><span>Passer une commande de câble / adaptateur</span></div></a>
 </div>
 
 <h1>- NOS PROJETS -</h1>
 <div class="grille-enfants">
 	<div class="projet ombre_inset fond">
-		<span>Faire le site internet de l'AIR.</span>
+		<span>Finir HypAIR, le site pour la vie associative.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>Newsletter hebdo avec les posts facebook important.</span>
+		<span>Newsletter hebdomadaire avec les actualités phares.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>Remise en place d'un serveur de stockage pour les archives, les logiciels crackés, les serveurs de jeux. ça passe ou pas ?</span>
+		<span>Remise en place d'un serveur de stockage pour les archives, les logiciels crackés, les serveurs de jeux.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>Courr'imt : Notification de courrier par OCR avec un raspberrypi et openCV.</span>
+		<span>Courr'imt : Notification de courrier.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 	<div class="projet ombre_inset fond">
-		<span>GPS pour la MEUD (quelle chambre est où).</span>
-		<a class="voir-plus" href="#">+</a>
-	</div>
-	<div class="projet ombre_inset fond">
-		<span>Webscrapping pour récupérer les vidéos de Just Dance (2 parties indépendantes).</span>
+		<span>Accès aux locaus par la carte étudiante.</span>
 		<a class="voir-plus" href="#">+</a>
 	</div>
 </div>
@@ -36,7 +34,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(240, 20, 20)"></div>
-			<img class="ombre_petite" src="images/photo_membres/marc.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/marc.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Marc Bresson</span>
@@ -48,7 +46,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(240, 20, 20)"></div>
-			<img class="ombre_petite" src="images/photo_membres/benjamin.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/benjamin.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Benjamin Duchiron</span>
@@ -60,7 +58,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(236, 240, 20)"></div>
-			<img class="ombre_petite" src="images/photo_membres/lara.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/lara.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Lara Sirecki</span>
@@ -72,7 +70,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(20, 240, 49)"></div>
-			<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Hajra Anwar Beg</span>
@@ -84,7 +82,7 @@
 	<div>
 		<div class="photo centre-element">
 			<div class="cercle" style="border-color: rgb(20, 240, 49)"></div>
-			<img class="ombre_petite" src="images/photo_membres/inconnu.png"/>
+			<img class="ombre_petite" src="/images/photo_membres/inconnu.png"/>
 		</div>
 		<div class="info" style="text-align:center;">
 			<span>Nilavan Deva</span>

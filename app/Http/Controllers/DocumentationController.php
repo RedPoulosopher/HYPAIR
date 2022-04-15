@@ -6,37 +6,31 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use \App\Models\Documentation;
 use \App\Services\AutorisationGestion;
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use DateTimeZone;
 
 class DocumentationController extends Controller
 {
 	public function create()
 	{
-		AutorisationGestion::protectionPage("gerer_documentation");
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$docs_existantes = Documentation::select('id','titre')
-			->where('association_id', session('association_id'))
-			->where("confidentialite", "<=", $niveau_administration)
-			->get();
+		$confidentialites = config('roles');
 		
-		return view('documentation.creation', [
-			'titre' => 'Nouvelle documentation',
-			'docs_existantes' => $docs_existantes,
-		]);
+		return view('documentation.creation')->with('titre','Nouvelle documentation')->with('confidentialites',$confidentialites);
 	}
 
 
 	public function store(Request $request)
 	{
-		AutorisationGestion::protectionPage("gerer_documentation");
+		$doc = $this->fomulaire_traitement($request);
 
-		$traitement = $this->fomulaire_traitement($request);
-		Documentation::create($traitement);
+		$existe = Documentation::existe_slug($doc->slug, $doc->entite_id)->first();
+		if($existe){ return back()->withErrors(["Cette documentation existe déjà pour votre entite."]); }
 
-		return redirect("/documentation/" . $traitement["slug"]);
+		$doc->save();
+
+		return redirect()->route('documentation_afficher', ['entite_uid' => $request->route('entite_uid'), 'slug' => $doc->slug]);
 	}
 
 
@@ -44,15 +38,10 @@ class DocumentationController extends Controller
 	{
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$doc = Documentation::select('id', 'titre',DB::raw('SUBSTR(contenu_md, 1, 300) as contenu_md'),'description','categories','slug','confidentialite','visibilite')
-			->where("association_id", session('association_id'))
-			->where("confidentialite", "<=", $niveau_administration)
-			->where("visibilite", "<", 2)
-			->orderBy('confidentialite', 'desc')
-			->get();
+		$docs = Documentation::index($niveau_administration)->get();
 
 		return view('documentation.index', [
-			'documentations' => $doc,
+			'documentations' => $docs,
 			'gerer_documentation' => AutorisationGestion::gestion("gerer_documentation")
 		]);
 	}
@@ -62,19 +51,19 @@ class DocumentationController extends Controller
 	{
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$doc = Documentation::where('slug', $request->route('slug'))
-			->where('association_id', session('association_id'));
-		
-		if(!$doc->exists()){
-			abort(404);
-		}
+		$doc = Documentation::existe_slug($request->route('slug'), session('entite_id'));
+
+		if(!$doc){abort(404);}
+
 		$doc = $doc->first();
-		if($doc["confidentialite"] > $niveau_administration){
-			abort(403);
-		}
+		if($doc->confidentialite > $niveau_administration){abort(403);}
+		
+		Carbon::setLocale('fr');
+		$date = $doc->updated_at->setTimezone(new DateTimeZone("EUROPE/PARIS"))->diffForHumans();
 		
 		return view('documentation.show', [
 			'documentation' => $doc,
+			'date' => $date,
 			'gerer_documentation' => AutorisationGestion::gestion("gerer_documentation")
 		]);
 	}
@@ -82,48 +71,32 @@ class DocumentationController extends Controller
 
 	public function edit(Request $request)
 	{
-		AutorisationGestion::protectionPage("gerer_documentation");
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$doc = Documentation::where('id', $request->route('id'));
-		if(!$doc->exists()){
-			abort(404);
-		}
+		$doc = Documentation::existe($request->route('documentation_id'));
+		if(!$doc){abort(404);}
 		
-		$doc = $doc->first();
-		if($doc["confidentialite"] > $niveau_administration){
-			abort(403);
-		}
+		if($doc->confidentialite > $niveau_administration){abort(403);}
 
-		$docs_existantes = Documentation::select('id','titre')->where('association_id', session('association_id'))->get();
-
-		return view('documentation.creation', [
-			'documentation' => $doc,
-			'docs_existantes' => $docs_existantes,
-			'titre' => "Modifier la documentation",
-		]);
+		$confidentialites = config('roles');
+		
+		return view('documentation.creation')
+				->with('documentation', $doc)
+				->with('titre','Modifier la  documentation')
+				->with('confidentialites',$confidentialites);
 	}
 
 
 	public function update(Request $request)
 	{
-		AutorisationGestion::protectionPage("gerer_documentation");
+		$doc = $this->fomulaire_traitement($request, true);
+		$doc->save();
 
-		$traitement = $this->fomulaire_traitement($request);
-		Documentation::where('id', $request->route('id'))->update($traitement);
-
-		return redirect("/documentation/" . $traitement["slug"]);
+		return redirect()->route('documentation_afficher', ['entite_uid' => $request->route('entite_uid'), 'slug' => $doc->slug]);
 	}
 
 
-	public function destroy($id) //inutilisé pour le moment
-	{
-		AutorisationGestion::protectionPage("gerer_documentation");
-		Documentation::where('id', $id)->delete();
-	}
-
-
-	public function fomulaire_traitement(Request $request)
+	public function fomulaire_traitement(Request $request, $update=false)
 	{
 		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
 		sort($request->categories);
@@ -141,28 +114,24 @@ class DocumentationController extends Controller
 		];
 		$this->validate($request, $validation);
 
-		if($request->has('mise_en_avant')){
-			$mise_en_avant=true;
-		}else{
-			$mise_en_avant=false;
+		if($update){
+			$doc = Documentation::existe($request->route('documentation_id'));
+		} else {
+			$doc = new Documentation;
 		}
 
-		//formate les résultats pour leur entrée dans la table
-		$resultat = [
-			'association_id' => session("association_id"),
-			"titre" => $request->titre,
-			"slug" => Str::slug($request->titre, '-'),
-			"confidentialite" => $request->confidentialite,
-			"visibilite" => $request->visibilite,
-			"derive_de" => $request->derive_de,
-			"description" => $request->description,
-			"contenu_md" => $request->contenu_md,
-			"categories" => json_encode($request->categories),
-			"mise_en_avant" => $mise_en_avant,
-			"debut_mise_en_avant" => strlen($request->debut_mise_en_avant) ? $request->debut_mise_en_avant : null,
-			"fin_mise_en_avant" => strlen($request->fin_mise_en_avant) ? $request->fin_mise_en_avant : null,
-		];
+		$doc->entite_id = session("entite_id");
+		$doc->titre = $request->titre;
+		$doc->slug = Str::slug($request->titre, '-');
+		$doc->confidentialite = $request->confidentialite;
+		$doc->visibilite = $request->visibilite;
+		$doc->description = $request->description;
+		$doc->contenu_md = $request->contenu_md;
+		$doc->categories = json_encode($request->categories);
+		$doc->mise_en_avant = $request->has('mise_en_avant');
+		$doc->debut_mise_en_avant = strlen($request->debut_mise_en_avant) ? $request->debut_mise_en_avant : null;
+		$doc->fin_mise_en_avant = strlen($request->fin_mise_en_avant) ? $request->fin_mise_en_avant : null;
 
-		return $resultat;
+		return $doc;
 	}
 }

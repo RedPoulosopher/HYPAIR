@@ -1,5 +1,4 @@
-@use 'accueil.scss';
-@use 'general.scss';
-@use 'formulaire.scss';
-@use 'documentations.scss';
-@use 'iconsax.scss';
+@use './importants/fenetre_contextuelle.scss';
+@use './importants/general.scss';
+@use './importants/sidenav.scss';
+@use './importants/icones.scss';

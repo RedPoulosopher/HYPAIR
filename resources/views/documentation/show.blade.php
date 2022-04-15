@@ -23,8 +23,11 @@ h1.titre::first-letter {
 	text-transform: capitalize;
 }
 p {
-	color: var(--couleur_police_secondaire);
 	text-align:justify;
+}
+.derniere_maj {
+	font-size:0.9em;
+	color: var(--couleur_police_secondaire);
 }
 </style>
 	
@@ -33,13 +36,13 @@ p {
 
 		<div style="display:flex;">
 			@if (substr(url()->previous(), -13)=="documentation")
-			<a onclick="history.go(-1)" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
+			<a onclick="history.go(-1)" class="bouton secondaire" style="margin:15px;">< Retour</a>
 			@else
-			<a href="/documentation" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
+			<a href="documentation" class="bouton secondaire" style="margin:15px;">< Retour</a>
 			@endif
 
 			@if($gerer_documentation)
-			<a href="/documentation/modifier/{{$documentation->id}}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
+			<a href="documentation/modifier/{{$documentation->id}}" class="bouton tertiaire icon-security-safe" style="margin:15px;">Modifier</a>
 			@endif
 		</div>
 
@@ -47,6 +50,7 @@ p {
 			<div class="contenu_doc" id="contenu_doc">
 		
 				<h1 class="titre">{{$documentation->titre}}</h1>
+				<p class="derniere_maj">Dernière mise à jour <span>{{$date}}</span></p>
 
 				{!! Str::markdown($documentation->contenu_md); !!}
 			</div>

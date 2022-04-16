@@ -1,32 +1,30 @@
-<div id="sidebar-wrapper">
-	<div id="sidenav" class="ombre_grande">
-		<div class="sidebar-nav-icon">
+<div id="menu_lateral">
+	<div class="ombre_grande">
+		<div class="logotype">
 			@hasSection('logo')
 				@yield('logo')
 			@else
-				<img id="logo_menu" class="arrondi" src="{{session("entite_logo_petit")}}" alt="logo"/>
+				<img class="arrondi" src="{{session("entite_logo_petit")}}" alt="logo"/>
 			@endif
 		</div>
-		<ul class="sidebar-nav">
+		<ul class="navigation">
 			@yield('liens')
 			@if (session('gerer_entite'))
 				<a href="gestion"><li><span>Gestion</span></li></a>
 			@endif
 		</ul>
+		<div id="bascule-mode">
+			<h6 class="label-sombre">Sombre</h6>
+			<div id="bascule-theme"></div>
+			<h6 class="label-clair">Clair</h6>
+		</div>
 	</div>
-	<div id="bascule-mode">
-		<h6 class="label-sombre">Sombre</h6>
-		<div id="bascule-theme"></div>
-		<h6 class="label-clair">Clair</h6>
-	</div>
-	<a>
-		<button id="hamburger">
-			<span></span>
-			<span></span>
-			<span></span>
-		</button>
-	</a>
 </div>
+<button id="hamburger">
+	<span></span>
+	<span></span>
+	<span></span>
+</button>
 
 
 <script>
@@ -42,7 +40,12 @@ btn.addEventListener("click", function () {
 	localStorage.setItem("theme", theme);
 });
 
+el_sidebar_wrapper = document.getElementById("menu_lateral")
 document.getElementById("hamburger").addEventListener("click", function () {
-	document.getElementById("sidebar-wrapper").classList.toggle("expand")
+	localStorage.setItem("menu_ouvert", el_sidebar_wrapper.classList.toggle("menu_affiche"))
 })
+
+if(localStorage.getItem("menu_ouvert")=="true" && window.matchMedia("(min-width: 768px)").matches){
+	el_sidebar_wrapper.classList.toggle("menu_affiche")
+}
 </script>

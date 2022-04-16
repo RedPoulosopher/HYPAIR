@@ -147,65 +147,56 @@ body.dark-theme #bascule-mode #bascule-theme {
 }
 
 
-/* tablette, téléphone, téléphone en portrait */
-@media (min-width: 767.98px) {
-	#hamburger {
-		width: 40px;
-		height: 40px;
-		border:inherit;
-		position:fixed;
-		top:20px;
-		left:20px;
-		border-radius:5px;
-		z-index:999;
-		cursor:pointer;
-		background-color: var(--couleur_fond);
+#hamburger {
+	width: 40px;
+	height: 40px;
+	border:inherit;
+	position:fixed;
+	top:20px;
+	left:20px;
+	border-radius:5px;
+	z-index:999;
+	cursor:pointer;
+	background-color: var(--couleur_fond);
 
-		& span {
-			width: 80%;
-			height: 2px;
-			margin: 0 auto;
-			display: block;
-			transition: all 0.3s cubic-bezier(0.9, 0, 0, 0.9);
-			
-			transform: none;
-			opacity: 1;
-			margin: 5px auto;
-		}
-	}
-
-	#sidebar-wrapper.expand {
-		& #hamburger span:first-of-type {transform: rotate(45deg) translate(5px, 4px);}
-		& #hamburger span:nth-of-type(2) {opacity: 0;}
-		& #hamburger span:last-of-type {transform: rotate(-45deg) translate(6px, -5px);}
-		& #hamburger{background-color: transparent;}
+	& span {
+		width: 80%;
+		height: 2px;
+		margin: 0 auto;
+		display: block;
+		transition: all 0.3s cubic-bezier(0.9, 0, 0, 0.9);
 		
-		& #sidenav{
-			display: flex;
-		}
-		& #bascule-mode{
-			display: flex;
-		}
+		transform: none;
+		opacity: 1;
+		margin: 5px auto;
+	}
+}
+
+#sidebar-wrapper {
+	display: none;
+}
+#sidebar-wrapper.expand {
+	display:block;
+
+	& ~ #hamburger span:first-of-type {transform: rotate(45deg) translate(5px, 4px);}
+	& ~ #hamburger span:nth-of-type(2) {opacity: 0;}
+	& ~ #hamburger span:last-of-type {transform: rotate(-45deg) translate(6px, -5px);}
+	& ~ #hamburger{background-color: transparent;}
+	
+	& #sidenav{
+		display: flex;
+	}
+	& #bascule-mode{
+		display: flex;
 	}
 
-	#sidebar-wrapper {
-		& #sidenav{
-			display: none;
-		}
-		& #bascule-mode {
-			display:none;
+	@media (min-width: 768px) {
+		~ #wrapper{
+			padding-left:calc(var(--taille_nav));
 		}
 	}
 }
 
-@media (max-width: 768px) {
-	#wrapper{
-		padding-left:calc(var(--taille_nav));
-	}
-	#hamburger{
-		display: none;
-	}
-}
 
 /* téléphone en portrait */
 @media (max-height: 500px) {

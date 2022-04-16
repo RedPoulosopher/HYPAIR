@@ -19,14 +19,12 @@
 		<div id="bascule-theme"></div>
 		<h6 class="label-clair">Clair</h6>
 	</div>
-	<a>
-		<button id="hamburger">
-			<span></span>
-			<span></span>
-			<span></span>
-		</button>
-	</a>
 </div>
+<button id="hamburger">
+	<span></span>
+	<span></span>
+	<span></span>
+</button>
 
 
 <script>
@@ -42,7 +40,12 @@ btn.addEventListener("click", function () {
 	localStorage.setItem("theme", theme);
 });
 
+el_sidebar_wrapper = document.getElementById("sidebar-wrapper")
 document.getElementById("hamburger").addEventListener("click", function () {
-	document.getElementById("sidebar-wrapper").classList.toggle("expand")
+	localStorage.setItem("menu_ouvert", el_sidebar_wrapper.classList.toggle("expand"))
 })
+
+if(localStorage.getItem("menu_ouvert")=="true" && window.matchMedia("(min-width: 768px)").matches){
+	el_sidebar_wrapper.classList.toggle("expand")
+}
 </script>

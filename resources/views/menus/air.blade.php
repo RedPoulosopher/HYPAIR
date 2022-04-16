@@ -1,8 +1,8 @@
 @extends('menus.#menu')
 
 @section('logo')
-    <img id="logo_menu" src="/images/logo_air.png" width="120px" alt="logo de l'AIR"/>
-    <span id="nom_menu">AIR</span>
+    <img src="/images/logo_air.png" width="120px" alt="logo de l'AIR"/>
+    <div>AIR</div>
 @endsection
 
 @section('liens')

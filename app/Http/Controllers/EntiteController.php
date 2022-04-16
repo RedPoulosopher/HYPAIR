@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
-use App\services\GestionPhotoDeProfil;
+use App\Services\GestionPhotoDeProfil;
 
 use Carbon\Carbon;
 

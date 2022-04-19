@@ -106,7 +106,7 @@
 		</div>
 		<div class="reseaux_sociaux grille-enfants">
 			@foreach ($reseaux_sociaux as $reseau_social)
-				<a href="{{ $reseau_social->liste->pre_url.$reseau_social->cle }}" style="background-color:hsl({{ $reseau_social->liste->hue .', '. $reseau_social->liste->saturation .'%, '. $reseau_social->liste->value .'%' }})">
+				<a href="{{ $reseau_social->liste->pre_url.$reseau_social->cle }}" style="background-color:{{ $reseau_social->liste->couleur }}">
 					{{ $reseau_social->liste->nom }}
 				</a>
 			@endforeach

@@ -29,10 +29,6 @@ class Documentation extends Model
         return $this->belongsTo(Entite::class);
     }
 
-    public function derivation(){
-        return $this->hasMany(Documentation::class);
-    }
-
     public static function existe($documentation_id){
         $doc = self::find($documentation_id);
 		if(is_null($doc)){return false;}

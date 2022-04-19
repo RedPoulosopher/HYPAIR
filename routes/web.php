@@ -6,6 +6,7 @@ use App\Http\Controllers\EntiteController;
 use App\Http\Controllers\MembreController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReseauSocialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,25 +48,31 @@ $routes_AIR = function(){
         Route::middleware('protection.autorisation:gerer_entite')->group(function(){
 
             Route::controller(EntiteController::class)->group(function(){
-                Route::get('/entites/gestion', 'index_admin');
+                Route::get('/entites/admin', 'index_admin');
                 Route::get('/entites/index/json', 'index_admin_json');
     
                 Route::get('/entite/nouvelle', 'create');
                 Route::post('/entite/nouvelle', 'store');
-                Route::get('/entite/modifier/informations/{entite_id}', 'modifier_infos')->name('modifier_infos');
-                Route::post('/entite/modifier/informations/{entite_id}', 'maj_infos');
-                Route::get('/entite/modifier/description/{entite_id}', 'modifier_description')->name('modifier_description');
-                Route::post('/entite/modifier/description/{entite_id}', 'maj_description');
+                Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos')->name('modifier_infos');
+                Route::post('/entite/{entite_id}/modifier/informations', 'maj_infos');
+                Route::get('/entite/{entite_id}/modifier/description', 'modifier_description')->name('modifier_description');
+                Route::post('/entite/{entite_id}/modifier/description', 'maj_description');
             });
 
             Route::controller(LogoController::class)->group(function(){
-                Route::get('/entite/logotype/{entite_id}', 'create')->name('modifier_logotype');
-                Route::post('/entite/logotype/{entite_id}', 'store');
+                Route::get('/entite/{entite_id}/logotype', 'create')->name('modifier_logotype');
+                Route::post('/entite/{entite_id}/logotype', 'store');
             });
 
             Route::controller(MembreController::class)->group(function(){
-                Route::get('/entite/membres/{entite_id}', 'index_admin');
-                Route::post('/entite/membres/{entite_id}', 'ajout_membre');
+                Route::get('/entite/{entite_id}/membres', 'index_admin');
+                Route::post('/entite/{entite_id}/membres', 'ajout_membre');
+            });
+
+            Route::controller(ReseauSocialController::class)->group(function(){
+                Route::get('/entite/{entite_id}/reseau_social', 'create');
+                Route::post('/entite/{entite_id}/reseau_social', 'store');
+                Route::delete('/entite/{entite_id}/reseau_social', 'delete');
             });
         });
     };
@@ -80,10 +87,15 @@ $routes_bureaux = function(){
             Route::middleware('protection.autorisation:gerer_entite')->group(function(){
                 Route::get('/entites/gestion', 'index_admin');
 
-                Route::get('/entite/modifier/informations/{entite_id}', 'modifier_infos');
-                Route::post('/entite/modifier/informations/{entite_id}', 'maj_infos');
-                Route::get('/entite/modifier/description/{entite_id}', 'modifier_description');
-                Route::post('/entite/modifier/description/{entite_id}', 'maj_description');
+                Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos');
+                Route::post('/entite/{entite_id}/modifier/informations', 'maj_infos');
+                Route::get('/entite/{entite_id}/modifier/description', 'modifier_description');
+                Route::post('/entite/{entite_id}/modifier/description', 'maj_description');
+            });
+
+            Route::controller(MembreController::class)->group(function(){
+                Route::get('/entite/{entite_id}/membres', 'index_admin');
+                Route::post('/entite/{entite_id}/membres', 'ajout_membre');
             });
         });
     };
@@ -99,8 +111,8 @@ $routes_entites = function () {
         Route::middleware('protection.autorisation:gerer_documentation')->group(function(){
             Route::get('/documentation/nouvelle', 'create');
             Route::post('/documentation/nouvelle', 'store');
-            Route::get('/documentation/modifier/{documentation_id}', 'edit');
-            Route::post('/documentation/modifier/{documentation_id}', 'update');
+            Route::get('/documentation/{documentation_id}/modifier', 'edit');
+            Route::post('/documentation/{documentation_id}/modifier', 'update');
         });
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show')->name('documentation_afficher');
@@ -109,12 +121,18 @@ $routes_entites = function () {
     Route::controller(EntiteController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
         Route::middleware('protection.autorisation:gerer_entite')->group(function(){
-            Route::get('/gestion', 'gestion');
-            Route::get('/modifier/description/', 'modifier_description');
-            Route::post('/modifier/description/', 'maj_description');
+            Route::get('/entite/gestion', 'gestion');
+            Route::get('/entite/modifier/description/', 'modifier_description');
+            Route::post('/entite/modifier/description/', 'maj_description');
         });
-        // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
-        // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+    });
+
+    Route::controller(ReseauSocialController::class)->group(function(){
+        Route::middleware('protection.autorisation:gerer_entite')->group(function(){
+            Route::get('/entite/reseau_social', 'create');
+            Route::post('/entite/reseau_social', 'store');
+            Route::delete('/entite/reseau_social', 'delete');
+        });
     });
 };
 

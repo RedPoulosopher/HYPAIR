@@ -38,7 +38,7 @@ p {
 			<a href="documentation" class="bouton secondaire" style="margin:15px;">< Retour</a>
 
 			@if($gerer_documentation)
-			<a href="documentation/modifier/{{$documentation->id}}" class="bouton tertiaire icon-security-safe" style="margin:15px;">Modifier</a>
+			<a href="documentation/{{$documentation->id}}/modifier" class="bouton tertiaire icon-security-safe" style="margin:15px;">Modifier</a>
 			@endif
 		</div>
 

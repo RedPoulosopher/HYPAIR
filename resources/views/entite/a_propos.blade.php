@@ -33,6 +33,10 @@
 }
 .description {
 	margin-top:40px;
+	max-width: 80ch;
+	text-align: justify;
+	margin-left: auto;
+    margin-right: auto;
 }
 
 .membres > div {
@@ -73,6 +77,15 @@
     height:180px;
     }
 }
+
+.reseaux_sociaux {
+	gap: 12px;
+	margin-bottom:25px;
+}
+.reseaux_sociaux > a {
+	padding: 10px 18px;
+	border-radius: 50px;
+}
 </style>
 
 <div id="wrapper">
@@ -89,7 +102,14 @@
 			</div>
 		@endif
 		<div class="description">
-			{!! Str::markdown($entite->description_md ?? ""); !!}
+			{!! Str::markdown($entite->description_md ?? $entite->description_courte ?? "") !!}
+		</div>
+		<div class="reseaux_sociaux grille-enfants">
+			@foreach ($reseaux_sociaux as $reseau_social)
+				<a href="{{ $reseau_social->liste->pre_url.$reseau_social->cle }}" style="background-color:hsl({{ $reseau_social->liste->hue .', '. $reseau_social->liste->saturation .'%, '. $reseau_social->liste->value .'%' }})">
+					{{ $reseau_social->liste->nom }}
+				</a>
+			@endforeach
 		</div>
 
 		<h1>- mandat -</h1>

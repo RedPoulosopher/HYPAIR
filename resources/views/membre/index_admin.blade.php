@@ -152,16 +152,5 @@ function afficher_menu_membre(ceci){
     el_user_uid.value = user_uid
     el_select_role.querySelector('[value="'+role_id+'"]').selected = true
 }
-// el_menu_membre_annuler = document.getElementById("menu_membre_annuler")
-// el_menu_membre_annuler.addEventListener("click",function(){
-//     el_menu_membre.style.display = "none"
-//     el_gestion_membre.style.display = "block"
-// })
-// el_menu_membre_modifier = document.getElementById("menu_membre_modifier")
-// el_menu_membre_modifier.addEventListener("click",function(){
-//     el_menu_membre.style.display = "none"
-//     el_gestion_membre.style.display = "block"
-// })
-
 </script>
 @endsection

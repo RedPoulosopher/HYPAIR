@@ -65,8 +65,8 @@ $routes_AIR = function(){
             });
 
             Route::controller(MembreController::class)->group(function(){
-                Route::get('/entite/{entite_id}/membres', 'index_admin');
-                Route::post('/entite/{entite_id}/membres', 'ajout_membre');
+                Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type'=>'membres|abonnes'])->name('gestion_membres');
+                Route::post('/entite/{entite_id}/{type}', 'ajout_membre')->where(['type'=>'membres|abonnes']);
             });
 
             Route::controller(ReseauSocialController::class)->group(function(){
@@ -94,8 +94,8 @@ $routes_bureaux = function(){
             });
 
             Route::controller(MembreController::class)->group(function(){
-                Route::get('/entite/{entite_id}/membres', 'index_admin');
-                Route::post('/entite/{entite_id}/membres', 'ajout_membre');
+                Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type'=>'membres|abonnes']);
+                Route::post('/entite/{entite_id}/{type}', 'ajout_membre')->where(['type'=>'membres|abonnes']);
             });
         });
     };
@@ -104,8 +104,6 @@ $routes_bureaux = function(){
 //les routes pour les entites, les clubs et les listes
 //=========================================================
 $routes_entites = function () {
-    Route::get('/', function() { return view('accueils.#accueil'); });
-    Route::get('/accueil', function() { return view('accueils.#accueil'); });
 
     Route::controller(DocumentationController::class)->group(function(){
         Route::middleware('protection.autorisation:gerer_documentation')->group(function(){
@@ -120,6 +118,8 @@ $routes_entites = function () {
     
     Route::controller(EntiteController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
+        Route::get('/accueil', 'show');
+        Route::get('/', 'show');
         Route::middleware('protection.autorisation:gerer_entite')->group(function(){
             Route::get('/entite/gestion', 'gestion');
             Route::get('/entite/modifier/description/', 'modifier_description');
@@ -133,6 +133,11 @@ $routes_entites = function () {
             Route::post('/entite/reseau_social', 'store');
             Route::delete('/entite/reseau_social', 'delete');
         });
+    });
+    
+    Route::controller(MembreController::class)->group(function(){
+        Route::get('/entite/{type}', 'index_admin')->where(['type'=>'membres|abonnes']);
+        Route::post('/entite/{type}', 'ajout_membre')->where(['type'=>'membres|abonnes']);
     });
 };
 

@@ -85,13 +85,14 @@ a:hover {
 a[target=_blank] {
   position: relative;
   display: inline-block;
-  padding-right: 1rem;
+  padding-right: 0.9rem !important;
 }
 
-a[target=_blank]:before {
+a[target=_blank]:after {
   content: " \2197";
-  position: absolute;
-  right: 0;
+  padding-left: 3px;
+  width: 0px;
+  height: 0px;
 }
 
 /* Main Content */
@@ -404,6 +405,7 @@ body.light-theme a.couleur:hover {
   width: 100%;
   display: flex;
   overflow-y: auto;
+  overflow-x: clip;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 0px 25px 25px 0px;
@@ -418,6 +420,7 @@ body.light-theme a.couleur:hover {
 
 #menu_lateral > div .logotype img {
   transition: all 0.3s cubic-bezier(0.7, 0, 0, 0.7);
+  width: 80%;
 }
 
 #menu_lateral > div .logotype img.arrondi {

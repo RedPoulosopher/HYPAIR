@@ -37,6 +37,7 @@
 	text-align: justify;
 	margin-left: auto;
     margin-right: auto;
+	overflow-wrap: break-word;
 }
 
 .membres > div {
@@ -57,6 +58,7 @@
     top:calc(5% - 3px);
     width:90%;
     height:90%;
+	border-color: var(--couleur_accentuation);
 }
 
 @media (max-width: 767.98px) {
@@ -106,7 +108,7 @@
 		</div>
 		<div class="reseaux_sociaux grille-enfants">
 			@foreach ($reseaux_sociaux as $reseau_social)
-				<a href="{{ $reseau_social->liste->pre_url.$reseau_social->cle }}" style="background-color:{{ $reseau_social->liste->couleur }}">
+				<a target="_blank" class="ombre_petite" href="{{ $reseau_social->liste->pre_url.$reseau_social->cle }}" style="background-color:{{ $reseau_social->liste->couleur }}">
 					{{ $reseau_social->liste->nom }}
 				</a>
 			@endforeach
@@ -117,7 +119,7 @@
 		@foreach ($mandat as $mandat_user)
 			<div>
 				<div class="photo centre-element">
-					<div class="cercle" style="border-color: rgb(240, 20, 20)"></div>
+					<div class="cercle"></div>
 					<img class="ombre_petite" src="{{$mandat_user->lien_photo}}"/>
 				</div>
 				<div class="info" style="text-align:center;">

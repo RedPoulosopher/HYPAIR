@@ -92,11 +92,16 @@ td a.icon-edit-2 {
             </form>
 
             <div id="choix_role">
-                <a href="entite/membres/{{Request::route('entite_id')}}?type=membre" class="bouton secondaire">Membres</a>
-                <a href="entite/membres/{{Request::route('entite_id')}}?type=abonne" class="bouton secondaire">Abonnés</a>
+                @if (null !==Request::route('entite_id'))
+                <a href="entite/{{Request::route('entite_id')}}/membres" class="bouton secondaire">Membres</a>
+                <a href="entite/{{Request::route('entite_id')}}/abonnes" class="bouton secondaire">Abonnés</a>
+                @else
+                <a href="entite/membres" class="bouton secondaire">Membres</a>
+                <a href="entite/abonnes" class="bouton secondaire">Abonnés</a>
+                @endif
             </div>
 
-            @if(!is_null($personnes_a_responsabilites) && count($personnes_a_responsabilites)>0)
+            @if(!is_null($personnes_concernees) && count($personnes_concernees)>0)
                 <div class="table ombre_petite">
                     <table id="index">
                         <thead>
@@ -108,7 +113,7 @@ td a.icon-edit-2 {
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($personnes_a_responsabilites as $membre)
+                            @foreach ($personnes_concernees as $membre)
                                 <tr class="ligne_membre">
                                     <td>{{$membre["prenom"]}}</td>
                                     <td>{{$membre["nom"]}}</td>

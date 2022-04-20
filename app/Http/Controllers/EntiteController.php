@@ -21,13 +21,15 @@ class EntiteController extends Controller
 	public function show()
 	{
 		$entite = Entite::existe(session('entite_id'));
+		$reseaux_sociaux = $entite->reseaux_sociaux()->with('liste')->get();
+
 		$mandat = $entite->mandat()->get();
 		
 		foreach($mandat as &$mandat_user){
 			$mandat_user["lien_photo"] = GestionPhotoDeProfil::chemin_membre_photo($mandat_user);
 		}
 
-		return view('entite.a_propos')->with('entite', $entite)->with('mandat', $mandat);
+		return view('entite.a_propos')->with('entite', $entite)->with('mandat', $mandat)->with('reseaux_sociaux', $reseaux_sociaux);
 	}
 
 	public function gestion(Request $request)
@@ -40,9 +42,7 @@ class EntiteController extends Controller
 
     public function create() //réservé à l'AIR
 	{
-		$assos_existantes = Entite::get();
-
-		return view('entite.creer', ['assos_existantes' => $assos_existantes]);
+		return view('entite.creer');
 	}
 
 	public function store(Request $request) //réservé à l'AIR

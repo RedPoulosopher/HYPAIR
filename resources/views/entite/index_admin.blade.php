@@ -105,10 +105,10 @@ td.type {
 
         <div id="choix_entite">
             @if (!$est_bureau)
-                <a href="entites/gestion?type=bureau" class="bouton secondaire">Bureaux</a>
+                <a href="entites/admin?type=bureau" class="bouton secondaire">Bureaux</a>
             @endif
-            <a href="entites/gestion?type=comité" class="bouton secondaire">Comités</a>
-            <a href="entites/gestion?type=liste" class="bouton secondaire">Listes</a>
+            <a href="entites/admin?type=comité" class="bouton secondaire">Comités</a>
+            <a href="entites/admin?type=liste" class="bouton secondaire">Listes</a>
         </div>
 
         @if(isset($entites) && count($entites)>0)
@@ -139,10 +139,10 @@ td.type {
             </div>
 
             <ul id="menu_meatballs" class="ombre_grande">
-                <li><a id="menu_modifier" href="" url="entite/modifier/informations/">Modifier les infos</a></li>
-                <li><a id="menu_modifier" href="" url="entite/modifier/description/">Modifier la description</a></li>
-                <li><a id="menu_modifier_logo" href="" url="entite/modifier/logotype/">Modifier le logo</a></li>
-                <li><a id="menu_membres" href="" url="entite/membres/">Gérer les membres</a></li>
+                <li><a id="menu_modifier" href="" url="entite/{entite_id}/modifier/informations/">Modifier les infos</a></li>
+                <li><a id="menu_modifier" href="" url="entite/{entite_id}/modifier/description/">Modifier la description</a></li>
+                <li><a id="menu_modifier_logo" href="" url="entite/{entite_id}/modifier/logotype/">Modifier le logo</a></li>
+                <li><a id="menu_membres" href="" url="entite/{entite_id}/membres/">Gérer les membres</a></li>
             </ul>
         @endif
 	</div>
@@ -184,7 +184,7 @@ function menu_meatballs(ceci){
     entite_id = ceci.getAttribute("entite_id")
     for(let element of el_menu_meatballs.querySelectorAll("a")){
         url = element.getAttribute("url")
-        element.href = url + entite_id
+        element.href = url.replace('{entite_id}', entite_id)
     };
 
     el_menu_meatballs.style.top = topp + 10 + "px";

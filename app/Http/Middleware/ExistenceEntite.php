@@ -28,14 +28,20 @@ class ExistenceEntite
         $entite_uid = $request->route('entite_uid');
 
         $entites_model = Entite::where('uid', $entite_uid);
+
         if($type=="liste"){$entites_model = $entites_model->where('id',  $request->route('liste_id'));}
         if(!$entites_model->exists()){ return abort(405);}
+
         $entite = $entites_model->first();
+
 
         if($entite["type"] == EntiteTypeEnum::Liste && $type != "liste"){ //essaye d'acceder a une liste via {liste}.imt-ne.fr/
             abort(405);
         }
         else if($type == "bureau" && $entite["type"] != EntiteTypeEnum::Bureau){ //les routes réservées aux bureaux
+            abort(403);
+        }
+        else if($type == "air" && $entite["uid"] != "air"){ //les routes réservées à l'AIR
             abort(403);
         }
 

@@ -10,7 +10,7 @@
 		<ul class="navigation">
 			@yield('liens')
 			@if (session('gerer_entite'))
-				<a href="gestion"><li><span>Gestion</span></li></a>
+				<a href="entite/gestion"><li><span>Gestion</span></li></a>
 			@endif
 		</ul>
 		<div id="bascule-mode">

@@ -177,4 +177,8 @@ class Entite extends Model
         ->join('roles','roles.id','=','membres.role_id')
         ->where('roles.niveau_admin','>=','1');
     }
+
+    public function reseaux_sociaux(){
+        return $this->morphMany(ReseauSocial::class, 'reseau_sociable');
+    }
 }

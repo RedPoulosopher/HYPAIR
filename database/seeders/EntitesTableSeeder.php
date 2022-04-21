@@ -254,10 +254,10 @@ class EntitesTableSeeder extends Seeder
             "brasseurs"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/brasseur.png",
         ];
 
-        foreach($asso_bde as $entite){
-            $asso_uid = $entite["uid"];
-            $entite_id = Entite::where('uid', $asso_uid)->first()->id;
-            GestionLogo::stocker_logo_depuis_url($lien_logos[$asso_uid], $entite_id);
-        }
+        // foreach($asso_bde as $entite){
+        //     $asso_uid = $entite["uid"];
+        //     $entite_id = Entite::where('uid', $asso_uid)->first()->id;
+        //     GestionLogo::stocker_logo_depuis_url($lien_logos[$asso_uid], $entite_id);
+        // }
     }
 }

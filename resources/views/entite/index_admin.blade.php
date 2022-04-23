@@ -44,6 +44,7 @@ table th {
 }
 table td {
     padding: 10px 15px;
+    vertical-align: inherit !important;
 }
 
 td.sites {
@@ -101,7 +102,9 @@ td.type {
 	<div id="contenu" class="petit">
 		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Entites -</h1>
 
-		<a href="entite/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une entite</a>
+        @if (!$est_bureau)
+		    <a href="entite/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une entite</a>
+        @endif
 
         <div id="choix_entite">
             @if (!$est_bureau)
@@ -111,7 +114,7 @@ td.type {
             <a href="entites/admin?type=liste" class="bouton secondaire">Listes</a>
         </div>
 
-        @if(isset($entites) && count($entites)>0)
+        @if(isset($entites_dependantes) && count($entites_dependantes)>0)
             <div class="table ombre_petite">
                 <table id="index">
                     <thead>
@@ -123,11 +126,11 @@ td.type {
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($entites as $entite)
+                        @foreach ($entites_dependantes as $entite)
                             <tr class="ligne_entite">
                                 <td><a class="couleur" href="{{ $entite->lien_relatif() }}">{{ $entite["nom"] }}</a></td>
                                 <td class="sites">
-                                    @foreach (json_decode($entite["sites"]) as $site)
+                                    @foreach ($entite->sites()->get()->pluck('label') as $site)
                                         <span class="site">: {{ $site }}</span>
                                     @endforeach
                                 </td>

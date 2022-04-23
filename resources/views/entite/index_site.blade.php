@@ -30,13 +30,11 @@
                     </div>
                     <div class="info" style="text-align:center;">
                         <p class="nom">{{ $comite_club->nom }}</p>
-                        @if (!is_null($comite_club->categories))
-                            <div class="categories">
-                                @foreach (json_decode($comite_club->categories) as $categorie)
-                                    <span>#{{$categorie}}</span>
-                                @endforeach
-                            </div>
-                        @endif
+                        <div class="categories">
+                            {{-- @foreach ($comite_club->categories() as $categorie)
+                                <span>#{{$categorie->label}}</span>
+                            @endforeach --}}
+                        </div>
                     </div>
                 </a>
             @endforeach

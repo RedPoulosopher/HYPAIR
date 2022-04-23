@@ -7,6 +7,7 @@ use App\Enums\BureauEnum;
 use App\Enums\EntiteTypeEnum;
 use \App\Models\Entite;
 use \App\Models\Logo;
+use \App\Models\Site;
 
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -23,13 +24,19 @@ class EntiteController extends Controller
 		$entite = Entite::existe(session('entite_id'));
 		$reseaux_sociaux = $entite->reseaux_sociaux()->with('liste')->get();
 
+		$categories = $entite->categories()->get();
+
 		$mandat = $entite->mandat()->get();
 		
 		foreach($mandat as &$mandat_user){
 			$mandat_user["lien_photo"] = GestionPhotoDeProfil::chemin_membre_photo($mandat_user);
 		}
 
-		return view('entite.a_propos')->with('entite', $entite)->with('mandat', $mandat)->with('reseaux_sociaux', $reseaux_sociaux);
+		return view('entite.a_propos')
+			->with('entite', $entite)
+			->with('mandat', $mandat)
+			->with('categories', $categories)
+			->with('reseaux_sociaux', $reseaux_sociaux);
 	}
 
 	public function gestion(Request $request)
@@ -42,7 +49,8 @@ class EntiteController extends Controller
 
     public function create() //réservé à l'AIR
 	{
-		return view('entite.creer');
+		$sites = Site::all();
+		return view('entite.creer')->with('sites', $sites);
 	}
 
 	public function store(Request $request) //réservé à l'AIR
@@ -65,10 +73,11 @@ class EntiteController extends Controller
 			$entite = new Entite;
 			$entite->nom = $request->nom;
 			$entite->uid = $request->uid;
-			$entite->sites = json_encode($request->sites);
 			$entite->bureau_de_ratachement = $request->bureau_de_ratachement;
 			$entite->type = $request->type;
 			$entite->save();
+
+			$entite->ajout_sites($request->sites);
 		}
 
 		return redirect()->route('modifier_infos', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
@@ -117,22 +126,22 @@ class EntiteController extends Controller
 		}
 	}
 
-	public function modifier_description(Request $request){ //pour l'entité
+	public function modifier_description(Request $request){
 		$entite_id = $request->route('entite_id') ?? session('entite_id');
 
 		$entite = Entite::existe($entite_id);
 
-		return view('entite.modifier_description')->with('entite', $entite);
+		$categories = $entite->categories()->get()->toArray();
+
+		return view('entite.modifier_description')->with('entite', $entite)->with('categories', $categories);
 	}
 
-	public function maj_description(Request $request){ //pour l'entité
+	public function maj_description(Request $request){
 		$entite_id = $request->route('entite_id') ?? session('entite_id');
 
 		$entite = Entite::existe($entite_id);
 		
 		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
-		sort($request->categories);
-		
 		$this->validate($request, [
 			'description_courte' => ['filled','max:300'],
 			'description_md' => ['filled','min:300'],
@@ -141,8 +150,11 @@ class EntiteController extends Controller
 
 		$entite->description_courte = $request->description_courte;
 		$entite->description_md = $request->description_md;
-		$entite->categories = json_encode($request->categories);
 		$entite->save();
+		
+		
+		sort($request->categories);
+		$entite->ajout_categories($request->categories);
 
 		if($request->query('creation')){
 			return redirect()->route('modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
@@ -156,13 +168,13 @@ class EntiteController extends Controller
 		$site = $request["site"];
 
 		$bureaux = Entite::bureaux_site($site)->get();
-
+		
 		$comites_clubs_dependants = array();
 		foreach($bureaux as $bureau){
 			$bureau_ratachement = $bureau->bureau_de_ratachement->value;
 			$comites_clubs_dependants[$bureau_ratachement] = $bureau->comites_clubs_dependants()->get();
 		}
-
+		
 		return view('entite.index_site', [
 			"bureaux" => $bureaux,
 			"comites_clubs_dependants" => $comites_clubs_dependants,
@@ -193,21 +205,21 @@ class EntiteController extends Controller
 		if(isset($request["type"])){
 
 			if($request["type"] == EntiteTypeEnum::Bureau->value){ //seule l'AIR peut gérer les bureaux
-				$assos = $asso_gerante->bureaux();
+				$entites_dependantes = $asso_gerante->bureaux();
 			}
 			else if($request["type"] == EntiteTypeEnum::Comite->value) {
-				$assos = $asso_gerante->comites_clubs_dependants();
+				$entites_dependantes = $asso_gerante->comites_clubs_dependants();
 			}
 			else if($request["type"] == EntiteTypeEnum::Liste->value){
-				$assos = $asso_gerante->listes_dependantes();
+				$entites_dependantes = $asso_gerante->listes_dependantes();
 			}
 
-			$parametres = ["entites" => $assos->orderBy('nom', 'asc')->get()];
+			$entites_dependantes = $entites_dependantes->orderBy('nom', 'asc')->get();
 		} else {
-			$parametres = [];
+			$entites_dependantes = [];
 		}
 
-		return view('entite.index_admin', array_merge($parametres, ['est_bureau' => $asso_gerante->type == EntiteTypeEnum::Bureau]));
+		return view('entite.index_admin')->with('est_bureau', $asso_gerante->type == EntiteTypeEnum::Bureau)->with('entites_dependantes', $entites_dependantes);
 	}
 
 }

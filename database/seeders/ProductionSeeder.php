@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use \App\Models\Entite;
 use App\Services\GestionLogo;
 
-class SeederProduction extends Seeder
+class ProductionSeeder extends Seeder
 {
     /**
      * Seed the application's database.
@@ -30,8 +30,6 @@ EOT;
             'bureau_de_ratachement' => 'bde',
             'annee_creation' => '2010',
             'type' => 'comité',
-            'sites' => '["douai","lille"]',
-            'categories' => '["informatique","réseau"]',
             'couleur_claire' => '#c6152a',
             'couleur_sombre' => '#cc3345',
             'couleur_police_accentuation_claire' => '#000000',
@@ -43,9 +41,15 @@ EOT;
             
             'description_md' => null,
         ]);
+        DB::table('categories')->insert([
+            ['entite_id' => 1, 'label' => 'informatique'],
+            ['entite_id' => 1, 'label' => 'réseau'],
+        ]);
+        $this->call(SitesSeeder::class);
+        $this->call(EntitesSitesSeeder::class);
 
         $entite_id = Entite::where('uid', "air")->first()->id;
-        GestionLogo::stocker_logo_depuis_url("https://capa.etu.imt-lille-douai.fr/img/logoAsso/air.png", $entite_id);
+        // GestionLogo::stocker_logo_depuis_url("https://capa.etu.imt-lille-douai.fr/img/logoAsso/air.png", $entite_id);
         
         $this->call(RolesTableSeeder::class);
 

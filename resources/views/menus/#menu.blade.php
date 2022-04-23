@@ -49,14 +49,14 @@ document.getElementById("hamburger").addEventListener("click", function () {
 
 function bascule_affichage_menu(){
 	el_wrapper = document.getElementById("wrapper")
-	
+
 	est_affiche = el_sidebar_wrapper.classList.toggle("menu_affiche")
 	localStorage.setItem("menu_ouvert", est_affiche)
 
 	if(est_affiche){
 		el_wrapper.addEventListener('click', bascule_affichage_menu)
 	} else {
-		el_wrapper.removeEventListener('click')
+		el_wrapper.removeEventListener('click', bascule_affichage_menu)
 	}
 }
 

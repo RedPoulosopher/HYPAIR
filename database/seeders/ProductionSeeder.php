@@ -55,8 +55,8 @@ EOT;
 
         DB::table('users')->insert([
             [
-                'nom' => 'Marc',
-                'prenom' => 'Bresson',
+                'nom' => 'Bresson',
+                'prenom' => 'Marc',
                 'uid' => 'marc.bresson',
                 'password' => Hash::make("z&mWJRVVzT2WC9"),
             ],

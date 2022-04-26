@@ -15,7 +15,8 @@ class MembreController extends Controller
 {
     public function ajout_membre(Request $request){
 		//on vérifie que l'entite existe
-		$entite = Entite::existe($request->route('entite_id'));
+		$entite_id = $request->route('entite_id') ?? session('entite_id');
+		$entite = Entite::existe($entite_id);
 		
 		$membre_role_id = $request["role_id"];
 		$user = User::existe($request["user_uid"]);
@@ -24,7 +25,7 @@ class MembreController extends Controller
 		}
 
 		$membre_model = new Membre;
-		$membre_model->entite_id = $request->route('entite_id');
+		$membre_model->entite_id = $entite_id;
 		$membre_model->user_id =  $user->id;
 		$membre_model->role_id =  $membre_role_id;
 		$membre_model->changer_role();

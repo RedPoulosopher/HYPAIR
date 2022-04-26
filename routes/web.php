@@ -20,6 +20,8 @@ use App\Http\Controllers\ReseauSocialController;
 */
 Route::get('/', function(){return redirect('/entites/douai');});
 
+Route::get('/identicone', function(){return view('identicone');});
+
 Route::get('/entites', function(){return view('entite.choix_site');});
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
 

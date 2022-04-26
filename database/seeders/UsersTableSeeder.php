@@ -18,15 +18,15 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'nom' => 'Marc',
-                'prenom' => 'Bresson',
+                'nom' => 'Bresson',
+                'prenom' => 'Marc',
                 'uid' => 'marc.bresson',
                 'password' => Hash::make("test"),
                 'langue_pref' => 'fr',
             ],
             [
-                'nom' => 'Michel',
-                'prenom' => 'Dupont',
+                'nom' => 'Dupont',
+                'prenom' => 'Michel',
                 'uid' => 'michel.dupont',
                 'password' => Hash::make("test"),
                 'langue_pref' => 'en',

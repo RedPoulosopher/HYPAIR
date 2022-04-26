@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/css/entite.index.css" type="text/css" >
 
 <div id="contenu" class="grand">
+    <a href="/entites" class="bouton secondaire">< retour au choix du site</a>
     @foreach($bureaux as $bureau)
         <h1>- Entites du {{ $bureau->nom }} -</h1>
         <div class="liste_comite_club">
@@ -30,17 +31,20 @@
                     </div>
                     <div class="info" style="text-align:center;">
                         <p class="nom">{{ $comite_club->nom }}</p>
-                        @if (!is_null($comite_club->categories))
-                            <div class="categories">
-                                @foreach (json_decode($comite_club->categories) as $categorie)
-                                    <span>#{{$categorie}}</span>
-                                @endforeach
-                            </div>
-                        @endif
+                        <div class="categories">
+                            {{-- @foreach ($comite_club->categories() as $categorie)
+                                <span>#{{$categorie->label}}</span>
+                            @endforeach --}}
+                        </div>
                     </div>
                 </a>
             @endforeach
         </div>
     @endforeach
 </div>
+
+<script>
+site = window.location.pathname.split('/').pop()
+localStorage.setItem('defaut_entites_index_site', site)
+</script>
 @endsection

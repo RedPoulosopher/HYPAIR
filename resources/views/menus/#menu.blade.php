@@ -1,11 +1,13 @@
 <div id="menu_lateral">
 	<div class="ombre_grande">
 		<div class="logotype">
-			@hasSection('logo')
-				@yield('logo')
-			@else
-				<img class="arrondi" src="{{session("entite_logo_petit")}}" alt="logo"/>
-			@endif
+			<a href="/entites?defaut">
+				@hasSection('logo')
+					@yield('logo')
+				@else
+					<img class="arrondi" src="{{session("entite_logo_petit")}}" alt="logo"/>
+				@endif
+			</a>
 		</div>
 		<ul class="navigation">
 			@yield('liens')
@@ -42,8 +44,21 @@ btn.addEventListener("click", function () {
 
 el_sidebar_wrapper = document.getElementById("menu_lateral")
 document.getElementById("hamburger").addEventListener("click", function () {
-	localStorage.setItem("menu_ouvert", el_sidebar_wrapper.classList.toggle("menu_affiche"))
+	bascule_affichage_menu()
 })
+
+function bascule_affichage_menu(){
+	el_wrapper = document.getElementById("wrapper")
+
+	est_affiche = el_sidebar_wrapper.classList.toggle("menu_affiche")
+	localStorage.setItem("menu_ouvert", est_affiche)
+
+	if(est_affiche){
+		el_wrapper.addEventListener('click', bascule_affichage_menu)
+	} else {
+		el_wrapper.removeEventListener('click', bascule_affichage_menu)
+	}
+}
 
 if(localStorage.getItem("menu_ouvert")=="true" && window.matchMedia("(min-width: 768px)").matches){
 	el_sidebar_wrapper.classList.toggle("menu_affiche")

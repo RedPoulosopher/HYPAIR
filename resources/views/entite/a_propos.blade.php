@@ -98,8 +98,8 @@
 		</div>
 		@if (!is_null($entite->categories))
 			<div class="categories">
-				@foreach (json_decode($entite->categories) as $categorie)
-					<span>#{{$categorie}}</span>
+				@foreach ($categories as $categorie)
+					<span>#{{$categorie->label}}</span>
 				@endforeach
 			</div>
 		@endif

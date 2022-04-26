@@ -1,7 +1,7 @@
 @extends('menus.#menu')
 
 @section('logo')
-    <img src="/images/logo_air.png" width="120px" alt="logo de l'AIR"/>
+    <img src="/images/logo_air.png" style="width:120px" alt="logo de l'AIR"/>
     <div>AIR</div>
 @endsection
 

@@ -420,7 +420,7 @@ body.light-theme a.couleur:hover {
 
 #menu_lateral > div .logotype img {
   transition: all 0.3s cubic-bezier(0.7, 0, 0, 0.7);
-  width: 80%;
+  width: 60%;
 }
 
 #menu_lateral > div .logotype img.arrondi {

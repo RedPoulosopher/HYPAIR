@@ -21,8 +21,6 @@ class CreateEntitesTable extends Migration
             $table->string('type', 20);
             $table->text('description_courte', 300)->nullable()->default(null);
             $table->text('description_md')->nullable()->default(null);
-            $table->json('sites')->nullable()->default(null);
-            $table->json('categories')->nullable()->default(null);
             $table->boolean('privee')->default(0); //pour que les listes puissent se cacher
             $table->boolean('ouvert')->default(1); //pour les listes, les bureaux, le téléthon 
             $table->year('annee_creation')->nullable()->default(null);

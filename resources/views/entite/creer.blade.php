@@ -50,6 +50,7 @@
 					<p class="titre">* Type :</p>
 					<select name="type" class="input" spellcheck="false" required select="{{old('type') ?? $entite->type ?? ''}}">
                         <option selected disabled="disabled"></option>
+                        <option value="association">Association</option>
                         <option value="bureau">Bureau</option>
                         <option value="comité">Comité</option>
                         <option value="fakeliste">Fausse liste</option>

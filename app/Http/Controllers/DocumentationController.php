@@ -25,7 +25,7 @@ class DocumentationController extends Controller
 	{
 		$doc = $this->fomulaire_traitement($request);
 
-		$existe = Documentation::existe_slug($doc->slug, $doc->entite_id)->first();
+		$existe = Documentation::existe_slug($doc->slug, $doc->entite_id);
 		if($existe){ return back()->withErrors(["Cette documentation existe déjà pour votre entite."]); }
 
 		$doc->save();
@@ -55,7 +55,6 @@ class DocumentationController extends Controller
 
 		if(!$doc){abort(404);}
 
-		$doc = $doc->first();
 		if($doc->confidentialite > $niveau_administration){abort(403);}
 		
 		Carbon::setLocale('fr');

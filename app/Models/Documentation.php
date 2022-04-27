@@ -36,7 +36,7 @@ class Documentation extends Model
     }
 
     public static function existe_slug($slug, $entite_id){
-        $doc = self::where('slug', $slug)->where('entite_id', $entite_id);
+        $doc = self::where('slug', $slug)->where('entite_id', $entite_id)->first();
 		if(is_null($doc)){return false;}
         return $doc;
     }

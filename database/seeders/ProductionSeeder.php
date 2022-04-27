@@ -46,7 +46,7 @@ EOT;
             ['entite_id' => 1, 'label' => 'réseau'],
         ]);
         $this->call(SitesSeeder::class);
-        $this->call(EntitesSitesSeeder::class);
+        $this->call(EntiteSitesSeeder::class);
 
         $entite_id = Entite::where('uid', "air")->first()->id;
         // GestionLogo::stocker_logo_depuis_url("https://capa.etu.imt-lille-douai.fr/img/logoAsso/air.png", $entite_id);

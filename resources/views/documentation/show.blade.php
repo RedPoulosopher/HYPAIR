@@ -29,8 +29,37 @@ p {
 	font-size:0.9em;
 	color: var(--couleur_police_secondaire);
 }
+.heading-permalink {
+  visibility: hidden;
+}
 </style>
-	
+
+@php
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
+use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkRenderer;
+use League\CommonMark\MarkdownConverter;
+
+// Define your configuration, if needed
+$config = [
+	'heading_permalink' => [
+        'html_class' => 'heading-permalink',
+        'insert' => 'after',
+		'id_prefix' => '',
+        'fragment_prefix' => '',
+    ],
+];
+
+// Configure the Environment with all the CommonMark parsers/renderers
+$environment = new Environment($config);
+$environment->addExtension(new CommonMarkCoreExtension());
+$environment->addExtension(new HeadingPermalinkExtension());
+
+// Instantiate the converter engine and start converting some Markdown!
+$converter = new MarkdownConverter($environment);
+@endphp
+
 <div id="wrapper">
 	<div id="contenu" class="petit">
 
@@ -48,7 +77,7 @@ p {
 				<h1 class="titre">{{$documentation->titre}}</h1>
 				<p class="derniere_maj">Dernière mise à jour <span>{{$date}}</span></p>
 
-				{!! Str::markdown($documentation->contenu_md); !!}
+				{!! $converter->convert($documentation->contenu_md); !!}
 			</div>
 		</div>
 	</div>

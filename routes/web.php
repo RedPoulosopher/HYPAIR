@@ -29,7 +29,7 @@ Route::get('/connexion', function() {  return view('connexion'); })->name("conne
 Route::post('/connexion', [AuthController::class, 'connexion']);
 Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
 Route::get('/cookies', function() {  return view('cookies'); });
-Route::get('/rgpd', function() {  return view('rgpd'); });
+Route::get('/rgpd', function() {  return redirect('/air/documentation/rgpd'); });
 
 //easter eggs
 //============

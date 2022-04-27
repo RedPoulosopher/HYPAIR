@@ -39,7 +39,7 @@
 				<label class="input_groupe">
 					<p class="titre">* Catégories :</p>
 					<p class="description">Séparez les catégories par des virgules (e.g. informatique, réseau, web)</p>
-					<input type="text" name="categories" class="input" required value="{{old('categories') ?? implode(", ", $categories)}}"/>
+					<input type="text" name="categories" class="input" required value="{{implode(", ", $categories)}}"/>
 				</label>
 			</div>
 				

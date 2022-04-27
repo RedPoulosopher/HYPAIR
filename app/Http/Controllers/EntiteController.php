@@ -131,7 +131,7 @@ class EntiteController extends Controller
 
 		$entite = Entite::existe($entite_id);
 
-		$categories = $entite->categories()->get()->toArray();
+		$categories = $entite->categories()->get()->pluck('label')->toArray();
 
 		return view('entite.modifier_description')->with('entite', $entite)->with('categories', $categories);
 	}

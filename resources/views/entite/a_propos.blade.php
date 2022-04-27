@@ -45,6 +45,7 @@
 }
 .membres .photo {
     position: relative;
+	width: fit-content;
 }
 .membres .photo img {
     border-radius: 500px;
@@ -118,9 +119,9 @@
 		<div class="membres grille-enfants">
 		@foreach ($mandat as $mandat_user)
 			<div>
-				<div class="photo centre-element">
+				<div class="photo centre-element" title="identicône par Marc Bresson">
 					<div class="cercle"></div>
-					<img class="ombre_petite" src="{{$mandat_user->lien_photo}}"/>
+					<img class="ombre_petite" src="{{$mandat_user->lien_photo}}" title="identicône par Marc Bresson"/>
 				</div>
 				<div class="info" style="text-align:center;">
 					<span>{{$mandat_user->prenom . " " . $mandat_user->nom}}</span>

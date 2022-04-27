@@ -132,7 +132,7 @@ class GestionPhotoDeProfil {
         $base_5 = base_convert($to_dec, 10, 5);
         $base_5_str = strval($base_5);
     
-        $svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9">';
+        $svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9" title="identicône par Marc Bresson">';
         foreach(array(0=>'rectangle', 1=>'cercle', 2=>'triangle') as $index=>$type){
             $taille = self::rerange($base_5_str[$index + 6], 0, 5, 2, 5);
             $position_x = $base_5_str[$index] + 2;

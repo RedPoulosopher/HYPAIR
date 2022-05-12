@@ -11,6 +11,13 @@ class AuthController extends Controller
         return 'uid';
     }
 
+    public function affichage_formulaire(Request $request){
+        if(!session()->has('url.intended')) {
+            session()->put('url.intended', url()->previous());
+        }
+
+        return view('connexion');
+    }
 
     public function connexion(Request $request) {
         $credentials = $request->validate([

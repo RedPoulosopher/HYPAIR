@@ -58,6 +58,10 @@ class ExistenceEntite
             "entite_couleur_police_accentuation_sombre" => $entite["couleur_police_accentuation_sombre"],
         ]);
         
+        session([
+            "gerer_entite" => false, //on réinitialise cette valeur pour éviter d'avoir le lien sur les entités qu'on ne gère pas
+        ]);
+
         if( Auth::check() ){
             $membre = Auth::user()->membres_actuel()->where("entite_id", $entite["id"]);
 

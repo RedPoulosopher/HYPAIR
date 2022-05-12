@@ -25,9 +25,11 @@ Route::get('/identicone', function(){return view('identicone');});
 Route::get('/entites', function(){return view('entite.choix_site');});
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
 
-Route::get('/connexion', function() {  return view('connexion'); })->name("connexion");
-Route::post('/connexion', [AuthController::class, 'connexion']);
-Route::get('/deconnexion', [AuthController::class, 'deconnexion']);
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/connexion', 'affichage_formulaire')->name("connexion");
+    Route::post('/connexion', 'connexion');
+    Route::get('/deconnexion', 'deconnexion');
+});
 Route::get('/cookies', function() {  return view('cookies'); });
 Route::get('/rgpd', function() {  return redirect('/air/documentation/rgpd'); });
 

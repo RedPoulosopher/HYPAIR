@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\BureauEnum;
+use App\Enums\RatachementEnum;
 use App\Enums\EntiteTypeEnum;
 use \App\Services\GestionLogo;
 
@@ -33,7 +33,7 @@ class Entite extends Model
     ];
 
     protected $casts = [
-        'bureau_de_ratachement' => BureauEnum::class,
+        'bureau_de_ratachement' => RatachementEnum::class,
         'type' => EntiteTypeEnum::class,
     ];
     
@@ -99,6 +99,15 @@ class Entite extends Model
             });
         
         return $bureaux;
+    }
+
+    public static function independants_site($site){
+        $entites_independantes = Entite::where('bureau_de_ratachement', RatachementEnum::Independant)
+            ->whereHas('sites', function ($query) use ($site){
+                $query->where('label', $site);
+            });
+        
+        return $entites_independantes;
     }
 
     public function bureaux(){
@@ -189,6 +198,7 @@ class Entite extends Model
         ->whereBetween('membres.created_at',[($annee_scolaire-1)."-03-01",$annee_scolaire."-02-01"])
         ->join('roles','roles.id','=','membres.role_id')
         ->join('users','users.id','=','membres.user_id')
+        ->orderBy('niveau_admin','desc')
         ->where('roles.niveau_admin','>=','6');
     }
 

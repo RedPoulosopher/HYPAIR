@@ -36,13 +36,14 @@
 				</label>
 				
 				<label class="input_groupe">
-					<p class="titre">* Bureau de ratachement :</p>
+					<p class="titre">* Ratachement :</p>
 					<select name="bureau_de_ratachement" class="input" spellcheck="false" required select="{{old('bureau_de_ratachement') ?? $entite->bureau_de_ratachement ?? ''}}">
                         <option selected disabled="disabled"></option>
                         <option value="bda">BDA</option>
                         <option value="bde">BDE</option>
                         <option value="bdh">BDH</option>
                         <option value="bds">BDS</option>
+                        <option value="independant">Independant</option>
                     </select>
 				</label>
 				

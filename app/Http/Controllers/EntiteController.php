@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Enums\BureauEnum;
+use App\Enums\RatachementEnum;
 use App\Enums\EntiteTypeEnum;
 use \App\Models\Entite;
 use \App\Models\Logo;
@@ -59,7 +59,7 @@ class EntiteController extends Controller
 			'sites' => ['filled','array',Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes'])],
 			'nom' => ['filled','max:120'],
 			'uid' => ['filled','max:30'],
-			'bureau_de_ratachement' => ['filled', new Enum(BureauEnum::class)],
+			'bureau_de_ratachement' => ['filled', new Enum(RatachementEnum::class)],
 			'type' => ['filled', new Enum(EntiteTypeEnum::class)],
 		]);
 
@@ -167,6 +167,7 @@ class EntiteController extends Controller
 	{
 		$site = $request["site"];
 
+		$entites_independantes = Entite::independants_site($site)->get();
 		$bureaux = Entite::bureaux_site($site)->get();
 		
 		$comites_clubs_dependants = array();
@@ -178,6 +179,7 @@ class EntiteController extends Controller
 		return view('entite.index_site', [
 			"bureaux" => $bureaux,
 			"comites_clubs_dependants" => $comites_clubs_dependants,
+			"entites_independantes" => $entites_independantes
 			]
 		);
 	}

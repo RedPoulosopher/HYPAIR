@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\BureauEnum;
+use App\Enums\RatachementEnum;
 use App\Enums\EntiteTypeEnum;
 use \App\Services\GestionLogo;
 
@@ -33,7 +33,7 @@ class Entite extends Model
     ];
 
     protected $casts = [
-        'bureau_de_ratachement' => BureauEnum::class,
+        'bureau_de_ratachement' => RatachementEnum::class,
         'type' => EntiteTypeEnum::class,
     ];
     
@@ -99,6 +99,15 @@ class Entite extends Model
             });
         
         return $bureaux;
+    }
+
+    public static function independants_site($site){
+        $entites_independantes = Entite::where('bureau_de_ratachement', RatachementEnum::Independant)
+            ->whereHas('sites', function ($query) use ($site){
+                $query->where('label', $site);
+            });
+        
+        return $entites_independantes;
     }
 
     public function bureaux(){

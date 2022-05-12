@@ -31,6 +31,28 @@
                     </div>
                     <div class="info" style="text-align:center;">
                         <p class="nom">{{ $comite_club->nom }}</p>
+                        {{-- <div class="categories">
+                            @foreach ($comite_club->categories() as $categorie)
+                                <span>#{{$categorie->label}}</span>
+                            @endforeach
+                        </div> --}}
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    @endforeach
+
+    @if (count($entites_independantes ?? array()) > 0)
+        <h1>- Entites indépendantes -</h1>
+        <div class="liste_comite_club">
+            @foreach ($entites_independantes as $entite_independante)
+                <a class="comite_club" href="{{$entite_independante->lien_relatif()}}">
+                    <div class="logo ombre_petite">
+                        <div class="cercle" style="border-color: {{ $entite_independante->couleur_sombre }}"></div>
+                        <img src="{{ $entite_independante->logo_url("petit") }}"/>
+                    </div>
+                    <div class="info" style="text-align:center;">
+                        <p class="nom">{{ $entite_independante->nom }}</p>
                         <div class="categories">
                             {{-- @foreach ($comite_club->categories() as $categorie)
                                 <span>#{{$categorie->label}}</span>
@@ -40,7 +62,7 @@
                 </a>
             @endforeach
         </div>
-    @endforeach
+    @endif
 </div>
 
 <script>

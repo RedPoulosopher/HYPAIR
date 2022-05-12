@@ -198,6 +198,7 @@ class Entite extends Model
         ->whereBetween('membres.created_at',[($annee_scolaire-1)."-03-01",$annee_scolaire."-02-01"])
         ->join('roles','roles.id','=','membres.role_id')
         ->join('users','users.id','=','membres.user_id')
+        ->orderBy('niveau_admin','desc')
         ->where('roles.niveau_admin','>=','6');
     }
 

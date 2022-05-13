@@ -17,7 +17,7 @@ class CreateEntitesTable extends Migration
             $table->id();
             $table->string('uid',128)->unique(); //ce qui est dans le LDAP
 	        $table->string('nom',128);
-            $table->string('bureau_de_ratachement');
+            $table->string('ratachement');
             $table->string('type', 20);
             $table->text('description_courte', 300)->nullable()->default(null);
             $table->text('description_md')->nullable()->default(null);

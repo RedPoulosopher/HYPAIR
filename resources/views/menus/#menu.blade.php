@@ -1,7 +1,7 @@
 <div id="menu_lateral">
 	<div class="ombre_grande">
-		{{ Breadcrumbs::render() }}
 		<div class="logotype">
+			{{-- {{ Breadcrumbs::render() }} --}}
 			<a href="/entites?defaut">
 				@hasSection('logo')
 					@yield('logo')

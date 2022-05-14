@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Gestion de l\'entite')
+@section('titre', 'A propos de '.$entite->nom)
 
 @section('content')
 
@@ -115,7 +115,7 @@
 			@endforeach
 		</div>
 
-		<h1>- mandat -</h1>
+		<h1 class="espace">- mandat -</h1>
 		<div class="membres grille-enfants">
 		@foreach ($mandat as $mandat_user)
 			<div>

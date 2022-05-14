@@ -92,13 +92,8 @@ td a.icon-edit-2 {
             </form>
 
             <div id="choix_role">
-                @if (null !==Request::route('entite_id'))
-                <a href="entite/{{Request::route('entite_id')}}/membres" class="bouton secondaire">Membres</a>
-                <a href="entite/{{Request::route('entite_id')}}/abonnes" class="bouton secondaire">Abonnés</a>
-                @else
-                <a href="entite/membres" class="bouton secondaire">Membres</a>
-                <a href="entite/abonnes" class="bouton secondaire">Abonnés</a>
-                @endif
+                <a href="membres" class="bouton secondaire">Membres</a>
+                <a href="abonnes" class="bouton secondaire">Abonnés</a>
             </div>
 
             @if(!is_null($personnes_concernees) && count($personnes_concernees)>0)

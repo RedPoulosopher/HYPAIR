@@ -43,7 +43,7 @@ a[target="_blank"] {
 }
 
 #contenu {
-	padding: 35px 15px;
+	padding: 15px 15px;
 
 	@media (max-width: 499.98px) {
 		&.tres_petit{
@@ -95,7 +95,7 @@ a[target="_blank"] {
 }
 
 h1{
-	margin-block-start: 0em;
+	margin-block-start: 1em;
 	text-align: center;
 	text-decoration: underline;
 	text-decoration-color: var(--couleur_accentuation);
@@ -103,6 +103,9 @@ h1{
 }
 h1.titre_page {
 	font-size:2.5em;
+}
+h1.espace {
+	margin-block-start: 2em;
 }
 p.explication {
 	text-align: justify;

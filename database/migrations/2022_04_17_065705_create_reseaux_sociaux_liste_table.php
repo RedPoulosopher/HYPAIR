@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('couleur',10);
+            $table->string('couleur_police',10);
             $table->string('pre_url');
         });
     }

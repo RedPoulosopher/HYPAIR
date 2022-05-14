@@ -59,7 +59,7 @@ class EntiteController extends Controller
 			'sites' => ['filled','array',Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes'])],
 			'nom' => ['filled','max:120'],
 			'uid' => ['filled','max:30'],
-			'bureau_de_ratachement' => ['filled', new Enum(RatachementEnum::class)],
+			'ratachement' => ['filled', new Enum(RatachementEnum::class)],
 			'type' => ['filled', new Enum(EntiteTypeEnum::class)],
 		]);
 
@@ -73,7 +73,7 @@ class EntiteController extends Controller
 			$entite = new Entite;
 			$entite->nom = $request->nom;
 			$entite->uid = $request->uid;
-			$entite->bureau_de_ratachement = $request->bureau_de_ratachement;
+			$entite->ratachement = $request->ratachement;
 			$entite->type = $request->type;
 			$entite->save();
 
@@ -172,7 +172,7 @@ class EntiteController extends Controller
 		
 		$comites_clubs_dependants = array();
 		foreach($bureaux as $bureau){
-			$bureau_ratachement = $bureau->bureau_de_ratachement->value;
+			$bureau_ratachement = $bureau->ratachement->value;
 			$comites_clubs_dependants[$bureau_ratachement] = $bureau->comites_clubs_dependants()->get();
 		}
 		

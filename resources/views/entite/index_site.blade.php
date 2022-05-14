@@ -23,7 +23,7 @@
         </div>
 
         <div class="liste_comite_club">
-            @foreach ($comites_clubs_dependants[$bureau->bureau_de_ratachement->value] as $comite_club)
+            @foreach ($comites_clubs_dependants[$bureau->ratachement->value] as $comite_club)
                 <a class="comite_club" href="{{$comite_club->lien_relatif()}}">
                     <div class="logo ombre_petite">
                         <div class="cercle" style="border-color: {{ $comite_club->couleur_sombre }}"></div>

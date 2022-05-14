@@ -20,7 +20,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'BDE',
                 'uid' => 'bde',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'couleur_claire' => '#C20502',
@@ -29,7 +29,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'BDE Lille',
                 'uid' => 'bde-lille',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'couleur_claire' => '#C20502',
@@ -38,7 +38,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => "BDS",
                 'uid' => 'bds',
-                'bureau_de_ratachement' => 'bds',
+                'ratachement' => 'bds',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'couleur_claire' => '#7132a8',
@@ -47,7 +47,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => "BDA",
                 'uid' => 'bda',
-                'bureau_de_ratachement' => 'bda',
+                'ratachement' => 'bda',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'couleur_claire' => '#7132a8',
@@ -56,7 +56,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => "BDH",
                 'uid' => 'bdh',
-                'bureau_de_ratachement' => 'bdh',
+                'ratachement' => 'bdh',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'couleur_claire' => '#7132a8',
@@ -68,7 +68,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => "Cart'naval",
                 'uid' => 'cartnaval',
-                'bureau_de_ratachement' => "bda",
+                'ratachement' => "bda",
                 'annee_creation' => '2020',
                 'type' => 'liste',
                 'couleur_claire' => '#7132a8',
@@ -77,7 +77,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => "dracul'art",
                 'uid' => 'draculart',
-                'bureau_de_ratachement' => "bda",
+                'ratachement' => "bda",
                 'annee_creation' => '2021',
                 'type' => 'liste',
                 'couleur_claire' => '#7132a8',
@@ -89,7 +89,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'AIR',
                 'uid' => 'air',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#c6152a',
@@ -98,7 +98,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'Club méca',
                 'uid' => 'meca',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#71d0dd',
@@ -107,7 +107,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => "IMT'ternational",
                 'uid' => 'imternational',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#e05a47',
@@ -116,7 +116,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'Cotrad',
                 'uid' => 'cotrad',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#000000',
@@ -125,7 +125,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'ZeGreenPeas',
                 'uid' => 'zegreenpeas',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#679a54',
@@ -134,7 +134,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'Egal’IMT',
                 'uid' => 'egalimt',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#9a49d5',
@@ -143,7 +143,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'Junior Entreprise',
                 'uid' => 'jine',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#01a7c5',
@@ -152,7 +152,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'Le Caméléon déchaîné',
                 'uid' => 'cameleon',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#01b531',
@@ -161,7 +161,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'Douai Moustache Club',
                 'uid' => 'dmc',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#000000',
@@ -170,7 +170,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'IMTalks',
                 'uid' => 'imtalks',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#f8b403',
@@ -179,7 +179,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'Club robotique',
                 'uid' => 'robotique',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#5271ff',
@@ -188,7 +188,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => 'Club des brasseurs',
                 'uid' => 'brasseurs',
-                'bureau_de_ratachement' => 'bde',
+                'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'comité',
                 'couleur_claire' => '#eab826',

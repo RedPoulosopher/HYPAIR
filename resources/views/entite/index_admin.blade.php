@@ -103,15 +103,15 @@ td.type {
 		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Entites -</h1>
 
         @if (!$est_bureau)
-		    <a href="entite/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une entite</a>
+		    <a href="../entite/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une entite</a>
         @endif
 
         <div id="choix_entite">
             @if (!$est_bureau)
-                <a href="entites/admin?type=bureau" class="bouton secondaire">Bureaux</a>
+                <a href="?type=bureau" class="bouton secondaire">Bureaux</a>
             @endif
-            <a href="entites/admin?type=comité" class="bouton secondaire">Comités</a>
-            <a href="entites/admin?type=liste" class="bouton secondaire">Listes</a>
+            <a href="?type=comité" class="bouton secondaire">Comités</a>
+            <a href="?type=liste" class="bouton secondaire">Listes</a>
         </div>
 
         @if(isset($entites_dependantes) && count($entites_dependantes)>0)
@@ -142,10 +142,10 @@ td.type {
             </div>
 
             <ul id="menu_meatballs" class="ombre_grande">
-                <li><a id="menu_modifier" href="" url="entite/{entite_id}/modifier/informations/">Modifier les infos</a></li>
-                <li><a id="menu_modifier" href="" url="entite/{entite_id}/modifier/description/">Modifier la description</a></li>
-                <li><a id="menu_modifier_logo" href="" url="entite/{entite_id}/logotype/">Modifier le logo</a></li>
-                <li><a id="menu_membres" href="" url="entite/{entite_id}/membres/">Gérer les membres</a></li>
+                <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/informations">Modifier les infos</a></li>
+                <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/description">Modifier la description</a></li>
+                <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/logotype">Modifier le logo</a></li>
+                <li><a id="menu_membres" href="" url="../entite/{entite_id}/membres">Gérer les membres</a></li>
             </ul>
         @endif
 	</div>
@@ -183,6 +183,7 @@ function menu_meatballs(ceci){
     }
     left = ceci.getBoundingClientRect().x
     topp = ceci.getBoundingClientRect().y
+    height = ceci.getBoundingClientRect().height
 
     entite_id = ceci.getAttribute("entite_id")
     for(let element of el_menu_meatballs.querySelectorAll("a")){
@@ -190,7 +191,7 @@ function menu_meatballs(ceci){
         element.href = url.replace('{entite_id}', entite_id)
     };
 
-    el_menu_meatballs.style.top = topp + 10 + "px";
+    el_menu_meatballs.style.top = topp + 10 + document.documentElement.scrollTop + "px";
     el_menu_meatballs.style.left = left - taille_x_menu_meatballs + taille_x_meatballs + "px";
 }
 </script>

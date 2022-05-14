@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Gestion de l\'entite')
+@section('titre', 'A propos de '.$entite->nom)
 
 @section('content')
 
@@ -109,13 +109,13 @@
 		</div>
 		<div class="reseaux_sociaux grille-enfants">
 			@foreach ($reseaux_sociaux as $reseau_social)
-				<a target="_blank" class="ombre_petite" href="{{ $reseau_social->liste->pre_url.$reseau_social->cle }}" style="background-color:{{ $reseau_social->liste->couleur }}">
+				<a target="_blank" class="ombre_petite" href="{{ $reseau_social->liste->pre_url . $reseau_social->cle }}" style="background-color:{{ $reseau_social->liste->couleur }}; color:{{ $reseau_social->liste->couleur_police }};">
 					{{ $reseau_social->liste->nom }}
 				</a>
 			@endforeach
 		</div>
 
-		<h1>- mandat -</h1>
+		<h1 class="espace">- mandat -</h1>
 		<div class="membres grille-enfants">
 		@foreach ($mandat as $mandat_user)
 			<div>

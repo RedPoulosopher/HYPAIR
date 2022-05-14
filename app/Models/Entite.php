@@ -17,7 +17,7 @@ class Entite extends Model
     protected $fillable = [
         'nom',
         'uid',
-        'bureau_de_ratachement',
+        'ratachement',
         'type',
         'courriel',
         'alias',
@@ -33,7 +33,7 @@ class Entite extends Model
     ];
 
     protected $casts = [
-        'bureau_de_ratachement' => RatachementEnum::class,
+        'ratachement' => RatachementEnum::class,
         'type' => EntiteTypeEnum::class,
     ];
     
@@ -102,7 +102,7 @@ class Entite extends Model
     }
 
     public static function independants_site($site){
-        $entites_independantes = Entite::where('bureau_de_ratachement', RatachementEnum::Independant)
+        $entites_independantes = Entite::where('ratachement', RatachementEnum::Independant)
             ->whereHas('sites', function ($query) use ($site){
                 $query->where('label', $site);
             });
@@ -129,7 +129,7 @@ class Entite extends Model
         if($this->type == EntiteTypeEnum::Bureau){
             $sites_bureau = $this->sites()->get()->pluck('label')->toArray();
 
-            $comites_clubs_dependants = Entite::where('bureau_de_ratachement', $this->bureau_de_ratachement)
+            $comites_clubs_dependants = Entite::where('ratachement', $this->ratachement)
                                                 ->whereHas('sites', function ($query) use ($sites_bureau){
                                                     $query->whereIn('label', $sites_bureau);
                                                 });;
@@ -152,7 +152,7 @@ class Entite extends Model
         if($this->type == EntiteTypeEnum::Bureau){
             $sites_bureau = $this->sites()->get()->pluck('label')->toArray();
 
-            $listes_dependantes = Entite::where('bureau_de_ratachement', $this->bureau_de_ratachement)
+            $listes_dependantes = Entite::where('ratachement', $this->ratachement)
                                                 ->whereHas('sites', function ($query) use ($sites_bureau){
                                                     $query->whereIn('label', $sites_bureau);
                                                 });;
@@ -199,6 +199,7 @@ class Entite extends Model
         ->join('roles','roles.id','=','membres.role_id')
         ->join('users','users.id','=','membres.user_id')
         ->orderBy('niveau_admin','desc')
+        ->orderBy('nom','asc')
         ->where('roles.niveau_admin','>=','6');
     }
 
@@ -210,6 +211,7 @@ class Entite extends Model
         ->join('users','users.id','=','membres.user_id')
         ->where('roles.niveau_admin','>','1')
         ->orderBy('niveau_admin','desc')
+        ->orderBy('nom','asc')
         ->orderBy('prenom');
     }
 
@@ -220,7 +222,7 @@ class Entite extends Model
         ->join('roles','roles.id','=','membres.role_id')
         ->join('users','users.id','=','membres.user_id')
         ->where('roles.niveau_admin','1')
-        ->orderBy('prenom');
+        ->orderBy('nom', 'asc');
     }
 
     public function nbr_abonnes(){

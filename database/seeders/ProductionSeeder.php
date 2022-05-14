@@ -27,7 +27,7 @@ EOT;
         DB::table('entites')->insert([
             'nom' => 'AIR',
             'uid' => 'air',
-            'bureau_de_ratachement' => 'bde',
+            'ratachement' => 'bde',
             'annee_creation' => '2010',
             'type' => 'comité',
             'couleur_claire' => '#c6152a',

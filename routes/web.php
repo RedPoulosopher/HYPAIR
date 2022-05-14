@@ -20,9 +20,7 @@ use App\Http\Controllers\ReseauSocialController;
 */
 Route::get('/', function(){return redirect('/entites/douai');});
 
-Route::get('/identicone', function(){return view('identicone');});
-
-Route::get('/entites', function(){return view('entite.choix_site');});
+Route::get('/entites', function(){return view('entite.choix_site');})->name('racine');
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
 
 Route::controller(AuthController::class)->group(function(){
@@ -124,7 +122,8 @@ $routes_entites = function () {
     Route::controller(EntiteController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
         Route::get('/accueil', 'show');
-        Route::get('/', 'show');
+        Route::get('/', 'show')
+            ->name('entite');
         Route::middleware('protection.autorisation:gerer_entite')->group(function(){
             Route::get('/entite/gestion', 'gestion');
             Route::get('/entite/modifier/description/', 'modifier_description');

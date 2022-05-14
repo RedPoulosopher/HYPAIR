@@ -1,5 +1,6 @@
 <div id="menu_lateral">
 	<div class="ombre_grande">
+		{{ Breadcrumbs::render() }}
 		<div class="logotype">
 			<a href="/entites?defaut">
 				@hasSection('logo')
@@ -12,7 +13,7 @@
 		<ul class="navigation">
 			@yield('liens')
 			@if (session('gerer_entite'))
-				<a href="entite/gestion"><li><span>Gestion</span></li></a>
+				<a href="{{ session('entite_lien') }}/entite/gestion"><li><span>Gestion</span></li></a>
 			@endif
 		</ul>
 		<div id="bascule-mode">

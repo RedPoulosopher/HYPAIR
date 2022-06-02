@@ -26,7 +26,6 @@ class RolesTableSeeder extends Seeder
         );
 
         foreach($roles as $role){
-            print_r($role);
             $labels = $role[2];
             $niveau_admin = $role[1]['niveau_admin'];
             $autorisations = $role[0];

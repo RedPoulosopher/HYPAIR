@@ -13,20 +13,10 @@ use Illuminate\Validation\Rule;
 
 class MembreController extends Controller
 {
-    public function passation(Request $request){
-		AutorisationGestion::protectionPage("gerer_entite");
-
-		$entite = Entite::existe($request->route('entite_id'));
-
-		return view('entite.passation', [
-			'entite' => $entite,
-			'creation' => $request->query('creation', 0),
-		]);
-    }
-
     public function ajout_membre(Request $request){
 		//on vérifie que l'entite existe
-		$entite = Entite::existe($request->route('entite_id'));
+		$entite_id = $request->route('entite_id') ?? session('entite_id');
+		$entite = Entite::existe($entite_id);
 		
 		$membre_role_id = $request["role_id"];
 		$user = User::existe($request["user_uid"]);
@@ -35,7 +25,7 @@ class MembreController extends Controller
 		}
 
 		$membre_model = new Membre;
-		$membre_model->entite_id = $request->route('entite_id');
+		$membre_model->entite_id = $entite_id;
 		$membre_model->user_id =  $user->id;
 		$membre_model->role_id =  $membre_role_id;
 		$membre_model->changer_role();
@@ -51,29 +41,18 @@ class MembreController extends Controller
 
 	public function index_admin(Request $request){
 		$entite_id = $request->route('entite_id') ?? session('entite_id');
+		$type = $request->route('type');
 
 		$entite = Entite::existe($entite_id);
+		$roles = Role::index();
 
-		if(isset($request["type"])){
-
-			if($request["type"] == "membre"){ //seule l'AIR peut gérer les bureaux
-				$personnes_a_responsabilites = $entite->personnes_a_responsabilites();
-			}
-			else if($request["type"] == "abonne") {
-				$personnes_a_responsabilites = $entite->abonnes();
-			}
-
-			$personnes_a_responsabilites = $personnes_a_responsabilites->get();
-
-			// Entiteee::test();
-
-			$roles = Role::index();
-		} else {
-			$personnes_a_responsabilites = null;
-
-			$roles = array();
+		if($type == "membres"){
+			$personnes_concernees = $entite->personnes_a_responsabilites();
+		}
+		else if($type == "abonnes") {
+			$personnes_concernees = $entite->abonnes();
 		}
 
-		return view('membre.index_admin', ["personnes_a_responsabilites" => $personnes_a_responsabilites, "roles"=>$roles]);
+		return view('membre.index_admin', ["personnes_concernees" => $personnes_concernees->get(), "roles"=>$roles]);
 	}
 }

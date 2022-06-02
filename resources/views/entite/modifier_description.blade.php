@@ -6,9 +6,8 @@
 
 <link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
 <link rel="stylesheet" href="/css/documentation.css" type="text/css" >
-
-<style id="style_clair"></style>
-<style id="style_sombre"></style>
+<link rel="stylesheet" href="/css/simpleMDE.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
@@ -28,19 +27,19 @@
 			<div class="groupe ombre_petite">
 				<label class="input_groupe">
 					<p class="titre">* Description courte :</p>
-					<textarea name="description" class="input" required rows="6">{{old('description_courte') ?? $entite->description_courte ?? ''}}</textarea>
+					<textarea name="description_courte" class="input" required rows="6">{{old('description_courte') ?? $entite->description_courte ?? ''}}</textarea>
 				</label>
 
 				<label class="input_groupe">
 					<p class="titre">* Description :</p>
 					<p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
-					<textarea name="description" class="input" required rows="12">{{old('description_md') ?? $entite->description_md ?? ''}}</textarea>
+					<textarea name="description_md" id="description_md" class="input" rows="12">{{old('description_md') ?? $entite->description_md ?? ''}}</textarea>
 				</label>
 
 				<label class="input_groupe">
 					<p class="titre">* Catégories :</p>
 					<p class="description">Séparez les catégories par des virgules (e.g. informatique, réseau, web)</p>
-					<input type="text" name="categories" class="input" required value="{{old('categories') ?? implode(", ",json_decode($entite->categories ?? '[]'))}}"/>
+					<input type="text" name="categories" class="input" required value="{{implode(", ", $categories)}}"/>
 				</label>
 			</div>
 				
@@ -49,4 +48,11 @@
 		</form>
 	</div>
 </div>
+<script>
+var simplemde = new SimpleMDE({
+	element: document.getElementById("description_md"),
+	toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
+	spellChecker: false,
+});
+</script>
 @endsection

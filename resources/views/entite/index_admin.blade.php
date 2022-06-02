@@ -44,6 +44,7 @@ table th {
 }
 table td {
     padding: 10px 15px;
+    vertical-align: inherit !important;
 }
 
 td.sites {
@@ -101,17 +102,19 @@ td.type {
 	<div id="contenu" class="petit">
 		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Entites -</h1>
 
-		<a href="entite/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une entite</a>
+        @if (!$est_bureau)
+		    <a href="../entite/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une entite</a>
+        @endif
 
         <div id="choix_entite">
             @if (!$est_bureau)
-                <a href="entites/gestion?type=bureau" class="bouton secondaire">Bureaux</a>
+                <a href="?type=bureau" class="bouton secondaire">Bureaux</a>
             @endif
-            <a href="entites/gestion?type=comité" class="bouton secondaire">Comités</a>
-            <a href="entites/gestion?type=liste" class="bouton secondaire">Listes</a>
+            <a href="?type=comité" class="bouton secondaire">Comités</a>
+            <a href="?type=liste" class="bouton secondaire">Listes</a>
         </div>
 
-        @if(isset($entites) && count($entites)>0)
+        @if(isset($entites_dependantes) && count($entites_dependantes)>0)
             <div class="table ombre_petite">
                 <table id="index">
                     <thead>
@@ -123,11 +126,11 @@ td.type {
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($entites as $entite)
+                        @foreach ($entites_dependantes as $entite)
                             <tr class="ligne_entite">
                                 <td><a class="couleur" href="{{ $entite->lien_relatif() }}">{{ $entite["nom"] }}</a></td>
                                 <td class="sites">
-                                    @foreach (json_decode($entite["sites"]) as $site)
+                                    @foreach ($entite->sites()->get()->pluck('label') as $site)
                                         <span class="site">: {{ $site }}</span>
                                     @endforeach
                                 </td>
@@ -139,10 +142,10 @@ td.type {
             </div>
 
             <ul id="menu_meatballs" class="ombre_grande">
-                <li><a id="menu_modifier" href="" url="entite/modifier/informations/">Modifier les infos</a></li>
-                <li><a id="menu_modifier" href="" url="entite/modifier/description/">Modifier la description</a></li>
-                <li><a id="menu_modifier_logo" href="" url="entite/modifier/logotype/">Modifier le logo</a></li>
-                <li><a id="menu_membres" href="" url="entite/membres/">Gérer les membres</a></li>
+                <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/informations">Modifier les infos</a></li>
+                <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/description">Modifier la description</a></li>
+                <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/logotype">Modifier le logo</a></li>
+                <li><a id="menu_membres" href="" url="../entite/{entite_id}/membres">Gérer les membres</a></li>
             </ul>
         @endif
 	</div>
@@ -180,14 +183,15 @@ function menu_meatballs(ceci){
     }
     left = ceci.getBoundingClientRect().x
     topp = ceci.getBoundingClientRect().y
+    height = ceci.getBoundingClientRect().height
 
     entite_id = ceci.getAttribute("entite_id")
     for(let element of el_menu_meatballs.querySelectorAll("a")){
         url = element.getAttribute("url")
-        element.href = url + entite_id
+        element.href = url.replace('{entite_id}', entite_id)
     };
 
-    el_menu_meatballs.style.top = topp + 10 + "px";
+    el_menu_meatballs.style.top = topp + 10 + document.documentElement.scrollTop + "px";
     el_menu_meatballs.style.left = left - taille_x_menu_meatballs + taille_x_meatballs + "px";
 }
 </script>

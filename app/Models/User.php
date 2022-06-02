@@ -57,4 +57,8 @@ class User extends Authenticatable
         
         return $user->first();
     }
+
+    public function reseaux_sociaux(){
+        return $this->morphMany(ReseauSocial::class, 'reseau_sociable');
+    }
 }

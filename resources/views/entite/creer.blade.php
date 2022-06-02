@@ -36,13 +36,14 @@
 				</label>
 				
 				<label class="input_groupe">
-					<p class="titre">* Bureau de ratachement :</p>
-					<select name="bureau_de_ratachement" class="input" spellcheck="false" required select="{{old('bureau_de_ratachement') ?? $entite->bureau_de_ratachement ?? ''}}">
+					<p class="titre">* Ratachement :</p>
+					<select name="ratachement" class="input" spellcheck="false" required select="{{old('ratachement') ?? $entite->ratachement ?? ''}}">
                         <option selected disabled="disabled"></option>
                         <option value="bda">BDA</option>
                         <option value="bde">BDE</option>
                         <option value="bdh">BDH</option>
                         <option value="bds">BDS</option>
+                        <option value="independant">Independant</option>
                     </select>
 				</label>
 				
@@ -50,6 +51,7 @@
 					<p class="titre">* Type :</p>
 					<select name="type" class="input" spellcheck="false" required select="{{old('type') ?? $entite->type ?? ''}}">
                         <option selected disabled="disabled"></option>
+                        <option value="association">Association</option>
                         <option value="bureau">Bureau</option>
                         <option value="comité">Comité</option>
                         <option value="fakeliste">Fausse liste</option>

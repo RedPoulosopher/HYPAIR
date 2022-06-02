@@ -29,20 +29,45 @@ p {
 	font-size:0.9em;
 	color: var(--couleur_police_secondaire);
 }
+.heading-permalink {
+  visibility: hidden;
+}
 </style>
-	
+
+@php
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
+use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkRenderer;
+use League\CommonMark\MarkdownConverter;
+
+// Define your configuration, if needed
+$config = [
+	'heading_permalink' => [
+        'html_class' => 'heading-permalink',
+        'insert' => 'after',
+		'id_prefix' => '',
+        'fragment_prefix' => '',
+    ],
+];
+
+// Configure the Environment with all the CommonMark parsers/renderers
+$environment = new Environment($config);
+$environment->addExtension(new CommonMarkCoreExtension());
+$environment->addExtension(new HeadingPermalinkExtension());
+
+// Instantiate the converter engine and start converting some Markdown!
+$converter = new MarkdownConverter($environment);
+@endphp
+
 <div id="wrapper">
 	<div id="contenu" class="petit">
 
 		<div style="display:flex;">
-			@if (substr(url()->previous(), -13)=="documentation")
-			<a onclick="history.go(-1)" class="bouton secondaire" style="margin:15px;">< Retour</a>
-			@else
-			<a href="documentation" class="bouton secondaire" style="margin:15px;">< Retour</a>
-			@endif
+			<a href="../documentation" class="bouton secondaire" style="margin:15px;">< Retour</a>
 
 			@if($gerer_documentation)
-			<a href="documentation/modifier/{{$documentation->id}}" class="bouton tertiaire icon-security-safe" style="margin:15px;">Modifier</a>
+			<a href="../documentation/{{$documentation->id}}/modifier" class="bouton tertiaire icon-security-safe" style="margin:15px;">Modifier</a>
 			@endif
 		</div>
 
@@ -52,7 +77,7 @@ p {
 				<h1 class="titre">{{$documentation->titre}}</h1>
 				<p class="derniere_maj">Dernière mise à jour <span>{{$date}}</span></p>
 
-				{!! Str::markdown($documentation->contenu_md); !!}
+				{!! $converter->convert($documentation->contenu_md); !!}
 			</div>
 		</div>
 	</div>

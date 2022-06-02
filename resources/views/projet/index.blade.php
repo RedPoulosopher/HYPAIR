@@ -10,10 +10,11 @@
 	<div id="contenu" class="petit">
 		<h1>- Projet -</h1>
 		
-		<div id="search" class="ombre_inset centre-element" style="margin-bottom:60px;"><span class="input" placeholder="Rechercher un projet" id="search_input" contenteditable>Rechercher un projet</span></div>
-
+		<div id="search" class="ombre_inset centre-element icon-search-normal-1" style="margin-bottom:60px;"><span class="input" placeholder="Rechercher un projet" id="search_input" contenteditable>Rechercher un projet</span></div>
+		
 		@if($gerer_projet)
-		<a href="/projet/nouveau" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Créer un projet</a>
+		<a href="projet/nouveau" class="bouton tertiaire ombre_petite icon-security-safe" style="margin:15px;">Créer un projet</a>
+		
 		@endif
         
         <div id="index_docs">
@@ -29,6 +30,28 @@
 			@endforeach
 
 		</div>
+	</div>
+	<div id="index_docs">
+        
+			@foreach ($projets as $projet)
+			<a class="projet_liste" href="projet/{{ $projet->slug }}" visibilite="{{ $projet->visibilite }}">
+				<div>
+					@if ($projet->visibilite > 0)
+					<span class="icon-eye-slash" title="projet masquée"></span>
+					@endif
+					@if ($projet->visibilite == 1)
+					<span class="icon-search-normal-1" title="projet recherchable"></span>
+					@endif
+					@if ($projet->confidentialite > 0)
+					<span class="icon-security" title="projet privée"></span>
+					@endif
+					<span class="titre">{{ $projet->titre }}</span>
+					<p class="description">{{ $projet->description_courte }}</p>
+
+				</div>
+			</a>
+			@endforeach	
+
 	</div>
 </div>
 

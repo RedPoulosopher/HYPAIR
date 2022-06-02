@@ -24,7 +24,7 @@ class ProjetRequest extends FormRequest
     public function rules()
     {
         return [
-            'association_id' => 'bail|required|integer',
+            'entite_id' => 'bail|required|integer',
             'confidentialite' => 'bail|required|boolean',
             'titre' => 'bail|required|string',
             'projet_id' => 'bail|required|integer',

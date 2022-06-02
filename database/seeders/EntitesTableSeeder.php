@@ -238,7 +238,7 @@ class EntitesTableSeeder extends Seeder
         DB::table('entites')->insert($bureaux);
         DB::table('entites')->insert($listes);
 
-        $lien_logos = [
+        /*$lien_logos = [
             "bde"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/bde.png",
             "air"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/air.png",
             "meca"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/meca.png",
@@ -252,12 +252,12 @@ class EntitesTableSeeder extends Seeder
             "imtalks"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/talks.png",
             "robotique"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/robot.png",
             "brasseurs"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/brasseur.png",
-        ];
+        ];  
 
         foreach($asso_bde as $entite){
             $asso_uid = $entite["uid"];
             $entite_id = Entite::where('uid', $asso_uid)->first()->id;
             GestionLogo::stocker_logo_depuis_url($lien_logos[$asso_uid], $entite_id);
-        }
+        }*/
     }
 }

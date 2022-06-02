@@ -15,7 +15,7 @@ class CreateProjetsTable extends Migration
     {
         Schema::create('projets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('association_id')->references('id')->on('associations')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('entite_id')->references('id')->on('associations')->onUpdate('cascade')->onDelete('cascade');
             $table->tinyInteger('confidentialite');
             $table->string('titre');
             $table->string('slug')->index();

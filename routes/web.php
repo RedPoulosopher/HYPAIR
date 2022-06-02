@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
+use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\EntiteController;
 use App\Http\Controllers\MembreController;
 use App\Http\Controllers\LogoController;
@@ -104,6 +105,17 @@ $routes_entites = function () {
         });
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show')->name('documentation_afficher');
+    });
+    
+    Route::controller(ProjetController::class)->group(function(){
+        Route::middleware('protection.autorisation:gerer_projet')->group(function(){
+            Route::get('/projet/nouveau', 'create');
+            Route::post('/projet/nouveau', 'store');
+            Route::get('/projet/modifier/{projet_id}', 'edit');
+            Route::post('/projet/modifier/{projet_id}', 'update');
+        });
+        Route::get('/projet', 'index');
+        Route::get('/projet/{slug}', 'show')->name('projet_afficher');
     });
     
     Route::controller(EntiteController::class)->group(function(){

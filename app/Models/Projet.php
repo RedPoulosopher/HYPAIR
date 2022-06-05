@@ -31,9 +31,9 @@ class Projet extends Model
     }
 
     public static function existe_slug($slug, $entite_id){
-        $projet_id = self::where('slug', $slug)->where('entite_id', $entite_id);
+        $projet= self::where('slug', $slug)->where('entite_id', $entite_id);
 		if(is_null($projet)){return false;}
-        return $projet_id;
+        return $projet;
     }
     public static function index(){
         return self::select('id', 'titre','description_courte', 'slug', 'confidentialite','chef_projet','date_fin')

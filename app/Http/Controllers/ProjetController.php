@@ -8,11 +8,10 @@ use \App\Models\User;
 use \App\Models\Membre;
 use \App\Models\Projet;
 use \App\Models\Avancee;
-namespace App\Http\Controllers;
-
 use Illuminate\Support\Str;
 use \App\Services\AutorisationGestion;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DateTimeZone;
 
@@ -22,6 +21,7 @@ class ProjetController extends Controller
 
 		$niveau_administation = AutorisationGestion::protectionPage("gerer_projet");
 		$confidentialites = config('roles');
+		//$membre = Auth::user()->membres()->where("id", session(["entite_id"]));
 
 		return view('projet.creation')->with('titre','Nouveau projet')->with('confidentialites',$confidentialites);
 	}
@@ -44,7 +44,7 @@ class ProjetController extends Controller
 			'confidentialite' => ['filled','numeric','max:20'],
 			'description_courte'=>['filled','max:1000'],
 			'date_fin' => ['filled','date_format:Y-m-d'],
-			'chef_projet' => ['filled','numeric'] 
+			'chef_projet' => ['nullable','numeric'] 
 		];
 
 		$this->validate($request, $validation);
@@ -58,9 +58,8 @@ class ProjetController extends Controller
 		$projet->slug = Str::slug($request->titre, '-');
 		$projet->entite_id = session('entite_id');
 		$projet->confidentialite = $request->confidentialite;
-		$projet->chef_projet = $request->chef_projet;
+		$projet->chef_projet = Auth::user()->id;
 		$projet->description_courte = $request->description_courte;
-		$projet->creadted_at = $request->created_at;
 		$projet->date_fin= $request->date_fin;
 
 		return $projet;

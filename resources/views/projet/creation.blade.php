@@ -50,7 +50,7 @@
 			
 			<div class="groupe ombre_petite">
 				<label class="input_groupe">
-					<p class="titre">Date de fin du projet :</p>
+					<p class="titre">*Date de fin du projet :</p>
 					<input type="date" name="date_fin" class="input" value="{{old('date_fin') ?? $projet->date_fin ?? '' }}" min="2000-01-01" max="2000-12-31"/>
 				</label>
 			</div>

@@ -63,8 +63,10 @@ $routes_AIR = function(){
             });
 
             Route::controller(LogoController::class)->group(function(){
-                Route::get('/entite/{entite_id}/logotype', 'create')->name('modifier_logotype');
-                Route::post('/entite/{entite_id}/logotype', 'store');
+                Route::get('/entite/{entite_id}/logotype', 'modifier_logo')->name('modifier_logotype');
+                Route::post('/entite/{entite_id}/logotype', 'maj_logo');
+                Route::get('/entite/{entite_id}/couleur', 'modifier_couleur')->name('modifier_couleur');
+                Route::post('/entite/{entite_id}/couleur', 'maj_couleur');
             });
 
             Route::controller(MembreController::class)->group(function(){

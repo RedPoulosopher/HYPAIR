@@ -4,9 +4,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		<title>@yield('titre', 'Test') - AIR</title>
+		<title>@yield('titre', 'Test') - HypAIR</title>
 		<link rel="stylesheet" href="/css/app.css" type="text/css" >
-		<base href="{{session('entite_lien')}}/">
 	</head>
 	
 	<body class="dark-theme">

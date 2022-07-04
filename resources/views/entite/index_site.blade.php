@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/css/entite.index.css" type="text/css" >
 
 <div id="contenu" class="grand">
+    <a href="/entites" class="bouton secondaire">< retour au choix du site</a>
     @foreach($bureaux as $bureau)
         <h1>- Entites du {{ $bureau->nom }} -</h1>
         <div class="liste_comite_club">
@@ -22,7 +23,7 @@
         </div>
 
         <div class="liste_comite_club">
-            @foreach ($comites_clubs_dependants[$bureau->bureau_de_ratachement->value] as $comite_club)
+            @foreach ($comites_clubs_dependants[$bureau->ratachement->value] as $comite_club)
                 <a class="comite_club" href="{{$comite_club->lien_relatif()}}">
                     <div class="logo ombre_petite">
                         <div class="cercle" style="border-color: {{ $comite_club->couleur_sombre }}"></div>
@@ -30,17 +31,42 @@
                     </div>
                     <div class="info" style="text-align:center;">
                         <p class="nom">{{ $comite_club->nom }}</p>
-                        @if (!is_null($comite_club->categories))
-                            <div class="categories">
-                                @foreach (json_decode($comite_club->categories) as $categorie)
-                                    <span>#{{$categorie}}</span>
-                                @endforeach
-                            </div>
-                        @endif
+                        {{-- <div class="categories">
+                            @foreach ($comite_club->categories() as $categorie)
+                                <span>#{{$categorie->label}}</span>
+                            @endforeach
+                        </div> --}}
                     </div>
                 </a>
             @endforeach
         </div>
     @endforeach
+
+    @if (count($entites_independantes ?? array()) > 0)
+        <h1>- Entites indépendantes -</h1>
+        <div class="liste_comite_club">
+            @foreach ($entites_independantes as $entite_independante)
+                <a class="comite_club" href="{{$entite_independante->lien_relatif()}}">
+                    <div class="logo ombre_petite">
+                        <div class="cercle" style="border-color: {{ $entite_independante->couleur_sombre }}"></div>
+                        <img src="{{ $entite_independante->logo_url("petit") }}"/>
+                    </div>
+                    <div class="info" style="text-align:center;">
+                        <p class="nom">{{ $entite_independante->nom }}</p>
+                        <div class="categories">
+                            {{-- @foreach ($comite_club->categories() as $categorie)
+                                <span>#{{$categorie->label}}</span>
+                            @endforeach --}}
+                        </div>
+                    </div>
+                </a>
+            @endforeach
+        </div>
+    @endif
 </div>
+
+<script>
+site = window.location.pathname.split('/').pop()
+localStorage.setItem('defaut_entites_index_site', site)
+</script>
 @endsection

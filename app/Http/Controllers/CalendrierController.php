@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Evenement;
+use \App\Services\AutorisationGestion;
 
 class CalendrierController extends Controller
 {
@@ -12,7 +13,14 @@ class CalendrierController extends Controller
         $annee = date('Y');
         $mois = date('m');
         $evenements= Evenement::index($annee, $mois);
-        return view("evenements.calendrier", ["events" => $evenements->toArray()]);
+        $tables = Evenement::select('titre', 'slug', 'description', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'validation')
+        ->get();
+        return view("evenements.calendrier", [
+            "events" => $evenements->toArray(),	
+			'tables' => $tables,            
+			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")
+        ],
+    );
 
     }
 

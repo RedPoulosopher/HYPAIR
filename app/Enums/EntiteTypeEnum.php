@@ -3,7 +3,7 @@ namespace App\Enums;
 
 enum EntiteTypeEnum:string
 {
-    case Entite = 'association';
+    case Association = 'association';
     case Bureau = 'bureau';
     case Club = 'club';
     case Comite = 'comité';

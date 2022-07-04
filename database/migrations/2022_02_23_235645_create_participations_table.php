@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLogosTable extends Migration
+class CreateParticipationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLogosTable extends Migration
      */
     public function up()
     {
-        Schema::create('logos', function (Blueprint $table) {
+        Schema::create('participations', function (Blueprint $table) {
             $table->id();
 	        $table->foreignId('entite_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
 	        $table->date('nom');
@@ -27,6 +27,6 @@ class CreateLogosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logos');
+        Schema::dropIfExists('participations');
     }
 }

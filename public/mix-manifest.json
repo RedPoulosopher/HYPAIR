@@ -6,7 +6,9 @@
     "/css/documentation.css": "/css/documentation.css",
     "/css/entite.index.css": "/css/entite.index.css",
     "/css/formulaire.css": "/css/formulaire.css",
+    "/css/general.css": "/css/general.css",
     "/css/jstable.css": "/css/jstable.css",
+    "/css/sidenav.css": "/css/sidenav.css",
     "/css/simpleMDE.css": "/css/simpleMDE.css",
     "/js/jstable.min.js": "/js/jstable.min.js"
 }

@@ -39,6 +39,18 @@ border-left: var(--border);
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='rgba(127,127,127,0.15)' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
     cursor: not-allowed;
 }
+.documentation {
+	width:100%;
+	background:var(--gris_2);
+	padding:35px;
+	border-radius:25px;
+	box-sizing:border-box;
+	border:1px solid var(--gris_1);
+	box-sizing: ;
+}
+.my-class {
+    display: none;
+}
 </style>
 
 
@@ -66,7 +78,35 @@ border-left: var(--border);
         <div id="calendrier">
         </div>
     </div>
+
+
+    @foreach ($tables as $table)
+    <div id="<?= $table['slug'] ?>" class="my-class"
+        @if ($table['validation'] == 1)
+        <div class="petit" style="position:absolute">
+        
+		<div style="display:flex;">
+			@if($gerer_evenement)
+			<a href="/evenement/modifier/{{$evenement->id}}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
+			@endif
+		</div>
+
+		<div class="documentation ombre_petite">
+			<div class="contenu_doc" id="contenu_doc">
+				<h1 class="titre"><?= $table['titre'] ?></h1>
+                <p>Description : <?= $table['description'] ?></p>
+                <p>Lieu : <?= $table['lieu'] ?></p>
+			</div>
+
+            <p class="bouton secondaire ombre_petite info_bouton">< Retour</p>
+		</div>
+	</div>
+    @endif
+    @endforeach
+    </div>
 </div>
+
+
 
 <script>
 
@@ -155,7 +195,7 @@ function id_mois(date){
 }
 function placer_evenement_dans_jour(jour, index_evenement, evenements){
     el_jour = document.querySelector('[num_jour="' + jour + '"]')
-    el_jour.innerHTML += "<div style='background-color:"+evenements[index_evenement]["couleur_claire"]+"'>" + evenements[index_evenement]["titre"] + "</div>"
+    el_jour.innerHTML += "<div class='evenement' style='background-color:"+evenements[index_evenement]["couleur_claire"]+"'>" + evenements[index_evenement]["titre"] + "</div>"
 }
 
 event_dans_calendrier(events, mois, annee)
@@ -165,6 +205,39 @@ event_dans_calendrier(events, mois, annee)
 //pour simuler une demande de l utilisateur, appeler la requqte asynchrone avec un mois et une annee random
 
 //un listener click pour chaque evenement du calendrier, qui affiche un ecnadre avec les infos complementaires
+
+const listener_click_evenements = document.querySelectorAll('.evenement');
+
+listener_click_evenements.forEach((listener_click_evenement, index) => {
+    listener_click_evenement.addEventListener("click", function(){
+        afficher_informations_supplementaires(index, events);
+    });
+});
+
+tables = {!!json_encode($tables)!!}
+const listener_click_retour = document.querySelectorAll('.info_bouton');
+
+listener_click_retour.forEach((listener_click_retour, index) => {
+    listener_click_retour.addEventListener("click", function(){
+        var test = document.getElementById(tables[index]['slug']);
+        test.classList.add("my-class");
+    });
+});
+
+
+
+var el_wrapper = document.getElementById("wrapper");
+
+function afficher_informations_supplementaires(index_evenement, evenements) {    
+    var test = document.getElementById(evenements[index_evenement]["slug"]);
+    test.classList.remove("my-class");  
+}
+
+function annuler_info(slug) {
+    console.log(slug)
+    var test = document.getElementById(slug);
+    test.classList.add("my-class");
+    }
 
 </script>
 

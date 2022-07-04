@@ -16,8 +16,7 @@ class EvenementsTableSeeder extends Seeder
     {
         DB::table('evenements')->insert([
             [
-<<<<<<< HEAD
-                'association_id' => 1,
+                'entite_id' => 1,
                 'titre' => "Evenement",
                 'slug' => "coucou",
                 'description' => 'doc pour préciser le contenu',
@@ -25,8 +24,9 @@ class EvenementsTableSeeder extends Seeder
                 'temps_fin' => '2022-04-12 16:00:00',
                 'lieu' => 'Meud',
                 'max_participation' => 20,
+                'validation' => "1",
             ],[
-                'association_id' => 2,
+                'entite_id' => 2,
                 'titre' => "soirée BDE",
                 'slug' => "hello",
                 'description' => 'soirée du bde',
@@ -34,17 +34,19 @@ class EvenementsTableSeeder extends Seeder
                 'temps_fin' => '2022-04-12 23:00:00',
                 'lieu' => 'Meud',
                 'max_participation' => 200,
+                'validation' => "1",
             ],[
-                'association_id' => 3,
+                'entite_id' => 3,
                 'titre' => "Aprems",
                 'slug' => "helloo",
                 'description' => 'soirée du bde',
                 'temps_debut' => '2022-03-30 18:00:00',
                 'temps_fin' => '2022-04-02 23:00:00',
                 'lieu' => 'Meud',
-                'max_participation' => 200,
-=======
-                'association_id' => '1',
+                'max_participation' => 200,       
+                'validation' => "1",         
+            ],[
+                'entite_id' => '1',
                 'titre' => "Soirée",
                 'slug' => "soiree",
                 'description' => 'Soirée de folie',
@@ -53,7 +55,6 @@ class EvenementsTableSeeder extends Seeder
                 'lieu' => 'Meud',
                 'max_participation' => 20,
                 'validation' => "1",
->>>>>>> 7e6a79dd565f67af8804460efb1494b0a5200ac5
             ]
         ]);
     }

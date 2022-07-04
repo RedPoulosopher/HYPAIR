@@ -29,10 +29,6 @@ class Documentation extends Model
         return $this->belongsTo(Entite::class);
     }
 
-    public function derivation(){
-        return $this->hasMany(Documentation::class);
-    }
-
     public static function existe($documentation_id){
         $doc = self::find($documentation_id);
 		if(is_null($doc)){return false;}
@@ -40,7 +36,7 @@ class Documentation extends Model
     }
 
     public static function existe_slug($slug, $entite_id){
-        $doc = self::where('slug', $slug)->where('entite_id', $entite_id);
+        $doc = self::where('slug', $slug)->where('entite_id', $entite_id)->first();
 		if(is_null($doc)){return false;}
         return $doc;
     }

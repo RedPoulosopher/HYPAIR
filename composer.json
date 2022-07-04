@@ -10,12 +10,14 @@
     "require": {
         "php": "^8.0.2",
         "ext-mbstring": "*",
+        "diglactic/laravel-breadcrumbs": "^7.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
         "laravel/framework": "^9.0",
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.2",
+        "league/commonmark": "^2.3",
         "symfony/mailer": "^6.0"
     },
     "require-dev": {

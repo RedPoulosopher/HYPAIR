@@ -61,14 +61,15 @@
 		<h1>- <span class="icon-security-safe" title="page réservée aux administrateurs"></span> Gestion de l'entite -</h1>
 		<div class="logo">
 			<img src="{{session("entite_logo_petit")}}" alt="logo"/>
-			<a class="icon-edit-2" title="Modifier le logo et les couleurs." href="hypair.imt-ne.fr/air/contact?sujet='demande de modification du logo ou des couleurs'"></a>
+			<a class="icon-edit-2" title="Modifier le logo et les couleurs." href="https://hypair.imt-ne.fr/air/contact?sujet='demande de modification du logo ou des couleurs'"></a>
 		</div>
 		<div class="conteneur_boutons">
 			<a class="gros_bouton" href="modifier/description">Modifier les descriptions et catégories</a>
-			<a class="gros_bouton" href="hypair.imt-ne.fr/air/contact?sujet='demande de modification du logo ou des couleurs'">Modifier le logo et les couleurs</a>
+			<a class="gros_bouton" href="https://hypair.imt-ne.fr/air/contact?sujet='demande de modification du logo ou des couleurs'">Modifier le logo et les couleurs</a>
 			<a class="gros_bouton" href="membres">Gérer les membres</a>
+			<a class="gros_bouton" href="reseau_social">Gérer les réseaux sociaux</a>
 			@if ($entite["type"]=="bureau" || $entite["uid"]=="air")
-				<a class="gros_bouton" href="entites/gestion">Gérer les entites</a>
+				<a class="gros_bouton" href="../entites/admin">Gérer les entites</a>
 			@endif
 		</div>
 	</div>

@@ -10,7 +10,7 @@ class Evenement extends Model
     use HasFactory;
     protected $fillable = [
         'titre',
-        'association_id',
+        'entite_id',
         'slug',
         'description',
         'temps_debut',
@@ -23,21 +23,21 @@ class Evenement extends Model
         'validation',
     ];
     
-    public function association(){
-        return $this->belongsTo(Association::class);
+    public function entite(){
+        return $this->belongsTo(Entite::class);
     }
 
     public static function index($annee, $mois) {
         //ca doit retourner tous les evenements de l annee et du mois demandes. Faudra regarder la doc sur eloquent
         $evenements_mois_courant = 
-        self::select('evenements.*','associations.uid','associations.nom','associations.couleur_claire','associations.couleur_sombre')
+        self::select('evenements.*','entites.uid','entites.nom','entites.couleur_claire','entites.couleur_sombre')
             ->whereMonth("temps_debut", $mois)
             ->whereYear("temps_debut", $annee)
             ->orWhere(function($query) use($annee, $mois){
                 $query->whereMonth("temps_fin", $mois)
                     ->whereYear("temps_fin", $annee);
             })
-            ->join('associations','associations.id','=','evenements.association_id');
+            ->join('entites','entites.id','=','evenements.entite_id');
         return $evenements_mois_courant->get();
     }
 }

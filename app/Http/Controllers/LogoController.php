@@ -52,7 +52,7 @@ class LogoController extends Controller
 		}
 
 		if($request->query('creation')){
-			return redirect()->route('passation', ['entite_id' => $entite->id, 'creation' => true]);
+			return redirect()->route('gestion_membres', ['entite_uid' => 'air','entite_id' => $entite->id, 'type' => 'membres', 'creation' => true]);
 		} else {
 			return redirect($entite->url());
 		}

@@ -19,7 +19,7 @@ class EvenementController extends Controller
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
 		$evenements_existants = Evenement::select('id','titre')
-			->where('association_id', session('association_id'))
+			->where('entite_id', session('entite_id'))
 			->where("confidentialite", "<=", $niveau_administration)
 			->get();
 		
@@ -57,7 +57,7 @@ class EvenementController extends Controller
 			abort(403);
 		}
 
-		$docs_existantes = Evenement::select('id','titre')->where('association_id', session('association_id'))->get();
+		$docs_existantes = Evenement::select('id','titre')->where('entite_id', session('entite_id'))->get();
 
 		return view('evenements.formulaire', [
 			'documentation' => $evenement,
@@ -83,7 +83,7 @@ class EvenementController extends Controller
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
 		$evenement = Evenement::where('slug', $request->route('slug'))
-			->where('association_id', session('association_id'));
+			->where('entite_id', session('entite_id'));
 		
 		if(!$evenement->exists()){
 			abort(404);
@@ -100,7 +100,7 @@ class EvenementController extends Controller
 	}
 	
 
-	public function show_home(Request $request)
+	public function show_home()
 	{
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
@@ -138,7 +138,7 @@ class EvenementController extends Controller
         
 		//formate les résultats pour leur entrée dans la table
 		$resultat = [
-			'association_id' => session("association_id"),
+			'entite_id' => session("entite_id"),
 			"titre" => $request->titre,
 			"description" => $request->description,
 			"slug" => Str::slug($request->titre, '-'),            

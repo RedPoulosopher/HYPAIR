@@ -15,7 +15,7 @@ class CreateEvenementsTable extends Migration
     {
         Schema::create('evenements', function (Blueprint $table) {
             $table->id();
-	        $table->foreignId('association_id');
+	        $table->foreignId('entite_id');
             $table->string('titre');
             $table->string('slug',128);
             $table->text('description');

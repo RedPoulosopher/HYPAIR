@@ -80,29 +80,25 @@ border-left: var(--border);
     </div>
 
 
-    @foreach ($tables as $table)
-    <div id="<?= $table['slug'] ?>" class="my-class"
-        @if ($table['validation'] == 1)
-        <div class="petit" style="position:absolute">
-        
-		<div style="display:flex;">
-			@if($gerer_evenement)
-			<a href="/evenement/modifier/{{$evenement->id}}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
-			@endif
-		</div>
+    <div id="info" class="my-class" style="position:absolute" >
+        <div class="petit" >
+            
+            <div style="display:flex;">
+                @if($gerer_evenement)
+                <a href="/evenement/modifier/{{$evenement->id}}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
+                @endif
+            </div>
 
-		<div class="documentation ombre_petite">
-			<div class="contenu_doc" id="contenu_doc">
-				<h1 class="titre"><?= $table['titre'] ?></h1>
-                <p>Description : <?= $table['description'] ?></p>
-                <p>Lieu : <?= $table['lieu'] ?></p>
-			</div>
+            <div class="documentation ombre_petite">
+                <div class="contenu_doc" id="contenu_doc">
+                    <h1 id="titre"></h1>
+                    <p id ="description">Description :</p>
+                    <p id="lieu">Lieu : </p>
+                </div>
 
-            <p class="bouton secondaire ombre_petite info_bouton">< Retour</p>
-		</div>
-	</div>
-    @endif
-    @endforeach
+                <p class="bouton secondaire ombre_petite info_bouton">< Retour</p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -194,8 +190,8 @@ function id_mois(date){
     return date.getMonth()+date.getFullYear()*12
 }
 function placer_evenement_dans_jour(jour, index_evenement, evenements){
-    el_jour = document.querySelector('[num_jour="' + jour + '"]')
-    el_jour.innerHTML += "<div class='evenement' style='background-color:"+evenements[index_evenement]["couleur_claire"]+"'>" + evenements[index_evenement]["titre"] + "</div>"
+    el_jour = document.querySelector('[num_jour="' + jour + '"]');
+    el_jour.innerHTML += "<div id="+evenements[index_evenement]["slug"]+" class='evenement' style='background-color:"+evenements[index_evenement]["couleur_claire"]+"'>" + evenements[index_evenement]["titre"] + "</div>"
 }
 
 event_dans_calendrier(events, mois, annee)
@@ -210,17 +206,24 @@ const listener_click_evenements = document.querySelectorAll('.evenement');
 
 listener_click_evenements.forEach((listener_click_evenement, index) => {
     listener_click_evenement.addEventListener("click", function(){
-        afficher_informations_supplementaires(index, events);
+        for (var i = 0 ; i < events.length ; i++) {
+            if (events[i]["slug"] == this.id) {
+                afficher_informations_supplementaires(i, events);
+                break;
+            }
+        }
     });
 });
+
 
 tables = {!!json_encode($tables)!!}
 const listener_click_retour = document.querySelectorAll('.info_bouton');
 
 listener_click_retour.forEach((listener_click_retour, index) => {
     listener_click_retour.addEventListener("click", function(){
-        var test = document.getElementById(tables[index]['slug']);
-        test.classList.add("my-class");
+        refresh();
+
+        document.getElementById("info").classList.add("my-class");
     });
 });
 
@@ -229,15 +232,20 @@ listener_click_retour.forEach((listener_click_retour, index) => {
 var el_wrapper = document.getElementById("wrapper");
 
 function afficher_informations_supplementaires(index_evenement, evenements) {    
-    var test = document.getElementById(evenements[index_evenement]["slug"]);
-    test.classList.remove("my-class");  
+    refresh();
+
+    document.getElementById("titre").innerText += evenements[index_evenement]["titre"];
+    document.getElementById("description").innerText += evenements[index_evenement]["description"];
+    document.getElementById("lieu").innerText += evenements[index_evenement]["lieu"];
+
+    document.getElementById("info").classList.remove("my-class"); 
 }
 
-function annuler_info(slug) {
-    console.log(slug)
-    var test = document.getElementById(slug);
-    test.classList.add("my-class");
-    }
+function refresh() {
+    document.getElementById("titre").innerText = '';
+    document.getElementById("description").innerText = '';
+    document.getElementById("lieu").innerText = '';
+}
 
 </script>
 

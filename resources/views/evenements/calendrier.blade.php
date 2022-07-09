@@ -48,14 +48,51 @@ border-left: var(--border);
 	border:1px solid var(--gris_1);
 	box-sizing: ;
 }
-.my-class {
+.popup-cachee {
     display: none;
 }
+#wrapper {
+    display: flex;
+    flex-direction: column;
+}
+#boutons {
+    display: flex;
+    position:fixed;
+    top:20px;
+}
+#contenu {
+    position:fixed;
+    top:80px;
+    height: 100%;
+}
+.bouton {
+    width: 50px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.evenement:hover {
+  color: white;
+  box-shadow: 0 0 15px 2px rgb(127,127,127);
+}
+.evenement {    
+    transition: all 0.3s ease-out;
+} 
 </style>
 
+<head>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
 
 <div id="wrapper">
+    <div id="boutons">
+        <p id="fleche-gauche" class="bouton secondaire ombre_petite info_bouton"> <--- </p>
+        <p id="fleche-droite" class="bouton secondaire ombre_petite info_bouton"> ---> </p>
+    </div>
+  
+
     <div id="contenu" class="grand">
+        <h2 id="date" style="text-align:center;"></h2>
         {{-- <select>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -80,7 +117,7 @@ border-left: var(--border);
     </div>
 
 
-    <div id="info" class="my-class" style="position:absolute" >
+    <div id="info" class="popup-cachee" style="position:absolute" >
         <div class="petit" >
             
             <div style="display:flex;">
@@ -124,11 +161,17 @@ function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
 
     // remplissage
     for(var i=1; i<=nbr_jours_dans_mois; i++) {
-        el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''><div>" + i + "</div></div>")
+        //condition pour colorier la date d aujourd hui sur le calendrier
+        if (mois_courant && i == jour_actuel + index_jour_debut - 1) {
+            el_calendrier.innerHTML += ("<div class='jour' id='today' num_jour='" + i + "''><div>" + i + "</div></div>");
+            document.getElementById("today").style.cssText = 'border: 1px solid var(--couleur_accentuation); box-shadow: 0 0 7px; background-color:rgba(127,127,127,0.30)';
+        }
+        else {
+            el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''><div>" + i + "</div></div>");
+        
+        }
     }
 
-    console.log(nbr_jours_dans_mois)
-    console.log(index_jour_debut)
     // remplissage du calendrier apres la fin du mois
     for (var i = 0; i < 7 - (nbr_jours_dans_mois+index_jour_debut)%7; i++) {
         el_calendrier.innerHTML += ("<div class='jour desactive'></div>");
@@ -149,7 +192,23 @@ function remplissage(annee, mois){ //mois : 0=>11
 let aujourdhui = new Date();
 let mois = aujourdhui.getMonth();
 let annee = aujourdhui.getFullYear();
+//garder une trace de la date actuelle
+let jour_actuel = aujourdhui.getDay();
+let mois_actuel = mois;
+let annee_actuelle = annee;
+mois_courant = true;
+//remplissage
+test_mois_courant()
 remplissage(annee, mois)
+function test_mois_courant() {    
+    if (mois == mois_actuel && annee == annee_actuelle) {
+        mois_courant = true;
+    }
+    else {
+        mois_courant = false;        
+    }
+}
+
 
 //place les events dans le calendrier
 function event_dans_calendrier(evenements, mois, annee){
@@ -202,19 +261,122 @@ event_dans_calendrier(events, mois, annee)
 
 //un listener click pour chaque evenement du calendrier, qui affiche un ecnadre avec les infos complementaires
 
-const listener_click_evenements = document.querySelectorAll('.evenement');
 
-listener_click_evenements.forEach((listener_click_evenement, index) => {
-    listener_click_evenement.addEventListener("click", function(){
-        for (var i = 0 ; i < events.length ; i++) {
-            if (events[i]["slug"] == this.id) {
-                afficher_informations_supplementaires(i, events);
-                break;
+// GERER CHANGEMENT MOIS
+document.getElementById("fleche-gauche").addEventListener("click",  function() {
+    mois -= 1;
+    test_mois_courant()
+    remplissage(annee, mois);
+    event_choix_calendrier();
+})
+
+document.getElementById("fleche-droite").addEventListener("click",  function() {
+    mois += 1;
+    test_mois_courant()
+    remplissage(annee, mois);
+    
+    event_choix_calendrier();
+})
+
+function event_choix_calendrier() {
+    jQuery.ajax({
+            type: "GET",
+            url: "/calendrier/index_mois_json/"+annee+"-"+mois,
+            success: (data) => {
+                result_mois = mois%12;
+                afficher_mois_annee(result_mois);
+                event_dans_calendrier(data.events, mois, annee);
+
+                listener_events(data.events);
+            },
+            error: function(){
+                console.log(arguments);
             }
-        }
-    });
-});
+        });
+}
 
+
+
+
+
+result_mois = mois%12;
+annee_choisie = annee;
+afficher_mois_annee(result_mois);
+
+function afficher_mois_annee(result_mois) {
+    while (result_mois < 0) {
+        result_mois += 12;
+    }
+
+    calcul_annee = Math.trunc(mois/12);
+    if (mois/12 < 0 && Math.trunc(mois/12) != mois/12) {
+        annee_choisie = annee + calcul_annee - 1;
+    } else if (mois/12 < 0 && Math.trunc(mois/12) == mois/12) { 
+        annee_choisie = annee + calcul_annee;
+    } else {
+        annee_choisie = annee + calcul_annee;
+    }
+
+    changer_mois = document.getElementById("date");
+    switch(result_mois){
+        case 0:
+            changer_mois.innerHTML = "Janvier";
+            break;
+        case 1:
+            changer_mois.innerHTML = "Février";
+            break;
+        case 2:
+            changer_mois.innerHTML = "Mars";
+            break;
+        case 3:
+            changer_mois.innerHTML = "Avril";
+            break;
+        case 4:
+            changer_mois.innerHTML = "Mai";
+            break;
+        case 5:
+            changer_mois.innerHTML = "Juin";
+            break;
+        case 6:
+            changer_mois.innerHTML = "Juillet";
+            break;
+        case 7:
+            changer_mois.innerHTML = "Août";
+            break;
+        case 8:
+            changer_mois.innerHTML = "Septembre";
+            break;
+        case 9:
+            changer_mois.innerHTML = "Octobre";
+            break;
+        case 10:
+            changer_mois.innerHTML = "Novembre";
+            break;
+        case 11:
+            changer_mois.innerHTML = "Décembre";
+            break;
+    }    
+    changer_mois.innerHTML += " " + annee_choisie;
+}
+
+
+// POP UP
+listener_events(events);
+
+function listener_events(evenement) {
+    const listener_click_evenements = document.querySelectorAll('.evenement');
+
+    listener_click_evenements.forEach((listener_click_evenement, index) => {
+        listener_click_evenement.addEventListener("click", function(){
+            for (var i = 0 ; i < evenement.length ; i++) {
+                if (evenement[i]["slug"] == this.id) {
+                    afficher_informations_supplementaires(i, evenement);
+                    break;
+                }
+            }
+        });
+    });
+}
 
 tables = {!!json_encode($tables)!!}
 const listener_click_retour = document.querySelectorAll('.info_bouton');
@@ -223,7 +385,7 @@ listener_click_retour.forEach((listener_click_retour, index) => {
     listener_click_retour.addEventListener("click", function(){
         refresh();
 
-        document.getElementById("info").classList.add("my-class");
+        document.getElementById("info").classList.add("popup-cachee");
     });
 });
 
@@ -238,7 +400,7 @@ function afficher_informations_supplementaires(index_evenement, evenements) {
     document.getElementById("description").innerText += evenements[index_evenement]["description"];
     document.getElementById("lieu").innerText += evenements[index_evenement]["lieu"];
 
-    document.getElementById("info").classList.remove("my-class"); 
+    document.getElementById("info").classList.remove("popup-cachee"); 
 }
 
 function refresh() {

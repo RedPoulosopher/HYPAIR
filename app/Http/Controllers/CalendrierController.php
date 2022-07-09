@@ -26,13 +26,13 @@ class CalendrierController extends Controller
 
     public static function calendrier_index_json(Request $request){
         $annee = $request["annee"];
-        $mois = $request["mois"];
+        $mois = $request["mois"] +1;
 
         //on recupere les events demandes
-
-        //on retourne un tableau JSON
-        return Response()->json(["test"=>$annee]);
-
+        $evenements= Evenement::index($annee, $mois);
+       
+        return ["events" => $evenements];
     }
     //
+
 }

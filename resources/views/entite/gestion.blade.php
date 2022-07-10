@@ -68,6 +68,7 @@
 			<a class="gros_bouton" href="https://hypair.imt-ne.fr/air/contact?sujet='demande de modification du logo ou des couleurs'">Modifier le logo et les couleurs</a>
 			<a class="gros_bouton" href="membres">Gérer les membres</a>
 			<a class="gros_bouton" href="reseau_social">Gérer les réseaux sociaux</a>
+			<a class="gros_bouton" href="evenement">Gérer les évènements</a>
 			@if ($entite["type"]=="bureau" || $entite["uid"]=="air")
 				<a class="gros_bouton" href="../entites/admin">Gérer les entites</a>
 			@endif

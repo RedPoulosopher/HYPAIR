@@ -38,8 +38,9 @@ class EvenementController extends Controller
 		$traitement = $this->formulaire_traitement($request);
 		Evenement::create($traitement);
 
-		return redirect("/evenement");
+		return redirect(session('entite_uid') . "/entite/evenement");
 	}
+	
 
 
 	public function edit(Request $request)
@@ -106,9 +107,10 @@ class EvenementController extends Controller
 
 		$tables = Evenement::select('titre', 'description', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'validation')
 			->get();
-		
+		$entite = session('entite_uid');
 		return view('evenements.home-evenement', [			
 			'tables' => $tables,
+			'entite' => $entite,
 			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")
 		]);
 	}
@@ -128,9 +130,7 @@ class EvenementController extends Controller
             'lieu' => ['nullable','max:128'],
             'max_participation' => ['nullable','max:250'],
             'confidentialite' => ['filled'],
-            'pour_cotisant' => ['filled'],
-            'important' => ['filled'],
-            'validation' => ['filled'],
+            'pour_cotisant' => ['filled']
 		];
 		$this->validate($request, $validation);
 
@@ -148,8 +148,6 @@ class EvenementController extends Controller
             'max_participation' => $request->visibilite,
 			"confidentialite" => $request->confidentialite,
             'pour_cotisant' => $request->pour_cotisant,
-            'important' => $request->important,
-            'validation' => $request->validation,
 			"derive_de" => $request->derive_de,
 		];
 

@@ -19,7 +19,6 @@ class Evenement extends Model
         'max_participation',
         'confidentialite',
         'pour_cotisant',
-        'important',
         'validation',
     ];
     

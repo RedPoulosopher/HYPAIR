@@ -78,6 +78,10 @@ border-left: var(--border);
 .evenement {    
     transition: all 0.3s ease-out;
 } 
+.non_valide {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='rgba(255, 0, 0, 0.55)' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+   
+}
 </style>
 
 <head>
@@ -119,20 +123,19 @@ border-left: var(--border);
 
     <div id="info" class="popup-cachee" style="position:absolute" >
         <div class="petit" >
-            
-            <div style="display:flex;">
-                @if($gerer_evenement)
-                <a href="/evenement/modifier/{{$evenement->id}}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
-                @endif
-            </div>
+            <div class="documentation ombre_petite" >
+                <div id="gerer" style="display:flex;">
 
-            <div class="documentation ombre_petite">
-                <div class="contenu_doc" id="contenu_doc">
-                    <h1 id="titre"></h1>
-                    <p id ="description">Description :</p>
-                    <p id="lieu">Lieu : </p>
+                 
                 </div>
 
+                <div class="contenu_doc" id="contenu_doc">
+                    <h1 id="titre"></h1>
+                    <p id="description">Description : </p>
+                    <p id="lieu">Lieu : </p>
+                    <p id="heure_debut">Heure de début : </p>
+                    <p id="heure_fin">Heure de fin : </p>
+                </div>
                 <p class="bouton secondaire ombre_petite info_bouton">< Retour</p>
             </div>
         </div>
@@ -162,7 +165,7 @@ function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
     // remplissage
     for(var i=1; i<=nbr_jours_dans_mois; i++) {
         //condition pour colorier la date d aujourd hui sur le calendrier
-        if (mois_courant && i == jour_actuel + index_jour_debut - 1) {
+        if (mois_courant && i == jour_actuel) {
             el_calendrier.innerHTML += ("<div class='jour' id='today' num_jour='" + i + "''><div>" + i + "</div></div>");
             document.getElementById("today").style.cssText = 'border: 1px solid var(--couleur_accentuation); box-shadow: 0 0 7px; background-color:rgba(127,127,127,0.30)';
         }
@@ -181,7 +184,7 @@ function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
 var nbr_jours_dans_mois = 0
 var index_jour_debut = 0
 function remplissage(annee, mois){ //mois : 0=>11
-    el_calendrier.innerHTML=""
+    el_calendrier.innerHTML="";
     nbr_jours_dans_mois = new Date(annee, mois+1, 0).getDate();
     index_jour_debut = new Date(annee, mois, 1).getUTCDay();
 
@@ -193,7 +196,7 @@ let aujourdhui = new Date();
 let mois = aujourdhui.getMonth();
 let annee = aujourdhui.getFullYear();
 //garder une trace de la date actuelle
-let jour_actuel = aujourdhui.getDay();
+let jour_actuel = aujourdhui.getDate();
 let mois_actuel = mois;
 let annee_actuelle = annee;
 mois_courant = true;
@@ -209,7 +212,7 @@ function test_mois_courant() {
     }
 }
 
-
+entite = {!!json_encode($entite)!!}
 //place les events dans le calendrier
 function event_dans_calendrier(evenements, mois, annee){
     const range = (start, end, length = end - start + 1) => Array.from({ length }, (_, i) => start + i)
@@ -241,7 +244,9 @@ function event_dans_calendrier(evenements, mois, annee){
         }
         //on parcours le tableau qu'on vient de creer, on appelle placer_evenement_dans_jour a chaque fois
         for (var j=0 ; j<tableau.length ; j++){
-            placer_evenement_dans_jour(tableau[j], i, evenements)
+            if (entite == 'bde' || evenements[i]['uid'] == entite){
+                placer_evenement_dans_jour(tableau[j], i, evenements)
+            }
         }
     }
 }
@@ -250,7 +255,11 @@ function id_mois(date){
 }
 function placer_evenement_dans_jour(jour, index_evenement, evenements){
     el_jour = document.querySelector('[num_jour="' + jour + '"]');
-    el_jour.innerHTML += "<div id="+evenements[index_evenement]["slug"]+" class='evenement' style='background-color:"+evenements[index_evenement]["couleur_claire"]+"'>" + evenements[index_evenement]["titre"] + "</div>"
+    if (evenements[index_evenement]["validation"] == 0) {
+        el_jour.innerHTML += "<div id="+evenements[index_evenement]["slug"]+" class='evenement non_valide' >" + evenements[index_evenement]["titre"] + "</div>"
+    } else {
+        el_jour.innerHTML += "<div id="+evenements[index_evenement]["slug"]+" class='evenement' style='background-color:"+evenements[index_evenement]["couleur_claire"]+"'>" + evenements[index_evenement]["titre"] + "</div>"
+    }
 }
 
 event_dans_calendrier(events, mois, annee)
@@ -395,18 +404,34 @@ var el_wrapper = document.getElementById("wrapper");
 
 function afficher_informations_supplementaires(index_evenement, evenements) {    
     refresh();
-
+    document.getElementById("gerer").innerHTML += `    
+        @if ($gerer_evenement)
+            <a href="/evenement/" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
+        @endif
+        <form method="POST" >
+            @csrf
+            @if ($gerer_evenement && $entite=="bde")
+                <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
+            @endif
+        </form>`;
+    
     document.getElementById("titre").innerText += evenements[index_evenement]["titre"];
     document.getElementById("description").innerText += evenements[index_evenement]["description"];
     document.getElementById("lieu").innerText += evenements[index_evenement]["lieu"];
+    document.getElementById("heure_debut").innerText += evenements[index_evenement]["temps_debut"].substring(10, 16);
+    document.getElementById("heure_fin").innerText += evenements[index_evenement]["temps_fin"].substring(10, 16);
 
     document.getElementById("info").classList.remove("popup-cachee"); 
 }
 
 function refresh() {
+    document.getElementById("gerer").innerHTML = "";
+
     document.getElementById("titre").innerText = '';
-    document.getElementById("description").innerText = '';
-    document.getElementById("lieu").innerText = '';
+    document.getElementById("description").innerText = 'Description : ';
+    document.getElementById("lieu").innerText = 'Lieu : ';
+    document.getElementById("heure_debut").innerText = 'Heure de début : ';
+    document.getElementById("heure_fin").innerText = 'Heure de fin : ';
 }
 
 </script>

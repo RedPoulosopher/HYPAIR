@@ -83,8 +83,6 @@ $routes_AIR = function(){
         });
     };
     
-Route::get('/calendrier', [CalendrierController::class, 'calendrier_asso']);
-Route::get('/calendrier/index_mois_json/{annee}-{mois}', [CalendrierController::class, 'calendrier_index_json']);
 
 
 //les routes réservées aux différents bureaux
@@ -138,13 +136,13 @@ $routes_entites = function () {
                 // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
                 // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
         
-            Route::controller(EvenementController::class)->group(function(){
-                Route::get('/evenement', 'show_home');
-                Route::get('/evenement/formulaire', 'create');
-                Route::post('/evenement/formulaire', 'store');
-                Route::get('/evenement/modifier/{id}', 'edit');
-                Route::post('/evenement/modifier/{id}', 'update');
-                Route::get('/evenement/{slug}', 'show');
+        Route::controller(EvenementController::class)->group(function(){
+            Route::get('/entite/evenement', 'show_home');
+            Route::get('/entite/evenement/formulaire', 'create');
+            Route::post('/entite/evenement/formulaire', 'store');
+            Route::get('/evenement/modifier/{id}', 'edit');
+            Route::post('/evenement/modifier/{id}', 'update');
+            Route::get('/evenement/{slug}', 'show');
     });
 });
 
@@ -160,16 +158,9 @@ $routes_entites = function () {
     });
     Route::controller(CalendrierController::class)->group(function(){
         Route::get('/calendrier', 'calendrier_asso');
+        Route::post('/calendrier', 'validation');
     });
     
-    Route::controller(EvenementController::class)->group(function(){
-        Route::get('/evenement', 'show_home');
-        Route::get('/evenement/formulaire', 'create');
-        Route::post('/evenement/formulaire', 'store');
-        Route::get('/evenement/modifier/{id}', 'edit');
-        Route::post('/evenement/modifier/{id}', 'update');
-        Route::get('/evenement/{slug}', 'show');
-    });
 };
 
 Route::prefix('{entite_uid}-{liste_id}') //pour les listes

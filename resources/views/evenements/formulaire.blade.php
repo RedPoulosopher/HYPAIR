@@ -87,26 +87,8 @@
                         <option value="1">Non</option>
                     </select>
                 </label>
-                
-                <label class="input_groupe">
-                    <p class="titre">* Important :</p>
-                    <select name="important" class="input" spellcheck="false" required select="{{old('important') ?? $evenement->important ?? ''}}">
-                        <option value="0" selected>Oui</option>
-                        <option value="1">Non</option>
-                    </select>
-                </label>
             </div>
 
-
-            <div class="groupe ombre_petite">
-                <label class="input_groupe">
-                    <p class="titre">* Validé par le PVE :</p>
-                    <select name="validation" class="input" spellcheck="false" required select="{{old('validation') ?? $evenement->validation ?? ''}}">
-                        <option value="0" selected>Non</option>
-                        <option value="1">Oui</option>
-                    </select>
-                </label>
-            </div>
 
             <span>* Les champs marqués d'une astérisque sont obligatoires</span>
             <button type="submit" class="bouton primaire ombre_petite" style="float:right;"><span>{{$evenement->id ?? false ? "MODIFIER" : "CRÉER"}}</span></button>

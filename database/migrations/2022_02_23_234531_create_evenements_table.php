@@ -25,7 +25,6 @@ class CreateEvenementsTable extends Migration
             $table->integer('max_participation')->nullable()->default(0);
             $table->tinyInteger('confidentialite')->default(0);
             $table->boolean('pour_cotisant')->default(0);
-            $table->boolean('important')->default(0);
             $table->boolean('validation')->default(0);
             $table->unsignedBigInteger('derive_de')->nullable()->default(null);
             $table->timestamps();

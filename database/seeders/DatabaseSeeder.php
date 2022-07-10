@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MembresTableSeeder::class);
         $this->call(SitesSeeder::class);
         $this->call(EntiteSitesSeeder::class);
-        $this->call(EvenementsSeeder::class);
+        $this->call(EvenementsTableSeeder::class);
     }
 }

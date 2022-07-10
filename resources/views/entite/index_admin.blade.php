@@ -145,6 +145,7 @@ td.type {
                 <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/informations">Modifier les infos</a></li>
                 <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/description">Modifier la description</a></li>
                 <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/logotype">Modifier le logo</a></li>
+                <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/couleur">Modifier la couleur</a></li>
                 <li><a id="menu_membres" href="" url="../entite/{entite_id}/membres">Gérer les membres</a></li>
             </ul>
         @endif

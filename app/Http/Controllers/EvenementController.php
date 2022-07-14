@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use \App\Models\Evenement;
+use \App\Models\Entite;
 use \App\Services\AutorisationGestion;
 
 use Illuminate\Support\Facades\DB;
@@ -105,15 +106,43 @@ class EvenementController extends Controller
 	{
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$tables = Evenement::select('titre', 'description', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'validation')
+		$tables = Evenement::select('id', 'titre', 'description', 'confidentialite', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'validation')
 			->get();
-		$entite = session('entite_uid');
+		$membre_id = session('membre_id');		
+
+		$users = Entite::join('membres', 'membres.entite_id', '=', 'entites.id')
+			->join('users', 'users.id','=', 'membres.user_id')
+			->get('users.id')->pluck('id');
+		
+		$entites = Entite::join('membres', 'membres.entite_id', '=', 'entites.id')
+			->join('users', 'users.id','=', 'membres.user_id')
+			->get('entites.id')->pluck('id');
+
+		$entite_user = array();
+		for ($i = 0; $i < count($entites); $i++) {
+			if ($users[$i] == $membre_id) {
+				$entite_user[] = $entites[$i];
+			}
+		};
+
 		return view('evenements.home-evenement', [			
 			'tables' => $tables,
-			'entite' => $entite,
+			'entite' => $session('entite_uid'),
+			'entite_user' => $entite_user,
 			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")
 		]);
 	}
+
+	
+
+    public static function suppression(Request $request) {        
+		AutorisationGestion::protectionPage("gerer_evenement");       
+
+        $resultat = ["id" => $request->id,];
+        $evenement = Evenement::find($request["id"])->delete();
+
+        return redirect(session('entite_uid') . "/entite/evenement");
+    }
 
 
 	public function formulaire_traitement(Request $request)

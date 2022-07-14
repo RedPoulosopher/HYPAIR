@@ -73,9 +73,9 @@
                     <select name="confidentialite" class="input" spellcheck="false" required select="{{old('confidentialite') ?? $evenement->confidentialite ?? ''}}">
                         <option value="0" selected>Public</option>
                         <option value="1">Membres de l'association</option>
-                        <option value="4">Responsables & bureau</option>
-                        <option value="5">Bureau</option>
-                        <option value="6">Président⸱e⸱s et vice-président⸱e</option>
+                        <option value="2">Responsables & bureau</option>
+                        <option value="3">Bureau</option>
+                        <option value="4">Président⸱e⸱s et vice-président⸱e</option>
                     </select>
                 </label>
 

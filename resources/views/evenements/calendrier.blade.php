@@ -245,7 +245,9 @@ function event_dans_calendrier(evenements, mois, annee){
         //on parcours le tableau qu'on vient de creer, on appelle placer_evenement_dans_jour a chaque fois
         for (var j=0 ; j<tableau.length ; j++){
             if (entite == 'bde' || evenements[i]['uid'] == entite){
-                placer_evenement_dans_jour(tableau[j], i, evenements)
+                //if (evenements[i]['confidentialite'] == 0) {
+                    placer_evenement_dans_jour(tableau[j], i, evenements)
+                //}
             }
         }
     }
@@ -404,16 +406,22 @@ var el_wrapper = document.getElementById("wrapper");
 
 function afficher_informations_supplementaires(index_evenement, evenements) {    
     refresh();
-    document.getElementById("gerer").innerHTML += `    
+    if (evenements[index_evenement]['confidentialite'] == 0) {
+        document.getElementById("gerer").innerHTML += `    
         @if ($gerer_evenement)
             <a href="/evenement/" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
-        @endif
-        <form method="POST" >
-            @csrf
-            @if ($gerer_evenement && $entite=="bde")
-                <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
-            @endif
-        </form>`;
+        @endif`;
+        
+        if (evenements[index_evenement]['validation'] == 0) {
+            document.getElementById("gerer").innerHTML += `
+            <form method="POST" action="/bde/calendrier/validation">
+                @csrf
+                @if ($gerer_evenement && $entite=="bde")
+                    <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
+                @endif
+            </form>`;
+        }
+    }
     
     document.getElementById("titre").innerText += evenements[index_evenement]["titre"];
     document.getElementById("description").innerText += evenements[index_evenement]["description"];

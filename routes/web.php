@@ -138,6 +138,7 @@ $routes_entites = function () {
         
         Route::controller(EvenementController::class)->group(function(){
             Route::get('/entite/evenement', 'show_home');
+            Route::post('/entite/evenement', 'suppression');
             Route::get('/entite/evenement/formulaire', 'create');
             Route::post('/entite/evenement/formulaire', 'store');
             Route::get('/evenement/modifier/{id}', 'edit');
@@ -158,10 +159,17 @@ $routes_entites = function () {
     });
     Route::controller(CalendrierController::class)->group(function(){
         Route::get('/calendrier', 'calendrier_asso');
-        Route::post('/calendrier', 'validation');
+        Route::post('/calendrier/validation', 'validation');
+        Route::post('/calendrier/invalidation', 'invalidation');
+        Route::post('/calendrier/suppression', 'suppression');
     });
     
 };
+
+//Important !
+Route::controller(CalendrierController::class)->group(function(){
+    Route::get('/calendrier/index_mois_json/{annee}-{mois}', 'calendrier_index_json');
+});
 
 Route::prefix('{entite_uid}-{liste_id}') //pour les listes
     ->middleware('existence.entite:liste')

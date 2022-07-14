@@ -14,7 +14,7 @@ class CalendrierController extends Controller
         $annee = date('Y');
         $mois = date('m');
         $evenements= Evenement::index($annee, $mois);
-        $tables = Evenement::select('titre', 'entite_id', 'slug', 'description', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'validation')
+        $tables = Evenement::select('titre', 'entite_id', 'slug', 'description', 'temps_debut', 'temps_fin', 'confidentialite', 'lieu', 'max_participation', 'pour_cotisant', 'validation')
         ->get();
 
         $entite = session('entite_uid');
@@ -40,18 +40,22 @@ class CalendrierController extends Controller
     
 
     public static function validation(Request $request) {        
-		AutorisationGestion::protectionPage("gerer_evenement");
-        
+		AutorisationGestion::protectionPage("gerer_evenement");       
 
-        $resultat = [
-			"id" => $request->id,
-		];
-
+        $resultat = ["id" => $request->id,];
         $evenement = Evenement::where('id', '=', $request["id"])->get();
-
         $evenement[0]->update(['validation' => 1]);
 		
-        return redirect(session('entite_uid') . "/calendrier");;
+        return redirect(session('entite_uid') . "/calendrier");
+    }
+
+    public static function suppression(Request $request) {        
+		AutorisationGestion::protectionPage("gerer_evenement");       
+
+        $resultat = ["id" => $request->id,];
+        $evenement = Evenement::find($request["id"])->delete();
+
+        return redirect(session('entite_uid') . "/calendrier");
     }
 
 }

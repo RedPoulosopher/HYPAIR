@@ -138,12 +138,13 @@ $routes_entites = function () {
         
         Route::controller(EvenementController::class)->group(function(){
             Route::get('/entite/evenement', 'show_home');
-            Route::post('/entite/evenement', 'suppression');
+            Route::post('/entite/evenement/suppresion', 'suppression');
+            Route::post('/entite/evenement/validation', 'validation');
             Route::get('/entite/evenement/formulaire', 'create');
             Route::post('/entite/evenement/formulaire', 'store');
             Route::get('/evenement/modifier/{id}', 'edit');
             Route::post('/evenement/modifier/{id}', 'update');
-            Route::get('/evenement/{slug}', 'show');
+            Route::get('/entite/evenement/{slug}', 'show');
     });
 });
 

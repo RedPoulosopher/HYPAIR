@@ -35,7 +35,7 @@ p {
 			@if (substr(url()->previous(), -13)=="evenement")
 			<a onclick="history.go(-1)" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
 			@else
-			<a href="/evenement" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
+			<a href="/<?= $entite_uid ?>/entite/evenement" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
 			@endif
 
 			@if($gerer_evenement)
@@ -49,10 +49,31 @@ p {
 				<h1 class="titre">{{$evenement->titre}}</h1>
 
 				<div class="documentation ombre_petite">
-					<p class="titre">Description : {{$evenement->description}}</p>
-					<p class="titre">{{$evenement->temps_debut}}</p>
-					<p class="titre">{{$evenement->temps_fin}}</p>
-					<p class="titre">{{$evenement->lieu}}</p>
+					<p>Description : {{$evenement->description}}</p>
+					<p>Début : {{$evenement->temps_debut}}</p>
+					<p>Fin : {{$evenement->temps_fin}}</p>
+					<p>Lieu : {{$evenement->lieu}}</p>
+					<p>Nombre de personnes max : {{$evenement->max_participation}}</p>
+					<p>Confidentialité : 
+						@if ($evenement['confidentialite'] == 0)                          
+                        Public
+                        @elseif ($evenement['confidentialite'] == 1)
+                        Membres de l'assos
+                        @elseif ($evenement['confidentialite'] == 2)
+                        Responsables & bureau
+                        @elseif ($evenement['confidentialite'] == 3)
+                        Bureau
+                        @elseif ($evenement['confidentialite'] == 4)
+                        Prez & vice-prez
+                        @endif
+					</p>					
+					<p>Statut : 
+						@if ($evenement['validation'] == 1)                          
+                        Validé
+                        @elseif ($evenement['validation'] == 0)
+                        En attente de validation
+                        @endif
+					</p>
 				</div>
 
 			</div>
@@ -60,7 +81,4 @@ p {
 	</div>
 </div>
 
-<script>
-	evenement.querySelectorAll(".evenement a").forEach(ceci => ceci.classList.toggle("couleur", true))
-</script>
 @endsection

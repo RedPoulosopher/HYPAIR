@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use \App\Models\Evenement;
 use \App\Models\Entite;
+use \App\Models\Membre;
 use \App\Services\AutorisationGestion;
 
 use Illuminate\Support\Facades\DB;
@@ -35,6 +36,10 @@ class EvenementController extends Controller
 	{
 		
 		AutorisationGestion::protectionPage("gerer_evenement");
+
+		if ($request['confidentialite'] != 0) {
+			$request['validation'] = 1;
+		}
 
 		$traitement = $this->formulaire_traitement($request);
 		Evenement::create($traitement);
@@ -97,6 +102,7 @@ class EvenementController extends Controller
 		
 		return view('evenements.show-evenement', [
 			'evenement' => $evenement,
+			'entite_uid' => session('entite_uid'),
 			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")
 		]);
 	}
@@ -106,9 +112,35 @@ class EvenementController extends Controller
 	{
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$tables = Evenement::select('id', 'titre', 'description', 'confidentialite', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'validation')
+		if ($niveau_administration == 20) {
+			$confidentialite = 4;
+		} elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
+			$confidentialite = 3;
+		} elseif ($niveau_administration == 13) {
+			$confidentialite = 2;
+		} elseif ($niveau_administration == 8) {
+			$confidentialite = 1;
+		} else {
+			$confidentialite = 0;
+		}
+		
+		
+
+		$tables = Evenement::select('id', 'entite_id', 'titre', 'description', 'confidentialite', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'validation', 'slug')
+			->where([
+				['confidentialite', '<=', $confidentialite], 
+				['entite_id', '=', session('entite_id')]
+				])
 			->get();
-		$membre_id = session('membre_id');		
+
+		$tables_attente_validation = Evenement::select('id', 'entite_id', 'titre', 'description', 'temps_debut', 'temps_fin', 'lieu', 'validation', 'slug')
+			->where('validation', 0)
+			->get();
+			
+		$user_id = Membre::select('user_id')
+			->where('id', session('membre_id'))
+			->pluck('user_id')
+			->first();
 
 		$users = Entite::join('membres', 'membres.entite_id', '=', 'entites.id')
 			->join('users', 'users.id','=', 'membres.user_id')
@@ -120,14 +152,15 @@ class EvenementController extends Controller
 
 		$entite_user = array();
 		for ($i = 0; $i < count($entites); $i++) {
-			if ($users[$i] == $membre_id) {
+			if ($users[$i] == $user_id) {
 				$entite_user[] = $entites[$i];
 			}
 		};
 
 		return view('evenements.home-evenement', [			
 			'tables' => $tables,
-			'entite' => $session('entite_uid'),
+			'tables_attente_validation' => $tables_attente_validation ,
+			'entite' => session('entite_uid'),
 			'entite_user' => $entite_user,
 			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")
 		]);
@@ -144,6 +177,15 @@ class EvenementController extends Controller
         return redirect(session('entite_uid') . "/entite/evenement");
     }
 
+	public static function validation(Request $request) {        
+		AutorisationGestion::protectionPage("gerer_evenement");       
+
+        $resultat = ["id" => $request->id,];
+        $evenement = Evenement::where('id', '=', $request["id"])->get();
+        $evenement[0]->update(['validation' => 1]);
+		
+        return redirect(session('entite_uid') . "/entite/evenement");
+    }
 
 	public function formulaire_traitement(Request $request)
 	{

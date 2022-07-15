@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
-@section('titre', 'Evènement')
+@section('titre', 'Évènement')
 
 @section('content')
 
 <link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
 
 <style>
-.bouton_supprimer {
+.bouton_action {
 	min-width: 0;
     max-width: 80px;
     font-size: 0.8em;
     padding: 5px;
-    margin-left: 10px;
+    margin: 2px 0 2px 10px;
     text-align: start;
 }
 table {
@@ -32,13 +32,13 @@ table {
 }
 #info {
     position: absolute;
-    top: 300px;
+    top: 450px;
 }
 </style>
 
 <div id="wrapper">
     <div id="contenu" class="petit">
-        <h1>- Evènements -</h1>
+        <h1>- Évènements -</h1>
         @if(Session::has('success'))
         <p class="explication">Bienvenue sur la page concernant les évènements !</p>
         @endif
@@ -69,9 +69,9 @@ table {
                         <th>Titre</th>
                         <th>Début</th>
                         <th>Fin</th>
-                        <th>Lieu</th>
+                        <th>Lieu</th><!--
                         <th>Nombre de participants max</th>
-                        <th>Pour cotisants ?</th>
+                        <th>Pour cotisants ?</th>-->
                         <th>Confidentialité</th>
                         <th>Statut</th>
                     </tr> 
@@ -81,14 +81,14 @@ table {
                         <td><?= $table['titre'] ?></td>
                         <td><?= $table['temps_debut'] ?></td>
                         <td><?= $table['temps_fin'] ?></td>
-                        <td><?= $table['lieu'] ?></td>
+                        <td><?= $table['lieu'] ?></td><!--
                         <td><?= $table['max_participation'] ?></td>
                         
                         @if ($table['pour_cotisant'] == 0)                          
                         <td>Oui</td>                        
                         @else if ($table['pour_cotisant'] == 1)
                         <td>Non</td>
-                        @endif
+                        @endif-->
 
                         @if ($table['confidentialite'] == 0)                          
                         <td>Public</td>
@@ -109,17 +109,54 @@ table {
                         @endif
 
                         <td>
-                            <p class="secondaire bouton bouton_supprimer ombre_petite administrateur" style="color:black; border-color:black;">Detail</p>
-                            <p class="suppression secondaire bouton bouton_supprimer ombre_petite administrateur">Supprimer</p>
+                            <a href="evenement/<?= $table['slug'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:black; border-color:black;">Détail</a>
+                            <p class="suppression_entite secondaire bouton bouton_action ombre_petite administrateur">Supprimer</p>
                         </td>
 
                     </tr>
                     @endforeach
             </table>
         </div>
-        
-      
+
+
+        @if($entite == 'bde' && in_array(13, $entite_user) && $gerer_evenement == 1)
+        <div class="groupe ombre_petite">
+            <h2>Liste des évènements en attente de validation</h2>
+            <table style="text-align: center;">
+                    <tr>
+                        <th>Entités</th>
+                        <th>Titre</th>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Lieu</th>
+                    </tr> 
+                                     
+                    @foreach ($tables_attente_validation as $table)                    
+                    @if ($table['validation'] == 0)
+                    <tr>
+                        <td><?= $table['entite_id'] ?></td>
+                        <td><?= $table['titre'] ?></td>
+                        <td><?= $table['temps_debut'] ?></td>
+                        <td><?= $table['temps_fin'] ?></td>
+                        <td><?= $table['lieu'] ?></td>
+                       
+                        <td>
+                            <a href="<?= $table['slug'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:black; border-color:black;">Detail</a>
+                            <p class="suppression_bde secondaire bouton bouton_action ombre_petite administrateur">Supprimer</p>  
+                                                      
+                            <form method="POST" action="/bde/entite/evenement/validation">
+                                @csrf
+                                <button type="submit" name="id" value="<?= $table['id'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur">Valider</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                    @endif
+                    @endforeach
+            </table>
+        </div>      
     </div>
+    @endif
 
     
     <div id="info" class="popup">
@@ -141,19 +178,6 @@ table {
 
 
 <script>
-// Afficher popup de confirmation de suppression
-/*
-info = document.getElementById("info");
-document.getElementById("suppression").addEventListener("click",  function() {
-    console.log("tew");
-    info.classList.remove("popup"); 
-})
-
-retour = document.getElementById("retour");
-retour.addEventListener("click",  function() {
-    info.classList.add("popup"); 
-})
-*/
 
 events = {!!json_encode($tables)!!}
 
@@ -170,23 +194,34 @@ listener_click_retour.forEach((listener_click_retour, index) => {
 
 listener_events(events);
 
-function listener_events(evenement) {
-    const listener_click_evenements = document.querySelectorAll('.suppression');
-
+function listener_events(evenements) {
+    const listener_click_evenements = document.querySelectorAll('.suppression_entite');
     listener_click_evenements.forEach((listener_click_evenement, index) => {
         listener_click_evenement.addEventListener("click", function(){
-        console.log(events);
-                    afficher_informations_supplementaires(index, evenement);
-                
-            
+            afficher_informations_supplementaires(index, evenements);
+        });
+    });
+}
+
+
+// Partie BDE
+events_attente = {!!json_encode($tables_attente_validation)!!}
+listener_events_bde(events_attente);
+
+function listener_events_bde(evenements) {
+    const listener_click_evenements = document.querySelectorAll('.suppression_bde');
+    listener_click_evenements.forEach((listener_click_evenement, index) => {
+        listener_click_evenement.addEventListener("click", function(){
+            afficher_informations_supplementaires(index, events_attente);
         });
     });
 }
 
 function afficher_informations_supplementaires(index_evenement, evenements) {    
     refresh();
+    //document.getElementById('info').style.top = event.clientX + "px";
         document.getElementById("gerer").innerHTML += `
-            <form method="POST" >
+            <form method="POST" action="/entite/evenement/suppresion">
                 @csrf
                 @if ($gerer_evenement)
                     <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
@@ -197,10 +232,13 @@ function afficher_informations_supplementaires(index_evenement, evenements) {
     document.getElementById("info").classList.remove("popup"); 
 }
 
+// Fin partie BDE
+
 function refresh() {
     document.getElementById("message").innerText = 'Vous êtes sur le point de supprimer un évènement.';
     document.getElementById("gerer").innerHTML = "";
 }
+
 
 </script>
 

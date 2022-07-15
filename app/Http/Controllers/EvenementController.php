@@ -133,9 +133,12 @@ class EvenementController extends Controller
 				])
 			->get();
 
-		$tables_attente_validation = Evenement::select('id', 'entite_id', 'titre', 'description', 'temps_debut', 'temps_fin', 'lieu', 'validation', 'slug')
+		$tables_attente_validation = DB::table(DB::raw('evenements', 'entites'))
+			->join('entites', 'entites.id', '=', 'evenements.entite_id')
+			->select('entites.uid', 'entites.nom', 'evenements.id', 'evenements.entite_id', 'evenements.titre', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu', 'evenements.validation', 'slug')
 			->where('validation', 0)
 			->get();
+		$array = json_decode(json_encode($tables_attente_validation), true);
 			
 		$user_id = Membre::select('user_id')
 			->where('id', session('membre_id'))
@@ -159,7 +162,7 @@ class EvenementController extends Controller
 
 		return view('evenements.home-evenement', [			
 			'tables' => $tables,
-			'tables_attente_validation' => $tables_attente_validation ,
+			'tables_attente_validation' => $array ,
 			'entite' => session('entite_uid'),
 			'entite_user' => $entite_user,
 			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")

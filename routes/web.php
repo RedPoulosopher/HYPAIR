@@ -138,7 +138,7 @@ $routes_entites = function () {
         
         Route::controller(EvenementController::class)->group(function(){
             Route::get('/entite/evenement', 'show_home');
-            Route::post('/entite/evenement/suppresion', 'suppression');
+            Route::post('/entite/evenement/suppression', 'suppression');
             Route::post('/entite/evenement/validation', 'validation');
             Route::get('/entite/evenement/formulaire', 'create');
             Route::post('/entite/evenement/formulaire', 'store');
@@ -169,6 +169,10 @@ $routes_entites = function () {
 
 //Important !
 Route::controller(CalendrierController::class)->group(function(){
+    Route::get('/calendrier', 'calendrier_asso');
+    Route::post('/calendrier/validation', 'validation');
+    Route::post('/calendrier/invalidation', 'invalidation');
+    Route::post('/calendrier/suppression', 'suppression');
     Route::get('/calendrier/index_mois_json/{annee}-{mois}', 'calendrier_index_json');
 });
 

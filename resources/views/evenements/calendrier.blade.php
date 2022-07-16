@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Evènement')
+@section('titre', 'Calendrier')
 
 @section('content')
 
@@ -91,6 +91,7 @@ border-left: var(--border);
 <div id="wrapper">
     <div id="boutons">
         <p id="fleche-gauche" class="bouton secondaire ombre_petite info_bouton"> <--- </p>
+        {{ $entite }}
         <p id="fleche-droite" class="bouton secondaire ombre_petite info_bouton"> ---> </p>
     </div>
   
@@ -147,6 +148,7 @@ border-left: var(--border);
 <script>
 
 events = {!!json_encode($events)!!}
+evenements_prives = {!!json_encode($evenements_prives)!!}
 
 el_calendrier = document.getElementById("calendrier");
 
@@ -242,13 +244,9 @@ function event_dans_calendrier(evenements, mois, annee){
         } else {
             tableau = [jour_debut]
         }
-        //on parcours le tableau qu'on vient de creer, on appelle placer_evenement_dans_jour a chaque fois
+    
         for (var j=0 ; j<tableau.length ; j++){
-            if (entite == 'bde' || evenements[i]['uid'] == entite){
-                //if (evenements[i]['confidentialite'] == 0) {
-                    placer_evenement_dans_jour(tableau[j], i, evenements)
-                //}
-            }
+            placer_evenement_dans_jour(tableau[j], i, evenements);
         }
     }
 }
@@ -264,7 +262,8 @@ function placer_evenement_dans_jour(jour, index_evenement, evenements){
     }
 }
 
-event_dans_calendrier(events, mois, annee)
+event_dans_calendrier(events, mois, annee);
+event_dans_calendrier(evenements_prives, mois, annee);
 
 //a faire : requete asynchrone pour recup les events du mois demande par l utilisateur. la requete est generee quand l utilisateur demande un mois particulier
 //a faire : reconstruire le calendrier du bon mois et de la bonne année
@@ -296,9 +295,12 @@ function event_choix_calendrier() {
             success: (data) => {
                 result_mois = mois%12;
                 afficher_mois_annee(result_mois);
+                
                 event_dans_calendrier(data.events, mois, annee);
+                event_dans_calendrier(data.evenements_prives, mois, annee);
 
                 listener_events(data.events);
+                listener_events(data.evenements_prives);
             },
             error: function(){
                 console.log(arguments);
@@ -373,6 +375,7 @@ function afficher_mois_annee(result_mois) {
 
 // POP UP
 listener_events(events);
+listener_events(evenements_prives);
 
 function listener_events(evenement) {
     const listener_click_evenements = document.querySelectorAll('.evenement');
@@ -389,7 +392,7 @@ function listener_events(evenement) {
     });
 }
 
-tables = {!!json_encode($tables)!!}
+
 const listener_click_retour = document.querySelectorAll('.info_bouton');
 
 listener_click_retour.forEach((listener_click_retour, index) => {
@@ -406,21 +409,33 @@ var el_wrapper = document.getElementById("wrapper");
 
 function afficher_informations_supplementaires(index_evenement, evenements) {    
     refresh();
-    if (evenements[index_evenement]['confidentialite'] == 0) {
-        document.getElementById("gerer").innerHTML += `    
-        @if ($gerer_evenement)
-            <a href="/evenement/" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
-        @endif`;
+    console.log(evenements[index_evenement]['slug']);
+    
+     document.getElementById("gerer").innerHTML += `
+    <a href="entite/evenement/`+ evenements[index_evenement]['slug'] + ` " class="secondaire bouton bouton_action ombre_petite" style="margin:15px; color:black; border-color:black;">Détail</a>
+    <!--                                        
+    @if ($gerer_evenement)
+        <a href="/evenement/" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
+    @endif
+    -->`;
         
-        if (evenements[index_evenement]['validation'] == 0) {
-            document.getElementById("gerer").innerHTML += `
-            <form method="POST" action="/bde/calendrier/validation">
-                @csrf
-                @if ($gerer_evenement && $entite=="bde")
-                    <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
-                @endif
-            </form>`;
-        }
+    if (evenements[index_evenement]['validation'] == 0) {
+        document.getElementById("gerer").innerHTML += `
+        <form method="POST" action="/bde/calendrier/validation">
+            @csrf
+            @if ($gerer_evenement && $entite=="bde")
+                <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
+            @endif
+        </form>`;
+    } else if (evenements[index_evenement]['validation'] == 1) {
+        document.getElementById("gerer").innerHTML += `
+        <form method="POST" action="/bde/calendrier/invalidation">
+            @csrf
+            @if ($gerer_evenement && $entite=="bde")
+                <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Invalider</button>
+            @endif
+        </form>`;
+        
     }
     
     document.getElementById("titre").innerText += evenements[index_evenement]["titre"];

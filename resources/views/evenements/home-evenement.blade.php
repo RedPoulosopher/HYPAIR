@@ -161,7 +161,7 @@ table {
                     @endforeach
             </table>
             @else
-            <h4>Il n'y a aucun évènement non validé !</h4>
+            <h4>Il n'y a aucun évènement en attente de validation !</h4>
             @endif
         </div>      
     </div>
@@ -230,7 +230,7 @@ function afficher_informations_supplementaires(index_evenement, evenements) {
     refresh();
     //document.getElementById('info').style.top = event.clientX + "px";
         document.getElementById("gerer").innerHTML += `
-            <form method="POST" action="/entite/evenement/suppresion">
+            <form method="POST" action="evenement/suppression">
                 @csrf
                 @if ($gerer_evenement)
                     <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>

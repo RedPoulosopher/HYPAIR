@@ -39,6 +39,8 @@ class EvenementController extends Controller
 
 		if ($request['confidentialite'] != 0) {
 			$request['validation'] = 1;
+		} else {
+			$request['validation'] = 0;
 		}
 
 		$traitement = $this->formulaire_traitement($request);
@@ -219,8 +221,9 @@ class EvenementController extends Controller
             'temps_debut' => $request->temps_debut,
             'temps_fin' => $request->temps_fin,
             'lieu' => $request->lieu,
-            'max_participation' => $request->visibilite,
+            'max_participation' => $request->max_participation,
 			"confidentialite" => $request->confidentialite,
+			"validation" => $request->validation,
             'pour_cotisant' => $request->pour_cotisant,
 			"derive_de" => $request->derive_de,
 		];

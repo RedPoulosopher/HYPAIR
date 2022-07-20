@@ -32,6 +32,7 @@ class CreateEvenementsTable extends Migration
 
         Schema::table('evenements', function (Blueprint $table) {
             $table->foreign('derive_de')->references('id')->on('evenements')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('entite_id')->references('id')->on('entites')->onUpdate('cascade')->onDelete('cascade');
         });
 
     }

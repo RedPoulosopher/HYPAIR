@@ -140,6 +140,7 @@ class EvenementController extends Controller
 			->select('entites.uid', 'entites.nom', 'evenements.id', 'evenements.entite_id', 'evenements.titre', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu', 'evenements.validation', 'slug')
 			->where('validation', 0)
 			->get();
+
 		$array = json_decode(json_encode($tables_attente_validation), true);
 			
 		$user_id = Membre::select('user_id')
@@ -150,6 +151,8 @@ class EvenementController extends Controller
 		$users = Entite::join('membres', 'membres.entite_id', '=', 'entites.id')
 			->join('users', 'users.id','=', 'membres.user_id')
 			->get('users.id')->pluck('id');
+
+		//$entite->membres;
 		
 		$entites = Entite::join('membres', 'membres.entite_id', '=', 'entites.id')
 			->join('users', 'users.id','=', 'membres.user_id')

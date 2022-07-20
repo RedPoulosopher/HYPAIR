@@ -163,17 +163,18 @@ $routes_entites = function () {
         Route::post('/calendrier/validation', 'validation');
         Route::post('/calendrier/invalidation', 'invalidation');
         Route::post('/calendrier/suppression', 'suppression');
+        Route::get('/calendrier/index_mois_json/{annee}-{mois}', 'calendrier_index_json');
     });
     
 };
 
 //Important !
 Route::controller(CalendrierController::class)->group(function(){
-    Route::get('/calendrier', 'calendrier_asso');
+    Route::get('/calendrier', 'calendrier_general');
     Route::post('/calendrier/validation', 'validation');
     Route::post('/calendrier/invalidation', 'invalidation');
     Route::post('/calendrier/suppression', 'suppression');
-    Route::get('/calendrier/index_mois_json/{annee}-{mois}', 'calendrier_index_json');
+    Route::get('/calendrier/index_mois_json_general/{annee}-{mois}', 'calendrier_index_json_general');
 });
 
 Route::prefix('{entite_uid}-{liste_id}') //pour les listes

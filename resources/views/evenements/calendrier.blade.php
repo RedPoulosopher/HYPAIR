@@ -91,7 +91,6 @@ border-left: var(--border);
 <div id="wrapper">
     <div id="boutons">
         <p id="fleche-gauche" class="bouton secondaire ombre_petite info_bouton"> <--- </p>
-        {{ $entite }}
         <p id="fleche-droite" class="bouton secondaire ombre_petite info_bouton"> ---> </p>
     </div>
   
@@ -132,6 +131,7 @@ border-left: var(--border);
 
                 <div class="contenu_doc" id="contenu_doc">
                     <h1 id="titre"></h1>
+                    <h5 id="organisateur">Organisateur : </h5>
                     <p id="description">Description : </p>
                     <p id="lieu">Lieu : </p>
                     <p id="heure_debut">Heure de début : </p>
@@ -289,9 +289,10 @@ document.getElementById("fleche-droite").addEventListener("click",  function() {
 })
 
 function event_choix_calendrier() {
-    jQuery.ajax({
+    if (entite === "") {
+        jQuery.ajax({
             type: "GET",
-            url: "/calendrier/index_mois_json/"+annee+"-"+mois,
+            url: "calendrier/index_mois_json_general/"+annee+"-"+mois,
             success: (data) => {
                 result_mois = mois%12;
                 afficher_mois_annee(result_mois);
@@ -306,6 +307,25 @@ function event_choix_calendrier() {
                 console.log(arguments);
             }
         });
+    } else {
+        jQuery.ajax({
+            type: "GET",
+            url: "calendrier/index_mois_json/"+annee+"-"+mois,
+            success: (data) => {
+                result_mois = mois%12;
+                afficher_mois_annee(result_mois);
+                
+                event_dans_calendrier(data.events, mois, annee);
+                event_dans_calendrier(data.evenements_prives, mois, annee);
+
+                listener_events(data.events);
+                listener_events(data.evenements_prives);
+            },
+            error: function(){
+                console.log(arguments);
+            }
+        });
+    }
 }
 
 
@@ -409,10 +429,9 @@ var el_wrapper = document.getElementById("wrapper");
 
 function afficher_informations_supplementaires(index_evenement, evenements) {    
     refresh();
-    console.log(evenements[index_evenement]['slug']);
     
      document.getElementById("gerer").innerHTML += `
-    <a href="entite/evenement/`+ evenements[index_evenement]['slug'] + ` " class="secondaire bouton bouton_action ombre_petite" style="margin:15px; color:black; border-color:black;">Détail</a>
+    <a href="/`+ evenements[index_evenement]['uid'] + `/entite/evenement/`+ evenements[index_evenement]['slug'] + ` " class="secondaire bouton bouton_action ombre_petite" style="margin:15px; color:black; border-color:black;">Détail</a>
     <!--                                        
     @if ($gerer_evenement)
         <a href="/evenement/" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
@@ -427,7 +446,7 @@ function afficher_informations_supplementaires(index_evenement, evenements) {
                 <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
             @endif
         </form>`;
-    } else if (evenements[index_evenement]['validation'] == 1) {
+    } else if (evenements[index_evenement]['validation'] == 1 && evenements[index_evenement]['confidentialite'] == 0) {
         document.getElementById("gerer").innerHTML += `
         <form method="POST" action="/bde/calendrier/invalidation">
             @csrf
@@ -439,6 +458,7 @@ function afficher_informations_supplementaires(index_evenement, evenements) {
     }
     
     document.getElementById("titre").innerText += evenements[index_evenement]["titre"];
+    document.getElementById("organisateur").innerText += evenements[index_evenement]["nom"];
     document.getElementById("description").innerText += evenements[index_evenement]["description"];
     document.getElementById("lieu").innerText += evenements[index_evenement]["lieu"];
     document.getElementById("heure_debut").innerText += evenements[index_evenement]["temps_debut"].substring(10, 16);
@@ -451,6 +471,7 @@ function refresh() {
     document.getElementById("gerer").innerHTML = "";
 
     document.getElementById("titre").innerText = '';
+    document.getElementById("organisateur").innerText = 'Organisateur : ';
     document.getElementById("description").innerText = 'Description : ';
     document.getElementById("lieu").innerText = 'Lieu : ';
     document.getElementById("heure_debut").innerText = 'Heure de début : ';

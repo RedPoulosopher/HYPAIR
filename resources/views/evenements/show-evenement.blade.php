@@ -38,9 +38,11 @@ p {
 			<a href="{{ url()->previous() }}" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
 			@endif
 
+			<!--
 			@if($gerer_evenement)
 			<a href="/evenement/modifier/{{$evenement->id}}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
 			@endif
+-->
 		</div>
 
 		<div class="documentation ombre_petite">

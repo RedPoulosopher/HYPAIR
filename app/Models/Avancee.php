@@ -14,6 +14,8 @@ class Avancee extends Model
         'projet_id',
         'description_md',
         'slug',
+        'image',
+        'pdf',
     ];
     public function entite(){
         return $this->belongsTo(Entite::class);
@@ -26,14 +28,14 @@ class Avancee extends Model
 		if(is_null($avancee)){return false;}
         return $avancee;
     }
-    public static function existe_slug($slug, $entite_id){
-        $avancee_id = self::where('slug', $slug)->where('entite_id', $entite_id);
-		if(is_null($avancee)){return false;}
-        return $avancee_id;
+    public static function existe_slug($slug,$entite_id,$projet_id){
+        $avancee = self::where('slug', $slug)->where('entite_id',$entite_id)->where('projet_id', $projet_id);
+		if(is_null($avancee)){return false;};
+        return $avancee;
     }
-    public static function index(){
-        return self::select('id', 'projet_id','description_md', 'slug')
-                        ->where("entite_id", session('entite_id'))
+    public static function index($projet_id){
+        return self::select('id','titre','projet_id','description_md','slug','updated_at')
+                        ->where("projet_id",$projet_id)
                         ->orderBy('created_at', 'desc');
     }
 }

@@ -26,7 +26,7 @@ class AvanceeRequest extends FormRequest
         return [
             'projet_id' => 'bail|required|integer',
             'date_publication' => 'bail|required|date:Y-m-d',
-            'description' => 'bail|required|string',
+            'description_md' => 'bail|required|string',
         ];
     }
 }

@@ -8,6 +8,8 @@ use App\Http\Controllers\MembreController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReseauSocialController;
+use App\Http\Controllers\AvanceeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -124,11 +126,22 @@ $routes_entites = function () {
         Route::middleware('protection.autorisation:gerer_projet')->group(function(){
             Route::get('/projet/nouveau', 'create');
             Route::post('/projet/nouveau', 'store');
-            Route::get('/projet/modifier/{projet_id}', 'edit');
-            Route::post('/projet/modifier/{projet_id}', 'update');
+            Route::get('/projet/{projet_id}/modifier', 'edit');
+            Route::post('/projet/{projet_id}/modifier', 'update');
         });
         Route::get('/projet', 'index');
-        Route::get('/projet/{slug}', 'show')->name('projet_afficher');
+        
+    });
+
+    Route::controller(AvanceeController::class)->group(function(){
+        Route::middleware('protection.autorisation:gerer_projet')->group(function(){
+            Route::get('/projet/{slug}/avancee/nouvelle', 'create');
+            Route::post('/projet/{slug}/avancee/nouvelle', 'store');
+            Route::get('/projet/{slug}/avancee/{avancee_id}/modifier', 'edit');
+            Route::post('/projet/{slug}/avancee/{avancee_id}/modifier', 'update');
+        });
+        Route::get('/projet/{slug}', 'index')->name('projet_afficher');
+        Route::get('/projet/{slug}/avancee/{slug_avancee}', 'show')->name('avancee_afficher');
     });
     
     Route::controller(EntiteController::class)->group(function(){

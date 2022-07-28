@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Projet')
+@section('titre', 'Projets')
 
 @section('content')
 
@@ -11,47 +11,26 @@
 		<h1>- Projet -</h1>
 		
 		<div id="search" class="ombre_inset centre-element icon-search-normal-1" style="margin-bottom:60px;"><span class="input" placeholder="Rechercher un projet" id="search_input" contenteditable>Rechercher un projet</span></div>
-		
+
 		@if($gerer_projet)
 		<a href="projet/nouveau" class="bouton tertiaire ombre_petite icon-security-safe" style="margin:15px;">Créer un projet</a>
-		
 		@endif
         
         <div id="index_docs">
-        
+
 			@foreach ($projets as $projet)
-			<a class="projet_liste" href="projet/{{ $projet->slug }}" visibilite="{{ $projet->visibilite }}">
+			<a class="documentation_liste" href="projet/{{ $projet->slug }}">
 				<div>
-					<p class="titre">{{ $projet->titre }}</p>
-					<p class="description">{{ $projet->description }}</p>
-					</div>
+					@if ($projet->confidentialite > 0)
+					<span class="icon-security" title="projet privée"></span>
+					@endif
+					<span class="titre">{{ $projet->titre }}</span>
+					<p class="contenu_md">{{ $projet->description_courte }}</p>
 				</div>
 			</a>
 			@endforeach
 
 		</div>
-	</div>
-	<div id="index_docs">
-        
-			@foreach ($projets as $projet)
-			<a class="projet_liste" href="projet/{{ $projet->slug }}" visibilite="{{ $projet->visibilite }}">
-				<div>
-					@if ($projet->visibilite > 0)
-					<span class="icon-eye-slash" title="projet masquée"></span>
-					@endif
-					@if ($projet->visibilite == 1)
-					<span class="icon-search-normal-1" title="projet recherchable"></span>
-					@endif
-					@if ($projet->confidentialite > 0)
-					<span class="icon-security" title="projet privée"></span>
-					@endif
-					<span class="titre">{{ $projet->titre }}</span>
-					<p class="description">{{ $projet->description_courte }}</p>
-
-				</div>
-			</a>
-			@endforeach	
-
 	</div>
 </div>
 
@@ -76,27 +55,30 @@ champ_recherche.addEventListener('blur', function(e) {
 var index = elasticlunr(function () {
     this.addField('titre');
     this.addField('description');
-    this.addField('categories');
     this.setRef('index');
 });
 
 
 
 //rentre les données dans l'index
-doc_inv_rech_els = document.querySelectorAll('.projet_liste[visibilite="1"]') //les docs visibles que par la recherche
-doc_els = document.getElementsByClassName("projet_liste")
+doc_inv_rech_els = document.querySelectorAll('.documentation_liste[visibilite="1"]') //les docs visibles que par la recherche
+doc_inv_els = document.querySelectorAll('.documentation_liste[visibilite="2"]') //les docs invisibles
+doc_els = document.querySelectorAll('.documentation_liste:not([visibilite="2"])')
 for(var i = 0; i < doc_els.length; i++){
 	doc_el = doc_els[i]
 
 	titre = doc_el.querySelector(".titre").innerText
-	description = doc_el.querySelector(".description").innerText
-	categories = doc_el.querySelector(".categories").getAttribute("raw")
 
-	index.addDoc({"index":i, "titre":titre, "description":description, "categories": categories})
+	index.addDoc({"index":i, "titre":titre})
 }
+@if(!$gerer_projet)
 for(var i = 0; i < doc_inv_rech_els.length; i++){
 	doc_inv_rech_els[i].style.display = "none"
 }
+for(var i = 0; i < doc_inv_els.length; i++){
+	doc_inv_els[i].style.display = "none"
+}
+@endif
 
 //recherche si y'a pas eu d'input dans les dernieres 500ms
 var _changeInterval = null;

@@ -7,7 +7,6 @@ use \App\Models\Association;
 use \App\Models\User;
 use \App\Models\Membre;
 use \App\Models\Projet;
-use \App\Models\Avancee;
 use Illuminate\Support\Str;
 use \App\Services\AutorisationGestion;
 use Illuminate\Validation\Rule;
@@ -28,17 +27,17 @@ class ProjetController extends Controller
 
 	public function store(Request $request)
 	{
-		$projet = $this->fomulaire_projet($request);
+		$projet = $this->formulaire_projet($request);
 
 		$existe = Projet::existe_slug($projet->slug, $projet->entite_id)->first();
-		if($existe){ return back()->withErrors(["Ce porjet existe déjà pour votre entité."]); }
+		if($existe){ return back()->withErrors(["Ce projet existe déjà pour votre entité."]); }
 		
 		$projet->save();
 
 		return redirect()->route('projet_afficher',['entite_uid' =>$request->route('entite_uid'), 'slug'=>$projet->slug ]);
 	}
 
-	public function fomulaire_projet(Request $request,$update=false){
+	public function formulaire_projet(Request $request,$update=false){
 		$validation = [
 			'titre' => ['filled','max:120'],
 			'confidentialite' => ['filled','numeric','max:20'],
@@ -91,12 +90,15 @@ class ProjetController extends Controller
 		$niveau_administration = AutorisationGestion::niveau_administration();
 		$projet = Projet::existe_slug($request->route('slug'), session('entite_id'));
 		if(!$projet){
-			abort(404);;;
+			abort(404);
 		}
 		$projet = $projet->first();
+		$creation_date = $projet->created_at->setTimezone(new DateTimeZone("EUROPE/PARIS"));
+		$modification_date = $projet->updated_at->setTimezone(new DateTimeZone("EUROPE/PARIS"))->diffForHumans();
 		return view('projet.show', [
 			'projet' => $projet,
-			'date' =>$date,
+			'modification_date'=>$modification_date,
+			'creation_date'=>$creation_date,
 			'gerer_projet' => AutorisationGestion::gestion("gerer_projet")
 		]);
 	}
@@ -129,7 +131,7 @@ class ProjetController extends Controller
 		
 		return view('projet.creation')
 				->with('projet', $projet)
-				->with('titre','Modifier le  projet')
+				->with('titre','Modifier le projet')
 				->with('confidentialites',$confidentialites);
 	}
 

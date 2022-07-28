@@ -10,9 +10,9 @@
 
 <div id="wrapper">
 	<div id="contenu" class="moyen">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Créer un nouveau projet -</h1>
+		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Ajouter une nouvelle avancée -</h1>
 		@if(Session::has('success'))
-			<p class="explication">Merci pour le projet ! Elle est disponible.</p>
+			<p class="explication">Merci pour le travail ! Il est consultable.</p>
 		@endif
 		<form method="POST">
 			@csrf
@@ -24,45 +24,37 @@
 				</div>
 			@endif
 			<div class="groupe ombre_petite">
-				<span>Cette projet sera accessible via : <span id="lien_projet"></span></span>
+				<span>Cette avancée sera accessible via : <span id="lien_doc"></span></span>
 				<label class="input_groupe">
 					<p class="titre">* Titre :</p>
-					<input type="text" name="titre" class="input" id="titre" required value="{{old('titre') ?? $projet->titre ?? ''}}"/>
+					<input type="text" name="titre" class="input" id="titre_doc" required value="{{old('titre') ?? $avancee->titre ?? ''}}"/>
 				</label>
-				
-				<label class="input_groupe">
-					<p class="titre">* Confidentialité :</p>
-					<select name="confidentialite" class="input" spellcheck="false" required select="{{old('confidentialite') ?? $projet->confidentialite ?? 0}}">
-                        @foreach ($confidentialites as $label => $confidentialite)
-							<option value="{{ $confidentialite }}">{{ $label }}</option>
-						@endforeach
-                    </select>
-				</label>
-			</div>
 
-			<div class="groupe ombre_petite">
 				<label class="input_groupe">
-					<p class="titre">* Description courte du projet :</p>
-					<p class="description">Pour créer le projet, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
-					<textarea id="description_courte" name="description_courte" title="au moins 100 caractères pour le contenu" rows="13">{{old('description_courte') ?? $projet->description_courte ?? ''}}</textarea>
+					<p class="titre">* Contenu de l'avancée :</p>
+					<p class="description">Pour créer de l'avancéee, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
+					<textarea id="description_md"  name="description_md" title="au moins 100 caractères pour le contenu" rows="13">{{old('desciption_md') ?? $avancee->desciption_md ?? ''}}</textarea>
 				</label>
-			</div>
-			
-			<div class="groupe ombre_petite">
-				<label class="input_groupe">
-					<p class="titre">*Date de fin du projet :</p>
-					<input type="date" name="date_fin" class="input" value="{{old('date_fin') ?? $projet->date_fin ?? '' }}"/>
-				</label>
-			</div>
 
+				<label class="input_groupe">
+					<p class="titre">Ajouter des images :</p>
+					<p class="description">En informatique, une image de 200ko prend autant de place que 30 000 mots. Nous limitons la taille des images à 1920*1080 pixels, et à 300ko. Privilégiez le SVG si possible. <a target="_blank" class="couleur" href="https://air.imt-ne.fr/documentation/guide-images">guide sur les images</a></p>
+					<input type="file" name="image" class="input" value="{{ old('image')?? $avancee->image ?? '' }}"/>
+				</label>
+
+				<label class="input_groupe">
+					<p class="titre">Ajouter des fichiers :</p>
+					<input type="file" name="file" class="input" value="{{ old('file')?? $avancee->file ?? '' }}"/>
+				</label>
+			</div>
             <span>* les champs marqués d'une astérisque sont obligatoires</span>
-			<button type="submit" class="bouton primaire" style="float:right;"><span>{{$projet->id ?? false ? "MODIFIER" : "CRÉER"}}</span></button>
+			<button type="submit" name="submit" class="bouton primaire" style="float:right;"><span>{{$avancee->id ?? false ? "MODIFIER" : "CRÉER"}}</span></button>
 		</form>
 	</div>
 </div>
 <script>
 var simplemde = new SimpleMDE({
-	element: document.getElementById("description_courte"),
+	element: document.getElementById("contenu_md"),
 	toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
 	spellChecker: false,
 });
@@ -89,9 +81,9 @@ function string_to_slug(str) {
 	return str;
 }
 
-pre_url = window.location.origin + "/projet/"
-span_lien_doc = document.getElementById("lien_projet")
-document.getElementById("titre").addEventListener("keyup",function(){
+pre_url = window.location.origin + '/projet/<project name>/avancee/'
+span_lien_doc = document.getElementById("lien_doc")
+document.getElementById("titre_doc").addEventListener("keyup",function(){
 	slug = string_to_slug(this.value)
 	span_lien_doc.innerText = pre_url + slug
 })

@@ -12,7 +12,6 @@ class Projet extends Model
         'entite_id',
         'titre',
         'slug',
-        'entite_id',
         'confidentialite',
         'chef_projet',
         'description_courte',

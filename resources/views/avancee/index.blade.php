@@ -80,7 +80,7 @@ $converter = new MarkdownConverter($environment);
 			<div class="contenu_doc" id="contenu_doc">
 				<p>
 					<h4 style="width:70%">Créé le <span>{{$creation_date}}</span>
-					<span class="date" style="position:absolute;margin-left:25%;"> Deadline: {{ $projet->date_fin}}</span>
+					<span class="date" style="position:absolute;margin-left:26%;"> Deadline: {{ $projet->date_fin}}</span>
 					</h4>
 				</p>
 				

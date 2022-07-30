@@ -86,7 +86,8 @@ $converter = new MarkdownConverter($environment);
 				
 				<p>
 					<h4 class="derniere_maj" style="width:50%">Dernière mise à jour <span>{{$modification_date}}</span>
-					<span class="derniere_maj" style="position:absolute;margin-left:20%;">Temps restant: <span>{{$temps_restant}} jours</span></span>
+					<span class="derniere_maj" style="position:absolute;margin-left:20%;">Temps restant: <span>{{$temps_restant}} jour(s)</span>
+					</span>
 					</h4>
 				</p>
 				<h1 class="titre">{{$projet->titre}}</h1>

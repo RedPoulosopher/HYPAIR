@@ -41,12 +41,6 @@ class AvanceeController extends Controller
 
 		$existe = Avancee::existe_slug($avancee->slug,$avancee->entite_id, $avancee->projet_id)->first();
 		if($existe){ return back()->withErrors(["Cet avancee existe déjà pour votre entité."]); }
-		$chemin_image="image/imageTest/";
-		$chemin_file="file/";
-		$nom_image =strval($request->image);
-		$nom_file="";
-		Storage::put($chemin_image.$nom_image,$avancee->image);
-		Storage::put($chemin_file.$nom_file,$avancee->pdf);
 		$avancee->save();
 
 		return redirect()->route('avancee_afficher',['entite_uid' =>$request->route('entite_uid'),'slug'=>$request->route('slug'),'slug_avancee'=>$avancee->slug]);
@@ -56,7 +50,6 @@ class AvanceeController extends Controller
 		$validation = [
 			'titre' => ['filled','max:120'],
 			'description_md'=>['filled','max:3000'],
-
 		];
 
 		$this->validate($request, $validation);
@@ -77,8 +70,6 @@ class AvanceeController extends Controller
 		$avancee->projet_id =$projet->id;
 		$avancee->entite_id=session('entite_id');
 		$avancee->description_md = $request->description_md;
-		$avancee->image = $request->image;
-		$avancee->pdf = $request->file;
 
 		return $avancee;
 	}
@@ -166,4 +157,16 @@ class AvanceeController extends Controller
 				->with('titre','Modifier l\'avancee');
 	}
 
+	public function storeImage(Request $request){
+        $data= new Postimage();
+
+        if($request->image->file('image')){
+            $file= $request->file('image');
+            $filename= date('YmdHi').$file->getClientOriginalName();
+            $file-> move(public_path('public/Image'), $filename);
+            $data['image']= $filename;
+        }
+        $data->save();
+		return $filename;
+    }
 }

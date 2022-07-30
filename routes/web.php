@@ -10,7 +10,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReseauSocialController;
 use App\Http\Controllers\AvanceeController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +21,8 @@ use App\Http\Controllers\AvanceeController;
 |
 */
 Route::get('/', function(){return redirect('/entites/douai');});
+Route::get('/add-media', function(){
+    Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());});
 
 Route::get('/entites', function(){return view('entite.choix_site');})->name('racine');
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)

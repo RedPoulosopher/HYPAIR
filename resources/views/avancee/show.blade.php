@@ -78,7 +78,6 @@ $converter = new MarkdownConverter($environment);
 				<p class="derniere_maj">Dernière mise à jour <span>{{$modification_date}}</span></p>
 
 				{!! $converter->convert($avancee->description_md); !!}
-				<a>{{$avancee->pdf}}</a>
 				
 			</div>
 		</div>

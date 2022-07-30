@@ -20,8 +20,7 @@ return new class extends Migration
             $table->text('description_md');
             $table->string('slug')->index();
             $table->foreignId('entite_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->binary('image')->nullable()->default(null);
-            $table->binary('pdf')->nullable()->default(null);
+            $table->string('filename')->nullable()->default(null);
             $table->timestamps();
         });
     }

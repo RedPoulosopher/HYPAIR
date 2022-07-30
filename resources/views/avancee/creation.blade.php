@@ -44,7 +44,7 @@
 
 				<label class="input_groupe">
 					<p class="titre">Ajouter des fichiers :</p>
-					<input type="file" name="file" class="input" value="{{ old('file')?? $avancee->file ?? '' }}"/>
+					<input type="file" name="file" class="input" />
 				</label>
 			</div>
             <span>* les champs marqués d'une astérisque sont obligatoires</span>

@@ -36,6 +36,18 @@ p {
 .heading-permalink {
   visibility: hidden;
 }
+.align-items{
+	display:flex;
+	justify-content: space-between;
+	
+}
+
+@media only screen and (max-width: 530px) {
+    .align-items{
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+}
 </style>
 
 @php
@@ -67,7 +79,7 @@ $converter = new MarkdownConverter($environment);
 <div id="wrapper">
 	<div id="contenu" class="petit">
 
-		<div style="display:flex;">
+		<div class="align-items">
 			<a href="../projet" class="bouton secondaire" style="margin:15px;">< Retour</a>
 
 			@if($gerer_projet)
@@ -78,19 +90,19 @@ $converter = new MarkdownConverter($environment);
 
 		<div class="documentation ombre_petite">
 			<div class="contenu_doc" id="contenu_doc">
-				<p>
-					<h4 style="width:70%">Créé le <span>{{$creation_date}}</span>
-					<span class="date" style="position:absolute;margin-left:26%;"> Deadline: {{ $projet->date_fin}}</span>
-					</h4>
-				</p>
-				
-				<p>
-					<h4 class="derniere_maj" style="width:50%">Dernière mise à jour <span>{{$modification_date}}</span>
-					<span class="derniere_maj" style="position:absolute;margin-left:20%;">Temps restant: <span>{{$temps_restant}} jour(s)</span>
-					</span>
-					</h4>
-				</p>
+				<p>Chef de projet: {{ $chef_projet_prenom }} {{ $chef_projet_nom }}</p>
 				<h1 class="titre">{{$projet->titre}}</h1>
+				<div class="align-items" style="height: 1%">
+					<div class="box">
+						<h4>Créé le {{$creation_date}}</h4>
+						<h4 class="derniere_maj">Dernière mise à jour {{$modification_date}}</h4>	
+					</div>
+					<div class="box">
+						<h4 class="date"> Deadline : {{ $projet->date_fin}}</h4>
+						<h4 class="derniere_maj">Temps restant: {{$temps_restant}} jour(s)</h4>	
+					</div>
+				</div>
+				<h4>Description</h4>
 				{!! $converter->convert($projet->description_courte); !!}
 			</div>
 		</div>
@@ -98,9 +110,9 @@ $converter = new MarkdownConverter($environment);
 		<div id="index_docs">
 		@foreach ($avancees as $avancee)
 			<div>
-				<a class="documentation_liste"href="{{$projet->slug}}/avancee/{{ $avancee->slug }}">
+				<a class="documentation_liste align-items" href="{{$projet->slug}}/avancee/{{ $avancee->slug }}">
 					<span class="titre" style="width:75%;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;">{{ $avancee->titre }}</span> 
-					<span class="date" style="position:relative;">ajouté le {{ $avancee->updated_at->format('Y-m-d')}}</span>
+					<span class="date">ajouté le {{ $avancee->updated_at->format('Y-m-d')}}</span>
 				</a>
 			</div>
 		@endforeach

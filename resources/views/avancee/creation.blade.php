@@ -32,10 +32,11 @@
 
 				<label class="input_groupe">
 					<p class="titre">* Contenu de l'avancée :</p>
-					<p class="description">Pour créer de l'avancéee, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
-					<textarea id="description_md"  name="description_md" title="au moins 100 caractères pour le contenu" rows="13">{{old('desciption_md') ?? $avancee->desciption_md ?? ''}}</textarea>
+					<p class="description">Pour créer de l'avancée, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
+					<textarea id="description_md"  name="description_md" title="au moins 100 caractères pour le contenu" rows="13">{{old('description_md') ?? $avancee->description_md ?? ''}}</textarea>
 				</label>
-
+				
+				Ces fonctionnalités ci-dessous arrivent bientôt !
 				<label class="input_groupe">
 					<p class="titre">Ajouter des images :</p>
 					<p class="description">En informatique, une image de 200ko prend autant de place que 30 000 mots. Nous limitons la taille des images à 1920*1080 pixels, et à 300ko. Privilégiez le SVG si possible. <a target="_blank" class="couleur" href="https://air.imt-ne.fr/documentation/guide-images">guide sur les images</a></p>
@@ -44,7 +45,7 @@
 
 				<label class="input_groupe">
 					<p class="titre">Ajouter des fichiers :</p>
-					<input type="file" name="file" class="input" />
+					<input type="file" name="file" class="input" 	/>
 				</label>
 			</div>
             <span>* les champs marqués d'une astérisque sont obligatoires</span>

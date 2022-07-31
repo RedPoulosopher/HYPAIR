@@ -69,7 +69,7 @@ class AvanceeController extends Controller
 		$avancee->slug = Str::slug($request->titre, '-');
 		$avancee->projet_id =$projet->id;
 		$avancee->entite_id=session('entite_id');
-		$avancee->description_md = $request->description_md;
+		$avancee->description_md = $request->description_md;	
 
 		return $avancee;
 	}
@@ -82,19 +82,16 @@ class AvanceeController extends Controller
 			abort(404);
 		}
 		$projet = $projet->first();
-
 		$avancee = Avancee::existe_slug($request->route('slug_avancee'),session('entite_id'),$projet->id);
 		if(!$avancee){
 			abort(404);
 		}
 		$avancee = $avancee->first();
 		$modification_date = $avancee->updated_at->setTimezone(new DateTimeZone("EUROPE/PARIS"))->diffForHumans();
-		$image = Storage::get('/storage\app\public\image\imageTest\test.png');
 
 		return view('avancee.show',[
 			'avancee' => $avancee,
 			'slug'=> $request->route('slug'),
-			'image'=>$image,	
 			'modification_date'=> $modification_date,
 			'gerer_projet' => AutorisationGestion::gestion("gerer_projet")
 		]);
@@ -120,8 +117,12 @@ class AvanceeController extends Controller
 		   $temps_restant = 0;
 		}
 		$modification_date = $projet->updated_at->setTimezone(new DateTimeZone("EUROPE/PARIS"))->diffForHumans();
+		$chef_projet_prenom = User::existe_id($projet->chef_projet)->prenom;
+		$chef_projet_nom = User::existe_id($projet->chef_projet)->nom;
 		return view('avancee.index', [
 			'projet' => $projet,
+			'chef_projet_prenom'=>$chef_projet_prenom,
+			'chef_projet_nom'=>$chef_projet_nom,
 			'creation_date'=>$creation_date,
 			'avancees' => $avancee,
 			'temps_restant'=>$temps_restant,

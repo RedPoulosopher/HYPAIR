@@ -95,11 +95,11 @@ $converter = new MarkdownConverter($environment);
 				<div class="align-items" style="height: 1%">
 					<div class="box">
 						<h4>Créé le {{$creation_date}}</h4>
-						<h4 class="derniere_maj">Dernière mise à jour {{$modification_date}}</h4>	
+						<h6 class="derniere_maj">Dernière mise à jour {{$modification_date}}</h4>	
 					</div>
 					<div class="box">
-						<h4 class="date"> Deadline : {{ $projet->date_fin}}</h4>
-						<h4 class="derniere_maj">Temps restant: {{$temps_restant}} jour(s)</h4>	
+						<h4 class="date">Deadline: {{ $projet->date_fin}}</h4>
+						<h6 class="derniere_maj">Temps restant: {{$temps_restant}} jour(s)</h4>	
 					</div>
 				</div>
 				<h4>Description</h4>

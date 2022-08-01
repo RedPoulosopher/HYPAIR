@@ -55,7 +55,7 @@
 </div>
 <script>
 var simplemde = new SimpleMDE({
-	element: document.getElementById("contenu_md"),
+	element: document.getElementById("description_md"),
 	toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
 	spellChecker: false,
 });

@@ -158,9 +158,8 @@ class AvanceeController extends Controller
 				->with('titre','Modifier l\'avancee');
 	}
 
-	public function storeImage(Request $request){
+	/*public function storeImage(Request $request){
         $data= new Postimage();
-
         if($request->image->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').$file->getClientOriginalName();
@@ -169,5 +168,5 @@ class AvanceeController extends Controller
         }
         $data->save();
 		return $filename;
-    }
+    }*/
 }

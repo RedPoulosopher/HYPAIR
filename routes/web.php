@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\EntiteController;
 use App\Http\Controllers\MembreController;
+use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\CalendrierController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReseauSocialController;
@@ -35,6 +37,7 @@ Route::get('/rgpd', function() {  return redirect('/air/documentation/rgpd'); })
 //============
 Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });
 Route::get('/ecriture', function() {  return view('oeufs_de_paques.ecriture'); });
+Route::get('/cookies', function() {  return view('cookies'); });
 
 //accéder aux erreurs
 //====================
@@ -81,6 +84,7 @@ $routes_AIR = function(){
             });
         });
     };
+    
 
 
 //les routes réservées aux différents bureaux
@@ -131,7 +135,21 @@ $routes_entites = function () {
             Route::get('/entite/modifier/description/', 'modifier_description');
             Route::post('/entite/modifier/description/', 'maj_description');
         });
+                // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+                // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+        
+        Route::controller(EvenementController::class)->group(function(){
+            Route::get('/entite/evenement', 'show_home');
+            Route::post('/entite/evenement/suppression', 'suppression');
+            Route::post('/entite/evenement/validation', 'validation');
+            Route::get('/entite/evenement/formulaire', 'create');
+            Route::post('/entite/evenement/formulaire', 'store');
+            Route::get('/evenement/modifier/{id}', 'edit');
+            Route::post('/evenement/modifier/{id}', 'update');
+            Route::get('/entite/evenement/{slug}', 'show');
     });
+});
+
 
     Route::controller(ReseauSocialController::class)->group(function(){
         Route::middleware('protection.autorisation:gerer_entite')->group(function(){
@@ -139,13 +157,27 @@ $routes_entites = function () {
             Route::post('/entite/reseau_social', 'store');
             Route::delete('/entite/reseau_social', 'delete');
         });
+        // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+        // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+    });
+    Route::controller(CalendrierController::class)->group(function(){
+        Route::get('/calendrier', 'calendrier_asso');
+        Route::post('/calendrier/validation', 'validation');
+        Route::post('/calendrier/invalidation', 'invalidation');
+        Route::post('/calendrier/suppression', 'suppression');
+        Route::get('/calendrier/index_mois_json/{annee}-{mois}', 'calendrier_index_json');
     });
     
-    Route::controller(MembreController::class)->group(function(){
-        Route::get('/entite/{type}', 'index_admin')->where(['type'=>'membres|abonnes']);
-        Route::post('/entite/{type}', 'ajout_membre')->where(['type'=>'membres|abonnes']);
-    });
 };
+
+//Important !
+Route::controller(CalendrierController::class)->group(function(){
+    Route::get('/calendrier', 'calendrier_general');
+    Route::post('/calendrier/validation', 'validation');
+    Route::post('/calendrier/invalidation', 'invalidation');
+    Route::post('/calendrier/suppression', 'suppression');
+    Route::get('/calendrier/index_mois_json_general/{annee}-{mois}', 'calendrier_index_json_general');
+});
 
 Route::prefix('{entite_uid}-{liste_id}') //pour les listes
     ->middleware('existence.entite:liste')

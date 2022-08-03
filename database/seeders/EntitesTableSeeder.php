@@ -201,25 +201,11 @@ class EntitesTableSeeder extends Seeder
         DB::table('entites')->insert($listes);
 
         $lien_logos = [
-            "bde"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/bde.png",
-            "air"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/air.png",
-            "meca"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/meca.png",
-            "imternational"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/imternational.png",
-            "cotrad"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/cotrad.png",
-            "zegreenpeas"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/greenpeas.png",
-            "egalimt"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/egalimt.png",
-            "jine"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/artemis.png",
-            "cameleon"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/cameleon.png",
-            "dmc"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/moustache.png",
-            "imtalks"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/talks.png",
-            "robotique"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/robot.png",
-            "brasseurs"=>"https://capa.etu.imt-lille-douai.fr/img/logoAsso/brasseur.png",
         ];
 
-        // foreach($asso_bde as $entite){
-        //     $asso_uid = $entite["uid"];
-        //     $entite_id = Entite::where('uid', $asso_uid)->first()->id;
-        //     GestionLogo::stocker_logo_depuis_url($lien_logos[$asso_uid], $entite_id);
-        // }
+        foreach($asso_bde as $entite){
+            $asso_uid = $entite["uid"];
+            $entite_id = Entite::where('uid', $asso_uid)->first()->id;
+        }
     }
 }

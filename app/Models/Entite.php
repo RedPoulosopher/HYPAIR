@@ -36,6 +36,10 @@ class Entite extends Model
         'ratachement' => RatachementEnum::class,
         'type' => EntiteTypeEnum::class,
     ];
+
+    public function evenements(){
+        return $this->hasMany(Evenement::class);
+    }
     
     public function documentations(){
         return $this->hasMany(Documentation::class);

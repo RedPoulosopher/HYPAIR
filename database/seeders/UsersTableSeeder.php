@@ -29,7 +29,14 @@ class UsersTableSeeder extends Seeder
                 'prenom' => 'Michel',
                 'uid' => 'michel.dupont',
                 'password' => Hash::make("test"),
-                'langue_pref' => 'en',
+                'langue_pref' => 'fr',
+            ],
+            [
+                'nom' => 'Pascal',
+                'prenom' => 'Bastien',
+                'uid' => 'bastien.pascal',
+                'password' => Hash::make("test"),
+                'langue_pref' => 'fr',
             ],
         ]);
     }

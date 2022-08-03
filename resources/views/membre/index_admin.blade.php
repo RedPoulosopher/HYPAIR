@@ -61,6 +61,20 @@ td.type {
 td a.icon-edit-2 {
     cursor:pointer;
 }
+
+#roles{
+    display:flex;
+    gap:8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+#roles option {
+    display: none;
+    padding:6px 12px;
+    background-color: var(--gris_2);
+    cursor: pointer;
+    border-radius:5px;
+}
 </style>
 
 <div id="wrapper">
@@ -78,15 +92,17 @@ td a.icon-edit-2 {
                     </label>
                     <div class="input_groupe">
                         <p class="titre">Rôle du membre :</p>
-                        <select class="input" id="select_role" name="role_id">
-                            <option disabled selected></option>
+                        <input type="hidden" id="search_role_input_id" name="role_id">
+                        <input class="input" id="search_role_input" name="role_name">
+                        <div id="roles">
+                            <p style="display:none">aucun rôle ne correspond à cette recherche. Contactez l'AIR pour le rajouter.</p>
                             @foreach ($roles as $role)
                                 <option value="{{$role->id}}">{{$role->label}}</option>
                             @endforeach
-                        </select>
+                        </div>
                     </div>
                     <div style="display:flex;justify-content: flex-end;margin-top:15px;">
-                        <button type="submit" class="bouton primaire">VALIDER</span></button>
+                        <button type="submit" class="bouton primaire valider_role">VALIDER</span></button>
                     </div>
                 </div>
             </form>
@@ -113,7 +129,14 @@ td a.icon-edit-2 {
                                     <td>{{$membre["prenom"]}}</td>
                                     <td>{{$membre["nom"]}}</td>
                                     <td><span class="role">{{ $membre["label"] }}</span></td>
-                                    <td><a membre_id="{{ $membre["id"] }}" role_id="{{ $membre["roles.id"] }}" user_uid="{{$membre["uid"]}}" class="icon-edit-2" title="modifier" onclick="afficher_menu_membre(this)"></a></td>
+                                    <td><a 
+                                        membre_id="{{ $membre["id"] }}"
+                                        role_id="{{ $membre["roles.id"] }}"
+                                        user_uid="{{$membre["uid"]}}"
+                                        class="icon-edit-2"
+                                        title="modifier"
+                                        onclick="afficher_menu_membre(this)"></a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -125,7 +148,83 @@ td a.icon-edit-2 {
 </div>
 
 
+<script type="text/javascript" src="/js/elasticlunr.js"></script>
 <script>
+const input_role_nom = document.getElementById('search_role_input');
+const input_role_id = document.getElementById('search_role_input_id');
+
+
+//génère l'index
+var index = elasticlunr(function () {
+    this.addField('nom_role');
+    this.setRef('index');
+});
+
+function remove_accent(str){
+    return str.normalize("NFD").replace(/\p{Diacritic}/gu, "")
+}
+
+//rentre les données dans l'index
+role_els = document.querySelectorAll('#roles option')
+for(var i = 0; i < role_els.length; i++){
+	role_id = role_els[i].value
+	nom_role = role_els[i].innerText
+    nom_role = remove_accent(nom_role)
+
+	index.addDoc({"index":i, "nom_role":nom_role, "index_role":role_id})
+
+    role_els[i].addEventListener('click', function(){
+        input_role_nom.value = this.innerText;
+        input_role_id.value = this.value;
+    })
+}
+
+input_role_nom.addEventListener("keyup", function(){
+	a_rechercher = this.value
+
+    if(a_rechercher==""){
+        for(i=0; i<role_els.length; i++){
+            role_els[i].style.display = "none"
+        }
+    } else {
+        a_rechercher = remove_accent(a_rechercher)
+        rechercher(a_rechercher)
+    }
+})
+
+aucun_role = document.querySelector('#roles p')
+bouton_valider = document.querySelector('.bouton.primaire.valider_role')
+function rechercher(a_rechercher){
+	resultats = index.search(a_rechercher, {
+		expand: true
+	});
+    
+    trier_afficher_resultats(resultats)
+
+    if(resultats.length==0){
+        aucun_role.style.display = "block"
+        bouton_valider.disabled = true
+    } else {
+        aucun_role.style.display = "none"
+        bouton_valider.disabled = false
+    }
+}
+
+//affiche les bons résultats pour la recherche
+function trier_afficher_resultats(resultats){
+	for(i=0; i<role_els.length; i++){
+		role_els[i].style.display = "none"
+	}
+    input_role_id.value = resultats[0]["doc"]["index_role"]
+	for(i=0; i<resultats.length; i++){
+		index_resultat = resultats[i]["ref"]
+		role_els[parseInt(index_resultat)].style.display = "block"
+		role_els[parseInt(index_resultat)].style.order = i+1
+	}
+}
+
+
+
 
 datatable_options = {
     "perPage" : 15,

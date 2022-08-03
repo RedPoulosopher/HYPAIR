@@ -1,8 +1,3 @@
-{{-- @extends('layouts.vide')
-
-@section('titre', 'Accueil')
-
-@section('content') --}}
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -20,7 +15,7 @@
     <body class="dark-theme">
         <div id="wrapper">
             <div id="contenu" class="grand">
-                <h1 class="titre-page">--- HYP'AIR ---</h1>
+                <h1 class="titre-page">--- HypAIR ---</h1>
 
                 <div class="header">
                     <div class="logo">
@@ -36,7 +31,7 @@
                     <div class="entity-container-grand">
                         <a
                             class="entity-grand ombre_petite"
-                            href="https://hypair.imt-ne.fr/entites/lille"
+                            href="/entites/lille"
                         >
                             <img
                                 src="/images/logo_temp/lille.png"
@@ -123,7 +118,7 @@
                         </div>
                     </div>
                     <!-- Logo Mastodon -->
-                    <div class="entity-container">
+                    {{-- <div class="entity-container">
                         <a
                             class="entity ombre_petite"
                             href="https://mastodon.social/"
@@ -140,7 +135,7 @@
                         <div class="info">
                             <p class="nom">Mastodon</p>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- Logo Piwigo -->
                     <div class="entity-container">
                         <a
@@ -579,8 +574,3 @@
         </div>
     </body>
 </html>
-<script>
-// site = window.location.pathname.split('/').pop()
-// localStorage.setItem('accueil', site)
-// </script>
-{{-- @endsection --}}

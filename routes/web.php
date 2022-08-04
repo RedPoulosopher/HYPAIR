@@ -7,6 +7,7 @@ use App\Http\Controllers\MembreController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReseauSocialController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,18 @@ Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['e
 Route::get('/fenetre_contextuelle/cookies', function(){return view('fenetre_contextuelle.cookies');});
 Route::get('/fenetre_contextuelle/rgpd', function(){return view('fenetre_contextuelle.rgpd');});
 
+//users profile
+//====================
+Route::controller(UserController::class)->group(function(){
+  Route::get('/home', 'home');
+  Route::get('/editer_photo_profil', 'editer_photo_profil');
+  Route::post('/editer_photo_profil', 'maj_photo_profil');
+  Route::get('/editer_infos_profil', 'editer_infos_profil');
+  Route::post('/editer_infos_profil', 'maj_infos_profil');
+  Route::get('/editer_reseaux_profil', 'editer_reseaux_profil');
+  Route::post('/editer_reseaux_profil', 'enregistrer_reseaux_profil');
+});
+
 //les routes réservées à l'AIR
 //============================
 $routes_AIR = function(){
@@ -53,7 +66,7 @@ $routes_AIR = function(){
             Route::controller(EntiteController::class)->group(function(){
                 Route::get('/entites/admin', 'index_admin');
                 Route::get('/entites/index/json', 'index_admin_json');
-    
+
                 Route::get('/entite/nouvelle', 'create');
                 Route::post('/entite/nouvelle', 'store');
                 Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos')->name('modifier_infos');
@@ -104,7 +117,7 @@ $routes_bureaux = function(){
             });
         });
     };
-    
+
 
 //les routes pour les entites, les clubs et les listes
 //=========================================================
@@ -120,7 +133,7 @@ $routes_entites = function () {
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show')->name('documentation_afficher');
     });
-    
+
     Route::controller(EntiteController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
         Route::get('/accueil', 'show');
@@ -140,7 +153,7 @@ $routes_entites = function () {
             Route::delete('/entite/reseau_social', 'delete');
         });
     });
-    
+
     Route::controller(MembreController::class)->group(function(){
         Route::get('/entite/{type}', 'index_admin')->where(['type'=>'membres|abonnes']);
         Route::post('/entite/{type}', 'ajout_membre')->where(['type'=>'membres|abonnes']);

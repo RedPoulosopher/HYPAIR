@@ -488,7 +488,7 @@ body.light-theme a.couleur:hover {
   top: 20px;
   left: 20px;
   border-radius: 5px;
-  z-index: 999;
+  z-index: 10;
   cursor: pointer;
   box-shadow: var(--ombre_grande);
   background-color: var(--couleur_fond);
@@ -587,6 +587,41 @@ body.dark-theme #bascule-mode #bascule-theme:after {
   width: 25px;
   height: 25px;
 }
+
+
+#lien_profil {
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  right: 20px;
+  width:60px;
+    height:60px;
+}
+
+#lien_profil #photo_lien_profil {
+  width:100%;
+    border-radius:300px;
+  border: 2px solid var(--couleur_accentuation);
+  background-color: var(--couleur_fond);
+  transform: translateY(0px);
+  box-shadow: var(--ombre_petite);
+  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  cursor:pointer;
+}
+
+#lien_profil:hover #photo_lien_profil {
+  transform: translateY(-3px);
+  box-shadow: var(--ombre_grande);
+  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+
+#bouton_se_connecter {
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  right: 20px;
+}
+
 
 @font-face {
   font-family: "icosax";
@@ -4174,4 +4209,3 @@ body.dark-theme #bascule-mode #bascule-theme:after {
 .icon-woman:before {
   content: "\EC7F";
 }
-

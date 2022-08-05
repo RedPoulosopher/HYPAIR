@@ -97,7 +97,7 @@ td a.icon-edit-2, td a.icon-trash {
 							<p>Vous ne pouvez avoir qu'un seul réseau social de chaque type.</p>
 							<p>Pour supprimer un réseau social, laissez le lien vide, et appuyez sur <i>Supprimer</i></p>
 						</div>
-							<button type="submit" class="bouton primaire" style="margin-left:auto;">AJOUTER</span></button>
+							<button type="submit" class="bouton primaire" style="margin-left:auto; margin-top:auto;">AJOUTER</span></button>
 					</div>
 			</div>
 	</form>
@@ -124,63 +124,72 @@ td a.icon-edit-2, td a.icon-trash {
 	</div>
 
 </div>
+
 @endsection
 
 <script>
-liste_reseau_social_liste_id = {}
-possible_supprimer = false
+liste_reseau_social_liste_id = {};
+possible_supprimer = false;
+var el_bouton_formulaire;
+var el_reseau_social;
+var el_pre_url;
+var el_cle;
 
-el_bouton_formulaire = document.querySelector("form button")
-el_reseau_social = document.getElementById("reseaux_sociaux_liste")
-el_pre_url = document.querySelector(".pre_url")
-el_cle = document.getElementById("cle")
+window.onload = init;
 
-el_reseau_social.addEventListener("change", function(){
-    texte_pre_url = this.options[this.selectedIndex].getAttribute('pre_url');
-		if (texte_pre_url=='') {
-			el_pre_url.style.display = "none";
-		} else {
-			el_pre_url.style.display = "inline";
-			el_pre_url.innerText = this.options[this.selectedIndex].getAttribute('pre_url');
-		}
-    reseau_social_liste_id = this.options[this.selectedIndex].value;
+function init() {
+  el_bouton_formulaire = document.querySelector("form button")
+  el_reseau_social = document.getElementById("reseaux_sociaux_liste")
+  el_pre_url = document.querySelector(".pre_url")
+  el_cle = document.getElementById("cle")
 
-    if(reseau_social_liste_id in liste_reseau_social_liste_id){
-        el_bouton_formulaire.innerText = "Modifier"
-        el_bouton_formulaire.setAttribute("texte_bouton", "Modifier")
-        el_cle.value = liste_reseau_social_liste_id[reseau_social_liste_id]
-        possible_supprimer = true
-    } else {
-        el_bouton_formulaire.innerText = "Ajouter"
-        el_bouton_formulaire.setAttribute("texte_bouton", "Ajouter")
-        el_cle.value = ""
-        possible_supprimer = false
-    }
-})
+  el_reseau_social.addEventListener("change", function(){
+      texte_pre_url = this.options[this.selectedIndex].getAttribute('pre_url');
+  		if (texte_pre_url=='') {
+  			el_pre_url.style.display = "none";
+  		} else {
+  			el_pre_url.style.display = "inline";
+  			el_pre_url.innerText = this.options[this.selectedIndex].getAttribute('pre_url');
+  		}
+      reseau_social_liste_id = this.options[this.selectedIndex].value;
 
-el_cle.addEventListener("keyup", function(){
-    if(possible_supprimer){
-        if(this.value == ""){
-            el_bouton_formulaire.innerText = "Supprimer"
-        } else {
-            el_bouton_formulaire.innerText = el_bouton_formulaire.getAttribute("texte_bouton")
-        }
-    }
-})
+      if(reseau_social_liste_id in liste_reseau_social_liste_id){
+          el_bouton_formulaire.innerText = "Modifier"
+          el_bouton_formulaire.setAttribute("texte_bouton", "Modifier")
+          el_cle.value = liste_reseau_social_liste_id[reseau_social_liste_id]
+          possible_supprimer = true
+      } else {
+          el_bouton_formulaire.innerText = "Ajouter"
+          el_bouton_formulaire.setAttribute("texte_bouton", "Ajouter")
+          el_cle.value = ""
+          possible_supprimer = false
+      }
+  })
 
-document.querySelectorAll(".modifier_reseau_social").forEach(element => {
+  el_cle.addEventListener("keyup", function(){
+      if(possible_supprimer){
+          if(this.value == ""){
+              el_bouton_formulaire.innerText = "Supprimer"
+          } else {
+              el_bouton_formulaire.innerText = el_bouton_formulaire.getAttribute("texte_bouton")
+          }
+      }
+  })
 
-    element.addEventListener("click", function(){
-        cle = this.getAttribute("cle")
-        reseau_social_id = this.getAttribute("reseau_social_liste_id")
+  document.querySelectorAll(".modifier_reseau_social").forEach(element => {
 
-        el_cle.value = cle
-        el_reseau_social.querySelector('[value="'+reseau_social_id+'"]').selected = true
-        el_reseau_social.dispatchEvent(new Event('change'));
-    })
+      element.addEventListener("click", function(){
+          cle = this.getAttribute("cle")
+          reseau_social_id = this.getAttribute("reseau_social_liste_id")
 
-    cle = element.getAttribute("cle")
-    reseau_social_liste_id = element.getAttribute("reseau_social_liste_id")
-    liste_reseau_social_liste_id[reseau_social_liste_id] = cle
-});
+          el_cle.value = cle
+          el_reseau_social.querySelector('[value="'+reseau_social_id+'"]').selected = true
+          el_reseau_social.dispatchEvent(new Event('change'));
+      })
+
+      cle = element.getAttribute("cle")
+      reseau_social_liste_id = element.getAttribute("reseau_social_liste_id")
+      liste_reseau_social_liste_id[reseau_social_liste_id] = cle
+  });
+};
 </script>

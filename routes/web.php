@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\AccueilController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\EntiteController;
 use App\Http\Controllers\MembreController;
+use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\CalendrierController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ReseauSocialController;
 use App\Http\Controllers\AvanceeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +23,13 @@ use App\Http\Controllers\AvanceeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+<<<<<<< routes/web.php
 Route::get('/', function(){return redirect('/entites/douai');});
 Route::get('/add-media', function(){
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());});
+=======
+Route::get('/', [AccueilController::class, 'accueil']);
+>>>>>>> routes/web.php
 
 Route::get('/entites', function(){return view('entite.choix_site');})->name('racine');
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
@@ -39,6 +46,7 @@ Route::get('/rgpd', function() {  return redirect('/air/documentation/rgpd'); })
 //============
 Route::get('/matrix', function() {  return view('oeufs_de_paques.matrix'); });
 Route::get('/ecriture', function() {  return view('oeufs_de_paques.ecriture'); });
+Route::get('/cookies', function() {  return view('cookies'); });
 
 //accéder aux erreurs
 //====================
@@ -49,6 +57,18 @@ Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['e
 Route::get('/fenetre_contextuelle/cookies', function(){return view('fenetre_contextuelle.cookies');});
 Route::get('/fenetre_contextuelle/rgpd', function(){return view('fenetre_contextuelle.rgpd');});
 
+//users profile
+//====================
+Route::controller(UserController::class)->group(function(){
+  Route::get('/home', 'home');
+  Route::get('/editer_photo_profil', 'editer_photo_profil');
+  Route::post('/editer_photo_profil', 'maj_photo_profil');
+  Route::get('/editer_infos_profil', 'editer_infos_profil');
+  Route::post('/editer_infos_profil', 'maj_infos_profil');
+  Route::get('/editer_reseaux_profil', 'editer_reseaux_profil');
+  Route::post('/editer_reseaux_profil', 'enregistrer_reseaux_profil');
+});
+
 //les routes réservées à l'AIR
 //============================
 $routes_AIR = function(){
@@ -57,7 +77,7 @@ $routes_AIR = function(){
             Route::controller(EntiteController::class)->group(function(){
                 Route::get('/entites/admin', 'index_admin');
                 Route::get('/entites/index/json', 'index_admin_json');
-    
+
                 Route::get('/entite/nouvelle', 'create');
                 Route::post('/entite/nouvelle', 'store');
                 Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos')->name('modifier_infos');
@@ -67,8 +87,10 @@ $routes_AIR = function(){
             });
 
             Route::controller(LogoController::class)->group(function(){
-                Route::get('/entite/{entite_id}/logotype', 'create')->name('modifier_logotype');
-                Route::post('/entite/{entite_id}/logotype', 'store');
+                Route::get('/entite/{entite_id}/logotype', 'modifier_logo')->name('modifier_logotype');
+                Route::post('/entite/{entite_id}/logotype', 'maj_logo');
+                Route::get('/entite/{entite_id}/couleur', 'modifier_couleur')->name('modifier_couleur');
+                Route::post('/entite/{entite_id}/couleur', 'maj_couleur');
             });
 
             Route::controller(MembreController::class)->group(function(){
@@ -83,6 +105,7 @@ $routes_AIR = function(){
             });
         });
     };
+
 
 
 //les routes réservées aux différents bureaux
@@ -106,7 +129,7 @@ $routes_bureaux = function(){
             });
         });
     };
-    
+
 
 //les routes pour les entites, les clubs et les listes
 //=========================================================
@@ -122,6 +145,7 @@ $routes_entites = function () {
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show')->name('documentation_afficher');
     });
+<<<<<<< routes/web.php
     
     Route::controller(ProjetController::class)->group(function(){
         Route::middleware('protection.autorisation:gerer_projet')->group(function(){
@@ -145,6 +169,9 @@ $routes_entites = function () {
         Route::get('/projet/{slug}/avancee/{slug_avancee}', 'show')->name('avancee_afficher');
     });
     
+=======
+
+>>>>>>> routes/web.php
     Route::controller(EntiteController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
         Route::get('/accueil', 'show');
@@ -155,7 +182,21 @@ $routes_entites = function () {
             Route::get('/entite/modifier/description/', 'modifier_description');
             Route::post('/entite/modifier/description/', 'maj_description');
         });
+                // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+                // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+
+        Route::controller(EvenementController::class)->group(function(){
+            Route::get('/entite/evenement', 'show_home');
+            Route::post('/entite/evenement/suppression', 'suppression');
+            Route::post('/entite/evenement/validation', 'validation');
+            Route::get('/entite/evenement/formulaire', 'create');
+            Route::post('/entite/evenement/formulaire', 'store');
+            Route::get('/evenement/modifier/{id}', 'edit');
+            Route::post('/evenement/modifier/{id}', 'update');
+            Route::get('/entite/evenement/{slug}', 'show');
     });
+});
+
 
     Route::controller(ReseauSocialController::class)->group(function(){
         Route::middleware('protection.autorisation:gerer_entite')->group(function(){
@@ -163,13 +204,33 @@ $routes_entites = function () {
             Route::post('/entite/reseau_social', 'store');
             Route::delete('/entite/reseau_social', 'delete');
         });
+        // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
+        // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
     });
-    
+
+    Route::controller(CalendrierController::class)->group(function() {
+        Route::get('/calendrier', 'calendrier_asso');
+        Route::post('/calendrier/validation', 'validation');
+        Route::post('/calendrier/invalidation', 'invalidation');
+        Route::post('/calendrier/suppression', 'suppression');
+        Route::get('/calendrier/index_mois_json/{annee}-{mois}', 'calendrier_index_json');
+    });
+
     Route::controller(MembreController::class)->group(function(){
         Route::get('/entite/{type}', 'index_admin')->where(['type'=>'membres|abonnes']);
         Route::post('/entite/{type}', 'ajout_membre')->where(['type'=>'membres|abonnes']);
     });
+
 };
+
+//Important !
+Route::controller(CalendrierController::class)->group(function(){
+    Route::get('/calendrier', 'calendrier_general');
+    Route::post('/calendrier/validation', 'validation');
+    Route::post('/calendrier/invalidation', 'invalidation');
+    Route::post('/calendrier/suppression', 'suppression');
+    Route::get('/calendrier/index_mois_json_general/{annee}-{mois}', 'calendrier_index_json_general');
+});
 
 Route::prefix('{entite_uid}-{liste_id}') //pour les listes
     ->middleware('existence.entite:liste')

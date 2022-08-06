@@ -23,7 +23,7 @@ class MembresTableSeeder extends Seeder
                 'created_at' => "2022-03-01",
             ],
             [
-                'entite_id' => '2',
+                'entite_id' => '13',
                 'user_id' => '1',
                 'role_id' => '2',
                 'fin_mandat' => "2023-05-01",

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 
 class LogoController extends Controller
 {
-    public function create(Request $request)
+    public function modifier_logo(Request $request)
     {
 		AutorisationGestion::protectionPage("gerer_entite");
 
@@ -25,7 +25,7 @@ class LogoController extends Controller
 		]);
     }
 
-    public function store(Request $request){
+    public function maj_logo(Request $request){
 		AutorisationGestion::protectionPage("gerer_entite");
 
         $request->query('creation') ? $creation=true : $creation=false;
@@ -38,13 +38,6 @@ class LogoController extends Controller
 
 		$entite = Entite::existe($request->route('entite_id'));
 
-        //on sauvegarde les couleurs de l'entite
-		$entite->couleur_claire = $request->couleur_claire;
-		$entite->couleur_sombre = $request->couleur_sombre;
-		$entite->couleur_police_accentuation_claire = self::couleur_ecriture($request->couleur_claire);
-		$entite->couleur_police_accentuation_sombre = self::couleur_ecriture($request->couleur_sombre);
-		$entite->save();
-
         //on stock le logo dans le storage et dans la base de données
 		if($creation || $presence_logo){
 			GestionLogo::validation_logo($request->logo);
@@ -52,7 +45,48 @@ class LogoController extends Controller
 		}
 
 		if($request->query('creation')){
-			return redirect()->route('gestion_membres', ['entite_uid' => 'air','entite_id' => $entite->id, 'type' => 'membres', 'creation' => true]);
+			return redirect()->route('modifier_couleur', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+		} else {
+			return redirect($entite->url());
+		}
+    }
+
+
+    public function modifier_couleur(Request $request)
+    {
+		AutorisationGestion::protectionPage("gerer_entite");
+
+		$entite = Entite::existe($request->route('entite_id'));
+
+		return view('entite.modifier_couleur', [
+			'entite' => $entite,
+			'creation' => $request->query('creation', 0),
+		]);
+    }
+
+    public function maj_couleur(Request $request){
+		AutorisationGestion::protectionPage("gerer_entite");
+
+        $request->query('creation') ? $creation=true : $creation=false;
+        $presence_logo = $request->has('logo');
+
+		$this->validate($request, [
+			'couleur_claire' => ['filled'],
+			'couleur_sombre' => ['filled'],
+		]);
+
+        //comme l'air peut modif les couleurs, l'entite id vient de la route et ne peut pas venir de la session
+		$entite = Entite::existe($request->route('entite_id'));
+
+        //on sauvegarde les couleurs de l'entite
+		$entite->couleur_claire = $request->couleur_claire;
+		$entite->couleur_sombre = $request->couleur_sombre;
+		$entite->couleur_police_accentuation_claire = self::couleur_ecriture($request->couleur_claire);
+		$entite->couleur_police_accentuation_sombre = self::couleur_ecriture($request->couleur_sombre);
+		$entite->save();
+
+		if($request->query('creation')){
+			return redirect()->route('gestion_membres', ['entite_uid' => $request->route('entite_uid'), 'type' => 'membres', 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect($entite->url());
 		}

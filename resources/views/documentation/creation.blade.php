@@ -62,7 +62,7 @@
 				</label>
 
 				<label class="input_groupe">
-					<p class="titre">Ajouter des image :</p>
+					<p class="titre">Ajouter des images :</p>
 					<p class="description">En informatique, une image de 200ko prend autant de place que 30 000 mots. Nous limitons la taille des images à 1920*1080 pixels, et à 300ko. Privilégiez le SVG si possible. <a target="_blank" class="couleur" href="https://air.imt-ne.fr/documentation/guide-images">guide sur les images</a></p>
 					<input type="file" name="image1" class="input"/>
 				</label>

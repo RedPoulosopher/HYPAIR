@@ -57,6 +57,13 @@ class User extends Authenticatable
         
         return $user->first();
     }
+    public static function existe_id($user_id){
+        $user = self::where('id', $user_id);
+
+        if(!$user->exists()){return false;}
+        
+        return $user->first();
+    }
 
     public function reseaux_sociaux(){
         return $this->morphMany(ReseauSocial::class, 'reseau_sociable');

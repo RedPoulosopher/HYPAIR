@@ -38,7 +38,7 @@ class ExistenceAsso
         }
 
         session([
-            "association_id" => $asso["id"],
+            "entite_id" => $asso["id"],
             "association_couleur_claire" => $asso["couleur_claire"],
             "association_couleur_sombre" => $asso["couleur_sombre"],
         ]);

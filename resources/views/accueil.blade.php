@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Accueil - HypAIR</title>
         <link
             rel="stylesheet"
@@ -13,16 +13,30 @@
     </head>
 
     <body class="dark-theme">
-        <div id="wrapper">
-            <div id="contenu" class="grand">
-                <h1 class="titre-page">--- HypAIR ---</h1>
+    @php
+        use App\Services\GestionPhotoDeProfil;
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
+        }
+    @endphp
 
-                <div class="header">
-                    <div class="logo">
-                        <img
-                            src="/images/logo_air_1.png"
-                            alt="logo_hypair"
-                        />
+    @if (Auth::check())
+        <div id="lien_profil"><a href="/home"><img id="photo_lien_profil" src="{{$user->chemin_photo_de_profil}}"
+                                                   title="{{$user->prenom}} {{$user->prenom}}"/></a></div>
+    @else
+        <a href="/home" id="bouton_se_connecter" class="bouton primaire">Se connecter</a>
+    @endif
+    <div id="wrapper">
+        <div id="contenu" class="grand">
+            <h1 class="titre-page">--- HypAIR ---</h1>
+
+            <div class="header">
+                <div class="logo">
+                    <img
+                        src="/images/logo_air_1.png"
+                        alt="logo_hypair"
+                    />
                     </div>
                 </div>
 
@@ -62,23 +76,37 @@
                 <div class="intro texte_grand">
                     <p>Phrases pour présenter le projet</p>
                     <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Tempora eum animi sint qui aspernatur obcaecati
-                        nostrum pariatur! Quia similique quis atque doloremque
-                        numquam veritatis, possimus quod nesciunt vel voluptatem
-                        voluptas sit nostrum incidunt sunt minima sequi aut?
-                        Corrupti tempore debitis nostrum nisi corporis
-                        voluptatibus placeat assumenda explicabo eum tempora
-                        suscipit, error accusamus, dolor, vero soluta quod
-                        deserunt nulla quae dolorem nesciunt atque magnam.
-                        Obcaecati porro totam, exercitationem sapiente tenetur
-                        repellendus?
+                        HypAIR est un site qui se veut être un complément (voir un indispensable à l'avenir) à la vie associative en ajoutant des fonctionnalités et des services qui serviront et amélioreront la vie étudiante ( calendrier personnel, événement) et aussi la pérennité des comités et des associations en centralisant les informations et en les sauvegardant pour les années à venir (documentations, projets etc..).
+                        Nous voulons être présents à Lille comme à Douai et disponible sur ordinateur et sur mobile. Le projet HypAIR est encore à ses débuts et est donc présent pour la première fois cette année. Cela veut donc dire que le site est encore loin d'être fini. Il y a encore beaucoup d'amélioration à apporter et de fonctionnalités que nous avons en tête.
+                        Donc n'hésitez à nous faire des retours sur votre ressenti et sur les améliorations que vous aimeriez voir.
+                        Si vous voulez nous aider à développer notre site tout au long de l'année vous pouvez nous le faire savoir et rejoindre nos réseaux : <a href="/air">https://hypair.imt-ne.fr/air</a>
                     </p>
                 </div>
 
                 <h1 class="espace">- Services -</h1>
 
                 <div class="entity-list grille-enfants">
+
+                    <!-- Logo PeerTube -->
+                    <div class="entity-container">
+                        <a
+                            class="entity ombre_petite"
+                            href="/calendrier"
+                        >
+                            <div
+                                class="cercle"
+                                style="border-color: #e74c3c"
+                            ></div>
+                            <img
+                                src="/images/logo_services/calendrier.png"
+                                alt="logo_peertube"
+                            />
+                        </a>
+                        <div class="info">
+                            <p class="nom">Calendrier</p>
+                        </div>
+                    </div>
+
                     <!-- Logo cerbair -->
                     <div class="entity-container">
                         <a
@@ -98,6 +126,7 @@
                             <p class="nom">CerbAIR</p>
                         </div>
                     </div>
+
                     <!-- Logo PeerTube -->
                     <div class="entity-container">
                         <a

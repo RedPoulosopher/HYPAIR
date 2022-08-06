@@ -42,6 +42,40 @@ a[target="_blank"] {
 	justify-content:center;
 }
 
+#lien_profil {
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    right: 20px;
+    width:60px;
+    height:60px;
+}
+
+#lien_profil #photo_lien_profil {
+    width:100%;
+    border-radius:300px;
+    border: 2px solid var(--couleur_accentuation);
+    background-color: var(--couleur_fond);
+    transform: translateY(0px);
+    box-shadow: var(--ombre_petite);
+    transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+    cursor:pointer;
+}
+
+#lien_profil:hover #photo_lien_profil {
+    transform: translateY(-3px);
+    box-shadow: var(--ombre_grande);
+    transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+
+#bouton_se_connecter {
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    right: 20px;
+}
+
+
 #contenu {
 	padding: 15px 15px;
 
@@ -159,7 +193,7 @@ p.explication {
 	transform:translateY(0px);
 	box-shadow: var(--ombre_petite);
 	transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
-	
+
 	&[class*="icon-"]:before {
 		font-size:1.1em;
 		vertical-align: top;
@@ -176,7 +210,7 @@ p.explication {
 	& span {
 		vertical-align: middle;
 	}
-	
+
 	&.margin_tout {
 		margin:15px;
 	}
@@ -234,7 +268,7 @@ body.dark-theme {
 	--ombre_grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
 	--ombre_petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
 	--ombre_inset: 0px 2px 5px 1px rgb(0,0,0,0.5) inset;
-	
+
 	& a.couleur {
 		text-decoration:underline;
 		color: #98cbff;
@@ -243,7 +277,7 @@ body.dark-theme {
 		color: #759aff;
 	}
 }
- 
+
 body.light-theme {
 	background: var(--couleur_fond);
 	color:#000;

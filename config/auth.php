@@ -114,4 +114,13 @@ return [
 
     'password_timeout' => 10800,
 
+    'oauth2' => [
+        'authorize_url' => env('OAUTH2_AUTHORIZE_URL'),
+        'token_url' => env('OAUTH2_TOKEN_URL'),
+        'user_endpoint_url' => env('OAUTH2_USER_ENDPOINT_URL'),
+        'redirect_uri' => env('OAUTH2_REDIRECT_URI'),
+        'id' => env('OAUTH2_ID'),
+        'secret' => env('OAUTH2_SECRET'),
+    ]
+
 ];

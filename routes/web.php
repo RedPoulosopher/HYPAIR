@@ -37,8 +37,7 @@ Route::get('/entites', function(){return view('entite.choix_site');})->name('rac
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
 
 Route::controller(AuthController::class)->group(function(){
-    Route::get('/connexion', 'affichage_formulaire')->name("connexion");
-    Route::post('/connexion', 'connexion');
+    Route::get('/connexion', 'connexion')->name("connexion");
     Route::get('/deconnexion', 'deconnexion');
 });
 Route::get('/cookies', function() {  return view('cookies'); });

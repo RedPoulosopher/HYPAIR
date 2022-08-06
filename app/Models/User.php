@@ -20,6 +20,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'prenom',
+        'nom',
+        'uid'
     ];
 
     /**
@@ -54,14 +57,14 @@ class User extends Authenticatable
         $user = self::where('uid', $user_uid);
 
         if(!$user->exists()){return false;}
-        
+
         return $user->first();
     }
     public static function existe_id($user_id){
         $user = self::where('id', $user_id);
 
         if(!$user->exists()){return false;}
-        
+
         return $user->first();
     }
 

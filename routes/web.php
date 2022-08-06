@@ -10,6 +10,7 @@ use App\Http\Controllers\CalendrierController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReseauSocialController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,18 @@ Route::get('/{erreur}', function($erreur) { return abort($erreur); })->where(['e
 //====================
 Route::get('/fenetre_contextuelle/cookies', function(){return view('fenetre_contextuelle.cookies');});
 Route::get('/fenetre_contextuelle/rgpd', function(){return view('fenetre_contextuelle.rgpd');});
+
+//users profile
+//====================
+Route::controller(UserController::class)->group(function(){
+  Route::get('/home', 'home');
+  Route::get('/editer_photo_profil', 'editer_photo_profil');
+  Route::post('/editer_photo_profil', 'maj_photo_profil');
+  Route::get('/editer_infos_profil', 'editer_infos_profil');
+  Route::post('/editer_infos_profil', 'maj_infos_profil');
+  Route::get('/editer_reseaux_profil', 'editer_reseaux_profil');
+  Route::post('/editer_reseaux_profil', 'enregistrer_reseaux_profil');
+});
 
 //les routes réservées à l'AIR
 //============================
@@ -161,12 +174,18 @@ $routes_entites = function () {
         // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
         // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
     });
-    Route::controller(CalendrierController::class)->group(function(){
+
+    Route::controller(CalendrierController::class)->group(function() {
         Route::get('/calendrier', 'calendrier_asso');
         Route::post('/calendrier/validation', 'validation');
         Route::post('/calendrier/invalidation', 'invalidation');
         Route::post('/calendrier/suppression', 'suppression');
         Route::get('/calendrier/index_mois_json/{annee}-{mois}', 'calendrier_index_json');
+    });
+
+    Route::controller(MembreController::class)->group(function(){
+        Route::get('/entite/{type}', 'index_admin')->where(['type'=>'membres|abonnes']);
+        Route::post('/entite/{type}', 'ajout_membre')->where(['type'=>'membres|abonnes']);
     });
 
 };

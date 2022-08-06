@@ -33,6 +33,21 @@
 </button>
 
 
+@php
+use App\Services\GestionPhotoDeProfil;
+if (Auth::check()) {
+    $user = Auth::user();
+    $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
+}
+@endphp
+
+@if (Auth::check())
+<div id="lien_profil"><a href="/home"><img id="photo_lien_profil" src="{{$user->chemin_photo_de_profil}}" title="{{$user->prenom}} {{$user->prenom}}"/></a></div>
+@else
+<a href="/home" id="bouton_se_connecter" class="bouton primaire">Se connecter</a>
+@endif
+
+
 <script>
 const btn = document.querySelector("#bascule-theme");
 btn.addEventListener("click", function () {

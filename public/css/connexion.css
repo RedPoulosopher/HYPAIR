@@ -1,1 +1,142 @@
-.panneau{display:flex;width:100%;max-width:720px;border-radius:20px;background:var(--couleur_fond)}.titre{font-size:26px;margin:0;font-weight:600;color:var(--couleur_accentuation_air)}.description{margin:6px 0 30px}.panneau_gauche{padding:30px;flex:2;transition-duration:.5s}.panneau_droite{flex:2;display:grid;place-items:center;grid-template-rows:50% 50%}.panneau_droite img{width:55%;align-self:self-end;-webkit-animation-duration:1.2s;animation-duration:1.2s;-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite;-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;-webkit-animation-direction:alternate;animation-direction:alternate}.panneau_droite img.respiration{-webkit-animation-name:respiration;animation-name:respiration}.panneau_droite .nom{font-family:GearsOfPeace;font-size:80px;opacity:.85;align-self:self-start}@-webkit-keyframes respiration{0%{width:55%}to{width:70%}}@keyframes respiration{0%{width:55%}to{width:70%}}.groupe_boutons{display:flex;justify-content:space-between;align-items:center}.bouton.primaire{background-color:var(--couleur_accentuation_air)}.input_groupe{display:flex;flex-direction:column;padding:10px 20px;border-radius:50px;margin-bottom:20px;transition:.3s;border:.3px solid transparent;background:var(--gris_2)}.input_groupe label{font-size:11px;text-transform:uppercase;font-weight:600;letter-spacing:.7px;transition:.3s;color:var(--couleur_accentuation_air)}.input_groupe input{outline:0;border:0;padding:4px 0 0;font-size:1em;background-color:unset;color:var(--couleur_police)}.input_groupe::-moz-placeholder{color:#ccc}.input_groupe::placeholder{color:#ccc}.input_groupe:focus-within{border:.3px solid var(--couleur_accentuation_air)}@media (max-width:750px){.panneau{width:90%}.panneau_droite{display:none}.groupe_boutons{display:block}}
+.panneau {
+  display: flex;
+  width: 100%;
+  max-width: 720px;
+  border-radius: 20px;
+  background: var(--couleur_fond);
+}
+
+.titre {
+  font-size: 26px;
+  margin: 0;
+  font-weight: 600;
+  color: var(--couleur_accentuation_air);
+}
+
+.description {
+  margin: 6px 0 30px 0;
+}
+
+.panneau_gauche {
+  padding: 30px;
+  flex: 2;
+  transition-duration: 0.5s;
+}
+
+.panneau_droite {
+  flex: 2;
+  display: grid;
+  place-items: center;
+  grid-template-rows: 50% 50%;
+}
+
+.panneau_droite img {
+  width: 55%;
+  align-self: self-end;
+  -webkit-animation-duration: 1.2s;
+          animation-duration: 1.2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+}
+
+.panneau_droite img.respiration {
+  -webkit-animation-name: respiration;
+          animation-name: respiration;
+}
+
+.panneau_droite .nom {
+  font-family: "GearsOfPeace";
+  font-size: 80px;
+  opacity: 0.85;
+  align-self: self-start;
+}
+
+@-webkit-keyframes respiration {
+  from {
+    width: 55%;
+  }
+
+  to {
+    width: 70%;
+  }
+}
+
+@keyframes respiration {
+  from {
+    width: 55%;
+  }
+
+  to {
+    width: 70%;
+  }
+}
+
+.groupe_boutons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bouton.primaire {
+  background-color: var(--couleur_accentuation_air);
+}
+
+.input_groupe {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  transition: 0.3s;
+  border: 0.3px solid transparent;
+  background: var(--gris_2);
+}
+
+.input_groupe label {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.7px;
+  transition: 0.3s;
+  color: var(--couleur_accentuation_air);
+}
+
+.input_groupe input {
+  outline: 0;
+  border: 0;
+  padding: 4px 0 0;
+  font-size: 1em;
+  background-color: unset;
+  color: var(--couleur_police);
+}
+
+.input_groupe::-moz-placeholder {
+  color: #ccc;
+}
+
+.input_groupe::placeholder {
+  color: #ccc;
+}
+
+.input_groupe:focus-within {
+  border: 0.3px solid var(--couleur_accentuation_air);
+}
+
+@media (max-width: 750px) {
+  .panneau {
+    width: 90%;
+  }
+
+  .panneau_droite {
+    display: none;
+  }
+
+  .groupe_boutons {
+    display: block;
+  }
+}
+

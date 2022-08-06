@@ -73,12 +73,11 @@
                     </div>
                 </div>
 
-                <div class="intro texte_grand">
-                    <p>Phrases pour présenter le projet</p>
-                    <p>
-                        HypAIR est un site qui se veut être un complément (voir un indispensable à l'avenir) à la vie associative en ajoutant des fonctionnalités et des services qui serviront et amélioreront la vie étudiante ( calendrier personnel, événement) et aussi la pérennité des comités et des associations en centralisant les informations et en les sauvegardant pour les années à venir (documentations, projets etc..).
-                        Nous voulons être présents à Lille comme à Douai et disponible sur ordinateur et sur mobile. Le projet HypAIR est encore à ses débuts et est donc présent pour la première fois cette année. Cela veut donc dire que le site est encore loin d'être fini. Il y a encore beaucoup d'amélioration à apporter et de fonctionnalités que nous avons en tête.
-                        Donc n'hésitez à nous faire des retours sur votre ressenti et sur les améliorations que vous aimeriez voir.
+                <div class="intro texte_grand"><p>
+                        HypAIR est un site qui se veut être un complément (voir un indispensable à l'avenir) à la vie associative en ajoutant des fonctionnalités et des services qui serviront et amélioreront la vie étudiante (calendrier personnel, événement) et aussi la pérennité des comités et des associations en centralisant les informations et en les sauvegardant pour les années à venir (documentations, projets etc.).
+                        Nous voulons être présents à Lille comme à Douai et disponible sur ordinateur et sur mobile.<br>
+                        Le projet HypAIR est encore à ses débuts et est donc accessible pour la première fois cette année. Cela veut donc dire que le site est encore loin d'être fini. Il y a encore beaucoup d'améliorations à apporter et de fonctionnalités que nous avons en tête.
+                        Donc n'hésitez pas à nous faire des retours sur votre ressenti et sur les nouveautés que vous aimeriez voir.<br>
                         Si vous voulez nous aider à développer notre site tout au long de l'année vous pouvez nous le faire savoir et rejoindre nos réseaux : <a href="/air">https://hypair.imt-ne.fr/air</a>
                     </p>
                 </div>

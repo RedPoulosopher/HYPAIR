@@ -20,7 +20,7 @@ use App\Http\Controllers\ReseauSocialController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){return redirect('/entites/douai');});
+Route::view('/', 'accueil');
 
 Route::get('/entites', function(){return view('entite.choix_site');})->name('racine');
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)

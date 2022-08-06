@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/css/entite.index.css" type="text/css" >
 
 <div id="contenu" class="grand">
-    <a href="/entites" class="bouton secondaire">< retour au choix du site</a>
+    <a href="/" class="bouton secondaire">< retour au choix du site</a>
     @foreach($bureaux as $bureau)
         <h1>- Entites du {{ $bureau->nom }} -</h1>
         <div class="liste_comite_club">

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Models\Association;
 use \App\Models\User;
 use \App\Models\Membre;
 use \App\Models\Projet;
@@ -31,7 +30,7 @@ class ProjetController extends Controller
 
 		$existe = Projet::existe_slug($projet->slug, $projet->entite_id)->first();
 		if($existe){ return back()->withErrors(["Ce projet existe déjà pour votre entité."]); }
-		
+
 		$projet->save();
 
 		return redirect()->route('projet_afficher',['entite_uid' =>$request->route('entite_uid'), 'slug'=>$projet->slug ]);
@@ -43,11 +42,11 @@ class ProjetController extends Controller
 			'confidentialite' => ['filled','numeric','max:20'],
 			'description_courte'=>['filled','max:1000'],
 			'date_fin' => ['filled','date_format:Y-m-d'],
-			'chef_projet' => ['nullable','numeric'] 
+			'chef_projet' => ['nullable','numeric']
 		];
 
 		$this->validate($request, $validation);
-		
+
 		if($update){
 			$projet = Projet::existe($request->route('projet_id'));
 		} else{
@@ -102,7 +101,7 @@ class ProjetController extends Controller
 			'gerer_projet' => AutorisationGestion::gestion("gerer_projet")
 		]);
 	}
-	
+
 
 	public function update(Request $request)
 	{
@@ -110,7 +109,7 @@ class ProjetController extends Controller
 		$projet->save();
 
 		return redirect()->route('projet_afficher',['entite_uid' => $request->route('entite_uid'),'slug'=>$projet->slug]);
-	
+
 	}
 	/*public function update(Resquet $request)
 	{
@@ -124,11 +123,11 @@ class ProjetController extends Controller
 
 		$projet = Projet::existe($request->route('projet_id'));
 		if(!$projet){abort(404);}
-		
+
 		if($projet->confidentialite > $niveau_administration){abort(403);}
 
 		$confidentialites = config('roles');
-		
+
 		return view('projet.creation')
 				->with('projet', $projet)
 				->with('titre','Modifier le projet')

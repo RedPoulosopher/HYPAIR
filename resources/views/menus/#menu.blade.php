@@ -12,12 +12,6 @@
 		</div>
 		<ul class="navigation">
 			@yield('liens')
-			@if (session('entite_lien'))
-				<a href="{{ session('entite_lien') }}/entite/evenement"><li><span>Évènements</span></li></a>
-			@endif
-            @if (session('gerer_entite'))
-                <a href="{{ session('entite_lien') }}/entite/gestion"><li><span>Gestion</span></li></a>
-            @endif
 		</ul>
 		<div id="bascule-mode">
 			<h6 class="label-sombre">Sombre</h6>

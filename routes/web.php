@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccueilController;
+use App\Http\Controllers\ReseauSocialController;
+use App\Models\Avancee;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\ProjetController;
@@ -23,13 +25,13 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< routes/web.php
-Route::get('/', function(){return redirect('/entites/douai');});
-Route::get('/add-media', function(){
-    Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());});
-=======
+Route::get('/', function () {
+    return redirect('/entites/douai');
+});
+Route::get('/add-media', function () {
+    Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
+});
 Route::get('/', [AccueilController::class, 'accueil']);
->>>>>>> routes/web.php
 
 Route::get('/entites', function(){return view('entite.choix_site');})->name('racine');
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
@@ -145,8 +147,6 @@ $routes_entites = function () {
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show')->name('documentation_afficher');
     });
-<<<<<<< routes/web.php
-    
     Route::controller(ProjetController::class)->group(function(){
         Route::middleware('protection.autorisation:gerer_projet')->group(function(){
             Route::get('/projet/nouveau', 'create');
@@ -155,7 +155,7 @@ $routes_entites = function () {
             Route::post('/projet/{projet_id}/modifier', 'update');
         });
         Route::get('/projet', 'index');
-        
+
     });
 
     Route::controller(AvanceeController::class)->group(function(){
@@ -168,10 +168,6 @@ $routes_entites = function () {
         Route::get('/projet/{slug}', 'index')->name('projet_afficher');
         Route::get('/projet/{slug}/avancee/{slug_avancee}', 'show')->name('avancee_afficher');
     });
-    
-=======
-
->>>>>>> routes/web.php
     Route::controller(EntiteController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
         Route::get('/accueil', 'show');

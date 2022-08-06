@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use \App\Models\Association;
 use \App\Models\User;
 use \App\Models\Membre;
 use \App\Models\Projet;
@@ -32,7 +31,7 @@ class AvanceeController extends Controller
 
 		return view('avancee.creation', [
 			'projet' => $projet
-			])->with('titre','Nouvelle avancee')->with('confidentialites',$confidentialites);
+			])->with('titre','Nouvelle avancée')->with('confidentialites',$confidentialites);
 	}
 
 	public function store(Request $request)
@@ -40,7 +39,7 @@ class AvanceeController extends Controller
 		$avancee= $this->formulaire_avancee($request);
 
 		$existe = Avancee::existe_slug($avancee->slug,$avancee->entite_id, $avancee->projet_id)->first();
-		if($existe){ return back()->withErrors(["Cet avancee existe déjà pour votre entité."]); }
+		if($existe){ return back()->withErrors(["Cet avancée existe déjà pour votre entité."]); }
 		$avancee->save();
 
 		return redirect()->route('avancee_afficher',['entite_uid' =>$request->route('entite_uid'),'slug'=>$request->route('slug'),'slug_avancee'=>$avancee->slug]);
@@ -53,7 +52,7 @@ class AvanceeController extends Controller
 		];
 
 		$this->validate($request, $validation);
-		
+
 		if($update){
 			$avancee = Avancee::existe($request->route('avancee_id'));
 		} else{
@@ -69,7 +68,7 @@ class AvanceeController extends Controller
 		$avancee->slug = Str::slug($request->titre, '-');
 		$avancee->projet_id =$projet->id;
 		$avancee->entite_id=session('entite_id');
-		$avancee->description_md = $request->description_md;	
+		$avancee->description_md = $request->description_md;
 
 		return $avancee;
 	}
@@ -97,7 +96,7 @@ class AvanceeController extends Controller
 		]);
 	}
 
-	
+
 	public function index(Request $request)
 	{
 		$niveau_administration = AutorisationGestion::niveau_administration();
@@ -130,7 +129,7 @@ class AvanceeController extends Controller
 			'gerer_projet' => AutorisationGestion::gestion("gerer_projet")
 		]);
 	}
-	
+
 
 	public function update(Request $request)
 	{
@@ -138,7 +137,7 @@ class AvanceeController extends Controller
 		$avancee->save();
 
 		return redirect()->route('avancee_afficher',['entite_uid' => $request->route('entite_uid'),'slug'=>$request->route('slug'),'slug_avancee'=>$avancee->slug]);
-	
+
 	}
 	/*public function update(Resquet $request)
 	{
@@ -152,7 +151,7 @@ class AvanceeController extends Controller
 
 		$avancee = Avancee::existe($request->route('avancee_id'));
 		if(!$avancee){abort(404);}
-		
+
 		return view('avancee.creation')
 				->with('avancee', $avancee)
 				->with('titre','Modifier l\'avancee');

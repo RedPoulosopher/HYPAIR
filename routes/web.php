@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccueilController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\EntiteController;
@@ -20,7 +21,7 @@ use App\Http\Controllers\ReseauSocialController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/', 'accueil');
+Route::get('/', [AccueilController::class, 'accueil']);
 
 Route::get('/entites', function(){return view('entite.choix_site');})->name('racine');
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site'=>'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
@@ -56,7 +57,7 @@ $routes_AIR = function(){
             Route::controller(EntiteController::class)->group(function(){
                 Route::get('/entites/admin', 'index_admin');
                 Route::get('/entites/index/json', 'index_admin_json');
-    
+
                 Route::get('/entite/nouvelle', 'create');
                 Route::post('/entite/nouvelle', 'store');
                 Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos')->name('modifier_infos');
@@ -84,7 +85,7 @@ $routes_AIR = function(){
             });
         });
     };
-    
+
 
 
 //les routes réservées aux différents bureaux
@@ -108,7 +109,7 @@ $routes_bureaux = function(){
             });
         });
     };
-    
+
 
 //les routes pour les entites, les clubs et les listes
 //=========================================================
@@ -124,7 +125,7 @@ $routes_entites = function () {
         Route::get('/documentation', 'index');
         Route::get('/documentation/{slug}', 'show')->name('documentation_afficher');
     });
-    
+
     Route::controller(EntiteController::class)->group(function(){
         Route::get('/a_propos', 'show')->name('a_propos');
         Route::get('/accueil', 'show');
@@ -137,7 +138,7 @@ $routes_entites = function () {
         });
                 // Route::get('/entite/reseaux_sociaux/', 'reseaux_sociaux');
                 // Route::post('/entite/reseaux_sociaux/', 'reseaux_sociaux');
-        
+
         Route::controller(EvenementController::class)->group(function(){
             Route::get('/entite/evenement', 'show_home');
             Route::post('/entite/evenement/suppression', 'suppression');
@@ -167,7 +168,7 @@ $routes_entites = function () {
         Route::post('/calendrier/suppression', 'suppression');
         Route::get('/calendrier/index_mois_json/{annee}-{mois}', 'calendrier_index_json');
     });
-    
+
 };
 
 //Important !

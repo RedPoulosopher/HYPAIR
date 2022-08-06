@@ -136,6 +136,7 @@
 </style>
 
 <div id="contenu" class="moyen">
+  <a href="/" class="bouton secondaire">< Retour</a>
 	<div id="profil">
     <div id="photo_profil">
       <img src="{{$user->chemin_photo_de_profil}}" alt="Votre photo de profil"/>
@@ -172,11 +173,7 @@
 </div>
 @endsection
 
-
-
 <script>
-
-
 
 /*meatball*/
 var ouvert = false;

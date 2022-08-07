@@ -153,7 +153,7 @@
             <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>
         </div>
         <div id="bio">
-          {{$user->bio}}
+          {!! nl2br(e($user->bio)) !!}
         </div>
         <div class="reseaux_sociaux grille-enfants">
           @foreach ($reseaux_sociaux as $reseau_social)

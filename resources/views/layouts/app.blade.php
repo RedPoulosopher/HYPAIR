@@ -30,7 +30,7 @@
 </style>
 @if (Auth::check())
     <div id="lien_profil"><a href="/home"><img id="photo_lien_profil" src="{{$user->chemin_photo_de_profil}}"
-                                               title="{{$user->prenom}} {{$user->prenom}}"/></a></div>
+                                               title="{{$user->prenom}} {{$user->nom}}"/></a></div>
 @else
     <a href="/home" id="bouton_se_connecter" class="bouton primaire">Se connecter</a>
 @endif

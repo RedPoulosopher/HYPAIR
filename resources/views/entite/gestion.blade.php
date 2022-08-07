@@ -61,11 +61,12 @@
 		<h1>- <span class="icon-security-safe" title="page réservée aux administrateurs"></span> Gestion de l'entite -</h1>
 		<div class="logo">
 			<img src="{{session("entite_logo_petit")}}" alt="logo"/>
-			<a class="icon-edit-2" title="Modifier le logo et les couleurs." href="https://hypair.imt-ne.fr/air/contact?sujet='demande de modification du logo ou des couleurs'"></a>
+			<a class="icon-edit-2" title="Modifier le logo et les couleurs." href="logotype"></a>
 		</div>
 		<div class="conteneur_boutons">
-			<a class="gros_bouton" href="modifier/description">Modifier les descriptions et catégories</a>
-			<a class="gros_bouton" href="https://hypair.imt-ne.fr/air/contact?sujet='demande de modification du logo ou des couleurs'">Modifier le logo et les couleurs</a>
+			<a class="gros_bouton" href="description">Modifier les descriptions et catégories</a>
+			<a class="gros_bouton" href="logotype">Modifier le logo</a>
+            <a class="gros_bouton" href="couleur">Modifier les couleurs</a>
 			<a class="gros_bouton" href="membres">Gérer les membres</a>
 			<a class="gros_bouton" href="reseau_social">Gérer les réseaux sociaux</a>
 			<a class="gros_bouton" href="evenement">Gérer les évènements</a>

@@ -17,16 +17,17 @@ class GestionLogo {
         $image_chemin = $chemin . $image_nom;
 
         $image_rz = Image::make($image);
+
         $image_rz->resize(512, 512);
         Storage::put($image_chemin ."-moyen.png", $image_rz->encode("png"));
-        Storage::put($chemin ."moyen", $image_rz->encode("png"));
+        Storage::copy($image_chemin ."-moyen.png", $chemin ."moyen");
         $image_rz->resize(256, 256);
         Storage::put($image_chemin ."-petit.png", $image_rz->encode("png"));
-        Storage::put($chemin ."petit", $image_rz->encode("png"));
+        Storage::copy($image_chemin ."-petit.png", $chemin ."petit");
         $image_rz->resize(128, 128);
         Storage::put($image_chemin ."-tres-petit.png", $image_rz->encode("png"));
-        Storage::put($chemin ."tres-petit", $image_rz->encode("png"));
-        
+        Storage::copy($image_chemin ."-tres-petit.png", $chemin ."tres-petit");
+
         return $image_nom;
     }
 
@@ -48,7 +49,7 @@ class GestionLogo {
             $type = 'entites';
         }
         $chemin = 'images/'. $type .'/'. $uid .'-'. $id .'/logos/';
-        
+
         if($storage){return Storage::url($chemin);}
         return $chemin;
     }

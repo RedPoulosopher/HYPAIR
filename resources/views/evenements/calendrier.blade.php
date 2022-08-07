@@ -77,9 +77,10 @@ html {
    
 }
 #retour {
-  position: fixed;
-  top: 20px;
-  left: 20px;
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
 }
 
 @media (max-width: 768px) { /*FAIRE POPUP*/
@@ -350,7 +351,8 @@ document.getElementById("fleche-droite").addEventListener("click",  function() {
 if (entite === "") {
     document.getElementById('menu_lateral').style.display = "none";
     document.getElementById('hamburger').style.display = "none";
-    document.getElementById('retour').style.display = "visible";
+    document.getElementById('retour').style.display = "block";
+    console.log("e");
 }
 
 function event_choix_calendrier() {

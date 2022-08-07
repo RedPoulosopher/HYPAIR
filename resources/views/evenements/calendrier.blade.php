@@ -267,11 +267,12 @@ function remplissage(annee, mois){ //mois : 0=>11
     creation_calendrier(index_jour_debut, nbr_jours_dans_mois);
 }
 
-//remplissage du calendrier selon la taille
+//remplissage du calendrier selon la taille de la fenetre
 var responsive = window.matchMedia("(max-width: 768px)")
-responsive.addListener(appel) // Ne fonctionne pas si remplissage est mis a la place de appel
+responsive.addListener(appel)
 function appel() {
     remplissage(annee, mois);
+    event_choix_calendrier();
 }
 
 //genere le calendrier du mois courant

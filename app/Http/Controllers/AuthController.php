@@ -19,11 +19,6 @@ class AuthController extends Controller
 
     public function connexion(Request $request){
 
-        Auth::login(User::where('uid', 'bastien.pascal')->first());
-        $request->session()->regenerate();
-
-        return redirect()->intended();
-
         $req = $request->validate([
             'code' => ['nullable'],
             'state' => ['nullable']

@@ -89,8 +89,27 @@ html {
         grid-template-columns: repeat(1, 1fr);
         overflow: scroll;
         height: 80vh;
+        gap: 1.2em;
     }
-    .jour {
+    #calendrier .jour{
+        border: 1px solid black;
+        margin: auto 2%;
+	    border-radius: 15px;
+        display: flex;
+        flex-direction: row;
+    }
+    .num_jour {
+        flex: 20 1 auto;
+        border-radius: 10px;
+    }
+    .num_jour .evenement{
+        border-radius: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+    #calendrier .jour:nth-child(7n+1) {
         border: 1px solid black;
     }
     #retour {
@@ -200,11 +219,11 @@ function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
         for(var i=1; i<=nbr_jours_dans_mois; i++) { 
             //condition pour colorier la date d aujourd hui sur le calendrier
             if (mois_courant && i == jour_actuel) {
-                el_calendrier.innerHTML += ("<div class='jour' id='today' num_jour='" + i + "''><div>" + jours[(index_jour_debut+i-1)%7] + "</div>" + "<div>" + i + "</div></div>");
+                el_calendrier.innerHTML += ("<div class='jour' id='today'><div style='margin-left:10px; flex:1 1 auto;'>" + jours[(index_jour_debut+i-1)%7] + "<br>" + i + "</div><div class='num_jour' num_jour='" + i + "''></div></div>");
                 document.getElementById("today").style.cssText = 'border: 1px solid var(--couleur_accentuation); box-shadow: 0 0 7px; background-color:rgba(127,127,127,0.30)';
             }
             else {
-                el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''><div>" + jours[(index_jour_debut+i-1)%7] + "</div>" + "<div>" + i + "</div></div>");
+                el_calendrier.innerHTML += ("<div class='jour'><div style='margin-left:10px; flex:1 1 auto;'>" + jours[(index_jour_debut+i-1)%7] + "<br>" + i + "</div><div class='num_jour' num_jour='" + i + "''></div></div>");
         
             }
         } 

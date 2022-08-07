@@ -61,9 +61,9 @@ table {
             </div>
             @endif
 		
-
+            @if (count($tables) != 0)
             <div class="groupe ombre_petite">
-                <h2>Liste des évènements créés</h2>
+                <h2>Liste des évènements</h2>
                 <table style="text-align: center;">
                     <tr>
                         <th>Titre</th>
@@ -121,8 +121,11 @@ table {
 
                     </tr>
                     @endforeach
-            </table>
-        </div>
+                </table>
+            </div>
+            @else
+            <h4>Il n'y a aucun évènement prévu !</h4>
+            @endif
 
 
         @if($entite == 'bde' && in_array(13, $entite_user) && $gerer_evenement == 1)

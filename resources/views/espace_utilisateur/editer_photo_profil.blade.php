@@ -59,7 +59,7 @@ On voit le mail et le pseudo user associé sans pouvoir le changer.
 			<input name="input-photo" type="file" accept="image/*" required style="display: none;" onchange="affichage_photo_dynamique(event)"/>
 		</label>
 		</div>
-    <button id="bouton_submit" type="submit" tabindex="1" class="bouton primaire cacher" style="float:right;">VALIDER</button>
+    <button id="bouton_submit" type="submit" tabindex="1" class="bouton primaire cacher" style="float:right;" onclick="validation()">VALIDER</button>
 	</form>
 </div>
 @endsection
@@ -90,11 +90,21 @@ function init() {
 
 /*affichage dynamique*/
 function affichage_photo_dynamique(event) {
-	bouton_submit.className= "bouton primaire afficher";
-	photo_profil.src = URL.createObjectURL(event.target.files[0]);
-	photo_profil.onload = function() {
-      URL.revokeObjectURL(photo_profil.src) // free memory
-    }
+	if(event.target.files[0].size > 1024000000){
+  	alert("Cette image est sûrement très qualitative, mais on aimerait éviter qu'elle fasse brûler nos serveur. Réessaye avec une image plus legère ;)");
+    event.target.value = "";
+  }
+	else {
+		bouton_submit.className= "bouton primaire afficher";
+		photo_profil.src = URL.createObjectURL(event.target.files[0]);
+		photo_profil.onload = function() {
+	  	URL.revokeObjectURL(photo_profil.src) // free memory
+	  }
+	}
+};
+
+function validation() {
+	bouton_submit.innerText = "VALIDATION ...";
 };
 
 </script>

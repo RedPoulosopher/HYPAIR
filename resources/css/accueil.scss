@@ -1,12 +1,18 @@
 @use './app.scss';
 
+$color_background: #17191b;
+$color_grey: #2e2e33;
+$color_font: #ffffff;
+$color_hightlight: #cc3345;
+
 body {
-    background-color: var(--couleur_fond);
+    background-color: $color_background;
     font-family: system-ui;
+    overflow-x: hidden;
 }
 
 p {
-    color: var(--couleur_police_primaire);
+    color: $color_font;
 }
 
 #contenu {
@@ -25,7 +31,7 @@ p {
     max-width: 100ch;
     text-align: justify;
     overflow-wrap: break-word;
-    background-color: var(--gris_1);
+    background-color: $color_grey;
 }
 
 .entity-list {
@@ -53,7 +59,7 @@ p {
 
         & .entity {
             display: block;
-            background-color: var(--gris_1);
+            background-color: $color_grey;
             width: 200px;
             height: 200px;
             position: relative;
@@ -99,7 +105,7 @@ p {
 
         & .entity-grand {
             display: block;
-            background-color: var(--gris_1);
+            background-color: $color_grey;
             width: 300px;
             height: 300px;
             position: relative;
@@ -110,8 +116,8 @@ p {
             transition: 0.2s;
 
             &:hover {
-                background-color: var(--couleur_accentuation);
-                // filter: drop-shadow(5px 5px 5px var(--couleur_accentuation));
+                background-color: $color_hightlight;
+                // filter: drop-shadow(5px 5px 5px $color_hightlight);
             }
 
             & img {
@@ -122,6 +128,7 @@ p {
 }
 
 .carrousel {
+    position: absolute;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -163,7 +170,7 @@ p {
 
 @keyframes shining {
     50% {
-        background-color: var(--gris_1);
+        background-color: $color_grey;
     }
     100% {
         background-color: transparent;
@@ -181,5 +188,5 @@ p {
 .footer {
     margin-top: 30px;
     height: 200px;
-    background: var(--gris_1);
+    background: $color_grey;
 }

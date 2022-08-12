@@ -1,0 +1,40 @@
+.carrousel {
+  position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  width: 200%;
+  animation: carrousel-anim 30s ease-in-out infinite;
+  padding-bottom: 40px;
+  font-size: 0px;
+
+  .shifted {
+      transform: translateY(40px);
+  }
+
+  .bande {
+      width: 200px;
+      padding-left: 25px;
+      padding-right: 25px;
+      float: none;
+      display: inline-block;
+
+      .thumbnail-container {
+          width: 100%;
+          margin: 5px;
+          img {
+              width: 100%;
+              height: 100%;
+              border-radius: 500px;
+          }
+      }
+  }
+}
+@keyframes carrousel-anim {
+  50% {
+      transform: translateX(-50%);
+  }
+  100% {
+      transform: translateX(0%);
+  }
+}

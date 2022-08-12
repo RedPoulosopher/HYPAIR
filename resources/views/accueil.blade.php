@@ -7,7 +7,7 @@
         <title>Accueil - HypAIR</title>
         <link
             rel="stylesheet"
-            href="/css/accueil.css"
+            href="css/accueil.css"
             type="text/css"
         />
     </head>

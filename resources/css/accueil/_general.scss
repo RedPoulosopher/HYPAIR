@@ -1,0 +1,51 @@
+body {
+  background-color: $color_background;
+  font-family: system-ui;
+  overflow-x: hidden;
+}
+
+p {
+  color: $color_font;
+}
+
+#contenu {
+  overflow-x: hidden;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  height: 60vh;
+}
+
+.intro {
+  padding: 10px 30px 10px 30px;
+  margin: 40px auto 40px auto;
+  max-width: 100ch;
+  text-align: justify;
+  overflow-wrap: break-word;
+  background-color: $color_grey;
+}
+
+// @keyframes shining {
+//     50% {
+//         background-color: $color_grey;
+//     }
+//     100% {
+//         background-color: transparent;
+//     }
+// }
+
+// .values-container {
+//     height: 300px;
+
+//     & .value {
+//         margin: 50px;
+//     }
+// }
+
+// .footer {
+//     margin-top: 30px;
+//     height: 200px;
+//     background: $color_grey;
+// }

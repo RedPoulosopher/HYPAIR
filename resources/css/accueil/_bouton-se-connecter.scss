@@ -1,0 +1,42 @@
+#bouton_se_connecter {
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  right: 20px;
+}
+
+a.bouton {
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  padding: 11px 25px 12px 25px;
+  font-size: 1.1em;
+  border-radius: 50px;
+  min-width: 100px;
+  line-height: 1;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  font-family: system-ui;
+  transform: translateY(0px);
+  box-shadow: var(--ombre_petite);
+  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+  &:hover {
+		transform:translateY(-3px);
+		box-shadow: var(--ombre_grande);
+	}
+
+  &.primaire {
+    color: $color_font;
+    background-color: $color_hightlight;
+    border: none;
+    text-transform: uppercase;
+  }
+}

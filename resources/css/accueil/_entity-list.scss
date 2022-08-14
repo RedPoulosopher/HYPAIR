@@ -59,6 +59,8 @@
   }
 
   .entity-container-grand {
+      max-width: 300px;
+      width: 40%;
       position: relative;
       margin-left: auto;
       margin-right: auto;
@@ -74,8 +76,8 @@
       & .entity-grand {
           display: block;
           background-color: $color_grey;
-          width: 300px;
-          height: 300px;
+        //   width: 300px;
+        //   height: 300px;
           position: relative;
           margin-left: auto;
           margin-right: auto;

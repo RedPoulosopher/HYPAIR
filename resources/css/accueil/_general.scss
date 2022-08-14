@@ -19,6 +19,12 @@ p {
   justify-content: center;
 }
 
+@media (max-width: 600px) {
+  #wrapper {
+    padding: 0px 5px 0px 5px;
+  }
+}
+// TODO : recentrer le wrapper en tenant compte de la scroll bar (custom la scroll bar ?)
 
 #contenu {
   overflow-x: hidden;

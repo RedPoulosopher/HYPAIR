@@ -1,6 +1,10 @@
 .entity-list {
-
   margin: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
 
   & img {
       width: 84%;
@@ -8,7 +12,7 @@
       margin: 8%;
   }
 
-  & .entity-container {
+  .entity-container {
       position: relative;
       margin-left: auto;
       margin-right: auto;
@@ -54,7 +58,7 @@
       }
   }
 
-  & .entity-container-grand {
+  .entity-container-grand {
       position: relative;
       margin-left: auto;
       margin-right: auto;

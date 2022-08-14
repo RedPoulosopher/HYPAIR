@@ -8,8 +8,27 @@ p {
   color: $color_font;
 }
 
+#wrapper {
+  width: 100%;
+  min-height: 100%;
+  padding: 0px 15px 0px 15px;
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 #contenu {
   overflow-x: hidden;
+}
+
+@media (min-width: 1200px) {
+  #contenu.grand {
+      min-width: 1200px;
+      width: 80%
+  }
 }
 
 h1{
@@ -30,15 +49,6 @@ h1{
   display: flex;
   justify-content: center;
   height: 60vh;
-}
-
-.intro {
-  padding: 10px 30px 10px 30px;
-  margin: 40px auto 40px auto;
-  max-width: 100ch;
-  text-align: justify;
-  overflow-wrap: break-word;
-  background-color: $color_grey;
 }
 
 // @keyframes shining {

@@ -1,0 +1,45 @@
+.intro {
+  padding: 10px 30px 10px 30px;
+  margin: 40px auto 40px auto;
+  max-width: 100ch;
+  text-align: justify;
+  overflow-wrap: break-word;
+  background-color: $color_grey;
+  font-size: 1.8rem;
+  font-family: system-ui;
+
+  p {
+    margin-block-start: 30px;
+    margin-block-end: 30px;
+  }
+
+  a {
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 1000px) {
+  .intro {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .intro {
+    font-size: 1.2rem;
+    p {
+      margin-block-start: 15px;
+      margin-block-end: 15px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .intro {
+    font-size: 1rem;
+    padding: 10px 20px 10px 20px;
+  }
+}

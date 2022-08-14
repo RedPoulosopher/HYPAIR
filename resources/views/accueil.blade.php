@@ -40,6 +40,8 @@
                     </div>
                 </div>
 
+                <h1 class="espace">- Campus -</h1>
+
                 <div class="entity-list grille-enfants">
                     <!-- Logo lille -->
                     <div class="entity-container-grand">

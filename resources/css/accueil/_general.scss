@@ -12,6 +12,20 @@ p {
   overflow-x: hidden;
 }
 
+h1{
+	margin-block-start: 1em;
+	text-align: center;
+  color: $color_font;
+	text-decoration-line: underline;
+  text-decoration-thickness: initial;
+  text-decoration-style: initial;
+  text-decoration-color: $color_highlight;
+
+  .espace {
+    margin-block-start: 2em;;
+  }
+}
+
 .logo {
   display: flex;
   justify-content: center;

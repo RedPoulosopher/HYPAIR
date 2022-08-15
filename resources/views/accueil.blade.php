@@ -28,6 +28,7 @@
         <a href="/home" id="bouton_se_connecter" class="bouton primaire">Se connecter</a>
     @endif
     <div id="wrapper">
+
         <div id="contenu" class="grand">
             <h1 class="titre-page">--- HypAIR ---</h1>
 
@@ -42,7 +43,7 @@
 
                 <h1 class="espace">- Campus -</h1>
 
-                <div class="entity-list grille-enfants">
+                <div class="entity-list">
                     <!-- Logo lille -->
                     <div class="entity-container-grand">
                         <a

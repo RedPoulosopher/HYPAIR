@@ -47,7 +47,7 @@
                     <!-- Logo lille -->
                     <div class="entity-container-grand">
                         <a
-                            class="entity-grand ombre_petite"
+                            class="entity-grand"
                             href="/entites/lille"
                         >
                             <img
@@ -62,7 +62,7 @@
                     <!-- Logo douai -->
                     <div class="entity-container-grand">
                         <a
-                            class="entity-grand ombre_petite"
+                            class="entity-grand"
                             href="/entites/douai"
                         >
                             <img
@@ -118,7 +118,7 @@
                     <!-- Logo CerbAIR -->
                     <div class="entity-container">
                         <a
-                            class="entity ombre_petite"
+                            class="entity"
                             href="https://cerbair.etu.imt-nord-europe.fr"
                         >
                             <div
@@ -138,7 +138,7 @@
                     <!-- Logo PeerTube -->
                     <div class="entity-container">
                         <a
-                            class="entity ombre_petite"
+                            class="entity"
                             href="https://peertube.imt-ne.fr/"
                         >
                             <div
@@ -176,7 +176,7 @@
                     <!-- Logo Piwigo -->
                     <div class="entity-container">
                         <a
-                            class="entity ombre_petite"
+                            class="entity"
                             href="https://photos.imt-ne.fr/"
                         >
                             <div
@@ -195,7 +195,7 @@
                     <!-- Logo GitLab -->
                     <div class="entity-container">
                         <a
-                            class="entity ombre_petite"
+                            class="entity"
                             href="https://gitlab.etu.imt-nord-europe.fr/"
                         >
                             <div

@@ -29,31 +29,32 @@
       }
 
       & .entity {
-          display: block;
-          background-color: $color_grey;
-          width: auto;
-          height: auto;
-          position: relative;
-          margin-left: auto;
-          margin-right: auto;
-          border-radius: 500px;
-          cursor: pointer;
+				box-shadow: $big_shadow;
+				display: block;
+				background-color: $color_grey;
+				width: auto;
+				height: auto;
+				position: relative;
+				margin-left: auto;
+				margin-right: auto;
+				border-radius: 500px;
+				cursor: pointer;
 
-          & .cercle {
-              border-radius: 500px;
-              border: 2px solid;
-              position: absolute;
-              left: 5%;
-              top: 5%;
-              width: 90%;
-              height: 90%;
-              box-sizing: border-box;
-              transition: border 0.1s ease-in-out;
+				& .cercle {
+						border-radius: 500px;
+						border: 2px solid;
+						position: absolute;
+						left: 5%;
+						top: 5%;
+						width: 90%;
+						height: 90%;
+						box-sizing: border-box;
+						transition: border 0.1s ease-in-out;
 
-              &:hover {
-                  border: 5px solid;
-              }
-          }
+						&:hover {
+								border: 5px solid;
+						}
+				}
 
           & img {
               border-radius: 500px;
@@ -64,20 +65,21 @@
   .entity-container-grand {
       max-width: 300px;
       width: 40%;
-			min-width: 120px;
+    	min-width: 120px;
       position: relative;
       margin-left: auto;
       margin-right: auto;
-
+			
       & .nom {
-          text-align: center;
-          font-size: 1.8rem;
-          line-height: 1.8rem; // font size of 'texte-grand'
-          margin-block-end: 0.5rem;
+				text-align: center;
+				font-size: 1.8rem;
+				line-height: 1.8rem; // font size of 'texte-grand'
+				margin-block-end: 0.5rem;
           margin-block-start: 0.5rem;
-      }
+				}
 
-      & .entity-grand {
+				& .entity-grand {
+					box-shadow: $big_shadow;
           display: block;
           background-color: $color_grey;
         //   width: 300px;
@@ -91,7 +93,7 @@
 
           &:hover {
               background-color: $color_highlight;
-              // filter: drop-shadow(5px 5px 5px $color_hightlight);
+              // filter: drop-shadow(5px 5px 5px $color_highlight);
           }
 
           & img {

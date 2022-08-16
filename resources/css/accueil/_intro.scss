@@ -8,11 +8,6 @@
   font-size: 1.8rem;
   font-family: system-ui;
 
-  p {
-    margin-block-start: 30px;
-    margin-block-end: 30px;
-  }
-
   a {
     color: inherit;
     -webkit-tap-highlight-color: transparent;
@@ -21,15 +16,8 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
   .intro {
-    font-size: 1.4rem;
-  }
-}
-
-@media (max-width: 800px) {
-  .intro {
-    font-size: 1.2rem;
     p {
       margin-block-start: 15px;
       margin-block-end: 15px;
@@ -37,9 +25,8 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .intro {
-    font-size: 1rem;
     padding: 10px 20px 10px 20px;
   }
 }

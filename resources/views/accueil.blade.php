@@ -215,53 +215,53 @@
 
                 <h1 class="espace">- Entités -</h1>
 
+                {{-- On a décidé il y a quelques semaines de ne finalement pas mettre les valeurs de hypair dans la page d'accueil, donc on peut supprimer ce qui suit si c'est définitif --}}
                 
-                {{-- Carrousel généré dynamiquement en prenant des logos depuis la bdd --}}
-                {{-- <div class="carrousel">
-                    @for($i = 0; $i < 16; $i++)
-                        <div @class(['bande' => true, 'shifted' => ($i % 2 == 1 )])>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/storage/images/entites/{{$entites[3*$i]}}/logos/petit"
-                                    alt="entity_thumbnail"
+                <!-- Values actually not displayed in the landing page -->
+                <!-- <div class="values-container">
+                    <div class="value">
+                        <p>Une valeur de l'AIR</p>
+                    </div>
+                    <div class="value">
+                        <p>Une deuxième valeur de l'AIR</p>
+                    </div>
+                </div> -->
+                
+                {{-- Footer vide, on ne sait pas quoi mettre dedans  --}}
+                
+                {{-- <div class="footer">
+                    <p>Footer</p>
+                    <p>Lien vers une FAQ ?</p>
+                </div> --}}
+            </div>
+
+            {{-- Carrousel généré dynamiquement en prenant des logos depuis la bdd --}}
+            {{-- <div class="carrousel">
+                @for($i = 0; $i < 16; $i++)
+                    <div @class(['bande' => true, 'shifted' => ($i % 2 == 1 )])>
+                        <div class="thumbnail-container">
+                            <img
+                                src="/storage/images/entites/{{$entites[3*$i]}}/logos/petit"
+                                alt="entity_thumbnail"
+                            />
+                        </div>
+                        <div class="thumbnail-container">
+                            <img
+                                src="/storage/images/entites/{{$entites[3*$i + 1]}}/logos/petit"
+                                alt="entity_thumbnail"
                                 />
                             </div>
                             <div class="thumbnail-container">
                                 <img
-                                    src="/storage/images/entites/{{$entites[3*$i + 1]}}/logos/petit"
-                                    alt="entity_thumbnail"
-                                    />
-                                </div>
-                                <div class="thumbnail-container">
-                                    <img
-                                    src="/storage/images/entites/{{$entites[3*$i + 2]}}/logos/petit"
-                                    alt="entity_thumbnail"
-                                    />
-                                </div>
+                                src="/storage/images/entites/{{$entites[3*$i + 2]}}/logos/petit"
+                                alt="entity_thumbnail"
+                                />
                             </div>
-                            @endfor
-                        </div> --}}
-                        
-                        
-                        {{-- On a décidé il y a quelques semaines de ne finalement pas mettre les valeurs de hypair dans la page d'accueil, donc on peut supprimer ce qui suit si c'est définitif --}}
-                        
-                        <!-- Values actually not displayed in the landing page -->
-                        <!-- <div class="values-container">
-                            <div class="value">
-                                <p>Une valeur de l'AIR</p>
-                            </div>
-                            <div class="value">
-                                <p>Une deuxième valeur de l'AIR</p>
-                            </div>
-                        </div> -->
-                        
-                        {{-- Footer vide, on ne sait pas quoi mettre dedans  --}}
-                        
-                        {{-- <div class="footer">
-                            <p>Footer</p>
-                            <p>Lien vers une FAQ ?</p>
-                        </div> --}}
-                    </div>
+                        </div>
+                        @endfor
+                    </div> --}}
+                    
+                    
                     {{-- Carrousel généré manuellement, pour tester sans accéder à la bdd --}}
                     {{-- ATTENTION : réduire la div qui suit ! --}}
                     <div class="carrousel">

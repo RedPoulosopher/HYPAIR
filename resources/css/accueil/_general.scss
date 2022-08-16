@@ -6,6 +6,9 @@ body {
 
 p {
   color: $color_font;
+  font-size: 1.5rem;
+  margin-block-start: 30px;
+  margin-block-end: 30px;
 }
 
 h2 {
@@ -16,10 +19,36 @@ h3 {
   color: $color_font;
 }
 
+@media (max-width: 1100px) {
+  p {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 900px) {
+  p {
+    margin-block-start: 15px;
+    margin-block-end: 15px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 700px) {
+  p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 500px) {
+  p {
+    font-size: 1rem;
+  }
+}
+
 #wrapper {
   width: 100%;
   min-height: 100%;
-  padding: 0 calc($wrapper_padding + $scrollbar_width) 0 $wrapper_padding;
+  padding: 0 calc(15px + $scrollbar_width) 0 15px;
   position: absolute;
   box-sizing: border-box;
   display: flex;
@@ -30,7 +59,7 @@ h3 {
 
 @media (max-width: 600px) {
   #wrapper {
-    padding: 0px $mobile_wrapper_padding 0px $mobile_wrapper_padding;
+    padding: 0px 5px 0px 5px;
   }
 }
 // TODO : recentrer le wrapper en tenant compte de la scroll bar (custom la scroll bar ?)
@@ -39,10 +68,10 @@ h3 {
   overflow-x: hidden;
 }
 
-@media (min-width: $content_min_width) {
+@media (min-width: 1200px) {
   #content.grand {
-      min-width: $content_min_width;
-      width: $content_percent_width;
+      min-width: 1200px;
+      width: 80%;
   }
 }
 

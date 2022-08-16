@@ -25,12 +25,12 @@ a.bouton {
   text-align: center;
   font-family: system-ui;
   transform: translateY(0px);
-  box-shadow: var(--ombre_petite);
+  box-shadow: $small-shadow;
   transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 
   &:hover {
 		transform:translateY(-3px);
-		box-shadow: var(--ombre_grande);
+		box-shadow: $big-shadow;
 	}
 
   &.primaire {

@@ -17,6 +17,7 @@
 ::-webkit-scrollbar-track {
   background-color: $color_grey;
   // border: solid 0.25em $color_grey;
+  // background-clip: padding-box;
   border-radius: 50px;
 }
 

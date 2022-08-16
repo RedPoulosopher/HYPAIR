@@ -8,32 +8,41 @@ p {
   color: $color_font;
 }
 
+h2 {
+  color: $color_font;
+}
+
+h3 {
+  color: $color_font;
+}
+
 #wrapper {
   width: 100%;
   min-height: 100%;
-  padding: 0px 15px 0px 15px;
+  padding: 0 calc($wrapper_padding + $scrollbar_width) 0 $wrapper_padding;
   position: absolute;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 @media (max-width: 600px) {
   #wrapper {
-    padding: 0px 5px 0px 5px;
+    padding: 0px $mobile_wrapper_padding 0px $mobile_wrapper_padding;
   }
 }
 // TODO : recentrer le wrapper en tenant compte de la scroll bar (custom la scroll bar ?)
 
-#contenu {
+#content {
   overflow-x: hidden;
 }
 
-@media (min-width: 1200px) {
-  #contenu.grand {
-      min-width: 1200px;
-      width: 80%
+@media (min-width: $content_min_width) {
+  #content.grand {
+      min-width: $content_min_width;
+      width: $content_percent_width;
   }
 }
 

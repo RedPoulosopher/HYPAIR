@@ -1,8 +1,11 @@
+$nbr_bandes: 16;
+
 .carrousel {
-  position: absolute;
+  // position: absolute;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
+  transform: translateX(25%);
   width: 200%;
   animation: carrousel-anim 30s ease-in-out infinite;
   padding-bottom: 40px;
@@ -32,9 +35,9 @@
 }
 @keyframes carrousel-anim {
   50% {
-      transform: translateX(-50%);
+      transform: translateX(-25%);
   }
   100% {
-      transform: translateX(0%);
+      transform: translateX(25%);
   }
 }

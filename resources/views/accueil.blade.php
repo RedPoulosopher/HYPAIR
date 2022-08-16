@@ -30,7 +30,7 @@
     <div id="wrapper">
 
         <div id="content" class="grand">
-            <h1 class="titre-page">--- HypAIR ---</h1>
+            <h1 class="page-title">--- HypAIR ---</h1>
 
             <div class="header">
                 <div class="logo">
@@ -56,7 +56,7 @@
                             />
                         </a>
                         <div class="info">
-                            <p class="nom">Entités de Lille</p>
+                            <h2 class="nom">Entités de Lille</p>
                         </div>
                     </div>
                     <!-- Logo douai -->
@@ -71,7 +71,7 @@
                             />
                         </a>
                         <div class="info">
-                            <h3 class="nom">Entités de Douai</p>
+                            <h2 class="nom">Entités de Douai</p>
                             {{-- faire des logos avec moins d'infos et des écritures plus garndes pour mobile ? --}}
                         </div>
                     </div>
@@ -236,7 +236,7 @@
             </div>
 
             {{-- Carrousel généré dynamiquement en prenant des logos depuis la bdd --}}
-            {{-- <div class="carrousel">
+            <div class="carrousel">
                 @for($i = 0; $i < 16; $i++)
                     <div @class(['bande' => true, 'shifted' => ($i % 2 == 1 )])>
                         <div class="thumbnail-container">
@@ -259,12 +259,12 @@
                             </div>
                         </div>
                         @endfor
-                    </div> --}}
+                    </div>
                     
                     
                     {{-- Carrousel généré manuellement, pour tester sans accéder à la bdd --}}
                     {{-- ATTENTION : réduire la div qui suit ! --}}
-                    <div class="carrousel">
+                    {{-- <div class="carrousel">
                         <div class="bande">
                             <div class="thumbnail-container">
                                 <img
@@ -600,7 +600,7 @@
                                 />
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </body>
 </html>

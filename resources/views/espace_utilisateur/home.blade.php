@@ -21,6 +21,7 @@
 #photo_profil {
 	max-width:260px;
 	max-height:260px;
+  flex-basis:260px;
   margin-left: auto;
   margin-right: auto;
 }

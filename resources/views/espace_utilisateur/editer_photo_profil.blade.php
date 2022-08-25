@@ -56,11 +56,14 @@ On voit le mail et le pseudo user associé sans pouvoir le changer.
 	        	<img id="photo_profil_img" src="{{$user->chemin_photo_de_profil}}" alt="Preview votre photo de profil"/>
 	      	</div>
 			<p id="bouton_modifier" class="bouton primaire" tabindex="1" style="margin-left: auto; margin-right: auto;">Modifier</p>
-			<input name="input-photo" type="file" accept="image/*" required style="display: none;" onchange="affichage_photo_dynamique(event)"/>
+			<input name="input-photo" type="file" accept=".png" required style="display: none;" onchange="affichage_photo_dynamique(event)"/>
+			<!-- remplacer accept=".png" par accept="image/*" losque le problème sera réglé-->
 		</label>
 		</div>
     <button id="bouton_submit" type="submit" tabindex="1" class="bouton primaire cacher" style="float:right;" onclick="validation()">VALIDER</button>
 	</form>
+	<!-- effacer la ligne suivante lorsque le problème sera réglé -->
+	<p class="description"><span style="color:var(--couleur_accentuation);">*</span> Pour l'instant, seul le format d'image .png est accepté.</p>
 </div>
 @endsection
 

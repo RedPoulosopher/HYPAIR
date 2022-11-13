@@ -27,9 +27,12 @@ class EntiteController extends Controller
 		$categories = $entite->categories()->get();
 
 		$mandat = $entite->mandat()->get();
-		
+
 		foreach($mandat as &$mandat_user){
 			$mandat_user["lien_photo"] = GestionPhotoDeProfil::chemin_membre_photo($mandat_user);
+			$mandat_user["user_info"] = $mandat_user->user()->first();
+			$mandat_user["lien_photo_utilisateur"] = GestionPhotoDeProfil::chemin_utilisateur_photo($mandat_user["user_info"]);
+			$mandat_user["reseaux_sociaux"] = $mandat_user["user_info"]->reseaux_sociaux()->get();
 		}
 
 		return view('entite.a_propos')
@@ -65,7 +68,7 @@ class EntiteController extends Controller
 
 		//on se moque d'avoir des doublons d'uid pour les listes
 		$entite = Entite::where('uid', $request->uid)->where('type', '!=', EntiteTypeEnum::Liste);
-		
+
 		if($entite->exists()){
 			$entite = $entite->first();
 		}
@@ -93,7 +96,7 @@ class EntiteController extends Controller
 			'creation' => $request->query('creation', 0),
 		]);
 	}
-	
+
 	public function maj_infos(Request $request) //réservé à l'AIR
 	{
 		$entite = Entite::existe($request->route('entite_id'));
@@ -140,7 +143,7 @@ class EntiteController extends Controller
 		$entite_id = $request->route('entite_id') ?? session('entite_id');
 
 		$entite = Entite::existe($entite_id);
-		
+
 		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
 		$this->validate($request, [
 			'description_courte' => ['filled','max:300'],
@@ -151,8 +154,8 @@ class EntiteController extends Controller
 		$entite->description_courte = $request->description_courte;
 		$entite->description_md = $request->description_md;
 		$entite->save();
-		
-		
+
+
 		sort($request->categories);
 		$entite->ajout_categories($request->categories);
 
@@ -169,13 +172,13 @@ class EntiteController extends Controller
 
 		$entites_independantes = Entite::independants_site($site)->get();
 		$bureaux = Entite::bureaux_site($site)->get();
-		
+
 		$comites_clubs_dependants = array();
 		foreach($bureaux as $bureau){
 			$bureau_ratachement = $bureau->ratachement->value;
 			$comites_clubs_dependants[$bureau_ratachement] = $bureau->comites_clubs_dependants()->get();
 		}
-		
+
 		return view('entite.index_site', [
 			"bureaux" => $bureaux,
 			"comites_clubs_dependants" => $comites_clubs_dependants,

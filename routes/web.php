@@ -25,9 +25,7 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return redirect('/entites/douai');
-});
+
 Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });
@@ -171,7 +169,6 @@ $routes_entites = function () {
             Route::post('/projet/{projet_id}/modifier', 'update');
         });
         Route::get('/projet', 'index');
-
     });
 
     Route::controller(AvanceeController::class)->group(function () {
@@ -239,7 +236,6 @@ $routes_entites = function () {
         Route::get('/entite/{type}', 'index_admin')->where(['type' => 'membres|abonnes']);
         Route::post('/entite/{type}', 'ajout_membre')->where(['type' => 'membres|abonnes']);
     });
-
 };
 
 //Important !
@@ -252,17 +248,17 @@ Route::controller(CalendrierController::class)->group(function () {
 });
 
 Route::prefix('{entite_uid}-{liste_id}') //pour les listes
-->middleware('existence.entite:liste')
+    ->middleware('existence.entite:liste')
     ->group($routes_entites);
 
 Route::prefix('{entite_uid}') //pour toutes les autres entités
-->middleware('existence.entite:entite')
+    ->middleware('existence.entite:entite')
     ->group($routes_entites);
 
 Route::prefix('{entite_uid}') //pour les bureaux
-->middleware('existence.entite:bureau')
+    ->middleware('existence.entite:bureau')
     ->group($routes_bureaux);
 
 Route::prefix('{entite_uid}') //pour l'AIR
-->middleware('existence.entite:air')
+    ->middleware('existence.entite:air')
     ->group($routes_AIR);

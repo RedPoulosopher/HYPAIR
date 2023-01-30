@@ -1,3 +1,5 @@
+{{-- Maybe it's a useless file --}}
+
 @extends('layouts.app')
 
 @section('titre','Accueil')

@@ -20,12 +20,22 @@
 	border-radius:300px;
 }
 
+body.light-theme {
+        --couleur_accentuation: #c6152a;
+        --couleur_police_accentuation: ;
+    }
+
+    body.dark-theme {
+        --couleur_accentuation: #cc3345;
+        --couleur_police_accentuation: ;
+    }
+
 </style>
 
 
     <div id="wrapper">
         <div id="contenu" class="grand">
-            <h1>- HYPAIR -</h1>
+            <h1 class="titre_page">- HYPAIR -</h1>
                 <div class="logo">
                     <img
                         src="/images/logo_air_1.png"

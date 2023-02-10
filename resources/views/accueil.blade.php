@@ -1,35 +1,37 @@
 @extends('layouts.app')
 
-@section('title', 'Accueil')
+@section('titre', 'Accueil')
 
 @section('content')
-@php
-        use App\Services\GestionPhotoDeProfil;
-        if (Auth::check()) {
-            $user = Auth::user();
-            $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
-        }
-    @endphp
 
-    @if (Auth::check())
-        <div id="lien_profil"><a href="/home"><img id="photo_lien_profil" src="{{$user->chemin_photo_de_profil}}"
-                                                   title="{{$user->prenom}} {{$user->nom}}"/></a></div>
-    @else
-        <a href="/home" id="bouton_se_connecter" class="bouton primaire">Se connecter</a>
-    @endif
-    <div id="wrapper-accueil">
+<style>
+    .logo {
+        position: relative;
+        display: block;
+        margin-left:auto;
+        margin-right:auto;
+        width:260px;
+        height:260px;
+        border-radius: 20px;
+    }
 
-        <div id="content" class="grand">
-            <h1 class="page-title">--- HypAIR ---</h1>
+    .logo img {
+	width:100%;
+	border-radius:300px;
+}
 
-            <div class="header">
+</style>
+
+
+    <div id="wrapper">
+        <div id="contenu" class="grand">
+            <h1>- HYPAIR -</h1>
                 <div class="logo">
                     <img
                         src="/images/logo_air_1.png"
                         alt="logo_hypair"
                     />
                     </div>
-                </div>
 
                 <h1 class="espace">- Campus -</h1>
 

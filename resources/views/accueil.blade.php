@@ -30,6 +30,12 @@ body.light-theme {
         --couleur_police_accentuation: ;
     }
 
+#wrapper {
+    flex-direction: column;
+    overflow-x: hidden;
+    min-height: 110%;
+}
+
 </style>
 
 
@@ -79,7 +85,7 @@ body.light-theme {
                     </div>
                 </div>
 
-                <div class="intro">
+                <div class="description intro">
                     <p>
                         HypAIR est un site qui se veut être un complément (voir un indispensable à l'avenir) à la vie associative en ajoutant des fonctionnalités et des services qui serviront et amélioreront la vie étudiante (calendrier personnel, événement) et aussi la pérennité des comités et des associations en centralisant les informations et en les sauvegardant pour les années à venir (documentations, projets etc.).
                         Nous voulons être présents à Lille comme à Douai et disponible sur ordinateur et sur mobile.
@@ -238,7 +244,7 @@ body.light-theme {
             </div>
 
             {{-- Carrousel généré dynamiquement en prenant des logos depuis la bdd --}}
-            <div class="carrousel">
+            {{-- <div class="carrousel">
                 @for($i = 0; $i < 16; $i++)
                     <div @class(['bande' => true, 'shifted' => ($i % 2 == 1 )])>
                         <div class="thumbnail-container">
@@ -261,12 +267,12 @@ body.light-theme {
                             </div>
                         </div>
                         @endfor
-                    </div>
+                    </div> --}}
                     
                     
                     {{-- Carrousel généré manuellement, pour tester sans accéder à la bdd --}}
                     {{-- ATTENTION : réduire la div qui suit ! --}}
-                    {{-- <div class="carrousel">
+                    <div class="carrousel">
                         <div class="bande">
                             <div class="thumbnail-container">
                                 <img
@@ -602,12 +608,6 @@ body.light-theme {
                                 />
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                 </div>
 @endsection
-
-        {{-- <link
-            rel="stylesheet"
-            href="css/accueil.css"
-            type="text/css"
-        /> --}}

@@ -1,29 +1,29 @@
 ::-webkit-scrollbar {
-  width: $scrollbar_width;
-  height: $scrollbar_width; // if horizontal scroll bar in the future...
+    width: $scrollbar_width;
+    height: $scrollbar_width; // if horizontal scroll bar in the future...
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $color_highlight;
-  border-radius: 50px;
-  box-shadow: $big-shadow;
-  // margin-block: 0.5em;
-  
-  &:hover {
-    background-color: $color_light_highlight;
-  }
+    background-color: $color_highlight;
+    border-radius: 50px;
+    box-shadow: $big-shadow;
+    // margin-block: 0.5em;
+
+    &:hover {
+        background-color: $color_light_highlight;
+    }
 }
 
 ::-webkit-scrollbar-track {
-  background-color: $color_grey;
-  // border: solid 0.25em $color_grey;
-  // background-clip: padding-box;
-  border-radius: 50px;
+    background-color: var(--gris_1);
+    // border: solid 0.25em var(--gris_1);
+    // background-clip: padding-box;
+    border-radius: 50px;
 }
 
 // For mozilla firefox :
 @supports (scrollbar-color: white white) {
-  * {
-    scrollbar-color: $color_highlight $color_grey;
-  }
+    * {
+        scrollbar-color: $color_highlight var(--gris_1);
+    }
 }

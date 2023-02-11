@@ -244,7 +244,7 @@ body.light-theme {
             </div>
 
             {{-- Carrousel généré dynamiquement en prenant des logos depuis la bdd --}}
-            {{-- <div class="carrousel">
+            <div class="carrousel">
                 @for($i = 0; $i < 16; $i++)
                     <div @class(['bande' => true, 'shifted' => ($i % 2 == 1 )])>
                         <div class="thumbnail-container">
@@ -267,12 +267,12 @@ body.light-theme {
                             </div>
                         </div>
                         @endfor
-                    </div> --}}
+                    </div>
                     
                     
                     {{-- Carrousel généré manuellement, pour tester sans accéder à la bdd --}}
                     {{-- ATTENTION : réduire la div qui suit ! --}}
-                    <div class="carrousel">
+                    {{-- <div class="carrousel">
                         <div class="bande">
                             <div class="thumbnail-container">
                                 <img
@@ -608,6 +608,6 @@ body.light-theme {
                                 />
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 @endsection

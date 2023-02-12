@@ -24,6 +24,6 @@
 // For mozilla firefox :
 @supports (scrollbar-color: white white) {
     * {
-        scrollbar-color: $color_highlight var(--gris_1);
+        scrollbar-color: $color_highlight rgba(123, 123, 123, 0.2);
     }
 }

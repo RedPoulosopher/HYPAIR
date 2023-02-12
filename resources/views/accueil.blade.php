@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.global')
 
 @section('titre', 'Accueil')
 
@@ -19,16 +19,6 @@
 	width:100%;
 	border-radius:300px;
 }
-
-body.light-theme {
-        --couleur_accentuation: #c6152a;
-        --couleur_police_accentuation: ;
-    }
-
-    body.dark-theme {
-        --couleur_accentuation: #cc3345;
-        --couleur_police_accentuation: ;
-    }
 
 #wrapper {
     flex-direction: column;

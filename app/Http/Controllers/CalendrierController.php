@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Auth;
 
 class CalendrierController extends Controller
 {
-    public static function calendrier_asso(){
+    public static function calendrier_asso()
+    {
         //on doit recuperer l annee et le mois courant. ca sera l affichage par defaut
         $annee = date('Y');
         $mois = date('m');
@@ -38,15 +39,15 @@ class CalendrierController extends Controller
 
         $niveau_administration = AutorisationGestion::niveau_administration();
 
-		if ($niveau_administration == 20) {
-			$confidentialite = 4;
-		} elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
-			$confidentialite = 3;
-		} elseif ($niveau_administration == 13) {
-			$confidentialite = 2;
-		} elseif ($niveau_administration == 8) {
-			$confidentialite = 1;
-		} else {
+        if ($niveau_administration == 20) {
+            $confidentialite = 4;
+        } elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
+            $confidentialite = 3;
+        } elseif ($niveau_administration == 13) {
+            $confidentialite = 2;
+        } elseif ($niveau_administration == 8) {
+            $confidentialite = 1;
+        } else {
             $confidentialite = 0;
         }
 
@@ -60,19 +61,22 @@ class CalendrierController extends Controller
         }
 
 
-        return view("evenements.calendrier", [
-            //"events" => $evenements->toArray(),
-            'events' => $evenements_publics_array,
-            'evenements_prives' => $evenements_prives_array,
-            'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement"),
-            'entite' => session('entite_uid')
-        ],
+        return view(
+            "evenements.calendrier",
+            [
+                //"events" => $evenements->toArray(),
+                'events' => $evenements_publics_array,
+                'evenements_prives' => $evenements_prives_array,
+                'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement"),
+                'entite' => session('entite_uid')
+            ],
         );
 
     }
 
 
-     public static function calendrier_general(){
+    public static function calendrier_general()
+    {
         //on doit recuperer l annee et le mois courant. ca sera l affichage par defaut
         $annee = date('Y');
         $mois = date('m');
@@ -101,7 +105,7 @@ class CalendrierController extends Controller
                 ->whereYear("temps_debut", $annee)
                 ->get();
 
-		    $evenements_prive_array = json_decode(json_encode($evenements_prive), true);
+            $evenements_prive_array = json_decode(json_encode($evenements_prive), true);
 
             for ($i = 0; $i < count($evenements_prive_array); $i++) {
                 if ($evenements_prive_array[$i]['confidentialite'] == 4 && $evenements_prive_array[$i]['role_id'] <= 2) {
@@ -118,37 +122,38 @@ class CalendrierController extends Controller
             ///->where('membres.role_id', '<=', 'evenements.confidentialite')
         }
 
-         return
-             view("evenements.calendrier", [
-                 'events' => $evenements_publics_array,
-                 'evenements_prives' => $evenements_user,
-                 'gerer_evenement' => false,
-                 'entite' => ""
-             ]);
+        return
+            view("evenements.calendrier", [
+                'events' => $evenements_publics_array,
+                'evenements_prives' => $evenements_user,
+                'gerer_evenement' => false,
+                'entite' => ""
+            ]);
 
-     }
-    public static function calendrier_index_json(Request $request){
+    }
+    public static function calendrier_index_json(Request $request)
+    {
         $annee = $request["annee"];
-        $mois = $request["mois"] +1;
+        $mois = $request["mois"] + 1;
 
 
         //$evenements= Evenement::index($annee, $mois);
 
         $niveau_administration = AutorisationGestion::niveau_administration();
 
-		if ($niveau_administration == 20) {
-			$confidentialite = 4;
-		} elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
-			$confidentialite = 3;
-		} elseif ($niveau_administration == 13) {
-			$confidentialite = 2;
-		} elseif ($niveau_administration == 8) {
-			$confidentialite = 1;
-		} else {
-			$confidentialite = 0;
-		}
+        if ($niveau_administration == 20) {
+            $confidentialite = 4;
+        } elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
+            $confidentialite = 3;
+        } elseif ($niveau_administration == 13) {
+            $confidentialite = 2;
+        } elseif ($niveau_administration == 8) {
+            $confidentialite = 1;
+        } else {
+            $confidentialite = 0;
+        }
 
-		//on recupere les events demandes*
+        //on recupere les events demandes*
         $evenements_publics_array = array();
         if (session('entite_uid') == 'bde') {
             $evenements_publics = Evenement::index($annee, $mois)
@@ -192,7 +197,7 @@ class CalendrierController extends Controller
                 } elseif ($evenements_prive_array[$i]['confidentialite'] == 1 && $evenements_prive_array[$i]['role_id'] <= 25) {
                     $evenements_user[] = $evenements_prive_array[$i];
                 }
-        }
+            }
         }
 
 
@@ -202,28 +207,29 @@ class CalendrierController extends Controller
         ];
     }
 
-    public static function calendrier_index_json_general(Request $request){
+    public static function calendrier_index_json_general(Request $request)
+    {
         $annee = $request["annee"];
-        $mois = $request["mois"] +1;
+        $mois = $request["mois"] + 1;
 
 
         //$evenements= Evenement::index($annee, $mois);
 
         $niveau_administration = AutorisationGestion::niveau_administration();
 
-		if ($niveau_administration == 20) {
-			$confidentialite = 4;
-		} elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
-			$confidentialite = 3;
-		} elseif ($niveau_administration == 13) {
-			$confidentialite = 2;
-		} elseif ($niveau_administration == 8) {
-			$confidentialite = 1;
-		} else {
-			$confidentialite = 0;
-		}
+        if ($niveau_administration == 20) {
+            $confidentialite = 4;
+        } elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
+            $confidentialite = 3;
+        } elseif ($niveau_administration == 13) {
+            $confidentialite = 2;
+        } elseif ($niveau_administration == 8) {
+            $confidentialite = 1;
+        } else {
+            $confidentialite = 0;
+        }
 
-		//on recupere les events demandes*
+        //on recupere les events demandes*
         $evenements_publics = Evenement::index($annee, $mois)
             ->where('confidentialite', '=', 0)
             ->where('validation', '=', 1);

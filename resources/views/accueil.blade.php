@@ -1,4 +1,4 @@
-@extends('layouts.global')
+@extends('layouts.leger')
 
 @section('titre', 'Accueil')
 

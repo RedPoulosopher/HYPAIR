@@ -1,6 +1,6 @@
 ::-webkit-scrollbar {
-  width: 1em;
-  height: 1em;
+  width: 0.5em;
+  height: 0.5em;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -20,7 +20,7 @@
 
 @supports (scrollbar-color: white white) {
   * {
-    scrollbar-color: #cc3345 var(--gris_1);
+    scrollbar-color: #cc3345 rgba(123, 123, 123, 0.2);
   }
 }
 

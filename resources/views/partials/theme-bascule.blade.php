@@ -1,4 +1,4 @@
-<div id="bascule-mode-button">
+<div id="bascule-mode">
   <h6 class="label-sombre">Sombre</h6>
   <div id="bascule-theme"></div>
   <h6 class="label-clair">Clair</h6>

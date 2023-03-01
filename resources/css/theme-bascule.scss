@@ -1,5 +1,6 @@
 #bascule-mode-button {
-    position: fixed;
+    position: absolute;
+    z-index: 1;
     margin-left: 15px;
     display: inline-flex;
     flex-direction: row;

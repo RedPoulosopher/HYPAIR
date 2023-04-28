@@ -1,3 +1,39 @@
+# Le Projet HypAIR
+
+HypAIR est un site qui se veut être un complément (voir un indispensable à l'avenir) à la vie associative en ajoutant des fonctionnalités et des services qui serviront et amélioreront la vie étudiante (calendrier personnel, événement) et aussi la pérennité des comités et des associations en centralisant les informations et en les sauvegardant pour les années à venir (documentations, projets etc.). Nous voulons être présents sur tous les campus et disponibles sur ordinateur et sur mobile.
+
+Le projet HypAIR en est encore à ses débuts. Cela veut donc dire que le site est encore loin d'être fini. Il y a encore beaucoup d'améliorations à apporter et de fonctionnalités que nous avons en tête. Donc n'hésitez pas à nous faire des retours sur votre ressenti et sur les nouveautés que vous aimeriez voir ;)
+
+N'hésitez pas à jeter un coup d'oeil au site : https://hypair.imt-ne.fr/
+
+Si vous voulez nous aider à développer notre site tout au long de l'année vous pouvez nous le faire savoir et rejoindre nos réseaux, depuis la [page de notre comité sur le site HypAIR](https://hypair.imt-ne.fr/air).
+
+## Responsables du projet en 2023-2024
+- Arthur Mata, Président de l'AIR (mandat 2023-2024)
+- Antoine Joncheray, Membre de l'AIR
+
+## Hébergement du site
+HypAIR est hébergé sur un serveur Kimsufi chez **OVH**, ce qui lui permet d'être accessible depuis n'importe quel réseau.
+
+## Technologies utilisées
+
+- Concernant le *backend*, HypAIR est développé avec le framework PHP **Laravel** (version 9). La documentation est disponible sur le [site officiel de Laravel](https://laravel.com/docs/9.x).
+- Le *frontend* est fait à l'aide de **Blade**, fourni avec Laravel. Voir la documentation de Blade [ici](https://laravel.com/docs/9.x/frontend#php-and-blade).
+- HypAIR fait également appel à **CerbAIR**, plateforme d'*authentification* s'appuyant sur la base de données de la DISI.
+
+# Installation
+Pour faire fonctionner le site sur votre propre ordinateur, il vous faut au préalable :
+- PHP (version 8.0 au minimum)
+- Composer
+- NodeJS
+- Une base de données MySQL
+- Git
+- Un serveur web (comme Nginx) avec un VHost paramétré qui a comme racine le dossier `site-air/public`
+
+# Fonctionnalités futures
+blabla
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

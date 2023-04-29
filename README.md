@@ -42,7 +42,7 @@ Une fois installé, depuis l'interface de VS Code, vous pouvez télécharger l'e
 - GitLens : **INDISPENSABLE** pour utiliser Git avec l'interface de VS Code
 
 
-Les extensions suivantes ne sont pas nécessaires, mais peuvent faciliter la vite :
+Les extensions suivantes ne sont pas nécessaires, mais peuvent faciliter la vie :
 - PHP (All-in-One PHP support) : fournit des aides pour coder en PHP
 - Laravel Snippets : fournit des raccourcis de code liés à la syntaxe de Laravel
 - JavaScript (ES6) code snippets : permet de développer en javascript plus facilement
@@ -67,7 +67,7 @@ Pour cela, via l'explorateur de fichiers, allez dans votre dossier `wamp64` (cel
 
 Ensuite, tapez "variables" dans votre barre de recherche, et cliquez sur `Modifier les variables d'environnement système`. Puis cliquez sur `variables d'environnement` en bas de la fenêtre. Cliquez sur `Path` puis `Modifier`. Faites `Nouveau`, et collez le chemin que vous avez copié précédemment. Si jamais un chemin similaire est présent dans cette liste, et qu'il mène vers une version antérieure de PHP, supprimez-le. Vous pouvez ensuite valider et fermer toutes ces fenêtres.
 
-Pour vérifier que PHP ets recconu, ouvrez un terminal de commande, et tapez `php -v`. S'il n'y a pas d'erreur, cela a fonctionné :)
+Pour vérifier que PHP est reconnu, ouvrez un terminal de commande, et tapez `php -v`. S'il n'y a pas d'erreur, cela a fonctionné :)
 
 Sinon, le fait de redémarrer l'ordinateur suffit parfois à régler le problème...
 

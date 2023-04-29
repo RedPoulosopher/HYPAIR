@@ -90,9 +90,36 @@ Rendez-vous sur le [site de Git](https://git-scm.com/) et téléchargez-le. Lais
 ### Clonage du repository
 
 Cliquez sur le bouton `clone`sur GitLab (en haut à droite), et copiez le lien en-dessous de `clone with https`. Puis, ouvrez **Git Bash** à l'endroit où voulez importer le projet sur votre ordinateur, et tapez `git clone <lien>`, en remplissant **<lien>** par ce que vous venez de copier.
-Vous n'avez plus qu'à ouvrir le projet sur votre IDE :)
+Vous n'avez plus qu'à ouvrir le projet sur votre IDE, taper `git pull` dans le terminal et vérifier que votre *branche main*  est à jour :)
 
+### Mise en place
+Dupliquez le fichier `.env.example`, et appelez-le `.env`.
 
+Modifiez les lignes suivantes (si nécessaire)
+- `APP_ENV=local`
+- `APP_DEBUG=true`
+- `APP_HOST=localhost`
+- `DB_PORT=3307` : le port de MySQL est visible en ouvrant PhpMyAdmin (il est possible qu'il soit different de 3307)
+- `DB_DATABASE=HypAIR` : le nom de votre base de données 
+- `DB_USERNAME=root` : l'identifiant pour vous connecter à PhpMyAdmin
+
+Ensuite, tpez les commandes suivantes :
+- `npm install`
+- `composer install`
+- `php artisan key:generate`
+- `php artisan migrate:fresh`
+- `php artisan db:seed`
+
+Pour finir, et **ce qui suit est valable chaque fois que vous voudrez faire fonctionner HypAIR sur votre machine**, tapez :
+- `npm run dev` pour compiler les fichiers liés aux dépendances de Node (notamment les feuilles de style *sass*)
+
+**OU**
+- `npm run watch` pour effectuer l'action qui précède à chaque fois que vous sauvegardez un fichier (Ctrl+S)
+
+**PUIS**
+- `php artisan serve` pour lancer le serveur local
+
+Vous pouvez alors faire `Ctrl + clic gauche` sur l'URL qui s'affiche dans la console pour vous rendre sur HypAIR !!!
 
 # Fonctionnalités futures
 blabla

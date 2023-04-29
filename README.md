@@ -122,4 +122,6 @@ Pour finir, et **ce qui suit est valable chaque fois que vous voudrez faire fonc
 Vous pouvez alors faire `Ctrl + clic gauche` sur l'URL qui s'affiche dans la console pour vous rendre sur HypAIR !!!
 
 # Fonctionnalités futures
-blabla
+- Système d'actualités 
+- Page d'accueil qui s'adapte à l'utilisateur 
+- Conversion en PWA

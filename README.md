@@ -87,12 +87,12 @@ Dans un terminal, tapez `nvm install 16`. Une fois l'installation de Node termin
 ### • Git
 Rendez-vous sur le [site de Git](https://git-scm.com/) et téléchargez-le. Laissez tous les paramètres par défaut lors de l'installation.
 
-### Clonage du repository
+## Clonage du repository
 
 Cliquez sur le bouton `clone`sur GitLab (en haut à droite), et copiez le lien en-dessous de `clone with https`. Puis, ouvrez **Git Bash** à l'endroit où voulez importer le projet sur votre ordinateur, et tapez `git clone <lien>`, en remplissant **<lien>** par ce que vous venez de copier.
 Vous n'avez plus qu'à ouvrir le projet sur votre IDE, taper `git pull` dans le terminal et vérifier que votre *branche main*  est à jour :)
 
-### Mise en place
+## Mise en place
 Dupliquez le fichier `.env.example`, et appelez-le `.env`.
 
 Modifiez les lignes suivantes (si nécessaire)

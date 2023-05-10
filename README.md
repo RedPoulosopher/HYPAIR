@@ -38,11 +38,7 @@ Cette section explique de manière détaillée comment se munir de tous les él�
 **VS Code** est un éditeur de texte, qui peut être transformé en IDE via des extensions permettant de compiler des fichiers sources.
 Le logiciel peut être télécharger sur le [site officiel](https://code.visualstudio.com/).
 
-Une fois installé, depuis l'interface de VS Code, vous pouvez télécharger l'extension suivante :
-- GitLens : **INDISPENSABLE** pour utiliser Git avec l'interface de VS Code
-
-
-Les extensions suivantes ne sont pas nécessaires, mais peuvent faciliter la vie :
+Une fois installé, depuis l'interface de VS Code, vous pouvez télécharger les extensions suivantes, qui ne sont pas nécessaires, mais peuvent faciliter la vie :
 - PHP (All-in-One PHP support) : fournit des aides pour coder en PHP
 - Laravel Snippets : fournit des raccourcis de code liés à la syntaxe de Laravel
 - JavaScript (ES6) code snippets : permet de développer en javascript plus facilement

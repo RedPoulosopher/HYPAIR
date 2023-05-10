@@ -99,7 +99,7 @@ Modifiez les lignes suivantes (si nécessaire)
 - `DB_DATABASE=HypAIR` : le nom de votre base de données 
 - `DB_USERNAME=root` : l'identifiant pour vous connecter à PhpMyAdmin
 
-Ensuite, tpez les commandes suivantes :
+Ensuite, tapez les commandes suivantes :
 - `npm install`
 - `composer install`
 - `php artisan key:generate`

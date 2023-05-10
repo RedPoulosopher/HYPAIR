@@ -110,12 +110,26 @@ Pour finir, et **ce qui suit est valable chaque fois que vous voudrez faire fonc
 - `npm run dev` pour compiler les fichiers liés aux dépendances de Node (notamment les feuilles de style *sass*)
 
 **OU**
-- `npm run watch` pour effectuer l'action qui précède à chaque fois que vous sauvegardez un fichier (Ctrl+S)
+- `npm run watch` pour que l'action précède s'effectue automatiquement dès que vous sauvegardez un fichier (Ctrl+S)
 
 **PUIS**
 - `php artisan serve` pour lancer le serveur local
 
 Vous pouvez alors faire `Ctrl + clic gauche` sur l'URL qui s'affiche dans la console pour vous rendre sur HypAIR !!!
+
+*Remarque* : cette mise en place est typique des projets Laravel.
+
+# Comment mettre à jour la version en production ?
+- Se connecter en SSH au serveur HackLab chez OVH
+- Se rendre dans le repository : `cd ../home/services/hypair/src`
+- Faire un pull de git : `git pull`
+- Si ce n'est pas déjà le cas, copier le sha-1 correspondant au dernier commit sur GitLab, puis entrer la commande : `git checkout <sha>`
+- Se connecter au terminal du container : `docker exec -it hypair_laravel sh`
+- Taper `composer install`
+
+Il n'y a plus qu'à prier et vérifier que tout fonctionne bien en se rendant sur le site ;)
+
+*Remarque* : il faut parfois recharger la page complètement en vidant le cache, avec `Ctrl + F5`.
 
 # Fonctionnalités futures
 - Système d'actualités 

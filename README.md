@@ -94,7 +94,7 @@ Dupliquez le fichier `.env.example`, et appelez-le `.env`.
 Modifiez les lignes suivantes (si nécessaire)
 - `APP_ENV=local`
 - `APP_DEBUG=true`
-- `APP_HOST=localhost`
+- `DB_HOST=localhost`
 - `DB_PORT=3307` : le port de MySQL est visible en ouvrant PhpMyAdmin (il est possible qu'il soit different de 3307)
 - `DB_DATABASE=HypAIR` : le nom de votre base de données 
 - `DB_USERNAME=root` : l'identifiant pour vous connecter à PhpMyAdmin

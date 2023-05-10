@@ -2,15 +2,15 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom:1.6em;
+    margin-bottom: 1.6em;
 
     & .comite_club {
         flex-grow: 1;
 
         & .logo {
             position: relative;
-            margin-left:auto;
-            margin-right:auto;
+            margin-left: auto;
+            margin-right: auto;
             border-radius: 500px;
             background: var(--gris_2);
 
@@ -19,17 +19,17 @@
             }
             & .cercle {
                 border-radius: 500px;
-                border:2px solid;
-                position:absolute;
-                left:5%;
-                top:5%;
-                width:90%;
-                height:90%;
+                border: 2px solid;
+                position: absolute;
+                left: 5%;
+                top: 5%;
+                width: 90%;
+                height: 90%;
                 box-sizing: border-box;
                 transition: border 0.1s ease-in-out;
             }
         }
-        
+
         & .info {
             & .nom {
                 line-height: 0.8em;
@@ -38,7 +38,7 @@
                 text-transform: capitalize;
             }
             .categories {
-                color:var(--couleur_police_secondaire);
+                color: var(--couleur_police_secondaire);
 
                 & > span {
                     text-transform: capitalize;
@@ -51,15 +51,15 @@
 @media (min-width: 600px) {
     .liste_comite_club {
         gap: 20px 20px;
-        & .comite_club{
-            width:240px;
+        & .comite_club {
+            width: 240px;
 
-            & .logo{
-                width:200px;
-                height:200px;
+            & .logo {
+                width: 200px;
+                height: 200px;
 
                 & img {
-                    width:84%;
+                    width: 84%;
                     margin: 8%;
                 }
 
@@ -67,15 +67,15 @@
                     border: 5px solid;
                 }
             }
-            & .info .nom{
-                font-size:2em;
+            & .info .nom {
+                font-size: 2em;
             }
             & .info .categories {
                 font-size: 0.85em;
-                display:flex;
+                display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-                gap:5px;
+                gap: 5px;
 
                 & > span {
                     background: var(--gris_1);
@@ -90,15 +90,15 @@
 @media (max-width: 599.98px) {
     .liste_comite_club {
         gap: 10px 10px;
-        & .comite_club{
-            width:160px;
+        & .comite_club {
+            width: 160px;
 
-            & .logo{
-                width:130px;
-                height:130px;
-                
+            & .logo {
+                width: 130px;
+                height: 130px;
+
                 & img {
-                    width:80%;
+                    width: 80%;
                     margin: 10%;
                 }
 
@@ -106,8 +106,8 @@
                     border: 3.5px solid;
                 }
             }
-            & .info .nom{
-                font-size:1.3em;
+            & .info .nom {
+                font-size: 1.3em;
             }
             & .info .categories {
                 font-size: 0.55em;

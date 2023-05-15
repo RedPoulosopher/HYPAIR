@@ -77,7 +77,8 @@ a[target="_blank"] {
 }
 
 #contenu {
-    padding: 15px 15px;
+    padding: 15px 15px;    
+    box-sizing: border-box;
 
     @media (max-width: 499.98px) {
         &.tres_petit {

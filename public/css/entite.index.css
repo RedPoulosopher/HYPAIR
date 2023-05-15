@@ -1,12 +1,8 @@
 .liste_comite_club {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   margin-bottom: 1.6em;
-}
-
-.liste_comite_club .comite_club {
-  flex-grow: 1;
 }
 
 .liste_comite_club .comite_club .logo {
@@ -52,11 +48,12 @@
 
 @media (min-width: 600px) {
   .liste_comite_club {
-    gap: 20px 20px;
+    gap: 10px 0;
   }
 
   .liste_comite_club .comite_club {
     width: 240px;
+    padding: 5px 10px;
   }
 
   .liste_comite_club .comite_club .logo {
@@ -94,11 +91,12 @@
 
 @media (max-width: 599.98px) {
   .liste_comite_club {
-    gap: 10px 10px;
+    gap: 5px 0;
   }
 
   .liste_comite_club .comite_club {
     width: 160px;
+    padding: 2.5px 5px;
   }
 
   .liste_comite_club .comite_club .logo {

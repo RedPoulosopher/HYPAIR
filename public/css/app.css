@@ -318,6 +318,13 @@ p.explication {
   color: var(--couleur_accentuation);
 }
 
+.bouton.retour {
+  border: 1px solid var(--couleur_accentuation);
+  background: transparent;
+  color: var(--couleur_accentuation);
+  margin-top: 60px;
+}
+
 .bouton.tertiaire {
   background: transparent;
   color: var(--couleur_police_primaire);

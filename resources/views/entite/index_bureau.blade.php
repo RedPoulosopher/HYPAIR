@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Entites')
+@section('titre', 'Entités')
 
 @section('content')
 
@@ -8,7 +8,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="grand">
-		<h1>- Entites du {{ $bureau->nom }} -</h1>
+		<h1>- Entités du {{ $bureau->nom }} -</h1>
 
         <div class="liste_comite_club">
             @foreach ($comites_clubs_dependants as $comite_club)

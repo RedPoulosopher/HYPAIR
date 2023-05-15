@@ -1,6 +1,6 @@
 @extends('layouts.vide')
 
-@section('titre', 'Entites')
+@section('titre', 'Entités')
 
 @section('content')
 
@@ -9,7 +9,7 @@
 <div id="contenu" class="grand">
     <a href="/" class="bouton secondaire">< retour au choix du site</a>
     @foreach($bureaux as $bureau)
-        <h1>- Entites du {{ $bureau->nom }} -</h1>
+        <h1>- Entités du {{ $bureau->nom }} -</h1>
         <div class="liste_comite_club">
             <a class="comite_club" href="{{$bureau->lien_relatif()}}">
                 <div class="logo ombre_petite">

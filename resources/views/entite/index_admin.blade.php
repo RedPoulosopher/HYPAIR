@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Entites')
+@section('titre', 'Entités')
 
 @section('content')
 <link rel="stylesheet" type="text/css" href="/css/jstable.css">

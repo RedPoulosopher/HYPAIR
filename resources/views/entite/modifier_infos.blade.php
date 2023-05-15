@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', $creation==1 ? "Créer" : "Modifier" . ' une entite')
+@section('titre', $creation==1 ? "Créer" : "Modifier" . ' une entité')
 
 @section('content')
 

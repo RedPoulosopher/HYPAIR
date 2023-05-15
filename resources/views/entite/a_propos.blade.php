@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'A propos de '.$entite->nom)
+@section('titre', $entite->nom)
 
 @section('content')
 

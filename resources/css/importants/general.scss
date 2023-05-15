@@ -230,6 +230,12 @@ p.explication {
         color: var(--couleur_accentuation);
         // transition: border 0.1s ease-in-out;
     }
+    &.retour {
+        border: 1px solid var(--couleur_accentuation);
+        background: transparent;
+        color: var(--couleur_accentuation);
+        margin-top: 60px;
+    }
     &.tertiaire {
         background: transparent;
         color: var(--couleur_police_primaire);

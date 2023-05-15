@@ -208,6 +208,7 @@ p.explication {
   border: 1px solid var(--couleur_accentuation);
   background: transparent;
   color: var(--couleur_accentuation);
+  padding: 40px 25px 12px 25px;
 }
 
 .bouton.tertiaire {

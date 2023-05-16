@@ -4537,3 +4537,13 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   height: 25px;
 }
 
+@media (max-width: 400px) {
+  #bascule-mode-button .label-sombre {
+    display: none;
+  }
+
+  #bascule-mode-button .label-clair {
+    visibility: hidden;
+  }
+}
+

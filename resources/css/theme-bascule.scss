@@ -72,3 +72,16 @@ body.dark-theme #bascule-mode-button #bascule-theme {
         height: 25px;
     }
 }
+
+@media (max-width: 400px) {
+    #bascule-mode-button {
+        // margin-left: 5px;
+
+        & .label-sombre {
+            display: none;
+        }
+        & .label-clair {
+            visibility: hidden;
+        }
+    }
+}

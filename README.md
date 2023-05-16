@@ -134,30 +134,38 @@ Il n'y a plus qu'à prier et vérifier que tout fonctionne bien en se rendant su
 # Comment utiliser Git dans le projet ?
 Git est un outil qui va faciliter le travail à plusieurs sur un même projet et permettre de charger une version antérieure si besoin.
 
-Dans une console (comme **GitBash** qui est installée en même temps que git), il est possible de taper des commandes pour utiliser les fonctionnalités de git. Cependant, dans l'interface graphique de VS Code, il existe déjà plusieurs boutons permettant d'utiliser git dans ouvrir de terminal. Il est également possible d'utiliser GitHub Desktop pour avoir une vue globale sur ses projets.
+Dans une console (comme **GitBash** qui est installée en même temps que git), il est possible de taper des commandes pour utiliser les fonctionnalités de git (attention, pour ce faire il faut être situé dans le dossier du projet). Cependant, dans l'interface graphique de VS Code, il existe déjà plusieurs boutons permettant d'utiliser git sans ouvrir de terminal. Il est également possible d'utiliser GitHub Desktop pour avoir une vue globale sur ses projets.
 
 Il est courant de travailler sur une branche séparée et dédiée à la fonctionnalité que l'on souhaite implémenter. Cela permet d'éviter la plupart des conflits de code, et de ne pas impacter directement les autres développeurs en cas de problèmes.
 
-## Se créer une nouvelle branche
-- Cliquer sur la branche actuel en bas de VS Code (probabalement `main`)
+## Créer une nouvelle branche
+- Cliquer sur la branche actuelle en bas de VS Code (probabalement `main`)
 - Cliquer sur `create new branch from...`
 - Sélectionner la branche de départ (`origin/main` la plupart du temps)
 - Donner un nom à sa branche
-- Cliquer sur le nuage en bas pour publer la branche, et la rendre accessible à tous
+- Cliquer sur le nuage en bas pour publier la branche, et la rendre accessible à tous
+
+> Dans le cadre d'HypAIR, on nommera les branches
+> - `fonctionnalite/nom_de_la_fonctionnalite` pour une nouvelle fonctionnalité
+> - `fix/nom_du_fix` pour une correction de bug (si le bug est simple, on pourra directement modifier `main`)
+
 
 ## Faire des commits
-Un commit regroupe une ou plusieurs modifications de lignes de code dans des fichiers. Faire un commit signifie sauvegarder ses modifications sur sa branche. Une sorte de checkpoint est crée, et tout le monde peut charger le projet depuis ce commit.
+Un commit regroupe une ou plusieurs modifications de lignes de code dans des fichiers. Faire un commit signifie sauvegarder ses modifications sur sa branche. Une sorte de checkpoint est créé.
 
-- Cliquer sur le menu git à gauche de VS Code
+- Cliquer sur le menu git à gauche de VS Code (intitulé `Source Control`)
 - Cliquer sur le `+` pour ajouter toutes les modifications à la file d'attente
 - Donner une description très courte à son commit
 - Cliquer sur `commit`
+
+ Attention, pour l'instant celui-ci n'existe qu'en local, sur votre machine. Pour le mettre à jour sur GitLab et le rendre accessible à tous les autres :
+
 - Cliquer sur `Synchronize changes` pour publier ce commit
 
 ## Faire une merge request
-Les merge requests sont des demandes de fusion de deux branches, la plupart du temps `main` et une autre branche.
+Les merge requests sont des demandes de fusion de deux branches, la plupart du temps `main` et une autre branche. Cela permet notamment de récupérer les modifications faites sur une branche `fonctionnalite` dans la branche `main`.
 
-- Aller sur GitLab
+- Aller sur [GitLab](https://gitlab.etu.imt-nord-europe.fr/)
 - Cliquer sur `Merge requests`, puis `New merge request`
 - Dans *source branch*, sélectionner la branche avec la nouvelle fonctionnalité
 - Dans *target branch*, sélectionner la branche principale, la plupart du temps `main`
@@ -169,7 +177,7 @@ Les merge requests sont des demandes de fusion de deux branches, la plupart du t
 *ATTENTION* : S'il y a des modifications non sauvegardées et que vous changez de branche, elles risquent d'être perdues.
 
 ## Charger un ancien commit
-- Aller sur GitLab
+- Aller sur [GitLab](https://gitlab.etu.imt-nord-europe.fr/)
 - Ouvrir l'historique des commits en cliquants sur `History` en haut du repository
 - Chercher le commit qui nous intéresse
 - Copier le *SHA* en cliquant sur le bouton tout à droite d'un commit

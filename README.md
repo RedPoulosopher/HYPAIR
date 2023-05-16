@@ -174,6 +174,7 @@ Les merge requests sont des demandes de fusion de deux branches, la plupart du t
 ## Changer de branche
 - Cliquer sur sa branche actuelle en bas de VS Code
 - Cliquer sur la branche qu'on souhaite charger
+
 *ATTENTION* : S'il y a des modifications non sauvegardées et que vous changez de branche, elles risquent d'être perdues.
 
 ## Charger un ancien commit

@@ -11,7 +11,7 @@
     flex-direction: column;
     overflow-x: hidden;
     min-height: 110%;
-}
+    }
 </style>
 
 

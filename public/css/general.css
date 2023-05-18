@@ -97,7 +97,6 @@ a[target=_blank]:before {
 @media (max-width: 1299.98px) {
   #contenu.grand {
     width: 100%;
-    max-width: 100%;
   }
 }
 

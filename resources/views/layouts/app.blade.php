@@ -27,6 +27,18 @@
         --couleur_accentuation: {{session('entite_couleur_sombre')}};
         --couleur_police_accentuation: {{session('entite_couleur_police_accentuation_sombre')}};
     }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--couleur_accentuation);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+            background-color: #8d8d8d;
+        }
+
+    * {
+        scrollbar-color: var(--couleur_accentuation) rgba(123, 123, 123, 0.2);
+    }
 </style>
 @if (Auth::check())
     <div id="lien_profil"><a href="/home"><img id="photo_lien_profil" src="{{$user->chemin_photo_de_profil}}"

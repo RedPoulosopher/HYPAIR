@@ -131,7 +131,12 @@
 
 @media (max-width: 600px) {
   .entity-list {
-    margin: 40px 0 40px 0;
+    margin: 40px 20px 40px 20px;
+    flex-direction: column;
+  }
+
+  .entity-list .entity-container-grand {
+    width: 70%;
   }
 }
 

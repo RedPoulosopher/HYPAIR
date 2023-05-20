@@ -56,6 +56,42 @@ class EntiteSitesSeeder extends Seeder
                 'entite_id' => 12,
                 'site_id' => 1,
             ],
+            [
+                'entite_id' => 17,
+                'site_id' => 1,
+            ],
+            [
+                'entite_id' => 15,
+                'site_id' => 1,
+            ],
+            [
+                'entite_id' => 18,
+                'site_id' => 1,
+            ],
+            [
+                'entite_id' => 9,
+                'site_id' => 1,
+            ],
+            [
+                'entite_id' => 19,
+                'site_id' => 1,
+            ],
+            [
+                'entite_id' => 10,
+                'site_id' => 1,
+            ],
+            [
+                'entite_id' => 3,
+                'site_id' => 1,
+            ],
+            [
+                'entite_id' => 7,
+                'site_id' => 1,
+            ],
+            [
+                'entite_id' => 5,
+                'site_id' => 1,
+            ],
         ]);
     }
 }

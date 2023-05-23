@@ -10,8 +10,10 @@
         display: block;
         margin-left:auto;
         margin-right:auto;
-        width:260px;
-        height:260px;
+        max-width:240px;
+        max-height:240px;
+        width:40%;
+        height:40%;
         border-radius: 20px;
     }
 
@@ -25,6 +27,11 @@
     overflow-x: hidden;
     min-height: 110%;
 }
+
+/* @media (max-width: 600px) {
+    .logo {
+        height: 130px;
+    } */
 
 </style>
 

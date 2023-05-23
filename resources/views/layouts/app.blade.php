@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('titre', 'Test') - HypAIR</title>
-    <link rel="stylesheet" href="/css/app.css" type="text/css">
+    <link rel="stylesheet" href="/css/app.css?v=101" type="text/css">
 </head>
 
 <body class="dark-theme">

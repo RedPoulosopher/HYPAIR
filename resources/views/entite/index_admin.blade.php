@@ -100,7 +100,7 @@ td.type {
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Entites -</h1>
+		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Entites</h1>
 
         @if (!$est_bureau)
 		    <a href="../entite/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une entite</a>

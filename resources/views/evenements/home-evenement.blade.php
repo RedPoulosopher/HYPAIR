@@ -38,7 +38,7 @@ table {
 
 <div id="wrapper">
     <div id="contenu" class="petit">
-        <h1>- Évènements -</h1>
+        <h1>Évènements</h1>
         @if(Session::has('success'))
         <p class="explication">Bienvenue sur la page concernant les évènements !</p>
         @endif

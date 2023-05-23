@@ -38,7 +38,7 @@
 
     <div id="wrapper">
         <div id="contenu" class="grand">
-            <h1 class="titre_page espace">- HYPAIR -</h1>
+            <h1 class="titre_page espace">HypAIR</h1>
                 <div class="logo">
                     <img
                         src="/images/logo_air_1.png"
@@ -46,7 +46,7 @@
                     />
                     </div>
 
-                <h1 class="espace">- Campus -</h1>
+                <h1 class="espace">Campus</h1>
 
                 <div class="entity-list">
                     <!-- Logo lille -->
@@ -96,7 +96,7 @@
                     </p>
                 </div>
 
-                <h1 class="espace">- Services -</h1>
+                <h1 class="espace">Services</h1>
 
                 <div class="entity-list">
 
@@ -218,7 +218,7 @@
                     </div>
                 </div>
 
-                <h1 class="espace">- Entités -</h1>
+                <h1 class="espace">Entités</h1>
 
                 {{-- On a décidé il y a quelques semaines de ne finalement pas mettre les valeurs de hypair dans la page d'accueil, donc on peut supprimer ce qui suit si c'est définitif --}}
                 

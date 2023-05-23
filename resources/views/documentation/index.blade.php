@@ -8,7 +8,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- Documentation -</h1>
+		<h1>Documentation</h1>
 		
 		<div id="search" class="ombre_inset centre-element icon-search-normal-1" style="margin-bottom:60px;"><span class="input" placeholder="Rechercher dans la documentation" id="search_input" contenteditable>Rechercher dans la documentation</span></div>
 

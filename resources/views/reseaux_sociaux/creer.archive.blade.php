@@ -12,7 +12,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page réservée aux administrateurs"></span> Ajouter un réseau social -</h1>
+		<h1><span class="icon-security-safe" title="page réservée aux administrateurs"></span> Ajouter un réseau social</h1>
 		@if(Session::has('success'))
 			<p class="explication">Le réseau social a été ajouté correctement.</p>
 		@endif

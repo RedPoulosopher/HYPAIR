@@ -12,7 +12,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page réservée aux administrateurs"></span> Créer une nouvelle entite -</h1>
+		<h1><span class="icon-security-safe" title="page réservée aux administrateurs"></span> Créer une nouvelle entite</h1>
 		@if(Session::has('success'))
 			<p class="explication">L'entite a été créée correctement ! Elle est disponible.</p>
 		@endif

@@ -8,7 +8,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- Projet -</h1>
+		<h1>Projet</h1>
 		
 		<div id="search" class="ombre_inset centre-element icon-search-normal-1" style="margin-bottom:60px;"><span class="input" placeholder="Rechercher un projet" id="search_input" contenteditable>Rechercher un projet</span></div>
 

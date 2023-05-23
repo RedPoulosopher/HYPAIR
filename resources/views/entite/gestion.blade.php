@@ -58,7 +58,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="moyen">
-		<h1>- <span class="icon-security-safe" title="page réservée aux administrateurs"></span> Gestion de l'entite -</h1>
+		<h1><span class="icon-security-safe" title="page réservée aux administrateurs"></span> Gestion de l'entite</h1>
 		<div class="logo">
 			<img src="{{session("entite_logo_petit")}}" alt="logo"/>
 			<a class="icon-edit-2" title="Modifier le logo et les couleurs." href="logotype"></a>

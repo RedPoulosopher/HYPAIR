@@ -10,7 +10,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="moyen">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Ajouter une nouvelle avancée -</h1>
+		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Ajouter une nouvelle avancée</h1>
 		@if(Session::has('success'))
 			<p class="explication">Merci pour le travail ! Il est consultable.</p>
 		@endif

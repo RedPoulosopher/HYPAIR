@@ -64,7 +64,7 @@ td a.icon-edit-2, td a.icon-trash {
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des réseaux sociaux -</h1>
+		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des réseaux sociaux</h1>
 
         <div id="gestion_membre">
             <div>

@@ -6,7 +6,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="moyen">
-		<h1>- Nous contacter -</h1>
+		<h1>Nous contacter</h1>
 		@if(Session::has('success'))
 			<p class="explication">Votre problème va être résolu ! A bientôt.</p>
 		@else

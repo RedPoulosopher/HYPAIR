@@ -33,7 +33,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- Index associatif HypAIR -</h1>
+		<h1>Index associatif HypAIR</h1>
 
 		<div class="conteneur_boutons">
 			<a class="gros_bouton" href="entites/douai">Douai (Classes préparatoires)</a>

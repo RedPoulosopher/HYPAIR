@@ -79,7 +79,7 @@ td a.icon-edit-2 {
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des Membres -</h1>
+		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des Membres</h1>
 
         <div id="gestion_membre">
             <form method="POST">

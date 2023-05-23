@@ -11,7 +11,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs">Modifier votre entite -</h1>
+		<h1><span class="icon-security-safe" title="page accessible aux administrateurs">Modifier votre entite</h1>
 		@if(Session::has('success'))
 			<p class="explication">L'entite a été modifiée correctement !</p>
 		@endif

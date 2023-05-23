@@ -19,7 +19,7 @@
     <div id="contenu" class="grand">
         <a href="/" class="bouton retour">< retour au choix du site</a>
         @foreach($bureaux as $bureau)
-            <h1>- Entités du {{ $bureau->nom }} -</h1>
+            <h1>Entités du {{ $bureau->nom }}</h1>
             <div class="liste_comite_club">
                 <a class="comite_club" href="{{$bureau->lien_relatif()}}">
                     <div class="logo ombre_petite">
@@ -53,7 +53,7 @@
         @endforeach
     
         @if (count($entites_independantes ?? array()) > 0)
-            <h1>- Entites indépendantes -</h1>
+            <h1>Entites indépendantes</h1>
             <div class="liste_comite_club">
                 @foreach ($entites_independantes as $entite_independante)
                     <a class="comite_club" href="{{$entite_independante->lien_relatif()}}">

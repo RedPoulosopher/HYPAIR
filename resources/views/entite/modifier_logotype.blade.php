@@ -12,7 +12,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Ajouter un logotype -</h1>
+		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Ajouter un logotype</h1>
 		@if(Session::has('success'))
 			<p class="explication">Le logo a été modifié !</p>
 		@endif

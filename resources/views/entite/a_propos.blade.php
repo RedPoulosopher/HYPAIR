@@ -191,7 +191,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="moyen">
-		<h1 class="titre_page">- à propos de {{$entite->nom}} -</h1>
+		<h1 class="titre_page">à propos de {{$entite->nom}}</h1>
 		<div class="logo">
 			<img src="{{session("entite_logo_petit")}}" alt="logo"/>
 		</div>
@@ -213,7 +213,7 @@
 			@endforeach
 		</div>
 
-		<h1 class="espace">- mandat -</h1>
+		<h1 class="espace">mandat</h1>
 		<div class="membres grille-enfants">
 		@foreach ($mandat as $mandat_user)
 			<div>

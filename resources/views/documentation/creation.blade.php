@@ -10,7 +10,7 @@
 
 <div id="wrapper">
 	<div id="contenu" class="moyen">
-		<h1>- <span class="icon-security-safe" title="page accessible aux administrateurs"></span> Créer une nouvelle documentation -</h1>
+		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Créer une nouvelle documentation</h1>
 		@if(Session::has('success'))
 			<p class="explication">Merci pour la documentation ! Elle est disponible.</p>
 		@endif

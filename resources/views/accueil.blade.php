@@ -31,7 +31,7 @@
 
     <div id="wrapper">
         <div id="contenu" class="grand">
-            <h1 class="titre_page">- HYPAIR -</h1>
+            <h1 class="titre_page espace">- HYPAIR -</h1>
                 <div class="logo">
                     <img
                         src="/images/logo_air_1.png"

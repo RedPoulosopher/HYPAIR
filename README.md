@@ -120,6 +120,7 @@ Vous pouvez alors faire `Ctrl + clic gauche` sur l'URL qui s'affiche dans la con
 *Remarque* : cette mise en place est typique des projets Laravel.
 
 # Comment mettre à jour la version en production ?
+- Si ce n'est pas déjà fait, changer le numéro de version des liens vers les fichiers CSS dans les layouts
 - Se connecter en SSH au serveur HackLab chez OVH
 - Se rendre dans le repository : `cd ../home/services/hypair/src`
 - Faire un pull de git : `git pull`

@@ -1,7 +1,18 @@
+/* Variables contenant les codes hexadécimaux des principales couleurs */
 @import './accueil/variables';
+
+/* Style général de la page */
 @import './accueil/general';
+
+/* Style des différents composants de la page */
 @import './accueil/scrollbar';
 @import './accueil/bouton-se-connecter';
+@import './accueil/top-navigation-menu';
+@import './accueil/actualites';
+@import './accueil/calendrier';
+
+/* Anciens imports : 
 @import './accueil/entity-list';
 @import './accueil/intro';
 @import './accueil/carousel';
+*/

@@ -1,0 +1,26 @@
+#content {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-top: 8%;
+    color: white;
+  }
+  
+  #main-content {
+    width: 70%;
+    margin-left: 20px;
+    margin-right: 40px;
+  }
+  
+  .article-wrapper {
+    display: flex;
+    flex-direction: column;
+  
+  }
+  
+  .article {
+    background-color: #2E2E33;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }

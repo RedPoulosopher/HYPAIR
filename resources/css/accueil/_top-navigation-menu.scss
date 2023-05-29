@@ -1,0 +1,50 @@
+#navbar {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+  }
+  
+  #rectangle {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    flex-grow: 1;
+    background-color: #2E2E33;
+  }
+  
+  .logo {
+    margin-right: 5%;
+  
+  }
+  
+  .theme-switch-button {
+    display: flex;
+    margin-right: 50px;
+    margin-left: 20px;
+  }
+  
+  .menu-button {
+    padding-left: 25px;
+    padding-right: 25px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .menu-button:hover {
+    background-color: #4B4B52;
+  }
+  
+  .connect-button {
+    background-color: #CC3345;
+    color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-left: 10%;
+    cursor: pointer;
+  }
+  
+  .connect-button:hover {
+    background-color: white;
+    color: black;
+  }

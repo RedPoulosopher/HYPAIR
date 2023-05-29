@@ -12,596 +12,91 @@
         />
     </head>
 
-    <body class="dark-theme">
-    @php
-        use App\Services\GestionPhotoDeProfil;
-        if (Auth::check()) {
-            $user = Auth::user();
-            $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
-        }
-    @endphp
-
-    @if (Auth::check())
-        <div id="lien_profil"><a href="/home"><img id="photo_lien_profil" src="{{$user->chemin_photo_de_profil}}"
-                                                   title="{{$user->prenom}} {{$user->nom}}"/></a></div>
-    @else
-        <a href="/home" id="bouton_se_connecter" class="bouton primaire">Se connecter</a>
-    @endif
-    
-    <div id="wrapper">
-
-        <div id="content" class="grand">
-            <h1 class="page-title">--- HypAIR ---</h1>
-
-            <div class="header">
+    <body>
+        <div id="navbar">
+            <div id="rectangle">
                 <div class="logo">
-                    <img
-                        src="/images/logo_air_1.png"
-                        alt="logo_hypair"
-                    />
-                    </div>
+                    <a href="/" style="color: white; text-decoration: none;">
+                        <h1>HypAIR</h1>
+                    </a>
                 </div>
-
-                <h1 class="espace">- Campus -</h1>
-
-                <div class="entity-list">
-                    <!-- Logo lille -->
-                    <div class="entity-container-grand">
-                        <a
-                            class="entity-grand"
-                            href="/entites/lille"
-                        >
-                            <img
-                                src="/images/logo_campus/lille.png"
-                                alt="logo_lille"
-                            />
-                        </a>
-                        <div class="info">
-                            <h2 class="nom">Entités de Lille</p>
-                        </div>
+    
+                <div class="theme-switch-button">
+                    <h6>Sombre</h6>
+                    <div class="theme-switch">
+    
                     </div>
-                    <!-- Logo douai -->
-                    <div class="entity-container-grand">
-                        <a
-                            class="entity-grand"
-                            href="/entites/douai"
-                        >
-                            <img
-                                src="/images/logo_campus/douai.png"
-                                alt="logo_douai"
-                            />
-                        </a>
-                        <div class="info">
-                            <h2 class="nom">Entités de Douai</p>
-                            {{-- faire des logos avec moins d'infos et des écritures plus garndes pour mobile ? --}}
-                        </div>
-                    </div>
+                    <h6>Clair</h6>
                 </div>
-
-                <div class="intro">
-                    <p>
-                        HypAIR est un site qui se veut être un complément (voir un indispensable à l'avenir) à la vie associative en ajoutant des fonctionnalités et des services qui serviront et amélioreront la vie étudiante (calendrier personnel, événement) et aussi la pérennité des comités et des associations en centralisant les informations et en les sauvegardant pour les années à venir (documentations, projets etc.).
-                        Nous voulons être présents à Lille comme à Douai et disponible sur ordinateur et sur mobile.
-                    </p>
-                    <p>
-                        Le projet HypAIR est encore à ses débuts et est donc accessible pour la première fois cette année. Cela veut donc dire que le site est encore loin d'être fini. Il y a encore beaucoup d'améliorations à apporter et de fonctionnalités que nous avons en tête.
-                        Donc n'hésitez pas à nous faire des retours sur votre ressenti et sur les nouveautés que vous aimeriez voir.
-                    </p>
-                    <p>
-                        Si vous voulez nous aider à développer notre site tout au long de l'année vous pouvez nous le faire savoir et rejoindre nos réseaux : <a href="/air">https://hypair.imt-ne.fr/air</a>
-                    </p>
+    
+                <div class="menu-button">
+                    <h1>Evènements</h1>
                 </div>
-
-                <h1 class="espace">- Services -</h1>
-
-                <div class="entity-list">
-
-                    <!-- Logo Calendrier -->
-                    <div class="entity-container">
-                        <a
-                            class="entity ombre_petite"
-                            href="/calendrier"
-                        >
-                            <div
-                                class="cercle"
-                                style="border-color: #e74c3c"
-                            ></div>
-                            <img
-                                src="/images/logo_services/calendrier.png"
-                                alt="logo_calendrier"
-                            />
-                        </a>
-                        <div class="info">
-                            <h2 class="nom">Calendrier</p>
-                        </div>
-                    </div>
-
-                    <!-- Logo CerbAIR -->
-                    <div class="entity-container">
-                        <a
-                            class="entity"
-                            href="https://cerbair.etu.imt-nord-europe.fr"
-                        >
-                            <div
-                                class="cercle"
-                                style="border-color: #1D1D1B"
-                            ></div>
-                            <img
-                                src="/images/logo_services/cerbair-no_border.png"
-                                alt="logo_cerbair"
-                            />
-                        </a>
-                        <div class="info">
-                            <h2 class="nom">CerbAIR</p>
-                        </div>
-                    </div>
-
-                    <!-- Logo PeerTube -->
-                    <div class="entity-container">
-                        <a
-                            class="entity"
-                            href="https://peertube.imt-ne.fr/"
-                        >
-                            <div
-                                class="cercle"
-                                style="border-color: #737373"
-                            ></div>
-                            <img
-                                src="/images/logo_services/peertube.png"
-                                alt="logo_peertube"
-                            />
-                        </a>
-                        <div class="info">
-                            <h2 class="nom">PeerTube</p>
-                        </div>
-                    </div>
-                    <!-- Logo Mastodon -->
-                    {{-- <div class="entity-container">
-                        <a
-                            class="entity ombre_petite"
-                            href="https://mastodon.social/"
-                        >
-                            <div
-                                class="cercle"
-                                style="border-color: #2791DA"
-                            ></div>
-                            <img
-                                src="/images/logo_services/mastodon.png"
-                                alt="logo_mastodon"
-                            />
-                        </a>
-                        <div class="info">
-                            <h2 class="nom">Mastodon</p>
-                        </div>
-                    </div> --}}
-                    <!-- Logo Piwigo -->
-                    <div class="entity-container">
-                        <a
-                            class="entity"
-                            href="https://photos.imt-ne.fr/"
-                        >
-                            <div
-                                class="cercle"
-                                style="border-color: #FF7700"
-                            ></div>
-                            <img
-                                src="/images/logo_services/piwigo.png"
-                                alt="logo_piwigo"
-                            />
-                        </a>
-                        <div class="info">
-                            <h2 class="nom">Piwigo</p>
-                        </div>
-                    </div>
-                    <!-- Logo GitLab -->
-                    <div class="entity-container">
-                        <a
-                            class="entity"
-                            href="https://gitlab.etu.imt-nord-europe.fr/"
-                        >
-                            <div
-                                class="cercle"
-                                style="border-color: #E34329"
-                            ></div>
-                            <img
-                                src="/images/logo_services/gitlab.png"
-                                alt="logo_gitlab"
-                            />
-                        </a>
-                        <div class="info">
-                            <h2 class="nom">GitLab</p>
-                        </div>
-                    </div>
+                <div class="menu-button">
+                    <h1>Associations</h1>
                 </div>
-
-                <h1 class="espace">- Entités -</h1>
-
-                {{-- On a décidé il y a quelques semaines de ne finalement pas mettre les valeurs de hypair dans la page d'accueil, donc on peut supprimer ce qui suit si c'est définitif --}}
-                
-                <!-- Values actually not displayed in the landing page -->
-                <!-- <div class="values-container">
-                    <div class="value">
-                        <p>Une valeur de l'AIR</p>
-                    </div>
-                    <div class="value">
-                        <p>Une deuxième valeur de l'AIR</p>
-                    </div>
-                </div> -->
-                
-                {{-- Footer vide, on ne sait pas quoi mettre dedans  --}}
-                
-                {{-- <div class="footer">
-                    <p>Footer</p>
-                    <p>Lien vers une FAQ ?</p>
-                </div> --}}
+                <div class="menu-button">
+                    <h1>Contact</h1>
+                </div>
+    
+                <div class="connect-button">
+                    <h1>Se connecter</h1>
+                </div>
+    
             </div>
-
-            {{-- Carrousel généré dynamiquement en prenant des logos depuis la bdd --}}
-            <div class="carrousel">
-                @for($i = 0; $i < 16; $i++)
-                    <div @class(['bande' => true, 'shifted' => ($i % 2 == 1 )])>
-                        <div class="thumbnail-container">
-                            <img
-                                src="/storage/images/entites/{{$entites[3*$i]}}/logos/petit"
-                                alt="entity_thumbnail"
-                            />
-                        </div>
-                        <div class="thumbnail-container">
-                            <img
-                                src="/storage/images/entites/{{$entites[3*$i + 1]}}/logos/petit"
-                                alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                src="/storage/images/entites/{{$entites[3*$i + 2]}}/logos/petit"
-                                alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-                        @endfor
+        </div>
+    
+        <div id="content">
+    
+            <div id="main-content">
+                <h1>Evènements</h1>
+    
+                <div class="article-wrapper">
+                    <div class="article">
+                        <p>Yo les gens</p>
                     </div>
-                    
-                    
-                    {{-- Carrousel généré manuellement, pour tester sans accéder à la bdd --}}
-                    {{-- ATTENTION : réduire la div qui suit ! --}}
-                    {{-- <div class="carrousel">
-                        <div class="bande">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande shifted">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande shifted">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande shifted">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande shifted">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande shifted">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande shifted">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande shifted">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/mastodon.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-    
-                        <div class="bande shifted">
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/piwigo.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                            <div class="thumbnail-container">
-                                <img
-                                    src="/images/logo_services/peertube.png"
-                                    alt="entity_thumbnail"
-                                />
-                            </div>
-                        </div>
-                    </div> --}}
+                    <div class="article">
+                        <p>Tournoi de Smash</p>
+                    </div>
+                    <div class="article">
+                        <p>Big up aux Roman'tic, c'est les meilleurs</p>
+                    </div>
                 </div>
-            </body>
+    
+            </div>
+    
+    
+            <div id="side-bar">
+                <div class="presentation">
+                    <p>HypAIR, c'est le site fait par et pour les étudiants qui centralise les actus de la vie associative de l'IMT !</p>
+                    <p>Retrouvez ici les actualités des comités et bureaux, ainsi que la liste des différentes associations et leurs projets respectifs...</p>
+                </div>
+    
+                <div id="services">
+                    <h1>Services</h1>
+    
+                    <div class="service-card">
+                        <p>Calendrier</p>
+                    </div>
+    
+                    <div class="service-card">
+                        <p>Piwigo</p>
+                    </div>
+    
+                    <div class="service-card">
+                        <p>PeerTube</p>
+                    </div>
+    
+                    <div class="service-card">
+                        <p>GitLab</p>
+                    </div>                
+                </div>
+            </div>
+        </div>
+    
+        <footer>
+            Fait avec amour par l’AIR - Tous droits réservés
+        </footer>
+    </body>
+    
 </html>

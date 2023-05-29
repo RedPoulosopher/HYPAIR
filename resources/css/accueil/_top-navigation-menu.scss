@@ -46,5 +46,8 @@
   
   .connect-button:hover {
     background-color: white;
+  }
+
+  .connect-button:hover>h1 {
     color: black;
   }

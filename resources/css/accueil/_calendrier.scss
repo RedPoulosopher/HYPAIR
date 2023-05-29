@@ -4,22 +4,17 @@
     margin-right: 40px;
   }
   
-  .presentation {
-    background-color: #2E2E33;
-    border-radius: 15px;
-    text-align: justify;
-  }
-  
-  #services {
+  #calendrier {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  .service-card {
+  .day-card {
     width: 70%;
     background: #2E2E33;
     border-radius: 100px;
     margin-top: 10px;
     margin-bottom: 10px;
+    text-align: center;
   }

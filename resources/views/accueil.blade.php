@@ -27,6 +27,7 @@
     @else
         <a href="/home" id="bouton_se_connecter" class="bouton primaire">Se connecter</a>
     @endif
+    
     <div id="wrapper">
 
         <div id="content" class="grand">

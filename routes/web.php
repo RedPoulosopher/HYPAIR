@@ -36,7 +36,8 @@ Route::get('/', [AccueilController::class, 'accueil']);
 Route::get('/entites', function () {
     return view('entite.choix_site');
 })->name('racine');
-Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valencienne|dunkerke']); //liste de toutes les entite d'un site de l'école (e.g. Douai)
+
+Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valencienne|dunkerke']); // liste de toutes les entités d'un site de l'école (e.g. Douai)
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/connexion', 'connexion')->name("connexion");

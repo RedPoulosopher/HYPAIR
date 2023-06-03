@@ -1,0 +1,48 @@
+/* Style du wrapper */
+#content {
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-top: 8%;
+    color: white;
+}
+
+/* Style relatif à l'affichage des outils et liens utiles */
+.services-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.service-container {
+    border-radius: 15px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.service-ombre-petite {
+
+}
+
+.cercle {
+    
+}
+
+/* Style relatif à l'affichage des articles */
+#main-content {
+    width: 70%;
+    margin-left: 20px;
+    margin-right: 40px;
+}
+
+.article-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.article {
+    background-color: #2e2e33;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

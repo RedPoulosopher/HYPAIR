@@ -161,6 +161,49 @@ fieldset legend {
   opacity: 1;
 }
 
+.input_groupe .input[type=radio] {
+  display: grid;
+  place-content: center;
+  align-self: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  margin: 0px 8px;
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: 1em;
+  color: currentColor;
+  background-color: var(--gris_2);
+  border: 1px solid currentColor;
+}
+
+.input_groupe .input[type=radio]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 1em;
+  background: var(--couleur_accentuation);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 80ms ease-in-out, opacity 80ms ease-in-out;
+}
+
+.input_groupe .input[type=radio]:hover::before {
+  transform: scale(0.5);
+  opacity: 0.6;
+}
+
+.input_groupe .input[type=radio]:hover:checked::before {
+  transform: scale(0.8);
+  opacity: 0.8;
+}
+
+.input_groupe .input[type=radio]:checked::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
 .input_groupe textarea {
   width: 100%;
   margin-top: 8px;

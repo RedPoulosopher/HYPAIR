@@ -44,31 +44,51 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    function membres(){
+    function membres()
+    {
         return $this->hasMany(Membre::class);
     }
 
-    function membres_actuel(){
+    function membres_actuel()
+    {
         return $this->membres()
-                    ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`");
+            ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`");
     }
 
-    public static function existe($user_uid){
+    public static function existe($user_uid)
+    {
         $user = self::where('uid', $user_uid);
 
-        if(!$user->exists()){return false;}
+        if (!$user->exists()) {
+            return false;
+        }
 
         return $user->first();
     }
-    public static function existe_id($user_id){
+    public static function existe_id($user_id)
+    {
         $user = self::where('id', $user_id);
 
-        if(!$user->exists()){return false;}
+        if (!$user->exists()) {
+            return false;
+        }
 
         return $user->first();
     }
 
-    public function reseaux_sociaux(){
+    public function reseaux_sociaux()
+    {
         return $this->morphMany(ReseauSocial::class, 'reseau_sociable');
+    }
+
+    public function resume()
+    {
+        $phrase = "";
+        foreach ($this->membres as $membre) {
+            $nom_role = Role::find($membre->role_id)['label'];
+            $nom_entite = Entite::find($membre->entite_id)['nom'];
+            $phrase .= " - " . $nom_entite . " (" . $nom_role . ")";
+        }
+        return $phrase;
     }
 }

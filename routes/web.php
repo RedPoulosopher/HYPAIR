@@ -13,6 +13,7 @@ use App\Http\Controllers\CalendrierController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvanceeController;
+use App\Http\Controllers\LocalAuthController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -245,6 +246,11 @@ Route::controller(CalendrierController::class)->group(function () {
     Route::post('/calendrier/invalidation', 'invalidation');
     Route::post('/calendrier/suppression', 'suppression');
     Route::get('/calendrier/index_mois_json_general/{annee}-{mois}', 'calendrier_index_json_general');
+});
+
+Route::controller(LocalAuthController::class)->group(function () {
+    Route::get('/localauth', 'index');
+    Route::post('/localauth', 'connexion');
 });
 
 Route::prefix('{entite_uid}-{liste_id}') //pour les listes

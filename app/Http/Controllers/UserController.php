@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Services\GestionPhotoDeProfil;
 use \App\Models\ReseauSocialListe;
 use \App\Models\ReseauSocial;
+use Illuminate\Support\Facades\App;
 
 class UserController extends Controller
 {
@@ -18,6 +19,9 @@ class UserController extends Controller
       $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
       $reseaux_sociaux = $user->reseaux_sociaux()->get();
       return view('espace_utilisateur.home', ['user'=>$user, 'reseaux_sociaux'=>$reseaux_sociaux]);
+    }
+    if (App::environment('local')) {
+      return redirect('/localauth');
     }
     return redirect('/connexion');
   }

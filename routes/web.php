@@ -25,12 +25,15 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     return redirect('/entites/douai');
 });
+
 Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });
+
 Route::get('/', [AccueilController::class, 'accueil']);
 
 Route::get('/entites', function () {
@@ -43,6 +46,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/connexion', 'connexion')->name("connexion");
     Route::get('/deconnexion', 'deconnexion');
 });
+
 Route::get('/cookies', function () {
     return view('cookies');
 });
@@ -50,7 +54,7 @@ Route::get('/rgpd', function () {
     return redirect('/air/documentation/rgpd');
 });
 
-//easter eggs
+// Easter eggs
 //============
 Route::get('/matrix', function () {
     return view('oeufs_de_paques.matrix');
@@ -62,13 +66,13 @@ Route::get('/cookies', function () {
     return view('cookies');
 });
 
-//accéder aux erreurs
+// Accéder aux erreurs
 //====================
 Route::get('/{erreur}', function ($erreur) {
     return abort($erreur);
 })->where(['erreur' => '401|403|404|405|419|429|500|503']);
 
-//fenêtres contextuelles
+// Fenêtres contextuelles
 //====================
 Route::get('/fenetre_contextuelle/cookies', function () {
     return view('fenetre_contextuelle.cookies');
@@ -77,7 +81,7 @@ Route::get('/fenetre_contextuelle/rgpd', function () {
     return view('fenetre_contextuelle.rgpd');
 });
 
-//users profile
+// users profile
 //====================
 Route::controller(UserController::class)->group(function () {
     Route::get('/home', 'home');
@@ -89,7 +93,7 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/editer_reseaux_profil', 'enregistrer_reseaux_profil');
 });
 
-//les routes réservées à l'AIR
+// les routes réservées à l'AIR
 //============================
 $routes_AIR = function () {
     Route::middleware('protection.autorisation:gerer_entite')->group(function () {

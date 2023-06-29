@@ -13,6 +13,7 @@
     </head>
 
     <body>
+        <!-- Barre de navigation -->
         <div id="navbar">
             <div id="rectangle">
                 <div class="logo">
@@ -55,9 +56,11 @@
     
             </div>
         </div>
-    
+
+        <!-- Contenu de la page -->
         <div id="content">
-    
+            
+            <!-- Contenu principal de la page -->
             <div id="main-content">
                 <h1>Outils</h1>
 
@@ -113,7 +116,7 @@
     
             </div>
     
-    
+            <!-- Side bar : planning de la semaine -->
             <div id="side-bar">
     
                 <div id="calendrier">

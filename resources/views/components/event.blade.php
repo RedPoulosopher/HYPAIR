@@ -1,3 +1,5 @@
+<!-- COMPONENT des évènements de la page d'accueil -->
+
 <div id="event">
 
   <div id="header">
@@ -43,7 +45,7 @@
 
   </div>
 
-  <div id="content" style="display: none;">
+  <div id="description" style="display: none;">
       <p>Lorem ipsum dolor sit amet consectetur. Egestas eget aenean curabitur quis eleifend diam fermentum vitae. Tortor feugiat suspendisse faucibus ante. </p>
       <p>IMAGES</p>
       <p>Lien du shotgun : <a href="https://shotgun.fr/aprem-ninjas"> https://shotgun.fr/aprem-ninjas</a></p>
@@ -56,7 +58,7 @@
 <!-- Script qui commqnde la révélation du contenu du post  -->
 
 <script>
-  const content = document.getElementById("content")
+  const content = document.getElementById("description")
   const arrow = document.getElementById("arrow")
 
   var contentState = true
@@ -96,7 +98,7 @@
     justify-content: space-between;
 }
 
-#content {
+#description {
 
 }
 

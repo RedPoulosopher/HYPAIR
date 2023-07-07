@@ -103,15 +103,9 @@
                 <h1>Actualités</h1>
     
                 <div class="article-wrapper">
-                    <div class="article">
-                        <p>Yo les gens</p>
-                    </div>
-                    <div class="article">
-                        <p>Tournoi de Smash</p>
-                    </div>
-                    <div class="article">
-                        <p>Big up aux Roman'tic, c'est les meilleurs</p>
-                    </div>
+                    <x-event/>
+                    <x-event/>
+                    <x-event/>
                 </div>
     
             </div>

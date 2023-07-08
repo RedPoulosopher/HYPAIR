@@ -18,7 +18,7 @@
   --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
   --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
   --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.2) inset;
-  --scrollbar-width: 1em;
+  --scrollbar-width: .5em;
 }
 
 /* Style général de la page */

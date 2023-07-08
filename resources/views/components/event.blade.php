@@ -69,7 +69,7 @@
 
 </article>
 
-<!-- Script qui commqnde la révélation du contenu du post  -->
+<!-- Script qui commande la révélation du contenu du post  -->
 
 <script>
   const content = document.getElementById("description")
@@ -104,6 +104,9 @@
         color: white;
         border-radius: 15px;
         padding: 15px;
+
+        margin-top: 15px;
+        margin-bottom: 15px;
 
         &:not(:last-of-type) {
             margin-bottom: 30px;

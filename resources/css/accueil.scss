@@ -2,10 +2,11 @@
 @import './accueil/variables';
 
 /* Style général de la page */
-@import './accueil/general';
+@import './importants/general';
+@import './importants/scrollbar';
+@import './importants/layout';
 
 /* Style des différents composants de la page */
-@import './accueil/scrollbar';
 @import './accueil/bouton-se-connecter';
 @import './accueil/main-content';
 @import './accueil/calendrier';

@@ -1,6 +1,6 @@
-@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@600;
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;
 
-800&display=swap);@charset "UTF-8";
+500;700&family=Montserrat:wght@600;800&display=swap);@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap);@charset "UTF-8";
 
 /* Variables contenant les codes hexadécimaux des principales couleurs */
 :root {
@@ -23,76 +23,217 @@
 
 /* Style général de la page */
 
+html,
 body {
-  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  height: 100%;
+  box-sizing: border-box;
   font-family: "Inter", sans-serif, system-ui;
+  background-attachment: fixed !important;
+  background: var(--background-color);
+  color: var(--couleur_police_primaire);
   overflow-x: hidden;
 }
 
-p {
-  color: var(--couleur_police_primaire);
-  padding: 5px;
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+a[target=_blank] {
+  position: relative;
+  display: inline-block;
+  padding-right: 1rem;
+}
+
+a[target=_blank]:before {
+  content: " \2197";
+  position: absolute;
+  right: 0;
+}
+
+@font-face {
+  font-family: "GearsOfPeace";
+  src: url(/fonts/GearsOfPeace.ttf?3d1ce918e0d914cb936e1898038ec6ec) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
 h1 {
+  -webkit-margin-before: 0em;
+          margin-block-start: 0em;
   text-align: center;
+}
+
+p.explication {
+  text-align: justify;
+  -moz-text-align-last: left;
+       text-align-last: left;
+  margin-bottom: 30px;
+}
+
+.centre-element {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+}
+
+.centre-enfants {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.grille-enfants {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.centre-vertical-enfant {
+  align-items: center;
+}
+
+.texte_petit {
+  font-size: 0.7em;
+}
+
+.bouton {
+  padding: 10px 25px 12px 25px;
+  font-size: 1.1em;
+  border-radius: 50px;
+  min-width: 100px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: block;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  text-align: center;
+  font-family: "Inter", sans-serif, system-ui;
+  transition: padding 0.15s ease-in-out;
+}
+
+.bouton[class^=iconsax-]:before,
+.bouton[class^=iconsax-]:after {
+  font-size: 1.3em;
+}
+
+.bouton[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bouton:hover {
+  padding: 10px 20px 12px 30px;
+}
+
+.bouton span {
+  vertical-align: middle;
+}
+
+.bouton.margin_tout {
+  margin: 15px;
+}
+
+.bouton.margin_vertical {
+  margin: 15px 0px;
+}
+
+.bouton.primaire {
+  color: var(--couleur_police_accentuation);
+  background-color: var(--couleur_accentuation);
+  border: none;
+  text-transform: uppercase;
+}
+
+.bouton.secondaire {
+  border: 1px solid var(--couleur_accentuation);
+  background: transparent;
+  color: var(--couleur_accentuation);
+}
+
+.bouton.tertiaire {
+  background: transparent;
   color: var(--couleur_police_primaire);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--couleur_police_secondaire);
 }
 
-#content {
-  overflow-x: hidden;
+body.dark-theme .ombre_grande {
+  box-shadow: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
 }
 
-@media (max-width: 1100px) {
-  p {
-    font-size: 1.3rem;
-  }
+body.dark-theme .ombre_petite {
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 900px) {
-  p {
-    -webkit-margin-before: 15px;
-            margin-block-start: 15px;
-    -webkit-margin-after: 15px;
-            margin-block-end: 15px;
-    font-size: 1.2rem;
-  }
+body.dark-theme .ombre_inset {
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2) inset;
 }
 
-@media (max-width: 700px) {
-  p {
-    font-size: 1.1rem;
-  }
-
-  h2 {
-    font-size: 1.4rem;
-  }
+body.dark-theme a.couleur {
+  text-decoration: underline;
+  color: #98cbff;
 }
 
-@media (max-width: 500px) {
-  p {
-    font-size: 1rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
+body.dark-theme a.couleur:hover {
+  color: #759aff;
 }
 
-@media (max-width: 800px) {
-  #wrapper {
-    padding: 0px 5px 0px 5px;
-  }
+body.light-theme {
+  --grey: #ececec;
+  --dark-grey: #fcfcfc;
+  --background-color: #f5f5f5;
+  --light-grey: #f7f7;
+  --couleur_accentuation_air: #c6152a;
+  --couleur_accentuation: #4b14d6;
+  --couleur_police_accentuation_air: #ffffff;
+  --couleur_police_accentuation: #ffffff;
+  --couleur_police_primaire: #000000;
+  --couleur_police_secondaire: #3d3d3d;
 }
 
-@media (min-width: 1200px) {
-  #content.grand {
-    min-width: 1200px;
-    width: 80%;
-  }
+body.light-theme .ombre_grande {
+  box-shadow: 0px 13px 26px 0px rgba(0, 0, 0, 0.15);
 }
 
-/* Style des différents composants de la page */
+body.light-theme .ombre_petite {
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .ombre_inset {
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2) inset;
+}
+
+body.light-theme a.couleur {
+  text-decoration: underline;
+  color: #414fd8;
+}
+
+body.light-theme a.couleur:hover {
+  color: #7f8bf7;
+}
 
 ::-webkit-scrollbar {
   width: var(--scrollbar-width);
@@ -119,6 +260,55 @@ h1 {
     scrollbar-color: var(--couleur_accentuation_air) var(--grey);
   }
 }
+
+/* Main Content */
+
+:root {
+  --layout-padding-horizontal: 8vw;
+}
+
+#content {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  top: 60px;
+  max-height: calc(100% - 60px);
+  box-sizing: border-box;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  overflow-y: auto;
+  padding: 45px var(--layout-padding-horizontal) 45px;
+}
+
+#main-content {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#main-content h1 {
+  text-transform: uppercase;
+  position: relative;
+}
+
+#main-content h1::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--couleur_accentuation_air);
+}
+
+#side-bar {
+  width: 30%;
+}
+
+/* Style des différents composants de la page */
 
 #bouton_se_connecter {
   position: fixed;
@@ -162,16 +352,6 @@ a.bouton.primaire {
   text-transform: uppercase;
 }
 
-/* Style du wrapper */
-
-#content {
-  display: flex;
-  width: 100%;
-  position: relative;
-  margin-top: 8%;
-  color: white;
-}
-
 /* Style relatif à l'affichage des outils et liens utiles */
 
 .services-wrapper {
@@ -188,12 +368,6 @@ a.bouton.primaire {
 
 /* Style relatif à l'affichage des articles */
 
-#main-content {
-  width: 70%;
-  margin-left: 20px;
-  margin-right: 40px;
-}
-
 .article-wrapper {
   display: flex;
   flex-direction: column;
@@ -204,12 +378,6 @@ a.bouton.primaire {
   border-radius: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-#side-bar {
-  width: 30%;
-  margin-left: 20px;
-  margin-right: 40px;
 }
 
 #calendrier {
@@ -236,7 +404,7 @@ a.bouton.primaire {
   left: 0;
   top: 0;
   height: 60px;
-  padding: 0 5vw;
+  padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -256,7 +424,7 @@ a.bouton.primaire {
 }
 
 #navbar a h1 {
-  font-size: 26px;
+  font-size: 24px;
   margin: 0;
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
@@ -286,6 +454,9 @@ a.bouton.primaire {
 #navbar ul#links li.menu-button {
   height: 100%;
   padding: 0;
+  color: white;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
 }
 
 #navbar ul#links li.menu-button a {
@@ -296,22 +467,12 @@ a.bouton.primaire {
   cursor: pointer;
 }
 
-#navbar ul#links li.menu-button a:hover {
-  background-color: #4b4b52;
-}
-
 #navbar ul#links li.menu-button.connect-button {
   background-color: #cc3345;
-  color: white;
-  cursor: pointer;
 }
 
-#navbar ul#links li.menu-button.connect-button:hover {
-  background-color: white;
-}
-
-#navbar ul#links li.menu-button.connect-button:hover > h1 {
-  color: black;
+#navbar ul#links li.menu-button:hover {
+  background-color: #4b4b52;
 }
 
 /* Anciens imports : 

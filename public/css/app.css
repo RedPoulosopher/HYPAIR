@@ -110,7 +110,7 @@
   display: block;
   position: absolute;
   border-radius: 12px;
-  background: var(--background-color);
+  background: var(--grey);
   transition: left 0.2s ease-in-out;
 }
 
@@ -150,6 +150,7 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   align-items: center;
   justify-content: space-between;
   background-color: var(--grey);
+  box-shadow: var(--ombre-petite);
 }
 
 #navbar a {

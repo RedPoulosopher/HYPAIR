@@ -19,8 +19,10 @@
         <x-navbar/>
 
         <!-- Contenu de la page -->
-        @yield('content')
-        
+        <div id="content">
+            
+            @yield('content')
+
         </div>
         
         <footer>

@@ -19,7 +19,8 @@
         <x-navbar/>
 
         <!-- Contenu de la page -->
-        @yield('content')
+        <div id="content">
+            @yield('content')
     
             <!-- Side bar : planning de la semaine -->
             <aside id="side-bar">

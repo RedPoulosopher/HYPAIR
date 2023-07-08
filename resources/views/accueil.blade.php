@@ -14,48 +14,7 @@
 
     <body>
         <!-- Barre de navigation -->
-        <div id="navbar">
-            <div id="rectangle">
-                <div class="logo">
-                    <a href="/" 
-                        style="
-                            color: white; 
-                            text-decoration: none;
-                            display: inline-block;
-                            items-align: center;"
-                    >
-                        <img src="images/logo_air.png" alt="Une création originale de l'AIR" height="50px">
-                        <h1>HypAIR</h1>
-                    </a>
-                </div>
-    
-                <div class="theme-switch-button">
-                    <h6>Sombre</h6>
-                    <div class="theme-switch">
-    
-                    </div>
-                    <h6>Clair</h6>
-                </div>
-    
-                <div class="menu-button">
-                    <h1>Evènements</h1>
-                </div>
-                <div class="menu-button">
-                    <h1>Associations</h1>
-                </div>
-                <div class="menu-button">
-                    <h1>About</h1>
-                </div>
-                <div class="menu-button">
-                    <h1>Contact</h1>
-                </div>
-
-                <div class="connect-button">
-                    <h1>Se connecter</h1>
-                </div>
-    
-            </div>
-        </div>
+        <x-navbar/>
 
         <!-- Contenu de la page -->
         <div id="content">

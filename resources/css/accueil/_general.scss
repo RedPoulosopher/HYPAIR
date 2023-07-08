@@ -1,17 +1,17 @@
 body {
-  background-color: $color_background;
-  font-family: system-ui;
+  background-color: var(--background-color);
+  font-family: 'Inter', sans-serif, system-ui;
   overflow-x: hidden;
 }
 
 p {
-  color: $color_font;
+  color: var(--couleur_police_primaire);
   padding: 5px;
 }
 
 h1 {
   text-align: center;
-  color: $color_font;
+  color: var(--couleur_police_primaire);
 }
 
 #content {
@@ -37,6 +37,7 @@ h1 {
   p {
     font-size: 1.1rem;
   }
+
   h2 {
     font-size: 1.4rem;
   }
@@ -46,6 +47,7 @@ h1 {
   p {
     font-size: 1rem;
   }
+
   h2 {
     font-size: 1.2rem;
   }
@@ -59,7 +61,7 @@ h1 {
 
 @media (min-width: 1200px) {
   #content.grand {
-      min-width: 1200px;
-      width: 80%;
+    min-width: 1200px;
+    width: 80%;
   }
 }

@@ -4,9 +4,9 @@
   max-width: 100ch;
   text-align: justify;
   overflow-wrap: break-word;
-  background-color: $color_grey;
+  background-color: var(--grey);
   font-size: 1.8rem;
-  font-family: system-ui;
+  font-family: 'Inter', sans-serif, system-ui;
 
   a {
     color: inherit;

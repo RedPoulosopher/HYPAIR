@@ -23,19 +23,19 @@ a.bouton {
   -ms-user-select: none;
   user-select: none;
   text-align: center;
-  font-family: system-ui;
+  font-family: 'Inter', sans-serif, system-ui;
   transform: translateY(0px);
-  box-shadow: $small-shadow;
+  box-shadow: var(--ombre-petite);
   transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 
   &:hover {
-		transform:translateY(-3px);
-		box-shadow: $big-shadow;
-	}
+    transform: translateY(-3px);
+    box-shadow: var(--ombre-grande);
+  }
 
   &.primaire {
-    color: $color_font;
-    background-color: $color_highlight;
+    color: var(--couleur_police_primaire);
+    background-color: var(--couleur_accentuation_air);
     border: none;
     text-transform: uppercase;
   }

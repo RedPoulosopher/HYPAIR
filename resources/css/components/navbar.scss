@@ -85,11 +85,11 @@
 
 
             &.connect-button {
-                background-color: #cc3345;
+                background-color: var(--couleur_accentuation_air);
             }
 
             &:hover {
-                background-color: #4b4b52;
+                background-color: var(--light-grey);
             }
 
         }

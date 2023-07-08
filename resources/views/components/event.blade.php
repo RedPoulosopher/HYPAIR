@@ -100,7 +100,7 @@
 <style>
 
   #event {
-    background-color: #2E2E33;
+    background-color: var(--grey);
     color: white;
     border-radius: 15px;
     padding: 15px;
@@ -171,7 +171,7 @@
     }
 
     body {
-        background-color: #17191B;
+        background-color: var(--background-color);
         color: white;
     }
 </style>

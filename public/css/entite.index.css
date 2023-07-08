@@ -14,7 +14,7 @@
   margin-left: auto;
   margin-right: auto;
   border-radius: 500px;
-  background: var(--gris_2);
+  background: var(--dark-grey);
 }
 
 .liste_comite_club .comite_club .logo img {
@@ -86,7 +86,7 @@
   }
 
   .liste_comite_club .comite_club .info .categories > span {
-    background: var(--gris_1);
+    background: var(--grey);
     padding: 4px 15px 5px 15px;
     border-radius: 50px;
   }

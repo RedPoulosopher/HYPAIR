@@ -42,7 +42,7 @@
 .dt-top .dt-selector,
 .dt-bottom .dt-selector {
   padding: 10px;
-  background: var(--gris_1);
+  background: var(--grey);
   color: inherit;
   margin-right: 5px;
   border-radius: 8px;
@@ -68,7 +68,7 @@ select:focus {
 
 .dt-input {
   padding: 10px 16px;
-  background: var(--gris_1);
+  background: var(--grey);
   color: inherit;
   border-radius: 8px;
 }
@@ -95,13 +95,13 @@ select:focus {
 }
 
 .dt-pagination a:hover {
-  background-color: var(--gris_1);
+  background-color: var(--grey);
 }
 
 .dt-pagination .active a,
 .dt-pagination .active a:focus,
 .dt-pagination .active a:hover {
-  background-color: var(--gris_1);
+  background-color: var(--grey);
   cursor: default;
 }
 

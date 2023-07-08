@@ -46,3 +46,9 @@
 #side-bar {
     width: 30%;
 }
+
+@media screen and (max-width: 1250px) {
+    :root {
+        --layout-padding-horizontal: 4vw;
+    }
+}

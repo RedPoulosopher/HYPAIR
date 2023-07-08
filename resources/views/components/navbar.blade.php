@@ -6,15 +6,9 @@
             <h1>Hyp<span>AIR</span></h1>
         </a>
 
-        <div class="theme-switch-button">
-            <h6>Sombre</h6>
-            <div class="theme-switch">
-
-            </div>
-            <h6>Clair</h6>
-        </div>
-
+        
         <ul id="links">
+            <x-toggle-theme-btn/>
             <li class="menu-button"><a href="">Evènements</a></li>
             <li class="menu-button"><a href="">Associations</a></li>
             <li class="menu-button"><a href="">About</a></li>

@@ -11,6 +11,8 @@
             type="text/css"
         />
     </head>
+    
+@include('layouts.theme')
 
     <body>
         <!-- Barre de navigation -->

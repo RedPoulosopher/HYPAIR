@@ -1,6 +1,10 @@
 // Logo font
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
 
+// Toggle theme
+@import './toggle-theme-btn';
+
+
 #navbar {
     position: fixed;
     box-sizing: border-box;
@@ -65,10 +69,14 @@
             color: white;
             cursor: pointer;
 
+            &:first-of-type {
+                margin-left: 20px;
+            }
+
             a {
                 width: 100%;
                 height: 100%;
-                padding: 0 40px;
+                padding: 0 35px;
                 box-sizing: border-box;
                 cursor: pointer;
             }

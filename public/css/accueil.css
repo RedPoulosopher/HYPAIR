@@ -451,9 +451,20 @@ body.light-theme a.couleur:hover {
   align-items: center;
 }
 
+#main-content section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#main-content section:not(:last-of-type) {
+  margin-bottom: 40px;
+}
+
 #main-content h1 {
   text-transform: uppercase;
   position: relative;
+  margin-bottom: 28px;
 }
 
 #main-content h1::after {

@@ -1,6 +1,6 @@
 <!-- COMPONENT des évènements de la page d'accueil -->
 
-<div id="event">
+<article id="event">
 
   <div id="header">
 
@@ -67,7 +67,7 @@
           Justo cras sit eu viverra egestas. Varius faucibus tristique nulla cursus malesuada ut. Lobortis enim orci gravida cursus enim. Parturient augue.</p>
   </div>
 
-</div>
+</article>
 
 <!-- Script qui commqnde la révélation du contenu du post  -->
 
@@ -99,12 +99,15 @@
 
 <style>
 
-  #event {
-    background-color: var(--grey);
-    color: white;
-    border-radius: 15px;
-    padding: 15px;
-    margin: 15px;
+    #event {
+        background-color: var(--grey);
+        color: white;
+        border-radius: 15px;
+        padding: 15px;
+
+        &:not(:last-of-type) {
+            margin-bottom: 30px;
+        }
     }
 
     #header {

@@ -6,14 +6,32 @@ use Illuminate\View\Component;
 
 class Event extends Component
 {
+    // Données à récupérer du serveur
+
+    public $title;
+    public $author;
+    //public $tags;
+    //public $date;
+    //public $description;
+
+    // Il faut aussi récupérer l'icone du post
+    // public $image;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($title, $author)
     {
-        // ça fait quoi ?
+        $this->title = $title;
+        $this->author = $author;
+        /*
+        $this->tags = $tags;
+        $this->date = $date;
+        $this->description = $description;
+        */
+        
     }
 
     /**

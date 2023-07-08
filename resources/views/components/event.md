@@ -2,8 +2,8 @@
 
 - [ ] Aligner le titre et l'auteur du post
 - Ajouter les icônes
-    - [ ] Calendrier
-    - [ ] Flèche pour description
+    - [x] Calendrier
+    - [x] Flèche pour description
 - [ ] Animer la rotation de la flèche quand on clique dessus et le déroulement de la description
 - [ ] S'assurer que la page est bien responsive
 - [x] Implémenter les polices

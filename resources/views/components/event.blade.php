@@ -8,9 +8,9 @@
 
       <div class="details">
           <div id="main-title">
-              <h2>Introduction a Git</h2>
+              <h2>{{ $title }}</h2>
               <p>•</p>
-              <p>Poste par l'AIR</p>
+              <p>Posté par {{ $author }}</p>
           </div>
       
 

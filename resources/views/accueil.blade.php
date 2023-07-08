@@ -103,9 +103,8 @@
                 <h1>Actualités</h1>
     
                 <div class="article-wrapper">
-                    <x-event/>
-                    <x-event/>
-                    <x-event/>
+                    <x-event title="Intro à Git" author="l'AIR" />
+                    <x-event title="Shotgun Allô bouffe" author="BDS" />
                 </div>
     
             </div>

@@ -48,7 +48,7 @@
 }
 
 .documentation_liste .titre {
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   font-size: 1.1em;
   margin-block: 0;
   color: var(--couleur_accentuation);

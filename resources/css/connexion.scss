@@ -9,7 +9,7 @@
 .titre {
 	font-size: 26px;
 	margin: 0;
-	font-weight: 600;
+	font-weight: var(--fw-semibold);
 	color: var(--couleur_accentuation_air);
 }
 
@@ -83,7 +83,7 @@
 	& label {
 		font-size: 11px;
 		text-transform: uppercase;
-		font-weight: 600;
+		font-weight: var(--fw-semibold);
 		letter-spacing: 0.7px;
 		transition: 0.3s;
 		color: var(--couleur_accentuation_air);

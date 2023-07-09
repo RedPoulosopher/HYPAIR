@@ -12,9 +12,18 @@
     --couleur_police_primaire: #ffffff;
     --couleur_police_secondaire: #c5c5c5;
 
+    // Shadows
     --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
     --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
     --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.2) inset;
+
+    // Font weights
+    --fw-thin: 100;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
 
     --scrollbar-width: .5em;
 }

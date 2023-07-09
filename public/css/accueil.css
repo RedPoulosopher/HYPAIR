@@ -1,6 +1,6 @@
-@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;
 
-500;700&family=Montserrat:wght@600;800&display=swap);@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap);@charset "UTF-8";
+400;500;700);@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap);@charset "UTF-8";
 
 /* Variables contenant les codes hexadécimaux des principales couleurs */
 :root {
@@ -18,6 +18,12 @@
   --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
   --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
   --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.2) inset;
+  --fw-thin: 100;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
   --scrollbar-width: .5em;
 }
 
@@ -132,11 +138,11 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   font-size: 24px;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
 }
 
 #navbar a h1 span {
-  font-weight: 800;
+  font-weight: var(--fw-extrabold);
   color: var(--couleur_accentuation_air);
 }
 

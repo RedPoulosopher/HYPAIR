@@ -1,6 +1,6 @@
-@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;
 
-500;700&family=Montserrat:wght@600;800&display=swap);@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap);@charset "UTF-8";
+400;500;700);@import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap);@charset "UTF-8";
 #fenetres_contextuelles {
   z-index: 998;
   background-color: rgba(0, 0, 0, 0.6);
@@ -31,7 +31,7 @@
 .fenetre_contextuelle .panneau .titre {
   font-size: 26px;
   margin: 0;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   color: var(--couleur_accentuation_air);
 }
 
@@ -169,11 +169,11 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   font-size: 24px;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
 }
 
 #navbar a h1 span {
-  font-weight: 800;
+  font-weight: var(--fw-extrabold);
   color: var(--couleur_accentuation_air);
 }
 
@@ -500,7 +500,7 @@ body.light-theme a.couleur:hover {
   line-height: 20px;
   max-width: var(--taille_nav);
   padding: 10px 5px 10px 0px;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
 }
 
 .sidebar-nav li:hover {

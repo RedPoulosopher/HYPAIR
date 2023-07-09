@@ -58,7 +58,7 @@ fieldset {
 
 fieldset legend {
   font-size: 1.3em;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
 }
 
 .input_groupe {

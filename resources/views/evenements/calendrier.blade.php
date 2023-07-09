@@ -15,7 +15,7 @@
     }
     #calendrier .nom_jour {
         text-align: center;
-        font-weight: 500;
+        font-weight: var(--fw-medium);
         padding-bottom: 7px;
         border-bottom: 1px solid rgba(166, 168, 179, 0.12);
     }

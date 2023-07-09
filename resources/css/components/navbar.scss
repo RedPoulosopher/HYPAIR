@@ -37,10 +37,10 @@
             font-size: 24px;
             margin: 0;
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
+            font-weight: var(--fw-semibold);
 
             span {
-                font-weight: 800;
+                font-weight: var(--fw-extrabold);
                 color: var(--couleur_accentuation_air);
             }
         }

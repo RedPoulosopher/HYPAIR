@@ -26,8 +26,8 @@
   font-size: 3em;
   line-height: 1.1;
   -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 /* Sidebar */
@@ -66,7 +66,7 @@
   line-height: 20px;
   max-width: var(--taille_nav);
   padding: 10px 5px 10px 0px;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
 }
 
 .sidebar-nav li:hover {
@@ -186,4 +186,3 @@ body.dark-theme #hamburger span {
 body.light-theme #hamburger span {
   background-color: #555;
 }
-

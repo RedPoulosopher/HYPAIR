@@ -60,7 +60,7 @@
 	line-height: 20px;
 	max-width: var(--taille_nav);
 	padding: 10px 5px 10px 0px;
-	font-weight: 500;
+	font-weight: var(--fw-medium);
 }
 
 .sidebar-nav li:hover {

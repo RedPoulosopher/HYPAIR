@@ -1,4 +1,5 @@
 # Ancien code du layout "app.blade.php"
+
 ```html
 <!DOCTYPE html>
 <html lang="fr">

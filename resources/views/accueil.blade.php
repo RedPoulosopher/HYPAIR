@@ -53,7 +53,7 @@
 
         <div class="article-wrapper">
             @php
-                // Dans le futur : récupérer ces infos à partir de la partie backend
+                // Dans le futur : récupérer ces infos à partir de la partie backend (Coucou Arthur...)
                 $events = [
                     ["Intro à Git", "l'Air"], 
                     ["Shotgun Allô Bouffe", "BDS"],

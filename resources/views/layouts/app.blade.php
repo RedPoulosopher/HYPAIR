@@ -61,11 +61,11 @@
                     
                 </div>
             </aside>
+            <footer>
+                Fait avec amour par l’AIR - Tous droits réservés
+            </footer>
         </div>
         
-        <footer>
-            Fait avec amour par l’AIR - Tous droits réservés
-        </footer>
     </body>
     
 </html>

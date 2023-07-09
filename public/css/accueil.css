@@ -437,15 +437,17 @@ body.light-theme a.couleur:hover {
   top: 60px;
   max-height: calc(100% - 60px);
   box-sizing: border-box;
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   align-items: baseline;
   justify-content: space-between;
   overflow-y: auto;
-  padding: 45px var(--layout-padding-horizontal) 45px;
+  padding: 45px var(--layout-padding-horizontal) 0;
 }
 
 #main-content {
-  width: 65%;
+  grid-column: 1;
+  grid-row: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -478,13 +480,24 @@ body.light-theme a.couleur:hover {
 }
 
 #side-bar {
-  width: 30%;
+  grid-column: 2;
+  grid-row: 0;
 }
 
 @media screen and (max-width: 1250px) {
   :root {
     --layout-padding-horizontal: 4vw;
   }
+}
+
+footer {
+  grid-column: span 2;
+  grid-row: 2;
+  width: 100%;
+  color: var(--couleur_police_primaire);
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 45px;
 }
 
 /* Style des différents composants de la page */
@@ -570,17 +583,4 @@ a.bouton.primaire {
 @import './accueil/intro';
 
 */
-
-/* Je ne sais pas où mettre ça, désolé */
-
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #2e2e33;
-  color: white;
-  text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
 

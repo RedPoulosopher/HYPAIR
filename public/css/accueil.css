@@ -565,15 +565,6 @@ a.bouton.primaire {
   align-items: center;
 }
 
-.day-card {
-  width: 70%;
-  background: var(--grey);
-  border-radius: 40px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
 /* Anciens imports : 
 @import './accueil/entity-list';
 @import './accueil/intro';

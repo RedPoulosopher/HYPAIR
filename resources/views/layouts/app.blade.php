@@ -45,41 +45,20 @@
     
                 <div id="calendrier">
                     <h1>Cette semaine</h1>
-    
-                    <div class="day-card">
-                        <h5>Lundi</h5>
-                        <p>Lorem Ipsum</p>
-                    </div>
-    
-                    <div class="day-card">
-                        <h5>Mardi</h5>
-                        <p>Lorem Ipsum</p>
-                    </div>
-    
-                    <div class="day-card">
-                        <h5>Mercredi</h5>
-                        <p>Lorem Ipsum</p>
-                    </div>
-    
-                    <div class="day-card">
-                        <h5>Jeudi</h5>
-                        <p>Lorem Ipsum</p>
-                    </div>
+                    @php
+                        // Données de test fictives
+                        $comingEvents = [
+                            ["Tournoi de Smash Bros", "Samedi 18 Septembre"],
+                            ["Conférence IMTalks", "Dimanche 19 Septembre"],
+                            ["Reveal Gala", "Mardi 21 Septembre"],
+                            ["Soirée Bourse", "Jeudi 23 Septembre"]
+                        ]
+                    @endphp
 
-                    <div class="day-card">
-                        <h5>Vendredi</h5>
-                        <p>Lorem Ipsum</p>
-                    </div>   
+                    @foreach ($comingEvents as $comingEvent)
+                        <x-coming-event :title="$comingEvent[0]" :date="$comingEvent[1]" />
+                    @endforeach
                     
-                    <div class="day-card">
-                        <h5>Samedi</h5>
-                        <p>Lorem Ipsum</p>
-                    </div>  
-
-                    <div class="day-card">
-                        <h5>Dimanche</h5>
-                        <p>Lorem Ipsum</p>
-                    </div>  
                 </div>
             </aside>
         </div>

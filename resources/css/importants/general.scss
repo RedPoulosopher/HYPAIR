@@ -181,16 +181,6 @@ body.dark-theme {
 }
 
 body.light-theme {
-	--grey: #e6e6e6;
-	--dark-grey: #c7c2c2;
-	--background-color: #f3f3f3;
-	--light-grey: #cecece;
-	--couleur_accentuation_air: #c6152a;
-	--couleur_accentuation: #4b14d6;
-	--couleur_police_accentuation_air: #ffffff;
-	--couleur_police_accentuation: #ffffff;
-	--couleur_police_primaire: #000000;
-	--couleur_police_secondaire: #3d3d3d;
 
 	& .ombre_grande {
 		box-shadow: 0px 13px 26px 0px rgba(0, 0, 0, 0.15);

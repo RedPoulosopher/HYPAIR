@@ -9,11 +9,12 @@
     left: 0;
     width: 100vw;
     top: 60px;
-    max-height: calc(100% - 60px);
+    height: calc(100% - 60px);
     box-sizing: border-box;
 
     display: grid;
     grid-template-columns: 2fr 1fr;
+    gap: 45px 5vw;
     align-items: baseline;
     justify-content: space-between;
     overflow-y: auto;
@@ -80,6 +81,6 @@ footer {
     font-weight: var(--fw-thin);
     // opacity: 0.3;
 
-    padding: 15px 0;
-    margin-top: 45px;
+    padding: 20px 0;
+    margin-top: auto;
 }

@@ -166,7 +166,7 @@ class EntiteController extends Controller
 		}
 	}
 
-	public function index_site(Request $request) //réservé aux bureaux
+	public function index_site(Request $request) // réservé aux bureaux
 	{
 		$site = $request["site"];
 

@@ -1,6 +1,6 @@
 @extends('layouts.vide')
 
-@section('titre', 'Entites')
+@section('titre', 'Associations')
 
 @section('content')
 

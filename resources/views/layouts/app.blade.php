@@ -15,11 +15,29 @@
 @include('layouts.theme')
 
     <body>
+
+        @php
+            // Code pour gérer le login utilisateur
+            use App\Services\GestionPhotoDeProfil;
+            if (Auth::check()) {
+                $user = Auth::user();
+                $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
+            }
+        @endphp
+
         <!-- Barre de navigation -->
-        <x-navbar/>
+        
+        @if (Auth::check())
+            // Si l'utilisateur est connecté : faire apparaître sa PFP au lieu du bouton Se Connecter
+            <x-navbar :isConnected="true" :user="$user" />
+        @else
+            // Sinon : mettre le bouton Se Connecter (la navbar normale)
+            <x-navbar :isConnected="false" :user="[]" />
+        @endif
 
         <!-- Contenu de la page -->
         <div id="content">
+            
             @yield('content')
     
             <!-- Side bar : planning de la semaine -->

@@ -8,7 +8,7 @@
 <main id="main-content">
 
     <section>
-        <h1>Outils</h1>
+        <h1>Services</h1>
 
         <div class="services-wrapper">
             

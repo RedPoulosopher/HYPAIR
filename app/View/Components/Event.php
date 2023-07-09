@@ -8,6 +8,7 @@ class Event extends Component
 {
     // Données à récupérer du serveur
 
+    public $index;
     public $title;
     public $author;
     //public $tags;
@@ -22,10 +23,11 @@ class Event extends Component
      *
      * @return void
      */
-    public function __construct($title, $author)
+    public function __construct($index, $title, $author)
     {
         $this->title = $title;
         $this->author = $author;
+        $this->index = $index;
         /*
         $this->tags = $tags;
         $this->date = $date;

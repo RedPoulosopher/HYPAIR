@@ -37,7 +37,7 @@
             </div>
 
             <div class="service-container">
-                <a href="https://gitlab.etu.imt-ne.fr" class="service-ombre-petite" target="_blank">
+                <a href="https://gitlab.etu.imt-nord-europe.fr" class="service-ombre-petite" target="_blank">
                     <div class="cercle" style="border-color: #e74c3c"></div>
                     <img src="/images/logo_services/gitlab.png" alt="logo_gitlab" height="80">
                 </a>
@@ -52,8 +52,19 @@
         <h1>Actualités</h1>
 
         <div class="article-wrapper">
-            <x-event title="Intro à Git" author="l'AIR" />
-            <x-event title="Shotgun Allô bouffe" author="BDS" />
+            @php
+                // Dans le futur : récupérer ces infos à partir de la partie backend
+                $events = [
+                    ["Intro à Git", "l'Air"], 
+                    ["Shotgun Allô Bouffe", "BDS"],
+                    ["Finale de l'IM'Tremplin", "IM'Tremplin"]
+                ]
+            @endphp
+
+            @for($i = 0; $i < sizeof($events); $i++)
+                <x-event :index="$i" :title="$events[$i][0]" :author="$events[$i][1]" />
+            @endfor
+            
         </div>
     </section>
 

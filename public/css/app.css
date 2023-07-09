@@ -4307,6 +4307,8 @@ footer {
   width: 100%;
   color: var(--couleur_police_primaire);
   text-align: center;
+  font-size: 16px;
+  font-weight: var(--fw-thin);
   padding: 15px 0;
   margin-top: 45px;
 }

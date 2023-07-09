@@ -54,6 +54,10 @@ Route::get('/rgpd', function () {
     return redirect('/air/documentation/rgpd');
 });
 
+Route::get('/contact', function () {
+    return view('contact');
+});
+
 // Easter eggs
 //============
 Route::get('/matrix', function () {

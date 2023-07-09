@@ -24,14 +24,14 @@
                 $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
             }
         @endphp
-
-        <!-- Barre de navigation -->
         
+        <!-- Barre de navigation -->
+        <!-- Si l'utilisateur est connecté : faire apparaître sa PFP au lieu du bouton Se Connecter -->
         @if (Auth::check())
-            // Si l'utilisateur est connecté : faire apparaître sa PFP au lieu du bouton Se Connecter
             <x-navbar :isConnected="true" :user="$user" />
+
+        <!-- Sinon : mettre le bouton Se Connecter (la navbar normale) -->   
         @else
-            // Sinon : mettre le bouton Se Connecter (la navbar normale)
             <x-navbar :isConnected="false" :user="[]" />
         @endif
 

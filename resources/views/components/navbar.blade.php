@@ -13,7 +13,7 @@
       <li class="menu-button"><a href="/calendrier">Calendrier</a></li>
       <li class="menu-button"><a href="/entites">Associations</a></li>
       <li class="menu-button"><a href="/a-propos">À propos</a></li>
-      {{-- <li class="menu-button"><a href="">Contact</a></li> --}}
+      <li class="menu-button"><a href="">Contact</a></li>
 
       @if($isConnected)
         <div id="lien_profil">

@@ -1,3 +1,5 @@
+@import '../components/event.scss';
+
 /* Style relatif à l'affichage des outils et liens utiles */
 .services-wrapper {
     display: flex;
@@ -48,11 +50,4 @@
 .article-wrapper {
     display: flex;
     flex-direction: column;
-}
-
-.article {
-    background-color: var(--grey);
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }

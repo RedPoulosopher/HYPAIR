@@ -150,7 +150,7 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   align-items: center;
   justify-content: space-between;
   background-color: var(--grey);
-  box-shadow: var(--ombre-petite);
+  box-shadow: var(--ombre-card);
 }
 
 #navbar a {
@@ -4229,6 +4229,7 @@ body.light-theme #hamburger span {
   margin-top: 10px;
   margin-bottom: 10px;
   padding-left: 20px;
+  box-shadow: var(--ombre-card);
 }
 
 .event-card h4 {

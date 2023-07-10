@@ -17,8 +17,8 @@
   --couleur_police_secondaire: #c5c5c5;
   --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
   --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
-  --ombre-card: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.2) inset;
+  --ombre-card: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
   --fw-thin: 100;
   --fw-regular: 400;
   --fw-medium: 500;
@@ -42,6 +42,7 @@ body.light-theme {
   --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.2);
   --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
   --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.1) inset;
+  --ombre-card: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 }
 
 /* Style général de la page */

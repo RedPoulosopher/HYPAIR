@@ -43,7 +43,7 @@
             <!-- Side bar : planning de la semaine -->
             <aside id="side-bar">
     
-                <div id="calendrier">
+                <div id="calendrier-sidebar">
                     <h1>Cette semaine</h1>
                     @php
                         // Données de test fictives

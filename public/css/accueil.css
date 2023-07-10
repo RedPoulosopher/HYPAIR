@@ -143,6 +143,7 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   text-decoration: none;
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 #navbar a img {
@@ -193,7 +194,7 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
 #navbar ul#links li.menu-button a {
   width: 100%;
   height: 100%;
-  padding: 0 35px;
+  padding: 0 2vw;
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -432,6 +433,29 @@ body.light-theme a.couleur:hover {
   }
 }
 
+.event-card {
+  width: 100%;
+  background: var(--grey);
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+.event-card h4 {
+  margin: 20px 0 10px;
+}
+
+.event-card p {
+  margin: 0 0 20px;
+}
+
+#calendrier-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Main Content */
 
 :root {
@@ -447,7 +471,7 @@ body.light-theme a.couleur:hover {
   height: calc(100% - 60px);
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 1fr;
   gap: 45px 5vw;
   align-items: baseline;
   justify-content: space-between;
@@ -614,12 +638,6 @@ a.bouton.primaire {
   border-radius: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-#calendrier {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* Anciens imports : 

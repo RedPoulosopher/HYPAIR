@@ -253,7 +253,6 @@ a:hover {
 
 a[target=_blank] {
   position: relative;
-  display: inline-block;
   padding-right: 1rem;
 }
 
@@ -261,6 +260,7 @@ a[target=_blank]:before {
   content: " \2197";
   position: absolute;
   right: 0;
+  top: 0;
 }
 
 @font-face {
@@ -4262,13 +4262,20 @@ body.light-theme #hamburger span {
   margin-bottom: 40px;
 }
 
-#main-content h1 {
+#side-bar {
+  grid-column: 2;
+  grid-row: 0;
+}
+
+section > h1,
+aside h1 {
   text-transform: uppercase;
   position: relative;
   margin-bottom: 28px;
 }
 
-#main-content h1::after {
+section > h1::after,
+aside h1::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -4276,11 +4283,6 @@ body.light-theme #hamburger span {
   width: 100%;
   height: 2px;
   background-color: var(--couleur_accentuation_air);
-}
-
-#side-bar {
-  grid-column: 2;
-  grid-row: 0;
 }
 
 @media screen and (max-width: 1250px) {

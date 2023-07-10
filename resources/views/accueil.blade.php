@@ -12,37 +12,25 @@
 
         <div class="services-wrapper">
             
-            <div class="service-container">
-                <a href="/calendrier" class="service-ombre-petite">
-                    <div class="cercle" style="border-color: #e74c3c"></div>
-                    <img src="/images/logo_services/calendrier.png" alt="logo_calendrier" height="80">
-                </a>
+            <a href="/calendrier" class="service">
+                <img src="/images/logo_services/calendrier.png" alt="logo_calendrier" id="calendrier">
                 <p>Calendrier</p>
-            </div>
+            </a>
 
-            <div class="service-container">
-                <a href="https://photos.imt-ne.fr" class="service-ombre-petite" target="_blank">
-                    <div class="cercle" style="border-color: #e74c3c"></div>
-                    <img src="/images/logo_services/piwigo.png" alt="logo_piwigo" height="80">
-                </a>
+            <a href="https://photos.imt-ne.fr" class="service" target="_blank">
+                <img src="/images/logo_services/piwigo.png" alt="logo_piwigo" id="piwigo">
                 <p>Photos</p>
-            </div>
+            </a>
 
-            <div class="service-container">
-                <a href="https://peertube.imt-ne.fr" class="service-ombre-petite" target="_blank">
-                    <div class="cercle" style="border-color: #e74c3c"></div>
-                    <img src="/images/logo_services/peertube.png" alt="logo_peertube" height="80">
-                </a>
-                <p>Vidéos - PeerTube</p>
-            </div>
+            <a href="https://peertube.imt-ne.fr" class="service" target="_blank">
+                <img src="/images/logo_services/peertube.png" alt="logo_peertube" id="peertube">
+                <p>Vidéos</p>
+            </a>
 
-            <div class="service-container">
-                <a href="https://gitlab.etu.imt-nord-europe.fr" class="service-ombre-petite" target="_blank">
-                    <div class="cercle" style="border-color: #e74c3c"></div>
-                    <img src="/images/logo_services/gitlab.png" alt="logo_gitlab" height="80">
-                </a>
+            <a href="https://gitlab.etu.imt-nord-europe.fr" class="service" target="_blank">
+                <img src="/images/logo_services/gitlab.png" alt="logo_gitlab" id="gitlab">
                 <p>GitLab</p>
-            </div>
+            </a>
 
         </div>
     </section>

@@ -591,7 +591,7 @@ a.bouton.primaire {
   padding: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
-  box-shadow: var(--ombre-bas);
+  box-shadow: var(--ombre-card);
 }
 
 #event:not(:last-of-type) {
@@ -707,7 +707,7 @@ a.bouton.primaire {
   padding: 15px;
   margin-top: 15px;
   margin-bottom: 15px;
-  box-shadow: var(--ombre-bas);
+  box-shadow: var(--ombre-card);
 }
 
 #event:not(:last-of-type) {

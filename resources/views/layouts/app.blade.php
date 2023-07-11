@@ -62,7 +62,7 @@
                 </div>
             </aside>
             <footer>
-                Fait avec amour par l’AIR - Tous droits réservés
+                <a href="/a-propos">Fait avec amour par l’AIR - Tous droits réservés</a>
             </footer>
         </div>
         

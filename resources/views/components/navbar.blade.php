@@ -12,7 +12,7 @@
       <li class="menu-button"><a href="/">Accueil</a></li>
       <li class="menu-button"><a href="/calendrier">Calendrier</a></li>
       <li class="menu-button"><a href="/entites">Associations</a></li>
-      <li class="menu-button"><a href="/a-propos">À propos</a></li>
+      <li class="menu-button"><a href="/gestion-entite">Gestion</a></li>
       <li class="menu-button"><a href="/contact">Contact</a></li>
 
       @if($isConnected)

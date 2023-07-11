@@ -42,6 +42,11 @@ class EntiteController extends Controller
 			->with('reseaux_sociaux', $reseaux_sociaux);
 	}
 
+	public function mes_entites()
+	{
+		return view('entite.mes_entites');
+	}
+
 	public function gestion(Request $request)
 	{
 		$entite = Entite::existe(session('entite_id'));

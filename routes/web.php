@@ -37,9 +37,7 @@ Route::get('/add-media', function () {
 
 Route::get('/', [AccueilController::class, 'accueil']);
 
-Route::get('/mes-entites', function () {
-    return view('entite.mes_entites');
-});
+Route::get('/mes-entites', [EntiteController::class, 'mes_entites']);
 
 Route::get('/entites', function () {
     return view('entite.choix_site');

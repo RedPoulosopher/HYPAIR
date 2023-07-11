@@ -21,16 +21,6 @@
                 <p>Photos</p>
             </a>
 
-            <a href="https://peertube.imt-ne.fr" class="service" target="_blank">
-                <img src="/images/logo_services/peertube.png" alt="logo_peertube" id="peertube">
-                <p>Vidéos</p>
-            </a>
-
-            <a href="https://gitlab.etu.imt-nord-europe.fr" class="service" target="_blank">
-                <img src="/images/logo_services/gitlab.png" alt="logo_gitlab" id="gitlab">
-                <p>GitLab</p>
-            </a>
-
         </div>
     </section>
     

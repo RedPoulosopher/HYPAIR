@@ -2,6 +2,10 @@
 
 @section('titre', 'Accueil')
 
+@pushonce('styles')
+<link rel="stylesheet" href="css/accueil.css" type="text/css" />
+@endpushonce
+
 @section('content')
 
 <!-- Contenu principal de la page -->

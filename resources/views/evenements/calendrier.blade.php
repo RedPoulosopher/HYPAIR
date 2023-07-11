@@ -2,150 +2,18 @@
 
 @section('titre', 'Calendrier')
 
+@pushonce('styles')
+<link rel="stylesheet" href="css/calendrier.css" type="text/css" />
+@endpushonce
+
 @section('content')
 
-<style>
-    html {
-        font-family: system-ui;
-    }
-    #calendrier {
-        padding: 10px var(--side-padding);
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-    }
-    #calendrier .nom_jour {
-        text-align: center;
-        font-weight: var(--fw-medium);
-        padding-bottom: 7px;
-        border-bottom: 1px solid rgba(166, 168, 179, 0.12);
-    }
-    #calendrier .jour{
-        padding:2px;
-        min-height: 100px;
-        box-sizing: border-box;
-        --border: 1px solid rgba(166, 168, 179, 0.12);
-        border-bottom: var(--border);
-        border-right: var(--border);
-    }
-    #calendrier .jour:nth-child(7n+1) {
-        border-left: var(--border);
-    }
-    #calendrier .jour.desactive{
-        background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='rgba(127,127,127,0.15)' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-        cursor: not-allowed;
-    }
-    .documentation {
-        width:100%;
-        background:var(--gris_2);
-        padding:35px;
-        border-radius:25px;
-        box-sizing:border-box;
-        border:1px solid var(--gris_1);
-        box-sizing: ;
-    }
-    .popup-cachee {
-        display: none;
-    }
-    #wrapper {
-        display: flex;
-        flex-direction: column;
-    }
-    #boutons {
-        display: flex;
-        position: fixed;
-        top: 20px;
-    }
-    #contenu {
-        position: fixed;
-        left: 2%;
-        right: 2%;
-    }
-    .bouton {
-        padding: 10px;
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-    .evenement:hover {
-    color: white;
-    box-shadow: 0 0 15px 2px rgb(127,127,127);
-    }
-    .evenement {
-        transition: all 0.3s ease-out;
-    }
-    .non_valide {
-        background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='rgba(255, 0, 0, 0.55)' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
-
-    }
-    #retour {
-        display: none;
-        position: fixed;
-        top: 20px;
-        left: 20px;
-    }
-
-    @media (max-width: 768px) { /*FAIRE POPUP*/
-        #calendrier {
-            min-width: 0px;
-            grid-template-columns: repeat(1, 1fr);
-            overflow: scroll;
-            height: 80vh;
-            gap: 1.2em;
-        }
-        #calendrier .jour{
-            border: 1px solid black;
-            margin: auto 2%;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: row;
-        }
-        .num_jour {
-            flex: 20 1 auto;
-            border-radius: 10px;
-        }
-        .num_jour .evenement{
-            border-radius: 10px;
-            padding-left: 5px;
-            padding-right: 5px;
-            margin-top: 2px;
-            margin-bottom: 2px;
-        }
-        #calendrier .jour:nth-child(7n+1) {
-            border: 1px solid black;
-        }
-        #retour {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-        }
-        .bouton {
-            min-width: 20px;
-            width: 50px;
-            min-height: 10px;
-            height: 20px;
-        }
-        #titre {
-            font-size: 1.2em;
-        }
-        #info .retour {
-            font-size: 0.8em;
-        }
-    }
-    @media (max-width: 632px) {
-        #boutons {
-            top: 80px;
-        }
-        #contenu {
-            top: 165px;
-        }
-    }
-
-</style>
 
 <head>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
-<div id="wrapper">
+<div id="main-content">
 
     <div id="boutons">
         <p id="retour" class="bouton secondaire ombre_petite" style="width:100px;">< Accueil</p>

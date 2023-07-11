@@ -5,11 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>@yield('title', 'Site Web') - HypAIR</title>
-        <link
-            rel="stylesheet"
-            href="css/accueil.css"
-            type="text/css"
-        />
+        
+        @stack('styles')
     </head>
     
 @include('layouts.theme')
@@ -40,11 +37,11 @@
             
             @yield('content')
 
+            <footer>
+                Fait avec amour par l’AIR - Tous droits réservés
+            </footer>
         </div>
         
-        <footer>
-            Fait avec amour par l’AIR - Tous droits réservés
-        </footer>
     </body>
     
 </html>

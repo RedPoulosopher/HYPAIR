@@ -6,6 +6,7 @@ use App\Models\Avancee;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\ProjetController;
+use App\Http\Controllers\MesEntitesController;
 use App\Http\Controllers\EntiteController;
 use App\Http\Controllers\MembreController;
 use App\Http\Controllers\EvenementController;
@@ -35,6 +36,10 @@ Route::get('/add-media', function () {
 });
 
 Route::get('/', [AccueilController::class, 'accueil']);
+
+Route::get('/mes-entites', function () {
+    return view('entite.mes_entites');
+});
 
 Route::get('/entites', function () {
     return view('entite.choix_site');

@@ -8,41 +8,43 @@
 
 @section('content')
 
-<div id="contenu" class="moyen">
-  <a href="/" class="bouton secondaire">< Retour</a>
-	<div id="profil">
-    <div id="photo_profil">
-      <img src="{{$user->chemin_photo_de_profil}}" alt="Votre photo de profil"/>
-    </div>
-      <div id="info_profil">
-        <div id="ligne_prenoms">
-          <div id="prenoms">
-            <h2>{{$user->prenom}} {{$user->nom}}</h2>
-            @if ($user->pronom !== '')
-              <h2 class="pronoms">•</h2>
-              <h2 class="pronoms">{{$user->pronom}}</h2>
-            @endif
-          </div>
-            <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>
-        </div>
-        <div id="bio">
-          {!! nl2br(e($user->bio)) !!}
-        </div>
-        <div class="reseaux_sociaux grille-enfants">
-          @foreach ($reseaux_sociaux as $reseau_social)
-    				<a target="_blank" class="ombre_petite" tabindex="3" href="{{ $reseau_social->liste->pre_url . $reseau_social->cle }}" style="background-color:{{ $reseau_social->liste->couleur }}; color:{{ $reseau_social->liste->couleur_police }};">
-    					{{ $reseau_social->liste->nom }}
-    				</a>
-    			@endforeach
+<div id="main-content" class="moyen">
+  <section>
+    <div id="profil">
+      <div id="photo_profil">
+        <img src="{{$user->chemin_photo_de_profil}}" alt="Votre photo de profil"/>
       </div>
+        <div id="info_profil">
+          <div id="ligne_prenoms">
+            <div id="prenoms">
+              <h2>{{$user->prenom}} {{$user->nom}}</h2>
+              @if ($user->pronom !== '')
+                <h2 class="pronoms">•</h2>
+                <h2 class="pronoms">{{$user->pronom}}</h2>
+              @endif
+            </div>
+              <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>
+          </div>
+          <div id="bio">
+            {!! nl2br(e($user->bio)) !!}
+          </div>
+          <div class="reseaux_sociaux grille-enfants">
+            @foreach ($reseaux_sociaux as $reseau_social)
+              <a target="_blank" class="ombre_petite" tabindex="3" href="{{ $reseau_social->liste->pre_url . $reseau_social->cle }}" style="background-color:{{ $reseau_social->liste->couleur }}; color:{{ $reseau_social->liste->couleur_police }};">
+                {{ $reseau_social->liste->nom }}
+              </a>
+            @endforeach
+        </div>
+      </div>
+      <ul id="menu_meatballs" class="ombre_grande">
+          <li><a id="menu_modifier_photo_profil" tabindex="2" href="/editer_photo_profil">Modifier la photo de profil</a></li>
+          <li><a id="menu_modifier_info" tabindex="2" href="/editer_infos_profil">Modifier les infos</a></li>
+          <li><a id="menu_modifier_reseaux" tabindex="2" href="/editer_reseaux_profil">Gérer les réseaux sociaux</a></li>
+          <li><a id="menu_deconnexion" tabindex="2" href="/deconnexion">Se déconnecter</a></li>
+      </ul>
     </div>
-    <ul id="menu_meatballs" class="ombre_grande">
-        <li><a id="menu_modifier_photo_profil" tabindex="2" href="/editer_photo_profil">Modifier la photo de profil</a></li>
-        <li><a id="menu_modifier_info" tabindex="2" href="/editer_infos_profil">Modifier les infos</a></li>
-        <li><a id="menu_modifier_reseaux" tabindex="2" href="/editer_reseaux_profil">Gérer les réseaux sociaux</a></li>
-        <li><a id="menu_deconnexion" tabindex="2" href="/deconnexion">Se déconnecter</a></li>
-    </ul>
-  </div>
+  </section>
+
 </div>
 @endsection
 

@@ -9,16 +9,16 @@
 @section('content')
 
 
-<div id="wrapper">
+<div id="main-content" class="petit">
 	<!-- Choix du site -->
-	<div id="contenu" class="petit">
+	<section>
 		<h1>Associations</h1>
-
+	
 		<div class="conteneur_boutons">
 			<a class="gros_bouton" href="entites/douai">Douai</a>
 			<a class="gros_bouton" href="entites/lille">Lille</a>
 		</div>
-	</div>
+	</section>
 
 	<!-- Carousel des logos -->
 
@@ -48,180 +48,12 @@
 		</div>
 		@endfor
 	--}}
-	
+
 	{{-- Carrousel généré manuellement, pour tester sans accéder à la bdd --}}
-    {{-- ATTENTION : réduire la div qui suit ! --}}
+	{{-- ATTENTION : réduire la div qui suit ! --}}
 
-    {{-- 
+	{{-- 
 	<div class="carrousel">
-        <div class="bande">
-            <div class="thumbnail-container">
-                <img
-                    src="/images/logo_services/mastodon.png"
-                    alt="entity_thumbnail"
-                />
-            </div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/mastodon.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-		</div>
-
-		<div class="bande shifted">
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/piwigo.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-		</div>
-
-		<div class="bande">
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/piwigo.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/mastodon.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-		</div>
-
-		<div class="bande shifted">
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/mastodon.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/mastodon.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-		</div>
-
-		<div class="bande">
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/piwigo.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-		</div>
-
-		<div class="bande shifted">
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/piwigo.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/mastodon.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-		</div>
-
-		<div class="bande">
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/mastodon.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/mastodon.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-		</div>
-
-		<div class="bande shifted">
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/piwigo.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-			<div class="thumbnail-container">
-				<img
-					src="/images/logo_services/peertube.png"
-					alt="entity_thumbnail"
-				/>
-			</div>
-		</div>
-
 		<div class="bande">
 			<div class="thumbnail-container">
 				<img
@@ -389,9 +221,176 @@
 				/>
 			</div>
 		</div>
-    </div>
+
+		<div class="bande">
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/mastodon.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/mastodon.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+		</div>
+
+		<div class="bande shifted">
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/piwigo.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+		</div>
+
+		<div class="bande">
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/piwigo.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/mastodon.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+		</div>
+
+		<div class="bande shifted">
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/mastodon.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/mastodon.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+		</div>
+
+		<div class="bande">
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/piwigo.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+		</div>
+
+		<div class="bande shifted">
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/piwigo.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/mastodon.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+		</div>
+
+		<div class="bande">
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/mastodon.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/mastodon.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+		</div>
+
+		<div class="bande shifted">
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/piwigo.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+			<div class="thumbnail-container">
+				<img
+					src="/images/logo_services/peertube.png"
+					alt="entity_thumbnail"
+				/>
+			</div>
+		</div>
+	</div>
 	--}}
-
 
 </div>
 

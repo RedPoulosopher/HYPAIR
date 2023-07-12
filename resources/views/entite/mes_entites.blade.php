@@ -2,6 +2,10 @@
 
 @section('titre', 'Mes entités')
 
+@pushonce('styles')
+<link rel="stylesheet" href="css/mes-entites.css" type="text/css" />
+@endpushonce
+
 @section('content')
 <!-- Contenu principal de la page -->
 <main id="main-content">
@@ -11,15 +15,8 @@
 
         <div class="entites-wrapper">
             
-            <a href="/calendrier" class="service">
-                <img src="/images/logo_services/calendrier.png" alt="logo_calendrier" id="calendrier">
-                <p>Calendrier</p>
-            </a>
-
-            <a href="https://photos.imt-ne.fr" class="service" target="_blank">
-                <img src="/images/logo_services/piwigo.png" alt="logo_piwigo" id="piwigo">
-                <p>Photos</p>
-            </a>
+            <a href="/air">Test entité AIR</a>
+            <a href="/bdh">Test entité BDH</a>
 
         </div>
     </section>

@@ -463,8 +463,8 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   height: calc(100% - 60px);
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 45px 5vw;
+  grid-template-columns: 1fr;
+  grid-gap: 45px 0;
   align-items: baseline;
   justify-content: space-between;
   overflow-y: auto;
@@ -487,11 +487,6 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
 
 #main-content section:not(:last-of-type) {
   margin-bottom: 40px;
-}
-
-#side-bar {
-  grid-column: 2;
-  grid-row: 0;
 }
 
 section > h1,
@@ -528,6 +523,16 @@ footer {
   font-weight: var(--fw-thin);
   padding: 20px 0;
   margin-top: auto;
+}
+
+#content {
+  grid-template-columns: 3fr 1fr;
+  gap: 45px 5vw;
+}
+
+#side-bar {
+  grid-column: 2;
+  grid-row: 0;
 }
 
 /* Style des différents composants de la page */

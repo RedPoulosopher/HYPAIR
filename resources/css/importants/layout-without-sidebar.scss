@@ -1,6 +1,85 @@
-@use './layout';
+@import '../components/calendrier-sidebar.scss';
+@import '../components/navbar.scss';
+
+/* Main Content */
+:root {
+    --layout-padding-horizontal: 8vw;
+}
 
 #content {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    width: 100vw;
+    top: 60px;
+    height: calc(100% - 60px);
+    box-sizing: border-box;
+
+    display: grid;
     grid-template-columns: 1fr;
     grid-gap: 45px 0;
+    align-items: baseline;
+    justify-content: space-between;
+    overflow-y: auto;
+
+    padding: 45px var(--layout-padding-horizontal) 0;
+}
+
+//Content on the left
+#main-content {
+    grid-column: 1;
+    grid-row: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &:not(:last-of-type) {
+            margin-bottom: 40px;
+        }
+    }
+}
+
+//Titles
+section>h1,
+aside h1 {
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 28px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--couleur_accentuation_air);
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    :root {
+        --layout-padding-horizontal: 4vw;
+    }
+}
+
+//Footer at the bottom
+footer {
+    grid-column: span 2;
+    grid-row: 2;
+    width: 100%;
+    color: var(--couleur_police_primaire);
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: var(--fw-thin);
+    // opacity: 0.3;
+
+    padding: 20px 0;
+    margin-top: auto;
 }

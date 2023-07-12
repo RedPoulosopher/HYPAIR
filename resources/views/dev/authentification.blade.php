@@ -1,41 +1,40 @@
-@extends('layouts.app')
+@extends('layouts.app-without-sidebar')
 
 @section('titre', 'Connexion')
 
 @section('content')
 @pushonce('styles')
-<link rel="stylesheet" href="css/accueil.css" type="text/css" />
+<link rel="stylesheet" href="css/authentification.css" type="text/css" />
 <link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
 @endpushonce
 
-<div id="wrapper">
-    <div id="contenu" class="petit">
-      <a href="/" class="bouton retour">< retour au choix du site</a>
-        <h1>Authentification</h1>
-        <form method="POST">
-            @csrf
-            @if ($errors->any())
-            <div class="erreurs">
-                @foreach ($errors->all() as $error)
-                <div>{{ $error }}</div>
-                @endforeach
-            </div>
-            @endif
-            @foreach($users as $user)
-            
-            <div class="groupe ombre_petite">
-                <label class="input_groupe flex">
-                    <input type="radio" name="utilisateur" value={{$user->id}} class="input" @if ($user->id == 1) checked @endif/>
-                    <p><strong> {{$user->prenom}} {{$user->nom}}</strong>{{$user->resume()}}</p>
-                </label>
-            </div>
-            
-            @endforeach
 
-            <p>Vous pouvez rajouter des utilisateurs dans votre base de données locale pour effectuer plus de tests.</p><br>
-            <button type="submit" class="bouton primaire ombre_petite" style="float:right;"><span>VALIDER</span></button>
-        </form>
-    </div>
+<div id="main-content" class="petit">
+    <h1>Authentification</h1>
+    <form method="POST">
+        @csrf
+        @if ($errors->any())
+        <div class="erreurs">
+            @foreach ($errors->all() as $error)
+            <div>{{ $error }}</div>
+            @endforeach
+        </div>
+        @endif
+        @foreach($users as $user)
+        
+        <div class="groupe ombre_petite">
+            <label class="input_groupe flex">
+                <input type="radio" name="utilisateur" value={{$user->id}} class="input" @if ($user->id == 1) checked @endif/>
+                <p><strong> {{$user->prenom}} {{$user->nom}}</strong>{{$user->resume()}}</p>
+            </label>
+        </div>
+        
+        @endforeach
+
+        <p>Vous pouvez rajouter des utilisateurs dans votre base de données locale pour effectuer plus de tests.</p><br>
+        <button type="submit" class="bouton primaire ombre_petite" style="float:right;"><span>VALIDER</span></button>
+    </form>
 </div>
+
 
 @endsection

@@ -2,6 +2,7 @@
     "/js/elasticlunr.min.js": "/js/elasticlunr.min.js",
     "/css/accueil.css": "/css/accueil.css",
     "/css/app.css": "/css/app.css",
+    "/css/authentification.css": "/css/authentification.css",
     "/css/calendrier.css": "/css/calendrier.css",
     "/css/connexion.css": "/css/connexion.css",
     "/css/documentation.css": "/css/documentation.css",

@@ -1,13 +1,8 @@
-/* Variables contenant les codes hexadécimaux des principales couleurs */
-@import "./accueil/variables";
-
 /* Style général de la page */
 @import "./importants/general";
-@import "./importants/scrollbar";
 @import "./importants/layout";
 
 /* Style des différents composants de la page */
-@import "./accueil/bouton-se-connecter";
 @import "./accueil/main-content";
 
 @import "./components/event.scss";

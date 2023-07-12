@@ -1,16 +1,31 @@
 .liste_comite_club {
   display: flex;
+<<<<<<< HEAD
   justify-content: space-evenly;
+=======
+  justify-content: center;
+>>>>>>> Nouvelle-page-d'accueil
   flex-wrap: wrap;
   margin-bottom: 1.6em;
 }
 
+<<<<<<< HEAD
+=======
+.liste_comite_club .comite_club {
+  flex-grow: 1;
+}
+
+>>>>>>> Nouvelle-page-d'accueil
 .liste_comite_club .comite_club .logo {
   position: relative;
   margin-left: auto;
   margin-right: auto;
   border-radius: 500px;
+<<<<<<< HEAD
   background: var(--gris_2);
+=======
+  background: var(--dark-grey);
+>>>>>>> Nouvelle-page-d'accueil
 }
 
 .liste_comite_club .comite_club .logo img {
@@ -48,12 +63,19 @@
 
 @media (min-width: 600px) {
   .liste_comite_club {
+<<<<<<< HEAD
     gap: 10px 0;
+=======
+    gap: 20px 20px;
+>>>>>>> Nouvelle-page-d'accueil
   }
 
   .liste_comite_club .comite_club {
     width: 240px;
+<<<<<<< HEAD
     padding: 5px 10px;
+=======
+>>>>>>> Nouvelle-page-d'accueil
   }
 
   .liste_comite_club .comite_club .logo {
@@ -83,7 +105,11 @@
   }
 
   .liste_comite_club .comite_club .info .categories > span {
+<<<<<<< HEAD
     background: var(--gris_1);
+=======
+    background: var(--grey);
+>>>>>>> Nouvelle-page-d'accueil
     padding: 4px 15px 5px 15px;
     border-radius: 50px;
   }
@@ -91,12 +117,19 @@
 
 @media (max-width: 599.98px) {
   .liste_comite_club {
+<<<<<<< HEAD
     gap: 5px 0;
+=======
+    gap: 10px 10px;
+>>>>>>> Nouvelle-page-d'accueil
   }
 
   .liste_comite_club .comite_club {
     width: 160px;
+<<<<<<< HEAD
     padding: 2.5px 5px;
+=======
+>>>>>>> Nouvelle-page-d'accueil
   }
 
   .liste_comite_club .comite_club .logo {

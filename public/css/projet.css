@@ -4,7 +4,11 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+<<<<<<< HEAD
   background: var(--gris_2);
+=======
+  background: var(--dark-grey);
+>>>>>>> Nouvelle-page-d'accueil
 }
 
 #search .input {
@@ -34,11 +38,19 @@
   border-radius: 15px;
   padding: 15px 20px;
   margin-top: 15px;
+<<<<<<< HEAD
   background: var(--gris_2);
   border-width: 1px;
   border-style: solid;
   border-color: var(--gris_1);
   border-top-color: var(--gris_1);
+=======
+  background: var(--dark-grey);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--grey);
+  border-top-color: var(--grey);
+>>>>>>> Nouvelle-page-d'accueil
   box-sizing: border-box;
   transition: border-top-color 0.1s ease-in-out;
 }
@@ -48,7 +60,11 @@
 }
 
 .documentation_liste .titre {
+<<<<<<< HEAD
   font-weight: 500;
+=======
+  font-weight: var(--fw-medium);
+>>>>>>> Nouvelle-page-d'accueil
   font-size: 1.1em;
   margin-block: 0;
   color: var(--couleur_accentuation);
@@ -86,7 +102,11 @@
 }
 
 .categories span {
+<<<<<<< HEAD
   background: var(--gris_1);
+=======
+  background: var(--grey);
+>>>>>>> Nouvelle-page-d'accueil
   padding: 4px 15px 5px 15px;
   margin-right: 5px;
   margin-top: 5px;

@@ -33,7 +33,7 @@ textarea:focus {
     margin: 40px 0px;
     max-width: 100%;
     box-sizing: border-box;
-    border: 1px solid var(--gris_1);
+    border: 1px solid var(--grey);
 
     & .erreurs {
         border-left: 3px solid #e20000;
@@ -87,7 +87,7 @@ fieldset {
         padding: 5px;
         border-radius: 8px;
         font-size: 1em;
-        background-color: var(--gris_2);
+        background-color: var(--dark-grey);
         color: var(--couleur_police_secondaire);
         border: 1px solid transparent;
         transition: border 0.2s ease-in-out;
@@ -111,7 +111,7 @@ fieldset {
             height: 1.15em;
             border-radius: 0.3em;
             color: currentColor;
-            background-color: var(--gris_2);
+            background-color: var(--dark-grey);
             border: 1px solid currentColor;
 
             &::before {
@@ -149,7 +149,7 @@ fieldset {
             height: 1.15em;
             border-radius: 1em;
             color: currentColor;
-            background-color: var(--gris_2);
+            background-color: var(--dark-grey);
             border: 1px solid currentColor;
 
             &::before {
@@ -182,7 +182,7 @@ fieldset {
         padding: 5px;
         box-sizing: border-box;
         font-size: 1em;
-        background-color: var(--gris_2);
+        background-color: var(--dark-grey);
         border-radius: 8px;
         color: var(--couleur_police_secondaire);
     }

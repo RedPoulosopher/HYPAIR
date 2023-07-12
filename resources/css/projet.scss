@@ -1,79 +1,89 @@
 #search {
-	padding:13px 25px;
-	border-radius:50px;
-	width:fit-content;
-	background: var(--gris_2);
+	padding: 13px 25px;
+	border-radius: 50px;
+	width: fit-content;
+	background: var(--dark-grey);
 }
+
 #search .input {
 	font-size: 1.1em;
 	min-width: 30ex;
 	display: inline-block;
 }
+
 #search .input:focus {
 	outline: none;
 }
+
 #search:before {
 	font-size: 1.1em;
-    margin-right: 0.5em;
+	margin-right: 0.5em;
 }
 
 .index_docs {
 	display: flex;
-    flex-direction: column;
+	flex-direction: column;
 }
 
 .documentation_liste {
 	display: flex;
 	flex-wrap: nowrap;
-	width:100%;
+	width: 100%;
 	border-radius: 15px;
 	padding: 15px 20px;
-	margin-top:15px;
-	background: var(--gris_2);
-	border-width:1px;
-	border-style:solid;
-	border-color:var(--gris_1);
-	border-top-color:var(--gris_1);
+	margin-top: 15px;
+	background: var(--dark-grey);
+	border-width: 1px;
+	border-style: solid;
+	border-color: var(--grey);
+	border-top-color: var(--grey);
 	box-sizing: border-box;
 	transition: border-top-color 0.1s ease-in-out;
 }
+
 .documentation_liste:hover {
 	border-top-color: var(--couleur_accentuation);
 }
 
 .documentation_liste .titre {
-	font-weight: 500;
+	font-weight: var(--fw-medium);
 	font-size: 1.1em;
 	margin-block: 0;
 	color: var(--couleur_accentuation);
 }
+
 .documentation_liste .titre::first-letter {
 	text-transform: capitalize;
 }
+
 .documentation_liste .description {
-	display:none;
+	display: none;
 }
+
 .documentation_liste .contenu_md {
 	font-size: 0.95em;
-	margin-block:0;
-	color:var(--couleur_police_secondaire);
+	margin-block: 0;
+	color: var(--couleur_police_secondaire);
 	line-height: 1.15em;
 	max-height: calc(1.15em * 3);
 	mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 	overflow: hidden;
 }
+
 .documentation_liste .contenu_md::first-letter {
 	text-transform: capitalize;
 }
+
 .documentation_liste .categories {
 	font-size: 0.95em;
-	margin-top:10px;
+	margin-top: 10px;
 	display: flex;
-    flex-wrap: wrap;
-	color:var(--couleur_police_secondaire);
+	flex-wrap: wrap;
+	color: var(--couleur_police_secondaire);
 }
+
 .categories span {
-	background: var(--gris_1);
+	background: var(--grey);
 	padding: 4px 15px 5px 15px;
 	margin-right: 5px;
 	margin-top: 5px;

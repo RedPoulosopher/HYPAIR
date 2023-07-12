@@ -9,7 +9,7 @@
 .titre {
 	font-size: 26px;
 	margin: 0;
-	font-weight: 600;
+	font-weight: var(--fw-semibold);
 	color: var(--couleur_accentuation_air);
 }
 
@@ -38,20 +38,25 @@
 	animation-timing-function: ease-in-out;
 	animation-direction: alternate;
 }
+
 .panneau_droite img.respiration {
 	animation-name: respiration;
 }
+
 .panneau_droite .nom {
 	font-family: 'GearsOfPeace';
 	font-size: 80px;
 	opacity: 0.85;
 	align-self: self-start;
 }
+
 @keyframes respiration {
-	from{
-		width:55%;
-	} to {
-		width:70%;
+	from {
+		width: 55%;
+	}
+
+	to {
+		width: 70%;
 	}
 }
 
@@ -60,8 +65,9 @@
 	justify-content: space-between;
 	align-items: center;
 }
+
 .bouton.primaire {
-	background-color:var(--couleur_accentuation_air);
+	background-color: var(--couleur_accentuation_air);
 }
 
 .input_groupe {
@@ -71,16 +77,16 @@
 	border-radius: 50px;
 	margin-bottom: 20px;
 	transition: 0.3s;
-	border:0.3px solid transparent;
-	background: var(--gris_2);
+	border: 0.3px solid transparent;
+	background: var(--dark-grey);
 
 	& label {
 		font-size: 11px;
 		text-transform: uppercase;
-		font-weight: 600;
+		font-weight: var(--fw-semibold);
 		letter-spacing: 0.7px;
 		transition: 0.3s;
-		color:var(--couleur_accentuation_air);
+		color: var(--couleur_accentuation_air);
 	}
 
 	& input {
@@ -89,12 +95,13 @@
 		padding: 4px 0 0;
 		font-size: 1em;
 		background-color: unset;
-		color:var(--couleur_police);
+		color: var(--couleur_police);
 	}
 
 	&::placeholder {
 		color: #ccc;
 	}
+
 	&:focus-within {
 		border: 0.3px solid var(--couleur_accentuation_air);
 	}
@@ -104,9 +111,11 @@
 	.panneau {
 		width: 90%;
 	}
+
 	.panneau_droite {
 		display: none;
 	}
+
 	.groupe_boutons {
 		display: block;
 	}

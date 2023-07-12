@@ -42,7 +42,11 @@
 .dt-top .dt-selector,
 .dt-bottom .dt-selector {
   padding: 10px;
+<<<<<<< HEAD
   background: var(--gris_1);
+=======
+  background: var(--grey);
+>>>>>>> Nouvelle-page-d'accueil
   color: inherit;
   margin-right: 5px;
   border-radius: 8px;
@@ -68,7 +72,11 @@ select:focus {
 
 .dt-input {
   padding: 10px 16px;
+<<<<<<< HEAD
   background: var(--gris_1);
+=======
+  background: var(--grey);
+>>>>>>> Nouvelle-page-d'accueil
   color: inherit;
   border-radius: 8px;
 }
@@ -95,13 +103,21 @@ select:focus {
 }
 
 .dt-pagination a:hover {
+<<<<<<< HEAD
   background-color: var(--gris_1);
+=======
+  background-color: var(--grey);
+>>>>>>> Nouvelle-page-d'accueil
 }
 
 .dt-pagination .active a,
 .dt-pagination .active a:focus,
 .dt-pagination .active a:hover {
+<<<<<<< HEAD
   background-color: var(--gris_1);
+=======
+  background-color: var(--grey);
+>>>>>>> Nouvelle-page-d'accueil
   cursor: default;
 }
 

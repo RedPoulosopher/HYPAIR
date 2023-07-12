@@ -1,6 +1,6 @@
 @extends('layouts.leger')
 
-@section('titre', 'Entités')
+@section('titre', 'Associations')
 
 @section('content')
 

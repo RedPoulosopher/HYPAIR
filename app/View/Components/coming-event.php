@@ -1,0 +1,35 @@
+<?php
+
+namespace App\View\Components;
+
+use Illuminate\View\Component;
+
+class coming-event extends Component
+{
+    /** @var string */
+    public $title;
+
+    /** @var string */
+    public $date;
+
+    /**
+     * Create a new component instance.
+     *
+     * @return void
+     */
+    public function __construct($title, $date)
+    {
+        $this->title = $title;
+        $this->date = $date;
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
+    public function render()
+    {
+        return view('components.coming-event');
+    }
+}

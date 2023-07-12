@@ -112,14 +112,22 @@ a[target=_blank]:before {
 
 h1 {
   -webkit-margin-before: 0em;
+<<<<<<< HEAD
           margin-block-start: 0em;
+=======
+  margin-block-start: 0em;
+>>>>>>> Nouvelle-page-d'accueil
   text-align: center;
 }
 
 p.explication {
   text-align: justify;
   -moz-text-align-last: left;
+<<<<<<< HEAD
        text-align-last: left;
+=======
+  text-align-last: left;
+>>>>>>> Nouvelle-page-d'accueil
   margin-bottom: 30px;
 }
 
@@ -164,8 +172,13 @@ p.explication {
   display: block;
   cursor: pointer;
   -webkit-user-select: none;
+<<<<<<< HEAD
      -moz-user-select: none;
           user-select: none;
+=======
+  -moz-user-select: none;
+  user-select: none;
+>>>>>>> Nouvelle-page-d'accueil
   text-align: center;
   font-family: system-ui;
   transition: padding 0.15s ease-in-out;
@@ -208,7 +221,10 @@ p.explication {
   border: 1px solid var(--couleur_accentuation);
   background: transparent;
   color: var(--couleur_accentuation);
+<<<<<<< HEAD
   padding: 40px 25px 12px 25px;
+=======
+>>>>>>> Nouvelle-page-d'accueil
 }
 
 .bouton.tertiaire {
@@ -222,9 +238,15 @@ p.explication {
 body.dark-theme {
   background: var(--gris_3);
   color: #fff;
+<<<<<<< HEAD
   --gris_1: #2e2e33;
   --gris_2: #212227;
   --gris_3: #17191b;
+=======
+  --gris_1: var(--grey);
+  --gris_2: var(--dark-grey);
+  --gris_3: var(--background-color);
+>>>>>>> Nouvelle-page-d'accueil
   --couleur_accentuation_air: #cc3345;
   --couleur_accentuation: #5e25ef;
   --couleur_police_accentuation_air: #ffffff;
@@ -287,5 +309,9 @@ body.light-theme a.couleur {
 
 body.light-theme a.couleur:hover {
   color: #7f8bf7;
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> Nouvelle-page-d'accueil

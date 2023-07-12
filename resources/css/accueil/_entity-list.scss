@@ -31,7 +31,7 @@
         & .entity {
             box-shadow: $big_shadow;
             display: block;
-            background-color: var(--gris_1);
+            background-color: var(--grey);
             width: auto;
             height: auto;
             position: relative;
@@ -80,7 +80,7 @@
         & .entity-grand {
             box-shadow: $big_shadow;
             display: block;
-            background-color: var(--gris_1);
+            background-color: var(--grey);
             //   width: 300px;
             //   height: 300px;
             position: relative;
@@ -91,8 +91,8 @@
             transition: 0.2s;
 
             &:hover {
-                background-color: $color_highlight;
-                // filter: drop-shadow(5px 5px 5px $color_highlight);
+                background-color: var(--couleur_accentuation_air);
+                // filter: drop-shadow(5px 5px 5px var(--couleur_accentuation_air));
             }
 
             & img {
@@ -107,7 +107,7 @@
         margin: 40px 20px 40px 20px;
         flex-direction: column;
 
-        .entity-container-grand{
+        .entity-container-grand {
             width: 70%;
         }
     }

@@ -8,7 +8,7 @@ function set_theme(theme){
 	}
 }
 
-currentTheme = localStorage.getItem("theme");
+currentTheme = localStorage.getItem("theme")|| 'dark';//Default is dark
 if (currentTheme == null){
 	if(window.matchMedia("(prefers-color-scheme: dark)").matches){
 	currentTheme = "dark"
@@ -17,5 +17,8 @@ if (currentTheme == null){
 	}
 	localStorage.setItem("theme", currentTheme);
 }
-set_theme(currentTheme)
+
+window.onload = ()=>{
+	set_theme(currentTheme)
+}
 </script>

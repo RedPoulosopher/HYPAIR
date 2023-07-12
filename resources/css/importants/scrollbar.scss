@@ -1,0 +1,29 @@
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width); // if horizontal scroll bar in the future...
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--couleur_accentuation_air);
+  border-radius: 50px;
+  box-shadow: var(--ombre-grande);
+  // margin-block: 0.5em;
+
+  &:hover {
+    background-color: var(--couleur_accentuation_air_light);
+  }
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--grey);
+  // border: solid 0.25em var(--grey);
+  // background-clip: padding-box;
+  border-radius: 50px;
+}
+
+// For mozilla firefox :
+@supports (scrollbar-color: white white) {
+  * {
+    scrollbar-color: var(--couleur_accentuation_air) var(--grey);
+  }
+}

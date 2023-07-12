@@ -1,9 +1,48 @@
-$color_background: #17191b;
-$color_font: #ffffff;
-$color_highlight: #cc3345;
-$color_light_highlight: #cc5966;
+:root {
+    //Default = dark theme
+    --grey: #2e2e33;
+    --dark-grey: #212227;
+    --light-grey: #4b4b52;
+    --background-color: #17191b;
+    --couleur_accentuation_air: #cc3345;
+    --couleur_accentuation_air_light: #cc5966;
+    --couleur_accentuation: #cc3345;
+    --couleur_police_accentuation_air: #ffffff;
+    --couleur_police_accentuation: #ffffff;
+    --couleur_police_primaire: #ffffff;
+    --couleur_police_secondaire: #c5c5c5;
 
-$big_shadow: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
-$small_shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+    // Shadows
+    --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
+    --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+    --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.2) inset;
+    --ombre-card: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
 
-$scrollbar_width: 0.5em;
+    // Font weights
+    --fw-thin: 100;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+
+    --scrollbar-width: 0.5em;
+}
+
+body.light-theme {
+    --grey: #fff;
+    --dark-grey: #885050;
+    --background-color: #f1f1f1;
+    --light-grey: #dfdede;
+    --couleur_accentuation_air: #c6152a;
+    --couleur_accentuation: #4b14d6;
+    --couleur_police_accentuation_air: #ffffff;
+    --couleur_police_accentuation: #ffffff;
+    --couleur_police_primaire: #000000;
+    --couleur_police_secondaire: #3d3d3d;
+
+    --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.2);
+    --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+    --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.1) inset;
+    --ombre-card: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+}

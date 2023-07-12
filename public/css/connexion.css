@@ -9,7 +9,11 @@
 .titre {
   font-size: 26px;
   margin: 0;
+<<<<<<< HEAD
   font-weight: 600;
+=======
+  font-weight: var(--fw-semibold);
+>>>>>>> Nouvelle-page-d'accueil
   color: var(--couleur_accentuation_air);
 }
 
@@ -93,13 +97,21 @@
   margin-bottom: 20px;
   transition: 0.3s;
   border: 0.3px solid transparent;
+<<<<<<< HEAD
   background: var(--gris_2);
+=======
+  background: var(--dark-grey);
+>>>>>>> Nouvelle-page-d'accueil
 }
 
 .input_groupe label {
   font-size: 11px;
   text-transform: uppercase;
+<<<<<<< HEAD
   font-weight: 600;
+=======
+  font-weight: var(--fw-semibold);
+>>>>>>> Nouvelle-page-d'accueil
   letter-spacing: 0.7px;
   transition: 0.3s;
   color: var(--couleur_accentuation_air);

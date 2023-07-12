@@ -35,11 +35,7 @@
 
 .cm-header,
 .cm-strong {
-<<<<<<< HEAD
-  font-weight: 700;
-=======
   font-weight: var(--fw-bold);
->>>>>>> Nouvelle-page-d'accueil
 }
 
 .cm-em {
@@ -346,11 +342,7 @@ div.CodeMirror-dragcursors {
 .CodeMirror {
   height: auto;
   min-height: 300px;
-<<<<<<< HEAD
-  background: var(--gris_2);
-=======
   background: var(--dark-grey);
->>>>>>> Nouvelle-page-d'accueil
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   padding: 10px;

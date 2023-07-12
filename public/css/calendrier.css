@@ -6,7 +6,7 @@
 :root {
   --grey: #2e2e33;
   --dark-grey: #212227;
-  --light-grey: #4B4B52;
+  --light-grey: #4b4b52;
   --background-color: #17191b;
   --couleur_accentuation_air: #cc3345;
   --couleur_accentuation_air_light: #cc5966;
@@ -25,7 +25,7 @@
   --fw-semibold: 600;
   --fw-bold: 700;
   --fw-extrabold: 800;
-  --scrollbar-width: .5em;
+  --scrollbar-width: 0.5em;
 }
 
 body.light-theme {

@@ -1,9 +1,12 @@
-@extends('layouts.leger')
+@extends('layouts.app')
 
 @section('titre', 'Connexion')
 
 @section('content')
+@pushonce('styles')
+<link rel="stylesheet" href="css/accueil.css" type="text/css" />
 <link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
+@endpushonce
 
 <div id="wrapper">
     <div id="contenu" class="petit">

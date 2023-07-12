@@ -306,11 +306,6 @@ p.explication {
   padding: 10px 25px 12px 25px;
   font-size: 1.1em;
   border-radius: 50px;
-  min-width: 100px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  display: block;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -328,10 +323,6 @@ p.explication {
 .bouton[disabled] {
   opacity: 0.4;
   cursor: not-allowed;
-}
-
-.bouton:hover {
-  padding: 10px 20px 12px 30px;
 }
 
 .bouton span {
@@ -543,6 +534,7 @@ footer {
 
 #content {
   grid-template-columns: 1fr;
+  grid-gap: 45px 0;
 }
 
 /* Style des différents composants de la page */
@@ -605,7 +597,7 @@ footer {
 }
 
 .bouton {
-  padding: 10px;
+  padding: 10px 30px;
   margin-left: 20px;
   margin-right: 20px;
 }

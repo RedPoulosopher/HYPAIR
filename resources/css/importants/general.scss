@@ -98,9 +98,9 @@ p.explication {
     padding: 10px 25px 12px 25px;
     font-size: 1.1em;
     border-radius: 50px;
-    min-width: 100px;
-    width: fit-content;
-    display: block;
+    // min-width: 100px;
+    // width: fit-content;
+    // display: block;
     cursor: pointer;
     user-select: none;
     text-align: center;
@@ -118,7 +118,7 @@ p.explication {
     }
 
     &:hover {
-        padding: 10px 20px 12px 30px;
+        // padding: 10px 20px 12px 30px;
     }
 
     & span {

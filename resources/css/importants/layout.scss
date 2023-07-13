@@ -2,7 +2,6 @@
 
 //Add 1 column and gap
 #content {
-
     grid-template-columns: 3fr 1fr;
     gap: 45px 5vw;
 }
@@ -11,5 +10,24 @@
 //Content on the right
 #side-bar {
     grid-column: 2;
-    grid-row: 0;
+    grid-row: 1;
+}
+
+@media screen and (max-width: 1250px) {
+    #content {
+        gap: 35px 3vw;
+    }
+}
+@media screen and (max-width: 1080px) {
+    #content {
+        grid-template-columns: 1fr;
+        gap: 35px 0;
+    }
+    #side-bar {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    footer{
+        grid-row: 3;
+    }
 }

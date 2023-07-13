@@ -67,6 +67,11 @@ aside h1 {
         --layout-padding-horizontal: 4vw;
     }
 }
+@media screen and (max-width: 1080px) {
+    :root {
+        --layout-padding-horizontal: 2vw;
+    }
+}
 
 //Footer at the bottom
 footer {

@@ -4344,6 +4344,12 @@ aside h1::after {
   }
 }
 
+@media screen and (max-width: 1080px) {
+  :root {
+    --layout-padding-horizontal: 2vw;
+  }
+}
+
 footer {
   grid-column: span 2;
   grid-row: 2;
@@ -4363,6 +4369,28 @@ footer {
 
 #side-bar {
   grid-column: 2;
-  grid-row: 0;
+  grid-row: 1;
+}
+
+@media screen and (max-width: 1250px) {
+  #content {
+    gap: 35px 3vw;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  #content {
+    grid-template-columns: 1fr;
+    gap: 35px 0;
+  }
+
+  #side-bar {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  footer {
+    grid-row: 3;
+  }
 }
 

@@ -254,6 +254,12 @@ aside h1::after {
   }
 }
 
+@media screen and (max-width: 1080px) {
+  :root {
+    --layout-padding-horizontal: 2vw;
+  }
+}
+
 footer {
   grid-column: span 2;
   grid-row: 2;

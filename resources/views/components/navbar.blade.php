@@ -17,11 +17,12 @@
         <li class="menu-button"><a href="/contact">Contact</a></li>
   
         @if($isConnected)
-          <div id="lien_profil">
+          <li id="profile-button" class="menu-button">
             <a href="/home">
-              <img id="photo_lien_profil" src="{{$user->chemin_photo_de_profil}}" title="{{$user->prenom}} {{$user->nom}}"/>
+              <img id="photo_lien_profil" src="{{$user->chemin_photo_de_profil}}"/>
+              <p>{{$user->prenom}} {{$user->nom}}</p>
             </a>
-          </div>
+          </li>
         @else
           <li class="menu-button connect-button"><a href="/home">Se connecter</a></li>
         @endif

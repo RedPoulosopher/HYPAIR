@@ -16,7 +16,8 @@
     top: 0;
     height: 60px;
 
-    padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
+    //-2vw to align the right of the profile pic with the content in the layout
+    padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width) - 2vw) 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
 
     display: flex;
     align-items: center;
@@ -32,7 +33,7 @@
         align-items: center;
         white-space: nowrap;
 
-        img {
+        &#logo img {
             height: 25px;
             margin-right: 40px;
         }
@@ -93,8 +94,26 @@
                     background-color: var(--couleur_accentuation_air);
                 }
 
+
                 &:hover {
                     background-color: var(--light-grey);
+                }
+
+                &#profile-button {
+                    :hover {
+                        background-color: transparent;
+                    }
+
+                    img {
+                        height: 60%;
+                        aspect-ratio: 1;
+                        background-color: var(--couleur_accentuation_air);
+                        border-radius: 100%;
+                    }
+
+                    p {
+                        display: none;
+                    }
                 }
 
             }
@@ -124,7 +143,7 @@
             display: block;
             height: 3px;
             width: 100%;
-            background: white;
+            background: var(--couleur_police_secondaire);
             transition: all .5s cubic-bezier(0.5, 0.28, 0, 1);
             transform-origin: center;
 
@@ -156,13 +175,17 @@
 
 
 @media screen and (max-width: 980px) {
-    a#logo {
-        img {
-            margin-right: 20px;
-        }
+    #navbar {
+        padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
 
-        h1 {
-            display: none;
+        a#logo {
+            img {
+                margin-right: 20px;
+            }
+
+            h1 {
+                display: none;
+            }
         }
     }
 }
@@ -245,6 +268,25 @@
                         width: 100%;
                         height: auto;
                     }
+
+                    &#profile-button {
+                        border-top: 1px solid var(--dark-grey);
+                        border-bottom: 1px solid var(--dark-grey);
+
+                        a {
+                            padding: max(1.8vh, 15px) 0;
+                        }
+
+                        img {
+                            height: 50px;
+                            width: 50px;
+                            margin-right: 5vw;
+                        }
+
+                        p {
+                            display: block;
+                        }
+                    }
                 }
             }
 
@@ -263,7 +305,7 @@
                     padding: 0;
 
                     img {
-                        width: max(50%, 75px);
+                        width: max(50%, 60px);
                         height: auto;
                         margin: 0;
                     }

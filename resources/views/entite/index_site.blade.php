@@ -1,10 +1,12 @@
-@extends('layouts.leger')
-
+@extends('layouts.app')
 @section('titre', 'Associations')
-
+@pushonce('styles')
+<link rel="stylesheet" href="/css/entite.index.css" type="text/css">
+@endpushonce
 @section('content')
 
-<link rel="stylesheet" href="/css/entite.index.css" type="text/css" >
+
+{{-- <x-entite></x-entite> --}}
 
 <style>
     #wrapper {
@@ -41,11 +43,6 @@
                         </div>
                         <div class="info" style="text-align:center;">
                             <p class="nom">{{ $comite_club->nom }}</p>
-                            {{-- <div class="categories">
-                                @foreach ($comite_club->categories() as $categorie)
-                                    <span>#{{$categorie->label}}</span>
-                                @endforeach
-                            </div> --}}
                         </div>
                     </a>
                 @endforeach
@@ -64,9 +61,7 @@
                         <div class="info" style="text-align:center;">
                             <p class="nom">{{ $entite_independante->nom }}</p>
                             <div class="categories">
-                                {{-- @foreach ($comite_club->categories() as $categorie)
-                                    <span>#{{$categorie->label}}</span>
-                                @endforeach --}}
+
                             </div>
                         </div>
                     </a>
@@ -81,3 +76,4 @@ site = window.location.pathname.split('/').pop()
 localStorage.setItem('defaut_entites_index_site', site)
 </script>
 @endsection
+

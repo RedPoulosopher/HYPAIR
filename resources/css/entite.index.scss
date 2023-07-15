@@ -1,125 +1,135 @@
-.liste_comite_club {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    margin-bottom: 1.6em;
+/* Variables contenant les codes hexadécimaux des principales couleurs */
+@import "./accueil/variables";
 
-    & .comite_club {
-        //flex-grow: 1;
+/* Style général de la page */
+@import "./importants/general";
+@import "./importants/scrollbar";
+@import "./importants/layout";
 
-        & .logo {
-            position: relative;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 500px;
-            background: var(--dark-grey);
+/* Style des différents composants de la page */
 
-            & img {
-                border-radius: 500px;
-            }
+// .liste_comite_club {
+//     display: flex;
+//     justify-content: space-evenly;
+//     flex-wrap: wrap;
+//     margin-bottom: 1.6em;
 
-            & .cercle {
-                border-radius: 500px;
-                border: 2px solid;
-                position: absolute;
-                left: 5%;
-                top: 5%;
-                width: 90%;
-                height: 90%;
-                box-sizing: border-box;
-                transition: border 0.1s ease-in-out;
-            }
-        }
+//     & .comite_club {
+//         //flex-grow: 1;
 
-        & .info {
-            & .nom {
-                line-height: 0.8em;
-                margin-block-start: 0.3em;
-                margin-block-end: 0.3em;
-                text-transform: capitalize;
-            }
+//         & .logo {
+//             position: relative;
+//             margin-left: auto;
+//             margin-right: auto;
+//             border-radius: 500px;
+//             background: var(--dark-grey);
 
-            .categories {
-                color: var(--couleur_police_secondaire);
+//             & img {
+//                 border-radius: 500px;
+//             }
 
-                & > span {
-                    text-transform: capitalize;
-                }
-            }
-        }
-    }
-}
+//             & .cercle {
+//                 border-radius: 500px;
+//                 border: 2px solid;
+//                 position: absolute;
+//                 left: 5%;
+//                 top: 5%;
+//                 width: 90%;
+//                 height: 90%;
+//                 box-sizing: border-box;
+//                 transition: border 0.1s ease-in-out;
+//             }
+//         }
 
-@media (min-width: 600px) {
-    .liste_comite_club {
-        gap: 20px 20px;
+//         & .info {
+//             & .nom {
+//                 line-height: 0.8em;
+//                 margin-block-start: 0.3em;
+//                 margin-block-end: 0.3em;
+//                 text-transform: capitalize;
+//             }
 
-        & .comite_club {
-            width: 240px;
+//             .categories {
+//                 color: var(--couleur_police_secondaire);
 
-            & .logo {
-                width: 200px;
-                height: 200px;
+//                 & > span {
+//                     text-transform: capitalize;
+//                 }
+//             }
+//         }
+//     }
+// }
 
-                & img {
-                    width: 84%;
-                    margin: 8%;
-                }
+// @media (min-width: 600px) {
+//     .liste_comite_club {
+//         gap: 20px 20px;
 
-                &:hover .cercle {
-                    border: 5px solid;
-                }
-            }
+//         & .comite_club {
+//             width: 240px;
 
-            & .info .nom {
-                font-size: 2em;
-            }
+//             & .logo {
+//                 width: 200px;
+//                 height: 200px;
 
-            & .info .categories {
-                font-size: 0.85em;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
+//                 & img {
+//                     width: 84%;
+//                     margin: 8%;
+//                 }
 
-                & > span {
-                    background: var(--grey);
-                    padding: 4px 15px 5px 15px;
-                    border-radius: 50px;
-                }
-            }
-        }
-    }
-}
+//                 &:hover .cercle {
+//                     border: 5px solid;
+//                 }
+//             }
 
-@media (max-width: 599.98px) {
-    .liste_comite_club {
-        gap: 10px 10px;
+//             & .info .nom {
+//                 font-size: 2em;
+//             }
 
-        & .comite_club {
-            width: 160px;
+//             & .info .categories {
+//                 font-size: 0.85em;
+//                 display: flex;
+//                 flex-wrap: wrap;
+//                 justify-content: center;
+//                 gap: 5px;
 
-            & .logo {
-                width: 130px;
-                height: 130px;
+//                 & > span {
+//                     background: var(--grey);
+//                     padding: 4px 15px 5px 15px;
+//                     border-radius: 50px;
+//                 }
+//             }
+//         }
+//     }
+// }
 
-                & img {
-                    width: 80%;
-                    margin: 10%;
-                }
+// @media (max-width: 599.98px) {
+//     .liste_comite_club {
+//         gap: 10px 10px;
 
-                &:hover .cercle {
-                    border: 3.5px solid;
-                }
-            }
+//         & .comite_club {
+//             width: 160px;
 
-            & .info .nom {
-                font-size: 1.3em;
-            }
+//             & .logo {
+//                 width: 130px;
+//                 height: 130px;
 
-            & .info .categories {
-                font-size: 0.55em;
-            }
-        }
-    }
-}
+//                 & img {
+//                     width: 80%;
+//                     margin: 10%;
+//                 }
+
+//                 &:hover .cercle {
+//                     border: 3.5px solid;
+//                 }
+//             }
+
+//             & .info .nom {
+//                 font-size: 1.3em;
+//             }
+
+//             & .info .categories {
+//                 font-size: 0.55em;
+//             }
+//         }
+//     }
+// }

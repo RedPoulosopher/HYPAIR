@@ -233,12 +233,12 @@
 
         event_choix_calendrier();
     })
-    if (entite === "") {
-        document.getElementById('menu_lateral').style.display = "none";
-        document.getElementById('hamburger').style.display = "none";
-        document.getElementById('retour').style.display = "block";
-        console.log("e");
-    }
+    // if (entite === "") {
+    //     document.getElementById('menu_lateral').style.display = "none";
+    //     document.getElementById('hamburger').style.display = "none";
+    //     document.getElementById('retour').style.display = "block";
+    //     console.log("e");
+    // }
 
     function event_choix_calendrier() {
         if (entite === "") {

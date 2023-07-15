@@ -4216,19 +4216,19 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   height: 100px;
 }
 
-.service img#calendrier {
+.service img#service-calendrier {
   border: 2px solid #FF4155;
 }
 
-.service img#piwigo {
+.service img#service-piwigo {
   border: 2px solid #FF7800;
 }
 
-.service img#peertube {
+.service img#service-peertube {
   border: 2px solid #727272;
 }
 
-.service img#gitlab {
+.service img#service-gitlab {
   border: 2px solid #E24329;
 }
 

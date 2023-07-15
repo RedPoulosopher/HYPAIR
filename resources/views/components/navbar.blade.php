@@ -33,19 +33,19 @@
     </ul>
     <div id="services">
       <a href="/calendrier" class="service">
-        <img src="/images/logo_services/calendrier.png" alt="logo_calendrier" id="calendrier">
+        <img src="/images/logo_services/calendrier.png" alt="logo_calendrier" id="service-calendrier">
         <p>Calendrier</p>
       </a>
       <a href="https://photos.imt-ne.fr" class="service" target="_blank">
-        <img src="/images/logo_services/piwigo.png" alt="logo_piwigo" id="piwigo">
+        <img src="/images/logo_services/piwigo.png" alt="logo_piwigo" id="service-piwigo">
         <p>Photos</p>
       </a>
       <a href="https://peertube.imt-ne.fr" class="service" target="_blank">
-        <img src="/images/logo_services/peertube.png" alt="logo_peertube" id="peertube">
+        <img src="/images/logo_services/peertube.png" alt="logo_peertube" id="service-peertube">
         <p>Vidéos</p>
       </a>
       <a href="https://gitlab.etu.imt-nord-europe.fr" class="service" target="_blank">
-        <img src="/images/logo_services/gitlab.png" alt="logo_gitlab" id="gitlab">
+        <img src="/images/logo_services/gitlab.png" alt="logo_gitlab" id="service-gitlab">
         <p>GitLab</p>
       </a>
     </div>

@@ -3,7 +3,7 @@
 <nav id="navbar">
 
   <a href="/" id="logo">
-      <img src="images/logo_air.png" alt="Une création originale de l'AIR">
+      <img src="/images/logo_air.png" alt="Une création originale de l'AIR">
       <h1>Hyp<span>AIR</span></h1>
   </a>
   

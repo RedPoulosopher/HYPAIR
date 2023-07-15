@@ -28,7 +28,7 @@
             </a>
           </li>
         @else
-          <li class="menu-button connect-button"><a href="/home">Se connecter</a></li>
+          <li id="connect-button" class="menu-button"><a href="/home">Se connecter</a></li>
         @endif
     </ul>
     <div id="services">

@@ -150,7 +150,7 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   left: 0;
   top: 0;
   height: 60px;
-  padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width) - 2vw) 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
+  padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -228,7 +228,7 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   cursor: pointer;
 }
 
-#navbar #nav-content ul#links li.menu-button.connect-button {
+#navbar #nav-content ul#links li.menu-button#connect-button {
   background-color: var(--couleur_accentuation_air);
 }
 
@@ -236,8 +236,13 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   background-color: var(--light-grey);
 }
 
-#navbar #nav-content ul#links li.menu-button#profile-button :hover {
+#navbar #nav-content ul#links li.menu-button#profile-button:hover {
   background-color: transparent;
+}
+
+#navbar #nav-content ul#links li.menu-button#profile-button a {
+  padding: 0;
+  margin-left: 2vw;
 }
 
 #navbar #nav-content ul#links li.menu-button#profile-button img {
@@ -295,10 +300,6 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
 }
 
 @media screen and (max-width: 980px) {
-  #navbar {
-    padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
-  }
-
   #navbar #logo img {
     margin-right: 20px;
   }

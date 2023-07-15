@@ -17,7 +17,7 @@
     height: 60px;
 
     //-2vw to align the right of the profile pic with the content in the layout
-    padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width) - 2vw) 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
+    padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
 
     display: flex;
     align-items: center;
@@ -102,7 +102,7 @@
                 transition: background-color 150ms ease-in-out;
 
 
-                &.connect-button {
+                &#connect-button {
                     background-color: var(--couleur_accentuation_air);
                 }
 
@@ -112,8 +112,13 @@
                 }
 
                 &#profile-button {
-                    :hover {
+                    &:hover {
                         background-color: transparent;
+                    }
+
+                    a {
+                        padding: 0;
+                        margin-left: 2vw;
                     }
 
                     img {
@@ -188,7 +193,6 @@
 
 @media screen and (max-width: 980px) {
     #navbar {
-        padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
 
         #logo {
             img {

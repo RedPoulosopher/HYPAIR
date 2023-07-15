@@ -26,6 +26,21 @@
 
     box-shadow: var(--ombre-card);
 
+    #logo {
+        display: flex;
+        height: 100%;
+
+        img {
+            height: 25px;
+            margin-right: 40px;
+        }
+
+        #logo-text {
+            align-self: center;
+        }
+    }
+
+
     a {
         color: var(--couleur_police_primaire);
         text-decoration: none;
@@ -33,10 +48,7 @@
         align-items: center;
         white-space: nowrap;
 
-        &#logo img {
-            height: 25px;
-            margin-right: 40px;
-        }
+
 
         h1 {
             font-size: 24px;
@@ -178,12 +190,12 @@
     #navbar {
         padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
 
-        a#logo {
+        #logo {
             img {
                 margin-right: 20px;
             }
 
-            h1 {
+            #logo-text {
                 display: none;
             }
         }
@@ -196,9 +208,18 @@
             justify-content: center;
         }
 
-        a#logo {
+        #logo {
+
             img {
                 margin-right: 0;
+            }
+
+            #logo-text {
+                display: block;
+                position: fixed;
+                top: calc(60px / 2);
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         }
 

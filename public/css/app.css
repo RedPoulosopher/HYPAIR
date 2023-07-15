@@ -4248,17 +4248,26 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   box-shadow: var(--ombre-card);
 }
 
+#navbar #logo {
+  display: flex;
+  height: 100%;
+}
+
+#navbar #logo img {
+  height: 25px;
+  margin-right: 40px;
+}
+
+#navbar #logo #logo-text {
+  align-self: center;
+}
+
 #navbar a {
   color: var(--couleur_police_primaire);
   text-decoration: none;
   display: flex;
   align-items: center;
   white-space: nowrap;
-}
-
-#navbar a#logo img {
-  height: 25px;
-  margin-right: 40px;
 }
 
 #navbar a h1 {
@@ -4380,11 +4389,11 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
     padding: 0 calc(var(--layout-padding-horizontal) + var(--scrollbar-width));
   }
 
-  #navbar a#logo img {
+  #navbar #logo img {
     margin-right: 20px;
   }
 
-  #navbar a#logo h1 {
+  #navbar #logo #logo-text {
     display: none;
   }
 }
@@ -4394,8 +4403,16 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
     justify-content: center;
   }
 
-  #navbar a#logo img {
+  #navbar #logo img {
     margin-right: 0;
+  }
+
+  #navbar #logo #logo-text {
+    display: block;
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   #navbar #bascule-mode-button {

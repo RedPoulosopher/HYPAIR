@@ -6,14 +6,11 @@ use Illuminate\View\Component;
 
 class entite extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $asso;
+
+    public function __construct($asso)
     {
-        //
+        $this->asso = $asso;
     }
 
     /**

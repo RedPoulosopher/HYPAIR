@@ -1,4 +1,11 @@
-<div>
-    <p>ça marche !!!</p>
-
+<div class="entite">
+    <a class="comite_club" href="{{$asso->lien_relatif()}}">
+        <div class="logo ombre_petite">
+            <div class="cercle" style="border-color: {{ $asso->couleur_sombre }}"></div>
+            <img src="{{ $asso->logo_url("petit") }}"/>
+        </div>
+        <div class="info" style="text-align:center;">
+            <p class="nom">{{ $asso->nom }}</p>
+        </div>
+    </a>
 </div>

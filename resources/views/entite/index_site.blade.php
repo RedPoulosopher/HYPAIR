@@ -4,17 +4,7 @@
     <link rel="stylesheet" href="/css/entite.index.css" type="text/css">
 @endpushonce
 @section('content')
-
-    <style>
-        #wrapper {
-            flex-direction: column;
-            overflow-x: hidden;
-            min-height: 110%;
-        }
-    </style>
-
-
-    <div id="wrapper">
+    <main id="main-content">
         <div id="contenu" class="grand">
             <a href="/" class="bouton retour">
                 < retour au choix du site</a>
@@ -40,7 +30,7 @@
                         </div>
                     @endif
         </div>
-    </div>
+    </main>
 
     <script>
         site = window.location.pathname.split('/').pop()

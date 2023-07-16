@@ -1,0 +1,13 @@
+.liste_comite_club {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 1.6em;
+}
+
+
+@media (max-width: 599.98px) {
+  .liste_comite_club {
+      gap: 10px 10px;
+    }
+}

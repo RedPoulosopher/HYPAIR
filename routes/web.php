@@ -41,7 +41,8 @@ Route::get('/', [AccueilController::class, 'accueil']);
 Route::get('/mes-entites', [EntiteController::class, 'mes_entites']);
 
 Route::get('/entites', function () {
-    return view('entite.choix_site');
+    // return view('entite.choix_site'); 
+    return redirect('entites/douai');
 })->name('racine');
 
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valencienne|dunkerke']); // liste de toutes les entités d'un site de l'école (e.g. Douai)

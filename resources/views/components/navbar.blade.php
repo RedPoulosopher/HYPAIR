@@ -4,7 +4,7 @@
 
     <div id="logo">
         <a href="/" id="logo-img">
-            <img src="/images/logo_air.png" alt="Une création originale de l'AIR">
+            <img src="{{ mix('images/logo_air.png') }}" alt="Une création originale de l'AIR">
         </a>
         <a href="/" id="logo-text">
             <h1>Hyp<span>AIR</span></h1>

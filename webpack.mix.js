@@ -1,11 +1,11 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
-let fs = require('fs');
+let fs = require("fs");
 
 let getFiles = function (dir) {
     // get all 'files' in this directory
     // filter directories
-    return fs.readdirSync(dir).filter(file => {
+    return fs.readdirSync(dir).filter((file) => {
         return fs.statSync(`${dir}/${file}`).isFile();
     });
 };
@@ -21,11 +21,12 @@ let getFiles = function (dir) {
  |
  */
 
-
-getFiles('resources/css/').forEach(function (filepath) {
-    mix.sass('resources/css/' + filepath, 'public/css');
+getFiles("resources/css/").forEach(function (filepath) {
+    mix.sass("resources/css/" + filepath, "public/css");
 });
 
-getFiles('resources/js/').forEach(function (filepath) {
-    mix.js('resources/js/' + filepath, 'public/js');
+getFiles("resources/js/").forEach(function (filepath) {
+    mix.js("resources/js/" + filepath, "public/js");
 });
+
+mix.copy("resources/images/**/*.*", "public/images");

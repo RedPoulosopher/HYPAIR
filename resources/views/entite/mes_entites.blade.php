@@ -14,9 +14,13 @@
         <h1>Mes entités</h1>
 
         <div class="entites-wrapper">
-            
-            <a href="/air">Test entité AIR</a>
-            <a href="/bdh">Test entité BDH</a>
+            @if (Auth::check())
+                @foreach ($entites as $entite)
+                    {{-- <p>{{ $entite }}</p> --}}
+                    {{-- {{ $entite->lien_relatif() }} --}}
+                    <x-entite :asso="$entite" :destination="$entite->lien_relatif()" />
+                @endforeach
+            @endif
 
         </div>
     </section>

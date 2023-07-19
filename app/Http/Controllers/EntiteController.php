@@ -12,6 +12,7 @@ use \App\Models\Site;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
+use Illuminate\Support\Facades\Auth;
 
 use App\Services\GestionPhotoDeProfil;
 
@@ -44,7 +45,18 @@ class EntiteController extends Controller
 
 	public function mes_entites()
 	{
-		return view('entite.mes_entites');
+		if (Auth::check()) {
+			$user = Auth::user();
+			
+			$membres = $user->membres_actuel()->get();
+
+			$entites = [];			
+			foreach ($membres as $membre) {
+				array_push($entites, $membre->entite);
+			}
+		}
+
+		return view('entite.mes_entites')->with('entites', $entites);
 	}
 
 	public function gestion(Request $request)

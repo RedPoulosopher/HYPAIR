@@ -45,18 +45,20 @@ class EntiteController extends Controller
 
 	public function mes_entites()
 	{
+		$entites = [];
+
 		if (Auth::check()) {
 			$user = Auth::user();
 			
 			$membres = $user->membres_actuel()->get();
 
-			$entites = [];			
 			foreach ($membres as $membre) {
 				array_push($entites, $membre->entite);
 			}
 		}
 
 		return view('entite.mes_entites')->with('entites', $entites);
+
 	}
 
 	public function gestion(Request $request)

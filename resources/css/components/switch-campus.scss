@@ -1,5 +1,70 @@
-#switch-campus {
-    background-color: blue;
+.switch-campus {
     position: absolute;
-    z-index: 1;
+    font-family: Arial;
+    border-radius: 15px;
+    top: 20px;
+    left: 20px;
+
+    select {
+        display: none;
+    }
+    .select-selected {
+        border-radius: 16px;
+        transition: all 0.2s;
+        background-color: var(--grey);
+        color: var(--couleur_police_primaire);
+        padding: 8px 16px;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+        box-shadow: var(--ombre-card);
+
+        &::after {
+            position: absolute;
+            content: "";
+            top: 14px;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-color: #fff transparent transparent transparent;
+        }
+
+        &.select-arrow-active {
+            border-radius: 0px;
+
+            :after {
+                border-color: transparent transparent #fff transparent;
+                top: 7px;
+            }
+        }
+    }
+    .select-items {
+        position: absolute;
+        background-color: var(--grey);
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 99;
+
+        div {
+            color: #ffffff;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+        }
+    }
+
+    .select-hide {
+        display: none;
+    }
+
+    .same-as-selected {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
 }

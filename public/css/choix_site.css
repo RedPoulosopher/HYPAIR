@@ -489,7 +489,7 @@ section > h1,
 aside h1 {
   text-transform: uppercase;
   position: relative;
-  margin-bottom: 28px;
+  margin-bottom: 40px;
 }
 
 section > h1::after,

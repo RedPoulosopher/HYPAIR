@@ -489,7 +489,7 @@ section > h1,
 aside h1 {
   text-transform: uppercase;
   position: relative;
-  margin-bottom: 28px;
+  margin-bottom: 40px;
 }
 
 section > h1::after,
@@ -561,6 +561,7 @@ footer {
 
 .entite {
   width: 240px;
+  margin-bottom: 20px;
 }
 
 .entite .logo {
@@ -596,12 +597,9 @@ footer {
 }
 
 .entite .info .nom {
-  font-size: 2em;
-  line-height: 0.8em;
-  -webkit-margin-before: 0.3em;
-          margin-block-start: 0.3em;
-  -webkit-margin-after: 0.3em;
-          margin-block-end: 0.3em;
+  font-size: 1.5em;
+  line-height: 1.2em;
+  margin: 0.5em 0 0.3em;
   text-transform: capitalize;
 }
 
@@ -647,5 +645,10 @@ footer {
   .entite .info .categories {
     font-size: 0.55em;
   }
+}
+
+.entites-wrapper {
+  display: flex;
+  gap: 30px;
 }
 

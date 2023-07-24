@@ -1,92 +1,92 @@
 .entite {
-  width: 240px;
+    width: 240px;
+    margin-bottom: 20px;
 
-  //flex-grow: 1;
+    //flex-grow: 1;
 
-  & .logo {
-      width: 200px;
-      height: 200px;
-      position: relative;
-      margin-left: auto;
-      margin-right: auto;
-      border-radius: 500px;
-      background: var(--dark-grey);
+    & .logo {
+        width: 200px;
+        height: 200px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 500px;
+        background: var(--dark-grey);
 
-      & img {
-          width: 84%;
-          margin: 8%;
-          border-radius: 500px;
-      }
+        & img {
+            width: 84%;
+            margin: 8%;
+            border-radius: 500px;
+        }
 
-      &:hover .cercle {
-          border: 5px solid;
-      }
+        &:hover .cercle {
+            border: 5px solid;
+        }
 
-      & .cercle {
-          border-radius: 500px;
-          border: 2px solid;
-          position: absolute;
-          left: 5%;
-          top: 5%;
-          width: 90%;
-          height: 90%;
-          box-sizing: border-box;
-          transition: border 0.1s ease-in-out;
-      }
-  }
+        & .cercle {
+            border-radius: 500px;
+            border: 2px solid;
+            position: absolute;
+            left: 5%;
+            top: 5%;
+            width: 90%;
+            height: 90%;
+            box-sizing: border-box;
+            transition: border 0.1s ease-in-out;
+        }
+    }
 
-  & .info {
-      & .nom {
-          font-size: 2em;
+    & .info {
+        & .nom {
+            font-size: 1.5em;
 
-          line-height: 0.8em;
-          margin-block-start: 0.3em;
-          margin-block-end: 0.3em;
-          text-transform: capitalize;
-      }
+            line-height: 1.2em;
+            margin: 0.5em 0 0.3em;
+            text-transform: capitalize;
+        }
 
-      .categories {
-          color: var(--couleur_police_secondaire);
-          font-size: 0.85em;
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: center;
-              gap: 5px;
+        .categories {
+            color: var(--couleur_police_secondaire);
+            font-size: 0.85em;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
 
-          & > span {
-              text-transform: capitalize;
-              background: var(--grey);
-                  padding: 4px 15px 5px 15px;
-                  border-radius: 50px;
-          }
-      }
-  }
+            &>span {
+                text-transform: capitalize;
+                background: var(--grey);
+                padding: 4px 15px 5px 15px;
+                border-radius: 50px;
+            }
+        }
+    }
 }
 
 @media (max-width: 600px) {
-  .entite {
-      width: 160px;
+    .entite {
+        width: 160px;
 
-      & .logo {
-          width: 130px;
-          height: 130px;
+        & .logo {
+            width: 130px;
+            height: 130px;
 
-          & img {
-              width: 80%;
-              margin: 10%;
-          }
+            & img {
+                width: 80%;
+                margin: 10%;
+            }
 
-          &:hover .cercle {
-              border: 3.5px solid;
-          }
-      }
+            &:hover .cercle {
+                border: 3.5px solid;
+            }
+        }
 
-      & .info .nom {
-          font-size: 1.3em;
-      }
+        & .info .nom {
+            font-size: 1.3em;
+        }
 
-      & .info .categories {
-          font-size: 0.55em;
-      }
-  }
+        & .info .categories {
+            font-size: 0.55em;
+        }
+    }
 }

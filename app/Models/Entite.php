@@ -187,6 +187,10 @@ class Entite extends Model
         }
     }
 
+    public function lien_gestion_relatif(){
+        return $this->lien_relatif() . '/entite/gestion';
+    }
+
     public function logo_url($taille){
         $chemin = GestionLogo::chemin_logos($this->uid, $this->id, $this->type);
 

@@ -16,9 +16,7 @@
         <div class="entites-wrapper">
             @if (Auth::check())
                 @foreach ($entites as $entite)
-                    {{-- <p>{{ $entite }}</p> --}}
-                    {{-- {{ $entite->lien_relatif() }} --}}
-                    <x-entite :asso="$entite" :destination="$entite->lien_relatif()" />
+                    <x-entite :asso="$entite" :destination="$entite->lien_gestion_relatif()" />
                 @endforeach
             @endif
 

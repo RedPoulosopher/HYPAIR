@@ -769,7 +769,7 @@ footer {
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
+  border-color: var(--couleur_police_primaire) transparent transparent transparent;
 }
 
 .switch-campus .select-selected.select-arrow-active {
@@ -777,7 +777,7 @@ footer {
 }
 
 .switch-campus .select-selected.select-arrow-active :after {
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent var(--couleur_police_primaire) transparent;
   top: 7px;
 }
 
@@ -791,7 +791,7 @@ footer {
 }
 
 .switch-campus .select-items div {
-  color: #ffffff;
+  color: var(--couleur_police_primaire);
   padding: 8px 16px;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;

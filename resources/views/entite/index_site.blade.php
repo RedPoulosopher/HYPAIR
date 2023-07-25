@@ -5,7 +5,7 @@
 @endpushonce
 @section('content')
     <main id="main-content">
-        <x-switch-campus />
+        <x-switch-campus :campus="$site" />
         <section>
             @foreach ($bureaux as $bureau)
                 <h1>Entités du {{ $bureau->nom }}</h1>

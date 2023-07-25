@@ -11,9 +11,10 @@ class switchCampus extends Component
      *
      * @return void
      */
-    public function __construct()
+    public $campus;
+    public function __construct($campus)
     {
-        //
+        $this->campus = $campus;
     }
 
     /**

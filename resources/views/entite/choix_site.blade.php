@@ -1,31 +1,33 @@
+{{-- Plus utilisé -> remplacé par la combo box --}}
+
 @extends('layouts.app')
 
 @section('titre', 'Associations')
 
 @pushonce('styles')
-<link rel="stylesheet" href="css/choix_site.css" type="text/css" />
+    <link rel="stylesheet" href="css/choix_site.css" type="text/css" />
 @endpushonce
 
 @section('content')
 
 
-<div id="main-content" class="petit">
-	<!-- Choix du site -->
-	<section>
-		<h1>Associations</h1>
-	
-		<div class="conteneur_boutons">
-			<a class="gros_bouton" href="entites/douai">Douai</a>
-			<a class="gros_bouton" href="entites/lille">Lille</a>
-		</div>
-	</section>
+    <div id="main-content" class="petit">
+        <!-- Choix du site -->
+        <section>
+            <h1>Associations</h1>
 
-	<!-- Carousel des logos -->
+            <div class="conteneur_boutons">
+                <a class="gros_bouton" href="entites/douai">Douai</a>
+                <a class="gros_bouton" href="entites/lille">Lille</a>
+            </div>
+        </section>
 
-	{{-- Carrousel généré dynamiquement en prenant des logos depuis la bdd --}}
-	{{--
+        <!-- Carousel des logos -->
+
+        {{-- Carrousel généré dynamiquement en prenant des logos depuis la bdd --}}
+        {{--
 	<div class="carrousel">
-		@for($i = 0; $i < 16; $i++)
+		@for ($i = 0; $i < 16; $i++)
 		<div @class(['bande' => true, 'shifted' => ($i % 2 == 1 )])>
 			<div class="thumbnail-container">
 				<img
@@ -49,10 +51,10 @@
 		@endfor
 	--}}
 
-	{{-- Carrousel généré manuellement, pour tester sans accéder à la bdd --}}
-	{{-- ATTENTION : réduire la div qui suit ! --}}
+        {{-- Carrousel généré manuellement, pour tester sans accéder à la bdd --}}
+        {{-- ATTENTION : réduire la div qui suit ! --}}
 
-	{{-- 
+        {{-- 
 	<div class="carrousel">
 		<div class="bande">
 			<div class="thumbnail-container">
@@ -392,15 +394,15 @@
 	</div>
 	--}}
 
-</div>
+    </div>
 
-<script>
-	if(window.location.search[0] == "?"){
-		tmp = localStorage.getItem('defaut_entites_index_site')
-		if(tmp !== undefined){
-			window.location.replace('/entites/' + tmp)
-		}
-	}
-</script>
+    <script>
+        if (window.location.search[0] == "?") {
+            tmp = localStorage.getItem('defaut_entites_index_site')
+            if (tmp !== undefined) {
+                window.location.replace('/entites/' + tmp)
+            }
+        }
+    </script>
 
 @endsection

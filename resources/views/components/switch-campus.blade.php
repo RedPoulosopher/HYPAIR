@@ -1,6 +1,8 @@
+{{-- À dynamiser plus tard en tant que component réutilisable ... --}}
+
 <div class="switch-campus" style="width:200px;">
     <select>
-        <option value="0">Douai</option>
+        <option value="0">{{ Str::ucfirst($campus) }}</option>
         <option value="0">Douai</option>
         <option value="1">Lille</option>
         <option value="2">Valenciennes</option>
@@ -11,6 +13,7 @@
 
 <script>
     var x, i, j, l, ll, selElmnt, a, b, c;
+    const campus = ['douai', 'lille', 'douai', 'douai', 'douai'];
     /* Look for any elements with the class "custom-select": */
     x = document.getElementsByClassName("switch-campus");
     l = x.length;
@@ -31,7 +34,6 @@
             c = document.createElement("DIV");
             c.innerHTML = selElmnt.options[j].innerHTML;
             c.addEventListener("click", function(e) {
-                // C'est en cliquant ici que l'utilisateur est redirigé
                 /* When an item is clicked, update the original select box,
                 and the selected item: */
                 var y, i, k, s, h, sl, yl;
@@ -52,6 +54,11 @@
                     }
                 }
                 h.click();
+                if (i == 0) {
+                    location.replace("/entites/" + campus[i]);
+                } else {
+                    location.replace("/entites/" + campus[i - 1]);
+                }
             });
             b.appendChild(c);
         }

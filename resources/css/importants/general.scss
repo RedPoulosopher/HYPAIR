@@ -92,6 +92,12 @@ p.explication {
     font-size: 0.7em;
 }
 
+.card {
+    background: var(--grey);
+    border-radius: 15px;
+    box-shadow: var(--ombre-card);
+}
+
 .bouton {
     padding: 10px 25px 12px 25px;
     font-size: 1.1em;

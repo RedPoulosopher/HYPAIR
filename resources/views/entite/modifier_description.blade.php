@@ -2,15 +2,16 @@
 
 @section('titre', 'Modifier la description')
 
+@pushonce('styles')
+<link rel="stylesheet" href="/css/modifier_description.css" type="text/css" >
+@endpushonce
+
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
-<link rel="stylesheet" href="/css/simpleMDE.css">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs">Modifier votre entite</h1>
 		@if(Session::has('success'))
 			<p class="explication">L'entite a été modifiée correctement !</p>
@@ -46,8 +47,8 @@
 			<span>* les champs marqués d'une astérisque sont obligatoires</span>
 			<button type="submit" class="bouton primaire" style="float:right;">MODIFIER</span></button>
 		</form>
-	</div>
-</div>
+	</section>
+</main>
 <script>
 var simplemde = new SimpleMDE({
 	element: document.getElementById("description_md"),

@@ -77,28 +77,4 @@ $annee_actuelle = Carbon::now()->format("Y");
 		</form>
 	</div>
 </div>
-
-<script>
-body = document.getElementsByTagName('body')[0]
-
-style_clair = document.getElementById('style_clair')
-el_couleur_claire = document.getElementById("couleur_claire")
-el_couleur_claire.addEventListener("change", function(){
-	body.classList.toggle('light-theme', true)
-	body.classList.toggle('dark-theme', false)
-	style_clair.innerHTML = 'body.light-theme{--couleur_accentuation:'+ this.value +'}'
-})
-style_sombre = document.getElementById('style_sombre')
-el_couleur_sombre = document.getElementById("couleur_sombre")
-el_couleur_sombre.addEventListener("change", function(){
-	body.classList.toggle('dark-theme', true)
-	body.classList.toggle('light-theme', false)
-	style_sombre.innerHTML = 'body.dark-theme{--couleur_accentuation:'+ this.value +'}'
-})
-
-document.querySelectorAll("select[select]").forEach(function(ceci){
-	to_select = ceci.getAttribute("select");
-	ceci.querySelector('[value="'+ to_select +'"]').setAttribute("selected","true")
-})
-</script>
 @endsection

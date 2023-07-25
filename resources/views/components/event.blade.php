@@ -1,6 +1,6 @@
-<!-- COMPONENT des évènements de la page d'accueil -->
+{{-- COMPONENT des évènements de la page d'accueil --}}
 
-<article id="event">
+<article id="event" class="card">
 
   <div id="header">
 
@@ -35,7 +35,7 @@
       </div>
 
       <div id="release-date">
-            <!-- Icône de calendrier -->
+            {{-- Icône de calendrier --}}
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="20" height="20" fill="url(#pattern0)"/>
                 <defs>
@@ -51,7 +51,7 @@
 
 
       <div id="arrow-display">
-            <!-- Flèche rouge pour dérouler la description -->
+            {{-- Flèche rouge pour dérouler la description --}}
             <svg id="arrow" onclick="revealContent()" width="42" height="24" viewBox="0 0 42 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 3L21 21L39 3" stroke="#CC3345" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -69,7 +69,7 @@
 
 </article>
 
-<!-- Script qui commande la révélation du contenu du post  -->
+{{-- Script qui commande la révélation du contenu du post --}}
 
 <script>
   const content = document.getElementById("description")

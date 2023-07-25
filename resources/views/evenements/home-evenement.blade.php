@@ -2,42 +2,14 @@
 
 @section('titre', 'Évènement')
 
+@pushonce('styles')
+<link rel="stylesheet" href="/css/home-evenement.css" type="text/css" >
+@endpushonce
+
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-
-<style>
-.bouton_action {
-	min-width: 0;
-    max-width: 80px;
-    font-size: 0.8em;
-    padding: 5px;
-    margin: 2px 0 2px 10px;
-    text-align: start;
-}
-table {
-    border-spacing: 5px 25px;
-}
-.popup {
-    display: none;
-}
-.documentation {
-	width:100%;
-	background:var(--gris_2);
-	padding:35px;
-	border-radius:25px;
-	box-sizing:border-box;
-	border:1px solid var(--gris_1);
-	box-sizing: ;
-}
-#info {
-    position: absolute;
-    top: 450px;
-}
-</style>
-
-<div id="wrapper">
-    <div id="contenu" class="petit">
+<main id="main-content">
+    <section>
         <h1>Évènements</h1>
         @if(Session::has('success'))
         <p class="explication">Bienvenue sur la page concernant les évènements !</p>
@@ -167,26 +139,26 @@ table {
             <h4>Il n'y a aucun évènement en attente de validation !</h4>
             @endif
         </div>      
-    </div>
+    </section>
     @endif
 
     
     <div id="info" class="popup">
-            <div class="documentation ombre_petite" >
-                <div class="contenu_doc" id="contenu_doc">
-                    <h2>Attention !</h2>
-                    <p id="message">Vous êtes sur le point de supprimer un évènement. </p>
-                    <p style='font-style:italic;'>Cette action est irréversible.</p>
-                </div>
-
-                <div style="display:flex;">
-                    <div id="gerer"></div>
-                    <p class="bouton secondaire info_bouton ombre_petite" style="margin:15px;">Annuler</p>
-                </diV>
-
+        <div class="documentation ombre_petite" >
+            <div class="contenu_doc" id="contenu_doc">
+                <h2>Attention !</h2>
+                <p id="message">Vous êtes sur le point de supprimer un évènement. </p>
+                <p style='font-style:italic;'>Cette action est irréversible.</p>
             </div>
+
+            <div style="display:flex;">
+                <div id="gerer"></div>
+                <p class="bouton secondaire info_bouton ombre_petite" style="margin:15px;">Annuler</p>
+            </div>
+
         </div>
-</div>
+    </div>
+</main>
 
 
 <script>

@@ -2,12 +2,14 @@
 
 @section('titre', 'Evènement')
 
+@pushonce('styles')
+<link rel="stylesheet" href="/css/formulaire-evenement.css" type="text/css" >
+@endpushonce
+
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-
-<div id="wrapper">
-    <div id="contenu" class="petit">
+<main id="main-content">
+    <section>
         <h1>Créer un nouvel évènement</h1>
         @if(Session::has('success'))
         <p class="explication">Bienvenue ! Ici vous pourrez créer un évènement.</p>
@@ -93,7 +95,7 @@
             <span>* Les champs marqués d'une astérisque sont obligatoires</span>
             <button type="submit" class="bouton primaire ombre_petite" style="float:right;"><span>{{$evenement->id ?? false ? "MODIFIER" : "CRÉER"}}</span></button>
         </form>
-    </div>
-</div>
+    </section>
+</main>
 
 @endsection

@@ -2,68 +2,14 @@
 
 @section('titre', 'Réseaux Sociaux')
 
+@pushonce('styles')
+<link rel="stylesheet" type="text/css" href="/css/index_gestion.css">
+@endpushonce
+
 @section('content')
-<link rel="stylesheet" type="text/css" href="/css/jstable.css">
-<link rel="stylesheet" type="text/css" href="/css/formulaire.css">
 
-<style>
-#choix_role {
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:25px;
-}
-div.table {
-    box-sizing: border-box;
-    border-radius: 25px;
-    margin-top:10px;
-    overflow: hidden;
-    padding: 13px 18px;
-    border: 1px solid var(--gris_1);
-    background-color: var(--gris_2);
-    transition: border-color 0.1s ease-in-out;
-}
-div.table:hover {
-    border-color: var(--couleur_accentuation);
-}
-table {
-    border-collapse: collapse;
-    width:100%;
-}
-table tr {
-    text-align:center;
-    color: var(--couleur_police);
-    border-bottom: 1px solid transparent;
-}
-table tbody tr:hover {
-    border-bottom: 1px solid var(--gris_1);
-}
-table th {
-    padding: 15px 15px;
-    border-bottom: 1px solid var(--gris_1);
-}
-table td {
-    padding: 10px 15px;
-}
-
-td span.role {
-	font-size: 0.95em;
-	color:var(--couleur_police_secondaire);
-	background: var(--gris_1);
-	padding: 4px 15px 5px 15px;
-	border-radius: 50px;
-	text-transform: capitalize;
-}
-td.lien {
-    text-align: left;
-}
-td a.icon-edit-2, td a.icon-trash {
-    cursor:pointer;
-}
-</style>
-
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des réseaux sociaux</h1>
 
         <div id="gestion_membre">
@@ -118,8 +64,8 @@ td a.icon-edit-2, td a.icon-trash {
                 </table>
             </div>
         </div>
-	</div>
-</div>
+	</section>
+</main>
 
 
 <script>

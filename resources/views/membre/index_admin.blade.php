@@ -2,83 +2,16 @@
 
 @section('titre', 'Membres')
 
+@pushonce('styles')
+<link rel="stylesheet" type="text/css" href="/css/index_admin.css">
+@endpushonce
+
 @section('content')
-<link rel="stylesheet" type="text/css" href="/css/jstable.css">
-<link rel="stylesheet" type="text/css" href="/css/formulaire.css">
 <script type="text/javascript" src="/js/jstable.min.js"></script>
 
-<style>
-#choix_role {
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:25px;
-}
-div.table {
-    box-sizing: border-box;
-    border-radius: 25px;
-    margin-top:10px;
-    overflow: hidden;
-    padding: 13px 18px;
-    border: 1px solid var(--gris_1);
-    background-color: var(--gris_2);
-    transition: border-color 0.1s ease-in-out;
-}
-div.table:hover {
-    border-color: var(--couleur_accentuation);
-}
-table {
-    border-collapse: collapse;
-    width:100%;
-}
-table tr {
-    text-align:center;
-    color: var(--couleur_police);
-    border-bottom: 1px solid transparent;
-}
-table tbody tr:hover {
-    border-bottom: 1px solid var(--gris_1);
-}
-table th {
-    padding: 15px 15px;
-    border-bottom: 1px solid var(--gris_1);
-}
-table td {
-    padding: 10px 15px;
-}
 
-td span.role {
-	font-size: 0.95em;
-	color:var(--couleur_police_secondaire);
-	background: var(--gris_1);
-	padding: 4px 15px 5px 15px;
-	border-radius: 50px;
-	text-transform: capitalize;
-}
-td.type {
-    text-transform: capitalize;
-}
-td a.icon-edit-2 {
-    cursor:pointer;
-}
-
-#roles{
-    display:flex;
-    gap:8px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-}
-#roles option {
-    display: none;
-    padding:6px 12px;
-    background-color: var(--gris_2);
-    cursor: pointer;
-    border-radius:5px;
-}
-</style>
-
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des Membres</h1>
 
         <div id="gestion_membre">
@@ -144,8 +77,8 @@ td a.icon-edit-2 {
                 </div>
             @endif
         </div>
-	</div>
-</div>
+	</section>
+</main>
 
 
 <script type="text/javascript" src="/js/elasticlunr.js"></script>

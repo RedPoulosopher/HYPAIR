@@ -2,16 +2,14 @@
 
 @section('titre', 'Créer une entité')
 
+@pushonce('styles')
+<link rel="stylesheet" href="/css/creer_entite.css" type="text/css" >
+@endpushonce
+
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
-
-<style id="style_clair"></style>
-<style id="style_sombre"></style>
-
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section>
 		<h1><span class="icon-security-safe" title="page réservée aux administrateurs"></span> Créer une nouvelle entite</h1>
 		@if(Session::has('success'))
 			<p class="explication">L'entite a été créée correctement ! Elle est disponible.</p>
@@ -74,8 +72,8 @@
 			<span>* les champs marqués d'une astérisque sont obligatoires</span>
 			<button type="submit" class="bouton primaire" style="float:right;"><span>SUIVANT</span></button>
 		</form>
-	</div>
-</div>
+	</section>
+</main>
 
 <script>
 document.querySelectorAll("select[select]").forEach(function(ceci){

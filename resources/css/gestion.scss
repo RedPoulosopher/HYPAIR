@@ -41,15 +41,12 @@
 .gros_bouton {
     width: 200px;
     height: 200px;
-    border: 1px solid var(--light-grey);
-    border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
-    background: var(--grey);
     transition: background 0.15s ease-in-out;
 }
 

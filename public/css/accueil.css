@@ -5,12 +5,12 @@
 /* Style général de la page */
 .event-card {
   width: 100%;
-  background: var(--grey);
-  border-radius: 15px;
-  margin-top: 10px;
   margin-bottom: 10px;
   padding-left: 20px;
-  box-shadow: var(--ombre-card);
+}
+
+.event-card:not(:first-of-type) {
+  margin-top: 10px;
 }
 
 .event-card h4 {
@@ -489,7 +489,7 @@ section > h1,
 aside h1 {
   text-transform: uppercase;
   position: relative;
-  margin-bottom: 40px;
+  margin-bottom: 45px;
 }
 
 section > h1::after,
@@ -562,10 +562,7 @@ footer {
 /* Style des différents composants de la page */
 
 #event {
-  background-color: var(--grey);
   color: white;
-  border-radius: 15px;
-  box-shadow: var(--ombre-card);
   padding: 15px;
 }
 
@@ -640,10 +637,7 @@ footer {
 }
 
 #event {
-  background-color: var(--grey);
   color: white;
-  border-radius: 15px;
-  box-shadow: var(--ombre-card);
   padding: 15px;
 }
 

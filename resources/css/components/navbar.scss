@@ -87,6 +87,20 @@
                 color: white;
                 cursor: pointer;
 
+                position: relative;
+
+                &.active a::after {
+                    content: '';
+                    position: absolute;
+                    top: 80%;
+                    width: 20%;
+                    height: 2px;
+                    border-radius: 50px;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: var(--couleur_accentuation_air);
+                }
+
                 &:first-of-type {
                     margin-left: 20px;
                 }

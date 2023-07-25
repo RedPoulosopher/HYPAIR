@@ -2,6 +2,10 @@
 
 @section('titre', $creation==1 ? "Créer" : "Modifier" . ' une entité')
 
+@pushonce('styles')
+<link rel="stylesheet" href="/css/modifier_infos.css" type="text/css" >
+@endpushonce
+
 @section('content')
 
 @php
@@ -9,14 +13,8 @@ use Carbon\Carbon;
 $annee_actuelle = Carbon::now()->format("Y");
 @endphp
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
-
-<style id="style_clair"></style>
-<style id="style_sombre"></style>
-
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> {{$creation==1 ? "Créer" : "Modifier"}} une entite</h1>
 		@if(Session::has('success'))
 			<p class="explication">L'entite a été modifiée correctement !</p>
@@ -75,6 +73,6 @@ $annee_actuelle = Carbon::now()->format("Y");
 				<button type="submit" class="bouton primaire"><span>{{$creation==1 ? "SUIVANT" : "MODIFIER"}}</span></button>
 			</div>
 		</form>
-	</div>
-</div>
+	</section>
+</main>
 @endsection

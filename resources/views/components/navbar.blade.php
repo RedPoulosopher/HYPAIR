@@ -14,11 +14,11 @@
     <div id="nav-content">
         <x-toggle-theme-btn />
         <ul id="links">
-            <li class="menu-button"><a href="/">Accueil</a></li>
-            <li class="menu-button"><a href="/calendrier">Calendrier</a></li>
-            <li class="menu-button"><a href="/entites">Associations</a></li>
-            <li class="menu-button"><a href="/mes-entites">Gestion</a></li>
-            <li class="menu-button"><a href="/contact">Contact</a></li>
+            <li class="menu-button {{request()->is("/") ? 'active' : ''}}"><a href="/">Accueil</a></li>
+            <li class="menu-button {{request()->is('calendrier') ? 'active' : ''}}"><a href="/calendrier">Calendrier</a></li>
+            <li class="menu-button {{request()->is('entites*') ? 'active' : ''}}"><a href="/entites">Associations</a></li>
+            <li class="menu-button {{(request()->is('mes-entites') ? 'active' : '') . (request()->is('*entite/*') ? 'active' : '')}}"><a href="/mes-entites">Gestion</a></li>
+            <li class="menu-button {{request()->is('contact') ? 'active' : ''}}"><a href="/contact">Contact</a></li>
 
             @if ($isConnected)
                 <li id="profile-button" class="menu-button">

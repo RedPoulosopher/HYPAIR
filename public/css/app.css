@@ -4309,7 +4309,20 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   padding: 0;
   color: white;
   cursor: pointer;
+  position: relative;
   transition: background-color 150ms ease-in-out;
+}
+
+#navbar #nav-content ul#links li.menu-button.active a::after {
+  content: "";
+  position: absolute;
+  top: 80%;
+  width: 20%;
+  height: 2px;
+  border-radius: 50px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--couleur_accentuation_air);
 }
 
 #navbar #nav-content ul#links li.menu-button:first-of-type {

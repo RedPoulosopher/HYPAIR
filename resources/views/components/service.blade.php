@@ -1,4 +1,4 @@
-<a class="entite" href="{{ $destination }}">
+<a class="service" href="{{ $destination }}">
     <div class="logo ombre_petite">
         <div class="cercle" style="border-color: {{ $color }}"></div>
         <img src="{{ $logo }}" />

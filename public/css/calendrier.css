@@ -106,12 +106,12 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   height: 25px;
 }
 
-.entite {
+.service {
   width: 180px;
   margin-bottom: 30px;
 }
 
-.entite .logo {
+.service .logo {
   width: 150px;
   height: 150px;
   position: relative;
@@ -121,17 +121,17 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   background: var(--dark-grey);
 }
 
-.entite .logo img {
+.service .logo img {
   width: 84%;
   margin: 8%;
   border-radius: 375px;
 }
 
-.entite .logo:hover .cercle {
+.service .logo:hover .cercle {
   border: 3.5px solid;
 }
 
-.entite .logo .cercle {
+.service .logo .cercle {
   border-radius: 375px;
   border: 2px solid;
   position: absolute;
@@ -143,14 +143,14 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   transition: border 0.1s ease-in-out;
 }
 
-.entite .info .nom {
+.service .info .nom {
   font-size: 1.1em;
   line-height: 0.9em;
   margin: 0.5em 0 0.3em;
   text-transform: capitalize;
 }
 
-.entite .info .categories {
+.service .info .categories {
   color: var(--couleur_police_secondaire);
   font-size: 0.6em;
   display: flex;
@@ -159,7 +159,7 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   gap: 5px;
 }
 
-.entite .info .categories > span {
+.service .info .categories > span {
   text-transform: capitalize;
   background: var(--grey);
   padding: 4px 15px 5px 15px;
@@ -487,12 +487,6 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
     justify-content: center;
     margin: 0;
     padding: 0;
-  }
-
-  #navbar #nav-content #services .service img {
-    width: max(50%, 60px);
-    height: auto;
-    margin: 0;
   }
 
   #navbar #nav-content #services a[target=_blank]:before {

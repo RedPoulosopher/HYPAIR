@@ -1,11 +1,10 @@
 // Logo font
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap");
 
 // Toggle theme
-@import './toggle-theme-btn';
+@import "./toggle-theme-btn";
 
-@import './service.scss';
-
+@import "./service.scss";
 
 #navbar {
     z-index: 5;
@@ -40,7 +39,6 @@
         }
     }
 
-
     a {
         color: var(--couleur_police_primaire);
         text-decoration: none;
@@ -48,12 +46,10 @@
         align-items: center;
         white-space: nowrap;
 
-
-
         h1 {
             font-size: 24px;
             margin: 0;
-            font-family: 'Montserrat', sans-serif;
+            font-family: "Montserrat", sans-serif;
             font-weight: var(--fw-semibold);
 
             span {
@@ -62,9 +58,6 @@
             }
         }
     }
-
-
-
 
     #nav-content {
         display: flex;
@@ -90,7 +83,7 @@
                 position: relative;
 
                 &.active a::after {
-                    content: '';
+                    content: "";
                     position: absolute;
                     top: 80%;
                     width: 20%;
@@ -115,11 +108,9 @@
 
                 transition: background-color 150ms ease-in-out;
 
-
                 &#connect-button {
                     background-color: var(--couleur_accentuation_air);
                 }
-
 
                 &:hover {
                     background-color: var(--light-grey);
@@ -146,7 +137,6 @@
                         display: none;
                     }
                 }
-
             }
         }
 
@@ -154,8 +144,6 @@
             display: none;
         }
     }
-
-
 
     #hamburger-toggle {
         visibility: hidden;
@@ -175,7 +163,7 @@
             height: 3px;
             width: 100%;
             background: var(--couleur_police_secondaire);
-            transition: all .5s cubic-bezier(0.5, 0.28, 0, 1);
+            transition: all 0.5s cubic-bezier(0.5, 0.28, 0, 1);
             transform-origin: center;
 
             &:nth-child(2) {
@@ -199,15 +187,10 @@
             }
         }
     }
-
-
-
 }
-
 
 @media screen and (max-width: 980px) {
     #navbar {
-
         #logo {
             img {
                 margin-right: 20px;
@@ -227,7 +210,6 @@
         }
 
         #logo {
-
             img {
                 margin-right: 0;
             }
@@ -251,7 +233,6 @@
             .label-sombre {
                 display: block;
             }
-
         }
 
         #nav-content {
@@ -343,17 +324,15 @@
                     margin: 0;
                     padding: 0;
 
-                    img {
-                        width: max(50%, 60px);
-                        height: auto;
-                        margin: 0;
-                    }
-
-
+                    // img {
+                    //     width: max(50%, 60px);
+                    //     height: auto;
+                    //     margin: 0;
+                    // }
                 }
 
-                a[target=_blank]:before {
-                    content: '';
+                a[target="_blank"]:before {
+                    content: "";
                 }
 
                 p {
@@ -361,8 +340,6 @@
                 }
             }
         }
-
-
 
         #hamburger-toggle {
             visibility: visible;

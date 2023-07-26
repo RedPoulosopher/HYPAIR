@@ -23,10 +23,14 @@
     "/css/mes_entites.css": "/css/mes_entites.css",
     "/css/modifier_couleur.css": "/css/modifier_couleur.css",
     "/css/modifier_description.css": "/css/modifier_description.css",
+    "/css/modifier_infos.css": "/css/modifier_infos.css",
     "/css/modifier_logotype.css": "/css/modifier_logotype.css",
     "/css/projet.css": "/css/projet.css",
     "/css/simpleMDE.css": "/css/simpleMDE.css",
     "/css/theme-bascule.css": "/css/theme-bascule.css",
     "/js/jstable.min.js": "/js/jstable.min.js",
-    "/images/logo_air.png": "/images/logo_air.png"
+    "/images/gitlab.png": "/images/gitlab.png",
+    "/images/logo_air.png": "/images/logo_air.png",
+    "/images/peertube.png": "/images/peertube.png",
+    "/images/piwigo.png": "/images/piwigo.png"
 }

@@ -13,18 +13,24 @@ class Evenement extends Model
         'entite_id',
         // 'slug',
         'description',
+        'date_apparition',
         'temps_debut',
         'temps_fin',
         'lieu',
         'max_participation',
-        'campus',
+        'campus_id',
         'pour_cotisant',
+        'is_actualite',
         // 'validation',
     ];
 
     public function entite()
     {
         return $this->belongsTo(Entite::class);
+    }
+
+    public function campus() {
+        return $this->belongsTo(Site::class);
     }
 
     // Vieille fonction

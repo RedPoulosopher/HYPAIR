@@ -11,32 +11,35 @@ class Evenement extends Model
     protected $fillable = [
         'titre',
         'entite_id',
-        'slug',
+        // 'slug',
         'description',
         'temps_debut',
         'temps_fin',
         'lieu',
         'max_participation',
-        'confidentialite',
+        'campus',
         'pour_cotisant',
-        'validation',
+        // 'validation',
     ];
-    
-    public function entite(){
+
+    public function entite()
+    {
         return $this->belongsTo(Entite::class);
     }
 
-    public static function index($annee, $mois) {
+    // Vieille fonction
+    public static function index($annee, $mois)
+    {
         //ca doit retourner tous les evenements de l annee et du mois demandes. Faudra regarder la doc sur eloquent
-        $evenements_mois_courant = 
-        self::select('evenements.*','entites.uid','entites.nom','entites.couleur_claire','entites.couleur_sombre')
+        $evenements_mois_courant =
+            self::select('evenements.*', 'entites.uid', 'entites.nom', 'entites.couleur_claire', 'entites.couleur_sombre')
             ->whereMonth("temps_debut", $mois)
             ->whereYear("temps_debut", $annee)
-            ->orWhere(function($query) use($annee, $mois){
+            ->orWhere(function ($query) use ($annee, $mois) {
                 $query->whereMonth("temps_fin", $mois)
                     ->whereYear("temps_fin", $annee);
             })
-            ->join('entites','entites.id','=','evenements.entite_id');
+            ->join('entites', 'entites.id', '=', 'evenements.entite_id');
         return $evenements_mois_courant->get();
     }
 }

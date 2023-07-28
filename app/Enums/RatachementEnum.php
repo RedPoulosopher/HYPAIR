@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Enums;
 
-enum RatachementEnum:string
+enum RatachementEnum: string
 {
     case BDA = 'bda';
     case BDE = 'bde';

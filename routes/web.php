@@ -36,7 +36,7 @@ Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });
 
-Route::get('/', [AccueilController::class, 'accueil']);
+Route::get('/', [EvenementController::class, 'accueil']);
 
 Route::get('/mes-entites', [EntiteController::class, 'mes_entites']);
 

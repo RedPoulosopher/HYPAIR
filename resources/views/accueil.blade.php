@@ -30,14 +30,10 @@
             <h1>Actualités</h1>
 
             <div class="article-wrapper">
-                @php
-                    // Dans le futur : récupérer ces infos à partir de la partie backend (Coucou Arthur...) --> C'est moi ;)
-$events = [['Intro à Git', "l'Air"], ['Shotgun Allô Bouffe', 'BDS'], ["Finale de l'IM'Tremplin", "IM'Tremplin"]];
-                @endphp
 
-                @for ($i = 0; $i < sizeof($events); $i++)
-                    <x-event :index="$i" :title="$events[$i][0]" :author="$events[$i][1]" />
-                @endfor
+                @foreach ($events as $event)
+                    <x-event :event="$event" />
+                @endforeach
 
             </div>
         </section>

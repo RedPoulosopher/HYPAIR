@@ -17,7 +17,8 @@ class EvenementController extends Controller
 {
 	public function accueil()
 	{
-		return view('accueil');
+		$events = Evenement::all();
+		return view('accueil')->with('events', $events);
 	}
 	public function create()
 	{

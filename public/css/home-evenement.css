@@ -840,6 +840,14 @@ fieldset legend {
   color: var(--couleur_police_secondaire);
 }
 
+section {
+  width: 100%;
+}
+
+section .table-container {
+  width: 100%;
+}
+
 .bouton_action {
   min-width: 0;
   max-width: 80px;
@@ -851,6 +859,7 @@ fieldset legend {
 
 table {
   border-spacing: 5px 25px;
+  width: 100%;
 }
 
 .popup {

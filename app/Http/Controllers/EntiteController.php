@@ -46,18 +46,23 @@ class EntiteController extends Controller
 	public function mes_entites()
 	{
 		$entites = [];
+		$events = [];
 
 		if (Auth::check()) {
 			$user = Auth::user();
 
-			$membres = $user->membres_actuel()->get();
+			$membres = $user->membres_actuel;
 
 			foreach ($membres as $membre) {
-				array_push($entites, $membre->entite);
+				$entite = $membre->entite;
+				array_push($entites, $entite);
+				$entite_events = $entite->evenements;
+				foreach ($entite_events as $entite_event) {
+					array_push($events, $entite_event);
+				}
 			}
 		}
-
-		return view('entite.mes_entites')->with('entites', $entites);
+		return view('entite.mes_entites')->with('entites', $entites)->with('events', $events);
 	}
 
 	public function gestion(Request $request)

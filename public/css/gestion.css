@@ -650,24 +650,27 @@ footer {
 .conteneur_boutons {
   margin-top: 40px;
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
 
-.gros_bouton {
-  width: 200px;
-  height: 200px;
+.modif_option {
+  gap: 15px;
+  width: 400px;
   display: flex;
-  justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 10px 20px 10px 20px;
+  border-radius: 12px;
   text-align: center;
   transition: background 0.15s ease-in-out;
+  background-color: var(--grey);
+  box-shadow: var(--ombre-petite);
 }
 
-.gros_bouton:hover {
-  background: var(--dark-grey);
+.modif_option:hover {
+  background-color: var(--dark-grey);
 }
 

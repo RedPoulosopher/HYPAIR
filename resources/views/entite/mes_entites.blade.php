@@ -21,6 +21,11 @@
             @endif
 
         </div>
+
+        <h1>Mes évènements</h1>
+        @foreach ($events as $event)
+        <x-event :event="$event"/>
+        @endforeach
     </section>
     
 

@@ -1,24 +1,23 @@
 /* Style général de la page */
 @import "./importants/layout-without-sidebar";
+@import "./components/reseau-social.scss";
+@import "../fonts/style.scss";
 
 
 #profil {
-    padding: 20px;
-    margin-top: 20px;
+    padding: 20px 40px 20px 20px;
     height: auto;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: row;
-    flex-wrap: wrap;
-    row-gap: 40px;
-    column-gap: 30px;
+    gap: 40px 30px;
+    position: relative;
 }
 
 #photo_profil {
-    max-width: 260px;
-    max-height: 260px;
-    flex-basis: 260px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 200px;
+    max-height: 200px;
 }
 
 #photo_profil img {
@@ -29,9 +28,6 @@
 #info_profil {
     display: flex;
     flex-direction: column;
-    flex-grow: 4;
-    flex-basis: 40ch;
-    row-gap: 20px;
 }
 
 #ligne_prenoms {
@@ -40,6 +36,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 #prenoms {
@@ -48,64 +45,70 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 5px;
-}
 
-#prenoms h2 {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
+    h2 {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
 
-#prenoms .pronoms {
-    color: grey;
-    font-weight: normal;
+    .pronoms {
+        color: grey;
+        font-weight: normal;
+        margin: 0;
+    }
+
 }
 
 #reglages {
-    font-size: 1.5em;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 1.25em;
     transform: rotate(0deg);
-    transition-duration: 0.7s;
+    transition-duration: 300ms;
 }
 
 #reglages:hover {
     color: var(--couleur_police_secondaire);
     transform: rotate(60deg);
-    transition-duration: 0.7s;
+    transition-duration: 300ms;
 }
+
+
+
 
 #menu_meatballs {
     /* display:none; */
     position: absolute;
     z-index: 1;
     border-radius: 15px;
-    background: var(--gris_1);
-    padding-inline-start: 0px;
-}
-
-#menu_meatballs li {
-    display: block;
-    width: 100%;
+    background: var(--dark-grey);
+    top: 70px;
+    right: 40px;
     list-style-type: none;
-}
+    margin: 0;
+    padding: 10px 0;
 
-#menu_meatballs li a {
-    padding: 10px 20px;
-    display: inline-block;
-}
+    li {
+        display: block;
+        width: 100%;
 
-#menu_meatballs li #menu_deconnexion {
-    color: var(--couleur_accentuation);
-}
+        a {
+            padding: 10px 20px;
+            display: inline-block;
 
-#menu_meatballs li a:hover {
-    color: var(--couleur_police_secondaire);
-}
+            &:hover {
+                color: var(--couleur_police_secondaire);
+            }
+        }
 
-#menu_meatballs li #menu_deconnexion:hover {
-    color: var(--couleur_police_secondaire);
-}
+        #menu_deconnexion {
+            color: var(--couleur_accentuation);
 
-#reglages:hover #menu_meatballs {
-    display: block;
+            :hover {
+                color: var(--couleur_police_secondaire);
+            }
+        }
+    }
 }
 
 #bio {
@@ -125,11 +128,10 @@
 }
 
 .reseaux_sociaux {
-    margin-top: 12px;
     gap: 12px;
-}
-
-.reseaux_sociaux>a {
-    padding: 10px 18px;
-    border-radius: 50px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
 }

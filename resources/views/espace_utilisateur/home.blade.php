@@ -10,30 +10,29 @@
 
 <div id="main-content" class="moyen">
   <section>
-    <div id="profil">
+    <h1>Mon profil</h1>
+    <div id="profil" class="card">
       <div id="photo_profil">
         <img src="{{$user->chemin_photo_de_profil}}" alt="Votre photo de profil"/>
       </div>
-        <div id="info_profil">
-          <div id="ligne_prenoms">
-            <div id="prenoms">
-              <h2>{{$user->prenom}} {{$user->nom}}</h2>
-              @if ($user->pronom !== '')
-                <h2 class="pronoms">•</h2>
-                <h2 class="pronoms">{{$user->pronom}}</h2>
-              @endif
-            </div>
-              <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>
+      <div id="info_profil">
+        <div id="ligne_prenoms">
+          <div id="prenoms">
+            <h2>{{$user->prenom}} {{$user->nom}}</h2>
+            @if ($user->pronom !== '')
+              <h3 class="pronoms">•</h3>
+              <h3 class="pronoms">{{$user->pronom}}</h3>
+            @endif
           </div>
-          <div id="bio">
-            {!! nl2br(e($user->bio)) !!}
-          </div>
-          <div class="reseaux_sociaux grille-enfants">
-            @foreach ($reseaux_sociaux as $reseau_social)
-              <a target="_blank" class="ombre_petite" tabindex="3" href="{{ $reseau_social->liste->pre_url . $reseau_social->cle }}" style="background-color:{{ $reseau_social->liste->couleur }}; color:{{ $reseau_social->liste->couleur_police }};">
-                {{ $reseau_social->liste->nom }}
-              </a>
-            @endforeach
+          <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>
+        </div>
+        <div id="bio">
+          {!! nl2br(e($user->bio)) !!}
+        </div>
+        <div class="reseaux_sociaux">
+          @foreach ($reseaux_sociaux as $reseau_social)
+            <x-reseau-social :reseau="$reseau_social" />
+          @endforeach
         </div>
       </div>
       <ul id="menu_meatballs" class="ombre_grande">
@@ -46,52 +45,52 @@
   </section>
 
 </div>
-@endsection
 
 <script>
-
-/*meatball*/
-var ouvert = false;
-var el_menu_meatballs;
-var taille_x_menu_meatballs;
-var taille_x_meatballs;
-/*accessibilité*/
-var reglages;
-
-window.onload = init;
-
-function init() {
+  
   /*meatball*/
-  el_menu_meatballs = document.getElementById("menu_meatballs");
-  taille_x_menu_meatballs = el_menu_meatballs.getBoundingClientRect().width;
-  reglages = document.getElementById("reglages");
-  taille_x_meatballs = reglages.getBoundingClientRect().width;
-  el_menu_meatballs.style.display = "none";
+  var ouvert = false;
+  var el_menu_meatballs;
+  var taille_x_menu_meatballs;
+  var taille_x_meatballs;
   /*accessibilité*/
-  reglages.addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
+  var reglages;
+  
+  window.onload = init;
+  
+  function init() {
+    /*meatball*/
+    el_menu_meatballs = document.getElementById("menu_meatballs");
+    el_menu_meatballs.style.display = "none";
+
+    /*accessibilité*/
+    reglages = document.getElementById("reglages");
+    reglages.addEventListener("keyup", function(event) {
+      event.preventDefault();
+      if (event.keyCode === 13) {//Si appuie sur Entrée
         reglages.click();
-    }
-  });
-};
+      }
+    });
 
-/*meatball*/
-/*merci marc pour le menu meatball, il est trop bien*/
+    window.addEventListener("keyup", function(event) {
+      event.preventDefault();
+      if (ouvert && event.keyCode === 27) {//Si appui sur Echap et menu ouvert
+        reglages.click();
+      }
+    });
+  };
+  
+  /*meatball*/
 function menu_meatballs(){
-    if (ouvert) {
-      el_menu_meatballs.style.display = "none";
-      ouvert = false;
-    } else {
-      el_menu_meatballs.style.display = "block";
-      ouvert = true
-    }
-
-    left = reglages.getBoundingClientRect().x;
-    topp = reglages.getBoundingClientRect().y;
-    height = reglages.getBoundingClientRect().height;
-
-    el_menu_meatballs.style.top = topp + 18 + document.documentElement.scrollTop + "px";
-    el_menu_meatballs.style.left = left - taille_x_menu_meatballs + taille_x_meatballs + "px";
+  console.log("click")
+  if (ouvert) {
+    el_menu_meatballs.style.display = "none";
+    ouvert = false;
+  } else {
+    el_menu_meatballs.style.display = "block";
+    ouvert = true
+  }
 };
 </script>
+
+@endsection

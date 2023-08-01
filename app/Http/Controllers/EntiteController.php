@@ -45,7 +45,8 @@ class EntiteController extends Controller
 
 	public function mes_entites()
 	{
-		$entites = [];
+		$entites_admin = [];
+		$entites_membre = [];
 		$events = [];
 
 		if (Auth::check()) {
@@ -55,14 +56,14 @@ class EntiteController extends Controller
 
 			foreach ($membres as $membre) {
 				$entite = $membre->entite;
-				array_push($entites, $entite);
+				array_push($entites_membre, $entite);
 				$entite_events = $entite->evenements;
 				foreach ($entite_events as $entite_event) {
 					array_push($events, $entite_event);
 				}
 			}
 		}
-		return view('entite.mes_entites')->with('entites', $entites)->with('events', $events);
+		return view('entite.mes_entites')->with('entites_admin', $entites_admin)->with('entites_membre', $entites_membre)->with('events', $events);
 	}
 
 	public function gestion(Request $request)

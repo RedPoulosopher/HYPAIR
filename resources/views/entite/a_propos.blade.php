@@ -75,11 +75,7 @@
                                 </div>
                                 <div class="reseaux_sociaux_profil grille-enfants">
                                     @foreach ($mandat_user->reseaux_sociaux as $reseau_social_user)
-                                        <a target="_blank" class="ombre_petite"
-                                            href="{{ $reseau_social_user->liste->pre_url . $reseau_social_user->cle }}"
-                                            style="background-color:{{ $reseau_social_user->liste->couleur }}; color:{{ $reseau_social_user->liste->couleur_police }};">
-                                            {{ $reseau_social_user->liste->nom }}
-                                        </a>
+                                        <x-reseau-social :reseau="$reseau_social_user" />
                                     @endforeach
                                 </div>
                             </div>

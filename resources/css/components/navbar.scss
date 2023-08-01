@@ -265,7 +265,11 @@
                 display: flex;
 
                 #services {
-                    display: grid;
+                    display: flex;
+                    max-width: 100vw;
+                    flex-wrap: wrap;
+                    gap: 0 20px;
+                    justify-content: center;
                 }
             }
 
@@ -311,9 +315,6 @@
             }
 
             #services {
-                grid-template-columns: 1fr 1fr;
-                grid-template-columns: 1fr 1fr;
-                gap: 2vh 0px;
                 margin: max(2vh, 5vw);
 
                 .service {
@@ -323,20 +324,10 @@
                     justify-content: center;
                     margin: 0;
                     padding: 0;
-
-                    // img {
-                    //     width: max(50%, 60px);
-                    //     height: auto;
-                    //     margin: 0;
-                    // }
                 }
 
                 a[target="_blank"]:before {
                     content: "";
-                }
-
-                p {
-                    font-size: max(2vh, min(5vw, 18px), 16px);
                 }
             }
         }

@@ -30,28 +30,51 @@
 .conteneur_boutons {
     margin-top: 40px;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+
+    .modif_option {
+        gap: 26px;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 20px;
+        text-align: center;
+        transition: background 0.15s ease-in-out;
+
+        &:hover {
+            background-color: var(--dark-grey);
+        }
+
+        i {
+            font-size: 32px;
+        }
+    }
 }
 
-.modif_option {
-    // text-align: right;
-    gap: 15px;
-    width: 400px;
-    display: flex;
-    // justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 10px 20px 10px 20px;
-    border-radius: 12px;
-    text-align: center;
-    transition: background 0.15s ease-in-out;
-    background-color: var(--grey);
-    box-shadow: var(--ombre-petite);
+@media screen and (max-width: 680px) {
+    .conteneur_boutons {
+        flex-direction: column;
+        gap: 16px;
 
-    &:hover {
-        background-color: var(--dark-grey);
+        .modif_option {
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 16px;
+            padding: 14px 20px;
+            width: 100%;
+            height: fit-content;
+
+            border-radius: 10px;
+
+            i {
+                font-size: 16px;
+            }
+        }
     }
 }

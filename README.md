@@ -54,7 +54,7 @@ Lors de l'installation, vous pouvez laisser le chemin par défaut (à la racine 
 
 Une fois l'installation terminée, si ce n'est pas déjà fait, lancez WampServer 64. Ensuite, il faut désactiver MySQL, pour seulement laisser MariaDB (qui est un équivalent). Pour cela, sur l'icône verte de Wamp dans votre barre des tâches, faites clic droit > `paramètres wamp` > décocher `autoriser MySQL`.
 
-Pour accéder à votre base de données (comme en cours de SGBD), faites un clic gauche sur l'icône, puis lancez **PhpMyAdmin**. Puis connectez-vous avec le login `root` et sans mot de passe. Enfin, créez une base de données nommée `HypAIR`.
+Pour accéder à votre base de données (comme en cours de SGBD), faites un clic gauche sur l'icône, puis lancez **PhpMyAdmin**. Puis connectez-vous avec le login `root` et sans mot de passe.
 
 ### • PHP
 PHP est déjà fourni avec WampServer, et contient toutes les extensions PHP nécessaires. Cependant, il faut modifier vos variables d'environnement pour que la commande `php` soit reconnue dans votre terminal.

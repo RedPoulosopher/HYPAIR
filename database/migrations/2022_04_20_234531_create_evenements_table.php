@@ -17,28 +17,25 @@ class CreateEvenementsTable extends Migration
             $table->id();
             $table->foreignId('entite_id');
             $table->string('titre');
-            // $table->string('slug',128);
+            $table->string('slug', 128);
             $table->text('description');
-            $table->datetime('date_apparition');
             $table->datetime('temps_debut');
             $table->datetime('temps_fin');
             $table->text('lieu')->nullable();
             $table->integer('max_participation')->nullable()->default(0);
-            $table->foreignId('campus_id')->nullable();
-            // $table->tinyInteger('confidentialite')->default(0);
+            $table->tinyInteger('confidentialite')->default(0);
             $table->boolean('pour_cotisant')->default(0);
-            $table->boolean('is_actualite')->default(0);
-            // $table->boolean('validation')->default(0);
-            // $table->unsignedBigInteger('derive_de')->nullable()->default(null);
+            $table->boolean('validation')->default(0);
+            $table->unsignedBigInteger('derive_de')->nullable()->default(null);
             $table->timestamps();
         });
 
         Schema::table('evenements', function (Blueprint $table) {
-            // $table->foreign('derive_de')->references('id')->on('evenements')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('derive_de')->references('id')->on('evenements')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('entite_id')->references('id')->on('entites')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('campus_id')->references('id')->on('sites')->onUpdate('cascade')->onDelete('cascade');
         });
     }
+
 
     /**
      * Reverse the migrations.

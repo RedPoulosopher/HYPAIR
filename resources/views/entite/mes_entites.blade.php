@@ -13,7 +13,7 @@
     <section>
         <h1>Mes entités</h1>
         <h2>Admin</h2>
-
+        
         <div class="entites-wrapper">
             @if (Auth::check())
                 @foreach ($entites_admin as $entite)
@@ -22,21 +22,17 @@
             @endif
 
         </div>
-        <h2>Membre</h2>
 
+        <h2>Membre</h2>
         <div class="entites-wrapper">
             @if (Auth::check())
                 @foreach ($entites_membre as $entite)
-                    <x-entite :asso="$entite" :destination="$entite->lien_gestion_relatif()" />
+                    <x-entite :asso="$entite" :destination="$entite->lien_relatif()" />
                 @endforeach
             @endif
 
         </div>
 
-        <h1>Mes évènements</h1>
-        @foreach ($events as $event)
-        <x-event :event="$event"/>
-        @endforeach
     </section>
     
 

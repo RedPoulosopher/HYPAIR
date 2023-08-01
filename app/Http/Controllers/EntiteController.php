@@ -14,6 +14,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Support\Facades\Auth;
 
+use \App\Services\AutorisationGestion;
 use App\Services\GestionPhotoDeProfil;
 
 use Carbon\Carbon;
@@ -47,23 +48,26 @@ class EntiteController extends Controller
 	{
 		$entites_admin = [];
 		$entites_membre = [];
-		$events = [];
+		$autorisation = "no";
 
 		if (Auth::check()) {
 			$user = Auth::user();
-
+			
+			
+			
 			$membres = $user->membres_actuel;
-
+			
 			foreach ($membres as $membre) {
 				$entite = $membre->entite;
-				array_push($entites_membre, $entite);
-				$entite_events = $entite->evenements;
-				foreach ($entite_events as $entite_event) {
-					array_push($events, $entite_event);
-				}
+				$gerer_entite = AutorisationGestion::gestion_dans_entite("gerer_entite", $entite);
+
+				if($gerer_entite == 1)
+					array_push($entites_admin, $entite);
+				else
+					array_push($entites_membre, $entite);
 			}
 		}
-		return view('entite.mes_entites')->with('entites_admin', $entites_admin)->with('entites_membre', $entites_membre)->with('events', $events);
+		return view('entite.mes_entites')->with('entites_admin', $entites_admin)->with('entites_membre', $entites_membre);
 	}
 
 	public function gestion(Request $request)

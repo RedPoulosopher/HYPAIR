@@ -4200,7 +4200,7 @@ a.reseau-social p {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  gap: 40px 30px;
+  gap: 15px 30px;
   position: relative;
 }
 
@@ -4319,5 +4319,36 @@ a.reseau-social p {
   flex-direction: row;
   flex-wrap: wrap;
   align-content: center;
+}
+
+@media screen and (max-width: 680px) {
+  #profil {
+    padding: 20px 30px;
+    flex-direction: column;
+  }
+
+  #prenoms {
+    margin: 0 auto;
+  }
+
+  #reglages {
+    position: absolute;
+    top: 12px;
+    right: 22px;
+  }
+
+  #menu_meatballs {
+    top: 48px;
+    right: 22px;
+  }
+
+  #bio {
+    -moz-text-align-last: center;
+         text-align-last: center;
+  }
+
+  .reseaux_sociaux {
+    justify-content: center;
+  }
 }
 

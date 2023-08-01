@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    gap: 40px 30px;
+    gap: 15px 30px;
     position: relative;
 }
 
@@ -134,4 +134,36 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
+}
+
+
+@media screen and (max-width: 680px) {
+    #profil {
+        padding: 20px 30px;
+        flex-direction: column;
+    }
+
+
+    #prenoms {
+        margin: 0 auto;
+    }
+
+    #reglages {
+        position: absolute;
+        top: calc(20px - 8px);
+        right: calc(30px - 8px);
+    }
+
+    #menu_meatballs {
+        top: calc(20px - 8px + 36px);
+        right: calc(30px - 8px);
+    }
+
+    #bio {
+        text-align-last: center;
+    }
+
+    .reseaux_sociaux {
+        justify-content: center;
+    }
 }

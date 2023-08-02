@@ -5,7 +5,7 @@
 @section('content')
 
 @pushonce('styles')
-<link rel="stylesheet" href="/css/modifier_logotype.css" type="text/css" >
+<link rel="stylesheet" href="/css/entite/modifier_logotype.css" type="text/css" >
 @endpushonce
 
 

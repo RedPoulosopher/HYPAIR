@@ -3,7 +3,7 @@
 @section('titre', 'Logotype')
 
 @pushonce('styles')
-<link rel="stylesheet" href="/css/modifier_couleur.css" type="text/css" >
+<link rel="stylesheet" href="/css/entite/modifier_couleur.css" type="text/css" >
 @endpushonce
 
 @section('content')

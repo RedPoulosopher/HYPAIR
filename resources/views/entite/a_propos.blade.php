@@ -4,7 +4,7 @@
 
 @pushonce('styles')
 @endpushonce
-<link rel="stylesheet" href="{{ mix('css/a_propos.css') }}">
+<link rel="stylesheet" href="{{ mix('css/entite/a_propos.css') }}">
 @section('content')
 
     <main id="main-content">

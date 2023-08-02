@@ -3,7 +3,7 @@
 @section('titre', $creation==1 ? "Créer" : "Modifier" . ' une entité')
 
 @pushonce('styles')
-<link rel="stylesheet" href="/css/modifier_infos.css" type="text/css" >
+<link rel="stylesheet" href="/css/entite/modifier_infos.css" type="text/css" >
 @endpushonce
 
 @section('content')

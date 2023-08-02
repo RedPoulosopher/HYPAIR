@@ -11,7 +11,7 @@ class Evenement extends Model
     protected $fillable = [
         'titre',
         'entite_id',
-        // 'slug',
+        'slug',
         'description',
         'date_apparition',
         'temps_debut',
@@ -21,7 +21,7 @@ class Evenement extends Model
         'campus_id',
         'pour_cotisant',
         'is_actualite',
-        // 'validation',
+        'validation',
     ];
 
     public function entite()
@@ -29,7 +29,8 @@ class Evenement extends Model
         return $this->belongsTo(Entite::class);
     }
 
-    public function campus() {
+    public function campus()
+    {
         return $this->belongsTo(Site::class);
     }
 

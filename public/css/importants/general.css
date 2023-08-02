@@ -1,0 +1,200 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;
+
+400;500;700);@charset "UTF-8";
+html,
+body {
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif, system-ui;
+  background-attachment: fixed !important;
+  background: var(--background-color);
+  color: var(--couleur_police_primaire);
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  color: var(--couleur_police_primaire);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+a[target=_blank] {
+  position: relative;
+  padding-right: 1rem;
+}
+
+a[target=_blank]:before {
+  content: " \2197";
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@font-face {
+  font-family: "GearsOfPeace";
+  src: url(/fonts/GearsOfPeace.ttf?3d1ce918e0d914cb936e1898038ec6ec) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+h1 {
+  -webkit-margin-before: 0em;
+          margin-block-start: 0em;
+  text-align: center;
+}
+
+p.explication {
+  text-align: justify;
+  -moz-text-align-last: left;
+       text-align-last: left;
+  margin-bottom: 30px;
+}
+
+.centre-element {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block;
+}
+
+.centre-enfants {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.grille-enfants {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.centre-vertical-enfant {
+  align-items: center;
+}
+
+.texte_petit {
+  font-size: 0.7em;
+}
+
+.card {
+  background: var(--grey);
+  border-radius: 15px;
+  box-shadow: var(--ombre-card);
+}
+
+.bouton {
+  padding: 10px 25px 12px 25px;
+  font-size: 1.1em;
+  border-radius: 50px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  text-align: center;
+  font-family: "Inter", sans-serif, system-ui;
+  transition: padding 0.15s ease-in-out;
+}
+
+.bouton[class^=iconsax-]:before,
+.bouton[class^=iconsax-]:after {
+  font-size: 1.3em;
+}
+
+.bouton[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bouton span {
+  vertical-align: middle;
+}
+
+.bouton.margin_tout {
+  margin: 15px;
+}
+
+.bouton.margin_vertical {
+  margin: 15px 0px;
+}
+
+.bouton.primaire {
+  color: var(--couleur_police_accentuation);
+  background-color: var(--couleur_accentuation);
+  border: none;
+  text-transform: uppercase;
+}
+
+.bouton.secondaire {
+  border: 1px solid var(--couleur_accentuation);
+  background: transparent;
+  color: var(--couleur_accentuation);
+}
+
+.bouton.tertiaire {
+  background: transparent;
+  color: var(--couleur_police_primaire);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--couleur_police_secondaire);
+}
+
+body.dark-theme .ombre_grande {
+  box-shadow: var(--ombre-grande);
+}
+
+body.dark-theme .ombre_petite {
+  box-shadow: var(--ombre-petite);
+}
+
+body.dark-theme .ombre_inset {
+  box-shadow: var(--ombre-inset);
+}
+
+body.dark-theme a.couleur {
+  text-decoration: underline;
+  color: #98cbff;
+}
+
+body.dark-theme a.couleur:hover {
+  color: #759aff;
+}
+
+body.light-theme .ombre_grande {
+  box-shadow: 0px 13px 26px 0px rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .ombre_petite {
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .ombre_inset {
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.2) inset;
+}
+
+body.light-theme a.couleur {
+  text-decoration: underline;
+  color: #414fd8;
+}
+
+body.light-theme a.couleur:hover {
+  color: #7f8bf7;
+}
+

@@ -863,8 +863,9 @@ a.reseau-social p {
   border-radius: 500px;
   border: 2px solid;
   position: absolute;
-  left: calc(5% - 2px);
-  top: calc(5% - 3px);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 90%;
   height: 90%;
   border-color: var(--couleur_accentuation);

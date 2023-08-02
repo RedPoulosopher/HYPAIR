@@ -1,9 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Montserrat:wght@600;
 
-800&display=swap);@charset "UTF-8";
-
-/* Style général de la page */
-.event-card {
+800&display=swap);.event-card {
   width: 100%;
   margin-bottom: 10px;
   padding-left: 20px;
@@ -583,106 +580,225 @@ footer {
   margin-top: auto;
 }
 
-#content {
-  grid-template-columns: 3fr 1fr;
-  gap: 45px 5vw;
+input {
+  border: none;
+  background: unset;
+  color: inherit;
 }
 
-#side-bar {
-  grid-column: 2;
-  grid-row: 1;
+input:focus {
+  border: none;
+  outline: none;
 }
 
-@media screen and (max-width: 1250px) {
-  #content {
-    gap: 35px 3vw;
-  }
+p {
+  -webkit-margin-before: inherit;
+          margin-block-start: inherit;
+  -webkit-margin-after: inherit;
+          margin-block-end: inherit;
+  -webkit-margin-start: inherit;
+          margin-inline-start: inherit;
+  margin-block-end: inherit;
 }
 
-@media screen and (max-width: 1080px) {
-  #content {
-    grid-template-columns: 1fr;
-    gap: 35px 0;
-  }
-
-  #side-bar {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  footer {
-    grid-row: 3;
-  }
+textarea {
+  border: none;
+  background: unset;
+  resize: vertical;
+  color: inherit;
+  font-family: inherit;
 }
 
-.logo {
-  position: relative;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 220px;
-  height: 220px;
+textarea:focus {
+  outline: none;
 }
 
-.logo img {
-  width: 100%;
-  border-radius: 300px;
+.groupe {
+  display: grid;
+  padding: 13px 18px;
+  border-radius: 25px;
+  font-size: 1em;
+  color: inherit;
+  margin: 40px 0px;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--grey);
 }
 
-.description {
-  margin-top: 40px;
+.groupe .erreurs {
+  border-left: 3px solid #e20000;
+  padding-left: 5px;
+  margin-bottom: 15px;
 }
 
-.conteneur_boutons {
-  margin-top: 40px;
+fieldset {
+  margin: 9px 0px;
+  display: grid;
+  border-radius: 10px;
+  border: 1px solid rgb(127, 127, 127);
+}
+
+fieldset legend {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.input_groupe {
+  padding: 5px 5px;
+  margin: 3px 0px;
+  border-left: 1px solid transparent;
+  transition: border 0.15s ease-in-out;
+}
+
+.input_groupe.flex {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
 }
 
-.conteneur_boutons .modif_option {
-  gap: 26px;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.input_groupe:focus-within {
+  border-left: 1px solid var(--couleur_accentuation);
+}
+
+.input_groupe:focus-within > .titre {
+  opacity: 0.8;
+}
+
+.input_groupe .titre {
+  transition: opacity 0.15s cubic-bezier(0.8, 0, 0, 0.8);
+  font-size: 1.1em;
+}
+
+.input_groupe .description {
+  color: var(--couleur_police_secondaire);
+  font-size: 0.95em;
+}
+
+.input_groupe .input {
+  display: inline-block;
   box-sizing: border-box;
-  padding: 20px;
-  text-align: center;
-  transition: background 0.15s ease-in-out;
-}
-
-.conteneur_boutons .modif_option:hover {
+  width: 100%;
+  padding: 5px;
+  border-radius: 8px;
+  font-size: 1em;
   background-color: var(--dark-grey);
+  color: var(--couleur_police_secondaire);
+  border: 1px solid transparent;
+  transition: border 0.2s ease-in-out;
 }
 
-.conteneur_boutons .modif_option i {
-  font-size: 32px;
+.input_groupe .input.erreur {
+  border: 1px solid #c70e0e;
 }
 
-@media screen and (max-width: 680px) {
-  .conteneur_boutons {
-    flex-direction: column;
-    gap: 16px;
-  }
+.input_groupe .input::-moz-placeholder {
+  color: inherit;
+  opacity: 0.6;
+}
 
-  .conteneur_boutons .modif_option {
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 16px;
-    padding: 14px 20px;
-    width: 100%;
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
-    border-radius: 10px;
-  }
+.input_groupe .input::placeholder {
+  color: inherit;
+  opacity: 0.6;
+}
 
-  .conteneur_boutons .modif_option i {
-    font-size: 16px;
-  }
+.input_groupe .input[type=checkbox] {
+  display: grid;
+  place-content: center;
+  align-self: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  margin: 0px 8px;
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: 0.3em;
+  color: currentColor;
+  background-color: var(--dark-grey);
+  border: 1px solid currentColor;
+}
+
+.input_groupe .input[type=checkbox]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 0.2em;
+  background: var(--couleur_accentuation);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 80ms ease-in-out, opacity 80ms ease-in-out;
+}
+
+.input_groupe .input[type=checkbox]:hover::before {
+  transform: scale(0.5);
+  opacity: 0.6;
+}
+
+.input_groupe .input[type=checkbox]:hover:checked::before {
+  transform: scale(0.8);
+  opacity: 0.8;
+}
+
+.input_groupe .input[type=checkbox]:checked::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.input_groupe .input[type=radio] {
+  display: grid;
+  place-content: center;
+  align-self: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  cursor: pointer;
+  margin: 0px 8px;
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: 1em;
+  color: currentColor;
+  background-color: var(--dark-grey);
+  border: 1px solid currentColor;
+}
+
+.input_groupe .input[type=radio]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 1em;
+  background: var(--couleur_accentuation);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 80ms ease-in-out, opacity 80ms ease-in-out;
+}
+
+.input_groupe .input[type=radio]:hover::before {
+  transform: scale(0.5);
+  opacity: 0.6;
+}
+
+.input_groupe .input[type=radio]:hover:checked::before {
+  transform: scale(0.8);
+  opacity: 0.8;
+}
+
+.input_groupe .input[type=radio]:checked::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.input_groupe textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 5px;
+  box-sizing: border-box;
+  font-size: 1em;
+  background-color: var(--dark-grey);
+  border-radius: 8px;
+  color: var(--couleur_police_secondaire);
+}
+
+.input_groupe.radio {
+  display: grid;
+  color: var(--couleur_police_secondaire);
 }
 

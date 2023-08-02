@@ -163,6 +163,7 @@ p.explication {
   padding: 10px 25px 12px 25px;
   font-size: 1.1em;
   border-radius: 50px;
+  border: unset;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -175,6 +176,10 @@ p.explication {
 .bouton[class^=iconsax-]:before,
 .bouton[class^=iconsax-]:after {
   font-size: 1.3em;
+}
+
+.bouton[type=submit] {
+  background-color: var(--couleur_accentuation);
 }
 
 .bouton[disabled] {

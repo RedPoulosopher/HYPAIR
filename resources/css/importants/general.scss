@@ -105,6 +105,7 @@ p.explication {
     // min-width: 100px;
     // width: fit-content;
     // display: block;
+    border: unset;
     cursor: pointer;
     user-select: none;
     text-align: center;
@@ -114,6 +115,10 @@ p.explication {
     &[class^="iconsax-"]:before,
     &[class^="iconsax-"]:after {
         font-size: 1.3em;
+    }
+
+    &[type="submit"] {
+        background-color: var(--couleur_accentuation);
     }
 
     &[disabled] {

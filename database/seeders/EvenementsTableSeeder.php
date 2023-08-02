@@ -25,6 +25,8 @@ class EvenementsTableSeeder extends Seeder
                 'lieu' => 'Meud',
                 'max_participation' => 20,
                 'validation' => "1",
+                'campus_id' => '1',
+                'date_apparition' => '2022-04-12 08:00:00'
             ], [
                 'entite_id' => 2,
                 'titre' => "soirée BDE",
@@ -35,6 +37,8 @@ class EvenementsTableSeeder extends Seeder
                 'lieu' => 'Meud',
                 'max_participation' => 200,
                 'validation' => "1",
+                'campus_id' => '2',
+                'date_apparition' => '2022-04-12 08:00:00'
             ], [
                 'entite_id' => 3,
                 'titre' => "Aprems",
@@ -45,6 +49,8 @@ class EvenementsTableSeeder extends Seeder
                 'lieu' => 'Meud',
                 'max_participation' => 200,
                 'validation' => "1",
+                'campus_id' => '1',
+                'date_apparition' => '2022-04-12 20:00:00'
             ], [
                 'entite_id' => '1',
                 'titre' => "Soirée",
@@ -55,6 +61,8 @@ class EvenementsTableSeeder extends Seeder
                 'lieu' => 'Meud',
                 'max_participation' => 20,
                 'validation' => "1",
+                'campus_id' => '1',
+                'date_apparition' => '2023-04-12 08:00:00'
             ], [
                 'entite_id' => '1',
                 'titre' => "Bonjour",
@@ -65,6 +73,8 @@ class EvenementsTableSeeder extends Seeder
                 'lieu' => 'Salle Nicolas',
                 'max_participation' => 400,
                 'validation' => "1",
+                'campus_id' => '2',
+                'date_apparition' => '2022-04-24 08:00:00'
             ]
         ]);
     }

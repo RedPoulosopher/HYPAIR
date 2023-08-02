@@ -7,11 +7,11 @@
 <style>
 .documentation {
 	width:100%;
-	background:var(--gris_2);
+	background:var(--dark-grey);
 	padding:25px;
 	border-radius:25px;
 	box-sizing:border-box;
-	border:1px solid var(--gris_1);
+	border:1px solid var(--grey);
 }
 h1.titre {
 	margin-block-start:0;

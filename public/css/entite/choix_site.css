@@ -9,7 +9,7 @@
 .gros_bouton {
   width: 200px;
   height: 200px;
-  border: 1px solid var(--gris_1);
+  border: 1px solid var(--grey);
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -17,11 +17,11 @@
   box-sizing: border-box;
   padding: 10px;
   text-align: center;
-  background: var(--gris_3);
+  background: var(--light-grey);
   transition: background 0.15s ease-in-out;
 }
 
 .gros_bouton:hover {
-  background: var(--gris_2);
+  background: var(--dark-grey);
 }
 

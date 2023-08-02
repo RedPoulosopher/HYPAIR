@@ -38,7 +38,7 @@ files.forEach(function (filepath) {
     var outFilepath = filepath.replace("resources/css/", "").split("/")//Remove base path
     outFilepath.pop();//Remove filename
     outFilepath = outFilepath.join("/");
-    mix.sass(filepath, "public/css/" + outFilepath);
+    mix.sass(filepath, "public/css" + outFilepath);
 });
 
 

@@ -29,6 +29,8 @@
     "/css/entite/modifier_infos.css": "/css/entite/modifier_infos.css",
     "/css/entite/modifier_logotype.css": "/css/entite/modifier_logotype.css",
     "/css/espace_utilisateur/editer_infos_profil.css": "/css/espace_utilisateur/editer_infos_profil.css",
+    "/css/espace_utilisateur/editer_photo_profil.css": "/css/espace_utilisateur/editer_photo_profil.css",
+    "/css/espace_utilisateur/editer_reseaux_profil.css": "/css/espace_utilisateur/editer_reseaux_profil.css",
     "/css/formulaire-evenement.css": "/css/formulaire-evenement.css",
     "/css/formulaire.css": "/css/formulaire.css",
     "/css/home-evenement.css": "/css/home-evenement.css",

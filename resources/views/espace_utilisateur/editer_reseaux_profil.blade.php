@@ -25,8 +25,8 @@ div.table {
     margin-top:10px;
     overflow: auto;
     padding: 13px 18px;
-    border: 1px solid var(--gris_1);
-    background-color: var(--gris_2);
+    border: 1px solid var(--grey);
+    background-color: var(--dark-grey);
     transition: border-color 0.1s ease-in-out;
 }
 div.table:hover {
@@ -42,11 +42,11 @@ table tr {
     border-bottom: 1px solid transparent;
 }
 table tbody tr:hover {
-    border-bottom: 1px solid var(--gris_1);
+    border-bottom: 1px solid var(--grey);
 }
 table th {
     padding: 15px 15px;
-    border-bottom: 1px solid var(--gris_1);
+    border-bottom: 1px solid var(--grey);
 }
 table td {
     padding: 10px 15px;
@@ -55,7 +55,7 @@ table td {
 td span.role {
 	font-size: 0.95em;
 	color:var(--couleur_police_secondaire);
-	background: var(--gris_1);
+	background: var(--grey);
 	padding: 4px 15px 5px 15px;
 	border-radius: 50px;
 	text-transform: capitalize;

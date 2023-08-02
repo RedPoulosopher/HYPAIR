@@ -1,0 +1,103 @@
+#choix_entite {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+div.table {
+    box-sizing: border-box;
+    border-radius: 25px;
+    margin-top: 10px;
+    overflow: hidden;
+    padding: 13px 18px;
+    border: 1px solid var(--grey);
+    background-color: var(--dark-grey);
+    transition: border-color 0.1s ease-in-out;
+}
+
+div.table:hover {
+    border-color: var(--couleur_accentuation);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table tr {
+    text-align: center;
+    color: var(--couleur_police);
+    border-bottom: 1px solid transparent;
+}
+
+table tbody tr:hover {
+    border-bottom: 1px solid var(--grey);
+}
+
+table th {
+    padding: 15px 15px;
+    border-bottom: 1px solid var(--grey);
+}
+
+table td {
+    padding: 10px 15px;
+    vertical-align: inherit !important;
+}
+
+td.sites {
+    font-size: 0.95em;
+    color: var(--couleur_police_secondaire);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+td.sites span {
+    background: var(--grey);
+    padding: 4px 15px 5px 15px;
+    border-radius: 50px;
+    text-transform: capitalize;
+}
+
+td.type {
+    text-transform: capitalize;
+}
+
+.meatballs {
+    display: flex;
+    gap: 2px;
+    cursor: pointer;
+}
+
+.meatballs>div {
+    border-radius: 5px;
+    width: 3px;
+    height: 3px;
+    background: var(--couleur_police_secondaire);
+}
+
+#menu_meatballs {
+    /* display:none; */
+    position: absolute;
+    border-radius: 15px;
+    background: var(--grey);
+    padding-inline-start: 0px;
+}
+
+#menu_meatballs li {
+    display: block;
+    width: 100%;
+    list-style-type: none;
+}
+
+#menu_meatballs li a {
+    padding: 10px 20px;
+    width: 100%;
+    display: inline-block;
+}
+
+#menu_meatballs li a:hover {
+    color: var(--couleur_police_secondaire);
+}

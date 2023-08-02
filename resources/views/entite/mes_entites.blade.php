@@ -3,7 +3,7 @@
 @section('titre', 'Mes entités')
 
 @pushonce('styles')
-<link rel="stylesheet" href="css/mes_entites.css" type="text/css" />
+<link rel="stylesheet" href="css/entite/mes_entites.css" type="text/css" />
 @endpushonce
 
 @section('content')

@@ -4,7 +4,7 @@
 
 @pushonce('styles')
 @endpushonce
-<link rel="stylesheet" href="{{ mix('css/a_propos.css') }}">
+<link rel="stylesheet" href="{{ mix('css/entite/a_propos.css') }}">
 @section('content')
 
     <main id="main-content">
@@ -26,10 +26,7 @@
             </div>
             <div class="reseaux_sociaux grille-enfants">
                 @foreach ($reseaux_sociaux as $reseau_social)
-                    <a target="_blank" class="ombre_petite" href="{{ $reseau_social->liste->pre_url . $reseau_social->cle }}"
-                        style="background-color:{{ $reseau_social->liste->couleur }}; color:{{ $reseau_social->liste->couleur_police }};">
-                        {{ $reseau_social->liste->nom }}
-                    </a>
+                    <x-reseau-social :reseau="$reseau_social" />
                 @endforeach
             </div>
 

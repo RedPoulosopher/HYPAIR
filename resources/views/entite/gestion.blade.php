@@ -3,7 +3,7 @@
 @section('titre', 'Gestion de l\'entité')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="/css/gestion.css" type="text/css" />
+    <link rel="stylesheet" href="/css/entite/gestion.css" type="text/css" />
 @endpushonce
 
 @section('content')
@@ -14,14 +14,12 @@
             <h1><span class="icon-security-safe" title="page réservée aux administrateurs"></span>Gestion de l'entité</h1>
             <div class="logo">
                 <img src="{{ session('entite_logo_petit') }}" alt="logo" />
-                <a class="icon-edit-2" title="Modifier le logo et les couleurs." href="logotype"></a>
             </div>
             <div class="conteneur_boutons">
                 <a class="modif_option card" href="evenement"><i class="fa-regular fa-calendar"></i>Gérer les évènements</a>
                 <a class="modif_option card" href="membres"><i class="fa-solid fa-users"></i>Gérer les membres</a>
                 <a class="modif_option card" href="reseau_social"><i class="fa-solid fa-globe"></i>Gérer les réseaux sociaux</a>
-                <a class="modif_option card" href="description"><i class="fa-solid fa-pen-to-square"></i>Modifier les
-                    descriptions et labels</a>
+                <a class="modif_option card" href="description"><i class="fa-solid fa-pen-to-square"></i>Modifier les descriptions et labels</a>
                 <a class="modif_option card" href="logotype"><i class="fa-solid fa-eye"></i>Modifier le logo</a>
                 <a class="modif_option card" href="couleur"><i class="fa-solid fa-palette"></i>Modifier les couleurs</a>
                 @if ($entite['type'] == 'bureau' || $entite['uid'] == 'air')

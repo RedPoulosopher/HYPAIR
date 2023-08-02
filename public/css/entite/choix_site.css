@@ -1,0 +1,27 @@
+.conteneur_boutons {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gros_bouton {
+  width: 200px;
+  height: 200px;
+  border: 1px solid var(--grey);
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  background: var(--light-grey);
+  transition: background 0.15s ease-in-out;
+}
+
+.gros_bouton:hover {
+  background: var(--dark-grey);
+}
+

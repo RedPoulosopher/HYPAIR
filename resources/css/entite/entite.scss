@@ -1,0 +1,16 @@
+@import "../components/entite";
+@import "../components/switch-campus";
+
+.liste_comite_club {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 1.4em;
+}
+
+
+@media (max-width: 599.98px) {
+  .liste_comite_club {
+    gap: 10px 10px;
+  }
+}

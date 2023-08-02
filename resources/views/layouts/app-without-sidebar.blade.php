@@ -8,6 +8,7 @@
     <title>@yield('titre', 'Site Web') - HypAIR</title>
 
     <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="stylesheet" href="/css/importants/layout-without-sidebar.css" type="text/css" />
     @stack('styles')
 </head>
 

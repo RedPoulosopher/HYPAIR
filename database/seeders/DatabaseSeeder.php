@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SitesSeeder::class);
         $this->call(EntiteSitesSeeder::class);
         $this->call(EvenementsTableSeeder::class);
+        $this->call(ReseauxSociauxListeSeeder::class);
+        $this->call(ReseauxSociauxSeeder::class);
     }
 }

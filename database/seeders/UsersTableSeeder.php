@@ -23,6 +23,8 @@ class UsersTableSeeder extends Seeder
                 'uid' => 'marc.bresson',
                 'password' => Hash::make("test"),
                 'langue_pref' => 'fr',
+                'pronom' => 'Il/Lui',
+                'bio' => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
             ],
             [
                 'nom' => 'Mata',
@@ -30,13 +32,17 @@ class UsersTableSeeder extends Seeder
                 'uid' => 'arthur.mata',
                 'password' => Hash::make("test"),
                 'langue_pref' => 'fr',
+                'pronom' => 'Il/Lui',
+                'bio' => '',
             ],
             [
                 'nom' => 'Pascal',
-                'prenom' => 'Bastien',
-                'uid' => 'bastien.pascal',
+                'prenom' => 'Mathilde',
+                'uid' => 'mathilde.pascal',
                 'password' => Hash::make("test"),
                 'langue_pref' => 'fr',
+                'pronom' => 'Elle/elle',
+                'bio' => '',
             ],
             [
                 'nom' => 'Sparrow',
@@ -44,6 +50,8 @@ class UsersTableSeeder extends Seeder
                 'uid' => 'jack.sparrow',
                 'password' => Hash::make("test"),
                 'langue_pref' => 'fr',
+                'pronom' => 'Il/Lui',
+                'bio' => '',
             ],
             [
                 'nom' => 'Bachelet',
@@ -51,6 +59,8 @@ class UsersTableSeeder extends Seeder
                 'uid' => 'remy.bachelet',
                 'password' => Hash::make("test"),
                 'langue_pref' => 'fr',
+                'pronom' => 'Il/Lui',
+                'bio' => NULL,
             ],
         ]);
     }

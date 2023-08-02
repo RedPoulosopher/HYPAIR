@@ -9,7 +9,18 @@
 	</head>
 	
 	<style>
-		#wrapper {padding-left:inherit;}
+		#wrapper {
+			padding-left:inherit;
+			min-width: 100vw;
+			min-height: 100vh;
+			box-sizing: border-box;
+			padding: 0 5vw;
+			
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
 	</style>
 	
 	<body class="dark-theme">

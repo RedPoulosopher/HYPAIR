@@ -12,17 +12,6 @@
     border-radius: 300px;
 }
 
-.logo a:before {
-    position: absolute;
-    z-index: 2;
-    top: 170px;
-    left: 170px;
-    padding: 10px;
-    font-size: 20px;
-    border-radius: 100px;
-    background: var(--background-color);
-}
-
 .description {
     margin-top: 40px;
 }

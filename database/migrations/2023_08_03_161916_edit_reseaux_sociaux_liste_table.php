@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reseaux_sociaux_liste', function (Blueprint $table) {
-            $table->id();
-            $table->string('nom');
-            $table->string('couleur', 10);
-            $table->string('couleur_police', 10);
-            $table->string('pre_url');
+        Schema::table('reseaux_sociaux_liste', function (Blueprint $table) {
+            $table->string('couleur', 15)->change();
         });
     }
 
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reseaux_sociaux_liste');
+        //
     }
 };

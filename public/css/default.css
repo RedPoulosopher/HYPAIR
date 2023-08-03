@@ -234,14 +234,14 @@ body.light-theme a.couleur:hover {
 body.light-theme {
   --grey: #fff;
   --dark-grey: #b3b3b3;
-  --background-color: #fafafa;
+  --background-color: #f5f5f5;
   --light-grey: #dfdede;
   --couleur_accentuation_air: #c6152a;
-  --couleur_accentuation: #4b14d6;
+  --couleur_accentuation: #c6152a;
   --couleur_police_accentuation_air: #ffffff;
   --couleur_police_accentuation: #ffffff;
-  --couleur_police_primaire: #171717;
-  --couleur_police_secondaire: #3d3d3d;
+  --couleur_police_primaire: #292929;
+  --couleur_police_secondaire: #898989;
   --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.2);
   --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
   --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.1) inset;

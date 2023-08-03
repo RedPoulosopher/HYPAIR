@@ -21,10 +21,12 @@ return new class extends Migration
             $table->dateTime('date_apparition');
             $table->dateTime('date_expiration')->nullable();
             $table->string('tags')->nullable();
+            $table->foreignId('entite_id');
         });
 
         Schema::table('posts', function (Blueprint $table) {
             $table->foreign('event_id')->nullable()->references('id')->on('evenements')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('entite_id')->references('id')->on('entites')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

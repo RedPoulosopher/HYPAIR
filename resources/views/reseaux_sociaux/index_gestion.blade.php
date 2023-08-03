@@ -38,7 +38,7 @@
                             <input type="text" name="cle" id="cle" class="input" value="{{old('cle') ?? ''}}"/>
                         </div>
                     </label>
-                    <div style="display:flex;justify-content: flex-end;margin-top:15px;">
+                    <div style="display:flex;justify-content: flex-end;margin-top:10px;">
                         <button type="submit" class="bouton primaire">AJOUTER</span></button>
                     </div>
                 </div>

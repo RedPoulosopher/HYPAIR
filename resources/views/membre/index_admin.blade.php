@@ -35,7 +35,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <div style="display:flex;justify-content: flex-end;margin-top:15px;">
+                    <div style="display:flex;justify-content: flex-end;">
                         <button type="submit" class="bouton primaire valider_role">VALIDER</span></button>
                     </div>
                 </div>

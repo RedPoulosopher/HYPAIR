@@ -57,7 +57,7 @@ fieldset {
 }
 
 .input_groupe {
-    padding: 5px 5px;
+    padding: 5px 0;
     margin: 3px 0px;
     border-left: 1px solid transparent;
     transition: border 0.15s ease-in-out;
@@ -225,7 +225,7 @@ table {
     tr {
         text-align: center;
         color: var(--couleur_police);
-
+        border-bottom: 1px transparent;
     }
 
     tbody tr:hover {

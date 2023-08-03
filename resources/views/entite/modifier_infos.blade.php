@@ -28,7 +28,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe flex">
 					<p class="titre">* Privée ?</p>
 					<input type="checkbox" name="privee" class="input" {{old('privee') ?? $documentation->privee ?? '' ? "checked" : ""}}/>
@@ -51,7 +51,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 				</label>
 			</div>
 
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">Courriel :</p>
 					<p class="description">Certaines entites possèdent un compte courriel fourni par la DISI.</p>

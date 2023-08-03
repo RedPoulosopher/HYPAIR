@@ -52,9 +52,16 @@ a[target=_blank]:before {
 }
 
 h1 {
+  font-size: 1.5em;
   -webkit-margin-before: 0em;
           margin-block-start: 0em;
   text-align: center;
+}
+
+h2 {
+  font-size: 1.25em;
+  -webkit-margin-before: 0em;
+          margin-block-start: 0em;
 }
 
 p.explication {
@@ -101,6 +108,7 @@ p.explication {
 }
 
 .bouton {
+  display: inline-block;
   padding: 10px 25px 12px 25px;
   font-size: 1.1em;
   border-radius: 50px;

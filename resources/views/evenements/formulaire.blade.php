@@ -23,14 +23,14 @@
                 @endforeach
             </div>
             @endif
-            <div class="groupe ombre_petite">
+            <div class="groupe card">
                 <label class="input_groupe">
                     <p class="titre">* Titre :</p>
                     <input type="text" name="titre" class="input" id="titre_doc" required value="{{old('titre') ?? $evenement->titre ?? ''}}"/>
                 </label>
             </div>
 
-            <div class="groupe ombre_petite">
+            <div class="groupe card">
                 <label class="input_groupe">
                     <p class="titre">* Description de l'évènement :</p>
                     <textarea name="description" pattern=".{30,250}" required title="Au moins 30 caractères dans la description, et au plus 250" rows="5">{{old('description') ?? $evenement->description ?? ''}}</textarea>
@@ -39,21 +39,21 @@
 
             </div>
 
-            <div class="groupe ombre_petite">
+            <div class="groupe card">
                 <label class="input_groupe">
                     <p class="titre">* Début de l'évènement :</p>
                     <input type="datetime-local" name="temps_debut" class="input" required value="{{old('temps_debut') ?? $evenement->fin_mise_en_avant ?? '' }}" min="01-01-2000" max="12-31-2099"/>
                 </label>
 
 
-                <label class="input_groupe">
+                <label class="card">
                     <p class="titre">* Fin de l'évènement :</p>
                     <input type="datetime-local" name="temps_fin" class="input" required value="{{old('temps_fin') ?? $evenement->fin_mise_en_avant ?? '' }}" min="2000-01-01" max="2100-12-31"/>
                 </label>
             </div>
 
 
-            <div class="groupe ombre_petite">
+            <div class="groupe card">
                 <label class="input_groupe">
                     <p class="titre">Lieu :</p>
                     <input type="text" name="lieu" class="input" id="lieu_evenement" value="{{old('lieu') ?? $evenement->lieu ?? ''}}"/>
@@ -61,7 +61,7 @@
             </div>
 
 
-            <div class="groupe ombre_petite">
+            <div class="groupe card">
                 <label class="input_groupe">
                     <p class="titre">Nombre maximum de participants :</p>
                     <input type="number" name="max_participation" class="input" id="max_participation_evenement" value="{{old('max_participation') ?? $evenement->max_participation ?? ''}}" min="0" />
@@ -69,7 +69,7 @@
             </div>
 
 
-            <div class="groupe ombre_petite">
+            <div class="groupe card">
                 <label class="input_groupe">
                     <p class="titre">* Confidentialité :</p>
                     <select name="confidentialite" class="input" spellcheck="false" required select="{{old('confidentialite') ?? $evenement->confidentialite ?? ''}}">

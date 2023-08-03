@@ -42,7 +42,7 @@
 .dt-top .dt-selector,
 .dt-bottom .dt-selector {
   padding: 10px;
-  background: var(--grey);
+  background: var(--dark-grey);
   color: inherit;
   margin-right: 5px;
   border-radius: 8px;
@@ -68,7 +68,7 @@ select:focus {
 
 .dt-input {
   padding: 10px 16px;
-  background: var(--grey);
+  background: var(--dark-grey);
   color: inherit;
   border-radius: 8px;
 }

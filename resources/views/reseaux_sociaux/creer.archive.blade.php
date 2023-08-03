@@ -26,7 +26,7 @@
 				</div>
 			@endif
 
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">* Réseau social :</p>
 					<select name="reseaux_sociaux_liste_id" id="reseau_social" class="input" spellcheck="false" required select="{{old('reseaux_sociaux_liste_id') ?? ''}}">

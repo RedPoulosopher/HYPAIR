@@ -23,7 +23,7 @@
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<span>Cette projet sera accessible via : <span id="lien_projet"></span></span>
 				<label class="input_groupe">
 					<p class="titre">* Titre :</p>
@@ -40,7 +40,7 @@
 				</label>
 			</div>
 
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">* Description courte du projet :</p>
 					<p class="description">Pour créer le projet, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
@@ -48,7 +48,7 @@
 				</label>
 			</div>
 			
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">*Date de fin du projet :</p>
 					<input type="date" name="date_fin" class="input" value="{{old('date_fin') ?? $projet->date_fin ?? '' }}"/>

@@ -3,7 +3,7 @@
 @section('titre', 'Réseaux Sociaux')
 
 @pushonce('styles')
-<link rel="stylesheet" type="text/css" href="/css/index_gestion.css">
+<link rel="stylesheet" type="text/css" href="/css/entite/index_gestion.css">
 @endpushonce
 
 @section('content')
@@ -12,14 +12,15 @@
 	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des réseaux sociaux</h1>
 
-        <div id="gestion_membre">
-            <div>
+        <div id="gestion_reseaux">
+            <h2>Ajouter un réseau social :</h2>
+            <div id="warning">
                 <p>Vous ne pouvez avoir qu'un seul réseau social de chaque type.</p>
                 <p>Pour supprimer un réseau social, laissez le lien vide, et appuyez sur <i>Supprimer</i></p>
             </div>
             <form method="POST">
                 @csrf
-                <div class="groupe ombre_petite">
+                <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Réseau social :</p>
                         <select name="reseaux_sociaux_liste_id" id="reseaux_sociaux_liste" class="input" spellcheck="false" required select="{{old('reseaux_sociaux_liste_id') ?? ''}}">
@@ -32,7 +33,7 @@
     
                     <label class="input_groupe">
                         <p class="titre">* Lien :</p>
-                        <div style="display:flex;">
+                        <div style="display:flex; align-items:center;">
                             <span class="pre_url"></span>
                             <input type="text" name="cle" id="cle" class="input" value="{{old('cle') ?? ''}}"/>
                         </div>
@@ -42,8 +43,10 @@
                     </div>
                 </div>
             </form>
+
+            <h2>Réseaux actuels:</h2>
             
-            <div class="table ombre_petite">
+            <div class="table card">
                 <table id="index">
                     <thead>
                         <tr>

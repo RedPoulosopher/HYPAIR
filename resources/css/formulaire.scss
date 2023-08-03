@@ -3,16 +3,19 @@ input {
     background: unset;
     color: inherit;
 }
+
 input:focus {
     border: none;
     outline: none;
 }
+
 p {
     margin-block-start: inherit;
     margin-block-end: inherit;
     margin-inline-start: inherit;
     margin-block-end: inherit;
 }
+
 textarea {
     border: none;
     background: unset;
@@ -20,6 +23,7 @@ textarea {
     color: inherit;
     font-family: inherit;
 }
+
 textarea:focus {
     outline: none;
 }
@@ -27,13 +31,11 @@ textarea:focus {
 .groupe {
     display: grid;
     padding: 13px 18px;
-    border-radius: 25px;
     font-size: 1em;
     color: inherit;
-    margin: 40px 0px;
+    margin: 0 0 40px;
     max-width: 100%;
     box-sizing: border-box;
-    border: 1px solid var(--grey);
 
     & .erreurs {
         border-left: 3px solid #e20000;
@@ -64,22 +66,26 @@ fieldset {
         display: flex;
         flex-wrap: wrap;
     }
+
     &:focus-within {
         border-left: 1px solid var(--couleur_accentuation);
 
-        & > .titre {
+        &>.titre {
             opacity: 0.8;
         }
     }
+
     & .titre {
         transition: opacity 0.15s cubic-bezier(0.8, 0, 0, 0.8);
         // user-select: none;
         font-size: 1.1em;
     }
+
     & .description {
         color: var(--couleur_police_secondaire);
         font-size: 0.95em;
     }
+
     & .input {
         display: inline-block;
         box-sizing: border-box;
@@ -95,6 +101,7 @@ fieldset {
         &.erreur {
             border: 1px solid #c70e0e;
         }
+
         &::placeholder {
             color: inherit;
             opacity: 0.6;
@@ -124,14 +131,17 @@ fieldset {
                 opacity: 0;
                 transition: transform 80ms ease-in-out, opacity 80ms ease-in-out;
             }
+
             &:hover::before {
                 transform: scale(0.5);
                 opacity: 0.6;
             }
+
             &:hover:checked::before {
                 transform: scale(0.8);
                 opacity: 0.8;
             }
+
             &:checked::before {
                 transform: scale(1);
                 opacity: 1;
@@ -162,20 +172,24 @@ fieldset {
                 opacity: 0;
                 transition: transform 80ms ease-in-out, opacity 80ms ease-in-out;
             }
+
             &:hover::before {
                 transform: scale(0.5);
                 opacity: 0.6;
             }
+
             &:hover:checked::before {
                 transform: scale(0.8);
                 opacity: 0.8;
             }
+
             &:checked::before {
                 transform: scale(1);
                 opacity: 1;
             }
         }
     }
+
     & textarea {
         width: 100%;
         margin-top: 8px;
@@ -186,8 +200,47 @@ fieldset {
         border-radius: 8px;
         color: var(--couleur_police_secondaire);
     }
+
     &.radio {
         display: grid;
         color: var(--couleur_police_secondaire);
+    }
+}
+
+div.table {
+    box-sizing: border-box;
+    margin-top: 10px;
+    overflow: hidden;
+    padding: 13px 18px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+
+    thead tr {
+        border-bottom: 1px solid var(--light-grey);
+    }
+
+    tr {
+        text-align: center;
+        color: var(--couleur_police);
+
+    }
+
+    tbody tr:hover {
+        border-bottom: 1px solid var(--light-grey);
+    }
+
+    th {
+        padding: 15px 15px;
+    }
+
+    td {
+        padding: 10px 15px;
+
+        &.lien {
+            text-align: left;
+        }
     }
 }

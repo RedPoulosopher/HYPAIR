@@ -25,7 +25,7 @@
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">* Description courte :</p>
 					<textarea name="description_courte" class="input" required rows="6">{{old('description_courte') ?? $entite->description_courte ?? ''}}</textarea>

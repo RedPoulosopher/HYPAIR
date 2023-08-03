@@ -15,9 +15,10 @@
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des Membres</h1>
 
         <div id="gestion_membre">
+            <h2>Ajouter un membre :</h2>
             <form method="POST">
                 @csrf
-                <div class="groupe ombre_petite">
+                <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">Uid du membre :</p>
                         <p class="description">Rentrez l'uid de la personne ou son adresse étudiante. Faites attention à ce que ce soit bien son adresse, elles ne sont pas toutes construites en prenom.nom !</p>
@@ -40,13 +41,14 @@
                 </div>
             </form>
 
-            <div id="choix_role">
+            {{-- <div id="choix_role">
                 <a href="membres" class="bouton secondaire">Membres</a>
                 <a href="abonnes" class="bouton secondaire">Abonnés</a>
-            </div>
+            </div> --}}
 
+            <h2>Membres actuels :</h2>
             @if(!is_null($personnes_concernees) && count($personnes_concernees)>0)
-                <div class="table ombre_petite">
+                <div class="table card">
                     <table id="index">
                         <thead>
                             <tr>

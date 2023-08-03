@@ -1,3 +1,199 @@
+/*!
+ * JSTable
+ */
+
+.dt-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: hidden;
+}
+
+.dt-container .dt-message {
+  text-align: center;
+}
+
+.dt-container .dt-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  margin-left: -50%;
+  margin-top: -20px;
+  height: 40px;
+  text-align: center;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.9) 25%, rgba(255, 255, 255, 0.9) 75%, rgba(255, 255, 255, 0) 100%);
+}
+
+.dt-top,
+.dt-bottom {
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dt-top .dt-selector,
+.dt-bottom .dt-selector {
+  padding: 10px;
+  background: var(--dark-grey);
+  color: inherit;
+  margin-right: 5px;
+  border-radius: 8px;
+}
+
+.dt-top .dt-info,
+.dt-bottom .dt-info {
+  margin: 7px 0;
+}
+
+input,
+select {
+  border: none;
+  background: unset;
+  color: inherit;
+}
+
+input:focus,
+select:focus {
+  border: none;
+  outline: none;
+}
+
+.dt-input {
+  padding: 10px 16px;
+  background: var(--dark-grey);
+  color: inherit;
+  border-radius: 8px;
+}
+
+/* PAGER */
+
+.dt-pagination ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+.dt-pagination ul li {
+  list-style: none;
+  float: left;
+}
+
+.dt-pagination a,
+.dt-pagination span {
+  border: 1px solid transparent;
+  float: left;
+  margin-left: 2px;
+  padding: 6px 12px;
+  border-radius: 50px;
+}
+
+.dt-pagination a:hover {
+  background-color: var(--grey);
+}
+
+.dt-pagination .active a,
+.dt-pagination .active a:focus,
+.dt-pagination .active a:hover {
+  background-color: var(--grey);
+  cursor: default;
+}
+
+.dt-pagination .dt-ellipsis span {
+  cursor: not-allowed;
+}
+
+.dt-pagination .disabled a,
+.dt-pagination .disabled a:focus,
+.dt-pagination .disabled a:hover {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.dt-pagination .pager a {
+  font-weight: bold;
+}
+
+.dt-table {
+  max-width: 100%;
+  width: 100%;
+  border-spacing: 0;
+}
+
+.dt-table > tbody > tr > td,
+.dt-table > tbody > tr > th,
+.dt-table > tfoot > tr > td,
+.dt-table > tfoot > tr > th,
+.dt-table > thead > tr > td,
+.dt-table > thead > tr > th {
+  vertical-align: top;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+.dt-table > thead > tr > th,
+.dt-table > thead > tr > td {
+  vertical-align: bottom;
+  text-align: left;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.dt-table > tfoot > tr > th,
+.dt-table > tfoot > tr > td {
+  vertical-align: bottom;
+  text-align: left;
+  border-top: 1px solid #d9d9d9;
+}
+
+.dt-table th {
+  vertical-align: bottom;
+  text-align: left;
+}
+
+.dt-table th.dt-sorter {
+  position: relative;
+  cursor: pointer;
+  padding-right: 20px;
+}
+
+.dt-table th.dt-sorter::before,
+.dt-table th.dt-sorter::after {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  right: 7px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+
+.dt-table th.dt-sorter::before {
+  border-top: 4px solid var(--couleur_police_primaire);
+  top: 18px;
+}
+
+.dt-table th.dt-sorter::after {
+  border-bottom: 4px solid var(--couleur_police_primaire);
+  border-top: 4px solid transparent;
+  bottom: 22px;
+}
+
+.dt-table th.dt-sorter.asc::after,
+.dt-table th.dt-sorter.desc::before {
+  opacity: 0.4;
+}
+
+.hidden {
+  display: none !important;
+  opacity: 0 !important;
+}
+
 input {
   border: none;
   background: unset;
@@ -255,105 +451,11 @@ table td.lien {
   text-align: left;
 }
 
-#search {
-  padding: 13px 25px;
-  border-radius: 50px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  background: var(--dark-grey);
-}
-
-#search .input {
-  font-size: 1.1em;
-  min-width: 30ex;
-  display: inline-block;
-}
-
-#search .input:focus {
-  outline: none;
-}
-
-#search:before {
-  font-size: 1.1em;
-  margin-right: 0.5em;
-}
-
-.index_docs {
-  display: flex;
-  flex-direction: column;
-}
-
-.documentation_liste {
-  display: flex;
-  flex-wrap: nowrap;
-  width: 100%;
-  border-radius: 15px;
-  padding: 15px 20px;
-  margin-top: 15px;
-  background: var(--dark-grey);
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--grey);
-  border-top-color: var(--grey);
-  box-sizing: border-box;
-  transition: border-top-color 0.1s ease-in-out;
-}
-
-.documentation_liste:hover {
-  border-top-color: var(--couleur_accentuation);
-}
-
-.documentation_liste .titre {
-  font-weight: var(--fw-medium);
-  font-size: 1.1em;
-  margin-block: 0;
-  color: var(--couleur_accentuation);
-}
-
-.documentation_liste .titre::first-letter {
-  text-transform: capitalize;
-}
-
-.documentation_liste .description {
-  display: none;
-}
-
-.documentation_liste .contenu_md {
-  font-size: 0.95em;
-  margin-block: 0;
-  color: var(--couleur_police_secondaire);
-  line-height: 1.15em;
-  max-height: 3.45em;
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-          mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  overflow: hidden;
-}
-
-.documentation_liste .contenu_md::first-letter {
-  text-transform: capitalize;
-}
-
-.documentation_liste .categories {
-  font-size: 0.95em;
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
+#warning p {
   color: var(--couleur_police_secondaire);
 }
 
-.categories span {
-  background: var(--grey);
-  padding: 4px 15px 5px 15px;
-  margin-right: 5px;
-  margin-top: 5px;
-  border-radius: 50px;
-  text-transform: capitalize;
-}
-
-.input_groupe .input {
-  background: none;
-  padding: 0;
-  height: 30px;
+#warning p:last-child {
+  margin-bottom: 15px;
 }
 

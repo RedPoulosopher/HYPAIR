@@ -22,7 +22,7 @@ On voit le mail et le pseudo user associé sans pouvoir le changer.
     
         <form method="POST">
             @csrf
-            <div class="groupe ombre_petite">
+            <div class="groupe card">
                 <label class="input_groupe">
                     <p class="titre"><span style="color:var(--couleur_accentuation);">*</span> Réseau social :</p>
                     <select name="reseaux_sociaux_liste_id" id="reseaux_sociaux_liste" class="input" spellcheck="false" required>
@@ -49,8 +49,8 @@ On voit le mail et le pseudo user associé sans pouvoir le changer.
                 </div>
             </div>
         </form>
-    
-        <div class="table ombre_petite">
+
+        <div class="table card">
             <table id="index">
                 <thead>
                     <tr>

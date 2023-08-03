@@ -24,11 +24,15 @@
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
-					<p class="titre">* Logotype :</p>
-					<p class="description">Soit un svg de moins de 70ko, soit un png de ratio 1 et de plus de 512px.</p>
-					<input type="file" name="logo" class="input" {{$creation==1 ? "required" : ""}} accept=".png">
+				<p class="titre">* Logotype :</p>
+				<p class="description">Soit un svg de moins de 70ko, soit un png de ratio 1 et de plus de 512px.</p>
+					<label id="file-upload">
+						<input type="file" name="logo" class="input" id="original_input" {{$creation==1 ? "required" : ""}} accept=".png">
+						Sélectionnez un fichier
+					</label>
+					<span id="filename">Aucun fichier sélectionné</span>
 				</label>
 			</div>
 				
@@ -37,5 +41,27 @@
 		</form>
 	</section>
 </main>
+
+<script>
+	var input = document.getElementById('original_input');
+	var label = document.getElementById('filename');
+
+	
+	input.addEventListener( 'change', function( e )
+	{
+		labelVal = label.innerHTML;
+		var fileName = '';
+		if( this.files && this.files.length > 1 )
+			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+		else
+			fileName = e.target.value.split( '\\' ).pop();
+
+		if( fileName )
+			label.innerHTML = "File name : " + fileName;
+		else
+			label.innerHTML = labelVal;
+	});
+
+</script>
 
 @endsection

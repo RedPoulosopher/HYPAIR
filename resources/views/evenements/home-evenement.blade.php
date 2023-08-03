@@ -33,73 +33,78 @@
                     </div>
                 @endif
 
+                <h2>Liste des évènements :</h2>
                 @if (count($tables) != 0)
-                    <div class="groupe ombre_petite">
-                        <h2>Liste des évènements</h2>
+                    <div class="table card">
                         <table style="text-align: center;">
-                            <tr>
-                                <th>Titre</th>
-                                <th>Début</th>
-                                <th>Fin</th>
-                                <th>Lieu</th>
-                                <!--
-                                                <th>Nombre de participants max</th>
-                                                <th>Pour cotisants ?</th>-->
-                                {{-- <th>Confidentialité</th>
-                                <th>Statut</th> --}}
-                            </tr>
-
-                            @foreach ($tables as $table)
+                            <thead>
                                 <tr>
-                                    <td><?= $table['titre'] ?></td>
-                                    <td><?= $table['temps_debut'] ?></td>
-                                    <td><?= $table['temps_fin'] ?></td>
-                                    <td><?= $table['lieu'] ?></td>
+                                    <th>Titre</th>
+                                    <th>Début</th>
+                                    <th>Fin</th>
+                                    <th>Lieu</th>
                                     <!--
-                                                <td><?= $table['max_participation'] ?></td>
-                                                
-                                                @if ($table['pour_cotisant'] == 0)
-    <td>Oui</td>
-@else
-    if ($table['pour_cotisant'] == 1)
-                                                <td>Non</td>
-    @endif-->
-
-                                    {{-- @if ($table['confidentialite'] == 0)
-                                        <td>Public</td>
-                                    @elseif ($table['confidentialite'] == 1)
-                                        <td>Membres de l'assos</td>
-                                    @elseif ($table['confidentialite'] == 2)
-                                        <td>Responsables & bureau</td>
-                                    @elseif ($table['confidentialite'] == 3)
-                                        <td>Bureau</td>
-                                    @elseif ($table['confidentialite'] == 4)
-                                        <td>Prez & vice-prez</td>
-                                    @endif --}}
-
-                                    {{-- @if ($table['confidentialite'] == 0)
-                                        @if ($table['validation'] == 1)
-                                            <td>Validé</td>
-                                        @elseif ($table['validation'] == 0)
-                                            <td>En attente de validation</td>
-                                        @endif
-                                    @else
-                                        <td>/</td>
-                                    @endif --}}
-
-                                    <td>
-                                        <a href="evenement/<?= $table['slug'] ?>"
-                                            class="secondaire bouton bouton_action ombre_petite administrateur"
-                                            style="color:black; border-color:black;">Détail</a>
-                                        @if ($gerer_evenement)
-                                            <p
-                                                class="suppression_entite secondaire bouton bouton_action ombre_petite administrateur">
-                                                Supprimer</p>
-                                        @endif
-                                    </td>
-
+                                                    <th>Nombre de participants max</th>
+                                                    <th>Pour cotisants ?</th>-->
+                                    {{-- <th>Confidentialité</th>
+                                    <th>Statut</th> --}}
                                 </tr>
-                            @endforeach
+                            </thead>
+
+                            <tbody>
+                                @foreach ($tables as $table)
+                                    <tr>
+                                        <td><?= $table['titre'] ?></td>
+                                        <td><?= $table['temps_debut'] ?></td>
+                                        <td><?= $table['temps_fin'] ?></td>
+                                        <td><?= $table['lieu'] ?></td>
+                                        
+                                        {{-- <td><?= $table['max_participation'] ?></td>
+                                        
+                                        @if ($table['pour_cotisant'] == 0)
+                                            <td>Oui</td>
+                                        @else
+                                            if ($table['pour_cotisant'] == 1)
+                                                <td>Non</td>
+                                        @endif --}}
+                                        
+    
+                                        {{-- @if ($table['confidentialite'] == 0)
+                                            <td>Public</td>
+                                        @elseif ($table['confidentialite'] == 1)
+                                            <td>Membres de l'assos</td>
+                                        @elseif ($table['confidentialite'] == 2)
+                                            <td>Responsables & bureau</td>
+                                        @elseif ($table['confidentialite'] == 3)
+                                            <td>Bureau</td>
+                                        @elseif ($table['confidentialite'] == 4)
+                                            <td>Prez & vice-prez</td>
+                                        @endif --}}
+    
+                                        {{-- @if ($table['confidentialite'] == 0)
+                                            @if ($table['validation'] == 1)
+                                                <td>Validé</td>
+                                            @elseif ($table['validation'] == 0)
+                                                <td>En attente de validation</td>
+                                            @endif
+                                        @else
+                                            <td>/</td>
+                                        @endif --}}
+    
+                                        <td>
+                                            <a href="evenement/<?= $table['slug'] ?>"
+                                                class="secondaire bouton bouton_action ombre_petite administrateur"
+                                                style="color:black; border-color:black;">Détail</a>
+                                            @if ($gerer_evenement)
+                                                <p
+                                                    class="suppression_entite secondaire bouton bouton_action ombre_petite administrateur">
+                                                    Supprimer</p>
+                                            @endif
+                                        </td>
+    
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 @else
@@ -108,46 +113,49 @@
 
 
                 {{-- @if ($entite == 'bde' && in_array(13, $entite_user) && $gerer_evenement == 1)
-        <div class="groupe ombre_petite">
-            <h2>Liste des évènements en attente de validation</h2>
+                    <div class="groupe card">
+                        <h2>Liste des évènements en attente de validation</h2>
 
-            @if (count($tables_attente_validation) != 0)
-            <table style="text-align: center;">
-                    <tr>
-                        <th>Entités</th>
-                        <th>Titre</th>
-                        <th>Début</th>
-                        <th>Fin</th>
-                        <th>Lieu</th>
-                    </tr> 
-                                     
-                    @foreach ($tables_attente_validation as $table)                    
-                    @if ($table['validation'] == 0)
-                    <tr>
-                        <td><?= $table['nom'] ?></td>
-                        <td><?= $table['titre'] ?></td>
-                        <td><?= $table['temps_debut'] ?></td>
-                        <td><?= $table['temps_fin'] ?></td>
-                        <td><?= $table['lieu'] ?></td>
-                       
-                        <td>
-                            <a href="/<?= $table['uid'] ?>/entite/evenement/<?= $table['slug'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:black; border-color:black;">Detail</a><form method="POST" action="/bde/entite/evenement/validation">
-                                @csrf
-                                <button type="submit" name="id" value="<?= $table['id'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:green; border-color:green;">Valider</button>
-                            </form>
-                            <p class="suppression_bde secondaire bouton bouton_action ombre_petite administrateur">Supprimer</p>  
-                        </td>
-
-                    </tr>
-                    @endif
-                    @endforeach
-            </table>
-            @else
-            <h4>Il n'y a aucun évènement en attente de validation !</h4>
-            @endif
-        </div>      
-    </section>
-    @endif --}}
+                        @if (count($tables_attente_validation) != 0)
+                        <table style="text-align: center;">
+                                <thead>
+                                    <tr>
+                                        <th>Entités</th>
+                                        <th>Titre</th>
+                                        <th>Début</th>
+                                        <th>Fin</th>
+                                        <th>Lieu</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    @foreach ($tables_attente_validation as $table)                    
+                                    @if ($table['validation'] == 0)
+                                    <tr>
+                                        <td><?= $table['nom'] ?></td>
+                                        <td><?= $table['titre'] ?></td>
+                                        <td><?= $table['temps_debut'] ?></td>
+                                        <td><?= $table['temps_fin'] ?></td>
+                                        <td><?= $table['lieu'] ?></td>
+                                    
+                                        <td>
+                                            <a href="/<?= $table['uid'] ?>/entite/evenement/<?= $table['slug'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:black; border-color:black;">Detail</a><form method="POST" action="/bde/entite/evenement/validation">
+                                                @csrf
+                                                <button type="submit" name="id" value="<?= $table['id'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:green; border-color:green;">Valider</button>
+                                            </form>
+                                            <p class="suppression_bde secondaire bouton bouton_action ombre_petite administrateur">Supprimer</p>  
+                                        </td>
+    
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                </tbody>                                                
+                        </table>
+                        @else
+                        <h4>Il n'y a aucun évènement en attente de validation !</h4>
+                        @endif
+                    </div>      
+                </section>
+                @endif --}}
 
 
                 <div id="info" class="popup">

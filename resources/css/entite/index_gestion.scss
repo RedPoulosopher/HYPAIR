@@ -1,0 +1,11 @@
+@import '../jstable';
+@import '../formulaire';
+
+
+#warning p {
+    color: var(--couleur_police_secondaire);
+
+    &:last-child {
+        margin-bottom: 15px;
+    }
+}

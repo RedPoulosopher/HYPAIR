@@ -3,7 +3,7 @@
 @section('titre', 'Entités')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="css/entite/index_admin.css" type="text/css">
+    <link rel="stylesheet" href="/css/entite/index_admin.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="/css/jstable.css">
 @endpushonce
 
@@ -15,53 +15,57 @@
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Entites</h1>
 
         @if (!$est_bureau)
-		    <a href="../entite/nouvelle" class="bouton tertiaire icon-security-safe" style="margin-top:15px;">Créer une entite</a>
+		    <a href="../entite/nouvelle" class="bouton tertiaire icon-security-safe" id="bouton-creer">Créer une entite</a>
         @endif
 
-        <div id="choix_entite">
-            @if (!$est_bureau)
-                <a href="?type=bureau" class="bouton secondaire">Bureaux</a>
-            @endif
-            <a href="?type=comité" class="bouton secondaire">Comités</a>
-            <a href="?type=liste" class="bouton secondaire">Listes</a>
-        </div>
+        <div id="entites-actuelles">
 
-        @if(isset($entites_dependantes) && count($entites_dependantes)>0)
-            <div class="table ombre_petite">
-                <table id="index">
-                    <thead>
-                        <tr>
-                            <th width="35%">Nom</th>
-                            <th>Sites</th>
-                            <th>Type</th>
-                            <th width="5%">-</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($entites_dependantes as $entite)
-                            <tr class="ligne_entite">
-                                <td><a class="couleur" href="{{ $entite->lien_relatif() }}">{{ $entite["nom"] }}</a></td>
-                                <td class="sites">
-                                    @foreach ($entite->sites()->get()->pluck('label') as $site)
-                                        <span class="site">: {{ $site }}</span>
-                                    @endforeach
-                                </td>
-                                <td class="type">{{ $entite["type"]->value }}</td>
-                                <td class="meatballs" onclick="javascript:menu_meatballs(this)" entite_id="{{ $entite["id"] }}"><div></div><div></div><div></div></td>
-                        @endforeach
-                    </tbody>
-                </table>
+            <h2>Entites actuelles :</h2>
+            <div id="choix_entite">
+                @if (!$est_bureau)
+                    <a href="?type=bureau" class="bouton secondaire">Bureaux</a>
+                @endif
+                <a href="?type=comité" class="bouton secondaire">Comités</a>
+                <a href="?type=liste" class="bouton secondaire">Listes</a>
             </div>
-
-            <ul id="menu_meatballs" class="ombre_grande">
-                <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/informations">Modifier les infos</a></li>
-                <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/description">Modifier la description</a></li>
-                <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/logotype">Modifier le logo</a></li>
-                <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/couleur">Modifier la couleur</a></li>
-                <li><a id="menu_membres" href="" url="../entite/{entite_id}/membres">Gérer les membres</a></li>
-                <li><a id="menu_membres" href="" url="../entite/{entite_id}/evenement">Gérer les évènements</a></li>
-            </ul>
-        @endif
+    
+            @if(isset($entites_dependantes) && count($entites_dependantes)>0)
+                <div class="table card">
+                    <table id="index">
+                        <thead>
+                            <tr>
+                                <th width="35%">Nom</th>
+                                <th>Sites</th>
+                                <th>Type</th>
+                                <th width="5%">-</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($entites_dependantes as $entite)
+                                <tr class="ligne_entite">
+                                    <td><a class="couleur" href="{{ $entite->lien_relatif() }}">{{ $entite["nom"] }}</a></td>
+                                    <td class="sites">
+                                        @foreach ($entite->sites()->get()->pluck('label') as $site)
+                                            <span class="site">: {{ $site }}</span>
+                                        @endforeach
+                                    </td>
+                                    <td class="type">{{ $entite["type"]->value }}</td>
+                                    <td class="meatballs" onclick="javascript:menu_meatballs(this)" entite_id="{{ $entite["id"] }}"><div></div><div></div><div></div></td>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+    
+                <ul id="menu_meatballs" class="ombre_grande">
+                    <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/informations">Modifier les infos</a></li>
+                    <li><a id="menu_modifier" href="" url="../entite/{entite_id}/modifier/description">Modifier la description</a></li>
+                    <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/logotype">Modifier le logo</a></li>
+                    <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/couleur">Modifier la couleur</a></li>
+                    <li><a id="menu_membres" href="" url="../entite/{entite_id}/membres">Gérer les membres</a></li>
+                    <li><a id="menu_membres" href="" url="../entite/{entite_id}/evenement">Gérer les évènements</a></li>
+                </ul>
+            @endif
+        </div>
     </section>
 </main>
 

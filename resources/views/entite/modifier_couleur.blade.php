@@ -28,7 +28,7 @@
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">* Couleur principale sur thème clair :</p>
 					<input type="color" name="couleur_claire" class="input" required id="couleur_claire"value="{{old('couleur_claire') ?? $entite->couleur_claire ?? ''}}">

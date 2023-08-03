@@ -22,7 +22,7 @@
 						@endforeach
 					</div>
 				@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 			<div style="display:flex; flex-wrap:wrap;">
 				<label class="input_groupe" style="flex-grow:1;">
 							<p class="titre">Nom <span style="color:var(--couleur_accentuation);">*</span></p>

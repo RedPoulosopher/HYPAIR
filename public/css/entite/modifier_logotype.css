@@ -34,13 +34,11 @@ textarea:focus {
 .groupe {
   display: grid;
   padding: 13px 18px;
-  border-radius: 25px;
   font-size: 1em;
   color: inherit;
-  margin: 40px 0px;
+  margin: 0 0 40px;
   max-width: 100%;
   box-sizing: border-box;
-  border: 1px solid var(--grey);
 }
 
 .groupe .erreurs {
@@ -220,6 +218,43 @@ fieldset legend {
   color: var(--couleur_police_secondaire);
 }
 
+div.table {
+  box-sizing: border-box;
+  margin-top: 10px;
+  overflow: hidden;
+  padding: 13px 18px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table thead tr {
+  border-bottom: 1px solid var(--light-grey);
+}
+
+table tr {
+  text-align: center;
+  color: var(--couleur_police);
+}
+
+table tbody tr:hover {
+  border-bottom: 1px solid var(--light-grey);
+}
+
+table th {
+  padding: 15px 15px;
+}
+
+table td {
+  padding: 10px 15px;
+}
+
+table td.lien {
+  text-align: left;
+}
+
 #search {
   padding: 13px 25px;
   border-radius: 50px;
@@ -314,5 +349,25 @@ fieldset legend {
   margin-top: 5px;
   border-radius: 50px;
   text-transform: capitalize;
+}
+
+input[type=file] {
+  display: none !important;
+}
+
+#file-upload {
+  display: block;
+  margin-top: 15px;
+  background-color: var(--dark-grey);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#filename {
+  display: block;
+  color: var(--couleur_police_secondaire);
+  font-style: italic;
+  margin-top: 8px;
 }
 

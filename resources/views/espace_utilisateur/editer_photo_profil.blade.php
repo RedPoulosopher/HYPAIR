@@ -17,7 +17,7 @@ On voit le mail et le pseudo user associé sans pouvoir le changer. --}}
 
 		<form method="POST" enctype="multipart/form-data">
 		@csrf
-		<div class="groupe ombre_petite">
+		<div class="groupe card">
 				@if ($errors->any())
 					<div class="erreurs">
 						@foreach ($errors->all() as $error)

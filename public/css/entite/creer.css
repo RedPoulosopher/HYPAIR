@@ -34,13 +34,11 @@ textarea:focus {
 .groupe {
   display: grid;
   padding: 13px 18px;
-  border-radius: 25px;
   font-size: 1em;
   color: inherit;
-  margin: 40px 0px;
+  margin: 0 0 40px;
   max-width: 100%;
   box-sizing: border-box;
-  border: 1px solid var(--grey);
 }
 
 .groupe .erreurs {
@@ -218,6 +216,43 @@ fieldset legend {
 .input_groupe.radio {
   display: grid;
   color: var(--couleur_police_secondaire);
+}
+
+div.table {
+  box-sizing: border-box;
+  margin-top: 10px;
+  overflow: hidden;
+  padding: 13px 18px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table thead tr {
+  border-bottom: 1px solid var(--light-grey);
+}
+
+table tr {
+  text-align: center;
+  color: var(--couleur_police);
+}
+
+table tbody tr:hover {
+  border-bottom: 1px solid var(--light-grey);
+}
+
+table th {
+  padding: 15px 15px;
+}
+
+table td {
+  padding: 10px 15px;
+}
+
+table td.lien {
+  text-align: left;
 }
 
 #search {

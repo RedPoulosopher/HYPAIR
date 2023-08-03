@@ -115,7 +115,7 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   margin-left: auto;
   margin-right: auto;
   border-radius: 250px;
-  background: var(--dark-grey);
+  background: var(--grey);
 }
 
 .service .logo img {

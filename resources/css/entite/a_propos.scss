@@ -18,11 +18,10 @@
 
 .categories {
     margin-top: 20px;
-    color: var(--couleur_police_secondaire);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .categories>span {
@@ -30,6 +29,8 @@
     padding: 4px 15px 5px 15px;
     border-radius: 50px;
     text-transform: capitalize;
+    color: var(--couleur_police_secondaire);
+    font-weight: var(--fw-regular);
 }
 
 .description {

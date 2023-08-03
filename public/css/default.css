@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;
 
-400;500;700);@charset "UTF-8";
+300;400;500;700);@charset "UTF-8";
 
 /* List styles imported by all pages */
 html,
@@ -222,6 +222,7 @@ body.light-theme a.couleur:hover {
   --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.2) inset;
   --ombre-card: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
   --fw-thin: 100;
+  --fw-light: 100;
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;

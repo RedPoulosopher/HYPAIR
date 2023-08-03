@@ -9,7 +9,7 @@
         margin-left: auto;
         margin-right: auto;
         border-radius: 250px;
-        background: var(--dark-grey);
+        background: var(--grey);
 
         & img {
             width: 84%;
@@ -51,7 +51,7 @@
             justify-content: center;
             gap: 5px;
 
-            & > span {
+            &>span {
                 text-transform: capitalize;
                 background: var(--grey);
                 padding: 4px 15px 5px 15px;

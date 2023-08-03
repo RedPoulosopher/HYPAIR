@@ -14,7 +14,7 @@
             @if (Session::has('success'))
                 <p class="explication">Bienvenue sur la page concernant les évènements !</p>
             @endif
-            <div class="table-container">
+            <div class="section-content">
                 @csrf
                 @if ($errors->any())
                     <div class="erreurs">

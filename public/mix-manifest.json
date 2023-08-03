@@ -3,7 +3,6 @@
     "/css/accueil.css": "/css/accueil.css",
     "/css/app.css": "/css/app.css",
     "/css/authentification.css": "/css/authentification.css",
-    "/css/calendrier.css": "/css/calendrier.css",
     "/css/components/calendrier-sidebar.css": "/css/components/calendrier-sidebar.css",
     "/css/components/coming-event.css": "/css/components/coming-event.css",
     "/css/components/entite.css": "/css/components/entite.css",
@@ -48,5 +47,6 @@
     "/css/membre/index_admin.css": "/css/membre/index_admin.css",
     "/css/projet.css": "/css/projet.css",
     "/css/simpleMDE.css": "/css/simpleMDE.css",
-    "/js/jstable.min.js": "/js/jstable.min.js"
+    "/js/jstable.min.js": "/js/jstable.min.js",
+    "/css/evenements/calendrier.css": "/css/evenements/calendrier.css"
 }

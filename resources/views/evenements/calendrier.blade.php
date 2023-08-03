@@ -3,7 +3,7 @@
 @section('titre', 'Calendrier')
 
 @pushonce('styles')
-<link rel="stylesheet" href="css/calendrier.css" type="text/css" />
+<link rel="stylesheet" href="css/evenements/calendrier.css" type="text/css" />
 @endpushonce
 
 @section('content')
@@ -13,37 +13,35 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
-<div id="main-content">
+<main id="main-content">
 
     <div id="boutons">
         <p id="retour" class="bouton secondaire ombre_petite" style="width:100px;">< Accueil</p>
         <p id="fleche-gauche" class="bouton secondaire ombre_petite info_bouton"> <--- </p>
-        <h2 id="date" style="text-align:center;"></h2>
+        <h1 id="date" style="text-align:center;"></h1>
         <p id="fleche-droite" class="bouton secondaire ombre_petite info_bouton"> ---> </p>
     </div>
 
-    <div id="contenu" class="grand">
-        {{-- <select>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-        </select>
-        <select>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-        </select> --}}
-        <div id="calendrier">
-        </div>
+    {{-- <select>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
+    <select>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+    </select> --}}
+    <div id="calendrier">
     </div>
 
 
@@ -67,7 +65,7 @@
             </div>
         </div>
     </div>
-</div>
+</main>
 
 <script>
 
@@ -77,7 +75,7 @@
     el_calendrier = document.getElementById("calendrier");
 
     function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
-        jours = ["lun","mar","mer","jeu","ven","sam","dim"]
+        jours = ["Lun.","Mar.","Mer.","Jeu.","Ven.","Sam.","Dim."]
 
         // remplissage
         if (responsive.matches) { // max-width: 768px (for phone)

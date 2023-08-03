@@ -14,7 +14,7 @@
 	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des Membres</h1>
 
-        <div id="gestion_membre">
+        <div class="section-content">
             <h2>Ajouter un membre :</h2>
             <form method="POST">
                 @csrf
@@ -40,12 +40,13 @@
                     </div>
                 </div>
             </form>
+        </div>
 
             {{-- <div id="choix_role">
                 <a href="membres" class="bouton secondaire">Membres</a>
                 <a href="abonnes" class="bouton secondaire">Abonnés</a>
             </div> --}}
-
+        <div class="section-content">
             <h2>Membres actuels :</h2>
             @if(!is_null($personnes_concernees) && count($personnes_concernees)>0)
                 <div class="table card">

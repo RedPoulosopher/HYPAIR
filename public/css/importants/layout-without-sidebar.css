@@ -522,13 +522,14 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
 
 #main-content {
   grid-column: 1;
-  grid-row: 0;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 #main-content section {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -536,6 +537,10 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
 
 #main-content section:not(:last-of-type) {
   margin-bottom: 40px;
+}
+
+#main-content section .section-content {
+  width: 100%;
 }
 
 section > h1,

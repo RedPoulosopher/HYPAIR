@@ -12,7 +12,7 @@
 	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des réseaux sociaux</h1>
 
-        <div id="gestion_reseaux">
+        <div class="section-content">
             <h2>Ajouter un réseau social :</h2>
             <div id="warning">
                 <p>Vous ne pouvez avoir qu'un seul réseau social de chaque type.</p>
@@ -43,7 +43,9 @@
                     </div>
                 </div>
             </form>
+        </div>
 
+        <div class="section-content">
             <h2>Réseaux actuels:</h2>
             
             <div class="table card">

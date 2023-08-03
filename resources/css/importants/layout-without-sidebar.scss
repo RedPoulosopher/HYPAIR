@@ -28,18 +28,23 @@
 //Content on the left
 #main-content {
     grid-column: 1;
-    grid-row: 0;
+    grid-row: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     section {
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
 
         &:not(:last-of-type) {
             margin-bottom: 40px;
+        }
+
+        .section-content {
+            width: 100%;
         }
     }
 }

@@ -18,7 +18,7 @@
 		    <a href="../entite/nouvelle" class="bouton tertiaire icon-security-safe" id="bouton-creer">Créer une entite</a>
         @endif
 
-        <div id="entites-actuelles">
+        <div class="section-content">
 
             <h2>Entites actuelles :</h2>
             <div id="choix_entite">

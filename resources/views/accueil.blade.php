@@ -8,7 +8,7 @@
 
 @section('content')
 
-    <!-- Contenu principal de la page -->
+    {{-- Contenu principal de la page --}}
     <main id="main-content">
 
         <section>

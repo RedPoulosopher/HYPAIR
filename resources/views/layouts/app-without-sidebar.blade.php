@@ -25,17 +25,17 @@
         }
     @endphp
 
-    <!-- Barre de navigation -->
-    <!-- Si l'utilisateur est connecté : faire apparaître sa PFP au lieu du bouton Se Connecter -->
+    {{-- Barre de navigation --}}
+    {{-- Si l'utilisateur est connecté : faire apparaître sa PFP au lieu du bouton Se Connecter --}}
     @if (Auth::check())
         <x-navbar :isConnected="true" :user="$user" />
 
-        <!-- Sinon : mettre le bouton Se Connecter (la navbar normale) -->
+    {{-- Sinon : mettre le bouton Se Connecter (la navbar normale) --}}
     @else
         <x-navbar :isConnected="false" :user="[]" />
     @endif
 
-    <!-- Contenu de la page -->
+    {{-- Contenu de la page --}}
     <div id="content">
 
         @yield('content')

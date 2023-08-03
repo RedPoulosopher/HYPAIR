@@ -1,7 +1,8 @@
-<!--
-Page d'edition du profil utilisateur, peut y changer photo de profil, nom, prenom, pronoms, promo.
-On voit le mail et le pseudo user associé sans pouvoir le changer.
--->
+{{--
+    Page d'edition du profil utilisateur, peut y changer photo de profil, nom, prenom, pronoms, promo.
+    On voit le mail et le pseudo user associé sans pouvoir le changer.
+--}}
+
 
 @extends('layouts.app')
 

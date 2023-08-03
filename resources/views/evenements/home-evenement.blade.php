@@ -43,10 +43,10 @@
                                     <th>Début</th>
                                     <th>Fin</th>
                                     <th>Lieu</th>
-                                    <!--
-                                                    <th>Nombre de participants max</th>
-                                                    <th>Pour cotisants ?</th>-->
-                                    {{-- <th>Confidentialité</th>
+                                    
+                                    {{-- <th>Nombre de participants max</th>
+                                    <th>Pour cotisants ?</th>
+                                    <th>Confidentialité</th>
                                     <th>Statut</th> --}}
                                 </tr>
                             </thead>

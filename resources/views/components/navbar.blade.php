@@ -1,4 +1,4 @@
-<!-- Component de la barre de navigation principale (celle du haut) -->
+{{-- Component de la barre de navigation principale (celle du haut) --}}
 
 <nav id="navbar">
 

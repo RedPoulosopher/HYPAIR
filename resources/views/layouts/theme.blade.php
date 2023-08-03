@@ -1,3 +1,4 @@
+<script>
 const set_theme = (theme) => {
     document.body.classList.value = "";
     if (theme == "dark") {
@@ -18,3 +19,4 @@ if (currentTheme == null) {
 }
 
 set_theme(currentTheme)
+</script>

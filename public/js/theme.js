@@ -93,29 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var set_theme = function set_theme(theme) {
-  document.body.classList.value = "";
-
-  if (theme == "dark") {
-    document.body.classList.add("dark-theme");
-  } else {
-    document.body.classList.add("light-theme");
-  }
-};
-
-currentTheme = localStorage.getItem("theme") || 'dark'; //Default is dark
-
-if (currentTheme == null) {
-  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    currentTheme = "dark";
-  } else {
-    currentTheme = "light";
-  }
-
-  localStorage.setItem("theme", currentTheme);
-}
-
-set_theme(currentTheme);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'D:\\Code\\AIR\\site-air\\resources\\js\\theme.js'");
 
 /***/ }),
 

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('titre', 'Site Web') - HypAIR</title>
 
+    {{-- @include('layouts.theme') --}}
     <link rel="stylesheet" href="/css/default.css" type="text/css" />
     <link rel="stylesheet" href="/css/importants/layout.css" type="text/css" />
     @stack('styles')
@@ -14,7 +15,8 @@
 
 
 <body>
-    <script type="text/javascript" src="/js/theme.js"></script>
+    @include('layouts.theme')
+    {{-- <script type="text/javascript" src="/js/theme.js"></script> --}}
 
     @php
         // Code pour gérer le login utilisateur

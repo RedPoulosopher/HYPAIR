@@ -14,7 +14,8 @@
 
 
 <body>
-    <script type="text/javascript" src="/js/theme.js"></script>
+    @include('layouts.theme')
+    {{-- <script type="text/javascript" src="/js/theme.js"></script> --}}
 
     @php
         // Code pour gérer le login utilisateur

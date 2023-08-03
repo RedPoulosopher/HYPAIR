@@ -72,7 +72,7 @@ class ReseauxSociauxListeSeeder extends Seeder
             ],
             [
                 'nom' => 'Snapchat',
-                'couleur' => '#f8de02',
+                'couleur' => '#dcbf05',
                 'couleur_police' => '#ffffff',
                 'pre_url' => "contactez l'AIR",
             ],

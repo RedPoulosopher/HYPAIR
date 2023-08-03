@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+    
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('titre', 'Site Web') - HypAIR</title>
-
-    <link rel="stylesheet" href="/css/default.css" type="text/css" />
-    <link rel="stylesheet" href="/css/importants/layout-without-sidebar.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/css/default.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/importants/layout-without-sidebar.css" type="text/css"/>
     @stack('styles')
 </head>
 
-@include('layouts.theme')
 
 <body>
+    <script type="text/javascript" src="/js/theme.js"></script>
 
     @php
         // Code pour gérer le login utilisateur

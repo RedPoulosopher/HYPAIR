@@ -31,6 +31,7 @@
     "/css/espace_utilisateur/editer_infos_profil.css": "/css/espace_utilisateur/editer_infos_profil.css",
     "/css/espace_utilisateur/editer_photo_profil.css": "/css/espace_utilisateur/editer_photo_profil.css",
     "/css/espace_utilisateur/editer_reseaux_profil.css": "/css/espace_utilisateur/editer_reseaux_profil.css",
+    "/css/evenements/calendrier.css": "/css/evenements/calendrier.css",
     "/css/formulaire-evenement.css": "/css/formulaire-evenement.css",
     "/css/formulaire.css": "/css/formulaire.css",
     "/css/home-evenement.css": "/css/home-evenement.css",
@@ -48,5 +49,5 @@
     "/css/projet.css": "/css/projet.css",
     "/css/simpleMDE.css": "/css/simpleMDE.css",
     "/js/jstable.min.js": "/js/jstable.min.js",
-    "/css/evenements/calendrier.css": "/css/evenements/calendrier.css"
+    "/js/theme.js": "/js/theme.js"
 }

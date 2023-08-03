@@ -1,0 +1,20 @@
+const set_theme = (theme) => {
+    document.body.classList.value = "";
+    if (theme == "dark") {
+        document.body.classList.add("dark-theme");
+    } else {
+        document.body.classList.add("light-theme");
+    }
+}
+
+currentTheme = localStorage.getItem("theme") || 'dark';//Default is dark
+if (currentTheme == null) {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        currentTheme = "dark"
+    } else {
+        currentTheme = "light"
+    }
+    localStorage.setItem("theme", currentTheme);
+}
+
+set_theme(currentTheme)

@@ -23,7 +23,7 @@
             @endif
             @foreach($users as $user)
             
-            <div class="groupe ombre_petite">
+            <div class="groupe card">
                 <label class="input_groupe flex">
                     <input type="radio" name="utilisateur" value={{$user->id}} class="input" @if ($user->id == 1) checked @endif/>
                     <p><strong> {{$user->prenom}} {{$user->nom}}</strong>{{$user->resume()}}</p>

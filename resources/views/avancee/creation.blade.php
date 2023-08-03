@@ -23,7 +23,7 @@
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<span>Cette avancée sera accessible via : <span id="lien_doc"></span></span>
 				<label class="input_groupe">
 					<p class="titre">* Titre :</p>

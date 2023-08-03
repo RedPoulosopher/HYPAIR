@@ -18,7 +18,7 @@ if (currentTheme == null){
 	localStorage.setItem("theme", currentTheme);
 }
 
-window.onload = ()=>{
+// window.onload = ()=>{
 	set_theme(currentTheme)
-}
+// }
 </script>

@@ -1,0 +1,30 @@
+p.explication {
+  margin-top: 0;
+}
+
+p.titre {
+  font-size: 18px;
+  font-weight: var(--fw-medium);
+}
+
+input,
+textarea {
+  border: none;
+  outline: none;
+  background-color: var(--grey);
+  border-radius: 8px;
+  padding: 14px 25px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+}
+
+textarea {
+  padding: 20px 25px;
+  resize: vertical;
+}
+
+#mail {
+  color: var(--couleur_police_secondaire);
+}
+

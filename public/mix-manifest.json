@@ -48,9 +48,5 @@
     "/css/membre/index_admin.css": "/css/membre/index_admin.css",
     "/css/projet.css": "/css/projet.css",
     "/css/simpleMDE.css": "/css/simpleMDE.css",
-    "/js/jstable.min.js": "/js/jstable.min.js",
-    "/images/gitlab.png": "/images/gitlab.png",
-    "/images/logo_air.png": "/images/logo_air.png",
-    "/images/peertube.png": "/images/peertube.png",
-    "/images/piwigo.png": "/images/piwigo.png"
+    "/js/jstable.min.js": "/js/jstable.min.js"
 }

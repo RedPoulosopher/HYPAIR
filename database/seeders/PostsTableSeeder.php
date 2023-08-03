@@ -23,7 +23,8 @@ class PostsTableSeeder extends Seeder
                     'description' => 'ceci est ma description géniale',
                     'date_apparition' => '2022-04-12 08:00:00',
                     'date_expiration' => '2022-04-17 08:00:00',
-                    'tags' => 'soirée, fête, bière'
+                    'tags' => 'soirée, fête, bière',
+                    'entite_id' => 1
                 ],
                 [
                     'id' => 2,
@@ -32,7 +33,8 @@ class PostsTableSeeder extends Seeder
                     'description' => 'ceci est ma description pas si ouf que ça en fait...',
                     'date_apparition' => '2022-06-12 08:00:00',
                     'date_expiration' => '2022-06-17 08:00:00',
-                    'tags' => null
+                    'tags' => null,
+                    'entite_id' => 1
                 ],
                 [
                     'id' => 3,
@@ -41,7 +43,8 @@ class PostsTableSeeder extends Seeder
                     'description' => "ceci est ma description géniale d'une actu encore mieux",
                     'date_apparition' => '2022-04-12 15:00:00',
                     'date_expiration' => '2022-04-22 20:00:00',
-                    'tags' => 'moumou, reine, mouette'
+                    'tags' => 'moumou, reine, mouette',
+                    'entite_id' => 3
                 ],
             ]
         );

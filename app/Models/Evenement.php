@@ -17,10 +17,10 @@ class Evenement extends Model
         'temps_debut',
         'temps_fin',
         'lieu',
+        'confidentialite',
         'max_participation',
         'campus_id',
         'pour_cotisant',
-        'is_actualite',
         'validation',
     ];
 
@@ -32,6 +32,10 @@ class Evenement extends Model
     public function campus()
     {
         return $this->belongsTo(Site::class);
+    }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 
     // Vieille fonction

@@ -133,7 +133,7 @@ class EvenementController extends Controller
 
 
 
-		$tables = Evenement::select('id', 'entite_id', 'titre', 'description', 'date_apparition', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'campus_id', 'is_actualite')
+		$tables = Evenement::select('id', 'entite_id', 'titre', 'description', 'date_apparition', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'campus_id')
 			->where([
 				// ['confidentialite', '<=', $confidentialite],
 				['entite_id', '=', session('entite_id')]

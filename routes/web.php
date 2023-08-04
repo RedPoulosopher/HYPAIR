@@ -15,6 +15,7 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvanceeController;
 use App\Http\Controllers\LocalAuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -28,15 +29,15 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/entites/douai');
-});
+// Route::get('/', function () {
+//     return redirect('/entites/douai');
+// });
 
 Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });
 
-Route::get('/', [EvenementController::class, 'accueil']);
+Route::get('/', [PostController::class, 'accueil']);
 
 Route::get('/mes-entites', [EntiteController::class, 'mes_entites']);
 

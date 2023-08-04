@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Auth;
 
 class EvenementController extends Controller
 {
-	public function accueil()
-	{
-		$events = Evenement::all();
-		return view('accueil')->with('events', $events);
-	}
+	// public function accueil()
+	// {
+	// 	$events = Evenement::all();
+	// 	return view('accueil')->with('events', $events);
+	// }
 	public function create()
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");

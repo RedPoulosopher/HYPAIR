@@ -1,6 +1,6 @@
 {{-- COMPONENT des évènements de la page d'accueil --}}
 
-<article id="event" class="card">
+<article id="post" class="card">
 
     <div id="header">
 
@@ -8,27 +8,27 @@
 
         <div class="details">
             <div id="main-title">
-                <h2>{{ $event->titre }}</h2>
+                <h2>{{ $post->titre }}</h2>
                 <p>•</p>
-                <p>Posté par {{ $event->entite->nom }}</p>
+                <p>Posté par {{ $post->entite->nom }}</p>
             </div>
 
 
             <div class="tags">
                 <div class="tag">
-                    <p>Event</p>
+                    <p>post</p>
                 </div>
                 <div class="tag">
-                    <p>Event</p>
+                    <p>post</p>
                 </div>
                 <div class="tag">
-                    <p>Event</p>
+                    <p>post</p>
                 </div>
                 <div class="tag">
-                    <p>Event</p>
+                    <p>post</p>
                 </div>
                 <div class="tag">
-                    <p>Event</p>
+                    <p>post</p>
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
     var contentState = true
 
 
-    function revealContent(event) {
+    function revealContent(post) {
 
         if (contentState) {
             content.style.display = "none"
@@ -98,5 +98,5 @@
         }
     }
 
-    content.addEventListener("click", revealContent())
+    content.addpostListener("click", revealContent())
 </script>

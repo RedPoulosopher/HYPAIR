@@ -31,8 +31,8 @@
 
             <div class="article-wrapper">
 
-                @foreach ($events as $event)
-                    <x-event :event="$event" />
+                @foreach ($posts as $post)
+                    <x-post :post="$post" />
                 @endforeach
 
             </div>

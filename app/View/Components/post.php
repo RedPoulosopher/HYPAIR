@@ -4,18 +4,18 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Event extends Component
+class Post extends Component
 {
-    public $event;
+    public $post;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($event)
+    public function __construct($post)
     {
-        $this->event = $event;
+        $this->post = $post;
     }
 
     /**
@@ -25,6 +25,6 @@ class Event extends Component
      */
     public function render()
     {
-        return view('components.event');
+        return view('components.post');
     }
 }

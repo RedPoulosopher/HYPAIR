@@ -31,14 +31,7 @@ let getFilesInSubdirectories = function (dir) {
  */
 
 
-mix.webpackConfig({
-    output: {
-        chunkFilename: "[name].[chunkhash:8].css",
-        filename: "[name].css",
-    }
-});
-
-
+// -------------------------------------------------------------CSS-------------------------------------------------------
 getFilesInSubdirectories("resources/css/");
 files.forEach(function (filepath) {
     var outFilepath = filepath.replace("resources/css/", "").split("/")//Remove base path
@@ -47,14 +40,26 @@ files.forEach(function (filepath) {
     mix.sass(filepath, "public/css" + outFilepath);
 });
 
-
+// -------------------------------------------------------------JS--------------------------------------------------------
 getFiles("resources/js/").forEach(function (filepath) {
     mix.js("resources/js/" + filepath, "public/js");
 });
 
-mix.copy('resources/images/*', 'public/images');
+// -----------------------------------------------------------IMAGES------------------------------------------------------
+files = []
+getFilesInSubdirectories("resources/images/");
+files.forEach(function (filepath) {
+    var outFilepath = filepath.replace("resources/images/", "").split("/")//Remove base path
+    outFilepath.pop();//Remove filename
+    outFilepath = outFilepath.join("/");
+    mix.copy(filepath, 'public/images' + outFilepath);
+});
+
+// ------------------------------------------------------------FONTS------------------------------------------------------
 mix.copy("resources/fonts/*.ttf", "public/fonts");
 
+
+// Versionning
 if (mix.inProduction()) {
     mix.version();
 }

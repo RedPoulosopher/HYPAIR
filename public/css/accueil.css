@@ -2,44 +2,44 @@
 
 /* Style des différents composants de la page */
 
-#event {
+#post {
   color: white;
   padding: 15px;
 }
 
-#event:not(:last-of-type) {
+#post:not(:last-of-type) {
   margin-bottom: 30px;
 }
 
-#event #header {
+#post #header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#event #header .thumbnail {
+#post #header .thumbnail {
   border-radius: 200px;
   width: 10%;
   height: 10%;
 }
 
-#event #header .details {
+#post #header .details {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-#event #header .details #main-title {
+#post #header .details #main-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#event #header .details .tags {
+#post #header .details .tags {
   display: flex;
   flex-direction: row;
 }
 
-#event #header .details .tags .tag {
+#post #header .details .tags .tag {
   background-color: #CC3345;
   border-radius: 100px;
   font-size: 12px;
@@ -50,13 +50,13 @@
   padding-right: 15px;
 }
 
-#event #header #release-date {
+#post #header #release-date {
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
 }
 
-#event #header #arrow-display {
+#post #header #arrow-display {
   margin-left: 10px;
   margin-right: 10px;
   cursor: pointer;
@@ -165,44 +165,44 @@
   }
 }
 
-#event {
+#post {
   color: white;
   padding: 15px;
 }
 
-#event:not(:last-of-type) {
+#post:not(:last-of-type) {
   margin-bottom: 30px;
 }
 
-#event #header {
+#post #header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#event #header .thumbnail {
+#post #header .thumbnail {
   border-radius: 200px;
   width: 10%;
   height: 10%;
 }
 
-#event #header .details {
+#post #header .details {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-#event #header .details #main-title {
+#post #header .details #main-title {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#event #header .details .tags {
+#post #header .details .tags {
   display: flex;
   flex-direction: row;
 }
 
-#event #header .details .tags .tag {
+#post #header .details .tags .tag {
   background-color: #CC3345;
   border-radius: 100px;
   font-size: 12px;
@@ -213,13 +213,13 @@
   padding-right: 15px;
 }
 
-#event #header #release-date {
+#post #header #release-date {
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
 }
 
-#event #header #arrow-display {
+#post #header #arrow-display {
   margin-left: 10px;
   margin-right: 10px;
   cursor: pointer;

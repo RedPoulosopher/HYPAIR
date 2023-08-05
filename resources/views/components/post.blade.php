@@ -1,5 +1,7 @@
 {{-- COMPONENT des évènements de la page d'accueil --}}
-
+@php
+use App\Http\Controllers\PostController;
+@endphp
 <article id="post" class="card">
 
     <div id="header">
@@ -15,20 +17,20 @@
 
 
             <div class="tags">
-                <div class="tag">
-                    <p>post</p>
+                <div class="tag" style="background-color: {{PostController::stringToColorCode("IMPORTANT")}};">
+                    <p>IMPORTANT</p>
                 </div>
-                <div class="tag">
-                    <p>post</p>
+                <div class="tag" style="background-color: {{PostController::stringToColorCode("BDH")}};">
+                    <p>BDH</p>
                 </div>
-                <div class="tag">
-                    <p>post</p>
+                <div class="tag" style="background-color: {{PostController::stringToColorCode("Gala")}};">
+                    <p>Gala</p>
                 </div>
-                <div class="tag">
-                    <p>post</p>
+                <div class="tag" style="background-color: {{PostController::stringToColorCode("Soirée")}};">
+                    <p>Soirée</p>
                 </div>
-                <div class="tag">
-                    <p>post</p>
+                <div class="tag" style="background-color: {{PostController::stringToColorCode("test")}};">
+                    <p>test</p>
                 </div>
             </div>
 

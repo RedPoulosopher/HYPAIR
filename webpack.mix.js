@@ -52,10 +52,9 @@ getFiles("resources/js/").forEach(function (filepath) {
     mix.js("resources/js/" + filepath, "public/js");
 });
 
-mix.copyDirectory("resources/images", "public/images");
+mix.copy('resources/images/*', 'public/images');
 mix.copy("resources/fonts/*.ttf", "public/fonts");
 
 if (mix.inProduction()) {
     mix.version();
-    mix.version(["public/images"]);
 }

@@ -68,9 +68,9 @@ fieldset {
     }
 
     &:focus-within {
-        border-left: 1px solid var(--couleur_accentuation);
+        // border-left: 1px solid var(--couleur_accentuation);
 
-        &>.titre {
+        & > .titre {
             opacity: 0.8;
         }
     }

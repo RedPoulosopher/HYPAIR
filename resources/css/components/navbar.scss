@@ -108,22 +108,19 @@
 
                 transition: background-color 150ms ease-in-out;
 
-                &#connect-button {
+                &:hover {
+                    background-color: var(--light-grey) !important;
+                }
+
+                &#connect-button,
+                &#profile-button {
                     background-color: var(--couleur_accentuation_air);
                 }
 
-                &:hover {
-                    background-color: var(--light-grey);
-                }
 
                 &#profile-button {
-                    &:hover {
-                        background-color: transparent;
-                    }
-
                     a {
-                        padding: 0;
-                        margin-left: 2vw;
+                        padding: 0 1vw 0 2vw;
                     }
 
                     img {
@@ -131,11 +128,9 @@
                         aspect-ratio: 1;
                         background-color: var(--couleur_accentuation_air);
                         border-radius: 100%;
+                        margin-left: 12px;
                     }
 
-                    p {
-                        display: none;
-                    }
                 }
             }
         }

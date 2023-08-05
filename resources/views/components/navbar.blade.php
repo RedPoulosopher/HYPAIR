@@ -27,8 +27,8 @@
             @if ($isConnected)
                 <li id="profile-button" class="menu-button">
                     <a href="/home">
+                        <p>Profil</p>
                         <img id="photo_lien_profil" src="{{ $user->chemin_photo_de_profil }}" />
-                        <p>{{ $user->prenom }} {{ $user->nom }}</p>
                     </a>
                 </li>
             @else

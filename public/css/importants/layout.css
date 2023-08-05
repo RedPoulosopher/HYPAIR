@@ -290,21 +290,17 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   cursor: pointer;
 }
 
-#navbar #nav-content ul#links li.menu-button#connect-button {
+#navbar #nav-content ul#links li.menu-button:hover {
+  background-color: var(--light-grey) !important;
+}
+
+#navbar #nav-content ul#links li.menu-button#connect-button,
+#navbar #nav-content ul#links li.menu-button#profile-button {
   background-color: var(--couleur_accentuation_air);
 }
 
-#navbar #nav-content ul#links li.menu-button:hover {
-  background-color: var(--light-grey);
-}
-
-#navbar #nav-content ul#links li.menu-button#profile-button:hover {
-  background-color: transparent;
-}
-
 #navbar #nav-content ul#links li.menu-button#profile-button a {
-  padding: 0;
-  margin-left: 2vw;
+  padding: 0 1vw 0 2vw;
 }
 
 #navbar #nav-content ul#links li.menu-button#profile-button img {
@@ -312,10 +308,7 @@ body.dark-theme #bascule-mode-button #bascule-theme:after {
   aspect-ratio: 1;
   background-color: var(--couleur_accentuation_air);
   border-radius: 100%;
-}
-
-#navbar #nav-content ul#links li.menu-button#profile-button p {
-  display: none;
+  margin-left: 12px;
 }
 
 #navbar #nav-content #services {

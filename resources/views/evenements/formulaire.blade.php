@@ -58,6 +58,20 @@
                     </label>
                 </div>
 
+                <div class="groupe card">
+                    <label class="input_groupe">
+                        <p class="titre">* Pour les cotisants :</p>
+                        <p class="description">Evènement seulement ouvert aux cotisants ?</p>
+                        <select name="pour_cotisant" class="input" spellcheck="false" required
+                            select="{{ old('pour_cotisant') ?? ($evenement->pour_cotisant ?? '') }}">
+                            <option value="0" selected>Oui</option>
+                            <option value="1">Non</option>
+                        </select>
+                    </label>
+                </div>
+
+                <br>
+                <h2>Options avancées</h2>
 
                 <div class="groupe card">
                     <label class="input_groupe">
@@ -67,39 +81,50 @@
                     </label>
                 </div>
 
+                <div class="groupe card">
+                    <label class="input_groupe">
+                        <p class="titre">Date de publication :</p>
+                        <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
+                            max="12-31-2099" />
+                    </label>
+                </div>
+
 
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">Nombre maximum de participants :</p>
                         <input type="number" name="max_participation" class="input" id="max_participation_evenement"
-                            value="{{ old('max_participation') ?? ($evenement->max_participation ?? '') }}" min="0" />
+                            value="{{ old('max_participation') ?? ($evenement->max_participation ?? '') }}"
+                            min="0" />
                     </label>
                 </div>
-
 
                 <div class="groupe card">
                     <label class="input_groupe">
-                        <p class="titre">* Confidentialité :</p>
-                        <select name="confidentialite" class="input" spellcheck="false" required
-                            select="{{ old('confidentialite') ?? ($evenement->confidentialite ?? '') }}">
-                            <option value="0" selected>Public</option>
-                            <option value="1">Membres de l'association</option>
-                            <option value="2">Responsables & bureau</option>
-                            <option value="3">Bureau</option>
-                            <option value="4">Président⸱e⸱s et vice-président⸱e</option>
-                        </select>
-                    </label>
-
-                    <label class="input_groupe">
-                        <p class="titre">* Pour cotisant :</p>
-                        <p class="description">Evènement seulement ouvert aux cotisants ?</p>
-                        <select name="pour_cotisant" class="input" spellcheck="false" required
-                            select="{{ old('pour_cotisant') ?? ($evenement->pour_cotisant ?? '') }}">
-                            <option value="0" selected>Oui</option>
-                            <option value="1">Non</option>
+                        <p class="titre">Campus</p>
+                        <p class="description">Évènement destiné aux étudiants de quel campus ?</p>
+                        <select name="campus" class="input" spellcheck="false">
+                            <option value="0" selected>Douai</option>
+                            <option value="1">Lille</option>
+                            <option value="2">Valenciennes</option>
+                            <option value="3">Dunkerque</option>
+                            <option value="4">Alençon</option>
                         </select>
                     </label>
                 </div>
+
+
+                {{-- <label class="input_groupe">
+                    <p class="titre">* Confidentialité :</p>
+                    <select name="confidentialite" class="input" spellcheck="false" required
+                        select="{{ old('confidentialite') ?? ($evenement->confidentialite ?? '') }}">
+                        <option value="0" selected>Public</option>
+                        <option value="1">Membres de l'association</option>
+                        <option value="2">Responsables & bureau</option>
+                        <option value="3">Bureau</option>
+                        <option value="4">Président⸱e⸱s et vice-président⸱e</option>
+                    </select>
+                </label> --}}
 
 
                 <span>* Les champs marqués d'une astérisque sont obligatoires</span>

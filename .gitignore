@@ -5,7 +5,7 @@
 /public/fonts
 /public/images
 /public/js
-/public/mix-manifest.json
+public/mix-manifest.json
 /storage/*.key
 .env.backup
 .phpunit.result.cache

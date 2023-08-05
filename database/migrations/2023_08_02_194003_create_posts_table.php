@@ -20,7 +20,6 @@ return new class extends Migration
             $table->text('description');
             $table->dateTime('date_apparition');
             $table->dateTime('date_expiration')->nullable();
-            $table->string('tags')->nullable();
             $table->foreignId('entite_id');
         });
 

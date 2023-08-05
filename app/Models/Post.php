@@ -14,7 +14,6 @@ class Post extends Model
         'description',
         'date_apparition',
         'date_expiration',
-        'tags',
         'entite_id'
     ];
 
@@ -25,5 +24,9 @@ class Post extends Model
     function entite()
     {
         return $this->belongsTo(Entite::class);
+    }
+    function tags()
+    {
+        return $this->belongsToMany(Tag::class, TagPost::class);
     }
 }

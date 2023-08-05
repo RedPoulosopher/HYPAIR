@@ -39,8 +39,6 @@ Route::get('/add-media', function () {
 
 Route::get('/', [PostController::class, 'accueil']);
 
-Route::get('/mes-entites', [EntiteController::class, 'mes_entites']);
-
 Route::get('/entites', function () {
     // return view('entite.choix_site'); 
     return redirect('entites/douai');

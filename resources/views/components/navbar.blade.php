@@ -19,9 +19,9 @@
                     href="/calendrier">Calendrier</a></li>
             <li class="menu-button {{ request()->is('entites*') ? 'active' : '' }}"><a href="/entites">Associations</a>
             </li>
-            <li
+            {{-- <li
                 class="menu-button {{ (request()->is('mes-entites') ? 'active' : '') . (request()->is('*entite/*') ? 'active' : '') }}">
-                <a href="/mes-entites">Gestion</a></li>
+                <a href="/mes-entites">Gestion</a></li> --}}
             <li class="menu-button {{ request()->is('contact') ? 'active' : '' }}"><a href="/contact">Contact</a></li>
 
             @if ($isConnected)

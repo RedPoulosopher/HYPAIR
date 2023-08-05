@@ -221,6 +221,11 @@ $routes_entites = function () {
             Route::post('/evenement/modifier/{id}', 'update');
             Route::get('/entite/evenement/{slug}', 'show');
         });
+
+        Route::controller(PostController::class)->group(function () {
+            Route::get('/entite/post', 'home');
+            Route::post('/entite/evenement/suppression', 'store');
+        });
     });
 
 

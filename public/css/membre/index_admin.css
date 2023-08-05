@@ -267,10 +267,6 @@ fieldset legend {
   flex-wrap: wrap;
 }
 
-.input_groupe:focus-within {
-  border-left: 1px solid var(--couleur_accentuation);
-}
-
 .input_groupe:focus-within > .titre {
   opacity: 0.8;
 }

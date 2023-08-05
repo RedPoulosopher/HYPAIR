@@ -53,8 +53,9 @@ getFiles("resources/js/").forEach(function (filepath) {
 });
 
 mix.copyDirectory("resources/images", "public/images");
+mix.copy("resources/fonts/*.ttf", "public/fonts");
 
-// if (mix.inProduction()) {
-mix.version();
-mix.version(["public/images"]);
-// }
+if (mix.inProduction()) {
+    mix.version();
+    mix.version(["public/images"]);
+}

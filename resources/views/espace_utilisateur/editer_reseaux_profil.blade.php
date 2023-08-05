@@ -9,8 +9,8 @@
 @section('titre', 'Gérer les réseaux sociaux')
 
 @pushonce('styles')
-<link rel="stylesheet" href="/css/jstable.css" type="text/css">
-<link rel="stylesheet" href="/css/espace_utilisateur/editer_reseaux_profil.css" type="text/css">
+<link rel="stylesheet" href="{{ mix('/css/jstable.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ mix('/css/espace_utilisateur/editer_reseaux_profil.css') }}" type="text/css">
 @endpushonce
 
 @section('content')

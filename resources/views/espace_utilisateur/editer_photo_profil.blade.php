@@ -6,7 +6,7 @@ On voit le mail et le pseudo user associé sans pouvoir le changer. --}}
 @section('titre', 'Editer la photo de profil')
 
 @pushonce('styles')
-<link rel="stylesheet" href="/css/espace_utilisateur/editer_photo_profil.css" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/espace_utilisateur/editer_photo_profil.css') }}" type="text/css" >
 @endpushonce
 
 @section('content')

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
@@ -34,7 +34,7 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="/js/elasticlunr.js"></script>
+<script type="text/javascript" src="{{ mix('/js/elasticlunr.js') }}"></script>
 <script>
 const champ_recherche = document.getElementById('search_input');
 const placeholder = champ_recherche.getAttribute('placeholder');

@@ -4,8 +4,8 @@
 
 @section('content')
 @pushonce('styles')
-<link rel="stylesheet" href="css/authentification.css" type="text/css" />
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/authentification.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
 @endpushonce
 
 

@@ -4,7 +4,7 @@
 
     <div id="logo">
         <a href="/" id="logo-img">
-            <img src="/images/logo_air.png" alt="Une création originale de l'AIR">
+            <img src="{{ mix('/images/logo_air.png') }}" alt="Une création originale de l'AIR">
         </a>
         <a href="/" id="logo-text">
             <h1>Hyp<span>AIR</span></h1>
@@ -36,12 +36,12 @@
             @endif
         </ul>
         <div id="services">
-            <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800 logo='/images/piwigo.png'>
+            <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800 logo="{{ mix('/images/piwigo.png') }}">
             </x-service>
             <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
-                logo='/images/peertube.png'></x-service>
+                logo="{{ mix('/images/peertube.png') }}"></x-service>
             <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
-                logo='/images/gitlab.png'></x-service>
+                logo="{{ mix('/images/gitlab.png') }}"></x-service>
         </div>
     </div>
 

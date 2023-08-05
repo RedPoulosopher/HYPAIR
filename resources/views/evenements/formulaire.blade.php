@@ -3,7 +3,7 @@
 @section('titre', 'Evènement')
 
 @pushonce('styles')
-<link rel="stylesheet" href="/css/formulaire-evenement.css" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/formulaire-evenement.css') }}" type="text/css" >
 @endpushonce
 
 @section('content')

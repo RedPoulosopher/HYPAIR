@@ -3,7 +3,7 @@
 @section('titre', 'Modifier la description')
 
 @pushonce('styles')
-<link rel="stylesheet" href="/css/entite/modifier_description.css" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/entite/modifier_description.css') }}" type="text/css" >
 @endpushonce
 
 @section('content')

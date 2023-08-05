@@ -3,7 +3,7 @@
 @section('titre', $projet->titre)
 
 @section('content')
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
 <style>
 .documentation {
 	width:100%;

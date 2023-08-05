@@ -3,7 +3,7 @@
 @section('titre', 'Réseaux Sociaux')
 
 @pushonce('styles')
-<link rel="stylesheet" type="text/css" href="/css/entite/index_gestion.css">
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/entite/index_gestion.css') }}">
 @endpushonce
 
 @section('content')

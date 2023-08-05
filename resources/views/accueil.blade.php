@@ -3,7 +3,7 @@
 @section('titre', 'Accueil')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="/css/accueil.css" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/accueil.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')
@@ -16,12 +16,12 @@
 
             <div class="services-wrapper">
 
-                <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800 logo='/images/piwigo.png'>
+                <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800 logo="{{ mix('/images/piwigo.png') }}">
                 </x-service>
-                <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272 logo='/images/peertube.png'>
+                <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272 logo="{{ mix('/images/peertube.png') }}">
                 </x-service>
                 <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
-                    logo='/images/gitlab.png'></x-service>
+                    logo="{{ mix('/images/gitlab.png') }}"></x-service>
 
             </div>
         </section>

@@ -3,7 +3,7 @@
 @section('titre', 'Editer le profil')
 
 @pushonce('styles')
-<link rel="stylesheet" href="/css/espace_utilisateur/editer_infos_profil.css" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/espace_utilisateur/editer_infos_profil.css') }}" type="text/css" >
 @endpushonce
 
 @section('content')

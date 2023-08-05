@@ -8,8 +8,8 @@
     <title>@yield('titre', 'Site Web') - HypAIR</title>
 
     {{-- @include('layouts.theme') --}}
-    <link rel="stylesheet" href="/css/default.css" type="text/css" />
-    <link rel="stylesheet" href="/css/importants/layout.css" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/importants/layout.css') }}" type="text/css" />
     @stack('styles')
 </head>
 

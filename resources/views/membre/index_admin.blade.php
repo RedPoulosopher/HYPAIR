@@ -3,11 +3,11 @@
 @section('titre', 'Membres')
 
 @pushonce('styles')
-<link rel="stylesheet" type="text/css" href="/css/membre/index_admin.css">
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/membre/index_admin.css') }}">
 @endpushonce
 
 @section('content')
-<script type="text/javascript" src="/js/jstable.min.js"></script>
+<script type="text/javascript" src="{{ mix('/js/jstable.min.js') }}"></script>
 
 
 <main id="main-content">
@@ -84,7 +84,7 @@
 </main>
 
 
-<script type="text/javascript" src="/js/elasticlunr.js"></script>
+<script type="text/javascript" src="{{ mix('/js/elasticlunr.js') }}"></script>
 <script>
 const input_role_nom = document.getElementById('search_role_input');
 const input_role_id = document.getElementById('search_role_input_id');

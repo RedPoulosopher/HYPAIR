@@ -26,10 +26,11 @@
 
 body.light-theme {
   --grey: #fff;
-  --dark-grey: #b3b3b3;
+  --dark-grey: #dfdfdf;
   --background-color: #f5f5f5;
   --light-grey: #dfdede;
-  --couleur_accentuation_air: #c6152a;
+  --couleur_accentuation_air: #c5283b;
+  --couleur_accentuation_air_light: #d74c5c;
   --couleur_accentuation: #c6152a;
   --couleur_police_accentuation_air: #ffffff;
   --couleur_police_accentuation: #ffffff;

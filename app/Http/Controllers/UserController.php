@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\GestionPhotoDeProfil;
+use \App\Services\AutorisationGestion;
 use \App\Models\ReseauSocialListe;
 use \App\Models\ReseauSocial;
 use Illuminate\Support\Facades\App;
@@ -18,11 +19,29 @@ class UserController extends Controller
       $user = Auth::user();
       $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
       $reseaux_sociaux = $user->reseaux_sociaux()->get();
-      return view('espace_utilisateur.home', ['user'=>$user, 'reseaux_sociaux'=>$reseaux_sociaux]);
+
+      //Get entites
+      $entites_admin = [];
+      $entites_membre = [];
+
+      $membres = $user->membres_actuel;
+      foreach ($membres as $membre) {
+        $entite = $membre->entite;
+        $gerer_entite = AutorisationGestion::gestion_dans_entite("gerer_entite", $entite);
+
+        if($gerer_entite == 1)
+          array_push($entites_admin, $entite);
+        else
+          array_push($entites_membre, $entite);
+      }
+
+      return view('espace_utilisateur.home', ['user'=>$user, 'reseaux_sociaux'=>$reseaux_sociaux, 'entites_admin'=>$entites_admin ,'entites_membre'=>$entites_membre]);
     }
+
     if (App::environment('local')) {
       return redirect('/localauth');
     }
+
     return redirect('/connexion');
   }
 

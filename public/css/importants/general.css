@@ -155,10 +155,13 @@ p.explication {
 }
 
 .bouton.primaire {
-  color: var(--couleur_police_accentuation);
   background-color: var(--couleur_accentuation);
   border: none;
   text-transform: uppercase;
+}
+
+.bouton.primaire * {
+  color: var(--couleur_police_accentuation);
 }
 
 .bouton.secondaire {

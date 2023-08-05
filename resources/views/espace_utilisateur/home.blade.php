@@ -3,7 +3,8 @@
 @section('titre', 'Home')
 
 @pushonce('styles')
-<link rel="stylesheet" href="{{ mix('/css/home.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ mix('/css/espace_utilisateur/home.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ mix('css/espace_utilisateur/mes_entites.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')
@@ -41,6 +42,31 @@
           <li><a id="menu_modifier_reseaux" tabindex="2" href="/editer_reseaux_profil">Gérer les réseaux sociaux</a></li>
           <li><a id="menu_deconnexion" tabindex="2" href="/deconnexion">Se déconnecter</a></li>
       </ul>
+    </div>
+  </section>
+
+
+  <section>
+    <h1>Mes entités</h1>
+    <h2>Admin</h2>
+    
+    <div class="entites-wrapper">
+        @if (Auth::check())
+            @foreach ($entites_admin as $entite)
+                <x-entite :asso="$entite" :destination="$entite->lien_gestion_relatif()" />
+            @endforeach
+        @endif
+
+    </div>
+
+    <h2>Membre</h2>
+    <div class="entites-wrapper">
+        @if (Auth::check())
+            @foreach ($entites_membre as $entite)
+                <x-entite :asso="$entite" :destination="$entite->lien_relatif()" />
+            @endforeach
+        @endif
+
     </div>
   </section>
 

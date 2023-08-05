@@ -109,12 +109,20 @@
                 transition: background-color 150ms ease-in-out;
 
                 &:hover {
-                    background-color: var(--light-grey) !important;
+                    background-color: var(--light-grey);
                 }
 
                 &#connect-button,
                 &#profile-button {
                     background-color: var(--couleur_accentuation_air);
+
+                    p {
+                        color: var(--couleur_police_accentuation);
+                    }
+
+                    &:hover {
+                        background-color: var(--couleur_accentuation_air_light);
+                    }
                 }
 
 
@@ -184,7 +192,7 @@
     }
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 880px) {
     #navbar {
         #logo {
             img {
@@ -198,7 +206,7 @@
     }
 }
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 710px) {
     #navbar {
         a {
             justify-content: center;

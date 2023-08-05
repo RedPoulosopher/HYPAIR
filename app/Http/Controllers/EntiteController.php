@@ -44,32 +44,6 @@ class EntiteController extends Controller
 			->with('reseaux_sociaux', $reseaux_sociaux);
 	}
 
-	public function mes_entites()
-	{
-		$entites_admin = [];
-		$entites_membre = [];
-		$autorisation = "no";
-
-		if (Auth::check()) {
-			$user = Auth::user();
-			
-			
-			
-			$membres = $user->membres_actuel;
-			
-			foreach ($membres as $membre) {
-				$entite = $membre->entite;
-				$gerer_entite = AutorisationGestion::gestion_dans_entite("gerer_entite", $entite);
-
-				if($gerer_entite == 1)
-					array_push($entites_admin, $entite);
-				else
-					array_push($entites_membre, $entite);
-			}
-		}
-		return view('entite.mes_entites')->with('entites_admin', $entites_admin)->with('entites_membre', $entites_membre);
-	}
-
 	public function gestion(Request $request)
 	{
 		$entite = Entite::existe(session('entite_id'));

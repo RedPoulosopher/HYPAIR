@@ -35,7 +35,7 @@
 
 
                 .tag {
-                    background-color: #CC3345;
+                    background-color: var(--couleur_accentuation_air);
                     border-radius: 100px;
 
                     font-size: 12px;
@@ -46,6 +46,10 @@
 
                     padding-left: 15px;
                     padding-right: 15px;
+
+                    p {
+                        color: var(--couleur_police_accentuation);
+                    }
                 }
             }
         }

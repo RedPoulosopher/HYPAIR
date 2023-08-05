@@ -109,12 +109,20 @@
                 transition: background-color 150ms ease-in-out;
 
                 &:hover {
-                    background-color: var(--light-grey) !important;
+                    background-color: var(--light-grey);
                 }
 
                 &#connect-button,
                 &#profile-button {
                     background-color: var(--couleur_accentuation_air);
+
+                    p {
+                        color: var(--couleur_police_accentuation);
+                    }
+
+                    &:hover {
+                        background-color: var(--couleur_accentuation_air_light);
+                    }
                 }
 
 

@@ -36,7 +36,7 @@
 }
 
 #post #header .details .tags .tag {
-  background-color: #CC3345;
+  background-color: var(--couleur_accentuation_air);
   border-radius: 100px;
   font-size: 12px;
   align-items: center;
@@ -44,6 +44,10 @@
   margin-right: 5px;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+#post #header .details .tags .tag p {
+  color: var(--couleur_police_accentuation);
 }
 
 #post #header #release-date {

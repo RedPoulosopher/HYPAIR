@@ -46,7 +46,7 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="{{ mix('/js/elasticlunr.js') }}"></script>
+<script type="text/javascript" src="{{ mix('/js/elasticlunr.min.js') }}"></script>
 <script>
 const champ_recherche = document.getElementById('search_input');
 const placeholder = champ_recherche.getAttribute('placeholder');

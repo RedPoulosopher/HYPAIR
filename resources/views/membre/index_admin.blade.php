@@ -84,7 +84,7 @@
 </main>
 
 
-<script type="text/javascript" src="{{ mix('/js/elasticlunr.js') }}"></script>
+<script type="text/javascript" src="{{ mix('/js/elasticlunr.min.js') }}"></script>
 <script>
 const input_role_nom = document.getElementById('search_role_input');
 const input_role_id = document.getElementById('search_role_input_id');

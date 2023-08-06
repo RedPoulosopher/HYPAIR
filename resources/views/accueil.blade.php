@@ -16,9 +16,11 @@
 
             <div class="services-wrapper">
 
-                <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800 logo="{{ mix('/images/piwigo.png') }}">
+                <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
+                    logo="{{ mix('/images/piwigo.png') }}">
                 </x-service>
-                <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272 logo="{{ mix('/images/peertube.png') }}">
+                <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
+                    logo="{{ mix('/images/peertube.png') }}">
                 </x-service>
                 <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
                     logo="{{ mix('/images/gitlab.png') }}"></x-service>
@@ -30,7 +32,6 @@
             <h1>Actualités</h1>
 
             <div class="article-wrapper">
-
                 @foreach ($posts as $post)
                     <x-post :post="$post" />
                 @endforeach

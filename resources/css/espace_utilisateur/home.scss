@@ -12,8 +12,8 @@
 }
 
 #photo_profil {
-    max-width: 200px;
-    max-height: 200px;
+    width: 200px;
+    height: 200px;
 }
 
 #photo_profil img {
@@ -32,7 +32,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
 }
 
 #prenoms {
@@ -111,6 +110,7 @@
     max-width: 80ch;
     text-align: justify;
     overflow-wrap: break-word;
+    margin-top: 15px;
 }
 
 #boutons_selections_categorie {
@@ -131,7 +131,6 @@
     flex-wrap: wrap;
     align-content: center;
 }
-
 
 @media screen and (max-width: 680px) {
     #profil {

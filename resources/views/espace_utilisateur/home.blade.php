@@ -27,14 +27,18 @@
           </div>
           <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>
         </div>
-        <div id="bio">
-          {!! nl2br(e($user->bio)) !!}
-        </div>
-        <div class="reseaux_sociaux">
-          @foreach ($reseaux_sociaux as $reseau_social)
-            <x-reseau-social :reseau="$reseau_social" />
-          @endforeach
-        </div>
+        @if($user->bio)
+          <div id="bio">
+            {!! nl2br(e($user->bio)) !!}
+          </div>
+        @endif
+        @if(count($reseaux_sociaux) > 0)
+          <div class="reseaux_sociaux">
+            @foreach ($reseaux_sociaux as $reseau_social)
+              <x-reseau-social :reseau="$reseau_social" />
+            @endforeach
+          </div>
+        @endif
       </div>
       <ul id="menu_meatballs" class="ombre_grande">
           <li><a id="menu_modifier_photo_profil" tabindex="2" href="/editer_photo_profil">Modifier la photo de profil</a></li>
@@ -46,29 +50,29 @@
   </section>
 
 
-  <section>
-    <h1>Mes entités</h1>
-    <h2>Admin</h2>
-    
-    <div class="entites-wrapper">
-        @if (Auth::check())
-            @foreach ($entites_admin as $entite)
-                <x-entite :asso="$entite" :destination="$entite->lien_gestion_relatif()" />
-            @endforeach
-        @endif
+  @if(count($entites_admin) > 0 || count($entites_membre) > 0)
+    <section>
+      <h1>Mes entités</h1>
 
-    </div>
+      @if(count($entites_admin)>0)
+        <h2>Admin</h2>        
+        <div class="entites-wrapper">
+                @foreach ($entites_admin as $entite)
+                    <x-entite :asso="$entite" :destination="$entite->lien_gestion_relatif()" />
+                @endforeach
+        </div>
+      @endif
 
-    <h2>Membre</h2>
-    <div class="entites-wrapper">
-        @if (Auth::check())
-            @foreach ($entites_membre as $entite)
-                <x-entite :asso="$entite" :destination="$entite->lien_relatif()" />
-            @endforeach
-        @endif
-
-    </div>
-  </section>
+      @if(count($entites_membre)>0)
+        <h2>Membre</h2>
+        <div class="entites-wrapper">
+                @foreach ($entites_membre as $entite)
+                    <x-entite :asso="$entite" :destination="$entite->lien_relatif()" />
+                @endforeach
+        </div>
+      @endif
+    </section>
+  @endif
 
 </div>
 

@@ -23,7 +23,7 @@ class PostController extends Controller
     public function accueil()
     {
         $posts = Post::all();
-        dd($posts);
+        // dd($posts);
         return view('accueil')->with('posts', $posts);
     }
 

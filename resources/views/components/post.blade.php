@@ -1,4 +1,8 @@
 {{-- COMPONENT des évènements de la page d'accueil --}}
+
+@php
+use App\Http\Controllers\PostController;
+@endphp
 <article id="post" class="card">
 
     <div id="header">

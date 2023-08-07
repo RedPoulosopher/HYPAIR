@@ -28,7 +28,7 @@
                 @if ($gerer_evenement)
                     <div style="margin:70px 0px;" class="centre-element">
                         <a href="evenement/formulaire" class="bouton tertiaire ombre_petite administrateur">
-                            <span>Créer un évènement</span>
+                            <span><i class="fa-solid fa-plus"></i>Créer un évènement</span>
                         </a>
                     </div>
                 @endif
@@ -43,7 +43,9 @@
                                     <th>Début</th>
                                     <th>Fin</th>
                                     <th>Lieu</th>
-                                    
+                                    <th>Modifier</th>
+                                    <th>Supprimer</th>
+
                                     {{-- <th>Nombre de participants max</th>
                                     <th>Pour cotisants ?</th>
                                     <th>Confidentialité</th>
@@ -58,7 +60,7 @@
                                         <td><?= $table['temps_debut'] ?></td>
                                         <td><?= $table['temps_fin'] ?></td>
                                         <td><?= $table['lieu'] ?></td>
-                                        
+
                                         {{-- <td><?= $table['max_participation'] ?></td>
                                         
                                         @if ($table['pour_cotisant'] == 0)
@@ -67,8 +69,8 @@
                                             if ($table['pour_cotisant'] == 1)
                                                 <td>Non</td>
                                         @endif --}}
-                                        
-    
+
+
                                         {{-- @if ($table['confidentialite'] == 0)
                                             <td>Public</td>
                                         @elseif ($table['confidentialite'] == 1)
@@ -80,7 +82,7 @@
                                         @elseif ($table['confidentialite'] == 4)
                                             <td>Prez & vice-prez</td>
                                         @endif --}}
-    
+
                                         {{-- @if ($table['confidentialite'] == 0)
                                             @if ($table['validation'] == 1)
                                                 <td>Validé</td>
@@ -90,18 +92,20 @@
                                         @else
                                             <td>/</td>
                                         @endif --}}
-    
+
                                         <td>
-                                            <a href="evenement/<?= $table['slug'] ?>"
-                                                class="secondaire bouton bouton_action ombre_petite administrateur"
-                                                style="color:black; border-color:black;">Détail</a>
+                                            <a href="evenement/<?= $table['slug'] ?>" class="bouton_action"
+                                                style="color:black; border-color:black;"><i
+                                                    class="fa-solid fa-pen-to-square fa-lg"></i></a>
+                                        </td>
+                                        <td>
                                             @if ($gerer_evenement)
-                                                <p
-                                                    class="suppression_entite secondaire bouton bouton_action ombre_petite administrateur">
-                                                    Supprimer</p>
+                                                <span class="bouton_action warning">
+                                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                                </span>
                                             @endif
                                         </td>
-    
+
                                     </tr>
                                 @endforeach
                             </tbody>

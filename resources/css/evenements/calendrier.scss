@@ -1,5 +1,5 @@
 .icon-container {
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     margin: 0 20px 0 20px;
     border-radius: 50px;
     background-color: var(--grey);
@@ -8,9 +8,9 @@
     border: 2px solid var(--couleur_accentuation);
 
     &:hover {
-        border: 2px solid white;
+        border: 2px solid var(--couleur_accentuation_air_light);
         i {
-            color: white;
+            color: var(--couleur_accentuation_air_light);
         }
     }
 

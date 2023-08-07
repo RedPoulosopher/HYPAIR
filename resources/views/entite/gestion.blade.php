@@ -34,6 +34,5 @@
         </section>
     </main>
 
-    <script src="https://kit.fontawesome.com/1087e6f14a.js" crossorigin="anonymous"></script>
 
 @endsection

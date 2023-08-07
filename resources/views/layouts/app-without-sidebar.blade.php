@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
-    
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('titre', 'Site Web') - HypAIR</title>
-    
-    <link rel="stylesheet" href="{{ mix("/css/default.css") }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ mix("/css/importants/layout-without-sidebar.css") }}" type="text/css"/>
+
+    <link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/importants/layout-without-sidebar.css') }}" type="text/css" />
     @stack('styles')
 </head>
 
@@ -30,7 +30,7 @@
     @if (Auth::check())
         <x-navbar :isConnected="true" :user="$user" />
 
-    {{-- Sinon : mettre le bouton Se Connecter (la navbar normale) --}}
+        {{-- Sinon : mettre le bouton Se Connecter (la navbar normale) --}}
     @else
         <x-navbar :isConnected="false" :user="[]" />
     @endif
@@ -44,6 +44,9 @@
             Fait avec amour par l’AIR - Tous droits réservés
         </footer>
     </div>
+
+    <script src="https://kit.fontawesome.com/1087e6f14a.js" crossorigin="anonymous"></script>
+
 
 </body>
 

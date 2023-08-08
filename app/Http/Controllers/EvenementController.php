@@ -8,7 +8,8 @@ use \App\Models\Evenement;
 use \App\Models\Entite;
 use \App\Models\Membre;
 use \App\Services\AutorisationGestion;
-
+use DateTime;
+use DateTimeZone;
 
 class EvenementController extends Controller
 {
@@ -58,7 +59,7 @@ class EvenementController extends Controller
 			// "confidentialite" => $request->confidentialite,
 			"validation" => "1",
 			'pour_cotisant' => $request->pour_cotisant,
-			'date_apparition' => $request->date_apparition,
+			'date_apparition' => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
 			'campus_id' => $request->campus_id
 			// "derive_de" => $request->derive_de,
 		]);

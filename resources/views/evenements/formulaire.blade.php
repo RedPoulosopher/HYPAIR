@@ -64,8 +64,8 @@
                         <p class="description">Evènement seulement ouvert aux cotisants ?</p>
                         <select name="pour_cotisant" class="input" spellcheck="false" required
                             select="{{ old('pour_cotisant') ?? ($evenement->pour_cotisant ?? '') }}">
-                            <option value="0" selected>Oui</option>
-                            <option value="1">Non</option>
+                            <option value="1" selected>Oui</option>
+                            <option value="0">Non</option>
                         </select>
                     </label>
                 </div>
@@ -104,11 +104,11 @@
                         <p class="titre">Campus</p>
                         <p class="description">Évènement destiné aux étudiants de quel campus ?</p>
                         <select name="campus_id" class="input" spellcheck="false">
-                            <option value="0" selected>Douai</option>
-                            <option value="1">Lille</option>
-                            <option value="2">Valenciennes</option>
-                            <option value="3">Dunkerque</option>
-                            <option value="4">Alençon</option>
+                            <option value="1" selected>Douai</option>
+                            <option value="2">Lille</option>
+                            <option value="3">Valenciennes</option>
+                            <option value="4">Dunkerque</option>
+                            <option value="5">Alençon</option>
                         </select>
                     </label>
                 </div>

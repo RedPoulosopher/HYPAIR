@@ -45,24 +45,8 @@ class EvenementController extends Controller
 		// 	$request['validation'] = 0;
 		// }
 
-		// $traitement = $this->formulaire_traitement($request);
-		// Evenement::create($traitement);
-		$event = Evenement::create([
-			'entite_id' => session("entite_id"),
-			"titre" => $request->titre,
-			"description" => $request->description,
-			"slug" => Str::slug($request->titre, '-'),
-			'temps_debut' => $request->temps_debut,
-			'temps_fin' => $request->temps_fin,
-			'lieu' => $request->lieu,
-			'max_participation' => $request->max_participation,
-			// "confidentialite" => $request->confidentialite,
-			"validation" => "1",
-			'pour_cotisant' => $request->pour_cotisant,
-			'date_apparition' => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
-			'campus_id' => $request->campus_id
-			// "derive_de" => $request->derive_de,
-		]);
+		$eventRequest = $this->formulaire_traitement($request);
+		Evenement::create($eventRequest);
 
 		return redirect(session('entite_uid') . "/entite/evenement");
 	}
@@ -218,22 +202,22 @@ class EvenementController extends Controller
 	public function formulaire_traitement(Request $request)
 	{
 		//vérifie que les valeurs qu'on obtient correspondent à ce qu'on attend
-		$validation = [
-			'titre' => 'required' | 'max:128',
-			'description' => 'required', 'min:30', 'max:250',
-			'temps_debut' => 'required',
-			'temps_fin' => 'required',
-			'lieu' => 'nullable' | 'max:128',
-			'date_apparition' => 'nullable',
-			'max_participation' => 'nullable' | 'max:250',
-			'campus' => 'required',
-			// 'confidentialite' => 'required',
-			'pour_cotisant' => 'required'
-		];
-		$valid = $request->validate($validation);
+		$validated = $request->validate(
+			[
+				'titre' => 'required|max:128',
+				'description' => 'required|min:30|max:250',
+				'temps_debut' => 'required',
+				'temps_fin' => 'required',
+				'lieu' => 'nullable|max:128',
+				'date_apparition' => 'nullable',
+				'max_participation' => 'nullable|max:250',
+				'pour_cotisant' => 'required'
+			]
+			// il faut que le slug soit unique
+		);
 
 		//formate les résultats pour leur entrée dans la table
-		$resultat = [
+		$eventRequest = [
 			'entite_id' => session("entite_id"),
 			"titre" => $request->titre,
 			"description" => $request->description,
@@ -242,14 +226,12 @@ class EvenementController extends Controller
 			'temps_fin' => $request->temps_fin,
 			'lieu' => $request->lieu,
 			'max_participation' => $request->max_participation,
-			// "confidentialite" => $request->confidentialite,
 			"validation" => "1",
 			'pour_cotisant' => $request->pour_cotisant,
-			'date_apparition' => $request->date_apparition,
+			'date_apparition' => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
 			'campus_id' => $request->campus_id
-			// "derive_de" => $request->derive_de,
 		];
 
-		return $resultat;
+		return $eventRequest;
 	}
 }

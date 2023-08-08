@@ -9,9 +9,6 @@ use \App\Models\Entite;
 use \App\Models\Membre;
 use \App\Services\AutorisationGestion;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-
 
 class EvenementController extends Controller
 {
@@ -39,17 +36,32 @@ class EvenementController extends Controller
 
 	public function store(Request $request)
 	{
-
 		AutorisationGestion::protectionPage("gerer_evenement");
 
-		if ($request['confidentialite'] != 0) {
-			$request['validation'] = 1;
-		} else {
-			$request['validation'] = 0;
-		}
+		// if ($request['confidentialite'] != 0) {
+		// 	$request['validation'] = 1;
+		// } else {
+		// 	$request['validation'] = 0;
+		// }
 
-		$traitement = $this->formulaire_traitement($request);
-		Evenement::create($traitement);
+		// $traitement = $this->formulaire_traitement($request);
+		// Evenement::create($traitement);
+		$event = Evenement::create([
+			'entite_id' => session("entite_id"),
+			"titre" => $request->titre,
+			"description" => $request->description,
+			"slug" => Str::slug($request->titre, '-'),
+			'temps_debut' => $request->temps_debut,
+			'temps_fin' => $request->temps_fin,
+			'lieu' => $request->lieu,
+			'max_participation' => $request->max_participation,
+			// "confidentialite" => $request->confidentialite,
+			"validation" => "1",
+			'pour_cotisant' => $request->pour_cotisant,
+			'date_apparition' => $request->date_apparition,
+			'campus_id' => $request->campus_id
+			// "derive_de" => $request->derive_de,
+		]);
 
 		return redirect(session('entite_uid') . "/entite/evenement");
 	}
@@ -204,23 +216,20 @@ class EvenementController extends Controller
 
 	public function formulaire_traitement(Request $request)
 	{
-		$request->categories = array_map('strtolower', array_map('trim', explode(",", $request->categories)));
-		sort($request->categories);
-
 		//vérifie que les valeurs qu'on obtient correspondent à ce qu'on attend
 		$validation = [
-			'titre' => ['filled', 'max:128'],
-			'description' => ['filled', 'min:30', 'max:250'],
-			'temps_debut' => ['filled'],
-			'temps_fin' => ['filled'],
-			'lieu' => ['nullable', 'max:128'],
-			'max_participation' => ['nullable', 'max:250'],
-			'confidentialite' => ['filled'],
-			'pour_cotisant' => ['filled']
+			'titre' => 'required' | 'max:128',
+			'description' => 'required', 'min:30', 'max:250',
+			'temps_debut' => 'required',
+			'temps_fin' => 'required',
+			'lieu' => 'nullable' | 'max:128',
+			'date_apparition' => 'nullable',
+			'max_participation' => 'nullable' | 'max:250',
+			'campus' => 'required',
+			// 'confidentialite' => 'required',
+			'pour_cotisant' => 'required'
 		];
-		$this->validate($request, $validation);
-
-
+		$valid = $request->validate($validation);
 
 		//formate les résultats pour leur entrée dans la table
 		$resultat = [
@@ -232,10 +241,12 @@ class EvenementController extends Controller
 			'temps_fin' => $request->temps_fin,
 			'lieu' => $request->lieu,
 			'max_participation' => $request->max_participation,
-			"confidentialite" => $request->confidentialite,
-			"validation" => $request->validation,
+			// "confidentialite" => $request->confidentialite,
+			"validation" => "1",
 			'pour_cotisant' => $request->pour_cotisant,
-			"derive_de" => $request->derive_de,
+			'date_apparition' => $request->date_apparition,
+			'campus_id' => $request->campus_id
+			// "derive_de" => $request->derive_de,
 		];
 
 		return $resultat;

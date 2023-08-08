@@ -103,7 +103,7 @@
                     <label class="input_groupe">
                         <p class="titre">Campus</p>
                         <p class="description">Évènement destiné aux étudiants de quel campus ?</p>
-                        <select name="campus" class="input" spellcheck="false">
+                        <select name="campus_id" class="input" spellcheck="false">
                             <option value="0" selected>Douai</option>
                             <option value="1">Lille</option>
                             <option value="2">Valenciennes</option>

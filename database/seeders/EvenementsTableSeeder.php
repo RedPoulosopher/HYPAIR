@@ -25,6 +25,7 @@ class EvenementsTableSeeder extends Seeder
                 'lieu' => 'Meud',
                 'max_participation' => 20,
                 'validation' => "1",
+                'pour_cotisant' => "1",
                 'campus_id' => '1',
                 'date_apparition' => '2022-04-12 08:00:00'
             ], [
@@ -36,6 +37,7 @@ class EvenementsTableSeeder extends Seeder
                 'temps_fin' => '2022-07-20 23:00:00',
                 'lieu' => 'Meud',
                 'max_participation' => 200,
+                'pour_cotisant' => "0",
                 'validation' => "1",
                 'campus_id' => '2',
                 'date_apparition' => '2022-04-12 08:00:00'
@@ -48,6 +50,7 @@ class EvenementsTableSeeder extends Seeder
                 'temps_fin' => '2022-04-02 23:00:00',
                 'lieu' => 'Meud',
                 'max_participation' => 200,
+                'pour_cotisant' => "1",
                 'validation' => "1",
                 'campus_id' => '1',
                 'date_apparition' => '2022-04-12 20:00:00'
@@ -60,6 +63,7 @@ class EvenementsTableSeeder extends Seeder
                 'temps_fin' => '2022-12-31 16:00:00',
                 'lieu' => 'Meud',
                 'max_participation' => 20,
+                'pour_cotisant' => "1",
                 'validation' => "1",
                 'campus_id' => '1',
                 'date_apparition' => '2023-04-12 08:00:00'
@@ -73,6 +77,7 @@ class EvenementsTableSeeder extends Seeder
                 'lieu' => 'Salle Nicolas',
                 'max_participation' => 400,
                 'validation' => "1",
+                'pour_cotisant' => "1",
                 'campus_id' => '2',
                 'date_apparition' => '2022-04-24 08:00:00'
             ]

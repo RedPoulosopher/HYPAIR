@@ -11,9 +11,9 @@ use App\Http\Controllers\PostController;
 
         <div class="details">
             <div id="main-title">
-                <h2>{{ $post->titre }}</h2>
+                <p><strong>{{ $post->titre }}</strong></p>
                 <p>•</p>
-                <p>Posté par {{ $post->entite->nom }}</p>
+                <p>Posté par {{ $post->entite->nom }} </p>
             </div>
 
 

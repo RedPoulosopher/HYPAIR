@@ -26,7 +26,7 @@
 
 
                 @if ($gerer_evenement)
-                    <div style="margin:70px 0px;" class="centre-element">
+                    <div class="create-btn-container">
                         <a href="evenement/formulaire" class="bouton tertiaire ombre_petite administrateur">
                             <span><i class="fa-solid fa-plus"></i>Créer un évènement</span>
                         </a>

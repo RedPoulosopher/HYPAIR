@@ -7,7 +7,7 @@ use App\Http\Controllers\PostController;
 
     <div id="header">
 
-        <img class="thumbnail" src="images/logo-air-rond-test.png" alt="AIR">
+        <img class="thumbnail" src="/images/logo-air-rond-test.png" alt="AIR">
 
         <div class="details">
             <div id="main-title">

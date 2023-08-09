@@ -222,6 +222,7 @@ $routes_entites = function () {
 
         Route::controller(PostController::class)->group(function () {
             Route::get('/entite/post', 'home');
+            Route::get('/entite/post/formulaire', 'create');
             Route::post('/entite/evenement/suppression', 'store');
         });
     });

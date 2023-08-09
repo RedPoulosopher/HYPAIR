@@ -2,11 +2,24 @@ input {
     border: none;
     background: unset;
     color: inherit;
+    color-scheme: dark;
+}
+
+body.light-theme input {
+    color-scheme: light;
 }
 
 input:focus {
     border: none;
     outline: none;
+}
+
+summary {
+    cursor: pointer;
+}
+
+summary h2 {
+    display: inline-block;
 }
 
 p {
@@ -33,7 +46,7 @@ textarea:focus {
     padding: 13px 18px;
     font-size: 1em;
     color: inherit;
-    margin: 0 0 40px;
+    margin: 0 0 25px;
     max-width: 100%;
     box-sizing: border-box;
 
@@ -70,7 +83,7 @@ fieldset {
     &:focus-within {
         // border-left: 1px solid var(--couleur_accentuation);
 
-        & > .titre {
+        &>.titre {
             opacity: 0.8;
         }
     }

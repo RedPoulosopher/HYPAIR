@@ -4,6 +4,8 @@
 
 @pushonce('styles')
     <link rel="stylesheet" href="{{ mix('/css/accueil.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/components/service.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/components/post.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')

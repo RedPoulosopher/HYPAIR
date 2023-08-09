@@ -3,7 +3,7 @@
 @section('titre', 'Evènement')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/formulaire-evenement.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
 @endpushonce
 
 @section('content')
@@ -70,48 +70,49 @@
                     </label>
                 </div>
 
-                <br>
-                <h2>Options avancées</h2>
-
-                <div class="groupe card">
-                    <label class="input_groupe">
-                        <p class="titre">Lieu :</p>
-                        <input type="text" name="lieu" class="input" id="lieu_evenement"
-                            value="{{ old('lieu') ?? ($evenement->lieu ?? '') }}" />
-                    </label>
-                </div>
-
-                <div class="groupe card">
-                    <label class="input_groupe">
-                        <p class="titre">Date de publication :</p>
-                        <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
-                            max="12-31-2099" />
-                    </label>
-                </div>
-
-
-                <div class="groupe card">
-                    <label class="input_groupe">
-                        <p class="titre">Nombre maximum de participants :</p>
-                        <input type="number" name="max_participation" class="input" id="max_participation_evenement"
-                            value="{{ old('max_participation') ?? ($evenement->max_participation ?? '') }}"
-                            min="0" />
-                    </label>
-                </div>
-
-                <div class="groupe card">
-                    <label class="input_groupe">
-                        <p class="titre">Campus</p>
-                        <p class="description">Évènement destiné aux étudiants de quel campus ?</p>
-                        <select name="campus_id" class="input" spellcheck="false">
-                            <option value="1" selected>Douai</option>
-                            <option value="2">Lille</option>
-                            <option value="3">Valenciennes</option>
-                            <option value="4">Dunkerque</option>
-                            <option value="5">Alençon</option>
-                        </select>
-                    </label>
-                </div>
+                <details>
+                    <summary><h2>Options avancées</h2></summary>
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="titre">Lieu :</p>
+                            <input type="text" name="lieu" class="input" id="lieu_evenement"
+                                value="{{ old('lieu') ?? ($evenement->lieu ?? '') }}" />
+                        </label>
+                    </div>
+    
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="titre">Date de publication :</p>
+                            <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
+                                max="12-31-2099" />
+                        </label>
+                    </div>
+    
+    
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="titre">Nombre maximum de participants :</p>
+                            <input type="number" name="max_participation" class="input" id="max_participation_evenement"
+                                value="{{ old('max_participation') ?? ($evenement->max_participation ?? '') }}"
+                                min="0" />
+                        </label>
+                    </div>
+    
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="titre">Campus</p>
+                            <p class="description">Évènement destiné aux étudiants de quel campus ?</p>
+                            <select name="campus_id" class="input" spellcheck="false">
+                                <option value="0" selected>Tous</option>
+                                <option value="1">Douai</option>
+                                <option value="2">Lille</option>
+                                <option value="3">Valenciennes</option>
+                                <option value="4">Dunkerque</option>
+                                <option value="5">Alençon</option>
+                            </select>
+                        </label>
+                    </div>
+                </details>
 
 
                 {{-- <label class="input_groupe">

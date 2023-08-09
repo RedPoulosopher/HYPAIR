@@ -10,7 +10,7 @@
 
     <main id="main-content">
         <section>
-            <h1>Créer un nouvel évènement</h1>
+            <h1>{{ $titre ?? "Créer un évènement" }}</h1>
             @if (Session::has('success'))
                 <p class="explication">Bienvenue ! Ici vous pourrez créer un évènement.</p>
             @endif

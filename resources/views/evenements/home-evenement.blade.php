@@ -94,9 +94,9 @@
                                         @endif --}}
 
                                         <td>
-                                            <a href="evenement/<?= $table['slug'] ?>" class="bouton_action"
-                                                style="color:black; border-color:black;"><i
-                                                    class="fa-solid fa-pen-to-square fa-lg"></i></a>
+                                            <a href="evenement/modifier/<?= $table['id'] ?>" class="bouton_action" style="color:black; border-color:black;">
+                                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                            </a>
                                         </td>
                                         <td>
                                             @if ($gerer_evenement)

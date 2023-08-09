@@ -23,6 +23,7 @@ section {
     padding: 5px;
     margin: 2px 0 2px 10px;
     text-align: start;
+    cursor: pointer;
 
     &.warning i {
         color: var(--couleur_accentuation);

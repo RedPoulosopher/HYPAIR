@@ -12,9 +12,9 @@
 
     <main id="main-content">
         <section>
-            <h1>Évènements</h1>
+            <h1>Posts</h1>
             @if (Session::has('success'))
-                <p class="explication">Bienvenue sur la page concernant les évènements !</p>
+                <p class="explication">Bienvenue sur la page concernant les posts !</p>
             @endif
             <div class="section-content">
                 @csrf
@@ -27,7 +27,7 @@
                 @endif
 
 
-                {{-- @if ($gerer_evenement) --}}
+                {{-- @if ($gerer_post) --}}
                     <div class="create-btn-container">
                         <a href="post/formulaire" class="bouton tertiaire ombre_petite administrateur">
                             <span><i class="fa-solid fa-plus"></i>Créer un post</span>
@@ -36,10 +36,21 @@
                 {{-- @endif --}}
 
                 <h2>Liste des posts :</h2>
-                @foreach ($posts as $post)
-                    <x-post :post="$post" />
-                @endforeach
-
+                <ul>
+                    @foreach ($posts as $post)
+                        <li>
+                            <x-post :post="$post" />
+                            <a href="post/modifier/<?= $post->id ?>" class="bouton_action" style="color:black; border-color:black;">
+                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </a>
+                            {{-- @if ($gerer_post) --}}
+                                <span class="bouton_action warning">
+                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                </span>
+                            {{-- @endif --}}
+                        </li>
+                    @endforeach
+                </ul>
 
                 <div id="info" class="popup">
                     <div class="documentation ombre_petite">
@@ -59,7 +70,8 @@
     </main>
 
 
-    {{-- <script>
+    {{--TODO: FAIRE FONCTIONNER LA SUPPRESSION
+        <script> 
         events = {!! json_encode($tables) !!}
 
         const listener_click_retour = document.querySelectorAll('.info_bouton');

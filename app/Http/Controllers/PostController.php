@@ -35,7 +35,10 @@ class PostController extends Controller
             ['entite_id', '=', session('entite_id')]
         ])->get();
         
-        return view('post.home')->with('posts', $posts);
+        return view('post.home')->with([
+            'posts' => $posts,
+            'gerer_post' => AutorisationGestion::gestion("gerer_post")
+        ]);
     }
 
     public function create()
@@ -49,10 +52,25 @@ class PostController extends Controller
 			->get();
 
 		return view('post.formulaire', [
-			'titre' => 'Nouveau post',
+			'titre' => 'Créer un post',
 			'events_existants' => $events_existants,
 		]);
 	}
+
+    public function edit(Request $request){//TODO : retourner la page de création avec tout de pré-rempli
+        		// AutorisationGestion::protectionPage("gerer_post");
+		$niveau_administration = AutorisationGestion::niveau_administration();
+
+		$events_existants = Evenement::select('id', 'titre')
+			->where('entite_id', session('entite_id'))
+			// ->where("confidentialite", "<=", $niveau_administration)
+			->get();
+
+		return view('post.formulaire', [
+			'titre' => 'Modifier le post',
+			'events_existants' => $events_existants,
+		]);
+    }
 
     public function store(Request $request)
     {

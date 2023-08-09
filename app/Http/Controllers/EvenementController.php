@@ -29,7 +29,7 @@ class EvenementController extends Controller
 			->get();
 
 		return view('evenements.formulaire', [
-			'titre' => 'Nouvel évènement',
+			'titre' => 'Créer un évènement',
 			'evenements_existants' => $evenements_existants,
 		]);
 	}

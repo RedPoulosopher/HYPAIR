@@ -36,10 +36,10 @@
                 {{-- @endif --}}
 
                 <h2>Liste des posts :</h2>
-                <ul>
+                <ul id="posts-list">
                     @foreach ($posts as $post)
                         <li>
-                            <x-post :post="$post" />
+                            <x-post :post="$post" :id="$post->id"/>
                             <a href="post/modifier/<?= $post->id ?>" class="bouton_action" style="color:black; border-color:black;">
                                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
                             </a>
@@ -68,7 +68,6 @@
                     </div>
                 </div>
     </main>
-
 
     {{--TODO: FAIRE FONCTIONNER LA SUPPRESSION
         <script> 

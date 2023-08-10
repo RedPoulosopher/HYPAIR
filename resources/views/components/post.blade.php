@@ -57,7 +57,7 @@ use App\Http\Controllers\PostController;
 
         <div class="arrow-display">
             {{-- Flèche rouge pour dérouler la description --}}
-            <svg class="arrow" id="arrow-{{$id}}" width="42" height="24" viewBox="0 0 42 24"
+            <svg class="arrow" id="arrow-{{$post->id}}" width="42" height="24" viewBox="0 0 42 24"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 3L21 21L39 3" stroke="#CC3345" stroke-width="6" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -66,7 +66,7 @@ use App\Http\Controllers\PostController;
 
     </div>
 
-    <div class="description" id="description-{{$id}}">
+    <div class="description" id="description-{{$post->id}}">
         <p>Lorem ipsum dolor sit amet consectetur. Egestas eget aenean curabitur quis eleifend diam fermentum vitae.
             Tortor feugiat suspendisse faucibus ante. </p>
         <p>IMAGES</p>
@@ -78,3 +78,8 @@ use App\Http\Controllers\PostController;
     </div>
 
 </article>
+
+
+@pushonce('end-scripts')
+@include('components.post-script')
+@endpushonce

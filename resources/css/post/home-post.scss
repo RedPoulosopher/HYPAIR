@@ -7,7 +7,7 @@ section {
 }
 
 .create-btn-container {
-    margin: 20px 0px 40px;
+    margin: 0 0px 40px;
 }
 
 .bouton_action {
@@ -47,7 +47,7 @@ table {
     top: 450px;
 }
 
-ul {
+ul#posts-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -56,5 +56,17 @@ ul {
         display: flex;
         margin-bottom: 20px;
         align-items: center;
+
+        i {
+            width: 16px;
+            height: 16px;
+        }
+
+        &>a,
+        &>span {
+            min-width: inherit;
+            display: block;
+            width: 25px;
+        }
     }
 }

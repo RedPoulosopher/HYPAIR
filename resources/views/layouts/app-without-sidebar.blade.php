@@ -15,6 +15,7 @@
 
 <body>
     @include('layouts.theme')
+    @stack('start-scripts')
 
     @php
         // Code pour gérer le login utilisateur
@@ -46,6 +47,7 @@
     </div>
 
     <script src="https://kit.fontawesome.com/1087e6f14a.js" crossorigin="anonymous"></script>
+    @stack('end-scripts')
 
 
 </body>

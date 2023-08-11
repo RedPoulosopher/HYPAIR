@@ -6,9 +6,6 @@
 
     // Cacher les descriptions des posts
     descriptions = document.getElementsByClassName("description")
-    for (let i = 0; i < arrows.length; i++) {
-        descriptions[i].style.display = "none"
-    }
 
     // Commander l'affichage des descriptions
     for (let i = 0; i < arrows.length; i++) {

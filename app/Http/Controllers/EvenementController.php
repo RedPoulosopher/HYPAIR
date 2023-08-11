@@ -178,12 +178,11 @@ class EvenementController extends Controller
 
 
 
-	public static function suppression(Request $request)
+	public static function suppression($id, $event_id)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
 
-		$resultat = ["id" => $request->id,];
-		$evenement = Evenement::find($request["id"])->delete();
+		$evenement = Evenement::find($event_id)->delete();
 
 		return redirect(session('entite_uid') . "/entite/evenement");
 	}

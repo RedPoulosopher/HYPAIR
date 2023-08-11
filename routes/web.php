@@ -211,7 +211,7 @@ $routes_entites = function () {
 
         Route::controller(EvenementController::class)->group(function () {
             Route::get('/entite/evenement', 'show_home');
-            Route::post('/entite/evenement/suppression', 'suppression');
+            Route::get('/entite/evenement/suppression/{event_id}', 'suppression');
             Route::post('/entite/evenement/validation', 'validation');
             Route::get('/entite/evenement/formulaire', 'create');
             Route::post('/entite/evenement/formulaire', 'store');

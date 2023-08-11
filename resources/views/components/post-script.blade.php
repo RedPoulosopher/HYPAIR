@@ -2,19 +2,16 @@
     // Ce script commande l'affichage des descriptions des posts
 
     // Ajouter un EventListener sur chaque flèche rouge
-    arrows = document.getElementsByClassName("arrow-display")
+    arrows = document.getElementsByClassName("arrow")
 
     // Cacher les descriptions des posts
     descriptions = document.getElementsByClassName("description")
-    for (let i = 0; i < arrows.length; i++) {
-        descriptions[i].style.display = "none"
-    }
 
     // Commander l'affichage des descriptions
     for (let i = 0; i < arrows.length; i++) {
         arrows[i].addEventListener("click", (event) => {
 
-            elementName = event.target.id
+            elementName = event.currentTarget.id
             console.log(elementName)
             descriptionName = "description"
 
@@ -25,13 +22,16 @@
                 console.log(descriptionName)
                 console.log(number)
 
+                //Toggle description
                 description = document.getElementById(descriptionName)
-                
-                if (description.style.display === "none") {
-                    description.style.display = "block"
+                description.classList.toggle("visible");
+                if (description.style.maxHeight) {
+                    description.style.maxHeight = null;
                 } else {
-                    description.style.display = "none"
+                    description.style.maxHeight = description.scrollHeight + "px"; //On utilise max-height pour animer l'affichage de la description
                 }
+                //Rotation de la flèche
+                event.currentTarget.classList.toggle("visible");
             }
 
         })

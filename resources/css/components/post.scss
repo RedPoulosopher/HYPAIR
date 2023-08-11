@@ -79,15 +79,33 @@
             .arrow {
                 padding: 30px 15px;
                 box-sizing: content-box;
+                transition: transform 300ms ease-out;
+
+                &.visible {
+                    transform: rotate(-180deg);
+                }
             }
         }
     }
 
     .description {
 
+        display: none;
+        display: block;
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 250ms ease;
+
+        &.visible {
+            display: block;
+            // max-height: 1000px;
+        }
+
         a {
             color: var(--link-color);
             font-weight: var(--fw-medium);
+            text-decoration: underline;
         }
     }
 }

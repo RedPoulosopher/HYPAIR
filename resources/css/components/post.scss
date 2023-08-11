@@ -87,6 +87,10 @@
 
         display: none;
 
+        &.visible {
+            display: block;
+        }
+
         a {
             color: var(--link-color);
             font-weight: var(--fw-medium);

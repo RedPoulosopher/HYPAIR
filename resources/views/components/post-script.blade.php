@@ -22,8 +22,15 @@
                 console.log(descriptionName)
                 console.log(number)
 
+                //Toggle description
                 description = document.getElementById(descriptionName)
                 description.classList.toggle("visible");
+                if (description.style.maxHeight) {
+                    description.style.maxHeight = null;
+                } else {
+                    description.style.maxHeight = description.scrollHeight + "px"; //On utilise max-height pour animer l'affichage de la description
+                }
+                //Rotation de la flèche
                 event.currentTarget.classList.toggle("visible");
             }
 

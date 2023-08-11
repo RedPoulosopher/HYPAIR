@@ -79,6 +79,11 @@
             .arrow {
                 padding: 30px 15px;
                 box-sizing: content-box;
+                transition: transform 300ms ease-out;
+
+                &.visible {
+                    transform: rotate(-180deg);
+                }
             }
         }
     }

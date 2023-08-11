@@ -24,6 +24,7 @@
 
                 description = document.getElementById(descriptionName)
                 description.classList.toggle("visible");
+                event.currentTarget.classList.toggle("visible");
             }
 
         })

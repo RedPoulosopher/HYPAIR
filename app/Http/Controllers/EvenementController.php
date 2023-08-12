@@ -85,14 +85,14 @@ class EvenementController extends Controller
 	}
 
 
-	public function update(Request $request)
+	public function update(Request $request, $id, $event_id)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
 
 		$traitement = $this->formulaire_traitement($request);
-		Evenement::where('id', $request->route('id'))->update($traitement);
+		Evenement::find($event_id)->update($traitement);
 
-		return redirect("/evenement/" . $traitement["slug"]);
+		return redirect(session('entite_uid') . "/entite/evenement");
 	}
 
 

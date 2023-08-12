@@ -186,7 +186,7 @@
 
                 <span>* Les champs marqués d'une astérisque sont obligatoires</span>
                 <button type="submit" class="bouton primaire ombre_petite"
-                    style="float:right;"><span>{{ $evenement->id ?? false ? 'MODIFIER' : 'CRÉER' }}</span></button>
+                    style="float:right;"><span>{{ isset($event) ? 'MODIFIER' : 'CRÉER' }}</span></button>
             </form>
         </section>
     </main>

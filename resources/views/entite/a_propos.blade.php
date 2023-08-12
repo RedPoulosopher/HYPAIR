@@ -4,7 +4,9 @@
 
 @pushonce('styles')
 @endpushonce
-<link rel="stylesheet" href="{{ mix('css/entite/a_propos.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/entite/a_propos.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/components/entite.css') }}">
+<link rel="stylesheet" href="{{ mix('/css/components/reseau-social.css') }}">
 @section('content')
 
     <main id="main-content">

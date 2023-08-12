@@ -4,6 +4,8 @@
 
 @pushonce('styles')
 <link rel="stylesheet" type="text/css" href="{{ mix('/css/entite/index_gestion.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/jstable.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/formulaire.css') }}">
 @endpushonce
 
 @section('content')

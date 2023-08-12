@@ -10,6 +10,7 @@
 
 @pushonce('styles')
 <link rel="stylesheet" href="{{ mix('/css/jstable.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
 <link rel="stylesheet" href="{{ mix('/css/espace_utilisateur/editer_reseaux_profil.css') }}" type="text/css">
 @endpushonce
 

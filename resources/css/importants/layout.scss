@@ -11,6 +11,12 @@
 #side-bar {
     grid-column: 2;
     grid-row: 1;
+
+    #calendrier-sidebar>p {
+        margin: 0;
+        text-align: center;
+        color: var(--couleur_police_secondaire);
+    }
 }
 
 @media screen and (max-width: 1250px) {
@@ -18,16 +24,19 @@
         gap: 35px 3vw;
     }
 }
+
 @media screen and (max-width: 1080px) {
     #content {
         grid-template-columns: 1fr;
         gap: 35px 0;
     }
+
     #side-bar {
         grid-column: 1;
         grid-row: 2;
     }
-    footer{
+
+    footer {
         grid-row: 3;
     }
 }

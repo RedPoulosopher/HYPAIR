@@ -5,6 +5,7 @@
 @pushonce('styles')
     <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ mix('/css/evenements/home-evenement.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')
@@ -169,7 +170,7 @@
 
 
                 <div id="info" class="popup">
-                    <div class="documentation ombre_petite">
+                    <div class="documentation card">
                         <div class="contenu_doc" id="contenu_doc">
                             <h2>Attention !</h2>
                             <p id="message">Vous êtes sur le point de supprimer un évènement. </p>

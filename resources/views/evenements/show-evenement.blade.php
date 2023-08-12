@@ -2,34 +2,19 @@
 
 @section('titre', $evenement->titre)
 
+@pushonce('styles')
+<link rel="stylesheet" href="{{ mix('/css/evenements/show-evenement.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
+@endpushonce
+
 @section('content')
 
 <style>
-.documentation {
-	width:100%;
-	background:var(--dark-grey);
-	padding:25px;
-	border-radius:25px;
-	box-sizing:border-box;
-	border:1px solid var(--grey);
-	box-sizing: ;
-}
-h1.titre {
-	margin-block-start:0;
-	text-decoration:underline;
-	text-decoration-color: var(--couleur_accentuation);
-}
-h1.titre::first-letter {
-	text-transform: capitalize;
-}
-p {
-	color: var(--couleur_police_secondaire);
-	text-align:justify;
-}
+
 </style>
 	
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section class="section-content">
 
 		<div style="display:flex;">
 			@if (substr(url()->previous(), -13)=="evenement")
@@ -45,7 +30,7 @@ p {
 -->
 		</div>
 
-		<div class="documentation ombre_petite">
+		<div class="documentation card">
 			<div class="contenu_doc" id="contenu_doc">
 		
 				<h1 class="titre">{{$evenement->titre}}</h1>
@@ -79,7 +64,7 @@ p {
 				@endif
 			</div>
 		</div>
-	</div>
-</div>
+	</section>
+</main>
 
 @endsection

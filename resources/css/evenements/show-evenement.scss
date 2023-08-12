@@ -1,0 +1,14 @@
+h1.titre {
+    margin-block-start: 0;
+    text-decoration: underline;
+    text-decoration-color: var(--couleur_accentuation);
+}
+
+h1.titre::first-letter {
+    text-transform: capitalize;
+}
+
+p {
+    color: var(--couleur_police_secondaire);
+    text-align: justify;
+}

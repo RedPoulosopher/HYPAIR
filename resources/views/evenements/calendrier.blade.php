@@ -4,6 +4,7 @@
 
 @pushonce('styles')
     <link rel="stylesheet" href="{{ mix('/css/evenements/calendrier.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')
@@ -48,7 +49,7 @@
 
         <div id="info" class="popup-cachee" style="position:absolute">
             <div class="petit">
-                <div class="documentation ombre_petite">
+                <div class="documentation card">
                     <div id="gerer" style="display:flex;">
 
 

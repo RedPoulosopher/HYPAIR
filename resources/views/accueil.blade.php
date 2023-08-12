@@ -13,7 +13,7 @@
     {{-- Contenu principal de la page --}}
     <main id="main-content">
 
-        <section>
+        <section id="section-services">
             <h1>Services</h1>
 
             <div class="services-wrapper">

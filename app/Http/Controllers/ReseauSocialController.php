@@ -24,7 +24,6 @@ class ReseauSocialController extends Controller
 
     public function store(Request $request)
     {
-        dd('dedans !!!');
         $reseau_social_model = new ReseauSocial();
         $reseau_social_model->reseaux_sociaux_liste_id = $request["reseaux_sociaux_liste_id"];
         $reseau_social_model->cle = $request["cle"];

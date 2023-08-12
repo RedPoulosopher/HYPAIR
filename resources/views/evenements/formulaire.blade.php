@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titre', 'Evènement')
+@section('titre', 'Évènements')
 
 @pushonce('styles')
     <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
@@ -10,7 +10,7 @@
 
     <main id="main-content">
         <section>
-            <h1>{{ $titre ?? "Créer un évènement" }}</h1>
+            <h1>{{ $titre ?? 'Créer un évènement' }}</h1>
             @if (Session::has('success'))
                 <p class="explication">Bienvenue ! Ici vous pourrez créer un évènement.</p>
             @endif
@@ -26,16 +26,28 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Titre :</p>
-                        <input type="text" name="titre" class="input" id="titre_doc" required
-                            value="{{ old('titre') ?? ($evenement->titre ?? '') }}" />
+                        @isset($event)
+                            <input type="text" name="titre" class="input" id="titre_doc" required
+                                value="{{ $event->titre }}" />
+                        @endisset
+                        @empty($event)
+                            <input type="text" name="titre" class="input" id="titre_doc" required
+                                value="{{ old('titre') ?? ($evenement->titre ?? '') }}" />
+                        @endempty
                     </label>
                 </div>
 
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Description de l'évènement :</p>
-                        <textarea name="description" pattern=".{30,250}" required
-                            title="Au moins 30 caractères dans la description, et au plus 250" rows="5">{{ old('description') ?? ($evenement->description ?? '') }}</textarea>
+                        @isset($event)
+                            <textarea name="description" pattern=".{30,250}" required
+                                title="Au moins 30 caractères dans la description, et au plus 250" rows="5">{{ $event->description }}</textarea>
+                        @endisset
+                        @empty($event)
+                            <textarea name="description" pattern=".{30,250}" required
+                                title="Au moins 30 caractères dans la description, et au plus 250" rows="5">{{ old('description') ?? ($evenement->description ?? '') }}</textarea>
+                        @endempty
                     </label>
 
 
@@ -44,17 +56,29 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Début de l'évènement :</p>
-                        <input type="datetime-local" name="temps_debut" class="input" required
-                            value="{{ old('temps_debut') ?? ($evenement->fin_mise_en_avant ?? '') }}" min="01-01-2000"
-                            max="12-31-2099" />
+                        @isset($event)
+                            <input type="datetime-local" name="temps_debut" class="input" required
+                                value="{{ $event->temps_debut }}" min="01-01-2000" max="12-31-2099" />
+                        @endisset
+                        @empty($event)
+                            <input type="datetime-local" name="temps_debut" class="input" required
+                                value="{{ old('temps_debut') ?? ($evenement->fin_mise_en_avant ?? '') }}" min="01-01-2000"
+                                max="12-31-2099" />
+                        @endempty
                     </label>
 
 
                     <label class="input_groupe">
                         <p class="titre">* Fin de l'évènement :</p>
-                        <input type="datetime-local" name="temps_fin" class="input" required
-                            value="{{ old('temps_fin') ?? ($evenement->fin_mise_en_avant ?? '') }}" min="2000-01-01"
-                            max="2100-12-31" />
+                        @isset($event)
+                            <input type="datetime-local" name="temps_fin" class="input" required
+                                value="{{ $event->temps_fin }}" min="2000-01-01" max="2100-12-31" />
+                        @endisset
+                        @empty($event)
+                            <input type="datetime-local" name="temps_fin" class="input" required
+                                value="{{ old('temps_fin') ?? ($evenement->fin_mise_en_avant ?? '') }}" min="2000-01-01"
+                                max="2100-12-31" />
+                        @endempty
                     </label>
                 </div>
 
@@ -64,51 +88,83 @@
                         <p class="description">Evènement seulement ouvert aux cotisants ?</p>
                         <select name="pour_cotisant" class="input" spellcheck="false" required
                             select="{{ old('pour_cotisant') ?? ($evenement->pour_cotisant ?? '') }}">
-                            <option value="1" selected>Oui</option>
-                            <option value="0">Non</option>
+                            @if ((isset($event) && $event->pour_cotisant) || !isset($event))
+                                <option value="1" selected>Oui</option>
+                                <option value="0">Non</option>
+                            @else
+                                <option value="1">Oui</option>
+                                <option value="0" selected>Non</option>
+                            @endif
                         </select>
                     </label>
                 </div>
 
                 <details>
-                    <summary><h2>Options avancées</h2></summary>
+                    <summary>
+                        <h2>Options avancées</h2>
+                    </summary>
                     <div class="groupe card">
                         <label class="input_groupe">
                             <p class="titre">Lieu :</p>
-                            <input type="text" name="lieu" class="input" id="lieu_evenement"
-                                value="{{ old('lieu') ?? ($evenement->lieu ?? '') }}" />
+                            @isset($event)
+                                <input type="text" name="lieu" class="input" id="lieu_evenement"
+                                    value="{{ $event->lieu }}" />
+                            @endisset
+                            @empty($event)
+                                <input type="text" name="lieu" class="input" id="lieu_evenement"
+                                    value="{{ old('lieu') ?? ($evenement->lieu ?? '') }}" />
+                            @endempty
                         </label>
                     </div>
-    
+
                     <div class="groupe card">
                         <label class="input_groupe">
                             <p class="titre">Date de publication :</p>
-                            <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
-                                max="12-31-2099" />
+                            @isset($event)
+                                <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
+                                    max="12-31-2099" value="{{ $event->date_apparition }}" />
+                            @endisset
+                            @empty($event)
+                                <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
+                                    max="12-31-2099" />
+                            @endempty
                         </label>
                     </div>
-    
-    
+
+
                     <div class="groupe card">
                         <label class="input_groupe">
                             <p class="titre">Nombre maximum de participants :</p>
-                            <input type="number" name="max_participation" class="input" id="max_participation_evenement"
-                                value="{{ old('max_participation') ?? ($evenement->max_participation ?? '') }}"
-                                min="0" />
+                            @isset($event)
+                                <input type="number" name="max_participation" class="input"
+                                    id="max_participation_evenement" value="{{ $event->max_participation }}"
+                                    min="0" />
+                            @endisset
+                            @empty($event)
+                                <input type="number" name="max_participation" class="input"
+                                    id="max_participation_evenement"
+                                    value="{{ old('max_participation') ?? ($evenement->max_participation ?? '') }}"
+                                    min="0" />
+                            @endempty
                         </label>
                     </div>
-    
+
                     <div class="groupe card">
                         <label class="input_groupe">
                             <p class="titre">Campus</p>
                             <p class="description">Évènement destiné aux étudiants de quel campus ?</p>
                             <select name="campus_id" class="input" spellcheck="false">
-                                <option value="0" selected>Tous</option>
-                                <option value="1">Douai</option>
-                                <option value="2">Lille</option>
-                                <option value="3">Valenciennes</option>
-                                <option value="4">Dunkerque</option>
-                                <option value="5">Alençon</option>
+                                {{-- Plutôt des checkbox par la suite --}}
+                                {{-- <option value="0" selected>Tous</option> --}}
+                                @foreach ($campus as $campus)
+                                    @if ((isset($event) && $event->campus_id == $campus->id) || (!isset($event) && $campus->id == 1))
+                                        <option value="{{ $campus->id }}" selected>{{ Str::ucfirst($campus->label) }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $campus->id }}">{{ Str::ucfirst($campus->label) }}
+                                        </option>
+                                    @endif
+                                @endforeach
                             </select>
                         </label>
                     </div>

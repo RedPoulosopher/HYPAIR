@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use \App\Models\Evenement;
 use \App\Models\Entite;
 use \App\Models\Membre;
+use App\Models\Site;
 use \App\Services\AutorisationGestion;
 use DateTime;
 use DateTimeZone;
@@ -28,9 +29,12 @@ class EvenementController extends Controller
 			->where("confidentialite", "<=", $niveau_administration)
 			->get();
 
+		$sites = Site::all();
+
 		return view('evenements.formulaire', [
 			'titre' => 'Créer un évènement',
 			'evenements_existants' => $evenements_existants,
+			'campus' => $sites
 		]);
 	}
 
@@ -53,27 +57,30 @@ class EvenementController extends Controller
 
 
 
-	public function edit(Request $request)
+	public function edit($id, $event_id)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$evenement = Evenement::where('id', $request->route('id'));
+		$evenement = Evenement::find($event_id);
 		if (!$evenement->exists()) {
 			abort(404);
 		}
 
-		$evenement = $evenement->first();
-		if ($evenement["confidentialite"] > $niveau_administration) {
-			abort(403);
-		}
+		$sites = Site::all();
+
+		// $evenement = $evenement->first();
+		// if ($evenement["confidentialite"] > $niveau_administration) {
+		// 	abort(403);
+		// }
 
 		$docs_existantes = Evenement::select('id', 'titre')->where('entite_id', session('entite_id'))->get();
-
 		return view('evenements.formulaire', [
-			'documentation' => $evenement,
-			'docs_existantes' => $docs_existantes,
+			// 'documentation' => $evenement,
+			// 'docs_existantes' => $docs_existantes,
+			'event' => $evenement,
 			'titre' => "Modifier l'évènement",
+			'campus' => $sites
 		]);
 	}
 

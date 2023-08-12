@@ -71,7 +71,6 @@ class CalendrierController extends Controller
                 'entite' => session('entite_uid')
             ],
         );
-
     }
 
 
@@ -99,7 +98,7 @@ class CalendrierController extends Controller
                 ->join('entites', 'evenements.entite_id', '=', 'entites.id')
                 ->join('membres', 'membres.entite_id', '=', 'entites.id')
                 ->join('users', 'users.id', '=', 'membres.user_id')
-                ->select('entites.uid', 'entites.nom', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre',/* 'evenements.slug', 'evenements.validation',*/ 'evenements.id', /*'evenements.confidentialite',*/ 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
+                ->select('entites.uid', 'entites.nom', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', 'evenements.slug', 'evenements.validation', 'evenements.id', 'evenements.confidentialite', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
                 ->where('users.id', '=', $user['id'])
                 ->whereMonth("temps_debut", $mois)
                 ->whereYear("temps_debut", $annee)
@@ -129,7 +128,6 @@ class CalendrierController extends Controller
                 'gerer_evenement' => false,
                 'entite' => ""
             ]);
-
     }
     public static function calendrier_index_json(Request $request)
     {
@@ -305,5 +303,4 @@ class CalendrierController extends Controller
 
         return redirect(session('entite_uid') . "/calendrier");
     }
-
 }

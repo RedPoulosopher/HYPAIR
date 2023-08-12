@@ -1,21 +1,22 @@
 .icon-container {
-    transition: all 0.2s ease;
     margin: 0 20px 0 20px;
     border-radius: 50px;
     background-color: var(--grey);
     cursor: pointer;
     padding: 10px;
     border: 2px solid var(--couleur_accentuation);
+    transition: border 150ms ease;
 
     &:hover {
         border: 2px solid var(--couleur_accentuation_air_light);
+
         i {
             color: var(--couleur_accentuation_air_light);
         }
     }
 
     i {
-        transition: all 0.3s ease;
+        transition: color 150ms ease;
 
         color: var(--couleur_accentuation);
     }
@@ -100,6 +101,7 @@
 }
 
 @media (max-width: 768px) {
+
     /*FAIRE POPUP*/
     #calendrier {
         grid-template-columns: repeat(1, 1fr);

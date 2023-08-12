@@ -55,7 +55,7 @@
 
             <div id="modal_info_membre">
                 <span id="close_modal" class='icon-close-square' tabindex="0" onclick="fermer_info_membre()"></span>
-                <div id="profil">
+                <div id="profil" class="card">
                     @foreach ($mandat as $mandat_user)
                         <div id="profil_{{ $mandat_user->id }}" class="profil">
                             <div class="photo_profil">

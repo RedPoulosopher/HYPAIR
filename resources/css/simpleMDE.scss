@@ -1,3 +1,22 @@
+/* AJOUTS AU STYLE DU MARKDOWN EDITOR : */
+.editor-preview {
+    a {
+        color: var(--link-color);
+        font-weight: var(--fw-medium);
+        text-decoration: underline;
+    }
+
+    img {
+        max-width: 80%;
+        max-height: 50vh;
+    }
+
+    p:has(img) {
+        display: flex;
+        justify-content: center;
+    }
+}
+
 /**
  * simplemde v1.11.2
  * Copyright Next Step Webs, Inc.

@@ -96,6 +96,7 @@
         max-height: 0;
         overflow: hidden;
         transition: max-height 250ms ease;
+        padding: 0 15px;
 
         &.visible {
             display: block;
@@ -111,6 +112,16 @@
             color: var(--link-color);
             font-weight: var(--fw-medium);
             text-decoration: underline;
+        }
+
+        img {
+            max-width: 80%;
+            max-height: 50vh;
+        }
+
+        p:has(img) {
+            display: flex;
+            justify-content: center;
         }
     }
 }

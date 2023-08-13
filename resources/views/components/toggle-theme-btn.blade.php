@@ -7,11 +7,11 @@
 <script>
   const btn = document.querySelector("#bascule-theme");
   btn.addEventListener("click", function () {
-    ancien_theme = localStorage.getItem("theme");
+    ancien_theme = localStorage.getItem("theme") || 'dark';//Default is dark
     if(ancien_theme=="dark"){
-        theme="light"
+      theme = "light"
     }else{
-      theme="dark"
+      theme = "dark"
     }
     set_theme(theme)
     localStorage.setItem("theme", theme);

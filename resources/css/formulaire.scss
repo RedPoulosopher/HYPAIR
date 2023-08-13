@@ -257,3 +257,11 @@ table {
         }
     }
 }
+
+.erreurs {
+    margin-bottom: 10px;
+
+    * {
+        color: var(--error-color);
+    }
+}

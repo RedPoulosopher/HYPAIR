@@ -48,10 +48,12 @@
                         <p class="titre">* Description du post :</p>
                         <p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
                         @isset($post)
-                            <textarea required name="description_md" id="description_md" class="input" rows="12">{{ $post->description }}</textarea>
+                            <textarea required name="description_md" id="description_md" class="input" title="Au moins 30 caractères dans la description, et au plus 250"
+                                rows="12">{{ $post->description }}</textarea>
                         @endisset
                         @empty($post)
-                            <textarea required name="description_md" id="description_md" class="input" rows="12">{{old('description') ?? $post->description ?? ''}}</textarea>
+                            <textarea required name="description_md" id="description_md" class="input" title="Au moins 30 caractères dans la description, et au plus 250"
+                                rows="12">{{old('description') ?? $post->description ?? ''}}</textarea>
                         @endempty
                     </label>
                 </div>

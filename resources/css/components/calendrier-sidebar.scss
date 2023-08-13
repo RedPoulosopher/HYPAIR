@@ -10,4 +10,9 @@
         text-align: center;
         color: var(--couleur_police_secondaire);
     }
+
+    &>a#voir-plus {
+        margin-top: 10px;
+        text-decoration: underline;
+    }
 }

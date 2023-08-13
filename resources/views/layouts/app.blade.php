@@ -54,8 +54,9 @@
 
                 @if(count($comingEvents) > 0)
                     @foreach ($comingEvents as $comingEvent)
-                        <x-coming-event :title="$comingEvent->titre" :start="$comingEvent->temps_debut" :end="$comingEvent->temps_fin" :entite="$comingEvent->entite_nom"/>
+                        <x-coming-event :title="$comingEvent->titre" :start="$comingEvent->temps_debut" :end="$comingEvent->temps_fin" :entite="$comingEvent->entite_nom" :uid="$comingEvent->uid" :slug="$comingEvent->slug"/>
                     @endforeach
+                    <a id="voir-plus" href="/calendrier">Voir plus</a>
                 @else
                     <p>Aucun évènement dans les 7 prochains jours</p>
                 @endif

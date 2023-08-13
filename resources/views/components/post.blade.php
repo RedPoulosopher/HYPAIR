@@ -67,14 +67,7 @@ use App\Http\Controllers\PostController;
     </div>
 
     <div class="description" id="description-{{$post->id}}">
-        <p>Lorem ipsum dolor sit amet consectetur. Egestas eget aenean curabitur quis eleifend diam fermentum vitae.
-            Tortor feugiat suspendisse faucibus ante. </p>
-        <p>IMAGES</p>
-        <p>Lien du shotgun : <a href="https://shotgun.fr/aprem-ninjas"> https://shotgun.fr/aprem-ninjas</a></p>
-        <p>Sed lorem eu purus suspendisse etiam libero duis placerat magna. Nibh tempor morbi integer curabitur senectus
-            commodo gravida nunc cras...
-            Justo cras sit eu viverra egestas. Varius faucibus tristique nulla cursus malesuada ut. Lobortis enim orci
-            gravida cursus enim. Parturient augue.</p>
+        {!! Str::markdown($post->description ?? ($entite->description_courte ?? '')) !!}
     </div>
 
 </article>

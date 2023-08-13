@@ -61,8 +61,8 @@ class UserController extends Controller
 
       $validation = [
         /* lorsque le problème de la bibliothèque GD sera réglé remplacer la validation par le commentaire si dessous */
-  			/*'input-photo' => ['required','image','dimensions:min_width=512,min_height=512','max:2000'],*/
-        'input-photo' => ['required','file','mimes:png','dimensions:min_width=512,min_height=512','max:2000'],
+  			'input-photo' => ['required','image','dimensions:min_width=512,min_height=512','max:2000'],
+        /*'input-photo' => ['required','file','mimes:png,','dimensions:min_width=512,min_height=512','max:2000'],*/
   		];
   		$this->validate($request, $validation);
       GestionPhotoDeProfil::stocker_photo_profil($request->file('input-photo'), $user);

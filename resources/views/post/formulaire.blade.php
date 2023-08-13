@@ -3,7 +3,13 @@
 @section('titre', 'Post')
 
 @pushonce('styles')
+    <link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/post/formulaire.css') }}" type="text/css">
+@endpushonce
+
+@pushonce('start-scripts')
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 @endpushonce
 
 @section('content')
@@ -40,13 +46,12 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Description du post :</p>
+                        <p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
                         @isset($post)
-                            <textarea name="description" pattern=".{30,250}" required
-                                title="Au moins 30 caractères dans la description, et au plus 250" rows="5">{{ $post->description }}</textarea>
+                            <textarea required name="description_md" id="description_md" class="input" rows="12">{{ $post->description }}</textarea>
                         @endisset
                         @empty($post)
-                            <textarea name="description" pattern=".{30,250}" required
-                                title="Au moins 30 caractères dans la description, et au plus 250" rows="5">{{ old('description') ?? ($post->description ?? '') }}</textarea>
+                            <textarea required name="description_md" id="description_md" class="input" rows="12">{{old('description') ?? $post->description ?? ''}}</textarea>
                         @endempty
                     </label>
                 </div>
@@ -155,3 +160,13 @@
     </main>
 
 @endsection
+
+@pushonce('end-scripts')
+<script>
+	var simplemde = new SimpleMDE({
+		element: document.getElementById("description_md"),
+		toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
+		spellChecker: false,
+	});
+</script>
+@endpushonce

@@ -9,9 +9,11 @@
 <link rel="stylesheet" href="{{ mix('/css/entite/modifier_description.css') }}" type="text/css">
 @endpushonce
 
-@section('content')
+@pushonce('start-scripts')
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+@endpushonce
 
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+@section('content')
 
 <main id="main-content">
 	<section>
@@ -52,11 +54,14 @@
 		</form>
 	</section>
 </main>
-<script>
-var simplemde = new SimpleMDE({
-	element: document.getElementById("description_md"),
-	toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
-	spellChecker: false,
-});
-</script>
 @endsection
+
+@pushonce('end-scripts')
+<script>
+	var simplemde = new SimpleMDE({
+		element: document.getElementById("description_md"),
+		toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
+		spellChecker: false,
+	});
+</script>
+@endpushonce

@@ -3,6 +3,8 @@
 @section('titre', 'Logotype')
 
 @pushonce('styles')
+<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
 <link rel="stylesheet" href="{{ mix('/css/entite/modifier_couleur.css') }}" type="text/css" >
 @endpushonce
 

@@ -7,7 +7,7 @@ section {
 }
 
 .create-btn-container {
-    margin: 20px 0px 40px;
+    margin: 0 0px 40px;
 }
 
 .bouton_action {
@@ -33,21 +33,12 @@ table {
     display: none;
 }
 
-.documentation {
-    width: 100%;
-    background: var(--dark-grey);
-    padding: 35px;
-    border-radius: 25px;
-    box-sizing: border-box;
-    border: 1px solid var(--grey);
-}
-
 #info {
     position: absolute;
     top: 450px;
 }
 
-ul {
+ul#posts-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -56,5 +47,17 @@ ul {
         display: flex;
         margin-bottom: 20px;
         align-items: center;
+
+        i {
+            width: 16px;
+            height: 16px;
+        }
+
+        &>a,
+        &>span {
+            min-width: inherit;
+            display: block;
+            width: 25px;
+        }
     }
 }

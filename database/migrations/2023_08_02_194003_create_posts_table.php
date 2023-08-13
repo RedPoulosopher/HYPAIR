@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('date_apparition');
             $table->dateTime('date_expiration')->nullable();
             $table->foreignId('entite_id');
+            $table->timestamps();
         });
 
         Schema::table('posts', function (Blueprint $table) {

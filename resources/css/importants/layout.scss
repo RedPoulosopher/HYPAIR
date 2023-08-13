@@ -6,6 +6,7 @@
     gap: 45px 5vw;
 }
 
+@import '../components/calendrier-sidebar.scss';
 
 //Content on the right
 #side-bar {
@@ -18,16 +19,19 @@
         gap: 35px 3vw;
     }
 }
+
 @media screen and (max-width: 1080px) {
     #content {
         grid-template-columns: 1fr;
         gap: 35px 0;
     }
+
     #side-bar {
         grid-column: 1;
         grid-row: 2;
     }
-    footer{
+
+    footer {
         grid-row: 3;
     }
 }

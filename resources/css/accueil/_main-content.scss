@@ -10,6 +10,15 @@
 /* Style relatif à l'affichage des articles */
 
 .article-wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 710px) {
+
+    //Masquer les services dans la page principale quand il y a la navbar mobile (parce que les services sont dedans)
+    #main-content section#section-services {
+        display: none;
+    }
 }

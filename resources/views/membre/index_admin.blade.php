@@ -3,6 +3,8 @@
 @section('titre', 'Membres')
 
 @pushonce('styles')
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/jstable.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/formulaire.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ mix('/css/membre/index_admin.css') }}">
 @endpushonce
 

@@ -211,20 +211,23 @@ $routes_entites = function () {
 
         Route::controller(EvenementController::class)->group(function () {
             Route::get('/entite/evenement', 'show_home');
-            Route::post('/entite/evenement/suppression', 'suppression');
+            Route::get('/entite/evenement/suppression/{event_id}', 'suppression');
             Route::post('/entite/evenement/validation', 'validation');
             Route::get('/entite/evenement/formulaire', 'create');
             Route::post('/entite/evenement/formulaire', 'store');
             Route::get('/entite/evenement/modifier/{id}', 'edit');
             Route::post('/entite/evenement/modifier/{id}', 'update');
-            Route::get('/entite/evenement/{slug}', 'show');
+            // Route::get('/entite/evenement/{slug}', 'show');
         });
 
         Route::controller(PostController::class)->group(function () {
             Route::get('/entite/post', 'home');
             Route::get('/entite/post/formulaire', 'create');
+            Route::post('/entite/post/formulaire', 'store');
             Route::get('/entite/post/modifier/{id}', 'edit');
+            Route::post('/entite/post/modifier/{id}', 'edit');
             Route::post('/entite/evenement/suppression', 'store');
+            Route::get('/entite/post/suppression/{id}', 'delete');
         });
     });
 

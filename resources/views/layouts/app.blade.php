@@ -16,6 +16,7 @@
 
 <body>
     @include('layouts.theme')
+    @stack('start-scripts')
 
     @php
         // Code pour gérer le login utilisateur
@@ -47,23 +48,29 @@
             <div id="calendrier-sidebar">
                 <h1>Cette semaine</h1>
                 @php
-                    // Données de test fictives
-                    $comingEvents = [['Tournoi de Smash Bros', 'Samedi 18 Septembre'], ['Conférence IMTalks', 'Dimanche 19 Septembre'], ['Reveal Gala', 'Mardi 21 Septembre'], ['Soirée Bourse', 'Jeudi 23 Septembre']];
+                    use \App\Models\Evenement;
+                    $comingEvents = Evenement::comingEvents()->get();
                 @endphp
 
-                @foreach ($comingEvents as $comingEvent)
-                    <x-coming-event :title="$comingEvent[0]" :date="$comingEvent[1]" />
-                @endforeach
+                @if(count($comingEvents) > 0)
+                    @foreach ($comingEvents as $comingEvent)
+                        <x-coming-event :title="$comingEvent->titre" :start="$comingEvent->temps_debut" :end="$comingEvent->temps_fin" :entite="$comingEvent->entite_nom" :uid="$comingEvent->uid" :slug="$comingEvent->slug"/>
+                    @endforeach
+                    <a id="voir-plus" href="/calendrier">Voir plus</a>
+                @else
+                    <p>Aucun évènement dans les 7 prochains jours</p>
+                @endif
 
             </div>
         </aside>
         <footer>
-            <a href="/a-propos">Fait avec amour par l’AIR - Tous droits réservés</a>
+            <a href="/a-propos">Fait avec amour par l'AIR - Tous droits réservés</a>
         </footer>
     </div>
 
 
     <script src="https://kit.fontawesome.com/1087e6f14a.js" crossorigin="anonymous"></script>
+    @stack('end-scripts')
 
 </body>
 

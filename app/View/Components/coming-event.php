@@ -8,19 +8,36 @@ class coming-event extends Component
 {
     /** @var string */
     public $title;
+    
+    /** @var string */
+    public $uid;
 
     /** @var string */
-    public $date;
+    public $slug;
+
+    /** @var string */
+    public $start;
+
+    /** @var string */
+    public $end;
+
+    /** @var string */
+    public $entite;
+
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title, $date)
+    public function __construct($title, $start, $end, $entite, $uid, $slug)
     {
         $this->title = $title;
-        $this->date = $date;
+        $this->start = $start;
+        $this->end = $end;
+        $this->entite = $entite;
+        $this->uid = $uid;
+        $this->slug = $slug;
     }
 
     /**

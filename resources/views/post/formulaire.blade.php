@@ -3,14 +3,20 @@
 @section('titre', 'Post')
 
 @pushonce('styles')
+    <link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/post/formulaire.css') }}" type="text/css">
+@endpushonce
+
+@pushonce('start-scripts')
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 @endpushonce
 
 @section('content')
 
     <main id="main-content">
         <section>
-            <h1>{{ $titre ?? "Créer un post"}}</h1>
+            <h1>{{ $titre ?? 'Créer un post' }}</h1>
             @if (Session::has('success'))
                 <p class="explication">Bienvenue ! Ici vous pourrez créer un post.</p>
             @endif
@@ -26,65 +32,112 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Titre :</p>
-                        <input type="text" name="titre" class="input" id="titre_doc" required
-                            value="{{ old('titre') ?? ($evenement->titre ?? '') }}" />
+                        @isset($post)
+                            <input type="text" name="titre" class="input" id="titre_doc" required
+                                value="{{ $post->titre }}" />
+                        @endisset
+                        @empty($post)
+                            <input type="text" name="titre" class="input" id="titre_doc" required
+                                value="{{ old('titre') ?? ($post->titre ?? '') }}" />
+                        @endempty
                     </label>
                 </div>
 
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Description du post :</p>
-                        <textarea name="description" pattern=".{30,250}" required
-                            title="Au moins 30 caractères dans la description, et au plus 250" rows="5">{{ old('description') ?? ($evenement->description ?? '') }}</textarea>
+                        <p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
+                        @isset($post)
+                            <textarea required name="description_md" id="description_md" class="input" title="Au moins 30 caractères dans la description, et au plus 250"
+                                rows="12">{{ $post->description }}</textarea>
+                        @endisset
+                        @empty($post)
+                            <textarea required name="description_md" id="description_md" class="input" title="Au moins 30 caractères dans la description, et au plus 250"
+                                rows="12">{{old('description') ?? $post->description ?? ''}}</textarea>
+                        @endempty
                     </label>
                 </div>
 
                 <details>
-                    <summary><h2>Options avancées</h2></summary>
-                        <div class="groupe card">
-                            <label class="input_groupe">
-                                <p class="titre">Rattaché à l'event :</p>
-                                <select name="campus_id" class="input" spellcheck="false">
-                                    <option value="-1" selected>Aucun</option>
-                                    @foreach($events_existants as $event)
+                    <summary>
+                        <h2>Options avancées</h2>
+                    </summary>
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="titre">Rattaché à l'event :</p>
+                            <select name="event_id" class="input" spellcheck="false">
+                                @isset($post)
+                                    @if (empty($post->event_id))
+                                        <option value="0" selected>Aucun</option>
+                                    @else
+                                        <option value="0">Aucun</option>
+                                    @endif
+                                    @foreach ($events as $event)
+                                        @if (!empty($post->event_id) && $post->event_id == $event->id)
+                                            <option value="{{ $event->id }}" selected>{{ $event->titre }}</option>
+                                        @else
+                                            <option value="{{ $event->id }}">{{ $event->titre }}</option>
+                                        @endif
+                                    @endforeach
+                                @endisset
+                                @empty($post)
+                                    <option value="0" selected>Aucun</option>
+                                    @foreach ($events as $event)
                                         <option value="{{ $event->id }}">{{ $event->titre }}</option>
                                     @endforeach
-                                </select>
-                            </label>
-                        </div>
-        
-                        <div class="groupe card">
-                            <label class="input_groupe">
-                                <p class="titre">Date de publication :</p>
+                                @endempty
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="titre">Date de publication :</p>
+                            @isset($post)
                                 <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
-                                    max="12-31-2099" />
-                            </label>
-                            <label class="input_groupe">
-                                <p class="titre">Date d'expiration :</p>
-                                <input type="datetime-local" name="temps_fin" class="input" required
-                                    value="{{ old('temps_fin') ?? ($evenement->fin_mise_en_avant ?? '') }}" min="2000-01-01"
+                                    max="12-31-2099" value="{{ $post->date_apparition }}" />
+                            @endisset
+                            @empty($post)
+                                <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
+                                    max="12-31-2099" value="{{ old('temps_debut') ?? ($post->date_apparition ?? '') }}" />
+                            @endempty
+                        </label>
+                        <label class="input_groupe">
+                            <p class="titre">Date d'expiration :</p>
+                            @isset($post)
+                                <input type="datetime-local" name="date_expiration" class="input" required
+                                    value="{{ $post->date_expiration }}" min="2000-01-01" max="2100-12-31" />
+                            @endisset
+                            @empty($post)
+                                <input type="datetime-local" name="date_expiration" class="input" required
+                                    value="{{ old('temps_fin') ?? ($post->date_expiration ?? '') }}" min="2000-01-01"
                                     max="2100-12-31" />
-                            </label>
-                        </div>
-        
-        
-                        <div class="groupe card">
-                            <label class="input_groupe">
-                                <p class="titre">Campus</p>
-                                <p class="description">Post destiné aux étudiants de quel campus ?</p>
-                                <select name="campus_id" class="input" spellcheck="false">
-                                    <option value="0" selected>Tous</option>
-                                    <option value="1">Douai</option>
-                                    <option value="2">Lille</option>
-                                    <option value="3">Valenciennes</option>
-                                    <option value="4">Dunkerque</option>
-                                    <option value="5">Alençon</option>
-                                </select>
-                            </label>
-                        </div>
+                            @endempty
+                        </label>
+                    </div>
+
+
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="titre">Campus</p>
+                            <p class="description">Post destiné aux étudiants de quel campus ?</p>
+                            <select name="campus_id" class="input" spellcheck="false">
+                                {{-- <option value="0" selected>Tous</option> --}}
+                                @foreach ($campus as $campus)
+                                    @if ((isset($event) && $event->campus_id == $campus->id) || (!isset($event) && $campus->id == 1))
+                                        <option value="{{ $campus->id }}" selected>{{ Str::ucfirst($campus->label) }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $campus->id }}">{{ Str::ucfirst($campus->label) }}
+                                        </option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
                 </details>
-                  
-                
+
+
 
 
 
@@ -103,9 +156,19 @@
 
                 <span>* Les champs marqués d'une astérisque sont obligatoires</span>
                 <button type="submit" class="bouton primaire ombre_petite"
-                    style="float:right;"><span>{{ $evenement->id ?? false ? 'MODIFIER' : 'CRÉER' }}</span></button>
+                    style="float:right;"><span>{{ isset($post) ? 'MODIFIER' : 'CRÉER' }}</span></button>
             </form>
         </section>
     </main>
 
 @endsection
+
+@pushonce('end-scripts')
+<script>
+	var simplemde = new SimpleMDE({
+		element: document.getElementById("description_md"),
+		toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
+		spellChecker: false,
+	});
+</script>
+@endpushonce

@@ -4,6 +4,7 @@
 
 @pushonce('styles')
     <link rel="stylesheet" href="{{ mix('/css/evenements/calendrier.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')
@@ -48,7 +49,7 @@
 
         <div id="info" class="popup-cachee" style="position:absolute">
             <div class="petit">
-                <div class="documentation ombre_petite">
+                <div class="documentation card">
                     <div id="gerer" style="display:flex;">
 
 
@@ -110,12 +111,12 @@
                 for (var i = 1; i <= nbr_jours_dans_mois; i++) {
                     //condition pour colorier la date d aujourd hui sur le calendrier
                     if (mois_courant && i == jour_actuel) {
-                        el_calendrier.innerHTML += ("<div class='jour' id='today' num_jour='" + i + "''><div>" + i +
+                        el_calendrier.innerHTML += ("<div class='jour' id='today' num_jour='" + i + "''><div class='num-jour'>" + i +
                             "</div></div>");
                         document.getElementById("today").style.cssText =
                             'border: 1px solid var(--couleur_accentuation); box-shadow: 0 0 7px; background-color:rgba(127,127,127,0.30)';
                     } else {
-                        el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''><div>" + i + "</div></div>");
+                        el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''><div class='num-jour'>" + i + "</div></div>");
 
                     }
                 }

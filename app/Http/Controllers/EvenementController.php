@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use \App\Models\Evenement;
 use \App\Models\Entite;
 use \App\Models\Membre;
+use App\Models\Site;
 use \App\Services\AutorisationGestion;
 use DateTime;
 use DateTimeZone;
@@ -28,9 +29,12 @@ class EvenementController extends Controller
 			->where("confidentialite", "<=", $niveau_administration)
 			->get();
 
+		$sites = Site::all();
+
 		return view('evenements.formulaire', [
 			'titre' => 'Créer un évènement',
 			'evenements_existants' => $evenements_existants,
+			'campus' => $sites
 		]);
 	}
 
@@ -53,39 +57,42 @@ class EvenementController extends Controller
 
 
 
-	public function edit(Request $request)
+	public function edit($entite_uid, $event_id)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$evenement = Evenement::where('id', $request->route('id'));
+		$evenement = Evenement::find($event_id);
 		if (!$evenement->exists()) {
 			abort(404);
 		}
 
-		$evenement = $evenement->first();
-		if ($evenement["confidentialite"] > $niveau_administration) {
-			abort(403);
-		}
+		$sites = Site::all();
 
-		$docs_existantes = Evenement::select('id', 'titre')->where('entite_id', session('entite_id'))->get();
+		// $evenement = $evenement->first();
+		// if ($evenement["confidentialite"] > $niveau_administration) {
+		// 	abort(403);
+		// }
 
+		// $docs_existantes = Evenement::select('id', 'titre')->where('entite_id', session('entite_id'))->get();
 		return view('evenements.formulaire', [
-			'documentation' => $evenement,
-			'docs_existantes' => $docs_existantes,
+			// 'documentation' => $evenement,
+			// 'docs_existantes' => $docs_existantes,
+			'event' => $evenement,
 			'titre' => "Modifier l'évènement",
+			'campus' => $sites
 		]);
 	}
 
 
-	public function update(Request $request)
+	public function update(Request $request, $entite_uid, $event_id)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
 
 		$traitement = $this->formulaire_traitement($request);
-		Evenement::where('id', $request->route('id'))->update($traitement);
+		Evenement::find($event_id)->update($traitement);
 
-		return redirect("/evenement/" . $traitement["slug"]);
+		return redirect(session('entite_uid') . "/entite/evenement");
 	}
 
 
@@ -130,12 +137,7 @@ class EvenementController extends Controller
 
 
 
-		$tables = Evenement::select('id', 'entite_id', 'titre', 'description', 'date_apparition', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'campus_id')
-			->where([
-				// ['confidentialite', '<=', $confidentialite],
-				['entite_id', '=', session('entite_id')]
-			])
-			->get();
+		$tables = Evenement::where('entite_id', session('entite_id'))->get();
 
 		// $tables_attente_validation = DB::table(DB::raw('evenements', 'entites'))
 		// 	->join('entites', 'entites.id', '=', 'evenements.entite_id')
@@ -178,26 +180,25 @@ class EvenementController extends Controller
 
 
 
-	public static function suppression(Request $request)
+	public static function suppression($id, $event_id)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
 
-		$resultat = ["id" => $request->id,];
-		$evenement = Evenement::find($request["id"])->delete();
+		$evenement = Evenement::find($event_id)->delete();
 
 		return redirect(session('entite_uid') . "/entite/evenement");
 	}
 
-	public static function validation(Request $request)
-	{
-		AutorisationGestion::protectionPage("gerer_evenement");
+	// public static function validation(Request $request)
+	// {
+	// 	AutorisationGestion::protectionPage("gerer_evenement");
 
-		$resultat = ["id" => $request->id,];
-		$evenement = Evenement::where('id', '=', $request["id"])->get();
-		$evenement[0]->update(['validation' => 1]);
+	// 	// $resultat = ["id" => $request->id,];
+	// 	$evenement = Evenement::where('id', '=', $request["id"])->get();
+	// 	$evenement[0]->update(['validation' => 1]);
 
-		return redirect(session('entite_uid') . "/entite/evenement");
-	}
+	// 	return redirect(session('entite_uid') . "/entite/evenement");
+	// }
 
 	public function formulaire_traitement(Request $request)
 	{

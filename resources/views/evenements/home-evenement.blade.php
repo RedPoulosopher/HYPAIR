@@ -3,7 +3,9 @@
 @section('titre', 'Évènement')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/home-evenement.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/evenements/home-evenement.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')
@@ -94,15 +96,20 @@
                                         @endif --}}
 
                                         <td>
-                                            <a href="evenement/modifier/<?= $table['id'] ?>" class="bouton_action" style="color:black; border-color:black;">
+                                            <a href="evenement/modifier/<?= $table['id'] ?>" class="bouton_action"
+                                                style="color:black; border-color:black;">
                                                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                             </a>
                                         </td>
                                         <td>
                                             @if ($gerer_evenement)
-                                                <span class="bouton_action warning">
-                                                    <i class="fa-solid fa-trash fa-lg"></i>
-                                                </span>
+                                                <a href="evenement/suppression">
+                                                    {{-- {{ dd($table) }} --}}
+                                                    <a href="evenement/suppression/{{ $table->id }}">
+                                                        <span class="bouton_action warning">
+                                                            <i class="fa-solid fa-trash fa-lg"></i>
+                                                        </span>
+                                                    </a>
                                             @endif
                                         </td>
 
@@ -163,7 +170,7 @@
 
 
                 <div id="info" class="popup">
-                    <div class="documentation ombre_petite">
+                    <div class="documentation card">
                         <div class="contenu_doc" id="contenu_doc">
                             <h2>Attention !</h2>
                             <p id="message">Vous êtes sur le point de supprimer un évènement. </p>

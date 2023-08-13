@@ -3,17 +3,17 @@
 @php
 use App\Http\Controllers\PostController;
 @endphp
+
 <article id="post" class="card">
 
-    <div id="header">
+    <div class="header">
 
         <img class="thumbnail" src="/images/logo-air-rond-test.png" alt="AIR">
 
         <div class="details">
-            <div id="main-title">
-                <p><strong>{{ $post->titre }}</strong></p>
-                <p>•</p>
-                <p>Posté par {{ $post->entite->nom }} </p>
+            <div class="main-title">
+                <h2>{{ $post->titre }}</h2>
+                <p><span class="separator">•</span>Posté par {{ $post->entite->nom }} </p>
             </div>
 
 
@@ -37,7 +37,7 @@ use App\Http\Controllers\PostController;
 
         </div>
 
-        <div id="release-date">
+        <div class="release-date">
             {{-- Icône de calendrier --}}
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -54,10 +54,9 @@ use App\Http\Controllers\PostController;
             <p>Mercredi 15 septembre</p>
         </div>
 
-
-        <div id="arrow-display">
+        <div class="arrow-display">
             {{-- Flèche rouge pour dérouler la description --}}
-            <svg id="arrow" onclick="revealContent()" width="42" height="24" viewBox="0 0 42 24"
+            <svg class="arrow" id="arrow-{{$post->id}}" width="42" height="24" viewBox="0 0 42 24"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 3L21 21L39 3" stroke="#CC3345" stroke-width="6" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -66,40 +65,13 @@ use App\Http\Controllers\PostController;
 
     </div>
 
-    <div id="description" style="display: none;">
-        <p>Lorem ipsum dolor sit amet consectetur. Egestas eget aenean curabitur quis eleifend diam fermentum vitae.
-            Tortor feugiat suspendisse faucibus ante. </p>
-        <p>IMAGES</p>
-        <p>Lien du shotgun : <a href="https://shotgun.fr/aprem-ninjas"> https://shotgun.fr/aprem-ninjas</a></p>
-        <p>Sed lorem eu purus suspendisse etiam libero duis placerat magna. Nibh tempor morbi integer curabitur senectus
-            commodo gravida nunc cras...
-            Justo cras sit eu viverra egestas. Varius faucibus tristique nulla cursus malesuada ut. Lobortis enim orci
-            gravida cursus enim. Parturient augue.</p>
+    <div class="description" id="description-{{$post->id}}">
+        {!! Str::markdown($post->description ?? ($entite->description_courte ?? '')) !!}
     </div>
 
 </article>
 
-{{-- Script qui commande la révélation du contenu du post --}}
 
-<script>
-    const content = document.getElementById("description")
-    const arrow = document.getElementById("arrow")
-
-    var contentState = true
-
-
-    function revealContent(post) {
-
-        if (contentState) {
-            content.style.display = "none"
-            arrow.style.transform = 'rotate(0deg)'
-            contentState = false
-        } else {
-            content.style.display = "block"
-            arrow.style.transform = 'rotate(180deg)'
-            contentState = true
-        }
-    }
-
-    content.addpostListener("click", revealContent())
-</script>
+@pushonce('end-scripts')
+@include('components.post-script')
+@endpushonce

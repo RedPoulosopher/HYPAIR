@@ -57,7 +57,7 @@ class EvenementController extends Controller
 
 
 
-	public function edit($id, $event_id)
+	public function edit($entite_uid, $event_id)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
 		$niveau_administration = AutorisationGestion::niveau_administration();
@@ -74,7 +74,7 @@ class EvenementController extends Controller
 		// 	abort(403);
 		// }
 
-		$docs_existantes = Evenement::select('id', 'titre')->where('entite_id', session('entite_id'))->get();
+		// $docs_existantes = Evenement::select('id', 'titre')->where('entite_id', session('entite_id'))->get();
 		return view('evenements.formulaire', [
 			// 'documentation' => $evenement,
 			// 'docs_existantes' => $docs_existantes,
@@ -85,7 +85,7 @@ class EvenementController extends Controller
 	}
 
 
-	public function update(Request $request, $id, $event_id)
+	public function update(Request $request, $entite_uid, $event_id)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
 
@@ -137,12 +137,7 @@ class EvenementController extends Controller
 
 
 
-		$tables = Evenement::select('id', 'entite_id', 'titre', 'description', 'date_apparition', 'temps_debut', 'temps_fin', 'lieu', 'max_participation', 'pour_cotisant', 'campus_id')
-			->where([
-				// ['confidentialite', '<=', $confidentialite],
-				['entite_id', '=', session('entite_id')]
-			])
-			->get();
+		$tables = Evenement::where('entite_id', session('entite_id'))->get();
 
 		// $tables_attente_validation = DB::table(DB::raw('evenements', 'entites'))
 		// 	->join('entites', 'entites.id', '=', 'evenements.entite_id')
@@ -194,16 +189,16 @@ class EvenementController extends Controller
 		return redirect(session('entite_uid') . "/entite/evenement");
 	}
 
-	public static function validation(Request $request)
-	{
-		AutorisationGestion::protectionPage("gerer_evenement");
+	// public static function validation(Request $request)
+	// {
+	// 	AutorisationGestion::protectionPage("gerer_evenement");
 
-		$resultat = ["id" => $request->id,];
-		$evenement = Evenement::where('id', '=', $request["id"])->get();
-		$evenement[0]->update(['validation' => 1]);
+	// 	// $resultat = ["id" => $request->id,];
+	// 	$evenement = Evenement::where('id', '=', $request["id"])->get();
+	// 	$evenement[0]->update(['validation' => 1]);
 
-		return redirect(session('entite_uid') . "/entite/evenement");
-	}
+	// 	return redirect(session('entite_uid') . "/entite/evenement");
+	// }
 
 	public function formulaire_traitement(Request $request)
 	{

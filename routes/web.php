@@ -217,14 +217,17 @@ $routes_entites = function () {
             Route::post('/entite/evenement/formulaire', 'store');
             Route::get('/entite/evenement/modifier/{id}', 'edit');
             Route::post('/entite/evenement/modifier/{id}', 'update');
-            Route::get('/entite/evenement/{slug}', 'show');
+            // Route::get('/entite/evenement/{slug}', 'show');
         });
 
         Route::controller(PostController::class)->group(function () {
             Route::get('/entite/post', 'home');
             Route::get('/entite/post/formulaire', 'create');
+            Route::post('/entite/post/formulaire', 'store');
             Route::get('/entite/post/modifier/{id}', 'edit');
+            Route::post('/entite/post/modifier/{id}', 'edit');
             Route::post('/entite/evenement/suppression', 'store');
+            Route::get('/entite/post/suppression/{id}', 'delete');
         });
     });
 

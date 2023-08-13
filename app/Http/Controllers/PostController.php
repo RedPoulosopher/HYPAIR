@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Evenement;
 use Illuminate\Http\Request;
 use \App\Services\AutorisationGestion;
-use \App\Models\Evenement;
+use App\Models\Site;
+use DateTime;
+use DateTimeZone;
 
 class PostController extends Controller
 {
@@ -25,16 +28,14 @@ class PostController extends Controller
     public function accueil()
     {
         $posts = Post::all();
-        // dd($posts);
         return view('accueil')->with('posts', $posts);
     }
 
     public function home()
     {
-        $posts = Post::select('id', 'event_id', 'titre', 'description', 'date_apparition', 'date_expiration', 'entite_id')->where([
-            ['entite_id', '=', session('entite_id')]
-        ])->get();
-        
+        $posts = Post::where('entite_id', session(('entite_id')))->get();
+
+
         return view('post.home')->with([
             'posts' => $posts,
             'gerer_post' => AutorisationGestion::gestion("gerer_post")
@@ -42,40 +43,82 @@ class PostController extends Controller
     }
 
     public function create()
-	{
-		// AutorisationGestion::protectionPage("gerer_post");
-		$niveau_administration = AutorisationGestion::niveau_administration();
+    {
+        // Pour l'instant, on considère que si on peut gérer les events, on peut gérer les posts
+        AutorisationGestion::protectionPage("gerer_evenement");
+        // $niveau_administration = AutorisationGestion::niveau_administration();
 
-		$events_existants = Evenement::select('id', 'titre')
-			->where('entite_id', session('entite_id'))
-			// ->where("confidentialite", "<=", $niveau_administration)
-			->get();
+        $events = Evenement::where('entite_id', session('entite_id'))->get();
+        $sites = Site::all();
 
-		return view('post.formulaire', [
-			'titre' => 'Créer un post',
-			'events_existants' => $events_existants,
-		]);
-	}
-
-    public function edit(Request $request){//TODO : retourner la page de création avec tout de pré-rempli
-        		// AutorisationGestion::protectionPage("gerer_post");
-		$niveau_administration = AutorisationGestion::niveau_administration();
-
-		$events_existants = Evenement::select('id', 'titre')
-			->where('entite_id', session('entite_id'))
-			// ->where("confidentialite", "<=", $niveau_administration)
-			->get();
-
-		return view('post.formulaire', [
-			'titre' => 'Modifier le post',
-			'events_existants' => $events_existants,
-		]);
+        return view('post.formulaire', [
+            'titre' => 'Créer un post',
+            'events' => $events,
+            'campus' => $sites
+        ]);
     }
 
     public function store(Request $request)
     {
-        // ajouter une authorization dans un service (voir eventcontrolelr)
-        // ajouter un traitement post-validation (à voir) dans un PostServcie
-        // Post::create($request);
+        AutorisationGestion::protectionPage('gerer_evenement');
+        $postRequest = $this->formulaire_traitement($request);
+        Post::create($postRequest);
+        return redirect(session('entite_uid') . '/entite/post');
+    }
+
+    public function edit($entite_uid, $post_id)
+    {
+        AutorisationGestion::protectionPage("gerer_evenement");
+        $niveau_administration = AutorisationGestion::niveau_administration();
+
+        $events = Evenement::where('entite_id', session('entite_id'));
+        $sites = Site::all();
+        $post = Post::find($post_id);
+
+        return view('post.formulaire', [
+            'titre' => 'Modifier le post',
+            'events' => $events,
+            'campus' => $sites,
+            'post' => $post
+        ]);
+    }
+
+    public function formulaire_traitement(Request $request)
+    {
+        $validated = $request->validate(
+            [
+                'titre' => 'required|max:128',
+                'descrption' => 'required|min:30|max:250',
+                'event_id' => 'nullable',
+                'date_apparition' => 'nullable',
+                'date_expiration' => 'nullable',
+            ]
+        );
+
+        $postRequest = [
+            "entite_id" => session('entite_id'),
+            "titre" => $request->titre,
+            "description" => $request->description,
+            "date_apparition" => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
+            "date_expiration" => $request->date_expiration,
+            "event_id" => $request->event_id
+        ];
+
+        return $postRequest;
+    }
+
+    public function update(Request $request, $entite_uid, $post_id)
+    {
+        AutorisationGestion::protectionPage("gerer_evenement");
+        $traitement = $this->formulaire_traitement($request);
+        Post::find($post_id)->update($traitement);
+        return redirect(session('entite_uid') . "/entite/post");
+    }
+
+    public function delete($entite_uid, $post_id)
+    {
+        AutorisationGestion::protectionPage("gerer_evenement");
+        $post = Post::find($post_id)->delete();
+        return redirect(session('entite_uid') . "/entite/post");
     }
 }

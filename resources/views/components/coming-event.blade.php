@@ -1,4 +1,4 @@
-<div class="event-card card">
+<a href="/{{ $uid }}/entite/evenement/{{ $slug }}" class="event-card card">
   <h4>{{ $title }} <span>• {{ $entite }}</span></h4>
 
   @php
@@ -17,4 +17,4 @@
     au {{ $end_date }}</p>
   @endif
   
-</div>
+</a>

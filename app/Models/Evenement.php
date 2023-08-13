@@ -42,7 +42,7 @@ class Evenement extends Model
         $now = date('Y-m-d');
         $dateInSevenDays =  date('Y-m-d', strtotime("+7 day", strtotime($now)));
 
-        return self::select('evenements.titre', 'evenements.temps_debut', 'evenements.temps_fin', 'entites.nom as entite_nom')
+        return self::select('evenements.titre', 'evenements.slug', 'evenements.temps_debut', 'evenements.temps_fin', 'entites.nom as entite_nom', 'entites.uid')
                 ->where('temps_debut',  '<', $dateInSevenDays)
                 ->where('temps_fin' , '>', $now)
                 ->orderBy('temps_debut', 'asc')

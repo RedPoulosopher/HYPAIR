@@ -46,12 +46,9 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Description du post :</p>
-                        <p class="description">Pour mettre en forme la description, <a target="_blank"
-                                class="couleur">utilisez le
-                                markdown</a> !</p>
-                        {{-- <p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur"
+                        <p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur"
                                 href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le
-                                markdown</a> !</p> --}}
+                                markdown</a> !</p>
                         @isset($post)
                             <textarea name="description_md" id="description_md" class="input"
                                 title="Au moins 30 caractères dans la description, et au plus 250" rows="12">{{ $post->description }}</textarea>

@@ -39,7 +39,7 @@
     @endif
 
     @if(Auth::check() &&  $user = Auth::user()->campus_id == NULL)
-    <x-select-campus-popup/>
+    {{-- <x-select-campus-popup/> --}}
     @endif
 
     {{-- Contenu de la page --}}

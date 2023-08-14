@@ -26,7 +26,6 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 20,
                 'validation' => "1",
                 'pour_cotisant' => "1",
-                'campus_id' => '1',
                 'date_apparition' => '2022-04-12 08:00:00'
             ], [
                 'entite_id' => 2,
@@ -39,7 +38,6 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 200,
                 'pour_cotisant' => "0",
                 'validation' => "1",
-                'campus_id' => '2',
                 'date_apparition' => '2022-04-12 08:00:00'
             ], [
                 'entite_id' => 3,
@@ -52,10 +50,9 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 200,
                 'pour_cotisant' => "1",
                 'validation' => "1",
-                'campus_id' => '1',
                 'date_apparition' => '2022-04-12 20:00:00'
             ], [
-                'entite_id' => '1',
+                'entite_id' => 1,
                 'titre' => "Soirée",
                 'slug' => "soiree",
                 'description' => 'Soirée de folie',
@@ -65,10 +62,9 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 20,
                 'pour_cotisant' => "1",
                 'validation' => "1",
-                'campus_id' => '1',
                 'date_apparition' => '2023-04-12 08:00:00'
             ], [
-                'entite_id' => '1',
+                'entite_id' => 1,
                 'titre' => "Bonjour",
                 'slug' => "bonjour",
                 'description' => 'Bonjour à tous, ceci est un évènement test pour vérifier que tout fonctionne correctement.',
@@ -78,7 +74,6 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 400,
                 'validation' => "1",
                 'pour_cotisant' => "1",
-                'campus_id' => '2',
                 'date_apparition' => '2022-04-24 08:00:00'
             ]
         ]);

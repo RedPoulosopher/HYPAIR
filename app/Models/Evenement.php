@@ -19,7 +19,6 @@ class Evenement extends Model
         'lieu',
         'confidentialite',
         'max_participation',
-        'campus_id',
         'pour_cotisant',
         'validation',
     ];
@@ -31,23 +30,24 @@ class Evenement extends Model
 
     public function campus()
     {
-        return $this->belongsTo(Site::class);
+        return $this->belongsToMany(Site::class, SiteEvenement::class);
     }
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
-    static function comingEvents(){
+    static function comingEvents()
+    {
         $now = date('Y-m-d');
         $dateInSevenDays =  date('Y-m-d', strtotime("+7 day", strtotime($now)));
 
         return self::select('evenements.titre', 'evenements.slug', 'evenements.temps_debut', 'evenements.temps_fin', 'entites.nom as entite_nom', 'entites.uid')
-                ->where('temps_debut',  '<', $dateInSevenDays)
-                ->where('temps_fin' , '>', $now)
-                ->orderBy('temps_debut', 'asc')
-                ->limit(5)
-                ->join('entites', 'entites.id', '=', 'evenements.entite_id');;
+            ->where('temps_debut',  '<', $dateInSevenDays)
+            ->where('temps_fin', '>', $now)
+            ->orderBy('temps_debut', 'asc')
+            ->limit(5)
+            ->join('entites', 'entites.id', '=', 'evenements.entite_id');;
     }
 
     // Vieille fonction

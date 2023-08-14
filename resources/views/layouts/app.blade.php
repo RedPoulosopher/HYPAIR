@@ -38,7 +38,7 @@
         <x-navbar :isConnected="false" :user="[]" />
     @endif
 
-    @if(Auth::check() &&  $user = Auth::user()->campus == NULL)
+    @if(Auth::check() &&  $user = Auth::user()->campus_id == NULL)
     <x-select-campus-popup/>
     @endif
 

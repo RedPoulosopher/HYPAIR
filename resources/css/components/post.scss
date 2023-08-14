@@ -21,32 +21,24 @@
 
             margin: 5px 10px 5px 20px;
             flex: 4;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
 
-            .main-title {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                margin: 0 0 12px 0;
-                flex-wrap: wrap;
-                gap: 6px 10px;
+            &>h2,
+            &>p {
+                margin: 0;
+            }
 
-                &::first-line {
-                    background-color: red;
-                }
+            &>p {
+                color: var(--couleur_police_secondaire);
+                margin-bottom: 5px;
 
-                h2,
-                p {
-                    margin: 0;
-                }
-
-                p {
+                .separator {
                     color: var(--couleur_police_secondaire);
-
-                    .separator {
-                        color: var(--couleur_police_secondaire);
-                        display: inline-block;
-                        width: calc(1ch + 10px); //Same width as parent's horizontal gap
-                    }
+                    display: inline-block;
+                    width: 20px; //Same width as parent's horizontal gap
+                    text-align: center;
                 }
             }
 

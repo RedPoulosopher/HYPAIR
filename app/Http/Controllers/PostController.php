@@ -27,8 +27,18 @@ class PostController extends Controller
 
     public function accueil()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('date_apparition', 'desc')->get();
         return view('accueil')->with('posts', $posts);
+    }
+
+    static function date_apparition_to_duration($date_apparition){
+        $now = date('Y-m-d');
+        $nbSeconds = strtotime($now) - strtotime($date_apparition);
+
+        if($nbSeconds < 60) return $nbSeconds . "s";
+        else if($nbSeconds/60 < 60) return floor($nbSeconds/60) . "min";
+        else if($nbSeconds/(60*60) < 24) return floor($nbSeconds/(60*60)) . "h";
+        else return floor($nbSeconds/(60*60*24)) . "j";
     }
 
     public function home()

@@ -11,11 +11,8 @@ use App\Http\Controllers\PostController;
         <img class="thumbnail" src="/images/logo-air-rond-test.png" alt="AIR">
 
         <div class="details">
-            <div class="main-title">
-                <h2>{{ $post->titre }}</h2>
-                <p><span class="separator">•</span>Posté par {{ $post->entite->nom }} </p>
-            </div>
-
+            <h2>{{ $post->titre }}</h2>
+            <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>Il y a {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
 
             <div class="tags">
                 <div class="tag" style="background-color: {{ PostController::stringToColorCode('IMPORTANT') }};">
@@ -35,23 +32,6 @@ use App\Http\Controllers\PostController;
                 </div>
             </div>
 
-        </div>
-
-        <div class="release-date">
-            {{-- Icône de calendrier --}}
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
-                <rect width="20" height="20" fill="url(#pattern0)" />
-                <defs>
-                    <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                        <use xlink:href="#image0_7_161" transform="scale(0.0104167)" />
-                    </pattern>
-                    <image id="image0_7_161" width="96" height="96"
-                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB90lEQVR4nO3dTU4UYRiF0Z60a1FcqoIYV4MuQ12IwAySayrWhISyR3yn8tU9G+A+9fI36jqdqqqq3kguOGF73zd9YHa+b/rA7Hzf9IHZ+b7pA7PzfdMHZuf7pg/MzvdNH5id77soycckX5L8SvKY+T2urTdJruSDf5fkW5LnHNdzkq9JzuLh/9D1O/J96BHW7/x66Xbk7/wj/9rZ8pTkw4gD3G5OqOsRB/jd57zp54gDPGx//cO7H3GA+o8eAOsBsB4A6wGwHgDrAbAeAOsBsB4A6wGwHuDoBzhNLrqfD8B4Px+A8X4+AOP9fADG+/kAjPfzARjv5wMw3s8HYLyfD8B4Px+A8X4+AOP9fADG+/kAjPfzARjv5wMw3s8HYLyfD8B4Px+A8X4+AOP9fADG+/kAjPfzARjv5wMw3s8HYLyfD8B4Px+A8X4+AOP9fADG+/kAjPfzARjv5wMw3s8HYLyfD8B4Px+A8X4+AOP9fADG+/kAjPfzARjv5wMw3s8HYLyfD8B4Px+A8X4+AOP9Se4vjTiwPyMOsLy8oOBHFy9vjqjXfRpxgKt+fP3mx9e/f/MDrEdYXttRL90MefjrAc7razvqnzvxHpnz+jKH5UfvqJ7Wv4ljH/4rfxOul/8ADvJugYe19fOQV5ZUVVVVVVVVVdVpFn8BBTe+IXL6weYAAAAASUVORK5CYII=" />
-                </defs>
-            </svg>
-
-            <p>Mercredi 15 septembre</p>
         </div>
 
         <div class="arrow-display">

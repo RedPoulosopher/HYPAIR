@@ -31,7 +31,7 @@
         </div>
         @if($user->bio)
           <div id="bio">
-            {!! nl2br(e($user->bio)) !!}
+            {!! nl2br(strip_tags($user->bio)) !!}
           </div>
         @endif
         @if(count($reseaux_sociaux) > 0)

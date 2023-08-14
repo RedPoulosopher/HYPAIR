@@ -2,7 +2,7 @@
   <h4>{{ $title }} <span>• {{ $entite }}</span></h4>
 
   @php
-  setlocale(LC_TIME, 'fr_FR.utf8','fra'); 
+  setlocale(LC_TIME, 'fr_FR', 'fra'); 
   //ucwords pour avoir les majuscules au début des mots
   //utf_8 sinon le mois avec des accents (fevrier, aout, decembre) passent pas
   //strftime pour garder uniquement la date (et pas le time)

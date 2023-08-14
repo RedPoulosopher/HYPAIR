@@ -8,10 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Site extends Model
 {
     use HasFactory;
-    
+
     public $timestamps = false;
-    
-    public function entites(){
+
+    public function entites()
+    {
         return $this->belongsToMany(Entite::class, EntiteSite::class);
+    }
+    public function evenements()
+    {
+        return $this->hasMany(Evenement::class);
+    }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }

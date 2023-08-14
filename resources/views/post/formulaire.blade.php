@@ -46,14 +46,16 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Description du post :</p>
-                        <p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
+                        <p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur"
+                                href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le
+                                markdown</a> !</p>
                         @isset($post)
-                            <textarea required name="description_md" id="description_md" class="input" title="Au moins 30 caractères dans la description, et au plus 250"
-                                rows="12">{{ $post->description }}</textarea>
+                            <textarea name="description_md" id="description_md" class="input"
+                                title="Au moins 30 caractères dans la description, et au plus 250" rows="12">{{ $post->description }}</textarea>
                         @endisset
                         @empty($post)
-                            <textarea required name="description_md" id="description_md" class="input" title="Au moins 30 caractères dans la description, et au plus 250"
-                                rows="12">{{old('description') ?? $post->description ?? ''}}</textarea>
+                            <textarea name="description_md" id="description_md" class="input"
+                                title="Au moins 30 caractères dans la description, et au plus 250" rows="12">{{ old('description') ?? ($post->description ?? '') }}</textarea>
                         @endempty
                     </label>
                 </div>
@@ -105,11 +107,11 @@
                         <label class="input_groupe">
                             <p class="titre">Date d'expiration :</p>
                             @isset($post)
-                                <input type="datetime-local" name="date_expiration" class="input" required
+                                <input type="datetime-local" name="date_expiration" class="input"
                                     value="{{ $post->date_expiration }}" min="2000-01-01" max="2100-12-31" />
                             @endisset
                             @empty($post)
-                                <input type="datetime-local" name="date_expiration" class="input" required
+                                <input type="datetime-local" name="date_expiration" class="input"
                                     value="{{ old('temps_fin') ?? ($post->date_expiration ?? '') }}" min="2000-01-01"
                                     max="2100-12-31" />
                             @endempty
@@ -164,11 +166,13 @@
 @endsection
 
 @pushonce('end-scripts')
-<script>
-	var simplemde = new SimpleMDE({
-		element: document.getElementById("description_md"),
-		toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
-		spellChecker: false,
-	});
-</script>
+    <script>
+        var simplemde = new SimpleMDE({
+            element: document.getElementById("description_md"),
+            toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link",
+                "image", "|", "table", "horizontal-rule", "|", "preview"
+            ],
+            spellChecker: false,
+        });
+    </script>
 @endpushonce

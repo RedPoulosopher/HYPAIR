@@ -14,7 +14,8 @@ class Post extends Model
         'description',
         'date_apparition',
         'date_expiration',
-        'entite_id'
+        'entite_id',
+        'campus_id'
     ];
 
     function event()
@@ -28,5 +29,9 @@ class Post extends Model
     function tags()
     {
         return $this->belongsToMany(Tag::class, TagPost::class);
+    }
+    function campus()
+    {
+        return $this->belongsTo(Site::class);
     }
 }

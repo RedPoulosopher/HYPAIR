@@ -88,7 +88,7 @@ class PostController extends Controller
         $validated = $request->validate(
             [
                 'titre' => 'required|max:128',
-                'description' => 'required|min:30|max:250',
+                'description_md' => 'required|min:30|max:250',
                 'event_id' => 'nullable',
                 'date_apparition' => 'nullable',
                 'date_expiration' => 'nullable',
@@ -98,10 +98,11 @@ class PostController extends Controller
         $postRequest = [
             "entite_id" => session('entite_id'),
             "titre" => $request->titre,
-            "description" => $request->description,
+            "description" => $request->description_md,
             "date_apparition" => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
             "date_expiration" => $request->date_expiration,
             "event_id" => $request->event_id == 0 ? null : $request->event_id,
+            "campus_id" => $request->campus_id
         ];
 
         return $postRequest;

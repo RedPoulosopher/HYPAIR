@@ -29,25 +29,27 @@
 
 
                 {{-- @if ($gerer_post) --}}
-                    <div class="create-btn-container">
-                        <a href="post/formulaire" class="bouton tertiaire ombre_petite administrateur">
-                            <span><i class="fa-solid fa-plus"></i>Créer un post</span>
-                        </a>
-                    </div>
+                <div class="create-btn-container">
+                    <a href="post/formulaire" class="bouton tertiaire ombre_petite administrateur">
+                        <span><i class="fa-solid fa-plus"></i>Créer un post</span>
+                    </a>
+                </div>
                 {{-- @endif --}}
 
                 <h2>Liste des posts :</h2>
                 <ul id="posts-list">
                     @foreach ($posts as $post)
                         <li>
-                            <x-post :post="$post" :id="$post->id"/>
-                            <a href="post/modifier/<?= $post->id ?>" class="bouton_action" style="color:black; border-color:black;">
+                            <x-post :post="$post" :id="$post->id" />
+                            <a href="post/modifier/<?= $post->id ?>" class="bouton_action"
+                                style="color:black; border-color:black;">
                                 <i class="fa-solid fa-pen-to-square fa-lg"></i>
                             </a>
+                            <a href="post/delete/{{ $post->id }}"></a>
                             {{-- @if ($gerer_post) --}}
-                                <span class="bouton_action warning">
-                                    <i class="fa-solid fa-trash fa-lg"></i>
-                                </span>
+                            <span class="bouton_action warning">
+                                <i class="fa-solid fa-trash fa-lg"></i>
+                            </span>
                             {{-- @endif --}}
                         </li>
                     @endforeach
@@ -70,7 +72,7 @@
                 </div>
     </main>
 
-    {{--TODO: FAIRE FONCTIONNER LA SUPPRESSION
+    {{-- TODO: FAIRE FONCTIONNER LA SUPPRESSION
         <script> 
         events = {!! json_encode($tables) !!}
 

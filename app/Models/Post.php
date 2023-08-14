@@ -15,7 +15,6 @@ class Post extends Model
         'date_apparition',
         'date_expiration',
         'entite_id',
-        'campus_id'
     ];
 
     function event()
@@ -32,6 +31,6 @@ class Post extends Model
     }
     function campus()
     {
-        return $this->belongsTo(Site::class);
+        return $this->belongsToMany(Site::class, SitePost::class);
     }
 }

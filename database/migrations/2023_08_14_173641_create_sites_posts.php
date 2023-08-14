@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('evenements', function (Blueprint $table) {
-            $table->dateTime('date_apparition');
+        Schema::create('sites_posts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('post_id')->constrained()->onUpdate('cascade')->onUpdate('cascade');
+            $table->foreignId('campus_id')->constrained('sites')->onUpdate('cascade')->onUpdate('cascade');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('sites_posts');
     }
 };

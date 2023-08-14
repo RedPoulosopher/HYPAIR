@@ -10,6 +10,7 @@
     {{-- @include('layouts.theme') --}}
     <link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/importants/layout.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/components/select-campus-popup.css') }}">
     @stack('styles')
 </head>
 
@@ -37,6 +38,10 @@
         <x-navbar :isConnected="false" :user="[]" />
     @endif
 
+    @if(Auth::check() &&  $user = Auth::user()->campus == NULL)
+    <x-select-campus-popup/>
+    @endif
+
     {{-- Contenu de la page --}}
     <div id="content">
 
@@ -52,13 +57,15 @@
                     $comingEvents = Evenement::comingEvents()->get();
                 @endphp
 
-                @if(count($comingEvents) > 0)
+                @if(Auth::check() && count($comingEvents) > 0)
                     @foreach ($comingEvents as $comingEvent)
                         <x-coming-event :title="$comingEvent->titre" :start="$comingEvent->temps_debut" :end="$comingEvent->temps_fin" :entite="$comingEvent->entite_nom" :uid="$comingEvent->uid" :slug="$comingEvent->slug"/>
                     @endforeach
                     <a id="voir-plus" href="/calendrier">Voir plus</a>
-                @else
+                @elseif(Auth::check())
                     <p>Aucun évènement dans les 7 prochains jours</p>
+                @else
+                    <p class="should-be-connected">Vous devez être connecté pour voir les événements</p>
                 @endif
 
             </div>

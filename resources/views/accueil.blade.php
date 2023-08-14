@@ -37,10 +37,13 @@
             <h1>Actualités</h1>
 
             <div class="article-wrapper">
-
-                @for($i = 0; $i < count($posts); $i++)
-                    <x-post :post="$posts[$i]"/>
-                @endfor
+                @if(Auth::check())
+                    @for($i = 0; $i < count($posts); $i++)
+                        <x-post :post="$posts[$i]"/>
+                    @endfor
+                @else
+                    <p class="should-be-connected">Vous devez être connecté pour voir les posts</p>
+                @endif
 
             </div>
         </section>

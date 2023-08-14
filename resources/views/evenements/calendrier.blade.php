@@ -16,58 +16,62 @@
 
     <main id="main-content">
 
-        <div id="boutons">
-            <p id="retour" class="bouton secondaire ombre_petite" style="width:100px;">
-                < Accueil</p>
-                    <p id="fleche-gauche" class="icon-container"> <i class="fa-solid fa-arrow-left fa-xl"></i> </p>
-                    <h1 id="date" style="text-align:center;"></h1>
-                    <p id="fleche-droite" class="icon-container"> <i class="fa-solid fa-arrow-right fa-xl"></i> </p>
-        </div>
+        @if(Auth::check())
+            <div id="boutons">
+                <p id="retour" class="bouton secondaire ombre_petite" style="width:100px;">
+                    < Accueil</p>
+                        <p id="fleche-gauche" class="icon-container"> <i class="fa-solid fa-arrow-left fa-xl"></i> </p>
+                        <h1 id="date" style="text-align:center;"></h1>
+                        <p id="fleche-droite" class="icon-container"> <i class="fa-solid fa-arrow-right fa-xl"></i> </p>
+            </div>
 
-        {{-- <select>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-    </select>
-    <select>
-        <option value="2020">2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
-    </select> --}}
-        <div id="calendrier">
-        </div>
-
-
-        <div id="info" class="popup-cachee" style="position:absolute">
-            <div class="petit">
-                <div class="documentation card">
-                    <div id="gerer" style="display:flex;">
+            {{-- <select>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        <select>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+        </select> --}}
+            <div id="calendrier">
+            </div>
 
 
+            <div id="info" class="popup-cachee" style="position:absolute">
+                <div class="petit">
+                    <div class="documentation card">
+                        <div id="gerer" style="display:flex;">
+
+
+                        </div>
+
+                        <div class="contenu_doc" id="contenu_doc">
+                            <h1 id="titre"></h1>
+                            <h5 id="organisateur">Organisateur : </h5>
+                            <p id="description">Description : </p>
+                            <p id="lieu">Lieu : </p>
+                            <p id="heure_debut">Heure de début : </p>
+                            <p id="heure_fin">Heure de fin : </p>
+                        </div>
+                        <p class="bouton secondaire ombre_petite info_bouton retour">
+                            < Retour</p>
                     </div>
-
-                    <div class="contenu_doc" id="contenu_doc">
-                        <h1 id="titre"></h1>
-                        <h5 id="organisateur">Organisateur : </h5>
-                        <p id="description">Description : </p>
-                        <p id="lieu">Lieu : </p>
-                        <p id="heure_debut">Heure de début : </p>
-                        <p id="heure_fin">Heure de fin : </p>
-                    </div>
-                    <p class="bouton secondaire ombre_petite info_bouton retour">
-                        < Retour</p>
                 </div>
             </div>
-        </div>
+        @else
+            <p class="should-be-connected">Vous devez être connecté pour consulter le calendrier</p>
+        @endif
     </main>
 
     <script>

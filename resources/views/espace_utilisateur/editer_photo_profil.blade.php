@@ -21,7 +21,7 @@ On voit le mail et le pseudo user associé sans pouvoir le changer. --}}
 		@csrf
 		<div class="groupe card">
 				@if ($errors->any())
-					<div class="erreurs">
+					<div class="erreurs" style="max-width: 260px;">
 						@foreach ($errors->all() as $error)
 							<div>{{ $error }}</div>
 						@endforeach

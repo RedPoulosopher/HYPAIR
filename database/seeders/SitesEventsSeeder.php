@@ -15,7 +15,7 @@ class SitesEventsSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('sites_events')->insert([
+        DB::table('sites_evenements')->insert([
             [
                 'campus_id' => 1,
                 'event_id' => 1,

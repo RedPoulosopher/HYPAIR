@@ -66,7 +66,7 @@ use App\Http\Controllers\PostController;
     </div>
 
     <div class="description" id="description-{{$post->id}}">
-        {!! Str::markdown($post->description ?? ($entite->description_courte ?? '')) !!}
+        {!! Str::markdown(strip_tags($post->description ?? ($entite->description_courte ?? ''))) !!}
     </div>
 
 </article>

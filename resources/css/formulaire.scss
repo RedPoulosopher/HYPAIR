@@ -258,6 +258,10 @@ table {
     }
 }
 
+input {
+    accent-color: var(--couleur_accentuation);
+}
+
 .erreurs {
     margin-bottom: 10px;
 

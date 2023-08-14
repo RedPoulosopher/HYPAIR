@@ -4,6 +4,7 @@
 
 @pushonce('styles')
     <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/evenements/formulaire.css') }}" type="text/css">
 @endpushonce
 
 @section('content')
@@ -153,19 +154,15 @@
                         <label class="input_groupe">
                             <p class="titre">Campus</p>
                             <p class="description">Évènement destiné aux étudiants de quel campus ?</p>
-                            <select name="campus_id" class="input" spellcheck="false">
-                                {{-- Plutôt des checkbox par la suite --}}
-                                {{-- <option value="0" selected>Tous</option> --}}
+                            <ul id="campus_id">
                                 @foreach ($campus as $campus)
                                     @if ((isset($event) && $event->campus_id == $campus->id) || (!isset($event) && $campus->id == 1))
-                                        <option value="{{ $campus->id }}" selected>{{ Str::ucfirst($campus->label) }}
-                                        </option>
+                                        <li><input type="checkbox" name="" id="campus_id_{{ $campus->id }}" checked>{{ Str::ucfirst($campus->label) }}</li>
                                     @else
-                                        <option value="{{ $campus->id }}">{{ Str::ucfirst($campus->label) }}
-                                        </option>
+                                        <li><input type="checkbox" name="" id="campus_id_{{ $campus->id }}">{{ Str::ucfirst($campus->label) }}</li>
                                     @endif
                                 @endforeach
-                            </select>
+                            </ul>
                         </label>
                     </div>
                 </details>

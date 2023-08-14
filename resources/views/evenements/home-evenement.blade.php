@@ -103,13 +103,13 @@
                                         </td>
                                         <td>
                                             @if ($gerer_evenement)
-                                                <a href="evenement/suppression">
-                                                    {{-- {{ dd($table) }} --}}
-                                                    <a href="evenement/suppression/{{ $table->id }}">
-                                                        <span class="bouton_action warning">
-                                                            <i class="fa-solid fa-trash fa-lg"></i>
-                                                        </span>
-                                                    </a>
+                                                {{-- <a href="evenement/suppression"> --}}
+                                                {{-- {{ dd($table) }} --}}
+                                                <a href="evenement/suppression/{{ $table->id }}">
+                                                    <span class="bouton_action warning">
+                                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                                    </span>
+                                                </a>
                                             @endif
                                         </td>
 

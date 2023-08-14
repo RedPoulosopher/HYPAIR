@@ -14,7 +14,8 @@ On voit le mail et le pseudo user associé sans pouvoir le changer. --}}
 <main id="main-content">
 	<section>
 		<h1><span class="icon-profile-circle"></span> Modifier la photo de profil</h1>
-		<a href="/home" class="bouton secondaire">< Retour au profil</a>
+		{{-- ancien bouton retour ci-dessous, a enlever lorsde l'ajout des breadcrumbs --}}
+		{{-- <a href="/home" class="bouton secondaire">< Retour au profil</a> --}}
 
 		<form method="POST" enctype="multipart/form-data">
 		@csrf

@@ -12,7 +12,8 @@
 <main id="main-content">
 	<section>
 		<h1><span class="icon-user-edit"></span> Modification des infos du profil</h1>
-		<a href="/home" class="bouton secondaire">< Retour au profil</a>
+		{{-- ancien bouton retour ci-dessous, a enlever lorsde l'ajout des breadcrumbs --}}
+		{{-- <a href="/home" class="bouton secondaire">< Retour au profil</a> --}}
 		
 		<form method="POST" enctype="multipart/form-data">
 			@csrf
@@ -24,7 +25,7 @@
 					</div>
 				@endif
 			<div class="groupe card">
-			<div style="display:flex; flex-wrap:wrap;">
+			<div style="display:flex; flex-wrap:wrap; column-gap:10px">
 				<label class="input_groupe" style="flex-grow:1;">
 							<p class="titre">Nom <span style="color:var(--couleur_accentuation);">*</span></p>
 							<input type="text" name="nom" class="input" required maxlength="40" value="{{$user->nom}}"/>

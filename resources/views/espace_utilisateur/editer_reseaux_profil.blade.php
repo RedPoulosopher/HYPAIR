@@ -20,7 +20,8 @@
 
     <section>
         <h1><span class="icon-people"></span> Gestion des réseaux sociaux</h1>
-        <a href="/home" class="bouton secondaire">< Retour au profil</a>
+        {{-- ancien bouton retour ci-dessous, a enlever lorsde l'ajout des breadcrumbs --}}
+        {{-- <a href="/home" class="bouton secondaire">< Retour au profil</a> --}}
     
         <form method="POST">
             @csrf

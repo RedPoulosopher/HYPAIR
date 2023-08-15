@@ -4,7 +4,7 @@
 --}}
 
 
-@extends('layouts.app')
+@extends('layouts.app-without-sidebar')
 
 @section('titre', 'Gérer les réseaux sociaux')
 

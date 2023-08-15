@@ -88,18 +88,18 @@ fieldset {
         }
     }
 
-    & .titre {
+    .titre {
         transition: opacity 0.15s cubic-bezier(0.8, 0, 0, 0.8);
         // user-select: none;
         font-size: 1.1em;
     }
 
-    & .description {
+    .description {
         color: var(--couleur_police_secondaire);
         font-size: 0.95em;
     }
 
-    & .input {
+    .input {
         display: inline-block;
         box-sizing: border-box;
         width: 100%;
@@ -107,7 +107,6 @@ fieldset {
         border-radius: 8px;
         font-size: 1em;
         background-color: var(--dark-grey);
-        color: var(--couleur_police_secondaire);
         border: 1px solid transparent;
         transition: border 0.2s ease-in-out;
 
@@ -116,8 +115,7 @@ fieldset {
         }
 
         &::placeholder {
-            color: inherit;
-            opacity: 0.6;
+            color: var(--couleur_police_secondaire);
         }
 
         &[type="checkbox"] {
@@ -203,7 +201,7 @@ fieldset {
         }
     }
 
-    & textarea {
+    textarea {
         width: 100%;
         margin-top: 8px;
         padding: 5px;
@@ -211,7 +209,10 @@ fieldset {
         font-size: 1em;
         background-color: var(--dark-grey);
         border-radius: 8px;
-        color: var(--couleur_police_secondaire);
+
+        &::placeholder {
+            color: var(--couleur_police_secondaire);
+        }
     }
 
     &.radio {

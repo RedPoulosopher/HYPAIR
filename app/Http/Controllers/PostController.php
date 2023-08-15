@@ -7,6 +7,7 @@ use App\Models\Evenement;
 use Illuminate\Http\Request;
 use \App\Services\AutorisationGestion;
 use App\Models\Site;
+use App\Models\Entite;
 use DateTime;
 use DateTimeZone;
 
@@ -133,4 +134,37 @@ class PostController extends Controller
         $post = Post::find($post_id)->delete();
         return redirect(session('entite_uid') . "/entite/post");
     }
+
+    public function show(Request $request)
+	{
+		$niveau_administration = AutorisationGestion::niveau_administration();
+
+		$post = Post::where('id', $request->route('event_id'));
+
+		if (!$post->exists()) {
+			abort(404);
+		}
+
+		$post = $post->first();
+		if ($post["confidentialite"] > $niveau_administration) {
+			abort(403);
+		}
+
+        $entite = Entite::where('id', $post->entite_id);
+
+        if (!$entite->exists()) {
+			abort(404);
+		}
+
+		$entite = $entite->first();
+		if ($entite["confidentialite"] > $niveau_administration) {
+			abort(403);
+		}
+
+		return view('post.show-post', [
+			'post' => $post,
+			'entite' => $entite,
+			'gerer_post' => AutorisationGestion::gestion("gerer_post")
+		]);
+	}
 }

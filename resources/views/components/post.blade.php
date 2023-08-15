@@ -14,7 +14,7 @@ use App\Http\Controllers\PostController;
             <h2>{{ $post->titre }}</h2>
             <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>Il y a {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
         </div>
-        
+
         <div class="tags">
             <div class="tag" style="background-color: {{ PostController::stringToColorCode('IMPORTANT') }};">IMPORTANT</div>
             <div class="tag" style="background-color: {{ PostController::stringToColorCode('BDH') }};">BDH</div>
@@ -35,7 +35,7 @@ use App\Http\Controllers\PostController;
     </div>
 
     <div class="description" id="description-{{$post->id}}">
-        {!! Str::markdown(strip_tags($post->description ?? ($entite->description_courte ?? ''))) !!}
+        {!! Str::markdown(strip_tags($post->description ?? '')) !!}
     </div>
 
 </article>

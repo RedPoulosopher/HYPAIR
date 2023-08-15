@@ -1,0 +1,31 @@
+section {
+    .thumbnail {
+        display: flex;
+        justify-content: center;
+
+        img {
+            border-radius: 1000px;
+            height: 150px;
+        }
+    }
+
+    .title {
+        margin: 15px 0 10px;
+        text-align: center;
+    }
+
+    .title+p {
+        text-align: center;
+        color: var(--couleur_police_secondaire);
+        font-weight: var(--fw-light);
+        font-size: 1em;
+
+        .separator {
+            color: var(--couleur_police_secondaire);
+            font-weight: var(--fw-light);
+            display: inline-block;
+            width: 20px; //Same width as parent's horizontal gap
+            text-align: center;
+        }
+    }
+}

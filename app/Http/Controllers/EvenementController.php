@@ -46,8 +46,11 @@ class EvenementController extends Controller
 		$eventRequest = $this->formulaire_traitement($request);
 		$event = Evenement::create($eventRequest);
 
-		foreach ($request->campus_id as $id) {
-			$event->campus()->attach($id);
+		// Peut-être besoin de gérer le cas où aucun campus n'est entré
+		if (!empty($request->campus_id)) {
+			foreach ($request->campus_id as $id) {
+				$event->campus()->attach($id);
+			}
 		}
 
 		return redirect(session('entite_uid') . "/entite/evenement");
@@ -102,8 +105,11 @@ class EvenementController extends Controller
 		for ($i = 1; $i <= $campus_nbr; $i++) {
 			$event->campus()->detach($i);
 		}
-		foreach ($request->campus_id as $id) {
-			$event->campus()->attach($id);
+
+		if (!empty($request->campus_id)) {
+			foreach ($request->campus_id as $id) {
+				$event->campus()->attach($id);
+			}
 		}
 
 		return redirect(session('entite_uid') . "/entite/evenement");

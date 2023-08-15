@@ -17,31 +17,31 @@ class SitesPostsSeeder extends Seeder
     {
         DB::table('sites_posts')->insert([
             [
-                'campus_id' => 1,
+                'site_id' => 1,
                 'post_id' => 1
             ],
             [
-                'campus_id' => 1,
+                'site_id' => 1,
                 'post_id' => 2
             ],
             [
-                'campus_id' => 2,
+                'site_id' => 2,
                 'post_id' => 2
             ],
             [
-                'campus_id' => 1,
+                'site_id' => 1,
                 'post_id' => 3
             ],
             [
-                'campus_id' => 1,
+                'site_id' => 1,
                 'post_id' => 4
             ],
             [
-                'campus_id' => 2,
+                'site_id' => 2,
                 'post_id' => 4
             ],
             [
-                'campus_id' => 3,
+                'site_id' => 3,
                 'post_id' => 4
             ],
         ]);

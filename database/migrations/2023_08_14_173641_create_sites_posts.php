@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('sites_posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')->constrained()->onUpdate('cascade')->onUpdate('cascade');
-            $table->foreignId('campus_id')->constrained('sites')->onUpdate('cascade')->onUpdate('cascade');
+            $table->foreignId('site_id')->constrained('sites')->onUpdate('cascade')->onUpdate('cascade');
         });
     }
 

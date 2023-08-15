@@ -14,11 +14,6 @@ use DateTimeZone;
 
 class EvenementController extends Controller
 {
-	// public function accueil()
-	// {
-	// 	$events = Evenement::all();
-	// 	return view('accueil')->with('events', $events);
-	// }
 	public function create()
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
@@ -49,7 +44,11 @@ class EvenementController extends Controller
 		// }
 
 		$eventRequest = $this->formulaire_traitement($request);
-		Evenement::create($eventRequest);
+		$event = Evenement::create($eventRequest);
+
+		foreach ($request->campus_id as $id) {
+			$event->campus()->attach($id);
+		}
 
 		return redirect(session('entite_uid') . "/entite/evenement");
 	}
@@ -229,7 +228,6 @@ class EvenementController extends Controller
 			"validation" => "1",
 			'pour_cotisant' => $request->pour_cotisant,
 			'date_apparition' => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
-			'campus_id' => $request->campus_id
 		];
 
 		return $eventRequest;

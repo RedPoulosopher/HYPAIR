@@ -37,10 +37,12 @@
             <h1>Actualités</h1>
 
             <div class="article-wrapper">
-                @if(Auth::check())
+                @if(Auth::check() && count($posts) > 0)
                     @for($i = 0; $i < count($posts); $i++)
                         <x-post :post="$posts[$i]"/>
                     @endfor
+                @elseif (Auth::check())
+                    <p class="should-be-connected">Aucun post pour le moment</p>
                 @else
                     <p class="should-be-connected">Vous devez être connecté pour voir les posts</p>
                 @endif

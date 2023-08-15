@@ -26,13 +26,14 @@ class PostController extends Controller
     }
 
     public function accueil()
-    {
-        $posts = Post::orderBy('date_apparition', 'desc')->get();
+    {        
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+        $posts = Post::where('date_apparition', '<', $now)->orderBy('date_apparition', 'desc')->get();
         return view('accueil')->with('posts', $posts);
     }
 
     static function date_apparition_to_duration($date_apparition){
-        $now = date('Y-m-d');
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
         $nbSeconds = strtotime($now) - strtotime($date_apparition);
 
         if($nbSeconds < 60) return $nbSeconds . "s";

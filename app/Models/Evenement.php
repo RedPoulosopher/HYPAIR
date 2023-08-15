@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use DateTime;
+use DateTimeZone;
+
 class Evenement extends Model
 {
     use HasFactory;
@@ -39,7 +42,7 @@ class Evenement extends Model
 
     static function comingEvents()
     {
-        $now = date('Y-m-d');
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d');
         $dateInSevenDays =  date('Y-m-d', strtotime("+7 day", strtotime($now)));
 
         return self::select('evenements.titre', 'evenements.slug', 'evenements.temps_debut', 'evenements.temps_fin', 'entites.nom as entite_nom', 'entites.uid')

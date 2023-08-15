@@ -16,6 +16,7 @@ use App\Http\Controllers\PostController;
         </div>
 
         <div class="tags">
+            {{-- TODO: REMPLACER LES TAGS EN DUR --}}
             <div class="tag" style="background-color: {{ PostController::stringToColorCode('IMPORTANT') }};">IMPORTANT</div>
             <div class="tag" style="background-color: {{ PostController::stringToColorCode('BDH') }};">BDH</div>
             <div class="tag" style="background-color: {{ PostController::stringToColorCode('Gala') }};">Gala</div>

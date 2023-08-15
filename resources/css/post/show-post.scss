@@ -28,4 +28,35 @@ section {
             text-align: center;
         }
     }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px 10px;
+
+        grid-row: 2;
+        grid-column: 2;
+
+
+        .tag {
+            display: inline-block;
+            color: var(--couleur_police_accentuation);
+            border-radius: 1000px;
+            align-items: center;
+            font-size: 13px;
+
+            padding: 6px 12px;
+
+        }
+    }
+
+    .description {
+        &> :first-child {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-grey);
+        }
+    }
 }

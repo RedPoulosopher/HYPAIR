@@ -36,7 +36,16 @@ use App\Http\Controllers\PostController;
 				<h2 class="title">{{$post->titre}}</h2>
 				<p>Posté par {{$entite->nom}}<span class="separator">•</span> Il y a  {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
 		
-				<div>{!! Str::markdown(strip_tags($post->description ?? '')) !!}</div>
+				<div class="tags">
+					{{-- TODO: REMPLACER LES TAGS EN DUR --}}
+					<div class="tag" style="background-color: {{ PostController::stringToColorCode('IMPORTANT') }};">IMPORTANT</div>
+					<div class="tag" style="background-color: {{ PostController::stringToColorCode('BDH') }};">BDH</div>
+					<div class="tag" style="background-color: {{ PostController::stringToColorCode('Gala') }};">Gala</div>
+					<div class="tag" style="background-color: {{ PostController::stringToColorCode('Soirée') }};">Soirée</div>
+					<div class="tag" style="background-color: {{ PostController::stringToColorCode('test') }};">test</div>
+				</div>
+
+				<div class="description">{!! Str::markdown(strip_tags($post->description ?? '')) !!}</div>
 			</div>
 		</div>
 	</section>

@@ -71,6 +71,22 @@ aside h1 {
     }
 }
 
+//Footer at the bottom
+footer {
+    grid-column: span 2;
+    grid-row: 2;
+    width: 100%;
+    color: var(--couleur_police_secondaire);
+
+    text-align: center;
+    font-size: 1em;
+    font-weight: var(--fw-light);
+    // opacity: 0.3;
+
+    padding: 20px 0;
+    margin-top: auto;
+}
+
 @media screen and (max-width: 1250px) {
     :root {
         --layout-padding-horizontal: 4vw;
@@ -83,18 +99,22 @@ aside h1 {
     }
 }
 
-//Footer at the bottom
-footer {
-    grid-column: span 2;
-    grid-row: 2;
-    width: 100%;
-    color: var(--couleur_police_primaire);
+@media screen and (max-width: 710px) {
+    :root {
+        --layout-padding-horizontal: 4vw;
+    }
 
-    text-align: center;
-    font-size: 16px;
-    font-weight: var(--fw-thin);
-    // opacity: 0.3;
+    #content {
+        padding: 25px var(--layout-padding-horizontal) 0;
+    }
 
-    padding: 20px 0;
-    margin-top: auto;
+    section>h1,
+    aside h1 {
+        margin-bottom: 30px;
+    }
+
+    footer {
+        padding: 15px 0;
+        font-size: .85em;
+    }
 }

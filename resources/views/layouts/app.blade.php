@@ -9,6 +9,7 @@
 
     {{-- @include('layouts.theme') --}}
     <link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/importants/layout-without-sidebar.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/importants/layout.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/components/select-campus-popup.css') }}">
     @stack('styles')

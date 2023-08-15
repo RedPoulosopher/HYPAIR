@@ -68,6 +68,11 @@ h2 {
     margin-block-start: 0em;
 }
 
+p,
+span {
+    font-size: 1em;
+}
+
 p.explication {
     text-align: justify;
     text-align-last: left;
@@ -232,4 +237,22 @@ body.light-theme {
     margin: 0;
     text-align: center;
     color: var(--couleur_police_secondaire);
+}
+
+@media screen and (max-width: 710px) {
+    h1 {
+        font-size: 1.3em;
+    }
+
+    h2 {
+        font-size: 1.15em;
+    }
+}
+
+@media screen and (max-width: 580px) {
+
+    p,
+    span {
+        font-size: .9em;
+    }
 }

@@ -1,5 +1,5 @@
 .service {
-    width: 180px;
+    width: fit-content;
     margin-bottom: 30px;
 
     & .logo {
@@ -17,10 +17,6 @@
             border-radius: 375px;
         }
 
-        &:hover .cercle {
-            border: 3.5px solid;
-        }
-
         & .cercle {
             border-radius: 375px;
             border: 2px solid;
@@ -32,6 +28,11 @@
             box-sizing: border-box;
             transition: border 0.1s ease-in-out;
         }
+
+        &:hover .cercle {
+            border: 3px solid;
+        }
+
     }
 
     & .info {
@@ -61,21 +62,16 @@
     }
 }
 
-@media (max-width: 600px) {
-    .entite {
-        width: 120px;
+@media (max-width: 710px) {
+    .service {
 
         & .logo {
-            width: 97px;
-            height: 97px;
+            width: 140px;
+            height: 140px;
 
             & img {
                 width: 80%;
                 margin: 10%;
-            }
-
-            &:hover .cercle {
-                border: 2.5px solid;
             }
         }
 
@@ -86,5 +82,12 @@
         & .info .categories {
             font-size: 0.4em;
         }
+    }
+}
+
+@media (max-width: 550px) {
+    .service .logo {
+        width: 120px;
+        height: 120px;
     }
 }

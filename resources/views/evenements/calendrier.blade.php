@@ -58,11 +58,11 @@
 
                         <div class="contenu_doc" id="contenu_doc">
                             <h1 id="titre"></h1>
-                            <h5 id="organisateur">Organisateur : </h5>
-                            <p id="description">Description : </p>
-                            <p id="lieu">Lieu : </p>
-                            <p id="heure_debut">Heure de début : </p>
-                            <p id="heure_fin">Heure de fin : </p>
+                            <p id="organisateur"><em>Organisateur :</em> </p>
+                            <p id="description"><em>Description :</em> </p>
+                            <p id="lieu"><em>Lieu :</em> </p>
+                            <p id="heure_debut"><em>Heure de début :</em> </p>
+                            <p id="heure_fin"><em>Heure de fin :</em> </p>
                         </div>
                         <p class="bouton secondaire ombre_petite info_bouton retour">
                             < Retour</p>
@@ -429,13 +429,13 @@
 
             }
 
-            document.getElementById("titre").innerText += evenements[index_evenement]["titre"];
-            document.getElementById("organisateur").innerText += evenements[index_evenement]["nom"];
-            document.getElementById("description").innerText += evenements[index_evenement]["description"];
-            document.getElementById("lieu").innerText += evenements[index_evenement]["lieu"];
-            document.getElementById("heure_debut").innerText += evenements[index_evenement]["temps_debut"].substring(10,
+            document.getElementById("titre").innerHTML += evenements[index_evenement]["titre"];
+            document.getElementById("organisateur").innerHTML += evenements[index_evenement]["nom"];
+            document.getElementById("description").innerHTML += evenements[index_evenement]["description"];
+            document.getElementById("lieu").innerHTML += evenements[index_evenement]["lieu"];
+            document.getElementById("heure_debut").innerHTML += evenements[index_evenement]["temps_debut"].substring(10,
                 16);
-            document.getElementById("heure_fin").innerText += evenements[index_evenement]["temps_fin"].substring(10, 16);
+            document.getElementById("heure_fin").innerHTML += evenements[index_evenement]["temps_fin"].substring(10, 16);
 
             document.getElementById("info").classList.remove("popup-cachee");
         }
@@ -443,12 +443,12 @@
         function refresh() {
             document.getElementById("gerer").innerHTML = "";
 
-            document.getElementById("titre").innerText = '';
-            document.getElementById("organisateur").innerText = 'Organisateur : ';
-            document.getElementById("description").innerText = 'Description : ';
-            document.getElementById("lieu").innerText = 'Lieu : ';
-            document.getElementById("heure_debut").innerText = 'Heure de début : ';
-            document.getElementById("heure_fin").innerText = 'Heure de fin : ';
+            document.getElementById("titre").innerHTML = '';
+            document.getElementById("organisateur").innerHTML = '<em>Organisateur :</em> ';
+            document.getElementById("description").innerHTML = '<em>Description :</em> ';
+            document.getElementById("lieu").innerHTML = '<em>Lieu :</em> ';
+            document.getElementById("heure_debut").innerHTML = '<em>Heure de début :</em> ';
+            document.getElementById("heure_fin").innerHTML = '<em>Heure de fin :</em> ';
         }
     </script>
 

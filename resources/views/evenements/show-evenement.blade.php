@@ -15,13 +15,11 @@
 	
 <main id="main-content">
 	<section class="section-content">
+		<h1>Infos de l'évènement</h1>
 
 		<div style="display:flex;">
-			@if (substr(url()->previous(), -13)=="evenement")
-			<a onclick="history.go(-1)" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
-			@else
-			<a href="{{ url()->previous() }}" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
-			@endif
+			<a onclick="history.back()" class="bouton secondaire ombre_petite" style="margin:0 0 15px;">< Retour</a>
+
 
 			<!--
 			@if($gerer_evenement)
@@ -33,14 +31,14 @@
 		<div class="documentation card">
 			<div class="contenu_doc" id="contenu_doc">
 		
-				<h1 class="titre">{{$evenement->titre}}</h1>
+				<p><em>Nom de l'évènement :</em> {{$evenement->titre}}</p>
 
-				<p>Description : {{$evenement->description}}</p>
-				<p>Début : {{$evenement->temps_debut}}</p>
-				<p>Fin : {{$evenement->temps_fin}}</p>
-				<p>Lieu : {{$evenement->lieu}}</p>
-				<p>Nombre de personnes max : {{$evenement->max_participation}}</p>
-				<p>Confidentialité : 
+				<p><em>Description :</em> {{$evenement->description}}</p>
+				<p><em>Début :</em> {{$evenement->temps_debut}}</p>
+				<p><em>Fin :</em> {{$evenement->temps_fin}}</p>
+				<p><em>Lieu :</em> {{$evenement->lieu}}</p>
+				<p><em>Nombre de personnes max :</em> {{$evenement->max_participation}}</p>
+				<p><em>Confidentialité :</em> 
 					@if ($evenement['confidentialite'] == 0)                          
                     Public
                     @elseif ($evenement['confidentialite'] == 1)
@@ -54,7 +52,7 @@
                     @endif
 				</p>
 				@if ($evenement['confidentialite'] == 0)	
-					<p>Statut : 
+					<p><em>Statut :</em> 
 						@if ($evenement['validation'] == 1)                          
 						Validé
 						@elseif ($evenement['validation'] == 0)

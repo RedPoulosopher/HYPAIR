@@ -66,6 +66,10 @@ class EvenementController extends Controller
 		}
 
 		$sites = Site::all();
+		$all_event_campus_id = [];
+		foreach ($evenement->campus as $campus) {
+			array_push($all_event_campus_id, $campus->id);
+		}
 
 		// $evenement = $evenement->first();
 		// if ($evenement["confidentialite"] > $niveau_administration) {
@@ -78,7 +82,8 @@ class EvenementController extends Controller
 			// 'docs_existantes' => $docs_existantes,
 			'event' => $evenement,
 			'titre' => "Modifier l'évènement",
-			'campus' => $sites
+			'campus' => $sites,
+			'all_event_campus_id' => $all_event_campus_id
 		]);
 	}
 
@@ -88,7 +93,18 @@ class EvenementController extends Controller
 		AutorisationGestion::protectionPage("gerer_evenement");
 
 		$traitement = $this->formulaire_traitement($request);
-		Evenement::find($event_id)->update($traitement);
+		$event = Evenement::find($event_id);
+		$event->update($traitement);
+
+		$campus_array = Site::all();
+		// Attention : on considère que les id des campus se suivent (pas de trou)
+		$campus_nbr = count($campus_array);
+		for ($i = 1; $i <= $campus_nbr; $i++) {
+			$event->campus()->detach($i);
+		}
+		foreach ($request->campus_id as $id) {
+			$event->campus()->attach($id);
+		}
 
 		return redirect(session('entite_uid') . "/entite/evenement");
 	}

@@ -157,15 +157,9 @@
                             <p class="description">Évènement destiné aux étudiants de quel campus ?</p>
                             <ul id="campus_id">
                                 @foreach ($campus as $campus)
-                                    @if ((isset($event) && $event->campus_id == $campus->id) || (!isset($event) && $campus->id == 1))
-                                        <li><input type="checkbox" name="campus_id[]" value="{{ $campus->id }}"
-                                                id="campus_id_{{ $campus->id }}"
-                                                checked>{{ Str::ucfirst($campus->label) }}</li>
-                                    @else
-                                        <li><input type="checkbox" name="campus_id[]" id="campus_id_{{ $campus->id }}"
-                                                value="{{ $campus->id }}">{{ Str::ucfirst($campus->label) }}
-                                        </li>
-                                    @endif
+                                    <li><input type="checkbox" name="campus_id[]" value="{{ $campus->id }}"
+                                            id="campus_id_{{ $campus->id }}"
+                                            @checked((isset($event) && in_array($campus->id, $all_event_campus_id)) || (!isset($event) && $campus->id == 1))>{{ Str::ucfirst($campus->label) }}</li>
                                 @endforeach
                             </ul>
                         </label>

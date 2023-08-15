@@ -303,11 +303,8 @@
                     }
 
                     &#profile-button {
-                        border-top: 1px solid var(--dark-grey);
-                        border-bottom: 1px solid var(--dark-grey);
-
                         a {
-                            padding: max(1.8vh, 15px) 0;
+                            padding: max(1.1vh, 10px) 0;
 
                             p {
                                 font-size: max(1.8vh, 1em)
@@ -315,8 +312,8 @@
                         }
 
                         img {
-                            height: 50px;
-                            width: 50px;
+                            height: 45px;
+                            width: 45px;
                         }
 
                         p {

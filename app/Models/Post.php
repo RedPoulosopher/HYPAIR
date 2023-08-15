@@ -27,10 +27,10 @@ class Post extends Model
     }
     function tags()
     {
-        return $this->belongsToMany(Tag::class, TagPost::class);
+        return $this->belongsToMany(Tag::class, 'tags_posts');
     }
     function campus()
     {
-        return $this->belongsToMany(Site::class, SitePost::class);
+        return $this->belongsToMany(Site::class, 'sites_posts');
     }
 }

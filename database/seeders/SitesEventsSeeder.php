@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelevenements;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,32 +17,32 @@ class SitesEventsSeeder extends Seeder
     {
         DB::table('sites_evenements')->insert([
             [
-                'campus_id' => 1,
-                'event_id' => 1,
+                'site_id' => 1,
+                'evenement_id' => 1,
             ],
             [
-                'campus_id' => 2,
-                'event_id' => 1,
+                'site_id' => 2,
+                'evenement_id' => 1,
             ],
             [
-                'campus_id' => 4,
-                'event_id' => 2,
+                'site_id' => 4,
+                'evenement_id' => 2,
             ],
             [
-                'campus_id' => 2,
-                'event_id' => 3,
+                'site_id' => 2,
+                'evenement_id' => 3,
             ],
             [
-                'campus_id' => 1,
-                'event_id' => 4,
+                'site_id' => 1,
+                'evenement_id' => 4,
             ],
             [
-                'campus_id' => 2,
-                'event_id' => 4,
+                'site_id' => 2,
+                'evenement_id' => 4,
             ],
             [
-                'campus_id' => 1,
-                'event_id' => 5,
+                'site_id' => 1,
+                'evenement_id' => 5,
             ],
         ]);
     }

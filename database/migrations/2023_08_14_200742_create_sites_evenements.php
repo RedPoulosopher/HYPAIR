@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('sites_evenements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('event_id')->constrained('evenements')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('campus_id')->constrained('sites')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('evenement_id')->constrained('evenements')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('site_id')->constrained('sites')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

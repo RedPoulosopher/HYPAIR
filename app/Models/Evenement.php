@@ -33,7 +33,7 @@ class Evenement extends Model
 
     public function campus()
     {
-        return $this->belongsToMany(Site::class, SiteEvenement::class);
+        return $this->belongsToMany(Site::class, 'sites_evenements');
     }
     public function posts()
     {

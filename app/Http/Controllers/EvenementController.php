@@ -14,11 +14,6 @@ use DateTimeZone;
 
 class EvenementController extends Controller
 {
-	// public function accueil()
-	// {
-	// 	$events = Evenement::all();
-	// 	return view('accueil')->with('events', $events);
-	// }
 	public function create()
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
@@ -49,7 +44,14 @@ class EvenementController extends Controller
 		// }
 
 		$eventRequest = $this->formulaire_traitement($request);
-		Evenement::create($eventRequest);
+		$event = Evenement::create($eventRequest);
+
+		// Peut-être besoin de gérer le cas où aucun campus n'est entré
+		if (!empty($request->campus_id)) {
+			foreach ($request->campus_id as $id) {
+				$event->campus()->attach($id);
+			}
+		}
 
 		return redirect(session('entite_uid') . "/entite/evenement");
 	}
@@ -67,6 +69,10 @@ class EvenementController extends Controller
 		}
 
 		$sites = Site::all();
+		$all_event_campus_id = [];
+		foreach ($evenement->campus as $campus) {
+			array_push($all_event_campus_id, $campus->id);
+		}
 
 		// $evenement = $evenement->first();
 		// if ($evenement["confidentialite"] > $niveau_administration) {
@@ -79,7 +85,8 @@ class EvenementController extends Controller
 			// 'docs_existantes' => $docs_existantes,
 			'event' => $evenement,
 			'titre' => "Modifier l'évènement",
-			'campus' => $sites
+			'campus' => $sites,
+			'all_event_campus_id' => $all_event_campus_id
 		]);
 	}
 
@@ -89,7 +96,21 @@ class EvenementController extends Controller
 		AutorisationGestion::protectionPage("gerer_evenement");
 
 		$traitement = $this->formulaire_traitement($request);
-		Evenement::find($event_id)->update($traitement);
+		$event = Evenement::find($event_id);
+		$event->update($traitement);
+
+		$campus_array = Site::all();
+		// Attention : on considère que les id des campus se suivent (pas de trou)
+		$campus_nbr = count($campus_array);
+		for ($i = 1; $i <= $campus_nbr; $i++) {
+			$event->campus()->detach($i);
+		}
+
+		if (!empty($request->campus_id)) {
+			foreach ($request->campus_id as $id) {
+				$event->campus()->attach($id);
+			}
+		}
 
 		return redirect(session('entite_uid') . "/entite/evenement");
 	}
@@ -229,7 +250,6 @@ class EvenementController extends Controller
 			"validation" => "1",
 			'pour_cotisant' => $request->pour_cotisant,
 			'date_apparition' => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
-			'campus_id' => $request->campus_id
 		];
 
 		return $eventRequest;

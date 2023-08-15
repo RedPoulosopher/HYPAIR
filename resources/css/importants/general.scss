@@ -247,12 +247,16 @@ body.light-theme {
     h2 {
         font-size: 1.15em;
     }
+
+    .bouton {
+        font-size: .95em;
+    }
 }
 
 @media screen and (max-width: 580px) {
 
     p,
     span {
-        font-size: .9em;
+        font-size: 1em;
     }
 }

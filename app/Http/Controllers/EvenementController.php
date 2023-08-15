@@ -42,7 +42,6 @@ class EvenementController extends Controller
 	public function store(Request $request)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
-
 		// if ($request['confidentialite'] != 0) {
 		// 	$request['validation'] = 1;
 		// } else {

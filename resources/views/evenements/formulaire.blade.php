@@ -27,6 +27,7 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Titre :</p>
+                        {{-- On peut tout simplifier avec la directive @selected et @checked --}}
                         @isset($event)
                             <input type="text" name="titre" class="input" id="titre_doc" required
                                 value="{{ $event->titre }}" />
@@ -157,9 +158,13 @@
                             <ul id="campus_id">
                                 @foreach ($campus as $campus)
                                     @if ((isset($event) && $event->campus_id == $campus->id) || (!isset($event) && $campus->id == 1))
-                                        <li><input type="checkbox" name="" id="campus_id_{{ $campus->id }}" checked>{{ Str::ucfirst($campus->label) }}</li>
+                                        <li><input type="checkbox" name="campus_id_{{ $campus->id }}"
+                                                id="campus_id_{{ $campus->id }}"
+                                                checked>{{ Str::ucfirst($campus->label) }}</li>
                                     @else
-                                        <li><input type="checkbox" name="" id="campus_id_{{ $campus->id }}">{{ Str::ucfirst($campus->label) }}</li>
+                                        <li><input type="checkbox" name="campus_id_{{ $campus->id }}"
+                                                id="campus_id_{{ $campus->id }}">{{ Str::ucfirst($campus->label) }}
+                                        </li>
                                     @endif
                                 @endforeach
                             </ul>

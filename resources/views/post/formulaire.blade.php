@@ -125,15 +125,9 @@
                             <p class="description">Post destiné aux étudiants de quel campus ?</p>
                             <ul id="campus_id">
                                 @foreach ($campus as $campus)
-                                    @if ((isset($post) && $post->campus_id == $campus->id) || (!isset($post) && $campus->id == 1))
-                                        <li><input type="checkbox" name="campus_id_{{ $campus->id }}"
-                                                id="campus_id_{{ $campus->id }}"
-                                                checked>{{ Str::ucfirst($campus->label) }}</li>
-                                    @else
-                                        <li><input type="checkbox" name="campus_id_{{ $campus->id }}"
-                                                id="campus_id_{{ $campus->id }}">{{ Str::ucfirst($campus->label) }}
-                                        </li>
-                                    @endif
+                                    <li><input type="checkbox" name="campus_id[]" value="{{ $campus->id }}"
+                                            id="campus_id_{{ $campus->id }}"
+                                            @checked((isset($post) && in_array($campus->id, $all_post_campus_id)) || (!isset($post) && $campus->id == 1))>{{ Str::ucfirst($campus->label) }}</li>
                                 @endforeach
                             </ul>
                         </label>

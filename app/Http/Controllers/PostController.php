@@ -74,7 +74,14 @@ class PostController extends Controller
     {
         AutorisationGestion::protectionPage('gerer_evenement');
         $postRequest = $this->formulaire_traitement($request);
-        Post::create($postRequest);
+        $post = Post::create($postRequest);
+
+        if (!empty($request->campus_id)) {
+            foreach ($request->campus_id as $id) {
+                $post->campus()->attach($id);
+            }
+        }
+
         return redirect(session('entite_uid') . '/entite/post');
     }
 
@@ -87,11 +94,17 @@ class PostController extends Controller
         $sites = Site::all();
         $post = Post::find($post_id);
 
+        $all_post_campus_id = [];
+        foreach($post->campus as $campus) {
+            array_push($all_post_campus_id, $campus->id);
+        }
+
         return view('post.formulaire', [
             'titre' => 'Modifier le post',
             'events' => $events,
             'campus' => $sites,
-            'post' => $post
+            'post' => $post,
+            'all_post_campus_id' => $all_post_campus_id
         ]);
     }
 
@@ -114,7 +127,6 @@ class PostController extends Controller
             "date_apparition" => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
             "date_expiration" => $request->date_expiration,
             "event_id" => $request->event_id == 0 ? null : $request->event_id,
-            "campus_id" => $request->campus_id
         ];
 
         return $postRequest;
@@ -124,7 +136,21 @@ class PostController extends Controller
     {
         AutorisationGestion::protectionPage("gerer_evenement");
         $traitement = $this->formulaire_traitement($request);
-        Post::find($post_id)->update($traitement);
+        $post = Post::find($post_id);
+        $post->update($traitement);
+
+        $campus_array = Site::all();
+        // Attention quand le tableau est vide
+        $campus_nbr = count($campus_array);
+        for($i = 1; $i <= $campus_nbr; $i++) {
+            $post->campus()->detach();
+        }
+        if (!empty($request->campus_id)) {
+            foreach ($request->campus_id as $id) {
+                $post->campus()->attach($id);
+            }
+        }
+
         return redirect(session('entite_uid') . "/entite/post");
     }
 

@@ -77,7 +77,6 @@ use App\Http\Controllers\PostController;
 
     window.addEventListener('resize', function(event) {
         if(mobileResponsive.matches){
-            console.log("dsodksokdoskdosdkp")
             for (let i = 0; i < descriptions.length; i++) {
                 description.style.maxHeight = null;
                 descriptions[i].classList.remove("visible");
@@ -93,8 +92,6 @@ use App\Http\Controllers\PostController;
     posts = document.getElementsByClassName("post")
     for (let i = 0; i < arrows.length; i++) {
         posts[i].addEventListener("click", (event) => {
-            console.log("click")
-
 
             if(mobileResponsive.matches){
                 postId = event.currentTarget.getAttribute("post_id")

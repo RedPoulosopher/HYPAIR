@@ -113,7 +113,6 @@
   
   /*meatball*/
 function menu_meatballs(){
-  console.log("click")
   if (ouvert) {
     el_menu_meatballs.style.display = "none";
     ouvert = false;

@@ -6,11 +6,11 @@ use App\Http\Controllers\PostController;
 
 <article class="post card" post_id="{{$post->id}}" entite_uid="{{$post->entite->uid}}">
 
-    <div class="header">
+    <div class="header" style="{{count($post->tags) > 0 ? '' : 'grid-template-rows: 1fr; row-gap: 0;'}}">
 
         <img class="thumbnail" src="{{$post->entite->logo_url("petit")}}" alt="Logo {{$post->entite->nom}}">
 
-        <div class="details" style="grid-row: {{count($post->tags) > 0 ? '' : ' 1 / span 2'}}">
+        <div class="details">
             <a href="/{{ $post->entite->uid }}/entite/post/{{ $post->id }}"><h2>{{ $post->titre }}</h2></a>
             <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>Il y a {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
         </div>
@@ -73,6 +73,21 @@ use App\Http\Controllers\PostController;
     }
 
 
+    var mobileResponsive = window.matchMedia('(max-width: 710px)')
+
+    window.addEventListener('resize', function(event) {
+        if(mobileResponsive.matches){
+            console.log("dsodksokdoskdosdkp")
+            for (let i = 0; i < descriptions.length; i++) {
+                description.style.maxHeight = null;
+                descriptions[i].classList.remove("visible");
+            }
+            for (let i = 0; i < arrows.length; i++) {
+                arrows[i].classList.remove("visible");
+            }
+        }
+    }, true);
+
 
     //Commander l'affichage des détails lorsque l'on clique sur un event
     posts = document.getElementsByClassName("post")
@@ -80,7 +95,6 @@ use App\Http\Controllers\PostController;
         posts[i].addEventListener("click", (event) => {
             console.log("click")
 
-            mobileResponsive = window.matchMedia('(max-width: 710px)')
 
             if(mobileResponsive.matches){
                 postId = event.currentTarget.getAttribute("post_id")

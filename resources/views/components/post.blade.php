@@ -10,7 +10,7 @@ use App\Http\Controllers\PostController;
 
         <img class="thumbnail" src="{{$post->entite->logo_url("petit")}}" alt="Logo {{$post->entite->nom}}">
 
-        <div class="details">
+        <div class="details" style="grid-row: {{count($post->tags) > 0 ? '' : ' 1 / span 2'}}">
             <a href="/{{ $post->entite->uid }}/entite/post/{{ $post->id }}"><h2>{{ $post->titre }}</h2></a>
             <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>Il y a {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
         </div>

@@ -42,9 +42,9 @@
                         <x-post :post="$posts[$i]"/>
                     @endfor
                 @elseif (Auth::check())
-                    <p class="should-be-connected">Aucun post pour le moment</p>
+                    <p class="should-be-connected no-content">Aucun post pour le moment</p>
                 @else
-                    <p class="should-be-connected">Vous devez être connecté pour voir les posts</p>
+                    <p class="should-be-connected no-content">Vous devez être connecté pour voir les posts</p>
                 @endif
 
             </div>

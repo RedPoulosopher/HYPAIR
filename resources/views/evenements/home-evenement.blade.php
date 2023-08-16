@@ -119,7 +119,7 @@
                         </table>
                     </div>
                 @else
-                    <h4>Il n'y a aucun évènement prévu !</h4>
+                    <p class="no-content">Aucun évènement n'est prévu pour le moment</p>
                 @endif
 
 

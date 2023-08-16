@@ -66,7 +66,7 @@
                 @elseif(Auth::check())
                     <p>Aucun évènement dans les 7 prochains jours</p>
                 @else
-                    <p class="should-be-connected">Vous devez être connecté pour voir les événements</p>
+                    <p class="should-be-connected no-content">Vous devez être connecté pour voir les événements</p>
                 @endif
 
             </div>

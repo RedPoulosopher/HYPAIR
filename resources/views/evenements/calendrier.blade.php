@@ -70,7 +70,7 @@
                 </div>
             </div>
         @else
-            <p class="should-be-connected">Vous devez être connecté pour consulter le calendrier</p>
+            <p class="should-be-connected no-content">Vous devez être connecté pour consulter le calendrier</p>
         @endif
     </main>
 

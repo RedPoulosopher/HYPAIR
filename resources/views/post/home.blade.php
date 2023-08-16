@@ -37,23 +37,27 @@
                 {{-- @endif --}}
 
                 <h2>Liste des posts :</h2>
-                <ul id="posts-list">
-                    @foreach ($posts as $post)
-                        <li>
-                            <x-post :post="$post" :id="$post->id" />
-                            <a href="post/modifier/<?= $post->id ?>" class="bouton_action"
-                                style="color:black; border-color:black;">
-                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                            </a>
-                            <a href="post/delete/{{ $post->id }}"></a>
-                            {{-- @if ($gerer_post) --}}
-                            <span class="bouton_action warning">
-                                <i class="fa-solid fa-trash fa-lg"></i>
-                            </span>
-                            {{-- @endif --}}
-                        </li>
-                    @endforeach
-                </ul>
+                @if(count($posts) > 0)
+                    <ul id="posts-list">
+                        @foreach ($posts as $post)
+                            <li>
+                                <x-post :post="$post" :id="$post->id" />
+                                <a href="post/modifier/<?= $post->id ?>" class="bouton_action"
+                                    style="color:black; border-color:black;">
+                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                </a>
+                                <a href="post/delete/{{ $post->id }}"></a>
+                                {{-- @if ($gerer_post) --}}
+                                <span class="bouton_action warning">
+                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                </span>
+                                {{-- @endif --}}
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p class="no-content">Aucun post pour le moment</p>
+                @endif
 
                 <div id="info" class="popup">
                     <div class="documentation card">

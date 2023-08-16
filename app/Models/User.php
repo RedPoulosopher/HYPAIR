@@ -54,6 +54,9 @@ class User extends Authenticatable
         return $this->membres()
             ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`");
     }
+    function sites() {
+        return $this->belongsToMany(Site::class, 'sites_users');
+    }
 
     public static function existe($user_uid)
     {

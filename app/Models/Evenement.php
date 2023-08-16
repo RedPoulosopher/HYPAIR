@@ -20,10 +20,10 @@ class Evenement extends Model
         'temps_debut',
         'temps_fin',
         'lieu',
-        'confidentialite',
+        'confidentialite', // ne sert plus (a une valeur par défaut)
         'max_participation',
         'pour_cotisant',
-        'validation',
+        'validation', // ne sert plus non plus
     ];
 
     public function entite()

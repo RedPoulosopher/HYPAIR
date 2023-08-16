@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('evenements', function (Blueprint $table) {
-            $table->dateTime('date_apparition');
-            // $table->boolean('confidentiel');
+        Schema::create('sites_users', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('site_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('sites_users');
     }
 };

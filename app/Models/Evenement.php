@@ -23,7 +23,8 @@ class Evenement extends Model
         'confidentialite', // ne sert plus (a une valeur par défaut)
         'max_participation',
         'pour_cotisant',
-        'validation', // ne sert plus non plus
+        'validation', // ne sert plus non plus,
+        'confidentiel'
     ];
 
     public function entite()

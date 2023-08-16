@@ -24,6 +24,7 @@ class PostsTableSeeder extends Seeder
                     'date_apparition' => '2022-04-12 08:00:00',
                     'date_expiration' => '2022-04-17 08:00:00',
                     'entite_id' => 1,
+                    "confidentiel" => "0"
                 ],
                 [
                     'id' => 2,
@@ -33,6 +34,7 @@ class PostsTableSeeder extends Seeder
                     'date_apparition' => '2022-06-12 08:00:00',
                     'date_expiration' => '2022-06-17 08:00:00',
                     'entite_id' => 1,
+                    "confidentiel" => "0"
                 ],
                 [
                     'id' => 3,
@@ -42,6 +44,7 @@ class PostsTableSeeder extends Seeder
                     'date_apparition' => '2022-04-12 15:00:00',
                     'date_expiration' => '2022-04-22 20:00:00',
                     'entite_id' => 3,
+                    "confidentiel" => "1"
                 ],
                 [
                     'id' => 4,
@@ -51,6 +54,7 @@ class PostsTableSeeder extends Seeder
                     'date_apparition' => '2022-04-12 15:00:00',
                     'date_expiration' => '2022-04-22 20:00:00',
                     'entite_id' => 5,
+                    "confidentiel" => "0"
                 ],
             ]
         );

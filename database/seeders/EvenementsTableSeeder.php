@@ -26,7 +26,8 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 20,
                 'validation' => "1",
                 'pour_cotisant' => "1",
-                'date_apparition' => '2022-04-12 08:00:00'
+                'date_apparition' => '2022-04-12 08:00:00',
+                "confidentiel" => "0"
             ], [
                 'entite_id' => 2,
                 'titre' => "soirée BDE",
@@ -38,7 +39,8 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 200,
                 'pour_cotisant' => "0",
                 'validation' => "1",
-                'date_apparition' => '2022-04-12 08:00:00'
+                'date_apparition' => '2022-04-12 08:00:00',
+                "confidentiel" => "0"
             ], [
                 'entite_id' => 3,
                 'titre' => "Aprems",
@@ -50,7 +52,8 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 200,
                 'pour_cotisant' => "1",
                 'validation' => "1",
-                'date_apparition' => '2022-04-12 20:00:00'
+                'date_apparition' => '2022-04-12 20:00:00',
+                "confidentiel" => "0"
             ], [
                 'entite_id' => 1,
                 'titre' => "Soirée",
@@ -62,7 +65,8 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 20,
                 'pour_cotisant' => "1",
                 'validation' => "1",
-                'date_apparition' => '2023-04-12 08:00:00'
+                'date_apparition' => '2023-04-12 08:00:00',
+                "confidentiel" => "0"
             ], [
                 'entite_id' => 1,
                 'titre' => "Bonjour",
@@ -74,7 +78,8 @@ class EvenementsTableSeeder extends Seeder
                 'max_participation' => 400,
                 'validation' => "1",
                 'pour_cotisant' => "1",
-                'date_apparition' => '2022-04-24 08:00:00'
+                'date_apparition' => '2022-04-24 08:00:00',
+                "confidentiel" => "1"
             ]
         ]);
     }

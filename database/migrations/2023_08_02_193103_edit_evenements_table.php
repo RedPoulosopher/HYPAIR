@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('evenements', function (Blueprint $table) {
             $table->dateTime('date_apparition');
-            // $table->boolean('confidentiel');
+            $table->boolean('confidentiel');
         });
     }
 

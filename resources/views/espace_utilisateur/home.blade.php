@@ -93,7 +93,6 @@
   function init() {
     /*meatball*/
     el_menu_meatballs = document.getElementById("menu_meatballs");
-    el_menu_meatballs.style.display = "none";
 
     /*accessibilité*/
     reglages = document.getElementById("reglages");

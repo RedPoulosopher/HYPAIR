@@ -83,7 +83,7 @@ fieldset {
     &:focus-within {
         // border-left: 1px solid var(--couleur_accentuation);
 
-        &>.titre {
+        & > .titre {
             opacity: 0.8;
         }
     }
@@ -269,4 +269,22 @@ input {
     * {
         color: var(--error-color);
     }
+}
+
+#campus_id {
+    margin: 0;
+    padding: 0;
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    gap: 5px;
+
+    li input {
+        margin-right: 10px;
+    }
+}
+
+form {
+    width: 100%;
 }

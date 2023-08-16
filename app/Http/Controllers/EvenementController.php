@@ -42,7 +42,6 @@ class EvenementController extends Controller
 		// } else {
 		// 	$request['validation'] = 0;
 		// }
-
 		$eventRequest = $this->formulaire_traitement($request);
 		$event = Evenement::create($eventRequest);
 
@@ -250,6 +249,7 @@ class EvenementController extends Controller
 			"validation" => "1",
 			'pour_cotisant' => $request->pour_cotisant,
 			'date_apparition' => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
+			"confidentiel" => $request->confidentialite
 		];
 
 		return $eventRequest;

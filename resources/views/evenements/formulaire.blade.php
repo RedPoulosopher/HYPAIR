@@ -164,6 +164,20 @@
                             </ul>
                         </label>
                     </div>
+
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="titre">Confidentialité</p>
+                            <p class="description">Ce post doit-il être caché pour les campus non concernés ?</p>
+                            <input type="radio" id="yes" name="confidentialite" value="1"
+                                @checked(isset($event) && $event->confidentiel == '1')>
+                            <label for="yes">OUI</label><br>
+                            <input type="radio" id="no" name="confidentialite" value="0"
+                                @checked(!(isset($event) && $event->confidentiel == '1'))>
+                            <label for="no">NON</label>
+                        </label>
+                    </div>
+
                 </details>
 
 
@@ -178,6 +192,7 @@
                         <option value="4">Président⸱e⸱s et vice-président⸱e</option>
                     </select>
                 </label> --}}
+
 
 
                 <span>* Les champs marqués d'une astérisque sont obligatoires</span>

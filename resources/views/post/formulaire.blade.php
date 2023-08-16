@@ -135,6 +135,19 @@
                             </ul>
                         </label>
                     </div>
+
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="titre">Confidentialité</p>
+                            <p class="description">Ce post doit-il être caché pour les campus non concernés ?</p>
+                            <input type="radio" id="yes" name="confidentialite" value="1"
+                                @checked(isset($post) && $post->confidentiel == '1')>
+                            <label for="yes">OUI</label><br>
+                            <input type="radio" id="no" name="confidentialite" value="0"
+                                @checked(!(isset($post) && $post->confidentiel == '1'))>
+                            <label for="no">NON</label>
+                        </label>
+                    </div>
                 </details>
 
 

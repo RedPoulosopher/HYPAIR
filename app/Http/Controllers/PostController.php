@@ -127,6 +127,7 @@ class PostController extends Controller
             "date_apparition" => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
             "date_expiration" => $request->date_expiration,
             "event_id" => $request->event_id == 0 ? null : $request->event_id,
+            "confidentiel" => $request->confidentialite
         ];
 
         return $postRequest;

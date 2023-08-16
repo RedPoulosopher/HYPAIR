@@ -8,7 +8,7 @@ use App\Http\Controllers\PostController;
 
     <div class="header">
 
-        <img class="thumbnail" src="/images/logo-air-rond-test.png" alt="AIR">
+        <img class="thumbnail" src="{{$post->entite->logo_url("petit")}}" alt="Logo {{$post->entite->nom}}">
 
         <div class="details">
             <a href="/{{ $post->entite->uid }}/entite/post/{{ $post->id }}"><h2>{{ $post->titre }}</h2></a>
@@ -16,12 +16,9 @@ use App\Http\Controllers\PostController;
         </div>
 
         <div class="tags">
-            {{-- TODO: REMPLACER LES TAGS EN DUR --}}
-            <div class="tag" style="background-color: {{ PostController::stringToColorCode('IMPORTANT') }};">IMPORTANT</div>
-            <div class="tag" style="background-color: {{ PostController::stringToColorCode('BDH') }};">BDH</div>
-            <div class="tag" style="background-color: {{ PostController::stringToColorCode('Gala') }};">Gala</div>
-            <div class="tag" style="background-color: {{ PostController::stringToColorCode('Soirée') }};">Soirée</div>
-            <div class="tag" style="background-color: {{ PostController::stringToColorCode('test') }};">test</div>
+            @foreach($post->tags as $tag)
+                <div class="tag" style="background-color: {{$tag->couleur}};">{{$tag->name}}</div>
+            @endforeach
         </div>
         
         <div class="arrow-display">

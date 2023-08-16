@@ -113,7 +113,7 @@ class PostController extends Controller
         $validated = $request->validate(
             [
                 'titre' => 'required|max:128',
-                'description_md' => 'required|min:30|max:250',
+                'description_md' => 'required|min:30|max:2500',
                 'event_id' => 'nullable',
                 'date_apparition' => 'nullable',
                 'date_expiration' => 'nullable',

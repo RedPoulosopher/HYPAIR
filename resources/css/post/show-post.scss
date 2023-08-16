@@ -53,10 +53,36 @@ section {
     }
 
     .description {
+        padding: 0 15px;
+
+        &.visible {
+            display: block;
+        }
+
         &> :first-child {
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid var(--light-grey);
+        }
+
+        a {
+            color: var(--link-color);
+            font-weight: var(--fw-medium);
+            text-decoration: underline;
+        }
+
+        img {
+            max-width: 80%;
+            max-height: 50vh;
+        }
+
+        p:has(img) {
+            display: flex;
+            justify-content: center;
+        }
+
+        p {
+            text-align: justify;
         }
     }
 }

@@ -46,7 +46,7 @@
                                     style="color:black; border-color:black;">
                                     <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                 </a>
-                                <a href="post/delete/{{ $post->id }}"></a>
+                                {{-- <a href="post/delete/{{ $post->id }}"></a> --}}
                                 {{-- @if ($gerer_post) --}}
                                 <span class="bouton_action warning">
                                     <i class="fa-solid fa-trash fa-lg"></i>

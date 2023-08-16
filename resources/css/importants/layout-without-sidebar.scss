@@ -94,16 +94,7 @@ footer {
     }
 }
 
-@media screen and (max-width: 1080px) {
-    :root {
-        --layout-padding-horizontal: 2vw;
-    }
-}
-
 @media screen and (max-width: 710px) {
-    :root {
-        --layout-padding-horizontal: 4vw;
-    }
 
     #content {
         padding: 25px var(--layout-padding-horizontal) 0;

@@ -33,7 +33,7 @@ use App\Http\Controllers\PostController;
 			<div class="contenu_doc" id="contenu_doc">
 
 				<div class="thumbnail"><img src="{{session('entite_logo_petit')}}" alt="Logo {{$entite->nom}}"></div>
-				<h2 class="title">{{$post->titre}}</h2>
+				<h1 class="title">{{$post->titre}}</h1>
 				<p>Posté par {{$entite->nom}}<span class="separator">•</span> Il y a  {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
 		
 				<div class="tags">

@@ -61,3 +61,30 @@ ul#posts-list {
         }
     }
 }
+
+@media screen and (max-width: 710px) {
+    .create-btn-container {
+        margin-bottom: 25px;
+    }
+
+    ul#posts-list li {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--grey);
+        }
+
+        article {
+            grid-row: 1;
+            grid-column: 1 / span 2;
+        }
+
+        &>a,
+        &>span {
+            padding-top: 10px;
+            margin: 10px auto 0;
+        }
+    }
+}

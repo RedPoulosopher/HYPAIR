@@ -126,7 +126,7 @@ class EntiteController extends Controller
 		if ($request->query('creation')) {
 			return redirect()->route('modifier_description', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
-			return redirect($entite->url());
+			return redirect($entite->lien_relatif());
 		}
 	}
 

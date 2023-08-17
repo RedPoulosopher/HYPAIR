@@ -71,7 +71,7 @@ class PostsTableSeeder extends Seeder
                     Jeux de société et jeux vidéos seront au rendez-vous !",
                     'date_apparition' => '2023-08-17 15:00:00',
                     'date_expiration' => '2023-08-31 20:00:00',
-                    'entite_id' => 14,
+                    'entite_id' => 10,
                     "confidentiel" => "0"
                 ],
             ]

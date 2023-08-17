@@ -103,6 +103,7 @@ Ensuite, tapez les commandes suivantes :
 - `npm install`
 - `composer install`
 - `php artisan key:generate`
+- `php artisan storage:link`
 - `php artisan migrate:fresh`
 - `php artisan db:seed`
 
@@ -117,7 +118,7 @@ Pour finir, et **ce qui suit est valable chaque fois que vous voudrez faire fonc
 
 Vous pouvez alors faire `Ctrl + clic gauche` sur l'URL qui s'affiche dans la console pour vous rendre sur HypAIR !!!
 
-*Remarque* : cette mise en place est typique des projets Laravel.
+*Remarque* : Si la PWA ne fonctionne pas, essayez `php artisan view:clear`.
 
 # Comment mettre à jour la version en production ?
 - Si ce n'est pas déjà fait, changer le numéro de version des liens vers les fichiers CSS dans les layouts

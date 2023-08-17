@@ -41,6 +41,14 @@ class TagsPostsSeeder extends Seeder
                     'post_id' => 4,
                     'tag_id' => 6,
                 ],
+                [
+                    'post_id' => 5,
+                    'tag_id' => 2,
+                ],
+                [
+                    'post_id' => 5,
+                    'tag_id' => 5,
+                ],
             ]
         );
     }

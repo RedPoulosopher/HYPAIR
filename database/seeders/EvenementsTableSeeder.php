@@ -80,6 +80,19 @@ class EvenementsTableSeeder extends Seeder
                 'pour_cotisant' => "1",
                 'date_apparition' => '2022-04-24 08:00:00',
                 "confidentiel" => "1"
+            ], [
+                'entite_id' => 14,
+                'titre' => "Aprem Jeux",
+                'slug' => "apremjeux",
+                'description' => 'Venez profiter d\'un aprem calme avec des jeux de société et des jeux vidéo',
+                'temps_debut' => '2023-08-22 13:00:00',
+                'temps_fin' => '2023-08-22 18:00:00',
+                'lieu' => 'Lille',
+                'max_participation' => 50,
+                'validation' => "1",
+                'pour_cotisant' => "0",
+                'date_apparition' => '2023-08-18 08:00:00',
+                "confidentiel" => "0"
             ]
         ]);
     }

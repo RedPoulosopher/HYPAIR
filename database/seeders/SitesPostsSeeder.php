@@ -21,11 +21,23 @@ class SitesPostsSeeder extends Seeder
                 'post_id' => 1
             ],
             [
-                'site_id' => 1,
-                'post_id' => 2
+                'site_id' => 2,
+                'post_id' => 1
             ],
             [
-                'site_id' => 2,
+                'site_id' => 3,
+                'post_id' => 1
+            ],
+            [
+                'site_id' => 4,
+                'post_id' => 1
+            ],
+            [
+                'site_id' => 5,
+                'post_id' => 1
+            ],
+            [
+                'site_id' => 1,
                 'post_id' => 2
             ],
             [
@@ -38,11 +50,11 @@ class SitesPostsSeeder extends Seeder
             ],
             [
                 'site_id' => 2,
-                'post_id' => 4
+                'post_id' => 5
             ],
             [
-                'site_id' => 3,
-                'post_id' => 4
+                'site_id' => 1,
+                'post_id' => 5
             ],
         ]);
     }

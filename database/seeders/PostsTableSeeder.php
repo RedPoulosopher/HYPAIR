@@ -17,43 +17,50 @@ class PostsTableSeeder extends Seeder
         DB::table('posts')->insert(
             [
                 [
-                    'id' => 1,
                     'event_id' => 1,
-                    'titre' => 'mon super post',
-                    'description' => 'ceci est ma description géniale',
-                    'date_apparition' => '2022-04-12 08:00:00',
-                    'date_expiration' => '2022-04-17 08:00:00',
+                    'titre' => 'Hypair est de retour !',
+                    'description' => '# Hypair est en plein développement mais un site de debug est sorti !
+                    Faites un tour sur le site pour voir la nouvelle page d\'accueil et la nouvelle gestion.',
+                    'date_apparition' => '2023-05-15 08:00:00',
+                    'date_expiration' => null,
                     'entite_id' => 1,
                     "confidentiel" => "0"
                 ],
                 [
-                    'id' => 2,
-                    'event_id' => 3,
-                    'titre' => 'un post éclatax',
-                    'description' => 'ceci est ma description pas si ouf que ça en fait...',
-                    'date_apparition' => '2022-06-12 08:00:00',
-                    'date_expiration' => '2022-06-17 08:00:00',
-                    'entite_id' => 1,
+                    'event_id' => 2,
+                    'titre' => 'Soirée BDE',
+                    'description' => '# Soirée BDE
+                    Au programme :
+                    * Stand de tir à l\'arc
+                    * Stand photo
+                    * Bar ouvert
+                    * Cocktails et biscuits maison
+                    * et plein d\'autres surprises !
+                    n\'hésite pas à nous rejoindre le **29 Août** à **18h** !',
+                    'date_apparition' => '2023-07-31 08:00:00',
+                    'date_expiration' => '2023-08-30 08:00:00',
+                    'entite_id' => 13,
                     "confidentiel" => "0"
                 ],
                 [
-                    'id' => 3,
                     'event_id' => null,
-                    'titre' => 'ma grosse actu',
-                    'description' => "ceci est ma description géniale d'une actu encore mieux",
-                    'date_apparition' => '2022-04-12 15:00:00',
-                    'date_expiration' => '2022-04-22 20:00:00',
-                    'entite_id' => 3,
+                    'titre' => 'Photos soirées',
+                    'description' => "Les photos de la soirée sont là alors n'hésitez pas à aller les voir !
+                    [elles sont ici](https://www.google.com)",
+                    'date_apparition' => '2023-08-12 15:00:00',
+                    'date_expiration' => null,
+                    'entite_id' => 17,
                     "confidentiel" => "1"
                 ],
                 [
-                    'id' => 4,
-                    'event_id' => 4,
-                    'titre' => 'un bon gros post sa mère',
-                    'description' => "Abréviation : bpsm !",
-                    'date_apparition' => '2022-04-12 15:00:00',
-                    'date_expiration' => '2022-04-22 20:00:00',
-                    'entite_id' => 5,
+                    'event_id' => 3,
+                    'titre' => 'Distribution Caméléon',
+                    'description' => "# Le nouveau numéro du Caméléon sort le 30 Août !
+                    N'oubliez pas votre numéro avant de manger !
+                    À la une : les Coulisses de l'Intégration !",
+                    'date_apparition' => '2023-08-17 15:00:00',
+                    'date_expiration' => '2023-08-31 20:00:00',
+                    'entite_id' => 8,
                     "confidentiel" => "0"
                 ],
             ]

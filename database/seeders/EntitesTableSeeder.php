@@ -25,15 +25,19 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'bureau',
                 'couleur_claire' => '#C20502',
                 'couleur_sombre' => '#FF1210',
+                'description_courte' => 'Bureau des Elèves de Douai',
+                'description_md' => "# Bureau des Elèves de Douai\nBienvenue au BDE ! Ici, on organise des évènements et des soirées, alors si tu veux cotiser [c'est par ici](https://www.youtube.com/watch?v=dQw4w9WgXcQ)"
             ],
             [
                 'nom' => 'BDE Lille',
-                'uid' => 'bde-lille',
+                'uid' => 'bde_lille',
                 'ratachement' => 'bde',
                 'annee_creation' => '2010',
                 'type' => 'bureau',
                 'couleur_claire' => '#C20502',
                 'couleur_sombre' => '#FF1210',
+                'description_courte' => 'Bureau des Eleves de Lille',
+                'description_md' => null
             ],
             [
                 'nom' => "BDS",
@@ -43,6 +47,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'bureau',
                 'couleur_claire' => '#7132a8',
                 'couleur_sombre' => '#7132a8',
+                'description_courte' => 'Bureau des Sports de Douai',
+                'description_md' => null
             ],
             [
                 'nom' => "BDA",
@@ -52,6 +58,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'bureau',
                 'couleur_claire' => '#7132a8',
                 'couleur_sombre' => '#7132a8',
+                'description_courte' => 'Bureau des Arts de Douai',
+                'description_md' => null
             ],
             [
                 'nom' => "BDH",
@@ -61,6 +69,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'bureau',
                 'couleur_claire' => '#7132a8',
                 'couleur_sombre' => '#7132a8',
+                'description_courte' => 'Bureau de l\'humanitaire de Douai',
+                'description_md' => null
             ],
         ];
 
@@ -73,6 +83,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'liste',
                 'couleur_claire' => '#7132a8',
                 'couleur_sombre' => '#7132a8',
+                'description_courte' => 'Liste BDA 2020',
+                'description_md' => null
             ],
             [
                 'nom' => "dracul'art",
@@ -82,6 +94,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'liste',
                 'couleur_claire' => '#7132a8',
                 'couleur_sombre' => '#7132a8',
+                'description_courte' => 'Liste BDA 2021',
+                'description_md' => null
             ],
         ];
 
@@ -94,6 +108,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#c6152a',
                 'couleur_sombre' => '#cc3345',
+                'description_courte' => 'Association Informatique et Réseaux',
+                'description_md' => null
             ],
             [
                 'nom' => 'Club méca',
@@ -103,6 +119,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#71d0dd',
                 'couleur_sombre' => '#71d0dd',
+                'description_courte' => 'Nous sommes le Club Méca',
+                'description_md' => null
             ],
             [
                 'nom' => "IMT'ternational",
@@ -112,6 +130,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#e05a47',
                 'couleur_sombre' => '#e05a47',
+                'description_courte' => 'IMT\'ernational',
+                'description_md' => null
             ],
             [
                 'nom' => 'Cotrad',
@@ -121,6 +141,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#000000',
                 'couleur_sombre' => '#ffffff',
+                'description_courte' => 'cotrad',
+                'description_md' => null
             ],
             [
                 'nom' => 'ZeGreenPeas',
@@ -130,6 +152,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#679a54',
                 'couleur_sombre' => '#679a54',
+                'description_courte' => 'ZeGreenPeas',
+                'description_md' => null
             ],
             [
                 'nom' => 'Egal’IMT',
@@ -139,6 +163,9 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#9a49d5',
                 'couleur_sombre' => '#9a49d5',
+                'description_courte' => null,
+                'description_md' => null
+
             ],
             [
                 'nom' => 'Junior Entreprise',
@@ -148,6 +175,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#01a7c5',
                 'couleur_sombre' => '#01a7c5',
+                'description_courte' => null,
+                'description_md' => null
             ],
             [
                 'nom' => 'Le Caméléon déchaîné',
@@ -157,6 +186,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#01b531',
                 'couleur_sombre' => '#01b531',
+                'description_courte' => null,
+                'description_md' => null
             ],
             [
                 'nom' => 'Douai Moustache Club',
@@ -166,6 +197,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#000000',
                 'couleur_sombre' => '#ffffff',
+                'description_courte' => null,
+                'description_md' => null
             ],
             [
                 'nom' => 'IMTalks',
@@ -175,6 +208,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#f8b403',
                 'couleur_sombre' => '#f8b403',
+                'description_courte' => null,
+                'description_md' => null
             ],
             [
                 'nom' => 'Club robotique',
@@ -184,6 +219,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#5271ff',
                 'couleur_sombre' => '#5271ff',
+                'description_courte' => null,
+                'description_md' => null
             ],
             [
                 'nom' => 'Club des brasseurs',
@@ -193,6 +230,8 @@ class EntitesTableSeeder extends Seeder
                 'type' => 'comité',
                 'couleur_claire' => '#eab826',
                 'couleur_sombre' => '#eab826',
+                'description_courte' => null,
+                'description_md' => null
             ],
         ];
 

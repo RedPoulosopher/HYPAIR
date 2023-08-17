@@ -79,6 +79,7 @@
 }
 
 .evenement {
+    color: var(--couleur_police_accentuation);
     transition: box-shadow 150ms ease-in-out;
     padding: 3px 8px;
     cursor: pointer;
@@ -86,7 +87,6 @@
 }
 
 .evenement:hover {
-    color: white;
     box-shadow: 0 0 15px 2px rgb(127, 127, 127);
 }
 

@@ -27,7 +27,7 @@ class TagsTableSeeder extends Seeder
                 ],
                 [
                     'name' => 'Art',
-                    'couleur' => '#55FFFF'
+                    'couleur' => '#5568FF'
                 ],
                 [
                     'name' => 'Tournoi',
@@ -36,6 +36,14 @@ class TagsTableSeeder extends Seeder
                 [
                     'name' => 'Jeux vidéos',
                     'couleur' => '#881133'
+                ],
+                [
+                    'name' => 'Info',
+                    'couleur' => '#AFAFAF'
+                ],
+                [
+                    'name' => 'Photos',
+                    'couleur' => '#AC3232'
                 ],
             ]
         );

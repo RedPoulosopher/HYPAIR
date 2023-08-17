@@ -35,14 +35,11 @@ use App\Http\Controllers\PostController;
 				<div class="thumbnail"><img src="{{session('entite_logo_petit')}}" alt="Logo {{$entite->nom}}"></div>
 				<h1 class="title">{{$post->titre}}</h1>
 				<p>Posté par {{$entite->nom}}<span class="separator">•</span> Il y a  {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
-		
+
 				<div class="tags">
-					{{-- TODO: REMPLACER LES TAGS EN DUR --}}
-					<div class="tag" style="background-color: {{ PostController::stringToColorCode('IMPORTANT') }};">IMPORTANT</div>
-					<div class="tag" style="background-color: {{ PostController::stringToColorCode('BDH') }};">BDH</div>
-					<div class="tag" style="background-color: {{ PostController::stringToColorCode('Gala') }};">Gala</div>
-					<div class="tag" style="background-color: {{ PostController::stringToColorCode('Soirée') }};">Soirée</div>
-					<div class="tag" style="background-color: {{ PostController::stringToColorCode('test') }};">test</div>
+					@foreach($post->tags as $tag)
+						<div class="tag" style="background-color: {{$tag->couleur}};">{{$tag->name}}</div>
+					@endforeach
 				</div>
 
 				<div class="description">{!! Str::markdown(strip_tags($post->description ?? '')) !!}</div>

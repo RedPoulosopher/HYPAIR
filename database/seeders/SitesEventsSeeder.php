@@ -25,11 +25,23 @@ class SitesEventsSeeder extends Seeder
                 'evenement_id' => 1,
             ],
             [
+                'site_id' => 3,
+                'evenement_id' => 1,
+            ],
+            [
                 'site_id' => 4,
+                'evenement_id' => 1,
+            ],
+            [
+                'site_id' => 5,
+                'evenement_id' => 1,
+            ],
+            [
+                'site_id' => 1,
                 'evenement_id' => 2,
             ],
             [
-                'site_id' => 2,
+                'site_id' => 1,
                 'evenement_id' => 3,
             ],
             [
@@ -37,12 +49,16 @@ class SitesEventsSeeder extends Seeder
                 'evenement_id' => 4,
             ],
             [
-                'site_id' => 2,
-                'evenement_id' => 4,
-            ],
-            [
                 'site_id' => 1,
                 'evenement_id' => 5,
+            ],
+            [
+                'site_id' => 2,
+                'evenement_id' => 6,
+            ],
+            [
+                'site_id' => 2,
+                'evenement_id' => 6,
             ],
         ]);
     }

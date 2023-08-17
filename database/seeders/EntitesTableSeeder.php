@@ -109,7 +109,7 @@ class EntitesTableSeeder extends Seeder
                 'couleur_claire' => '#c6152a',
                 'couleur_sombre' => '#cc3345',
                 'description_courte' => 'Association Informatique et Réseaux',
-                'description_md' => null
+                'description_md' => "# L'AIR c'est cool  \nCeci est une description écrite en **Markdown**.  \n\nOn peut également mettre des images !  \n\n![](https://images.unsplash.com/photo-1682685797828-d3b2561deef4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80)  \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
             ],
             [
                 'nom' => 'Club méca',

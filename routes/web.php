@@ -33,6 +33,11 @@ use App\Http\Controllers\UserController;
 //     return redirect('/entites/douai');
 // });
 
+// Offline page for PWA
+Route::get('/offline', function () {
+    return view('pwa.offline');
+});
+
 Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });

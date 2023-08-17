@@ -44,6 +44,9 @@ files.forEach(function (filepath) {
 getFiles("resources/js/").forEach(function (filepath) {
     mix.js("resources/js/" + filepath, "public/js");
 });
+//Service worker
+mix.copy("resources/pwa/sw.js", "public");
+
 
 // -----------------------------------------------------------IMAGES------------------------------------------------------
 files = []

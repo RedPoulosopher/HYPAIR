@@ -46,7 +46,6 @@ class EntiteController extends Controller
 
 	public function gestion(Request $request)
 	{
-		dd('là');
 		$entite = Entite::existe(session('entite_id'));
 
 		return view('entite.gestion')

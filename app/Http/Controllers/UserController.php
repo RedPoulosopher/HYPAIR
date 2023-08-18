@@ -9,6 +9,8 @@ use App\Services\GestionPhotoDeProfil;
 use \App\Services\AutorisationGestion;
 use \App\Models\ReseauSocialListe;
 use \App\Models\ReseauSocial;
+use \App\Models\Site;
+use \App\Models\SitesUsers;
 use Illuminate\Support\Facades\App;
 
 class UserController extends Controller
@@ -133,6 +135,40 @@ class UserController extends Controller
       return back()->with('success');
     }
     return redirect('/connexion');
+  }
+
+
+  public function choix_promo(Request $request){
+    if (Auth::check()) {
+      $user = Auth::user();
+      $promo = $request->route('promo');
+
+      if(in_array($promo, ['CP1', 'CP2', 'CI1', 'CI2', 'CI3'])){//If valid promo
+        $user->promo = $promo;
+        $user->save();
+      }
+    }
+
+    return back();
+  }
+
+  public function choix_campus(Request $request){
+    if (Auth::check()) {
+      $user = Auth::user();
+      $site_label_list =  explode("-", $request->route('campus'));
+
+      foreach($site_label_list as $site_label){
+        $site_id = Site::select('id')->where('label', $site_label)->first()->id;
+
+        $request = [
+          "site_id" => $site_id,
+			    "user_id" => $user->id
+        ];
+        SitesUsers::create($request);
+      }
+    }
+
+    return back();
   }
 
 }

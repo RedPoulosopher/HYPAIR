@@ -104,6 +104,8 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/editer_infos_profil', 'maj_infos_profil');
     Route::get('/editer_reseaux_profil', 'editer_reseaux_profil');
     Route::post('/editer_reseaux_profil', 'enregistrer_reseaux_profil');
+    Route::get('/choix-promo/{promo}', 'choix_promo');
+    Route::get('/choix-campus/{campus}', 'choix_campus');
 });
 
 // les routes réservées à l'AIR

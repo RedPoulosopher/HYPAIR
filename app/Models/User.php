@@ -94,4 +94,9 @@ class User extends Authenticatable
         }
         return $phrase;
     }
+
+    function campus()
+    {
+        return $this->belongsToMany(Site::class, 'sites_users');
+    }
 }

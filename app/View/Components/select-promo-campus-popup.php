@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class select-campus-popup extends Component
+class select-promo-campus-popup extends Component
 {
     /**
      * Create a new component instance.

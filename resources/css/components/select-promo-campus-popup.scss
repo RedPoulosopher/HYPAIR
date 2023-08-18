@@ -1,4 +1,4 @@
-#select-campus {
+#select-popup {
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, .85);
@@ -19,7 +19,8 @@
             margin: 0;
         }
 
-        #liste-campus {
+        #liste-campus,
+        #liste-promos {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -34,6 +35,26 @@
                 text-align: center;
                 border-radius: 15px;
                 box-sizing: border-box;
+                transition: background-color 150ms ease-in-out;
+
+                &:hover {
+                    background-color: var(--light-grey);
+                }
+            }
+        }
+
+        #liste-promos {
+            a {
+                font-weight: var(--fw-bold);
+                font-size: 22px;
+            }
+        }
+
+        #liste-campus {
+            // display: none;
+
+            a {
+                font-weight: var(--fw-medium);
             }
         }
 

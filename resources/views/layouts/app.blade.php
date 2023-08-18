@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/importants/layout-without-sidebar.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/importants/layout.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/components/select-campus-popup.css') }}">
+    <link rel="stylesheet" href="{{ mix('/css/components/select-promo-campus-popup.css') }}">
     @stack('styles')
 </head>
 
@@ -41,8 +41,8 @@
         <x-navbar :isConnected="false" :user="[]" />
     @endif
 
-    @if(Auth::check() &&  $user = Auth::user()->campus_id == NULL)
-    {{-- <x-select-campus-popup/> --}}
+    @if(Auth::check() && (Auth::user()->promo == NULL || count(Auth::user()->campus) == 0)) {{-- Si pas de promo ou pas de campus --}}
+        <x-select-promo-campus-popup/>
     @endif
 
     {{-- Contenu de la page --}}

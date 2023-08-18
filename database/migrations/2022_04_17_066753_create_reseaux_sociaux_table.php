@@ -14,6 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('reseaux_sociaux', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
             $table->id();
 	        $table->bigInteger('reseau_sociable_id');
             $table->string('reseau_sociable_type');

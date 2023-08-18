@@ -14,6 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tags_posts', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
             $table->id();
             $table->foreignId('post_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('tag_id')->constrained()->onUpdate('cascade')->onDelete('cascade');

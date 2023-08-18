@@ -14,6 +14,8 @@ class CreateEntitesTable extends Migration
     public function up()
     {
         Schema::create('entites', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
             $table->id();
             $table->string('uid',128)->unique(); //ce qui est dans le LDAP
 	        $table->string('nom',128);

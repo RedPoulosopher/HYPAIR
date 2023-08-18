@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('titre', 255)->charset('utf8mb4')->change();
             $table->string('titre', 255)->collation('utf8mb4_bin')->change();
             $table->text('description_md')->charset('utf8mb4')->change();
-            $table->string('description_md')->collation('utf8mb4_bin')->change();
+            $table->text('description_md')->collation('utf8mb4_bin')->change();
         });
 
         Schema::table('categories', function (Blueprint $table) {
@@ -42,28 +42,28 @@ return new class extends Migration
             $table->text('description_courte')->charset('utf8mb4')->change();
             $table->string('description_courte')->collation('utf8mb4_bin')->change();
             $table->text('description_md')->charset('utf8mb4')->change();
-            $table->string('description_md')->collation('utf8mb4_bin')->change();
+            $table->text('description_md')->collation('utf8mb4_bin')->change();
         });
 
         Schema::table('evenements', function (Blueprint $table) {
             $table->string('titre', 255)->charset('utf8mb4')->change();
             $table->string('titre', 255)->collation('utf8mb4_bin')->change();
             $table->text('description')->charset('utf8mb4')->change();
-            $table->string('description')->collation('utf8mb4_bin')->change();
+            $table->text('description')->collation('utf8mb4_bin')->change();
         });
 
         Schema::table('posts', function (Blueprint $table) {
             $table->string('titre', 255)->charset('utf8mb4')->change();
             $table->string('titre', 255)->collation('utf8mb4_bin')->change();
             $table->text('description')->charset('utf8mb4')->change();
-            $table->string('description')->collation('utf8mb4_bin')->change();
+            $table->text('description')->collation('utf8mb4_bin')->change();
         });
 
         Schema::table('projets', function (Blueprint $table) {
             $table->string('titre', 255)->charset('utf8mb4')->change();
             $table->string('titre', 255)->collation('utf8mb4_bin')->change();
             $table->text('description_courte')->charset('utf8mb4')->change();
-            $table->string('description_courte')->collation('utf8mb4_bin')->change();
+            $table->text('description_courte')->collation('utf8mb4_bin')->change();
         });
 
         Schema::table('reseaux_sociaux_liste', function (Blueprint $table) {

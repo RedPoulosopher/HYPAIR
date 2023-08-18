@@ -45,7 +45,7 @@ class PostController extends Controller
 
     public function home()
     {
-        $posts = Post::where('entite_id', session(('entite_id')))->get();
+        $posts = Post::where('entite_id', session(('entite_id')))->orderBy('date_apparition', 'desc')->get();
 
 
         return view('post.home')->with([
@@ -166,7 +166,7 @@ class PostController extends Controller
 	{
 		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		$post = Post::where('id', $request->route('event_id'));
+		$post = Post::where('id', $request->route('post_id'));
 
 		if (!$post->exists()) {
 			abort(404);

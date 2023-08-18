@@ -19,7 +19,7 @@ class ProtectionAutorisation
     public function handle(Request $request, Closure $next, $autorisation_necessaire)
     {
         $role = AutorisationGestion::recuperer_role($autorisation_necessaire);
-        if($role == "non authentifié") return redirect()->route('connexion');
+        if($role == "non authentifié") abort(403);
         else if($role == "non membre") abort(403);
         else if( $role[$autorisation_necessaire] != 1) abort(403);
 

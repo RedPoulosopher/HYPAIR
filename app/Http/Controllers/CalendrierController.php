@@ -213,21 +213,9 @@ class CalendrierController extends Controller
         $mois = $request["mois"] + 1;
 
 
+
         //$evenements= Evenement::index($annee, $mois);
 
-        $niveau_administration = AutorisationGestion::niveau_administration();
-
-        if ($niveau_administration == 20) {
-            $confidentialite = 4;
-        } elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
-            $confidentialite = 3;
-        } elseif ($niveau_administration == 13) {
-            $confidentialite = 2;
-        } elseif ($niveau_administration == 8) {
-            $confidentialite = 1;
-        } else {
-            $confidentialite = 0;
-        }
 
         //on recupere les events demandes*
         $evenements_publics = Evenement::index($annee, $mois)
@@ -237,6 +225,8 @@ class CalendrierController extends Controller
         foreach ($evenements_publics as $evenement_pub) {
             $evenements_publics_array[] = $evenement_pub;
         }
+
+        info($evenements_publics_array);
 
         $evenements_user = array();
         if (Auth::check()) {

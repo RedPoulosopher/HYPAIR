@@ -49,7 +49,16 @@ class PostController extends Controller
             $campus = Site::where('label', $site)->first();
         }
         $posts = $campus->posts;
-        return view('accueil')->with('posts', $posts)->with('site', $site);
+
+        $canSeeConfidentiel = false;
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->campus->contains($campus)) {
+                $canSeeConfidentiel = true;
+            }
+        }
+
+        return view('accueil')->with('posts', $posts)->with('site', $site)->with('canSeeConfidentiel', $canSeeConfidentiel);
     }
 
     static function date_apparition_to_duration($date_apparition){

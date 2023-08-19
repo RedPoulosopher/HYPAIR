@@ -40,9 +40,14 @@
 
             <div class="article-wrapper">
                 @if (Auth::check() && count($posts) > 0)
-                    @for ($i = 0; $i < count($posts); $i++)
+                    {{-- @for ($i = 0; $i < count($posts); $i++)
                         <x-post :post="$posts[$i]" />
-                    @endfor
+                    @endfor --}}
+                    @foreach ($posts as $post)
+                        @if (!$post->confidentiel || ($post->confidentiel && $canSeeConfidentiel))
+                            <x-post :post="$post" />
+                        @endif
+                    @endforeach
                 @elseif (Auth::check())
                     <p class="should-be-connected no-content">Aucun post pour le moment</p>
                 @else

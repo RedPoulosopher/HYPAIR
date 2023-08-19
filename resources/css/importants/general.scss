@@ -191,6 +191,19 @@ p.explication {
     }
 }
 
+.popup {
+    z-index: 100;
+    display: none;
+    position: fixed;
+    inset: 0;
+    place-items: center;
+    background-color: var(--popup-background-color);
+
+    &.visible {
+        display: grid;
+    }
+}
+
 body.dark-theme {
     & .ombre_grande {
         box-shadow: var(--ombre-grande);

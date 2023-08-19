@@ -235,7 +235,7 @@ $routes_entites = function () {
             Route::post('/entite/post/formulaire', 'store');
             Route::get('/entite/post/modifier/{id}', 'edit');
             Route::post('/entite/post/modifier/{id}', 'update');
-            Route::get('/entite/post/delete/{id}', 'delete');
+            Route::post('/entite/post/suppression/{id}', 'delete');
             Route::get('/entite/post/{post_id}', 'show');
         });
     });

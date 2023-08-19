@@ -1,11 +1,4 @@
 #select-popup {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, .85);
-
-    z-index: 100;
-    display: grid;
-    place-items: center;
 
     #popup-content {
         padding: 30px 20px;

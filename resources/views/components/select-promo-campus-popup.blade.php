@@ -1,5 +1,5 @@
-<div id="select-popup">
-    <div id="popup-content" class="popup card">
+<div id="select-popup" class="popup visible">
+    <div id="popup-content" class="card">
         @php
         use App\Models\Site;
         $sites = Site::select('*')->get();

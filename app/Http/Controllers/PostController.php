@@ -168,8 +168,9 @@ class PostController extends Controller
         return redirect(session('entite_uid') . "/entite/post");
     }
 
-    public function delete($entite_uid, $post_id)
+    public function delete(Request $request)
     {
+        $post_id = $request->route('id');
         AutorisationGestion::protectionPage("gerer_evenement");
         $post = Post::find($post_id)->delete();
         return redirect(session('entite_uid') . "/entite/post");

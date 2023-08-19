@@ -28,30 +28,32 @@
                 @endif
 
 
-                {{-- @if ($gerer_post) --}}
+                @if ($gerer_post)
                 <div class="create-btn-container">
                     <a href="post/formulaire" class="bouton tertiaire ombre_petite administrateur">
                         <span><i class="fa-solid fa-plus"></i>Créer un post</span>
                     </a>
                 </div>
-                {{-- @endif --}}
 
                 <h2>Liste des posts :</h2>
+                @endif
+
                 @if(count($posts) > 0)
                     <ul id="posts-list">
                         @foreach ($posts as $post)
                             <li>
                                 <x-post :post="$post" :id="$post->id" />
-                                <a href="post/modifier/<?= $post->id ?>" class="bouton_action"
-                                    style="color:black; border-color:black;">
-                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                </a>
-                                {{-- <a href="post/delete/{{ $post->id }}"></a> --}}
-                                {{-- @if ($gerer_post) --}}
-                                <span class="bouton_action warning">
-                                    <i class="fa-solid fa-trash fa-lg"></i>
-                                </span>
-                                {{-- @endif --}}
+                                @if ($gerer_post)
+                                    <a href="post/modifier/<?= $post->id ?>" class="bouton_action"
+                                        style="color:black; border-color:black;">
+                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                    </a>
+                                    {{-- <a href="post/delete/{{ $post->id }}"></a> --}}
+                                
+                                    <span class="bouton_action warning suppression_entite">
+                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                    </span>
+                                @endif
                             </li>
                         @endforeach
                     </ul>
@@ -76,9 +78,9 @@
                 </div>
     </main>
 
-    {{-- TODO: FAIRE FONCTIONNER LA SUPPRESSION
+    {{-- TODO: FAIRE FONCTIONNER LA SUPPRESSION --}}
         <script> 
-        events = {!! json_encode($tables) !!}
+        posts = {!! json_encode($posts) !!}
 
         const listener_click_retour = document.querySelectorAll('.info_bouton');
 
@@ -86,38 +88,36 @@
             listener_click_retour.addEventListener("click", function() {
                 refresh();
 
-                document.getElementById("info").classList.add("popup");
+                document.getElementById("info").classList.remove("visible");
             });
         });
 
 
-        listener_events(events);
+        listener_posts(posts);
 
-        function listener_events(evenements) {
-            const listener_click_evenements = document.querySelectorAll('.suppression_entite');
-            listener_click_evenements.forEach((listener_click_evenement, index) => {
-                listener_click_evenement.addEventListener("click", function() {
-                    afficher_informations_supplementaires(index, evenements);
+        function listener_posts(posts) {
+            const listener_click_posts = document.querySelectorAll('.suppression_entite');
+            listener_click_posts.forEach((listener_click_post, index) => {
+                listener_click_post.addEventListener("click", function() {
+                    afficher_informations_supplementaires(index, posts);
                 });
             });
         }
 
-        // Attention : une partie sur les évènements en attente a été supprimée
-
-        function afficher_informations_supplementaires(index_evenement, evenements) {
+        function afficher_informations_supplementaires(index_post, posts) {
             refresh();
             //document.getElementById('info').style.top = event.clientX + "px";
             document.getElementById("gerer").innerHTML += `
-            <form method="POST" action="evenement/suppression">
+            <form method="POST" action="post/suppression/${ posts[index_post]['id']}">
                 @csrf
-                @if ($gerer_evenement)
-                    <button type="submit" name="id" value=` + evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
+                @if ($gerer_post)
+                    <button type="submit" name="id" value=${posts[index_post]['id']} class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
                 @endif
             </form>`;
-            document.getElementById("message").innerText += " Voulez-vous vraiment supprimer : « " + evenements[
-                index_evenement]["titre"] + " » ?";
+            document.getElementById("message").innerText += " Voulez-vous vraiment supprimer : « " + posts[
+                index_post]["titre"] + " » ?";
 
-            document.getElementById("info").classList.remove("popup");
+            document.getElementById("info").classList.add("visible");
         }
 
         // Fin partie BDE
@@ -126,6 +126,6 @@
             document.getElementById("message").innerText = 'Vous êtes sur le point de supprimer un évènement.';
             document.getElementById("gerer").innerHTML = "";
         }
-    </script> --}}
+    </script>
 
 @endsection

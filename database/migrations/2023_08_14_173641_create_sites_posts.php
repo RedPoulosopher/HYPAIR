@@ -17,8 +17,8 @@ return new class extends Migration
             $table->charset = 'utf8';
             $table->collation = 'utf8_unicode_ci';
             $table->id();
-            $table->foreignId('post_id')->constrained()->onUpdate('cascade')->onUpdate('cascade');
-            $table->foreignId('site_id')->constrained('sites')->onUpdate('cascade')->onUpdate('cascade');
+            $table->foreignId('post_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('site_id')->constrained('sites')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

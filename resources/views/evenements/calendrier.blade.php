@@ -48,7 +48,7 @@
             </div>
 
 
-            <div id="info" class="popup-cachee" style="position:absolute">
+            <div id="info" class="popup" style="position:absolute">
                 <div class="petit">
                     <div class="documentation card">
                         <div id="gerer" style="display:flex;">
@@ -390,7 +390,7 @@
             listener_click_retour.addEventListener("click", function() {
                 refresh();
 
-                document.getElementById("info").classList.add("popup-cachee");
+                document.getElementById("info").classList.remove("visible");
             });
         });
 
@@ -437,7 +437,7 @@
                 16);
             document.getElementById("heure_fin").innerHTML += evenements[index_evenement]["temps_fin"].substring(10, 16);
 
-            document.getElementById("info").classList.remove("popup-cachee");
+            document.getElementById("info").classList.add("visible");
         }
 
         function refresh() {

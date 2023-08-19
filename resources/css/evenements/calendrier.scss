@@ -80,14 +80,18 @@
 
 .evenement {
     color: var(--couleur_police_accentuation);
-    transition: box-shadow 150ms ease-in-out;
+    transition: box-shadow 150ms ease-in-out, filter 150ms ease-in-out;
     padding: 3px 8px;
     cursor: pointer;
     user-select: none;
+    position: relative;
+    z-index: 5;
 }
 
 .evenement:hover {
-    box-shadow: 0 0 15px 2px rgb(127, 127, 127);
+    z-index: 10;
+    box-shadow: 0 0 10px 0 rgb(127, 127, 127, .25);
+    filter: brightness(1.1);
 }
 
 

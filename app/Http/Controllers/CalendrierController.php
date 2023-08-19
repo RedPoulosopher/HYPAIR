@@ -127,7 +127,6 @@ class CalendrierController extends Controller
             view("evenements.calendrier", [
                 'events' => $evenements_publics_array,
                 'evenements_prives' => $evenements_user,
-                'gerer_evenement' => false,
                 'entite' => ""
             ]);
     }

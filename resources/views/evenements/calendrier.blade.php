@@ -51,11 +51,9 @@
             <div id="info" class="popup">
                 <div class="petit">
                     <div class="documentation card">
-                        <div id="gerer" style="display:flex;">
-
-
-                        </div>
-
+                        <p class="bouton secondaire ombre_petite info_bouton retour">
+                            < Retour</p>
+                        
                         <div class="contenu_doc" id="contenu_doc">
                             <h1 id="titre"></h1>
                             <p id="organisateur"><em>Organisateur :</em> </p>
@@ -64,8 +62,9 @@
                             <p id="heure_debut"><em>Heure de début :</em> </p>
                             <p id="heure_fin"><em>Heure de fin :</em> </p>
                         </div>
-                        <p class="bouton secondaire ombre_petite info_bouton retour">
-                            < Retour</p>
+                        
+                        <div id="gerer" style="display:flex;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -252,12 +251,6 @@
 
             event_choix_calendrier();
         })
-        // if (entite === "") {
-        //     document.getElementById('menu_lateral').style.display = "none";
-        //     document.getElementById('hamburger').style.display = "none";
-        //     document.getElementById('retour').style.display = "block";
-        //     console.log("e");
-        // }
 
         function event_choix_calendrier() {
             if (entite === "") {
@@ -401,40 +394,13 @@
         function afficher_informations_supplementaires(index_evenement, evenements) {
             refresh();
 
-            document.getElementById("gerer").innerHTML += `
-        <a href="/` + evenements[index_evenement]['uid'] + `/entite/evenement/` + evenements[index_evenement]['slug'] + ` " class="secondaire bouton bouton_action ombre_petite" style="margin:15px; color:black; border-color:black;">Détail</a>
-        <!--
-        @if ($gerer_evenement)
-            <a href="/evenement/" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
-        @endif
-        -->`;
-
-            if (evenements[index_evenement]['validation'] == 0) {
-                document.getElementById("gerer").innerHTML += `
-            <form method="POST" action="/bde/calendrier/validation">
-                @csrf
-                @if ($gerer_evenement && $entite == 'bde')
-                    <button type="submit" name="id" value=` + evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
-                @endif
-            </form>`;
-            } else if (evenements[index_evenement]['validation'] == 1 && evenements[index_evenement]['confidentialite'] ==
-                0) {
-                document.getElementById("gerer").innerHTML += `
-            <form method="POST" action="/bde/calendrier/invalidation">
-                @csrf
-                @if ($gerer_evenement && $entite == 'bde')
-                    <button type="submit" name="id" value=` + evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Invalider</button>
-                @endif
-            </form>`;
-
-            }
+            document.getElementById("gerer").innerHTML += `<a href="/${evenements[index_evenement]['uid']}/entite/evenement/${evenements[index_evenement]['slug']}" class="secondaire bouton bouton_action ombre_petite" style="margin:15px; color:black; border-color:black;">Détails</a>`;
 
             document.getElementById("titre").innerHTML += evenements[index_evenement]["titre"];
             document.getElementById("organisateur").innerHTML += evenements[index_evenement]["nom"];
             document.getElementById("description").innerHTML += evenements[index_evenement]["description"];
             document.getElementById("lieu").innerHTML += evenements[index_evenement]["lieu"];
-            document.getElementById("heure_debut").innerHTML += evenements[index_evenement]["temps_debut"].substring(10,
-                16);
+            document.getElementById("heure_debut").innerHTML += evenements[index_evenement]["temps_debut"].substring(10,16);
             document.getElementById("heure_fin").innerHTML += evenements[index_evenement]["temps_fin"].substring(10, 16);
 
             document.getElementById("info").classList.add("visible");

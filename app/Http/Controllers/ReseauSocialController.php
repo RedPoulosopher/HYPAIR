@@ -7,6 +7,7 @@ use \App\Models\User;
 use \App\Models\Entite;
 use \App\Models\ReseauSocial;
 use \App\Models\ReseauSocialListe;
+use \App\Services\AutorisationGestion;
 
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,11 @@ class ReseauSocialController extends Controller
         $model = self::reseau_sociable_model();
         $reseaux_sociaux = $model->reseaux_sociaux()->get();
 
-        return view('reseaux_sociaux.index_gestion')->with('reseaux_sociaux_existants', $reseaux_sociaux_existants)->with('reseaux_sociaux', $reseaux_sociaux);
+        return view('reseaux_sociaux.index_gestion', [
+            'reseaux_sociaux_existants'=> $reseaux_sociaux_existants,
+            'reseaux_sociaux'=> $reseaux_sociaux,
+            'gerer_reseau' => AutorisationGestion::gestion("gerer_reseau")
+        ]);
     }
 
     public function store(Request $request)

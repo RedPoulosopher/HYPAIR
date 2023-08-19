@@ -53,6 +53,10 @@ class MembreController extends Controller
 			$personnes_concernees = $entite->abonnes();
 		}
 
-		return view('membre.index_admin', ["personnes_concernees" => $personnes_concernees->get(), "roles"=>$roles]);
+		return view('membre.index_admin', [
+			"personnes_concernees" => $personnes_concernees->get(),
+			"roles" => $roles,
+			"gerer_membre" => AutorisationGestion::gestion("gerer_membre")
+		]);
 	}
 }

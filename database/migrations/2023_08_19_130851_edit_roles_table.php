@@ -16,6 +16,7 @@ return new class extends Migration
         //ajout promo
         Schema::table('roles', function(Blueprint $table) {
             $table->boolean('gerer_post')->default(0);
+            $table->boolean('gerer_reseau')->default(0);
         });
     }
 

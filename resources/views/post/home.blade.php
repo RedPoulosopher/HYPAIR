@@ -34,9 +34,9 @@
                         <span><i class="fa-solid fa-plus"></i>Créer un post</span>
                     </a>
                 </div>
+                @endif
 
                 <h2>Liste des posts :</h2>
-                @endif
 
                 @if(count($posts) > 0)
                     <ul id="posts-list">

@@ -153,18 +153,14 @@ class UserController extends Controller
   }
 
   public function choix_campus(Request $request){
+    // Prévoir un reset à un moment !
     if (Auth::check()) {
       $user = Auth::user();
       $site_label_list =  explode("-", $request->route('campus'));
 
       foreach($site_label_list as $site_label){
         $site_id = Site::select('id')->where('label', $site_label)->first()->id;
-
-        $request = [
-          "site_id" => $site_id,
-			    "user_id" => $user->id
-        ];
-        SitesUsers::create($request);
+        $user->sites()->attach($site_id);
       }
     }
 

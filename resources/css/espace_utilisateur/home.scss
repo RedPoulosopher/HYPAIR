@@ -56,13 +56,13 @@
     cursor: pointer;
     padding: 8px;
     font-size: 1.25em;
-    transform: rotate(0deg);
+    transform: translateX(8px) rotate(0deg);
     transition-duration: 300ms;
 }
 
 #reglages:hover {
     color: var(--couleur_police_secondaire);
-    transform: rotate(60deg);
+    transform: translateX(8px) rotate(60deg);
     transition-duration: 300ms;
 }
 

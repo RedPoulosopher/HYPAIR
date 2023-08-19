@@ -10,6 +10,7 @@ use App\Models\Site;
 use App\Models\Entite;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -26,10 +27,22 @@ class PostController extends Controller
         return '#' . $color;
     }
 
-    public function accueil()
+    public function accueil($site = null)
     {        
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
-        $posts = Post::where('date_apparition', '<', $now)->orderBy('date_apparition', 'desc')->get();
+        if (!isset($site)) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                $site = $user->campus->first();
+            }
+            else {
+                // if user not connected, show Douai posts by default
+                $site = Site::all()->first();
+            }
+        } else {
+            $site = Site::where('label', $site)->first();
+        }
+        $posts = $site->posts;
         return view('accueil')->with('posts', $posts);
     }
 

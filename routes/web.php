@@ -42,14 +42,16 @@ Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });
 
-Route::get('/', [PostController::class, 'accueil']);
+// Route::get('/', [PostController::class, 'accueil']);
+// Attention à l'orthographe des campus (uid)
+Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alencon']);
 
 Route::get('/entites', function () {
     // return view('entite.choix_site'); 
     return redirect('entites/douai');
 })->name('racine');
 
-Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valencienne|dunkerke']); // liste de toutes les entités d'un site de l'école (e.g. Douai)
+Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valenciennes|dunkerkes']); // liste de toutes les entités d'un site de l'école (e.g. Douai)
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/connexion', 'connexion')->name("connexion");

@@ -21,7 +21,7 @@ class Site extends Model
     }
     public function posts()
     {
-        return $this->belongsToMany(Post::class, SitePost::class);
+        return $this->belongsToMany(Post::class, 'sites_posts');
     }
     public function users() {
         return $this->belongsToMany(User::class, 'sites_users');

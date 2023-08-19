@@ -1,56 +1,75 @@
 section {
-    .thumbnail {
-        display: flex;
-        justify-content: center;
+    .header {
+        .thumbnail {
+            display: flex;
+            justify-content: center;
 
-        img {
-            border-radius: 1000px;
-            height: 150px;
+            img {
+                border-radius: 1000px;
+                height: 150px;
+            }
         }
-    }
 
-    .title {
-        margin: 15px 0 10px;
-        text-align: center;
-    }
-
-    .title+p {
-        text-align: center;
-        color: var(--couleur_police_secondaire);
-        font-weight: var(--fw-light);
-        font-size: 1em;
-
-        .separator {
-            color: var(--couleur_police_secondaire);
-            font-weight: var(--fw-light);
-            display: inline-block;
-            width: 20px; //Same width as parent's horizontal gap
+        .title {
+            margin: 15px 0 10px;
             text-align: center;
         }
-    }
 
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: center;
-        gap: 8px 10px;
+        &>p {
+            text-align: center;
+            font-weight: var(--fw-light);
+            color: var(--couleur_police_secondaire);
+            font-size: 1em;
+            margin: 0 0 5px;
 
-        grid-row: 2;
-        grid-column: 2;
+            .separator {
+                color: var(--couleur_police_secondaire);
+                font-weight: var(--fw-light);
+                display: inline-block;
+                width: 20px; //Same width as parent's horizontal gap
+                text-align: center;
+            }
+
+            &#confidentiel {
+
+                i {
+                    margin-right: 8px;
+                    font-size: 14px;
+                }
+            }
+        }
 
 
-        .tag {
-            display: inline-block;
-            color: var(--couleur_police_accentuation);
-            border-radius: 1000px;
-            align-items: center;
-            font-size: 13px;
 
-            padding: 6px 12px;
 
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+            gap: 8px 10px;
+            margin-top: 15px;
+
+            grid-row: 2;
+            grid-column: 2;
+
+
+            .tag {
+                display: inline-block;
+                color: var(--couleur_police_accentuation);
+                border-radius: 1000px;
+                align-items: center;
+                font-size: 13px;
+
+                padding: 6px 12px;
+
+            }
         }
     }
+
+
+
 
     .description {
         padding: 0 15px;
@@ -84,5 +103,21 @@ section {
         p {
             text-align: justify;
         }
+    }
+}
+
+body #confidentiel {
+    color: #ab7c3e;
+
+    i {
+        color: #ab7c3e;
+    }
+}
+
+body.light-theme #confidentiel {
+    color: #eda33f;
+
+    i {
+        color: #eda33f;
     }
 }

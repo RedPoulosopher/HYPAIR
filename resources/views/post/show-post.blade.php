@@ -3,7 +3,7 @@
 @section('titre', $post->titre)
 
 @pushonce('styles')
-<link rel="stylesheet" href="{{ mix('/css/evenements/show-evenement.css') }}" type="text/css" >
+{{-- <link rel="stylesheet" href="{{ mix('/css/evenements/show-evenement.css') }}" type="text/css" > --}}
 <link rel="stylesheet" href="{{ mix('/css/post/show-post.css') }}" type="text/css" >
 <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
 @endpushonce
@@ -32,15 +32,20 @@ use App\Http\Controllers\PostController;
 		<div class="documentation card">
 			<div class="contenu_doc" id="contenu_doc">
 
-				<div class="thumbnail"><img src="{{session('entite_logo_petit')}}" alt="Logo {{$entite->nom}}"></div>
-				<h1 class="title">{{$post->titre}}</h1>
-				<p>Posté par {{$entite->nom}}<span class="separator">•</span> Il y a  {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
-
-				<div class="tags">
-					@foreach($post->tags as $tag)
-						<div class="tag" style="background-color: {{$tag->couleur}};">{{$tag->name}}</div>
-					@endforeach
-				</div>
+				<div class="header">
+					<div class="thumbnail"><img src="{{session('entite_logo_petit')}}" alt="Logo {{$entite->nom}}"></div>
+					<h1 class="title">{{$post->titre}}</h1>
+					<p>Posté par {{$entite->nom}}<span class="separator">•</span>Il y a  {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
+					@if($post->confidentiel != 0)
+						<p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager" class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>
+					@endif
+	
+					<div class="tags">
+						@foreach($post->tags as $tag)
+							<div class="tag" style="background-color: {{$tag->couleur}};">{{$tag->name}}</div>
+						@endforeach
+					</div>
+				</div>				
 
 				<div class="description">{!! Str::markdown(strip_tags($post->description ?? '')) !!}</div>
 			</div>

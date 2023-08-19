@@ -60,9 +60,14 @@
                     text-align: center;
                 }
 
-                &#confidentiel i {
-                    margin-right: 8px;
-                    font-size: 14px;
+                &#confidentiel {
+                    color: var(--confidentiel-color);
+
+                    i {
+                        color: var(--confidentiel-color);
+                        margin-right: 8px;
+                        font-size: 14px;
+                    }
                 }
             }
 
@@ -150,21 +155,6 @@
     }
 }
 
-body #confidentiel {
-    color: #ab7c3e;
-
-    i {
-        color: #ab7c3e;
-    }
-}
-
-body.light-theme #confidentiel {
-    color: #eda33f;
-
-    i {
-        color: #eda33f;
-    }
-}
 
 
 @media screen and (max-width: 710px) {

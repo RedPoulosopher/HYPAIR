@@ -23,3 +23,16 @@ h1.titre::first-letter {
 
     text-align: justify;
 }
+
+#confidentiel {
+    text-align: center;
+    font-weight: var(--fw-medium);
+    color: var(--confidentiel-color);
+    margin-bottom: 20px;
+
+    i {
+        color: var(--confidentiel-color);
+        margin-right: 8px;
+        font-size: 14px;
+    }
+}

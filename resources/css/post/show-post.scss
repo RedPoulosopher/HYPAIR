@@ -31,8 +31,10 @@ section {
             }
 
             &#confidentiel {
+                color: var(--confidentiel-color);
 
                 i {
+                    color: var(--confidentiel-color);
                     margin-right: 8px;
                     font-size: 14px;
                 }
@@ -103,21 +105,5 @@ section {
         p {
             text-align: justify;
         }
-    }
-}
-
-body #confidentiel {
-    color: #ab7c3e;
-
-    i {
-        color: #ab7c3e;
-    }
-}
-
-body.light-theme #confidentiel {
-    color: #eda33f;
-
-    i {
-        color: #eda33f;
     }
 }

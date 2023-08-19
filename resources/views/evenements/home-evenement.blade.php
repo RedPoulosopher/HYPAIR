@@ -87,15 +87,6 @@
                                             <td>Prez & vice-prez</td>
                                         @endif --}}
 
-                                        {{-- @if ($table['confidentialite'] == 0)
-                                            @if ($table['validation'] == 1)
-                                                <td>Validé</td>
-                                            @elseif ($table['validation'] == 0)
-                                                <td>En attente de validation</td>
-                                            @endif
-                                        @else
-                                            <td>/</td>
-                                        @endif --}}
 
                                         @if ($gerer_evenement)
                                             <td>

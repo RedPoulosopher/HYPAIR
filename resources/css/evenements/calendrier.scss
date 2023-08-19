@@ -85,11 +85,11 @@
     cursor: pointer;
     user-select: none;
     position: relative;
-    z-index: 5;
+    z-index: 1;
 }
 
 .evenement:hover {
-    z-index: 10;
+    z-index: 2;
     box-shadow: 0 0 10px 0 rgb(127, 127, 127, .25);
     filter: brightness(1.1);
 }

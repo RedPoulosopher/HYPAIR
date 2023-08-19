@@ -19,4 +19,10 @@ a.reseau-social {
     p {
         margin: 0;
     }
+
+    transition: filter 150ms ease-in-out;
+
+    &:hover {
+        filter: brightness(1.1);
+    }
 }

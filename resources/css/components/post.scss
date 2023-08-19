@@ -11,7 +11,7 @@
         display: grid;
         justify-content: flex-start;
         align-items: center;
-        gap: 5px 0;
+        gap: 10px 0;
 
         grid-template-columns: auto 1fr auto;
         grid-template-rows: repeat(2, auto);
@@ -19,6 +19,7 @@
         .thumbnail {
             border-radius: 200px;
             width: 75px;
+            height: 75px;
             grid-row: span 2;
             grid-column: 1;
             margin-right: 20px;
@@ -29,7 +30,7 @@
             flex: 4;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 3px;
             grid-row: 1;
             grid-column: 2;
 
@@ -43,6 +44,10 @@
                 width: fit-content;
             }
 
+            a {
+                margin-bottom: 2px;
+            }
+
 
             &>p {
                 margin: 0;
@@ -54,7 +59,13 @@
                     width: 20px; //Same width as parent's horizontal gap
                     text-align: center;
                 }
+
+                &#confidentiel i {
+                    margin-right: 8px;
+                    font-size: 14px;
+                }
             }
+
 
         }
 
@@ -139,6 +150,23 @@
     }
 }
 
+body #confidentiel {
+    color: #ab7c3e;
+
+    i {
+        color: #ab7c3e;
+    }
+}
+
+body.light-theme #confidentiel {
+    color: #eda33f;
+
+    i {
+        color: #eda33f;
+    }
+}
+
+
 @media screen and (max-width: 710px) {
     .post {
         padding: 18px;
@@ -153,8 +181,9 @@
             gap: 12px 0;
 
             .thumbnail {
-                grid-row: 1;
+                grid-row: 1 / span 2;
                 width: 48px;
+                height: 48px;
                 margin-right: min(4vw, 20px);
             }
 
@@ -169,7 +198,7 @@
             }
 
             .tags {
-                grid-column: 1 / span 2;
+                grid-column: 2;
                 gap: 1.8vw 2vw;
 
                 .tag {
@@ -179,6 +208,20 @@
 
             .arrow-display {
                 display: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .post {
+        .header {
+            .thumbnail {
+                grid-row: 1;
+            }
+
+            .tags {
+                grid-column: 1 / span 2;
             }
         }
     }

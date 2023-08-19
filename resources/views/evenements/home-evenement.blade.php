@@ -45,8 +45,10 @@
                                     <th>Début</th>
                                     <th>Fin</th>
                                     <th>Lieu</th>
+                                    @if ($gerer_evenement)
                                     <th>Modifier</th>
                                     <th>Supprimer</th>
+                                    @endif
 
                                     {{-- <th>Nombre de participants max</th>
                                     <th>Pour cotisants ?</th>
@@ -95,23 +97,20 @@
                                             <td>/</td>
                                         @endif --}}
 
-                                        <td>
-                                            <a href="evenement/modifier/<?= $table['id'] ?>" class="bouton_action"
-                                                style="color:black; border-color:black;">
-                                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            @if ($gerer_evenement)
-                                                {{-- <a href="evenement/suppression"> --}}
-                                                {{-- {{ dd($table) }} --}}
-                                                <a href="evenement/suppression/{{ $table->id }}">
-                                                    <span class="bouton_action warning">
+                                        @if ($gerer_evenement)
+                                            <td>
+                                                <a href="evenement/modifier/<?= $table['id'] ?>" class="bouton_action"
+                                                    style="color:black; border-color:black;">
+                                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                    <span class="bouton_action warning suppression_event">
                                                         <i class="fa-solid fa-trash fa-lg"></i>
                                                     </span>
-                                                </a>
-                                            @endif
-                                        </td>
+                                                {{-- </a> --}}
+                                            </td>
+                                        @endif
 
                                     </tr>
                                 @endforeach
@@ -187,7 +186,7 @@
     </main>
 
 
-    <script>
+    <script> 
         events = {!! json_encode($tables) !!}
 
         const listener_click_retour = document.querySelectorAll('.info_bouton');
@@ -196,38 +195,36 @@
             listener_click_retour.addEventListener("click", function() {
                 refresh();
 
-                document.getElementById("info").classList.add("popup");
+                document.getElementById("info").classList.remove("visible");
             });
         });
 
 
         listener_events(events);
 
-        function listener_events(evenements) {
-            const listener_click_evenements = document.querySelectorAll('.suppression_entite');
-            listener_click_evenements.forEach((listener_click_evenement, index) => {
-                listener_click_evenement.addEventListener("click", function() {
-                    afficher_informations_supplementaires(index, evenements);
+        function listener_events(events) {
+            const listener_click_events = document.querySelectorAll('.suppression_event');
+            listener_click_events.forEach((listener_click_event, index) => {
+                listener_click_event.addEventListener("click", function() {
+                    afficher_informations_supplementaires(index, events);
                 });
             });
         }
 
-        // Attention : une partie sur les évènements en attente a été supprimée
-
-        function afficher_informations_supplementaires(index_evenement, evenements) {
+        function afficher_informations_supplementaires(index_event, events) {
             refresh();
             //document.getElementById('info').style.top = event.clientX + "px";
             document.getElementById("gerer").innerHTML += `
-            <form method="POST" action="evenement/suppression">
+            <form method="POST" action="evenement/suppression/${ events[index_event]['id']}">
                 @csrf
                 @if ($gerer_evenement)
-                    <button type="submit" name="id" value=` + evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
+                    <button type="submit" name="id" value=${events[index_event]['id']} class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
                 @endif
             </form>`;
-            document.getElementById("message").innerText += " Voulez-vous vraiment supprimer : « " + evenements[
-                index_evenement]["titre"] + " » ?";
+            document.getElementById("message").innerText += " Voulez-vous vraiment supprimer : « " + events[
+                index_event]["titre"] + " » ?";
 
-            document.getElementById("info").classList.remove("popup");
+            document.getElementById("info").classList.add("visible");
         }
 
         // Fin partie BDE

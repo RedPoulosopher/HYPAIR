@@ -48,7 +48,7 @@
             </div>
 
 
-            <div id="info" class="popup" style="position:absolute">
+            <div id="info" class="popup">
                 <div class="petit">
                     <div class="documentation card">
                         <div id="gerer" style="display:flex;">

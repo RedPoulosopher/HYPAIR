@@ -50,7 +50,7 @@
                                     </a>
                                     {{-- <a href="post/delete/{{ $post->id }}"></a> --}}
                                 
-                                    <span class="bouton_action warning suppression_entite">
+                                    <span class="bouton_action warning suppression_post">
                                         <i class="fa-solid fa-trash fa-lg"></i>
                                     </span>
                                 @endif
@@ -78,10 +78,9 @@
                 </div>
     </main>
 
-    {{-- TODO: FAIRE FONCTIONNER LA SUPPRESSION --}}
         <script> 
         posts = {!! json_encode($posts) !!}
-
+        
         const listener_click_retour = document.querySelectorAll('.info_bouton');
 
         listener_click_retour.forEach((listener_click_retour, index) => {
@@ -96,7 +95,7 @@
         listener_posts(posts);
 
         function listener_posts(posts) {
-            const listener_click_posts = document.querySelectorAll('.suppression_entite');
+            const listener_click_posts = document.querySelectorAll('.suppression_post');
             listener_click_posts.forEach((listener_click_post, index) => {
                 listener_click_post.addEventListener("click", function() {
                     afficher_informations_supplementaires(index, posts);

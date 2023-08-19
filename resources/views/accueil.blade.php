@@ -40,9 +40,6 @@
 
             <div class="article-wrapper">
                 @if (Auth::check() && count($posts) > 0)
-                    {{-- @for ($i = 0; $i < count($posts); $i++)
-                        <x-post :post="$posts[$i]" />
-                    @endfor --}}
                     @foreach ($posts as $post)
                         @if (!$post->confidentiel || ($post->confidentiel && $canSeeConfidentiel))
                             <x-post :post="$post" />

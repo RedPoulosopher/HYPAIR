@@ -274,7 +274,7 @@ $routes_entites = function () {
 
 //Important !
 Route::controller(CalendrierController::class)->group(function () {
-    Route::get('/calendrier', 'calendrier_general');
+    Route::get('/calendrier/{site?}', 'calendrier_general')->where(['site' => 'douai|lille|valenciennes|dunkerque|alencon']);
     Route::post('/calendrier/validation', 'validation');
     Route::post('/calendrier/invalidation', 'invalidation');
     Route::post('/calendrier/suppression', 'suppression');

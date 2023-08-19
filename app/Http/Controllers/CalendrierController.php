@@ -60,7 +60,6 @@ class CalendrierController extends Controller
             $evenements_prives_array[] = $evenement_priv;
         }
 
-
         return view(
             "evenements.calendrier",
             [
@@ -74,7 +73,7 @@ class CalendrierController extends Controller
     }
 
 
-    public static function calendrier_general()
+    public static function calendrier_general($site = null)
     {
         //on doit recuperer l annee et le mois courant. ca sera l affichage par defaut
         $annee = date('Y');
@@ -120,6 +119,9 @@ class CalendrierController extends Controller
 
             ///->where('membres.role_id', '<=', 'evenements.confidentialite')
         }
+
+        // dd($evenements_publics_array);
+        // dd($evenements_user);
 
         return
             view("evenements.calendrier", [

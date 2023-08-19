@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use \App\Models\Evenement;
 use \App\Models\Entite;
 use \App\Models\Membre;
@@ -253,5 +254,30 @@ class EvenementController extends Controller
 		];
 
 		return $eventRequest;
+	}
+
+	static function comingEvents(){
+		if(Auth::check()){
+            $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d');
+            $dateInSevenDays =  date('Y-m-d', strtotime("+7 day", strtotime($now)));
+
+			$user = Auth::user();
+			//Récupère tous les id de campus de l'utilisateur
+			$user_site_ids = $user->campus->map(function ($campus) {
+				return $campus->id;
+			})->toArray();
+			
+            return Evenement::select('evenements.titre', 'evenements.slug', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.id', 'entites.nom as entite_nom', 'entites.uid', 'sites_evenements.site_id')
+                ->where('temps_debut',  '<', $dateInSevenDays)
+                ->where('temps_fin', '>', $now)
+				->whereIn('sites_evenements.site_id', $user_site_ids)//Filtre pour ne garder que les évènements du/des campus de l'utilisateur
+				->groupBy('evenements.id')//S'assure qu'il n'y a pas de duplicata
+                ->orderBy('temps_debut', 'asc')//Dans l'ordre chronologique	
+                ->limit(5)
+                ->join('entites', 'entites.id', '=', 'evenements.entite_id')
+                ->join('sites_evenements', 'sites_evenements.evenement_id', '=', 'evenements.id')->get();
+        }
+
+        return [];
 	}
 }

@@ -8,3 +8,9 @@
 
 // Pour le carousel des logos (utilisés sur la page des associations)
 //@import './accueil/carousel';
+
+@media (max-width: 615px) {
+    #main-content section {
+        margin-top: 50px;
+    }
+}

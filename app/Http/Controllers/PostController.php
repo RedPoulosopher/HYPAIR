@@ -33,17 +33,23 @@ class PostController extends Controller
         if (!isset($site)) {
             if (Auth::check()) {
                 $user = Auth::user();
-                $site = $user->campus->first();
+                if (count($user->campus)>0) {
+                    $campus = $user->campus->first();
+                } else {
+                    // if user has no campus saved, show Douai posts by default
+                    $campus = Site::all()->first();
+                }
             }
             else {
                 // if user not connected, show Douai posts by default
-                $site = Site::all()->first();
+                $campus = Site::all()->first();
             }
+            $site = $campus->label;
         } else {
-            $site = Site::where('label', $site)->first();
+            $campus = Site::where('label', $site)->first();
         }
-        $posts = $site->posts;
-        return view('accueil')->with('posts', $posts);
+        $posts = $campus->posts;
+        return view('accueil')->with('posts', $posts)->with('site', $site);
     }
 
     static function date_apparition_to_duration($date_apparition){

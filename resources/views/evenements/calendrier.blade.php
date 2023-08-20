@@ -91,13 +91,13 @@
                     //condition pour colorier la date d aujourd hui sur le calendrier
                     if (mois_courant && i == jour_actuel) {
                         el_calendrier.innerHTML += (
-                            "<div class='jour' id='today'><div style='margin-left:10px; flex:1 1 auto;'>" + jours[(
+                            "<div class='jour card' id='today'><div style='margin-left:10px; flex:1 1 auto;'>" + jours[(
                                 index_jour_debut + i - 1) % 7] + "<br>" + i + "</div><div class='num_jour' num_jour='" +
                             i + "''></div></div>");
                         document.getElementById("today").style.cssText =
                             'border: 1px solid var(--couleur_accentuation); box-shadow: 0 0 7px; background-color:rgba(127,127,127,0.30)';
                     } else {
-                        el_calendrier.innerHTML += ("<div class='jour'><div style='margin-left:10px; flex:1 1 auto;'>" +
+                        el_calendrier.innerHTML += ("<div class='jour card'><div style='margin-left:10px; flex:1 1 auto;'>" +
                             jours[(index_jour_debut + i - 1) % 7] + "<br>" + i +
                             "</div><div class='num_jour' num_jour='" + i + "''></div></div>");
 

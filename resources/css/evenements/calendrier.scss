@@ -103,6 +103,7 @@
 }
 
 @media (max-width: 768px) {
+
     /*FAIRE POPUP*/
     #calendrier {
         grid-template-columns: repeat(1, 1fr);
@@ -119,15 +120,23 @@
         /* IE and Edge */
         scrollbar-width: none;
         /* Firefox */
-    }
 
-    #calendrier .jour {
-        border: 1px solid black;
-        margin: auto 2%;
-        border-radius: 15px;
-        display: flex;
-        flex-direction: row;
-        padding: 5px 8px 5px 0;
+        .jour {
+            margin: auto 2%;
+            display: flex;
+            flex-direction: row;
+            padding: 5px 8px 5px 0;
+            border: none;
+
+            &:nth-child(7n+1) {
+                border: none;
+            }
+
+            &#today {
+                box-shadow: 0px 0px 7px rgba(255, 255, 255, 0.25);
+                border: 1px solid var(--couleur_accentuation_air);
+            }
+        }
     }
 
     .num_jour {
@@ -141,10 +150,6 @@
         padding-right: 5px;
         margin-top: 2px;
         margin-bottom: 2px;
-    }
-
-    #calendrier .jour:nth-child(7n + 1) {
-        border: 1px solid black;
     }
 
     #titre {

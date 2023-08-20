@@ -67,6 +67,16 @@ class UsersTableSeeder extends Seeder
                 'bio' => NULL,
                 'promo' => NULL
             ],
+            [
+                'nom' => 'Lambda',
+                'prenom' => 'Utilisateur',
+                'uid' => 'utilisateur.lambda',
+                'password' => Hash::make("test"),
+                'langue_pref' => 'fr',
+                'pronom' => 'Il/Lui',
+                'bio' => NULL,
+                'promo' => NULL
+            ],
         ]);
     }
 }

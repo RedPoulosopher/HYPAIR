@@ -83,11 +83,14 @@ class PostController extends Controller
 
     public function create()
     {
-        // Pour l'instant, on considère que si on peut gérer les posts est défini par gestion_actualite
-        AutorisationGestion::protectionPage("gerer_actualite");
+        AutorisationGestion::protectionPage("gerer_post");
         // $niveau_administration = AutorisationGestion::niveau_administration();
 
-        $events = Evenement::where('entite_id', session('entite_id'))->get();
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+        $oneMonthAgo = date('Y-m-d', strtotime("-1 month", strtotime($now)));
+        
+        $events = Evenement::where('entite_id', session('entite_id'))
+                            ->where('temps_fin', '>', $oneMonthAgo)->get();//On ne montre que les events qui ne sont pas fini ou on terminé il y a moins d'un mois
         $sites = Site::all();
 
         return view('post.formulaire', [
@@ -99,7 +102,7 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        AutorisationGestion::protectionPage('gerer_actualite');
+        AutorisationGestion::protectionPage('gerer_post');
         $postRequest = $this->formulaire_traitement($request);
         $post = Post::create($postRequest);
 
@@ -114,10 +117,15 @@ class PostController extends Controller
 
     public function edit($entite_uid, $post_id)
     {
-        AutorisationGestion::protectionPage("gerer_actualite");
+        AutorisationGestion::protectionPage("gerer_post");
         // $niveau_administration = AutorisationGestion::niveau_administration();
 
-        $events = Evenement::where('entite_id', session('entite_id'));
+        
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+        $oneMonthAgo = date('Y-m-d', strtotime("-1 month", strtotime($now)));
+
+        $events = Evenement::where('entite_id', session('entite_id'))
+                            ->where('temps_fin', '>', $oneMonthAgo)->get();//On ne montre que les events qui ne sont pas fini ou on terminé il y a moins d'un mois
         $sites = Site::all();
         $post = Post::find($post_id);
 
@@ -162,7 +170,7 @@ class PostController extends Controller
 
     public function update(Request $request, $entite_uid, $post_id)
     {
-        AutorisationGestion::protectionPage("gerer_actualite");
+        AutorisationGestion::protectionPage("gerer_post");
         $traitement = $this->formulaire_traitement($request);
         $post = Post::find($post_id);
         $post->update($traitement);

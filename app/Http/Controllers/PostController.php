@@ -17,7 +17,7 @@ use DB;
 
 class PostController extends Controller
 {
-    static $tag_colors = ["3240BD", "E14545", "4FCA63", "43A8A8", "63092C", "CF9F23", "5bbd75", "264d91", "831d64", "422977", "2b918b", "bf6a18", "C12816"];
+    static $tag_colors = ["3240BD", "E14545", "4FCA63", "43A8A8", "63092C", "CF9F23", "1b4426", "264d91", "831d64", "422977", "0e6e69", "bf6a18", "C12816", "5c75a7", "661664", "438949", "104547", "494993", "346a58", "a9363b", "D7263D", "1d8ed5", "871c5b", "32965D", "6a3351", "31676a", "27345c", "53409b", "af2f80", "414361", "4c5c2e"];
     static function stringToColorCode($str)
     {
         $code = crc32($str);

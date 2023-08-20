@@ -22,12 +22,32 @@ class TagsTableSeeder extends Seeder
                     'couleur' => '#BD2020'
                 ],
                 [
+                    'name' => 'Info',
+                    'couleur' => '#878686'
+                ],
+                [
+                    'name' => 'Information',
+                    'couleur' => '#878686'
+                ],
+                [
+                    'name' => 'Shotgun',
+                    'couleur' => '#6a449f'
+                ],
+                [
+                    'name' => 'CAPA',
+                    'couleur' => '#23b844'
+                ],
+                [
+                    'name' => 'Gala',
+                    'couleur' => '#009F93'
+                ],
+                [
                     'name' => 'Soirée',
-                    'couleur' => '#CCAA11'
+                    'couleur' => '#144b60'
                 ],
                 [
                     'name' => 'Moitage',
-                    'couleur' => '#00BB22'
+                    'couleur' => '#7c5446'
                 ],
                 [
                     'name' => 'Art',
@@ -35,19 +55,31 @@ class TagsTableSeeder extends Seeder
                 ],
                 [
                     'name' => 'Tournoi',
-                    'couleur' => '#FF6611'
+                    'couleur' => '#d14f06'
                 ],
                 [
                     'name' => 'Jeux vidéos',
                     'couleur' => '#881133'
                 ],
                 [
-                    'name' => 'Info',
-                    'couleur' => '#AFAFAF'
-                ],
-                [
                     'name' => 'Photos',
                     'couleur' => '#AC3232'
+                ],
+                [
+                    'name' => 'Campagnes',
+                    'couleur' => '#d56d5e'
+                ],
+                [
+                    'name' => 'Bénévolat',
+                    'couleur' => '#9f2462'
+                ],
+                [
+                    'name' => 'Aprem',
+                    'couleur' => '#cf7222'
+                ],
+                [
+                    'name' => 'Allo',
+                    'couleur' => '#F24333'
                 ],
             ]
         );

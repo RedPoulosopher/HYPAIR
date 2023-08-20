@@ -141,31 +141,8 @@ class EvenementController extends Controller
 
 	public function show_home()
 	{
-		$niveau_administration = AutorisationGestion::niveau_administration();
 
-		// if ($niveau_administration == 20) {
-		// 	$confidentialite = 4;
-		// } elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
-		// 	$confidentialite = 3;
-		// } elseif ($niveau_administration == 13) {
-		// 	$confidentialite = 2;
-		// } elseif ($niveau_administration == 8) {
-		// 	$confidentialite = 1;
-		// } else {
-		// 	$confidentialite = 0;
-		// }
-
-
-
-		$tables = Evenement::where('entite_id', session('entite_id'))->get();
-
-		// $tables_attente_validation = DB::table(DB::raw('evenements', 'entites'))
-		// 	->join('entites', 'entites.id', '=', 'evenements.entite_id')
-		// 	->select('entites.uid', 'entites.nom', 'evenements.id', 'evenements.entite_id', 'evenements.titre', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu', 'evenements.validation', 'slug')
-		// 	->where('validation', 0)
-		// 	->get();
-
-		// $array = json_decode(json_encode($tables_attente_validation), true);
+		$evenements = Evenement::where('entite_id', session('entite_id'))->get();
 
 		$user_id = Membre::select('user_id')
 			->where('id', session('membre_id'))
@@ -176,7 +153,6 @@ class EvenementController extends Controller
 			->join('users', 'users.id', '=', 'membres.user_id')
 			->get('users.id')->pluck('id');
 
-		//$entite->membres;
 
 		$entites = Entite::join('membres', 'membres.entite_id', '=', 'entites.id')
 			->join('users', 'users.id', '=', 'membres.user_id')
@@ -190,8 +166,7 @@ class EvenementController extends Controller
 		};
 
 		return view('evenements.home-evenement', [
-			'tables' => $tables,
-			// 'tables_attente_validation' => $array,
+			'evenements' => $evenements,
 			'entite' => session('entite_uid'),
 			'entite_user' => $entite_user,
 			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")

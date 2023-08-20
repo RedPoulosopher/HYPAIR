@@ -114,16 +114,21 @@ class PostController extends Controller
 
             foreach($tag_names as $tag_name){
                 if($tag_name != ""){
-                    $tag = Tag::where(DB::raw('lower(name)'), strtolower($tag_name));
+                    
+                    //Collate pour ne pas prendre en compte les majuscules et les accents
+                    $tag = Tag::whereRaw("lower(name) like '%$tag_name%' collate utf8mb4_unicode_ci");
     
                     if (!$tag->exists()) {//Si le tag n'existe pas, on le créé
-                        Tag::create([                        
+                        $tag = Tag::create([                        
                             'name' => ucfirst(strtolower($tag_name)),
                             'couleur' => self::stringToColorCode(strtolower($tag_name))
                         ]);
+                        $post->tags()->attach($tag->id);
+                    }else{
+
+                        $post->tags()->attach($tag->first()->id);
                     }
     
-                    $post->tags()->attach($tag->first()->id);
                 }
 
             }
@@ -137,12 +142,17 @@ class PostController extends Controller
 
         return redirect(session('entite_uid') . '/entite/post');
     }
+    function stripAccents($str) {
+        return strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+    }
 
     public function edit($entite_uid, $post_id)
     {
         AutorisationGestion::protectionPage("gerer_post");
-        // $niveau_administration = AutorisationGestion::niveau_administration();
+    
+        // $tag = Tag::where(DB::raw('lower(name)'), mb_strtolower($tag_name, 'UTF-8'));
 
+        // $niveau_administration = AutorisationGestion::niveau_administration();
         
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
         $oneMonthAgo = date('Y-m-d', strtotime("-1 month", strtotime($now)));
@@ -207,16 +217,21 @@ class PostController extends Controller
 
             foreach($tag_names as $tag_name){
                 if($tag_name != ""){
-                    $tag = Tag::where(DB::raw('lower(name)'), strtolower($tag_name));
+                    
+                    //Collate pour ne pas prendre en compte les majuscules et les accents
+                    $tag = Tag::whereRaw("lower(name) like '%$tag_name%' collate utf8mb4_unicode_ci");
     
                     if (!$tag->exists()) {//Si le tag n'existe pas, on le créé
-                        Tag::create([                        
+                        $tag = Tag::create([                        
                             'name' => ucfirst(strtolower($tag_name)),
                             'couleur' => self::stringToColorCode(strtolower($tag_name))
                         ]);
+                        $post->tags()->attach($tag->id);
+
+                    }else{
+                        $post->tags()->attach($tag->first()->id);
                     }
     
-                    $post->tags()->attach($tag->first()->id);
                 }
 
             }

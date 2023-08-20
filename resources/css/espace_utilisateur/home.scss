@@ -24,7 +24,7 @@
     flex-direction: column;
 }
 
-#ligne_prenoms {
+#ligne_top {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -32,22 +32,58 @@
     align-items: center;
 }
 
-#prenoms {
+#user-info {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    // align-items: center;
     flex-wrap: wrap;
     gap: 5px;
 
-    h2 {
-        margin-top: 0px;
-        margin-bottom: 0px;
+    #prenoms {
+        display: flex;
+
+        h2 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .separator {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            color: var(--couleur_police_secondaire);
+            font-weight: normal;
+        }
+
+        .pronoms {
+            color: var(--couleur_police_secondaire);
+            font-weight: normal;
+            margin: 0;
+        }
     }
 
-    .pronoms {
-        color: grey;
-        font-weight: normal;
-        margin: 0;
+
+    #promo-campus {
+        grid-row: 2;
+        grid-column: 1 / span 3;
+        display: flex;
+        gap: 15px;
+
+        p {
+            display: inline-block;
+            color: var(--couleur_police_secondaire);
+            font-weight: normal;
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            i {
+                color: var(--couleur_police_secondaire);
+                font-size: .7rem;
+                margin-right: 8px;
+
+            }
+        }
     }
 
 }
@@ -56,13 +92,13 @@
     cursor: pointer;
     padding: 8px;
     font-size: 1.25em;
-    transform: translateX(8px) rotate(0deg);
+    transform: translate(8px, -8px) rotate(0deg);
     transition-duration: 300ms;
 }
 
 #reglages:hover {
     color: var(--couleur_police_secondaire);
-    transform: translateX(8px) rotate(60deg);
+    transform: translate(8px, -8px) rotate(60deg);
     transition-duration: 300ms;
 }
 

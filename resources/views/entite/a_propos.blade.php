@@ -62,15 +62,24 @@
                                 <img src="{{ $mandat_user->lien_photo_utilisateur }}" alt="Votre photo de profil" />
                             </div>
                             <div class="info_profil">
-                                <div class="prenoms">
-                                    <h2>{{ $mandat_user->user_info->prenom . ' ' . $mandat_user->user_info->nom }}</h2>
-                                    @if ($mandat_user->user_info->pronom !== '')
-                                        <h2 class="pronoms">•</h2>
-                                        <h2 class="pronoms">{{ $mandat_user->user_info->pronom }}</h2>
+                                <div id="user-info" style="{{$mandat_user->user_info->bio ? '' : 'align-items:center'}}">
+                                    <div id="prenoms">
+                                      <h2>{{$mandat_user->user_info->prenom}} {{$mandat_user->user_info->nom}}</h2>
+                                      @if ($mandat_user->user_info->pronom !== '')
+                                        <div class="separator">•</div>
+                                        <h3 class="pronoms">{{$mandat_user->user_info->pronom}}</h3>
+                                      @endif
+                                    </div>
+                                    @if($mandat_user->user_info->promo && count($mandat_user->user_info->campus) > 0)
+                                    <div id="promo-campus">
+                                      <p><i class="fa-solid fa-graduation-cap"></i>{{$mandat_user->user_info->promo}}</p>
+                                      <p><i class="fa-solid fa-location-dot"></i>{{ ucwords(implode(', ', $mandat_user->user_info->campus->pluck('label')->toArray())) }}</p>
+                                    </div>
                                     @endif
                                 </div>
+
                                 <div class="bio">
-                                    {!! nl2br(e($mandat_user->user_info->bio)) !!}
+                                    {!! nl2br(strip_tags($mandat_user->user_info->bio)) !!}
                                 </div>
                                 <div class="reseaux_sociaux_profil grille-enfants">
                                     @foreach ($mandat_user->reseaux_sociaux as $reseau_social_user)

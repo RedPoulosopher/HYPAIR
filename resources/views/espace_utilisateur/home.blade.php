@@ -19,16 +19,25 @@
         <img src="{{$user->chemin_photo_de_profil}}" alt="Votre photo de profil"/>
       </div>
       <div id="info_profil">
-        <div id="ligne_prenoms">
-          <div id="prenoms">
-            <h2>{{$user->prenom}} {{$user->nom}}</h2>
-            @if ($user->pronom !== '')
-              <h3 class="pronoms">•</h3>
-              <h3 class="pronoms">{{$user->pronom}}</h3>
+        <div id="ligne_top">
+          <div id="user-info">
+            <div id="prenoms">
+              <h2>{{$user->prenom}} {{$user->nom}}</h2>
+              @if ($user->pronom !== '')
+                <div class="separator">•</div>
+                <h3 class="pronoms">{{$user->pronom}}</h3>
+              @endif
+            </div>
+            @if($user->promo && count($user->campus) > 0)
+            <div id="promo-campus">
+              <p><i class="fa-solid fa-graduation-cap"></i>{{$user->promo}}</p>
+              <p><i class="fa-solid fa-location-dot"></i>{{ ucwords(implode(', ', $user->campus->pluck('label')->toArray())) }}</p>
+            </div>
             @endif
           </div>
           <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>
         </div>
+        
         @if($user->bio)
           <div id="bio">
             {!! nl2br(strip_tags($user->bio)) !!}

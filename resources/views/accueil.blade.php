@@ -13,7 +13,10 @@
 
     {{-- Contenu principal de la page --}}
     <main id="main-content">
+        
+        @if (Auth::check())
         <x-post-switch-campus :campus="$site"></x-post-switch-campus>
+        @endif
 
         <section id="section-services">
             <h1>Services</h1>

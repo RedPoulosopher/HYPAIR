@@ -16,9 +16,9 @@
     </head>
 
     <main id="main-content">
+        @if (Auth::check())
         <x-calendrier-switch-campus :campus="$site"></x-calendrier-switch-campus>
 
-        @if (Auth::check())
             <div id="boutons">
                 <p id="retour" class="bouton secondaire ombre_petite" style="width:100px;">
                     < Accueil</p>

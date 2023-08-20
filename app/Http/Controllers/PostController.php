@@ -108,20 +108,23 @@ class PostController extends Controller
         $postRequest = $this->formulaire_traitement($request);
         $post = Post::create($postRequest);
 
+        // TAGS
         if (!empty($request->tags)) {
             $tag_names = array_map('trim', explode(',', $request->tags)); //On sépare par les virgules et on enlève les espaces devant et derrière chaque string
 
             foreach($tag_names as $tag_name){
-                $tag = Tag::where(DB::raw('lower(name)'), strtolower($tag_name));
-
-                if (!$tag->exists()) {//Si le tag n'existe pas, on le créé
-                    Tag::create([                        
-                        'name' => ucfirst(strtolower($tag_name)),
-                        'couleur' => self::stringToColorCode(strtolower($tag_name))
-                    ]);
+                if($tag_name != ""){
+                    $tag = Tag::where(DB::raw('lower(name)'), strtolower($tag_name));
+    
+                    if (!$tag->exists()) {//Si le tag n'existe pas, on le créé
+                        Tag::create([                        
+                            'name' => ucfirst(strtolower($tag_name)),
+                            'couleur' => self::stringToColorCode(strtolower($tag_name))
+                        ]);
+                    }
+    
+                    $post->tags()->attach($tag->first()->id);
                 }
-
-                $post->tags()->attach($tag->first()->id);
 
             }
         }
@@ -195,12 +198,33 @@ class PostController extends Controller
         $post = Post::find($post_id);
         $post->update($traitement);
 
-        $campus_array = Site::all();
-        // Attention quand le tableau est vide
-        $campus_nbr = count($campus_array);
-        for($i = 1; $i <= $campus_nbr; $i++) {
-            $post->campus()->detach();
+        // TAGS
+        //Detach previous tags
+        $post->tags()->detach();
+        //Attach new ones
+        if (!empty($request->tags)) {
+            $tag_names = array_map('trim', explode(',', $request->tags)); //On sépare par les virgules et on enlève les espaces devant et derrière chaque string
+
+            foreach($tag_names as $tag_name){
+                if($tag_name != ""){
+                    $tag = Tag::where(DB::raw('lower(name)'), strtolower($tag_name));
+    
+                    if (!$tag->exists()) {//Si le tag n'existe pas, on le créé
+                        Tag::create([                        
+                            'name' => ucfirst(strtolower($tag_name)),
+                            'couleur' => self::stringToColorCode(strtolower($tag_name))
+                        ]);
+                    }
+    
+                    $post->tags()->attach($tag->first()->id);
+                }
+
+            }
         }
+
+        //Detach previous campus
+        $post->campus()->detach();
+        //Attach new ones
         if (!empty($request->campus_id)) {
             foreach ($request->campus_id as $id) {
                 $post->campus()->attach($id);

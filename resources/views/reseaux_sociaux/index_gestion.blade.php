@@ -14,7 +14,6 @@
 	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des réseaux sociaux</h1>
 
-        @if($gerer_reseau)
         <div class="section-content">
             <h2>Ajouter un réseau social :</h2>
             <div id="warning">
@@ -47,7 +46,6 @@
                 </div>
             </form>
         </div>
-        @endif
 
         <div class="section-content">
             <h2>Réseaux actuels:</h2>

@@ -73,9 +73,10 @@ class PostController extends Controller
 
     public function home()
     {
+        AutorisationGestion::protectionPage("gerer_post");
+
         $posts = Post::where('entite_id', session(('entite_id')))->orderBy('date_apparition', 'desc')->get();
 
-        
         return view('post.home')->with([
             'posts' => $posts,
             'gerer_post' => AutorisationGestion::gestion("gerer_post")

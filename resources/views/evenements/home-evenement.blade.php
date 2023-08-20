@@ -27,13 +27,11 @@
                 @endif
 
 
-                @if ($gerer_evenement)
-                    <div class="create-btn-container">
-                        <a href="evenement/formulaire" class="bouton tertiaire ombre_petite administrateur">
-                            <span><i class="fa-solid fa-plus"></i>Créer un évènement</span>
-                        </a>
-                    </div>
-                @endif
+                <div class="create-btn-container">
+                    <a href="evenement/formulaire" class="bouton tertiaire ombre_petite administrateur">
+                        <span><i class="fa-solid fa-plus"></i>Créer un évènement</span>
+                    </a>
+                </div>
 
                 <h2>Liste des évènements :</h2>
                 @if (count($evenements) != 0)
@@ -45,10 +43,8 @@
                                     <th>Début</th>
                                     <th>Fin</th>
                                     <th>Lieu</th>
-                                    @if ($gerer_evenement)
                                     <th>Modifier</th>
                                     <th>Supprimer</th>
-                                    @endif
 
                                     {{-- <th>Nombre de participants max</th>
                                     <th>Pour cotisants ?</th>
@@ -88,20 +84,18 @@
                                         @endif --}}
 
 
-                                        @if ($gerer_evenement)
-                                            <td>
-                                                <a href="evenement/modifier/<?= $evenement['id'] ?>" class="bouton_action"
-                                                    style="color:black; border-color:black;">
-                                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                    <span class="bouton_action warning suppression_event">
-                                                        <i class="fa-solid fa-trash fa-lg"></i>
-                                                    </span>
-                                                {{-- </a> --}}
-                                            </td>
-                                        @endif
+                                        <td>
+                                            <a href="evenement/modifier/<?= $evenement['id'] ?>" class="bouton_action"
+                                                style="color:black; border-color:black;">
+                                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                                <span class="bouton_action warning suppression_event">
+                                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                                </span>
+                                            {{-- </a> --}}
+                                        </td>
 
                                     </tr>
                                 @endforeach
@@ -208,9 +202,7 @@
             document.getElementById("gerer").innerHTML += `
             <form method="POST" action="evenement/suppression/${ events[index_event]['id']}">
                 @csrf
-                @if ($gerer_evenement)
-                    <button type="submit" name="id" value=${events[index_event]['id']} class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
-                @endif
+                <button type="submit" name="id" value=${events[index_event]['id']} class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
             </form>`;
             document.getElementById("message").innerText += " Voulez-vous vraiment supprimer : « " + events[
                 index_event]["titre"] + " » ?";

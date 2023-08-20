@@ -141,6 +141,7 @@ class EvenementController extends Controller
 
 	public function show_home()
 	{
+        AutorisationGestion::protectionPage("gerer_evenement");
 
 		$evenements = Evenement::where('entite_id', session('entite_id'))->get();
 
@@ -168,8 +169,7 @@ class EvenementController extends Controller
 		return view('evenements.home-evenement', [
 			'evenements' => $evenements,
 			'entite' => session('entite_uid'),
-			'entite_user' => $entite_user,
-			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")
+			'entite_user' => $entite_user
 		]);
 	}
 

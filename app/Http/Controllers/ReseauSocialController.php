@@ -15,6 +15,8 @@ class ReseauSocialController extends Controller
 {
     public function create()
     {
+        AutorisationGestion::protectionPage("gerer_reseau");
+
         $reseaux_sociaux_existants = ReseauSocialListe::get();
 
         $model = self::reseau_sociable_model();
@@ -22,8 +24,7 @@ class ReseauSocialController extends Controller
 
         return view('reseaux_sociaux.index_gestion', [
             'reseaux_sociaux_existants'=> $reseaux_sociaux_existants,
-            'reseaux_sociaux'=> $reseaux_sociaux,
-            'gerer_reseau' => AutorisationGestion::gestion("gerer_reseau")
+            'reseaux_sociaux'=> $reseaux_sociaux
         ]);
     }
 

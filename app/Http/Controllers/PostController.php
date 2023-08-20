@@ -48,7 +48,7 @@ class PostController extends Controller
         } else {
             $campus = Site::where('label', $site)->first();
         }
-        $posts = $campus->posts;
+        $posts = $campus->posts->sortByDesc('date_apparition');
 
         $canSeeConfidentiel = false;
         if (Auth::check()) {
@@ -75,7 +75,7 @@ class PostController extends Controller
     {
         $posts = Post::where('entite_id', session(('entite_id')))->orderBy('date_apparition', 'desc')->get();
 
-
+        
         return view('post.home')->with([
             'posts' => $posts,
             'gerer_post' => AutorisationGestion::gestion("gerer_post")

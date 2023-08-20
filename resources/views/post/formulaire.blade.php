@@ -67,6 +67,22 @@
                     <summary>
                         <h2>Options avancées</h2>
                     </summary>
+
+                    <div class="groupe card">
+                        <label class="input_groupe">
+                            <p class="labels">Tags :</p>
+                            <p class="description">Séparez les tags par des virgules (e.g. important, soirée, info)</p>
+                            @isset($post)
+                                <input type="text" name="tags" class="input" id="tags_doc"
+                                    value="{{ implode(', ', $post->tags->pluck('name')->toArray()) }}" />
+                            @endisset
+                            @empty($post)
+                                <input type="text" name="tags" class="input" id="tags_doc"
+                                    value="{{ old('tags') ?? '' }}" />
+                            @endempty
+                        </label>
+                    </div>
+
                     <div class="groupe card">
                         <label class="input_groupe">
                             <p class="titre">Rattaché à l'event :</p>

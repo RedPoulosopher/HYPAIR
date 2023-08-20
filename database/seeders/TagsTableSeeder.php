@@ -18,6 +18,10 @@ class TagsTableSeeder extends Seeder
         DB::table('tags')->insert(
             [
                 [
+                    'name' => 'IMPORTANT',
+                    'couleur' => '#BD2020'
+                ],
+                [
                     'name' => 'Soirée',
                     'couleur' => '#CCAA11'
                 ],

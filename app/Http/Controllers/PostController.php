@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 use \App\Services\AutorisationGestion;
 use App\Models\Site;
 use App\Models\Entite;
+use App\Models\Tag;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Support\Facades\Auth;
+
+use DB;
 
 class PostController extends Controller
 {
@@ -18,8 +21,6 @@ class PostController extends Controller
     static function stringToColorCode($str)
     {
         $code = crc32($str);
-
-        if (strtolower($str) == 'important') return '#bd2020';
 
         $color = self::$tag_colors[$code % count(self::$tag_colors)];
 
@@ -105,6 +106,24 @@ class PostController extends Controller
         AutorisationGestion::protectionPage('gerer_post');
         $postRequest = $this->formulaire_traitement($request);
         $post = Post::create($postRequest);
+
+        if (!empty($request->tags)) {
+            $tag_names = array_map('trim', explode(',', $request->tags)); //On sépare par les virgules et on enlève les espaces devant et derrière chaque string
+
+            foreach($tag_names as $tag_name){
+                $tag = Tag::where(DB::raw('lower(name)'), strtolower($tag_name));
+
+                if (!$tag->exists()) {//Si le tag n'existe pas, on le créé
+                    Tag::create([                        
+                        'name' => ucfirst(strtolower($tag_name)),
+                        'couleur' => self::stringToColorCode(strtolower($tag_name))
+                    ]);
+                }
+
+                $post->tags()->attach($tag->first()->id);
+
+            }
+        }
 
         if (!empty($request->campus_id)) {
             foreach ($request->campus_id as $id) {

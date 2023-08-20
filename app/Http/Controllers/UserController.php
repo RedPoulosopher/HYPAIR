@@ -29,9 +29,14 @@ class UserController extends Controller
       $membres = $user->membres_actuel;
       foreach ($membres as $membre) {
         $entite = $membre->entite;
-        $gerer_entite = AutorisationGestion::gestion_dans_entite("gerer_entite", $entite);
+        $admin = AutorisationGestion::gestion_dans_entite("gerer_post", $entite)
+              || AutorisationGestion::gestion_dans_entite("gerer_entite", $entite)
+              || AutorisationGestion::gestion_dans_entite("gerer_evenement", $entite)
+              || AutorisationGestion::gestion_dans_entite("gerer_membre", $entite)
+              || AutorisationGestion::gestion_dans_entite("gerer_reseau", $entite);
+              // TODO : Ajouter les autres droits lorsque les boutons pour la docu, les tickets et les projets seront faits
 
-        if($gerer_entite == 1)
+        if($admin)
           array_push($entites_admin, $entite);
         else
           array_push($entites_membre, $entite);

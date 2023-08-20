@@ -168,6 +168,23 @@
         //remplissage
         test_mois_courant()
         remplissage(annee, mois)
+        if(mois_courant){
+            scrollToToday();
+        }
+
+        function scrollToToday(){
+            const y = document.getElementById("today").getBoundingClientRect().top - el_calendrier.getBoundingClientRect().top - 15;
+            el_calendrier.scroll({
+                top: y,
+                behavior: 'smooth'
+            });
+        }
+        function scrollToTop(){
+            el_calendrier.scroll({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
 
         function test_mois_courant() {
             if (mois == mois_actuel && annee == annee_actuelle) {
@@ -294,6 +311,12 @@
                         console.log(arguments);
                     }
                 });
+            }
+
+            if(mois_courant){
+                scrollToToday();
+            }else{
+                scrollToTop();
             }
         }
 

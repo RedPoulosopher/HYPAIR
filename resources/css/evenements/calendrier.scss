@@ -90,10 +90,9 @@
 
 .evenement:hover {
     z-index: 2;
-    box-shadow: 0 0 10px 0 rgb(127, 127, 127, .25);
+    box-shadow: 0 0 10px 0 rgb(127, 127, 127, 0.25);
     filter: brightness(1.1);
 }
-
 
 .non_valide {
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='rgba(255, 0, 0, 0.55)' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
@@ -104,7 +103,6 @@
 }
 
 @media (max-width: 768px) {
-
     /*FAIRE POPUP*/
     #calendrier {
         grid-template-columns: repeat(1, 1fr);
@@ -155,5 +153,11 @@
 
     #info .retour {
         font-size: 0.8em;
+    }
+}
+
+@media (max-width: 615px) {
+    #main-content #boutons {
+        margin-top: 50px;
     }
 }

@@ -5,6 +5,7 @@
 @pushonce('styles')
     <link rel="stylesheet" href="{{ mix('/css/evenements/calendrier.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/components/switch-campus.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')
@@ -15,8 +16,9 @@
     </head>
 
     <main id="main-content">
+        <x-calendrier-switch-campus :campus="$site"></x-calendrier-switch-campus>
 
-        @if(Auth::check())
+        @if (Auth::check())
             <div id="boutons">
                 <p id="retour" class="bouton secondaire ombre_petite" style="width:100px;">
                     < Accueil</p>
@@ -53,18 +55,18 @@
                     <div class="documentation card">
                         <p class="bouton secondaire ombre_petite info_bouton retour">
                             < Retour</p>
-                        
-                        <div class="contenu_doc" id="contenu_doc">
-                            <h1 id="titre"></h1>
-                            <p id="organisateur"><em>Organisateur :</em> </p>
-                            <p id="description"><em>Description :</em> </p>
-                            <p id="lieu"><em>Lieu :</em> </p>
-                            <p id="heure_debut"><em>Heure de début :</em> </p>
-                            <p id="heure_fin"><em>Heure de fin :</em> </p>
-                        </div>
-                        
-                        <div id="gerer" style="display:flex;">
-                        </div>
+
+                                <div class="contenu_doc" id="contenu_doc">
+                                    <h1 id="titre"></h1>
+                                    <p id="organisateur"><em>Organisateur :</em> </p>
+                                    <p id="description"><em>Description :</em> </p>
+                                    <p id="lieu"><em>Lieu :</em> </p>
+                                    <p id="heure_debut"><em>Heure de début :</em> </p>
+                                    <p id="heure_fin"><em>Heure de fin :</em> </p>
+                                </div>
+
+                                <div id="gerer" style="display:flex;">
+                                </div>
                     </div>
                 </div>
             </div>
@@ -76,6 +78,7 @@
     <script>
         events = {!! json_encode($events) !!}
         evenements_prives = {!! json_encode($evenements_prives) !!}
+        site = {!! json_encode($site) !!}
 
         el_calendrier = document.getElementById("calendrier");
 
@@ -114,12 +117,14 @@
                 for (var i = 1; i <= nbr_jours_dans_mois; i++) {
                     //condition pour colorier la date d aujourd hui sur le calendrier
                     if (mois_courant && i == jour_actuel) {
-                        el_calendrier.innerHTML += ("<div class='jour' id='today' num_jour='" + i + "''><div class='num-jour'>" + i +
+                        el_calendrier.innerHTML += ("<div class='jour' id='today' num_jour='" + i +
+                            "''><div class='num-jour'>" + i +
                             "</div></div>");
                         document.getElementById("today").style.cssText =
                             'border: 1px solid var(--couleur_accentuation); box-shadow: 0 0 7px; background-color:rgba(127,127,127,0.30)';
                     } else {
-                        el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''><div class='num-jour'>" + i + "</div></div>");
+                        el_calendrier.innerHTML += ("<div class='jour' num_jour='" + i + "''><div class='num-jour'>" + i +
+                            "</div></div>");
 
                     }
                 }
@@ -256,7 +261,7 @@
             if (entite === "") {
                 jQuery.ajax({
                     type: "GET",
-                    url: "calendrier/index_mois_json_general/" + annee + "-" + mois,
+                    url: "/calendrier/index_mois_json_general/" + annee + "-" + mois + '/' + site,
                     success: (data) => {
                         result_mois = mois % 12;
                         afficher_mois_annee(result_mois);
@@ -394,13 +399,15 @@
         function afficher_informations_supplementaires(index_evenement, evenements) {
             refresh();
 
-            document.getElementById("gerer").innerHTML += `<a href="/${evenements[index_evenement]['uid']}/entite/evenement/${evenements[index_evenement]['slug']}" class="secondaire bouton bouton_action ombre_petite" style="margin:15px; color:black; border-color:black;">Détails</a>`;
+            document.getElementById("gerer").innerHTML +=
+                `<a href="/${evenements[index_evenement]['uid']}/entite/evenement/${evenements[index_evenement]['slug']}" class="secondaire bouton bouton_action ombre_petite" style="margin:15px; color:black; border-color:black;">Détails</a>`;
 
             document.getElementById("titre").innerHTML += evenements[index_evenement]["titre"];
             document.getElementById("organisateur").innerHTML += evenements[index_evenement]["nom"];
             document.getElementById("description").innerHTML += evenements[index_evenement]["description"];
             document.getElementById("lieu").innerHTML += evenements[index_evenement]["lieu"];
-            document.getElementById("heure_debut").innerHTML += evenements[index_evenement]["temps_debut"].substring(10,16);
+            document.getElementById("heure_debut").innerHTML += evenements[index_evenement]["temps_debut"].substring(10,
+                16);
             document.getElementById("heure_fin").innerHTML += evenements[index_evenement]["temps_fin"].substring(10, 16);
 
             document.getElementById("info").classList.add("visible");

@@ -44,14 +44,14 @@ Route::get('/add-media', function () {
 
 // Route::get('/', [PostController::class, 'accueil']);
 // Attention à l'orthographe des campus (uid)
-Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alencon']);
+Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']);
 
 Route::get('/entites', function () {
     // return view('entite.choix_site'); 
     return redirect('entites/douai');
 })->name('racine');
 
-Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valenciennes|dunkerkes']); // liste de toutes les entités d'un site de l'école (e.g. Douai)
+Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']); // liste de toutes les entités d'un site de l'école (e.g. Douai)
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/connexion', 'connexion')->name("connexion");
@@ -274,11 +274,11 @@ $routes_entites = function () {
 
 //Important !
 Route::controller(CalendrierController::class)->group(function () {
-    Route::get('/calendrier/{site?}', 'calendrier_general')->where(['site' => 'douai|lille|valenciennes|dunkerque|alencon']);
+    Route::get('/calendrier/{site?}', 'calendrier_general')->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']);
     Route::post('/calendrier/validation', 'validation');
     Route::post('/calendrier/invalidation', 'invalidation');
     Route::post('/calendrier/suppression', 'suppression');
-    Route::get('/calendrier/index_mois_json_general/{annee}-{mois}', 'calendrier_index_json_general');
+    Route::get('/calendrier/index_mois_json_general/{annee}-{mois}/{site?}', 'calendrier_index_json_general')->where(['site' => 'douai|lille|valenciennes|dunkerque|alencon']);
 });
 
 Route::controller(LocalAuthController::class)->group(function () {

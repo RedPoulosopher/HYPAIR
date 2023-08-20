@@ -17,7 +17,7 @@ class Site extends Model
     }
     public function evenements()
     {
-        return $this->belongsToMany(Evenement::class, SiteEvenement::class);
+        return $this->belongsToMany(Evenement::class, 'sites_evenements');
     }
     public function posts()
     {

@@ -42,7 +42,6 @@ class Evenement extends Model
     }
 
 
-    // Vieille fonction
     public static function index($annee, $mois)
     {
         //ca doit retourner tous les evenements de l annee et du mois demandes. Faudra regarder la doc sur eloquent

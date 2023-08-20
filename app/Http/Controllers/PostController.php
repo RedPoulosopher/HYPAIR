@@ -237,7 +237,7 @@ class PostController extends Controller
     public function delete(Request $request)
     {
         $post_id = $request->route('id');
-        AutorisationGestion::protectionPage("gerer_evenement");
+        AutorisationGestion::protectionPage("gerer_post");
         $post = Post::find($post_id)->delete();
         return redirect(session('entite_uid') . "/entite/post");
     }

@@ -8,8 +8,9 @@ use App\Http\Controllers\PostController;
 
     <div class="header" style="{{count($post->tags) > 0 ? '' : 'grid-template-rows: 1fr; row-gap: 0;'}}">
 
-        <img class="thumbnail" src="{{$post->entite->logo_url("petit")}}" alt="Logo {{$post->entite->nom}}">
-
+        <a href="{{ $post->entite->lien_relatif() }}" class="thumbnail">
+            <img src="{{$post->entite->logo_url("petit")}}" alt="Logo {{$post->entite->nom}}">
+        </a>
         <div class="details">
             <a href="/{{ $post->entite->uid }}/entite/post/{{ $post->id }}"><h2>{{ $post->titre }}</h2></a>
             <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>Il y a {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>

@@ -16,13 +16,16 @@
         grid-template-columns: auto 1fr auto;
         grid-template-rows: repeat(2, auto);
 
-        .thumbnail {
-            border-radius: 200px;
-            width: 75px;
-            height: 75px;
+        a.thumbnail {
             grid-row: span 2;
             grid-column: 1;
             margin-right: 20px;
+
+            img {
+                border-radius: 200px;
+                width: 75px;
+                height: 75px;
+            }
         }
 
         .details {

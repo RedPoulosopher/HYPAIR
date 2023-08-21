@@ -20,8 +20,6 @@
         <x-calendrier-switch-campus :campus="$site"></x-calendrier-switch-campus>
 
             <div id="boutons">
-                <p id="retour" class="bouton secondaire ombre_petite" style="width:100px;">
-                    < Accueil</p>
                         <p id="fleche-gauche" class="icon-container"> <i class="fa-solid fa-arrow-left fa-xl"></i> </p>
                         <h1 id="date" style="text-align:center;"></h1>
                         <p id="fleche-droite" class="icon-container"> <i class="fa-solid fa-arrow-right fa-xl"></i> </p>

@@ -22,56 +22,65 @@
         <h1><span class="icon-people"></span> Gestion des réseaux sociaux</h1>
         {{-- ancien bouton retour ci-dessous, a enlever lorsde l'ajout des breadcrumbs --}}
         {{-- <a href="/home" class="bouton secondaire">< Retour au profil</a> --}}
+        
+        <div class="section-content">
+            <form method="POST">
+                @csrf
+                <div class="groupe card">
+                    <label class="input_groupe">
+                        <p class="titre"><span style="color:var(--couleur_accentuation);">*</span> Réseau social :</p>
+                        <select name="reseaux_sociaux_liste_id" id="reseaux_sociaux_liste" class="input" spellcheck="false" required>
+                            <option selected disabled></option>
+                            @foreach ($reseaux_sociaux_existants as $reseau_social)
+                                <option value="{{ $reseau_social->id }}" pre_url="{{ $reseau_social->pre_url }}">{{ $reseau_social->nom }}</option>
+                            @endforeach
+                        </select>
+                    </label>
     
-        <form method="POST">
-            @csrf
-            <div class="groupe card">
-                <label class="input_groupe">
-                    <p class="titre"><span style="color:var(--couleur_accentuation);">*</span> Réseau social :</p>
-                    <select name="reseaux_sociaux_liste_id" id="reseaux_sociaux_liste" class="input" spellcheck="false" required>
-                        <option selected disabled></option>
-                        @foreach ($reseaux_sociaux_existants as $reseau_social)
-                            <option value="{{ $reseau_social->id }}" pre_url="{{ $reseau_social->pre_url }}">{{ $reseau_social->nom }}</option>
-                        @endforeach
-                    </select>
-                </label>
-
-                <label class="input_groupe">
-                    <p class="titre"><span style="color:var(--couleur_accentuation);">*</span> Lien :</p>
-                    <div style="display:flex;gap:10px;align-items:center;">
-                        <span class="pre_url" style="display:none;"></span>
-                        <input type="text" name="cle" id="cle" class="input"/>
+                    <label class="input_groupe">
+                        <p class="titre"><span style="color:var(--couleur_accentuation);">*</span> Lien :</p>
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <span class="pre_url" style="display:none;"></span>
+                            <input type="text" name="cle" id="cle" class="input"/>
+                        </div>
+                    </label>
+                    <div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; align-items:flex-start; margin-top:15px; color:var(--couleur_police_secondaire);">
+                        <div style="flex-grow:1; flex-basis:20ch;">
+                            <p>Vous ne pouvez avoir qu'un seul réseau social de chaque type.</p>
+                            <p>Pour supprimer un réseau social, laissez le lien vide, et appuyez sur <i>Supprimer</i></p>
+                        </div>
+                        <button type="submit" class="bouton primaire" style="margin-left:auto; margin-top:auto;">AJOUTER</span></button>
                     </div>
-                </label>
-                <div style="display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; align-items:flex-start; margin-top:15px; color:var(--couleur_police_secondaire);">
-                    <div style="flex-grow:1; flex-basis:20ch;">
-                        <p>Vous ne pouvez avoir qu'un seul réseau social de chaque type.</p>
-                        <p>Pour supprimer un réseau social, laissez le lien vide, et appuyez sur <i>Supprimer</i></p>
-                    </div>
-                    <button type="submit" class="bouton primaire" style="margin-left:auto; margin-top:auto;">AJOUTER</span></button>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
 
-        <div class="table card">
-            <table id="index">
-                <thead>
-                    <tr>
-                        <th width="35%">Nom</th>
-                        <th>Lien</th>
-                        <th width="5%">-</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($reseaux_sociaux as $reseau_social)
-                        <tr class="ligne_membre">
-                            <td>{{$reseau_social->liste->nom}}</td>
-                            <td class="lien"><a class="couleur" href="{{$reseau_social->liste->pre_url.$reseau_social->cle}}">{{$reseau_social->liste->pre_url.$reseau_social->cle}}</a></td>
-                            <td><a class="modifier_reseau_social icon-edit-2" reseau_social_liste_id="{{ $reseau_social->liste->id }}" cle="{{ $reseau_social->cle }}" title="modifier"></a></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="section-content">
+            <h2>Réseaux actuels :</h2>
+            @if(count($reseaux_sociaux) > 0)
+                <div class="table card">
+                    <table id="index">
+                        <thead>
+                            <tr>
+                                <th width="35%">Nom</th>
+                                <th>Lien</th>
+                                <th width="5%">-</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($reseaux_sociaux as $reseau_social)
+                                <tr class="ligne_membre">
+                                    <td>{{$reseau_social->liste->nom}}</td>
+                                    <td class="lien"><a class="couleur" href="{{$reseau_social->liste->pre_url.$reseau_social->cle}}">{{$reseau_social->liste->pre_url.$reseau_social->cle}}</a></td>
+                                    <td><a class="modifier_reseau_social icon-edit-2" reseau_social_liste_id="{{ $reseau_social->liste->id }}" cle="{{ $reseau_social->cle }}" title="modifier"></a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+            <p class="no-content">Aucun réseau social pour le moment</p>
+            @endif
         </div>
     
     </section>

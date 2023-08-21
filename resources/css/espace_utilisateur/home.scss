@@ -64,9 +64,8 @@
 
 
     #promo-campus {
-        grid-row: 2;
-        grid-column: 1 / span 3;
         display: flex;
+        justify-content: center;
         gap: 15px;
 
         p {

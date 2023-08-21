@@ -65,7 +65,6 @@
 
     #promo-campus {
         display: flex;
-        justify-content: center;
         gap: 15px;
 
         p {
@@ -195,6 +194,10 @@
     }
 
     .reseaux_sociaux {
+        justify-content: center;
+    }
+
+    #promo-campus {
         justify-content: center;
     }
 }

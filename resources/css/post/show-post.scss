@@ -11,6 +11,7 @@ section {
             cursor: pointer;
         }
 
+
         .header {
             .thumbnail {
                 display: flex;
@@ -25,14 +26,21 @@ section {
             .title {
                 margin: 15px 0 10px;
                 text-align: center;
+
+                &::first-letter {
+                    text-transform: capitalize;
+                }
             }
 
             &>p {
-                text-align: center;
                 font-weight: var(--fw-light);
                 color: var(--couleur_police_secondaire);
                 font-size: 1em;
-                margin: 0 0 5px;
+                margin: 0 0 8px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
                 .separator {
                     color: var(--couleur_police_secondaire);
@@ -48,8 +56,13 @@ section {
                     i {
                         color: var(--confidentiel-color);
                         margin-right: 8px;
-                        font-size: 14px;
                     }
+                }
+
+                i {
+                    color: var(--couleur_police_secondaire);
+                    font-size: 13px;
+                    margin-right: 10px;
                 }
             }
 

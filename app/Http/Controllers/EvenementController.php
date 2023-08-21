@@ -131,9 +131,20 @@ class EvenementController extends Controller
 			abort(403);
 		}
 
+		$entite = Entite::where('id', $evenement->entite_id);
+
+        if (!$entite->exists()) {
+			abort(404);
+		}
+
+		$entite = $entite->first();
+		if ($entite["confidentialite"] > $niveau_administration) {
+			abort(403);
+		}
+
 		return view('evenements.show-evenement', [
 			'evenement' => $evenement,
-			'entite_uid' => session('entite_uid'),
+			'entite' => $entite,
 			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")
 		]);
 	}

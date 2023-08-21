@@ -1,52 +1,8 @@
-h1.titre {
-    margin-block-start: 0;
-    text-decoration: underline;
-    text-decoration-color: var(--couleur_accentuation);
-}
-
-h1.titre::first-letter {
-    text-transform: capitalize;
-}
-
 .documentation p {
     font-weight: var(--fw-light);
-    margin: 0;
-
-    &:not(:last-child) {
-        margin: 0 0 12px;
-    }
 
     em {
         display: inline-block;
         margin-right: 8px;
-    }
-
-    text-align: justify;
-}
-
-#confidentiel {
-    text-align: center;
-    font-weight: var(--fw-medium);
-    color: var(--confidentiel-color);
-    margin-bottom: 20px;
-
-    i {
-        color: var(--confidentiel-color);
-        margin-right: 8px;
-        font-size: 14px;
-    }
-}
-
-.documentation.card {
-    position: relative;
-    padding-right: 65px;
-
-    #share-btn {
-        color: var(--couleur_police_secondaire);
-        position: absolute;
-        top: calc(25px - 15px);
-        right: calc(35px - 15px);
-        padding: 15px;
-        cursor: pointer;
     }
 }

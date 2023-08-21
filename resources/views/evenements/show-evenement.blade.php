@@ -3,6 +3,7 @@
 @section('titre', $evenement->titre)
 
 @pushonce('styles')
+<link rel="stylesheet" href="{{ mix('/css/post/show-post.css') }}" type="text/css" >
 <link rel="stylesheet" href="{{ mix('/css/evenements/show-evenement.css') }}" type="text/css" >
 <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
 @endpushonce
@@ -31,35 +32,51 @@
 		<div class="documentation card">				
 			<i id="share-btn" class="fa-solid fa-arrow-up-right-from-square"></i>
 	
-			@if($evenement->confidentiel)
+			{{-- @if($evenement->confidentiel)
 				<p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager" class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>
-			@endif
-			
-			<p><em>Nom de l'évènement :</em> {{$evenement->titre}}</p>
+			@endif --}}
 
 			@php
 			setlocale(LC_TIME, 'fr_FR', 'fra'); 
 			@endphp
 
-			<p><em>Description :</em> {{$evenement->description}}</p>
-			<p><em>Début :</em> {{ucwords(utf8_encode(strftime("%A %d %B - %H:%M", strtotime($evenement->temps_debut))))}}</p>
-			<p><em>Fin :</em> {{ucwords(utf8_encode(strftime("%A %d %B - %H:%M", strtotime($evenement->temps_fin))))}}</p>
-			<p><em>Lieu :</em> {{$evenement->lieu}}</p>
-			<p><em>Nombre de personnes max :</em> {{$evenement->max_participation}}</p>
-			<p><em>Confidentialité :</em> 
-				@if ($evenement['confidentialite'] == 0)                          
-				Public
-				@elseif ($evenement['confidentialite'] == 1)
-				Membres de l'assos
-				@elseif ($evenement['confidentialite'] == 2)
-				Responsables & bureau
-				@elseif ($evenement['confidentialite'] == 3)
-				Bureau
-				@elseif ($evenement['confidentialite'] == 4)
-				Prez & vice-prez
+			<div class="header">
+				<div class="thumbnail"><img src="{{session('entite_logo_petit')}}" alt="Logo {{$entite->nom}}"></div>
+				<h1 class="title">{{$evenement->titre}}</h1>
+				@if($evenement->confidentiel != 0)
+					<p id="confidentiel" title="Cet évènement n'est visible que pour votre campus. Ne pas partager" class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement est confidentiel</p>
 				@endif
-			</p>
-			<p><em>Campus concerné{{count($evenement->campus) > 0 ? 's' : ''}} :</em> {{ ucwords(implode(", ", $evenement->campus->pluck('label')->toArray())) }}</p>
+				@if(strftime("%A %d %B", strtotime($evenement->temps_debut)) == strftime("%A %d %B", strtotime($evenement->temps_fin))) {{-- Si début et fin le même jour --}}
+					<p><i class="fa-regular fa-calendar"></i>{{ ucwords(utf8_encode(strftime("%A %d %B de %H:%M", strtotime($evenement->temps_debut)))) . ' à ' . utf8_encode(strftime("%H:%M", strtotime($evenement->temps_fin)))}}</p>
+				@else
+					<p><i class="fa-regular fa-calendar-check"></i>{{ str_replace('X', 'à', ucwords(utf8_encode(strftime("%A %d %B X %H:%M", strtotime($evenement->temps_debut)))))}}</p>
+					<p><i class="fa-regular fa-calendar-xmark"></i>{{ str_replace('X', 'à', ucwords(utf8_encode(strftime("%A %d %B X %H:%M", strtotime($evenement->temps_fin))))) }}</p>
+				@endif
+				<p><i class="fa-solid fa-location-dot"></i>{{ $evenement->lieu }}</p>
+			</div>				
+			
+			{{-- <p><em>Nom de l'évènement :</em> {{$evenement->titre}}</p> --}}
+
+
+			<div class="description">
+
+				<p><em>Description :</em> {{$evenement->description}}</p>
+				<p><em>Nombre de personnes max :</em> {{$evenement->max_participation}}</p>
+				{{-- <p><em>Confidentialité :</em> 
+					@if ($evenement['confidentialite'] == 0)                          
+					Public
+					@elseif ($evenement['confidentialite'] == 1)
+					Membres de l'assos
+					@elseif ($evenement['confidentialite'] == 2)
+					Responsables & bureau
+					@elseif ($evenement['confidentialite'] == 3)
+					Bureau
+					@elseif ($evenement['confidentialite'] == 4)
+					Prez & vice-prez
+					@endif
+				</p> --}}
+				<p><em>Campus concerné{{count($evenement->campus) > 0 ? 's' : ''}} :</em> {{ ucwords(implode(", ", $evenement->campus->pluck('label')->toArray())) }}</p>
+			</div>
 		</div>
 	</section>
 </main>

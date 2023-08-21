@@ -30,8 +30,8 @@ use App\Http\Controllers\PostController;
 		</div>
 
 		<div class="documentation card">
-			<i id="share-btn" class="fa-solid fa-share"></i>
-
+			<i id="share-btn" class="fa-solid fa-arrow-up-right-from-square"></i>
+			
 			<div class="header">
 				<div class="thumbnail"><img src="{{session('entite_logo_petit')}}" alt="Logo {{$entite->nom}}"></div>
 				<h1 class="title">{{$post->titre}}</h1>
@@ -68,17 +68,12 @@ use App\Http\Controllers\PostController;
 	}
 
 	shareBtn.addEventListener('click', ()=>{
-		if (navigator.share) {
+		if(window.matchMedia("(max-width: 710px)").matches && navigator.share) {//Montre l'API share sur mobile si possible
 			navigator.share({
-				title: 'HypAIR - {{$post->titre}}',
-				text: 'Consultez le message',
+				title: '{{$post->titre}} - HypAIR',
+				text: "[{{$post->titre}}]\nVoir sur HypAIR :",
 				url: window.location.href,
 			})
-			.then(() => console.log('Successful share'))
-			.catch(() => {
-			   copierLien();
-			}
-			);
 		}else{			
 			copierLien();
 		}

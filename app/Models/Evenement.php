@@ -34,7 +34,7 @@ class Evenement extends Model
 
     public function campus()
     {
-        return $this->belongsToMany(Site::class, 'sites_evenements');
+        return $this->belongsToMany(Site::class, 'sites_evenements')->groupBy('sites_evenements.site_id');
     }
     public function posts()
     {

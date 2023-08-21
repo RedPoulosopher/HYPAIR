@@ -129,7 +129,8 @@
                 }
 
                 // remplissage du calendrier apres la fin du mois
-                for (var i = 0; i < 7 - (nbr_jours_dans_mois + index_jour_debut) % 7; i++) {
+                console.log(nbr_jours_dans_mois + " " + index_jour_debut );
+                for (var i = 0; i <  (70 - (nbr_jours_dans_mois + index_jour_debut)) % 7; i++) {
                     el_calendrier.innerHTML += ("<div class='jour desactive'></div>");
                 }
             }

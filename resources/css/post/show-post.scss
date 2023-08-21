@@ -1,42 +1,83 @@
 section {
-    .header {
-        .thumbnail {
-            display: flex;
-            justify-content: center;
+    .documentation {
+        position: relative;
 
-            img {
-                border-radius: 1000px;
-                height: 150px;
-            }
-        }
-
-        .title {
-            margin: 15px 0 10px;
-            text-align: center;
-        }
-
-        &>p {
-            text-align: center;
-            font-weight: var(--fw-light);
+        #share-btn {
             color: var(--couleur_police_secondaire);
-            font-size: 1em;
-            margin: 0 0 5px;
+            position: absolute;
+            top: calc(25px - 15px);
+            right: calc(35px - 15px);
+            padding: 15px;
+            cursor: pointer;
+        }
 
-            .separator {
-                color: var(--couleur_police_secondaire);
-                font-weight: var(--fw-light);
-                display: inline-block;
-                width: 20px; //Same width as parent's horizontal gap
+        .header {
+            .thumbnail {
+                display: flex;
+                justify-content: center;
+
+                img {
+                    border-radius: 1000px;
+                    height: 150px;
+                }
+            }
+
+            .title {
+                margin: 15px 0 10px;
                 text-align: center;
             }
 
-            &#confidentiel {
-                color: var(--confidentiel-color);
+            &>p {
+                text-align: center;
+                font-weight: var(--fw-light);
+                color: var(--couleur_police_secondaire);
+                font-size: 1em;
+                margin: 0 0 5px;
 
-                i {
+                .separator {
+                    color: var(--couleur_police_secondaire);
+                    font-weight: var(--fw-light);
+                    display: inline-block;
+                    width: 20px; //Same width as parent's horizontal gap
+                    text-align: center;
+                }
+
+                &#confidentiel {
                     color: var(--confidentiel-color);
-                    margin-right: 8px;
-                    font-size: 14px;
+
+                    i {
+                        color: var(--confidentiel-color);
+                        margin-right: 8px;
+                        font-size: 14px;
+                    }
+                }
+            }
+
+
+
+
+
+            .tags {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                justify-content: center;
+                gap: 8px 10px;
+                margin-top: 15px;
+
+                grid-row: 2;
+                grid-column: 2;
+
+
+                .tag {
+                    display: inline-block;
+                    color: var(--couleur_police_accentuation);
+                    border-radius: 1000px;
+                    align-items: center;
+                    font-size: 13px;
+
+                    padding: 6px 12px;
+
                 }
             }
         }
@@ -44,66 +85,38 @@ section {
 
 
 
+        .description {
+            padding: 0 15px;
 
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            justify-content: center;
-            gap: 8px 10px;
-            margin-top: 15px;
-
-            grid-row: 2;
-            grid-column: 2;
-
-
-            .tag {
-                display: inline-block;
-                color: var(--couleur_police_accentuation);
-                border-radius: 1000px;
-                align-items: center;
-                font-size: 13px;
-
-                padding: 6px 12px;
-
+            &.visible {
+                display: block;
             }
-        }
-    }
 
+            &> :first-child {
+                margin-top: 15px;
+                padding-top: 15px;
+                border-top: 1px solid var(--light-grey);
+            }
 
+            a {
+                color: var(--link-color);
+                font-weight: var(--fw-medium);
+                text-decoration: underline;
+            }
 
+            img {
+                max-width: 80%;
+                max-height: 50vh;
+            }
 
-    .description {
-        padding: 0 15px;
+            p:has(img) {
+                display: flex;
+                justify-content: center;
+            }
 
-        &.visible {
-            display: block;
-        }
-
-        &> :first-child {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--light-grey);
-        }
-
-        a {
-            color: var(--link-color);
-            font-weight: var(--fw-medium);
-            text-decoration: underline;
-        }
-
-        img {
-            max-width: 80%;
-            max-height: 50vh;
-        }
-
-        p:has(img) {
-            display: flex;
-            justify-content: center;
-        }
-
-        p {
-            text-align: justify;
+            p {
+                text-align: justify;
+            }
         }
     }
 }

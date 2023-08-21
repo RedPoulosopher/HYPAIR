@@ -30,27 +30,58 @@ use App\Http\Controllers\PostController;
 		</div>
 
 		<div class="documentation card">
-			<div class="contenu_doc" id="contenu_doc">
+			<i id="share-btn" class="fa-solid fa-share"></i>
 
-				<div class="header">
-					<div class="thumbnail"><img src="{{session('entite_logo_petit')}}" alt="Logo {{$entite->nom}}"></div>
-					<h1 class="title">{{$post->titre}}</h1>
-					<p>Posté par {{$entite->nom}}<span class="separator">•</span>Il y a  {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
-					@if($post->confidentiel != 0)
-						<p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager" class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>
-					@endif
-	
-					<div class="tags">
-						@foreach($post->tags as $tag)
-							<div class="tag" style="background-color: {{$tag->couleur}};">{{$tag->name}}</div>
-						@endforeach
-					</div>
-				</div>				
+			<div class="header">
+				<div class="thumbnail"><img src="{{session('entite_logo_petit')}}" alt="Logo {{$entite->nom}}"></div>
+				<h1 class="title">{{$post->titre}}</h1>
+				<p>Posté par {{$entite->nom}}<span class="separator">•</span>Il y a  {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
+				@if($post->confidentiel != 0)
+					<p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager" class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>
+				@endif
 
-				<div class="description">{!! Str::markdown(strip_tags($post->description ?? '')) !!}</div>
-			</div>
+				<div class="tags">
+					@foreach($post->tags as $tag)
+						<div class="tag" style="background-color: {{$tag->couleur}};">{{$tag->name}}</div>
+					@endforeach
+				</div>
+			</div>				
+
+			<div class="description">{!! Str::markdown(strip_tags($post->description ?? '')) !!}</div>
 		</div>
 	</section>
 </main>
 
 @endsection
+
+@pushonce('end-scripts')
+<script>
+	shareBtn = document.getElementById("share-btn")
+
+	function copierLien(){
+		navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
+			if (result.state === "granted" || result.state === "prompt") {
+				navigator.clipboard.writeText(window.location.href);
+				alert("Lien copié dans le presse-papier ")
+			}
+		});
+	}
+
+	shareBtn.addEventListener('click', ()=>{
+		if (navigator.share) {
+			navigator.share({
+				title: 'HypAIR - {{$post->titre}}',
+				text: 'Consultez le message',
+				url: window.location.href,
+			})
+			.then(() => console.log('Successful share'))
+			.catch(() => {
+			   copierLien();
+			}
+			);
+		}else{			
+			copierLien();
+		}
+	})
+</script>
+@endpushonce

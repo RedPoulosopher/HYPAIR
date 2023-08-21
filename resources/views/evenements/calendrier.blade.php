@@ -53,8 +53,9 @@
             <div id="info" class="popup">
                 <div class="petit">
                     <div class="documentation card">
-                        <p class="bouton secondaire ombre_petite info_bouton retour">
-                            < Retour</p>
+                        {{-- <p class="bouton secondaire ombre_petite info_bouton retour">
+                            < Retour</p> --}}
+                            <span id="retour" class='icon-close-square info_bouton' tabindex="0"></span>
 
                                 <div class="contenu_doc" id="contenu_doc">
                                     <h1 id="titre"></h1>
@@ -423,7 +424,7 @@
             refresh();
 
             document.getElementById("gerer").innerHTML +=
-                `<a href="/${evenements[index_evenement]['uid']}/entite/evenement/${evenements[index_evenement]['slug']}" class="secondaire bouton bouton_action ombre_petite" style="margin:15px; color:black; border-color:black;">Détails</a>`;
+                `<a href="/${evenements[index_evenement]['uid']}/entite/evenement/${evenements[index_evenement]['slug']}" class="secondaire bouton bouton_action" style="margin-top:10px; background-color: var(--light-grey); color:var(--couleur_police_primaire); border:none;">Détails</a>`;
 
             document.getElementById("titre").innerHTML += evenements[index_evenement]["titre"];
             document.getElementById("organisateur").innerHTML += evenements[index_evenement]["nom"];

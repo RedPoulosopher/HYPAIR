@@ -1,5 +1,6 @@
 .documentation {
     width: fit-content;
+    max-width: 92vw;
     padding: 25px 35px;
     box-sizing: border-box;
 }
@@ -13,8 +14,12 @@
     justify-content: center;
 }
 
-@media screen and (max-width: 710px) {
-    .documentation {
-        padding: 25px 15px;
+.bouton {
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
     }
 }

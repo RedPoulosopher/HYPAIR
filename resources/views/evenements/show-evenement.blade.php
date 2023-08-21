@@ -97,7 +97,7 @@
 	}
 
 	shareBtn.addEventListener('click', ()=>{
-		if(navigator.share) {//Montre l'API share sur mobile si possible
+		if(window.matchMedia("(max-width: 710px)").matches && navigator.share) {//Montre l'API share sur mobile si possible
 			navigator.share({
 				title: '{{$evenement->titre}} - HypAIR',
 				text: "[Event - {{$evenement->titre}}]\nVoir sur HypAIR :",

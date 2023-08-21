@@ -71,7 +71,7 @@ use App\Http\Controllers\PostController;
 		if(window.matchMedia("(max-width: 710px)").matches && navigator.share) {//Montre l'API share sur mobile si possible
 			navigator.share({
 				title: '{{$post->titre}} - HypAIR',
-				text: "[{{$post->titre}}]\nVoir sur HypAIR :",
+				text: "[Post - {{$post->titre}}]\nVoir sur HypAIR :",
 				url: window.location.href,
 			})
 		}else{			

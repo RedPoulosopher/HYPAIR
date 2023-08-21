@@ -36,3 +36,17 @@ h1.titre::first-letter {
         font-size: 14px;
     }
 }
+
+.documentation.card {
+    position: relative;
+    padding-right: 65px;
+
+    #share-btn {
+        color: var(--couleur_police_secondaire);
+        position: absolute;
+        top: calc(25px - 15px);
+        right: calc(35px - 15px);
+        padding: 15px;
+        cursor: pointer;
+    }
+}

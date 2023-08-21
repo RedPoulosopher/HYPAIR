@@ -194,11 +194,6 @@
             }
         }
 
-        // Redirection bouton retour
-        document.getElementById("retour").onclick = function() {
-            location.href = "/";
-        };
-
         entite = {!! json_encode($entite) !!}
         //place les events dans le calendrier
         function event_dans_calendrier(evenements, mois, annee) {

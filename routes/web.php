@@ -42,6 +42,10 @@ Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });
 
+Route::get('/a-propos', function () {
+    return view('a_propos');
+});
+
 // Route::get('/', [PostController::class, 'accueil']);
 // Attention à l'orthographe des campus (uid)
 Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']);

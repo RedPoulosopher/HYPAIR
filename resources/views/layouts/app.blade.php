@@ -5,11 +5,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="HypAIR est le site associatif de l'IMT Nord Europe développé par l'AIR. Il regroupe l'ensemble des informations dont vous avez besoin en tant qu'étudiant !" />
+    <meta name="description"
+        content="HypAIR est le site associatif de l'IMT Nord Europe développé par l'AIR. Il regroupe l'ensemble des informations dont vous avez besoin en tant qu'étudiant !" />
     <title>@yield('titre', 'Site Web') - HypAIR</title>
 
     @include('pwa.meta')
-    
+
     <link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/importants/layout-without-sidebar.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/importants/layout.css') }}" type="text/css" />
@@ -41,8 +42,9 @@
         <x-navbar :isConnected="false" :user="[]" />
     @endif
 
-    @if(Auth::check() && (Auth::user()->promo == NULL || count(Auth::user()->campus) == 0)) {{-- Si pas de promo ou pas de campus --}}
-        <x-select-promo-campus-popup/>
+    @if (Auth::check() && (Auth::user()->promo == null || count(Auth::user()->campus) == 0))
+        {{-- Si pas de promo ou pas de campus --}}
+        <x-select-promo-campus-popup />
     @endif
 
     {{-- Contenu de la page --}}
@@ -60,9 +62,10 @@
                     $comingEvents = EvenementController::comingEvents();
                 @endphp
 
-                @if(Auth::check() && count($comingEvents) > 0)
+                @if (Auth::check() && count($comingEvents) > 0)
                     @foreach ($comingEvents as $comingEvent)
-                        <x-coming-event :title="$comingEvent->titre" :start="$comingEvent->temps_debut" :end="$comingEvent->temps_fin" :entite="$comingEvent->entite_nom" :uid="$comingEvent->uid" :slug="$comingEvent->slug"/>
+                        <x-coming-event :title="$comingEvent->titre" :start="$comingEvent->temps_debut" :end="$comingEvent->temps_fin" :entite="$comingEvent->entite_nom"
+                            :uid="$comingEvent->uid" :slug="$comingEvent->slug" />
                     @endforeach
                     <a id="voir-plus" href="/calendrier">Voir plus</a>
                 @elseif(Auth::check())

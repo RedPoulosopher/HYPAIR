@@ -13,7 +13,7 @@
 
 <script>
     var x, i, j, l, ll, selElmnt, a, b, c;
-    const campus = ['douai', 'lille', 'douai', 'douai', 'douai'];
+    const campus = ['douai', 'lille', 'valenciennes', 'dunkerque', 'alençon'];
     /* Look for any elements with the class "custom-select": */
     x = document.getElementsByClassName("switch-campus");
     l = x.length;

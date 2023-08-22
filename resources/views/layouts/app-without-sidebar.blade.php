@@ -5,13 +5,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="HypAIR est le site associatif de l'IMT Nord Europe développé par l'AIR. Il regroupe l'ensemble des informations dont vous avez besoin en tant qu'étudiant !" />
+    <meta name="description"
+        content="HypAIR est le site associatif de l'IMT Nord Europe développé par l'AIR. Il regroupe l'ensemble des informations dont vous avez besoin en tant qu'étudiant !" />
     <title>@yield('titre', 'Site Web') - HypAIR</title>
 
     @include('pwa.meta')
-    
-    <link rel="stylesheet" href="{{ mix("/css/default.css") }}" type="text/css"/>
-    <link rel="stylesheet" href="{{ mix("/css/importants/layout-without-sidebar.css") }}" type="text/css"/>
+
+    <link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/importants/layout-without-sidebar.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/components/select-promo-campus-popup.css') }}">
     @stack('styles')
 </head>
@@ -40,8 +41,9 @@
         <x-navbar :isConnected="false" :user="[]" />
     @endif
 
-    @if(Auth::check() && (Auth::user()->promo == NULL || count(Auth::user()->campus) == 0)) {{-- Si pas de promo ou pas de campus --}}
-        <x-select-promo-campus-popup/>
+    @if (Auth::check() && (Auth::user()->promo == null || count(Auth::user()->campus) == 0))
+        {{-- Si pas de promo ou pas de campus --}}
+        <x-select-promo-campus-popup />
     @endif
 
     {{-- Contenu de la page --}}
@@ -50,7 +52,7 @@
         @yield('content')
 
         <footer>
-            Fait avec amour par l’AIR - Tous droits réservés
+            <a href="/a-propos">Fait avec amour par l'AIR - Tous droits réservés</a>
         </footer>
     </div>
 

@@ -1,0 +1,23 @@
+article {
+    padding: 10px 20px 10px 20px;
+
+    p {
+        font-size: 1.2rem;
+        text-align: justify;
+
+        a {
+            color: var(--couleur_accentuation);
+            transition: all 0.2s ease;
+
+            &:hover {
+                color: var(--couleur_accentuation_air_light);
+            }
+        }
+    }
+}
+
+@media (max-width: 615px) {
+    article p {
+        font-size: 0.8rem;
+    }
+}

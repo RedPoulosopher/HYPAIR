@@ -23,10 +23,13 @@ class SitesSeeder extends Seeder
                 'label' => 'lille'
             ],
             [
-                'label' => 'valancienne'
+                'label' => 'valenciennes'
             ],
             [
                 'label' => 'dunkerque'
+            ],
+            [
+                'label' => 'alençon'
             ],
         ]);
     }

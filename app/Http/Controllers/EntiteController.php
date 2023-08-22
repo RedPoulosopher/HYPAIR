@@ -12,7 +12,9 @@ use \App\Models\Site;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
+use Illuminate\Support\Facades\Auth;
 
+use \App\Services\AutorisationGestion;
 use App\Services\GestionPhotoDeProfil;
 
 use Carbon\Carbon;
@@ -28,7 +30,7 @@ class EntiteController extends Controller
 
 		$mandat = $entite->mandat()->get();
 
-		foreach($mandat as &$mandat_user){
+		foreach ($mandat as &$mandat_user) {
 			$mandat_user["lien_photo"] = GestionPhotoDeProfil::chemin_membre_photo($mandat_user);
 			$mandat_user["user_info"] = $mandat_user->user()->first();
 			$mandat_user["lien_photo_utilisateur"] = GestionPhotoDeProfil::chemin_utilisateur_photo($mandat_user["user_info"]);
@@ -42,11 +44,6 @@ class EntiteController extends Controller
 			->with('reseaux_sociaux', $reseaux_sociaux);
 	}
 
-	public function mes_entites()
-	{
-		return view('entite.mes_entites');
-	}
-
 	public function gestion(Request $request)
 	{
 		$entite = Entite::existe(session('entite_id'));
@@ -55,7 +52,7 @@ class EntiteController extends Controller
 			->with('entite', $entite);
 	}
 
-    public function create() //réservé à l'AIR
+	public function create() //réservé à l'AIR
 	{
 		$sites = Site::all();
 		return view('entite.creer')->with('sites', $sites);
@@ -64,9 +61,9 @@ class EntiteController extends Controller
 	public function store(Request $request) //réservé à l'AIR
 	{
 		$this->validate($request, [
-			'sites' => ['filled','array',Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes'])],
-			'nom' => ['filled','max:120'],
-			'uid' => ['filled','max:30'],
+			'sites' => ['filled', 'array', Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes'])],
+			'nom' => ['filled', 'max:120'],
+			'uid' => ['filled', 'max:30'],
 			'ratachement' => ['filled', new Enum(RatachementEnum::class)],
 			'type' => ['filled', new Enum(EntiteTypeEnum::class)],
 		]);
@@ -74,10 +71,9 @@ class EntiteController extends Controller
 		//on se moque d'avoir des doublons d'uid pour les listes
 		$entite = Entite::where('uid', $request->uid)->where('type', '!=', EntiteTypeEnum::Liste);
 
-		if($entite->exists()){
+		if ($entite->exists()) {
 			$entite = $entite->first();
-		}
-		else {
+		} else {
 			$entite = new Entite;
 			$entite->nom = $request->nom;
 			$entite->uid = $request->uid;
@@ -106,18 +102,18 @@ class EntiteController extends Controller
 	{
 		$entite = Entite::existe($request->route('entite_id'));
 
-		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
+		$request->categories = array_map('strtolower', array_map('trim', explode(",", $request->categories)));
 		sort($request->categories);
 		$validation = [
-			'annee_creation' => ['filled','numeric'],
-			'annee_fin' => ['nullable','numeric'],
-			'courriel' => ['nullable','max:191','email:rfc'],
-			'alias' => ['nullable','max:191','email:rfc'],
+			'annee_creation' => ['filled', 'numeric'],
+			'annee_fin' => ['nullable', 'numeric'],
+			'courriel' => ['nullable', 'max:191', 'email:rfc'],
+			'alias' => ['nullable', 'max:191', 'email:rfc'],
 		];
 		$this->validate($request, $validation);
 
-		$request->has('privee') ? $privee=true : $privee=false;
-		$request->has('ouvert') ? $ouvert=true : $ouvert=false;
+		$request->has('privee') ? $privee = true : $privee = false;
+		$request->has('ouvert') ? $ouvert = true : $ouvert = false;
 
 		$entite->privee = $request->has('privee');
 		$entite->ouvert = $request->has('ouvert');
@@ -127,14 +123,15 @@ class EntiteController extends Controller
 		$entite->alias = $request->alias;
 		$entite->save();
 
-		if($request->query('creation')){
+		if ($request->query('creation')) {
 			return redirect()->route('modifier_description', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
-			return redirect($entite->url());
+			return redirect($entite->lien_relatif());
 		}
 	}
 
-	public function modifier_description(Request $request){
+	public function modifier_description(Request $request)
+	{
 		$entite_id = $request->route('entite_id') ?? session('entite_id');
 
 		$entite = Entite::existe($entite_id);
@@ -144,16 +141,17 @@ class EntiteController extends Controller
 		return view('entite.modifier_description')->with('entite', $entite)->with('categories', $categories);
 	}
 
-	public function maj_description(Request $request){
+	public function maj_description(Request $request)
+	{
 		$entite_id = $request->route('entite_id') ?? session('entite_id');
 
 		$entite = Entite::existe($entite_id);
 
-		$request->categories = array_map('strtolower',array_map('trim',explode(",",$request->categories)));
+		$request->categories = array_map('strtolower', array_map('trim', explode(",", $request->categories)));
 		$this->validate($request, [
-			'description_courte' => ['filled','max:300'],
-			'description_md' => ['filled','min:300'],
-			'categories' => ['filled','distinct'],
+			'description_courte' => ['filled', 'max:300'],
+			'description_md' => ['filled', 'min:300'],
+			'categories' => ['filled', 'distinct'],
 		]);
 
 		$entite->description_courte = $request->description_courte;
@@ -164,7 +162,7 @@ class EntiteController extends Controller
 		sort($request->categories);
 		$entite->ajout_categories($request->categories);
 
-		if($request->query('creation')){
+		if ($request->query('creation')) {
 			return redirect()->route('modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect()->route('a_propos', ['entite_uid' => $entite->uid]);
@@ -179,15 +177,18 @@ class EntiteController extends Controller
 		$bureaux = Entite::bureaux_site($site)->get();
 
 		$comites_clubs_dependants = array();
-		foreach($bureaux as $bureau){
+		foreach ($bureaux as $bureau) {
 			$bureau_ratachement = $bureau->ratachement->value;
 			$comites_clubs_dependants[$bureau_ratachement] = $bureau->comites_clubs_dependants()->get();
 		}
 
-		return view('entite.index_site', [
-			"bureaux" => $bureaux,
-			"comites_clubs_dependants" => $comites_clubs_dependants,
-			"entites_independantes" => $entites_independantes
+		return view(
+			'entite.index_site',
+			[
+				"site" => $site,
+				"bureaux" => $bureaux,
+				"comites_clubs_dependants" => $comites_clubs_dependants,
+				"entites_independantes" => $entites_independantes
 			]
 		);
 	}
@@ -200,10 +201,12 @@ class EntiteController extends Controller
 
 		$listes_dependantes = $bureau->listes_dependantes();
 
-		return view('entite.index_bureau', [
-			"bureau" => $bureau,
-			"comites_clubs_dependants" => $comites_clubs_dependants->get(),
-			"listes_dependantes" => $listes_dependantes->get()
+		return view(
+			'entite.index_bureau',
+			[
+				"bureau" => $bureau,
+				"comites_clubs_dependants" => $comites_clubs_dependants->get(),
+				"listes_dependantes" => $listes_dependantes->get()
 			]
 		);
 	}
@@ -212,15 +215,13 @@ class EntiteController extends Controller
 	{
 		$asso_gerante = Entite::existe(session('entite_id'));
 
-		if(isset($request["type"])){
+		if (isset($request["type"])) {
 
-			if($request["type"] == EntiteTypeEnum::Bureau->value){ //seule l'AIR peut gérer les bureaux
+			if ($request["type"] == EntiteTypeEnum::Bureau->value) { //seule l'AIR peut gérer les bureaux
 				$entites_dependantes = $asso_gerante->bureaux();
-			}
-			else if($request["type"] == EntiteTypeEnum::Comite->value) {
+			} else if ($request["type"] == EntiteTypeEnum::Comite->value) {
 				$entites_dependantes = $asso_gerante->comites_clubs_dependants();
-			}
-			else if($request["type"] == EntiteTypeEnum::Liste->value){
+			} else if ($request["type"] == EntiteTypeEnum::Liste->value) {
 				$entites_dependantes = $asso_gerante->listes_dependantes();
 			}
 
@@ -231,5 +232,4 @@ class EntiteController extends Controller
 
 		return view('entite.index_admin')->with('est_bureau', $asso_gerante->type == EntiteTypeEnum::Bureau)->with('entites_dependantes', $entites_dependantes);
 	}
-
 }

@@ -1,53 +1,25 @@
-@import '../components/event.scss';
-
 /* Style relatif à l'affichage des outils et liens utiles */
 .services-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-.service {
-    border-radius: 15px;
-    margin-left: 25px;
-    margin-right: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    p {
-        text-align: center;
-    }
-
-
-
-    img {
-        padding: 10px;
-        border-radius: 100%;
-        height: 100px;
-
-        &#calendrier {
-            border: 2px solid #FF4155;
-        }
-
-        &#piwigo {
-            border: 2px solid #FF7800;
-        }
-
-        &#peertube {
-            border: 2px solid #727272;
-        }
-
-        &#gitlab {
-            border: 2px solid #E24329;
-        }
-    }
+    flex-wrap: wrap;
+    max-width: 100vw;
+    gap: 4vw;
 }
 
 /* Style relatif à l'affichage des articles */
 
 .article-wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 710px) {
+
+    //Masquer les services dans la page principale quand il y a la navbar mobile (parce que les services sont dedans)
+    #main-content section#section-services {
+        display: none;
+    }
 }

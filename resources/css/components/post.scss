@@ -1,0 +1,226 @@
+.post {
+    width: 100%;
+    color: white;
+    padding: 15px;
+
+    &:not(:last-of-type) {
+        margin-bottom: 30px;
+    }
+
+    .header {
+        display: grid;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px 0;
+
+        grid-template-columns: auto 1fr auto;
+        grid-template-rows: repeat(2, auto);
+
+        a.thumbnail {
+            grid-row: span 2;
+            grid-column: 1;
+            margin-right: 20px;
+
+            img {
+                border-radius: 200px;
+                width: 75px;
+                height: 75px;
+            }
+        }
+
+        .details {
+            margin-right: auto;
+            flex: 4;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            grid-row: 1;
+            grid-column: 2;
+
+            p {
+                font-size: 14px;
+            }
+
+            &>a,
+            a>h2 {
+                margin: 0;
+                width: fit-content;
+            }
+
+            a {
+                margin-bottom: 2px;
+            }
+
+
+            &>p {
+                margin: 0;
+                color: var(--couleur_police_secondaire);
+
+                .separator {
+                    color: var(--couleur_police_secondaire);
+                    display: inline-block;
+                    width: 20px; //Same width as parent's horizontal gap
+                    text-align: center;
+                }
+
+                &#confidentiel {
+                    color: var(--confidentiel-color);
+
+                    i {
+                        color: var(--confidentiel-color);
+                        margin-right: 8px;
+                        font-size: 14px;
+                    }
+                }
+            }
+
+
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            gap: 8px 10px;
+
+            grid-row: 2;
+            grid-column: 2;
+
+
+            .tag {
+                display: inline-block;
+                color: var(--couleur_police_accentuation);
+                border-radius: 1000px;
+                align-items: center;
+                font-size: 13px;
+
+                padding: 6px 12px;
+
+            }
+        }
+
+        .arrow-display {
+            grid-row: span 2;
+            grid-column: 3;
+            cursor: pointer;
+
+            .arrow {
+                padding: 20px 15px;
+                box-sizing: content-box;
+                transition: transform 300ms ease-out;
+
+                &.visible {
+                    transform: rotate(-180deg);
+                }
+            }
+        }
+    }
+
+    .description {
+
+        display: none;
+        display: block;
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 250ms ease;
+        padding: 0 15px;
+
+        &.visible {
+            display: block;
+        }
+
+        &> :first-child {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--light-grey);
+        }
+
+        a {
+            color: var(--link-color);
+            font-weight: var(--fw-medium);
+            text-decoration: underline;
+        }
+
+        img {
+            max-width: 80%;
+            max-height: 50vh;
+        }
+
+        p:has(img) {
+            display: flex;
+            justify-content: center;
+        }
+
+        p {
+            text-align: justify;
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 710px) {
+    .post {
+        padding: 18px;
+        cursor: pointer;
+
+        &:not(:last-of-type) {
+            margin-bottom: 20px;
+        }
+
+        .header {
+            grid-template-columns: auto 1fr; //Hide arrow
+            gap: 12px 0;
+
+            a.thumbnail {
+                grid-row: 1 / span 2;
+                margin-right: min(4vw, 20px);
+
+                img {
+                    width: 48px;
+                    height: 48px;
+                }
+            }
+
+            .details {
+                h2 {
+                    font-size: 1.1em;
+                }
+
+                p {
+                    font-size: 13px;
+                }
+            }
+
+            .tags {
+                grid-column: 2;
+                gap: 1.8vw 2vw;
+
+                .tag {
+                    font-size: 12px;
+                }
+            }
+
+            .arrow-display {
+                display: none;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .post {
+        .header {
+            a.thumbnail {
+                grid-row: 1;
+            }
+
+
+
+            .tags {
+                grid-column: 1 / span 2;
+            }
+        }
+    }
+}

@@ -1,79 +1,28 @@
-@extends('layouts.app')
+@extends('layouts.app-without-sidebar')
 
 @section('titre', 'Réseaux Sociaux')
 
+@pushonce('styles')
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/entite/index_gestion.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/jstable.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ mix('/css/formulaire.css') }}">
+@endpushonce
+
 @section('content')
-<link rel="stylesheet" type="text/css" href="/css/jstable.css">
-<link rel="stylesheet" type="text/css" href="/css/formulaire.css">
 
-<style>
-#choix_role {
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:25px;
-}
-div.table {
-    box-sizing: border-box;
-    border-radius: 25px;
-    margin-top:10px;
-    overflow: hidden;
-    padding: 13px 18px;
-    border: 1px solid var(--gris_1);
-    background-color: var(--gris_2);
-    transition: border-color 0.1s ease-in-out;
-}
-div.table:hover {
-    border-color: var(--couleur_accentuation);
-}
-table {
-    border-collapse: collapse;
-    width:100%;
-}
-table tr {
-    text-align:center;
-    color: var(--couleur_police);
-    border-bottom: 1px solid transparent;
-}
-table tbody tr:hover {
-    border-bottom: 1px solid var(--gris_1);
-}
-table th {
-    padding: 15px 15px;
-    border-bottom: 1px solid var(--gris_1);
-}
-table td {
-    padding: 10px 15px;
-}
-
-td span.role {
-	font-size: 0.95em;
-	color:var(--couleur_police_secondaire);
-	background: var(--gris_1);
-	padding: 4px 15px 5px 15px;
-	border-radius: 50px;
-	text-transform: capitalize;
-}
-td.lien {
-    text-align: left;
-}
-td a.icon-edit-2, td a.icon-trash {
-    cursor:pointer;
-}
-</style>
-
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des réseaux sociaux</h1>
 
-        <div id="gestion_membre">
-            <div>
+        <div class="section-content">
+            <h2>Ajouter un réseau social :</h2>
+            <div id="warning">
                 <p>Vous ne pouvez avoir qu'un seul réseau social de chaque type.</p>
                 <p>Pour supprimer un réseau social, laissez le lien vide, et appuyez sur <i>Supprimer</i></p>
             </div>
             <form method="POST">
                 @csrf
-                <div class="groupe ombre_petite">
+                <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Réseau social :</p>
                         <select name="reseaux_sociaux_liste_id" id="reseaux_sociaux_liste" class="input" spellcheck="false" required select="{{old('reseaux_sociaux_liste_id') ?? ''}}">
@@ -86,18 +35,23 @@ td a.icon-edit-2, td a.icon-trash {
     
                     <label class="input_groupe">
                         <p class="titre">* Lien :</p>
-                        <div style="display:flex;">
+                        <div style="display:flex; align-items:center;">
                             <span class="pre_url"></span>
                             <input type="text" name="cle" id="cle" class="input" value="{{old('cle') ?? ''}}"/>
                         </div>
                     </label>
-                    <div style="display:flex;justify-content: flex-end;margin-top:15px;">
+                    <div style="display:flex;justify-content: flex-end;margin-top:10px;">
                         <button type="submit" class="bouton primaire">AJOUTER</span></button>
                     </div>
                 </div>
             </form>
-            
-            <div class="table ombre_petite">
+        </div>
+
+        <div class="section-content">
+            <h2>Réseaux actuels:</h2>
+
+            @if(count($reseaux_sociaux) > 0)            
+            <div class="table card">
                 <table id="index">
                     <thead>
                         <tr>
@@ -117,9 +71,12 @@ td a.icon-edit-2, td a.icon-trash {
                     </tbody>
                 </table>
             </div>
+            @else
+                <p class="no-content">Aucun réseau social pour le moment</p>
+            @endif
         </div>
-	</div>
-</div>
+	</section>
+</main>
 
 
 <script>

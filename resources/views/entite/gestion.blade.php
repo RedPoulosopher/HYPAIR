@@ -1,79 +1,50 @@
-@extends('layouts.app')
+@extends('layouts.app-without-sidebar')
 
 @section('titre', 'Gestion de l\'entité')
 
+@pushonce('styles')
+    <link rel="stylesheet" href="{{ mix('/css/entite/gestion.css') }}" type="text/css" />
+@endpushonce
+
 @section('content')
 
-<style>
-.logo {
-	position: relative;
-	display: block;
-	margin-left:auto;
-	margin-right:auto;
-	width:220px;
-	height:220px;
-}
-.logo img {
-	width:100%;
-	border-radius:300px;
-}
-.logo a:before {
-	position: absolute;
-	z-index: 2;
-	top:170px;
-	left:170px;
-	padding:10px;
-	font-size:20px;
-	border-radius:100px;
-	background: var(--couleur_fond);
-}
-.description {
-	margin-top:40px;
-}
-.conteneur_boutons {
-	margin-top:40px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap:20px;
-}
-.gros_bouton {
-	width:200px;
-	height:200px;
-	border: 1px solid var(--gris_1);
-	border-radius: 15px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	box-sizing: border-box;
-    padding: 10px;
-	text-align: center;
-	background: var(--gris_3);
-	transition: background 0.15s ease-in-out;
-}
-.gros_bouton:hover {
-	background: var(--gris_2);
-}
-</style>
+    <main id="main-content">
 
-<div id="wrapper">
-	<div id="contenu" class="moyen">
-		<h1><span class="icon-security-safe" title="page réservée aux administrateurs"></span> Gestion de l'entite</h1>
-		<div class="logo">
-			<img src="{{session("entite_logo_petit")}}" alt="logo"/>
-			<a class="icon-edit-2" title="Modifier le logo et les couleurs." href="logotype"></a>
-		</div>
-		<div class="conteneur_boutons">
-			<a class="gros_bouton" href="description">Modifier les descriptions et catégories</a>
-			<a class="gros_bouton" href="logotype">Modifier le logo</a>
-            <a class="gros_bouton" href="couleur">Modifier les couleurs</a>
-			<a class="gros_bouton" href="membres">Gérer les membres</a>
-			<a class="gros_bouton" href="reseau_social">Gérer les réseaux sociaux</a>
-			<a class="gros_bouton" href="evenement">Gérer les évènements</a>
-			@if ($entite["type"]=="bureau" || $entite["uid"]=="air")
-				<a class="gros_bouton" href="../entites/admin">Gérer les entites</a>
-			@endif
-		</div>
-	</div>
-</div>
+        @php
+        use \App\Services\AutorisationGestion;
+        @endphp
+
+        <section>
+            <h1><span class="icon-security-safe" title="page réservée aux administrateurs"></span>Gestion de l'entité</h1>
+            <a class="logo" href="{{ $entite->lien_relatif() }}">
+                <img src="{{ session('entite_logo_petit') }}" alt="logo" />
+            </a>
+            <div class="conteneur_boutons">
+                {{-- Les icônes viennent de https://fontawesome.com/ --}}
+                @if(AutorisationGestion::gestion('gerer_post'))
+                    <a class="modif_option card" href="post"><i class="fa-solid fa-comment"></i>Gérer les posts</a>
+                @endif
+                @if(AutorisationGestion::gestion('gerer_evenement'))
+                    <a class="modif_option card" href="evenement"><i class="fa-regular fa-calendar"></i>Gérer les évènements</a>
+                @endif
+                @if(AutorisationGestion::gestion('gerer_membre'))
+                    <a class="modif_option card" href="membres"><i class="fa-solid fa-users"></i>Gérer les membres</a>
+                @endif
+                @if(AutorisationGestion::gestion('gerer_reseau'))
+                    <a class="modif_option card" href="reseau_social"><i class="fa-solid fa-globe"></i>Gérer les réseaux sociaux</a>
+                @endif
+                @if(AutorisationGestion::gestion('gerer_entite'))
+                    <a class="modif_option card" href="description"><i class="fa-solid fa-pen-to-square"></i>Modifier les descriptions et labels</a>
+                    <a class="modif_option card" href="logotype"><i class="fa-solid fa-eye"></i>Modifier le logo</a>
+                    <a class="modif_option card" href="couleur"><i class="fa-solid fa-palette"></i>Modifier les couleurs</a>
+                @endif
+                @if ($entite['type'] == 'bureau' || $entite['uid'] == 'air')
+                    <a class="modif_option card" href="../entites/admin"><i class="fa-solid fa-crown"></i>Gérer les
+                        entités</a>
+                @endif
+            </div>
+        </section>
+    </main>
+
+
 @endsection

@@ -29,7 +29,7 @@
         }
 
         & .entity {
-            box-shadow: $big_shadow;
+            box-shadow: var(--ombre-grande);
             display: block;
             background-color: var(--grey);
             width: auto;
@@ -78,7 +78,7 @@
         }
 
         & .entity-grand {
-            box-shadow: $big_shadow;
+            box-shadow: var(--ombre-grande);
             display: block;
             background-color: var(--grey);
             //   width: 300px;

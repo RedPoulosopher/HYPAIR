@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Site;
 use Illuminate\Http\Request;
 use \App\Models\Evenement;
 use \App\Services\AutorisationGestion;
@@ -60,7 +61,6 @@ class CalendrierController extends Controller
             $evenements_prives_array[] = $evenement_priv;
         }
 
-
         return view(
             "evenements.calendrier",
             [
@@ -71,19 +71,54 @@ class CalendrierController extends Controller
                 'entite' => session('entite_uid')
             ],
         );
-
     }
 
 
-    public static function calendrier_general()
+    public static function calendrier_general($site = null)
     {
+        // --- FONCTION À SIMPLIFIER ---
+
         //on doit recuperer l annee et le mois courant. ca sera l affichage par defaut
         $annee = date('Y');
         $mois = date('m');
 
-        $evenements_publics = Evenement::index($annee, $mois)
-            ->where('confidentialite', '=', 0)
-            ->where('validation', '=', 1);
+        if (!isset($site)) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                if (count($user->campus)>0) {
+                    $campus = $user->campus->first();
+                } else {
+                    // if user has no campus saved, show Douai posts by default
+                    $campus = Site::all()->first();
+                }
+            }
+            else {
+                // if user not connected, show Douai posts by default
+                $campus = Site::all()->first();
+            }
+            $site = $campus->label;
+        } else {
+            $campus = Site::where('label', $site)->first();
+        }
+        
+        $canSeeConfidentiel = false;
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->campus->contains($campus)) {
+                $canSeeConfidentiel = true;
+            }
+        }
+        if($canSeeConfidentiel) {
+            $evenements_publics = Evenement::index($annee, $mois)
+                ->where('confidentialite', '=', 0)
+                ->where('validation', '=', 1)
+                ->intersect($campus->evenements);
+        } else {
+            $evenements_publics = Evenement::index($annee, $mois)
+                ->where('confidentialite', '=', 0)
+                ->where('validation', '=', 1)
+                ->intersect($campus->evenements->where('confidentiel', 0));
+        }
 
         $evenements_publics_array = array();
         foreach ($evenements_publics as $evenement_pub) {
@@ -122,20 +157,21 @@ class CalendrierController extends Controller
             ///->where('membres.role_id', '<=', 'evenements.confidentialite')
         }
 
+        // dd($evenements_publics_array);
+        // dd($evenements_user);
+
         return
             view("evenements.calendrier", [
                 'events' => $evenements_publics_array,
                 'evenements_prives' => $evenements_user,
-                'gerer_evenement' => false,
-                'entite' => ""
+                'entite' => "",
+                'site' => $site
             ]);
-
     }
     public static function calendrier_index_json(Request $request)
     {
         $annee = $request["annee"];
         $mois = $request["mois"] + 1;
-
 
         //$evenements= Evenement::index($annee, $mois);
 
@@ -178,7 +214,7 @@ class CalendrierController extends Controller
                 ->join('entites', 'evenements.entite_id', '=', 'entites.id')
                 ->join('membres', 'membres.entite_id', '=', 'entites.id')
                 ->join('users', 'users.id', '=', 'membres.user_id')
-                ->select('entites.uid', 'entites.nom', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', 'evenements.slug', 'evenements.validation', 'evenements.id', 'evenements.confidentialite', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
+                ->select('entites.uid', 'entites.nom', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', /*'evenements.slug', 'evenements.validation',*/ 'evenements.id', /*'evenements.confidentialite',*/ 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
                 ->where('users.id', '=', $user['id'])
                 ->where('entites.uid', '=', session('entite_uid'))
                 ->whereMonth("temps_debut", $mois)
@@ -211,32 +247,55 @@ class CalendrierController extends Controller
     {
         $annee = $request["annee"];
         $mois = $request["mois"] + 1;
+        $site = $request["site"];
 
-
-        //$evenements= Evenement::index($annee, $mois);
-
-        $niveau_administration = AutorisationGestion::niveau_administration();
-
-        if ($niveau_administration == 20) {
-            $confidentialite = 4;
-        } elseif ($niveau_administration <= 18 && $niveau_administration >= 17) {
-            $confidentialite = 3;
-        } elseif ($niveau_administration == 13) {
-            $confidentialite = 2;
-        } elseif ($niveau_administration == 8) {
-            $confidentialite = 1;
+        if (!isset($site)) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                if (count($user->campus)>0) {
+                    $campus = $user->campus->first();
+                } else {
+                    // if user has no campus saved, show Douai posts by default
+                    $campus = Site::all()->first();
+                }
+            }
+            else {
+                // if user not connected, show Douai posts by default
+                $campus = Site::all()->first();
+            }
+            $site = $campus->label;
         } else {
-            $confidentialite = 0;
+            $campus = Site::where('label', $site)->first();
+        }
+        //$evenements= Evenement::index($annee, $mois);
+        
+        $canSeeConfidentiel = false;
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->campus->contains($campus)) {
+                $canSeeConfidentiel = true;
+            }
         }
 
         //on recupere les events demandes*
-        $evenements_publics = Evenement::index($annee, $mois)
-            ->where('confidentialite', '=', 0)
-            ->where('validation', '=', 1);
+        if($canSeeConfidentiel) {
+            $evenements_publics = Evenement::index($annee, $mois)
+                ->where('confidentialite', '=', 0)
+                ->where('validation', '=', 1)
+                ->intersect($campus->evenements);
+        } else {
+            $evenements_publics = Evenement::index($annee, $mois)
+                ->where('confidentialite', '=', 0)
+                ->where('validation', '=', 1)
+                ->intersect($campus->evenements->where('confidentiel', 0));
+        }
+
         $evenements_publics_array = array();
         foreach ($evenements_publics as $evenement_pub) {
             $evenements_publics_array[] = $evenement_pub;
         }
+
+        info($evenements_publics_array);
 
         $evenements_user = array();
         if (Auth::check()) {
@@ -271,6 +330,7 @@ class CalendrierController extends Controller
         return [
             "events" => $evenements_publics_array,
             "evenements_prives" => $evenements_user,
+            "site" => $site
         ];
     }
 
@@ -305,5 +365,4 @@ class CalendrierController extends Controller
 
         return redirect(session('entite_uid') . "/calendrier");
     }
-
 }

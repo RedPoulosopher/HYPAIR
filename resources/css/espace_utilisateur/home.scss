@@ -1,0 +1,203 @@
+#profil {
+    padding: 20px 40px 20px 20px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 15px 30px;
+    position: relative;
+}
+
+#photo_profil {
+    width: 200px;
+    height: 200px;
+}
+
+#photo_profil img {
+    width: 100%;
+    border-radius: 300px;
+}
+
+#info_profil {
+    display: flex;
+    flex-direction: column;
+}
+
+#ligne_top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#user-info {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    #prenoms {
+        display: flex;
+
+        h2 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .separator {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            color: var(--couleur_police_secondaire);
+            font-weight: normal;
+        }
+
+        .pronoms {
+            color: var(--couleur_police_secondaire);
+            font-weight: normal;
+            margin: 0;
+        }
+    }
+
+
+    #promo-campus {
+        display: flex;
+        gap: 15px;
+
+        p {
+            display: inline-block;
+            color: var(--couleur_police_secondaire);
+            font-weight: normal;
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            i {
+                color: var(--couleur_police_secondaire);
+                font-size: .7rem;
+                margin-right: 8px;
+
+            }
+        }
+    }
+
+}
+
+#reglages {
+    cursor: pointer;
+    padding: 8px;
+    font-size: 1.25em;
+    transform: translate(8px, -8px) rotate(0deg);
+    transition-duration: 300ms;
+}
+
+#reglages:hover {
+    color: var(--couleur_police_secondaire);
+    transform: translate(8px, -8px) rotate(60deg);
+    transition-duration: 300ms;
+}
+
+
+
+
+#menu_meatballs {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    border-radius: 15px;
+    background: var(--dark-grey);
+    top: 70px;
+    right: 40px;
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 0;
+
+    li {
+        display: block;
+        width: 100%;
+
+        a {
+            padding: 10px 20px;
+            display: inline-block;
+
+            &:hover {
+                color: var(--couleur_police_secondaire);
+            }
+        }
+
+        #menu_deconnexion {
+            color: var(--couleur_accentuation);
+
+            :hover {
+                color: var(--couleur_police_secondaire);
+            }
+        }
+    }
+}
+
+#bio {
+    max-width: 80ch;
+    text-align: justify;
+    overflow-wrap: break-word;
+    margin-top: 15px;
+}
+
+#boutons_selections_categorie {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.reseaux_sociaux {
+    gap: 12px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+@media screen and (max-width: 680px) {
+    #profil {
+        padding: 20px 30px;
+        flex-direction: column;
+    }
+
+    #ligne_top {
+        justify-content: center;
+    }
+
+    #prenoms {
+        margin: 0 auto;
+    }
+
+    #reglages {
+        position: absolute;
+        top: calc(20px - 8px);
+        right: calc(30px - 8px);
+    }
+
+    #menu_meatballs {
+        top: calc(20px - 8px + 36px);
+        right: calc(30px - 8px);
+    }
+
+    #bio {
+        text-align-last: center;
+    }
+
+    .reseaux_sociaux {
+        justify-content: center;
+    }
+
+    #promo-campus {
+        justify-content: center;
+    }
+}

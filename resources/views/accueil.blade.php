@@ -3,63 +3,59 @@
 @section('titre', 'Accueil')
 
 @pushonce('styles')
-<link rel="stylesheet" href="css/accueil.css" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/accueil.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/components/service.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/components/post.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ mix('/css/components/switch-campus.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')
 
-<!-- Contenu principal de la page -->
-<main id="main-content">
+    {{-- Contenu principal de la page --}}
+    <main id="main-content">
+        
+        @if (Auth::check())
+        <x-post-switch-campus :campus="$site"></x-post-switch-campus>
+        @endif
 
-    <section>
-        <h1>Services</h1>
+        <section id="section-services">
+            <h1>Services</h1>
 
-        <div class="services-wrapper">
-            
-            <a href="/calendrier" class="service">
-                <img src="/images/logo_services/calendrier.png" alt="logo_calendrier" id="calendrier">
-                <p>Calendrier</p>
-            </a>
+            <div class="services-wrapper">
 
-            <a href="https://photos.imt-ne.fr" class="service" target="_blank">
-                <img src="/images/logo_services/piwigo.png" alt="logo_piwigo" id="piwigo">
-                <p>Photos</p>
-            </a>
+                <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
+                    logo="{{ mix('/images/piwigo.png') }}">
+                </x-service>
 
-            <a href="https://peertube.imt-ne.fr" class="service" target="_blank">
-                <img src="/images/logo_services/peertube.png" alt="logo_peertube" id="peertube">
-                <p>Vidéos</p>
-            </a>
+                <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
+                    logo="{{ mix('/images/peertube.png') }}">
+                </x-service>
 
-            <a href="https://gitlab.etu.imt-nord-europe.fr" class="service" target="_blank">
-                <img src="/images/logo_services/gitlab.png" alt="logo_gitlab" id="gitlab">
-                <p>GitLab</p>
-            </a>
+                <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
+                    logo="{{ mix('/images/gitlab.png') }}">
+                </x-service>
 
-        </div>
-    </section>
-    
+            </div>
+        </section>
 
-    <section>
-        <h1>Actualités</h1>
+        <section>
+            <h1>Actualités</h1>
 
-        <div class="article-wrapper">
-            @php
-                // Dans le futur : récupérer ces infos à partir de la partie backend (Coucou Arthur...)
-                $events = [
-                    ["Intro à Git", "l'Air"], 
-                    ["Shotgun Allô Bouffe", "BDS"],
-                    ["Finale de l'IM'Tremplin", "IM'Tremplin"]
-                ]
-            @endphp
+            <div class="article-wrapper">
+                @if (Auth::check() && count($posts) > 0)
+                    @foreach ($posts as $post)
+                        @if (!$post->confidentiel || ($post->confidentiel && $canSeeConfidentiel))
+                            <x-post :post="$post" />
+                        @endif
+                    @endforeach
+                @elseif (Auth::check())
+                    <p class="should-be-connected no-content">Aucun post pour le moment</p>
+                @else
+                    <p class="should-be-connected no-content">Vous devez être connecté pour voir les posts</p>
+                @endif
 
-            @for($i = 0; $i < sizeof($events); $i++)
-                <x-event :index="$i" :title="$events[$i][0]" :author="$events[$i][1]" />
-            @endfor
-            
-        </div>
-    </section>
+            </div>
+        </section>
 
-</main>
-
+    </main>
 @endsection

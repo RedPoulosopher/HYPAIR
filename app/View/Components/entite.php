@@ -7,10 +7,12 @@ use Illuminate\View\Component;
 class entite extends Component
 {
     public $asso;
+    public $destination;
 
-    public function __construct($asso)
+    public function __construct($asso, $destination)
     {
         $this->asso = $asso;
+        $this->destination = $destination;
     }
 
     /**

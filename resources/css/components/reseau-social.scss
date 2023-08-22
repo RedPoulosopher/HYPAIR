@@ -1,0 +1,28 @@
+a.reseau-social {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    gap: 18px;
+    border-radius: 6px;
+
+    &[target="_blank"]:before {
+        content: "";
+    }
+
+    img {
+        width: 28px;
+        height: 28px;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    transition: filter 150ms ease-in-out;
+
+    &:hover {
+        filter: brightness(1.1);
+    }
+}

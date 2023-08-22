@@ -188,6 +188,12 @@ Les merge requests sont des demandes de fusion de deux branches, la plupart du t
 - Ouvrir un terminal, par exemple celui intégré à VS Code
 - Taper `git checkout <SHA>` en collant le **SHA** copié juste avant
 
+# Notes sur les migrations
+On a configuré le charset de mysql à `utf8mb4` et le collation à `utf8mb4_bin` pour pouvoir passer des *emojis* dans les requêtes.
+Comme l'encodage UTF-8 classique est préférable pour les textes simples, il faut rajouter ces deux lignes à chaque création de chaque table, dans la fonction `Schema::create(...)` :
+- `$table->charset = 'utf8';`
+- `$table->collation = 'utf8_unicode_ci';`
+
 # Fonctionnalités futures
 - Système d'actualités 
 - Page d'accueil qui s'adapte à l'utilisateur 

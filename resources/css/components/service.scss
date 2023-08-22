@@ -1,0 +1,93 @@
+.service {
+    width: fit-content;
+    margin-bottom: 30px;
+
+    & .logo {
+        width: 150px;
+        height: 150px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 250px;
+        background: var(--grey);
+
+        & img {
+            width: 84%;
+            margin: 8%;
+            border-radius: 375px;
+        }
+
+        & .cercle {
+            border-radius: 375px;
+            border: 2px solid;
+            position: absolute;
+            left: 5%;
+            top: 5%;
+            width: 90%;
+            height: 90%;
+            box-sizing: border-box;
+            transition: border 0.1s ease-in-out;
+        }
+
+        &:hover .cercle {
+            border: 3px solid;
+        }
+
+    }
+
+    & .info {
+        & .nom {
+            font-size: 1.1em;
+
+            line-height: 0.9em;
+            margin: 0.5em 0 0.3em;
+            text-transform: capitalize;
+        }
+
+        .categories {
+            color: var(--couleur_police_secondaire);
+            font-size: 0.6em;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+
+            &>span {
+                text-transform: capitalize;
+                background: var(--grey);
+                padding: 4px 15px 5px 15px;
+                border-radius: 50px;
+            }
+        }
+    }
+}
+
+@media (max-width: 710px) {
+    .service {
+
+        & .logo {
+            width: 140px;
+            height: 140px;
+
+            & img {
+                width: 80%;
+                margin: 10%;
+            }
+        }
+
+        & .info .nom {
+            font-size: 1em;
+        }
+
+        & .info .categories {
+            font-size: 0.4em;
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .service .logo {
+        width: 120px;
+        height: 120px;
+    }
+}

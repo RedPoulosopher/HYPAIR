@@ -1,16 +1,22 @@
-@extends('layouts.app')
+@extends('layouts.app-without-sidebar')
 
 @section('titre', 'Modifier la description')
 
+@pushonce('styles')
+<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}" type="text/css">
+<link rel="stylesheet" href="{{ mix('/css/entite/modifier_description.css') }}" type="text/css">
+@endpushonce
+
+@pushonce('start-scripts')
+	<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+@endpushonce
+
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
-<link rel="stylesheet" href="/css/simpleMDE.css">
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs">Modifier votre entite</h1>
 		@if(Session::has('success'))
 			<p class="explication">L'entite a été modifiée correctement !</p>
@@ -24,7 +30,7 @@
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">* Description courte :</p>
 					<textarea name="description_courte" class="input" required rows="6">{{old('description_courte') ?? $entite->description_courte ?? ''}}</textarea>
@@ -46,13 +52,16 @@
 			<span>* les champs marqués d'une astérisque sont obligatoires</span>
 			<button type="submit" class="bouton primaire" style="float:right;">MODIFIER</span></button>
 		</form>
-	</div>
-</div>
-<script>
-var simplemde = new SimpleMDE({
-	element: document.getElementById("description_md"),
-	toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
-	spellChecker: false,
-});
-</script>
+	</section>
+</main>
 @endsection
+
+@pushonce('end-scripts')
+<script>
+	var simplemde = new SimpleMDE({
+		element: document.getElementById("description_md"),
+		toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "table", "horizontal-rule", "|", "preview"],
+		spellChecker: false,
+	});
+</script>
+@endpushonce

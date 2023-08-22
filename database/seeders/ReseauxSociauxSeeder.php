@@ -18,6 +18,18 @@ class ReseauxSociauxSeeder extends Seeder
         DB::table('reseaux_sociaux')->insert([
             [
                 'reseau_sociable_id' => 1,
+                'reseau_sociable_type' => 'App\Models\User',
+                'reseaux_sociaux_liste_id' => 1,
+                'cle' => 'test',
+            ],
+            [
+                'reseau_sociable_id' => 1,
+                'reseau_sociable_type' => 'App\Models\User',
+                'reseaux_sociaux_liste_id' => 7,
+                'cle' => 'test',
+            ],
+            [
+                'reseau_sociable_id' => 1,
                 'reseau_sociable_type' => 'App\Models\Entite',
                 'reseaux_sociaux_liste_id' => 1,
                 'cle' => 'QScNktyb3j',

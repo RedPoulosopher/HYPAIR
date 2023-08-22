@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;400;500;700");
-
-@import "../components/navbar.scss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700");
 
 html,
 body {
@@ -10,7 +8,6 @@ body {
     top: 0;
     height: 100%;
     box-sizing: border-box;
-    font-family: "Inter", sans-serif, system-ui;
     background-attachment: fixed !important;
     background: var(--background-color);
     color: var(--couleur_police_primaire);
@@ -18,6 +15,7 @@ body {
 }
 
 * {
+    font-family: "Inter", sans-serif, system-ui;
     box-sizing: border-box;
     color: var(--couleur_police_primaire);
 }
@@ -25,6 +23,7 @@ body {
 a {
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 
     &:hover {
         text-decoration: none;
@@ -45,6 +44,11 @@ a[target="_blank"]:before {
     top: 0;
 }
 
+em {
+    font-style: normal;
+    font-weight: var(--fw-bold);
+}
+
 @font-face {
     font-family: "GearsOfPeace";
     src: url("../../fonts/GearsOfPeace.ttf") format("truetype");
@@ -54,8 +58,19 @@ a[target="_blank"]:before {
 }
 
 h1 {
+    font-size: 1.5em;
     margin-block-start: 0em;
     text-align: center;
+}
+
+h2 {
+    font-size: 1.25em;
+    margin-block-start: 0em;
+}
+
+p,
+span {
+    font-size: 1em;
 }
 
 p.explication {
@@ -94,13 +109,25 @@ p.explication {
     font-size: 0.7em;
 }
 
+.tooltip {
+    cursor: help;
+}
+
+.card {
+    background: var(--grey);
+    border-radius: 15px;
+    box-shadow: var(--ombre-card);
+}
+
 .bouton {
+    display: inline-block;
     padding: 10px 25px 12px 25px;
-    font-size: 1.1em;
+    font-size: 1em;
     border-radius: 50px;
-    min-width: 100px;
-    width: fit-content;
-    display: block;
+    // min-width: 100px;
+    // width: fit-content;
+    // display: block;
+    border: unset;
     cursor: pointer;
     user-select: none;
     text-align: center;
@@ -112,14 +139,18 @@ p.explication {
         font-size: 1.3em;
     }
 
+    &[type="submit"] {
+        background-color: var(--couleur_accentuation);
+    }
+
     &[disabled] {
         opacity: 0.4;
         cursor: not-allowed;
     }
 
-    &:hover {
-        padding: 10px 20px 12px 30px;
-    }
+    // &:hover {
+    //    padding: 10px 20px 12px 30px;
+    // }
 
     & span {
         vertical-align: middle;
@@ -134,7 +165,10 @@ p.explication {
     }
 
     &.primaire {
-        color: var(--couleur_police_accentuation);
+        * {
+            color: var(--couleur_police_accentuation);
+        }
+
         background-color: var(--couleur_accentuation);
         border: none;
         text-transform: uppercase;
@@ -154,6 +188,19 @@ p.explication {
         border-style: solid;
         border-color: var(--couleur_police_secondaire);
         // transition: border-color 0.1s ease-in-out;
+    }
+}
+
+.popup {
+    z-index: 100;
+    display: none;
+    position: fixed;
+    inset: 0;
+    place-items: center;
+    background-color: var(--popup-background-color);
+
+    &.visible {
+        display: grid;
     }
 }
 
@@ -200,5 +247,40 @@ body.light-theme {
 
     & a.couleur:hover {
         color: #7f8bf7;
+    }
+}
+
+.should-be-connected {
+    margin: 0;
+    text-align: center;
+}
+
+p.no-content {
+    color: var(--couleur_police_secondaire);
+}
+
+@media screen and (max-width: 710px) {
+    h1 {
+        font-size: 1.3em;
+    }
+
+    h2 {
+        font-size: 1.15em;
+    }
+
+    .bouton {
+        font-size: .95em;
+    }
+
+    .card {
+        border-radius: 10px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+
+    p,
+    span {
+        font-size: 1em;
     }
 }

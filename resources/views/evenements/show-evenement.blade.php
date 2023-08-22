@@ -2,41 +2,25 @@
 
 @section('titre', $evenement->titre)
 
+@pushonce('styles')
+<link rel="stylesheet" href="{{ mix('/css/post/show-post.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/evenements/show-evenement.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
+@endpushonce
+
 @section('content')
 
 <style>
-.documentation {
-	width:100%;
-	background:var(--gris_2);
-	padding:25px;
-	border-radius:25px;
-	box-sizing:border-box;
-	border:1px solid var(--gris_1);
-	box-sizing: ;
-}
-h1.titre {
-	margin-block-start:0;
-	text-decoration:underline;
-	text-decoration-color: var(--couleur_accentuation);
-}
-h1.titre::first-letter {
-	text-transform: capitalize;
-}
-p {
-	color: var(--couleur_police_secondaire);
-	text-align:justify;
-}
+
 </style>
 	
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section class="section-content">
+		<h1>Infos de l'évènement</h1>
 
 		<div style="display:flex;">
-			@if (substr(url()->previous(), -13)=="evenement")
-			<a onclick="history.go(-1)" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
-			@else
-			<a href="{{ url()->previous() }}" class="bouton secondaire ombre_petite" style="margin:15px;">< Retour</a>
-			@endif
+			<a onclick="history.back()" class="bouton secondaire ombre_petite" style="margin:0 0 15px;">< Retour</a>
+
 
 			<!--
 			@if($gerer_evenement)
@@ -45,41 +29,83 @@ p {
 -->
 		</div>
 
-		<div class="documentation ombre_petite">
-			<div class="contenu_doc" id="contenu_doc">
-		
-				<h1 class="titre">{{$evenement->titre}}</h1>
+		<div class="documentation card">				
+			<i id="share-btn" class="fa-solid fa-arrow-up-right-from-square"></i>
+	
+			{{-- @if($evenement->confidentiel)
+				<p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager" class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>
+			@endif --}}
 
-				<p>Description : {{$evenement->description}}</p>
-				<p>Début : {{$evenement->temps_debut}}</p>
-				<p>Fin : {{$evenement->temps_fin}}</p>
-				<p>Lieu : {{$evenement->lieu}}</p>
-				<p>Nombre de personnes max : {{$evenement->max_participation}}</p>
-				<p>Confidentialité : 
-					@if ($evenement['confidentialite'] == 0)                          
-                    Public
-                    @elseif ($evenement['confidentialite'] == 1)
-                    Membres de l'assos
-                    @elseif ($evenement['confidentialite'] == 2)
-                    Responsables & bureau
-                    @elseif ($evenement['confidentialite'] == 3)
-                    Bureau
-                    @elseif ($evenement['confidentialite'] == 4)
-                    Prez & vice-prez
-                    @endif
-				</p>
-				@if ($evenement['confidentialite'] == 0)	
-					<p>Statut : 
-						@if ($evenement['validation'] == 1)                          
-						Validé
-						@elseif ($evenement['validation'] == 0)
-						En attente de validation
-						@endif
-					</p>
+			@php
+			setlocale(LC_TIME, 'fr_FR', 'fra'); 
+			@endphp
+
+			<div class="header">
+				<div class="thumbnail"><img src="{{session('entite_logo_petit')}}" alt="Logo {{$entite->nom}}"></div>
+				<h1 class="title">{{$evenement->titre}}</h1>
+				@if($evenement->confidentiel != 0)
+					<p id="confidentiel" title="Cet évènement n'est visible que pour votre campus. Ne pas partager" class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement est confidentiel</p>
 				@endif
+				@if(strftime("%A %d %B", strtotime($evenement->temps_debut)) == strftime("%A %d %B", strtotime($evenement->temps_fin))) {{-- Si début et fin le même jour --}}
+					<p><i class="fa-regular fa-calendar"></i>{{ ucwords(utf8_encode(strftime("%A %d %B de %H:%M", strtotime($evenement->temps_debut)))) . ' à ' . utf8_encode(strftime("%H:%M", strtotime($evenement->temps_fin)))}}</p>
+				@else
+					<p><i class="fa-regular fa-calendar-check"></i>{{ str_replace('X', 'à', ucwords(utf8_encode(strftime("%A %d %B X %H:%M", strtotime($evenement->temps_debut)))))}}</p>
+					<p><i class="fa-regular fa-calendar-xmark"></i>{{ str_replace('X', 'à', ucwords(utf8_encode(strftime("%A %d %B X %H:%M", strtotime($evenement->temps_fin))))) }}</p>
+				@endif
+				<p><i class="fa-solid fa-location-dot"></i>{{ $evenement->lieu }}</p>
+			</div>				
+			
+			{{-- <p><em>Nom de l'évènement :</em> {{$evenement->titre}}</p> --}}
+
+
+			<div class="description">
+
+				<p><em>Description :</em> {{$evenement->description}}</p>
+				<p><em>Nombre de personnes max :</em> {{$evenement->max_participation}}</p>
+				{{-- <p><em>Confidentialité :</em> 
+					@if ($evenement['confidentialite'] == 0)                          
+					Public
+					@elseif ($evenement['confidentialite'] == 1)
+					Membres de l'assos
+					@elseif ($evenement['confidentialite'] == 2)
+					Responsables & bureau
+					@elseif ($evenement['confidentialite'] == 3)
+					Bureau
+					@elseif ($evenement['confidentialite'] == 4)
+					Prez & vice-prez
+					@endif
+				</p> --}}
+				<p><em>Campus concerné{{count($evenement->campus) > 0 ? 's' : ''}} :</em> {{ ucwords(implode(", ", $evenement->campus->pluck('label')->toArray())) }}</p>
 			</div>
 		</div>
-	</div>
-</div>
+	</section>
+</main>
 
 @endsection
+
+@pushonce('end-scripts')
+<script>
+	shareBtn = document.getElementById("share-btn")
+
+	function copierLien(){
+		navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
+			if (result.state === "granted" || result.state === "prompt") {
+				navigator.clipboard.writeText(window.location.href);
+				alert("Lien copié dans le presse-papier ")
+			}
+		});
+	}
+
+	shareBtn.addEventListener('click', ()=>{
+		if(window.matchMedia("(max-width: 710px)").matches && navigator.share) {//Montre l'API share sur mobile si possible
+			navigator.share({
+				title: '{{$evenement->titre}} - HypAIR',
+				text: "[Event - {{$evenement->titre}}]\nVoir sur HypAIR :",
+				url: window.location.href,
+			})
+		}else{			
+			copierLien();
+		}
+	})
+</script>
+@endpushonce

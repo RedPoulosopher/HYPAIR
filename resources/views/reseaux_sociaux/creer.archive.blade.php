@@ -4,8 +4,8 @@
 
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
 
 <style id="style_clair"></style>
 <style id="style_sombre"></style>
@@ -26,7 +26,7 @@
 				</div>
 			@endif
 
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">* Réseau social :</p>
 					<select name="reseaux_sociaux_liste_id" id="reseau_social" class="input" spellcheck="false" required select="{{old('reseaux_sociaux_liste_id') ?? ''}}">

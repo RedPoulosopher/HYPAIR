@@ -1,0 +1,259 @@
+.logo {
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 260px;
+    height: 260px;
+}
+
+.logo img {
+    width: 100%;
+    border-radius: 300px;
+}
+
+.categories {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.categories>span {
+    background: var(--grey);
+    padding: 4px 15px 5px 15px;
+    border-radius: 50px;
+    text-transform: capitalize;
+    color: var(--couleur_police_secondaire);
+    font-weight: var(--fw-regular);
+}
+
+.description {
+    margin-top: 40px;
+    max-width: 80ch;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-wrap: break-word;
+
+    p:has(img) {
+        display: flex;
+        justify-content: center;
+    }
+
+    a,
+    a:hover {
+        color: var(--link-color);
+        font-weight: var(--fw-medium);
+        text-decoration: underline;
+
+
+    }
+
+    p img {
+        width: 80%;
+        padding: 0 auto;
+    }
+
+}
+
+.membres>div {
+    position: relative;
+    cursor: pointer;
+}
+
+.membres .photo {
+    position: relative;
+    width: fit-content;
+}
+
+.membres .photo img {
+    border-radius: 500px;
+    background: var(--dark-grey);
+}
+
+.membres .photo .cercle {
+    border-radius: 500px;
+    border: 2px solid;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    border-color: var(--couleur_accentuation);
+}
+
+@media (max-width: 767.98px) {
+    .membres>div {
+        margin: 15px;
+    }
+
+    .membres .photo img {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media (min-width: 768px) {
+    .membres>div {
+        margin: 20px;
+    }
+
+    .membres .photo img {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+.reseaux_sociaux {
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+#modal_info_membre {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    box-sizing: border-box;
+    width: 95%;
+    max-width: 110ch;
+    max-height: 50ch;
+    z-index: 11;
+    border-radius: 20px;
+    background: var(--couleur_fond);
+    box-shadow: var(--ombre_grande);
+}
+
+#profil {
+    display: grid;
+    padding: 50px;
+    overflow: auto;
+}
+
+#close_modal {
+    position: absolute;
+    padding: 5px;
+    font-size: 1.5em;
+    top: 20px;
+    left: 20px;
+    background: var(--couleur_fond);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profil {
+    margin-top: auto;
+    margin-bottom: auto;
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 40px;
+    column-gap: 30px;
+}
+
+.photo_profil {
+    max-width: 260px;
+    max-height: 260px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.photo_profil img {
+    width: 100%;
+    border-radius: 300px;
+}
+
+.info_profil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 4;
+    flex-basis: 40ch;
+    row-gap: 20px;
+}
+
+#user-info {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    #prenoms {
+        display: flex;
+
+        h2 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .separator {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            color: var(--couleur_police_secondaire);
+            font-weight: normal;
+        }
+
+        .pronoms {
+            color: var(--couleur_police_secondaire);
+            font-weight: normal;
+            margin: 0;
+        }
+    }
+
+
+    #promo-campus {
+        grid-row: 2;
+        grid-column: 1 / span 3;
+        display: flex;
+        gap: 15px;
+
+        p {
+            display: inline-block;
+            color: var(--couleur_police_secondaire);
+            font-weight: normal;
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            i {
+                color: var(--couleur_police_secondaire);
+                font-size: .7rem;
+                margin-right: 8px;
+
+            }
+        }
+    }
+
+}
+
+.prenoms h2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.prenoms .pronoms {
+    color: grey;
+    font-weight: normal;
+}
+
+.bio {
+    max-width: 80ch;
+    text-align: justify;
+    overflow-wrap: break-word;
+}
+
+.reseaux_sociaux_profil {
+    margin-top: 12px;
+    gap: 12px;
+}
+
+.reseaux_sociaux_profil>a {
+    padding: 10px 18px;
+    border-radius: 50px;
+}

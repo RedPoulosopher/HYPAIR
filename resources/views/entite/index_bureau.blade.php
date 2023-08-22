@@ -2,12 +2,15 @@
 
 @section('titre', 'Entités')
 
+@pushonce('styles')
+    <link rel="stylesheet" href="{{ mix('/css/entite/entite.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/components/entite.css') }}" type="text/css">
+@endpushonce
+
 @section('content')
 
-<link rel="stylesheet" href="/css/entite.index.css" type="text/css" >
-
-<div id="wrapper">
-	<div id="contenu" class="grand">
+<main id="main-content">
+	<section>
 		<h1>Entités du {{ $bureau->nom }}</h1>
 
         <div class="liste_comite_club">
@@ -30,6 +33,6 @@
                 </a>
             @endforeach
         </div>
-	</div>
-</div>
+	</section>
+</main>
 @endsection

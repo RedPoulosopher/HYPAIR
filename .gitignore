@@ -1,6 +1,14 @@
 /node_modules
 /public/hot
 /public/storage
+/public/css
+/public/fonts
+/public/images/*
+!public/images/offline.svg
+!public/images/icons/
+/public/js
+public/sw.js
+public/mix-manifest.json
 /storage/*.key
 .env.backup
 .phpunit.result.cache
@@ -10,6 +18,8 @@ npm-debug.log
 yarn-error.log
 /vendor
 .env
+package-lock.json
+composer.lock
 
 questions.md
 *.lnk

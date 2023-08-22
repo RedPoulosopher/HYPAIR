@@ -1,0 +1,19 @@
+input[type="file"] {
+    display: none !important;
+}
+
+#file-upload {
+    display: block;
+    margin-top: 15px;
+    background-color: var(--dark-grey);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#filename {
+    display: block;
+    color: var(--couleur_police_secondaire);
+    font-style: italic;
+    margin-top: 8px;
+}

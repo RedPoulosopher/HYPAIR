@@ -1,0 +1,25 @@
+.documentation {
+    width: fit-content;
+    max-width: 92vw;
+    padding: 25px 35px;
+    box-sizing: border-box;
+}
+
+.section-content>.documentation {
+    width: 100%;
+}
+
+#gerer {
+    display: flex;
+    justify-content: center;
+}
+
+.bouton {
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

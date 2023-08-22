@@ -1,257 +1,221 @@
-@extends('layouts.app')
+@extends('layouts.app-without-sidebar')
 
 @section('titre', 'Évènement')
 
+@pushonce('styles')
+    <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/evenements/home-evenement.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
+@endpushonce
+
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-
-<style>
-.bouton_action {
-	min-width: 0;
-    max-width: 80px;
-    font-size: 0.8em;
-    padding: 5px;
-    margin: 2px 0 2px 10px;
-    text-align: start;
-}
-table {
-    border-spacing: 5px 25px;
-}
-.popup {
-    display: none;
-}
-.documentation {
-	width:100%;
-	background:var(--gris_2);
-	padding:35px;
-	border-radius:25px;
-	box-sizing:border-box;
-	border:1px solid var(--gris_1);
-	box-sizing: ;
-}
-#info {
-    position: absolute;
-    top: 450px;
-}
-</style>
-
-<div id="wrapper">
-    <div id="contenu" class="petit">
-        <h1>Évènements</h1>
-        @if(Session::has('success'))
-        <p class="explication">Bienvenue sur la page concernant les évènements !</p>
-        @endif
-        <div>
-            @csrf
-            @if ($errors->any())
-            <div class="erreurs">
-                @foreach ($errors->all() as $error)
-                <div>{{ $error }}</div>
-                @endforeach
-            </div>
+    <main id="main-content">
+        <section>
+            <h1>Évènements</h1>
+            @if (Session::has('success'))
+                <p class="explication">Bienvenue sur la page concernant les évènements !</p>
             @endif
-            
-
-            @if($gerer_evenement)
-		    <div style="margin:70px 0px;" class="centre-element">            		
-			    <a href="evenement/formulaire" class="bouton tertiaire ombre_petite administrateur">
-                    <span>Créer un évènement</span>
-                </a>
-            </div>
-            @endif
-		
-            @if (count($tables) != 0)
-            <div class="groupe ombre_petite">
-                <h2>Liste des évènements</h2>
-                <table style="text-align: center;">
-                    <tr>
-                        <th>Titre</th>
-                        <th>Début</th>
-                        <th>Fin</th>
-                        <th>Lieu</th><!--
-                        <th>Nombre de participants max</th>
-                        <th>Pour cotisants ?</th>-->
-                        <th>Confidentialité</th>
-                        <th>Statut</th>
-                    </tr> 
-                                     
-                    @foreach ($tables as $table)
-                    <tr>
-                        <td><?= $table['titre'] ?></td>
-                        <td><?= $table['temps_debut'] ?></td>
-                        <td><?= $table['temps_fin'] ?></td>
-                        <td><?= $table['lieu'] ?></td><!--
-                        <td><?= $table['max_participation'] ?></td>
-                        
-                        @if ($table['pour_cotisant'] == 0)                          
-                        <td>Oui</td>                        
-                        @else if ($table['pour_cotisant'] == 1)
-                        <td>Non</td>
-                        @endif-->
-
-                        @if ($table['confidentialite'] == 0)                          
-                        <td>Public</td>
-                        @elseif ($table['confidentialite'] == 1)
-                        <td>Membres de l'assos</td>
-                        @elseif ($table['confidentialite'] == 2)
-                        <td>Responsables & bureau</td>
-                        @elseif ($table['confidentialite'] == 3)
-                        <td>Bureau</td>
-                        @elseif ($table['confidentialite'] == 4)
-                        <td>Prez & vice-prez</td>
-                        @endif
-
-                        @if($table['confidentialite'] == 0)
-                            @if ($table['validation'] == 1)                          
-                            <td>Validé</td>
-                            @elseif ($table['validation'] == 0)
-                            <td>En attente de validation</td>
-                            @endif
-                        @else
-                            <td>/</td>
-                        @endif
-
-                        <td>
-                            <a href="evenement/<?= $table['slug'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:black; border-color:black;">Détail</a>
-                            @if($gerer_evenement)
-                            <p class="suppression_entite secondaire bouton bouton_action ombre_petite administrateur">Supprimer</p>
-                            @endif
-                        </td>
-
-                    </tr>
-                    @endforeach
-                </table>
-            </div>
-            @else
-            <h4>Il n'y a aucun évènement prévu !</h4>
-            @endif
+            <div class="section-content">
+                @csrf
+                @if ($errors->any())
+                    <div class="erreurs">
+                        @foreach ($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
 
 
-        @if($entite == 'bde' && in_array(13, $entite_user) && $gerer_evenement == 1)
-        <div class="groupe ombre_petite">
-            <h2>Liste des évènements en attente de validation</h2>
-
-            @if (count($tables_attente_validation) != 0)
-            <table style="text-align: center;">
-                    <tr>
-                        <th>Entités</th>
-                        <th>Titre</th>
-                        <th>Début</th>
-                        <th>Fin</th>
-                        <th>Lieu</th>
-                    </tr> 
-                                     
-                    @foreach ($tables_attente_validation as $table)                    
-                    @if ($table['validation'] == 0)
-                    <tr>
-                        <td><?= $table['nom'] ?></td>
-                        <td><?= $table['titre'] ?></td>
-                        <td><?= $table['temps_debut'] ?></td>
-                        <td><?= $table['temps_fin'] ?></td>
-                        <td><?= $table['lieu'] ?></td>
-                       
-                        <td>
-                            <a href="/<?= $table['uid'] ?>/entite/evenement/<?= $table['slug'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:black; border-color:black;">Detail</a><form method="POST" action="/bde/entite/evenement/validation">
-                                @csrf
-                                <button type="submit" name="id" value="<?= $table['id'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:green; border-color:green;">Valider</button>
-                            </form>
-                            <p class="suppression_bde secondaire bouton bouton_action ombre_petite administrateur">Supprimer</p>  
-                        </td>
-
-                    </tr>
-                    @endif
-                    @endforeach
-            </table>
-            @else
-            <h4>Il n'y a aucun évènement en attente de validation !</h4>
-            @endif
-        </div>      
-    </div>
-    @endif
-
-    
-    <div id="info" class="popup">
-            <div class="documentation ombre_petite" >
-                <div class="contenu_doc" id="contenu_doc">
-                    <h2>Attention !</h2>
-                    <p id="message">Vous êtes sur le point de supprimer un évènement. </p>
-                    <p style='font-style:italic;'>Cette action est irréversible.</p>
+                <div class="create-btn-container">
+                    <a href="evenement/formulaire" class="bouton tertiaire ombre_petite administrateur">
+                        <span><i class="fa-solid fa-plus"></i>Créer un évènement</span>
+                    </a>
                 </div>
 
-                <div style="display:flex;">
-                    <div id="gerer"></div>
-                    <p class="bouton secondaire info_bouton ombre_petite" style="margin:15px;">Annuler</p>
-                </diV>
+                <h2>Liste des évènements :</h2>
+                @if (count($evenements) != 0)
+                    <div class="table card">
+                        <table style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Début</th>
+                                    <th>Fin</th>
+                                    <th>Lieu</th>
+                                    <th>Modifier</th>
+                                    <th>Supprimer</th>
 
-            </div>
-        </div>
-</div>
+                                    {{-- <th>Nombre de participants max</th>
+                                    <th>Pour cotisants ?</th>
+                                    <th>Confidentialité</th>
+                                    <th>Statut</th> --}}
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($evenements as $evenement)
+                                    <tr>
+                                        <td><?= $evenement['titre'] ?></td>
+                                        <td><?= $evenement['temps_debut'] ?></td>
+                                        <td><?= $evenement['temps_fin'] ?></td>
+                                        <td><?= $evenement['lieu'] ?></td>
+
+                                        {{-- <td><?= $evenement['max_participation'] ?></td>
+                                        
+                                        @if ($evenement['pour_cotisant'] == 0)
+                                            <td>Oui</td>
+                                        @else
+                                            if ($evenement['pour_cotisant'] == 1)
+                                                <td>Non</td>
+                                        @endif --}}
 
 
-<script>
-
-events = {!!json_encode($tables)!!}
-
-const listener_click_retour = document.querySelectorAll('.info_bouton');
-
-listener_click_retour.forEach((listener_click_retour, index) => {
-    listener_click_retour.addEventListener("click", function(){
-        refresh();
-
-        document.getElementById("info").classList.add("popup");
-    });
-});
+                                        {{-- @if ($evenement['confidentialite'] == 0)
+                                            <td>Public</td>
+                                        @elseif ($evenement['confidentialite'] == 1)
+                                            <td>Membres de l'assos</td>
+                                        @elseif ($evenement['confidentialite'] == 2)
+                                            <td>Responsables & bureau</td>
+                                        @elseif ($evenement['confidentialite'] == 3)
+                                            <td>Bureau</td>
+                                        @elseif ($evenement['confidentialite'] == 4)
+                                            <td>Prez & vice-prez</td>
+                                        @endif --}}
 
 
-listener_events(events);
+                                        <td>
+                                            <a href="evenement/modifier/<?= $evenement['id'] ?>" class="bouton_action"
+                                                style="color:black; border-color:black;">
+                                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                                <span class="bouton_action warning suppression_event">
+                                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                                </span>
+                                            {{-- </a> --}}
+                                        </td>
 
-function listener_events(evenements) {
-    const listener_click_evenements = document.querySelectorAll('.suppression_entite');
-    listener_click_evenements.forEach((listener_click_evenement, index) => {
-        listener_click_evenement.addEventListener("click", function(){
-            afficher_informations_supplementaires(index, evenements);
-        });
-    });
-}
-
-
-// Partie BDE
-events_attente = {!!json_encode($tables_attente_validation)!!}
-listener_events_bde(events_attente);
-
-function listener_events_bde(evenements) {
-    const listener_click_evenements = document.querySelectorAll('.suppression_bde');
-    listener_click_evenements.forEach((listener_click_evenement, index) => {
-        listener_click_evenement.addEventListener("click", function(){
-            afficher_informations_supplementaires(index, events_attente);
-        });
-    });
-}
-
-function afficher_informations_supplementaires(index_evenement, evenements) {    
-    refresh();
-    //document.getElementById('info').style.top = event.clientX + "px";
-        document.getElementById("gerer").innerHTML += `
-            <form method="POST" action="evenement/suppression">
-                @csrf
-                @if ($gerer_evenement)
-                    <button type="submit" name="id" value=`+ evenements[index_evenement]['id'] + ` class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <p class="no-content">Aucun évènement n'est prévu pour le moment</p>
                 @endif
+
+
+                {{-- @if ($entite == 'bde' && in_array(13, $entite_user) && $gerer_evenement == 1)
+                    <div class="groupe card">
+                        <h2>Liste des évènements en attente de validation</h2>
+
+                        @if (count($evenements_attente_validation) != 0)
+                        <table style="text-align: center;">
+                                <thead>
+                                    <tr>
+                                        <th>Entités</th>
+                                        <th>Titre</th>
+                                        <th>Début</th>
+                                        <th>Fin</th>
+                                        <th>Lieu</th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    @foreach ($evenements_attente_validation as $evenement)                    
+                                    @if ($evenement['validation'] == 0)
+                                    <tr>
+                                        <td><?= $evenement['nom'] ?></td>
+                                        <td><?= $evenement['titre'] ?></td>
+                                        <td><?= $evenement['temps_debut'] ?></td>
+                                        <td><?= $evenement['temps_fin'] ?></td>
+                                        <td><?= $evenement['lieu'] ?></td>
+                                    
+                                        <td>
+                                            <a href="/<?= $evenement['uid'] ?>/entite/evenement/<?= $evenement['slug'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:black; border-color:black;">Detail</a><form method="POST" action="/bde/entite/evenement/validation">
+                                                @csrf
+                                                <button type="submit" name="id" value="<?= $evenement['id'] ?>" class="secondaire bouton bouton_action ombre_petite administrateur" style="color:green; border-color:green;">Valider</button>
+                                            </form>
+                                            <p class="suppression_bde secondaire bouton bouton_action ombre_petite administrateur">Supprimer</p>  
+                                        </td>
+    
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                </tbody>                                                
+                        </table>
+                        @else
+                        <h4>Il n'y a aucun évènement en attente de validation !</h4>
+                        @endif
+                    </div>      
+                </section>
+                @endif --}}
+
+
+                <div id="info" class="popup">
+                    <div class="documentation card">
+                        <div class="contenu_doc" id="contenu_doc">
+                            <h2>Attention !</h2>
+                            <p id="message">Vous êtes sur le point de supprimer un évènement. </p>
+                            <p style='font-style:italic;'>Cette action est irréversible.</p>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div id="gerer"></div>
+                            <p class="bouton secondaire info_bouton ombre_petite" style="margin:15px;">Annuler</p>
+                        </div>
+
+                    </div>
+                </div>
+    </main>
+
+
+    <script> 
+        events = {!! json_encode($evenements) !!}
+
+        const listener_click_retour = document.querySelectorAll('.info_bouton');
+
+        listener_click_retour.forEach((listener_click_retour, index) => {
+            listener_click_retour.addEventListener("click", function() {
+                refresh();
+
+                document.getElementById("info").classList.remove("visible");
+            });
+        });
+
+
+        listener_events(events);
+
+        function listener_events(events) {
+            const listener_click_events = document.querySelectorAll('.suppression_event');
+            listener_click_events.forEach((listener_click_event, index) => {
+                listener_click_event.addEventListener("click", function() {
+                    afficher_informations_supplementaires(index, events);
+                });
+            });
+        }
+
+        function afficher_informations_supplementaires(index_event, events) {
+            refresh();
+            //document.getElementById('info').style.top = event.clientX + "px";
+            document.getElementById("gerer").innerHTML += `
+            <form method="POST" action="evenement/suppression/${ events[index_event]['id']}">
+                @csrf
+                <button type="submit" name="id" value=${events[index_event]['id']} class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
             </form>`;
-    document.getElementById("message").innerText += " Voulez-vous vraiment supprimer : « " + evenements[index_evenement]["titre"] + " » ?";
+            document.getElementById("message").innerText += " Voulez-vous vraiment supprimer : « " + events[
+                index_event]["titre"] + " » ?";
 
-    document.getElementById("info").classList.remove("popup"); 
-}
+            document.getElementById("info").classList.add("visible");
+        }
 
-// Fin partie BDE
+        // Fin partie BDE
 
-function refresh() {
-    document.getElementById("message").innerText = 'Vous êtes sur le point de supprimer un évènement.';
-    document.getElementById("gerer").innerHTML = "";
-}
-
-
-</script>
+        function refresh() {
+            document.getElementById("message").innerText = 'Vous êtes sur le point de supprimer un évènement.';
+            document.getElementById("gerer").innerHTML = "";
+        }
+    </script>
 
 @endsection

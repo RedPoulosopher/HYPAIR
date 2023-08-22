@@ -15,6 +15,7 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AvanceeController;
 use App\Http\Controllers\LocalAuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -28,24 +29,35 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/entites/douai');
+// Route::get('/', function () {
+//     return redirect('/entites/douai');
+// });
+
+// Offline page for PWA
+Route::get('/offline', function () {
+
+    return view('pwa.offline');
 });
 
 Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });
 
-Route::get('/', [AccueilController::class, 'accueil']);
+Route::get('/a-propos', function () {
+    return view('a_propos');
+});
 
-Route::get('/mes-entites', [EntiteController::class, 'mes_entites']);
+// Route::get('/', [PostController::class, 'accueil']);
+// Attention à l'orthographe des campus (uid)
+Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']);
 
 Route::get('/entites', function () {
-    // return view('entite.choix_site');
-    return redirect('/entites/douai');
+    // return view('entite.choix_site'); 
+    
+    return redirect('entites/douai');
 })->name('racine');
 
-Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valencienne|dunkerke']); // liste de toutes les entités d'un site de l'école (e.g. Douai)
+Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']); // liste de toutes les entités d'un site de l'école (e.g. Douai)
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/connexion', 'connexion')->name("connexion");
@@ -100,6 +112,8 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/editer_infos_profil', 'maj_infos_profil');
     Route::get('/editer_reseaux_profil', 'editer_reseaux_profil');
     Route::post('/editer_reseaux_profil', 'enregistrer_reseaux_profil');
+    Route::get('/choix-promo/{promo}', 'choix_promo');
+    Route::get('/choix-campus/{campus}', 'choix_campus');
 });
 
 // les routes réservées à l'AIR
@@ -212,13 +226,23 @@ $routes_entites = function () {
 
         Route::controller(EvenementController::class)->group(function () {
             Route::get('/entite/evenement', 'show_home');
-            Route::post('/entite/evenement/suppression', 'suppression');
+            Route::post('/entite/evenement/suppression/{event_id}', 'suppression');
             Route::post('/entite/evenement/validation', 'validation');
             Route::get('/entite/evenement/formulaire', 'create');
             Route::post('/entite/evenement/formulaire', 'store');
-            Route::get('/evenement/modifier/{id}', 'edit');
-            Route::post('/evenement/modifier/{id}', 'update');
+            Route::get('/entite/evenement/modifier/{id}', 'edit');
+            Route::post('/entite/evenement/modifier/{id}', 'update');
             Route::get('/entite/evenement/{slug}', 'show');
+        });
+
+        Route::controller(PostController::class)->group(function () {
+            Route::get('/entite/post', 'home');
+            Route::get('/entite/post/formulaire', 'create');
+            Route::post('/entite/post/formulaire', 'store');
+            Route::get('/entite/post/modifier/{id}', 'edit');
+            Route::post('/entite/post/modifier/{id}', 'update');
+            Route::post('/entite/post/suppression/{id}', 'delete');
+            Route::get('/entite/post/{post_id}', 'show');
         });
     });
 
@@ -256,11 +280,11 @@ $routes_entites = function () {
 
 //Important !
 Route::controller(CalendrierController::class)->group(function () {
-    Route::get('/calendrier', 'calendrier_general');
+    Route::get('/calendrier/{site?}', 'calendrier_general')->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']);
     Route::post('/calendrier/validation', 'validation');
     Route::post('/calendrier/invalidation', 'invalidation');
     Route::post('/calendrier/suppression', 'suppression');
-    Route::get('/calendrier/index_mois_json_general/{annee}-{mois}', 'calendrier_index_json_general');
+    Route::get('/calendrier/index_mois_json_general/{annee}-{mois}/{site?}', 'calendrier_index_json_general')->where(['site' => 'douai|lille|valenciennes|dunkerque|alencon']);
 });
 
 Route::controller(LocalAuthController::class)->group(function () {

@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\GestionPhotoDeProfil;
+use \App\Services\AutorisationGestion;
 use \App\Models\ReseauSocialListe;
 use \App\Models\ReseauSocial;
+use \App\Models\Site;
+use \App\Models\SitesUsers;
 use Illuminate\Support\Facades\App;
 
 class UserController extends Controller
@@ -18,11 +21,34 @@ class UserController extends Controller
       $user = Auth::user();
       $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
       $reseaux_sociaux = $user->reseaux_sociaux()->get();
-      return view('espace_utilisateur.home', ['user'=>$user, 'reseaux_sociaux'=>$reseaux_sociaux]);
+
+      //Get entites
+      $entites_admin = [];
+      $entites_membre = [];
+
+      $membres = $user->membres_actuel;
+      foreach ($membres as $membre) {
+        $entite = $membre->entite;
+        $admin = AutorisationGestion::gestion_dans_entite("gerer_post", $entite)
+              || AutorisationGestion::gestion_dans_entite("gerer_entite", $entite)
+              || AutorisationGestion::gestion_dans_entite("gerer_evenement", $entite)
+              || AutorisationGestion::gestion_dans_entite("gerer_membre", $entite)
+              || AutorisationGestion::gestion_dans_entite("gerer_reseau", $entite);
+              // TODO : Ajouter les autres droits lorsque les boutons pour la docu, les tickets et les projets seront faits
+
+        if($admin)
+          array_push($entites_admin, $entite);
+        else
+          array_push($entites_membre, $entite);
+      }
+
+      return view('espace_utilisateur.home', ['user'=>$user, 'reseaux_sociaux'=>$reseaux_sociaux, 'entites_admin'=>$entites_admin ,'entites_membre'=>$entites_membre]);
     }
+
     if (App::environment('local')) {
       return redirect('/localauth');
     }
+
     return redirect('/connexion');
   }
 
@@ -42,10 +68,15 @@ class UserController extends Controller
 
       $validation = [
         /* lorsque le problème de la bibliothèque GD sera réglé remplacer la validation par le commentaire si dessous */
-  			/*'input-photo' => ['required','image','dimensions:min_width=512,min_height=512','max:2000'],*/
-        'input-photo' => ['required','file','mimes:png','dimensions:min_width=512,min_height=512','max:2000'],
+  			'input-photo' => ['required','image','dimensions:min_width=256,min_height=256','max:2000']
+        /*'input-photo' => ['required','file','mimes:png,','dimensions:min_width=512,min_height=512','max:2000']*/
   		];
-  		$this->validate($request, $validation);
+      $messages_custom = [
+        'input-photo.dimensions' => 'L\'image doit faire au minimum 256px en largeur et en hauteur.',
+        'input-photo.max' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 2 méga-octets.',
+        'input-photo.uploaded' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 2 méga-octets.'
+      ];
+  		$this->validate($request, $validation, $messages_custom);
       GestionPhotoDeProfil::stocker_photo_profil($request->file('input-photo'), $user);
       $user->photo = 1;
       $user->save();
@@ -109,6 +140,36 @@ class UserController extends Controller
       return back()->with('success');
     }
     return redirect('/connexion');
+  }
+
+
+  public function choix_promo(Request $request){
+    if (Auth::check()) {
+      $user = Auth::user();
+      $promo = $request->route('promo');
+
+      if(in_array($promo, ['CP1', 'CP2', 'CI1', 'CI2', 'CI3'])){//If valid promo
+        $user->promo = $promo;
+        $user->save();
+      }
+    }
+
+    return back();
+  }
+
+  public function choix_campus(Request $request){
+    // Prévoir un reset à un moment !
+    if (Auth::check()) {
+      $user = Auth::user();
+      $site_label_list =  explode("-", $request->route('campus'));
+
+      foreach($site_label_list as $site_label){
+        $site_id = Site::select('id')->where('label', $site_label)->first()->id;
+        $user->sites()->attach($site_id);
+      }
+    }
+
+    return back();
   }
 
 }

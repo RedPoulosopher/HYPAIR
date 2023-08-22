@@ -1,29 +1,51 @@
-::-webkit-scrollbar {
-  width: var(--scrollbar-width);
-  height: var(--scrollbar-width); // if horizontal scroll bar in the future...
-}
+@media (max-width: 710px) and (pointer: fine) and (pointer: none) {
 
-::-webkit-scrollbar-thumb {
-  background-color: var(--couleur_accentuation_air);
-  border-radius: 50px;
-  box-shadow: var(--ombre-grande);
-  // margin-block: 0.5em;
+  //Only on desktop
+  :root {
+    --scrollbar-width: 0px;
+  }
 
-  &:hover {
-    background-color: var(--couleur_accentuation_air_light);
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    width: 0;
+    height: 0;
   }
 }
 
-::-webkit-scrollbar-track {
-  background-color: var(--grey);
-  // border: solid 0.25em var(--grey);
-  // background-clip: padding-box;
-  border-radius: 50px;
-}
+@media (min-width: 710px) {
+  //Only show custom scroll bar if not on mobile
 
-// For mozilla firefox :
-@supports (scrollbar-color: white white) {
-  * {
-    scrollbar-color: var(--couleur_accentuation_air) var(--grey);
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+    height: var(--scrollbar-width); // if horizontal scroll bar in the future...
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--couleur_accentuation_air);
+    border-radius: 50px;
+    box-shadow: var(--ombre-grande);
+    // margin-block: 0.5em;
+
+    &:hover {
+      background-color: var(--couleur_accentuation_air_light);
+    }
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--grey);
+    // border: solid 0.25em var(--grey);
+    // background-clip: padding-box;
+    border-radius: 50px;
+  }
+
+  // For mozilla firefox :
+  @supports (scrollbar-color: white white) {
+    * {
+      scrollbar-color: var(--couleur_accentuation_air) var(--grey);
+    }
   }
 }

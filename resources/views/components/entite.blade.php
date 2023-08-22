@@ -1,4 +1,4 @@
-<a class="entite" href="{{ $asso->lien_relatif() }}">
+<a class="entite" href="{{ $destination }}">
     <div class="logo ombre_petite">
         <div class="cercle" style="border-color: {{ $asso->couleur_sombre }}"></div>
         <img src="{{ $asso->logo_url('petit') }}" />

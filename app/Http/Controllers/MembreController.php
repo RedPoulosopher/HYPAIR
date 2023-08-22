@@ -40,6 +40,8 @@ class MembreController extends Controller
 	}
 
 	public function index_admin(Request $request){
+		AutorisationGestion::protectionPage("gerer_membre");
+		
 		$entite_id = $request->route('entite_id') ?? session('entite_id');
 		$type = $request->route('type');
 
@@ -53,6 +55,9 @@ class MembreController extends Controller
 			$personnes_concernees = $entite->abonnes();
 		}
 
-		return view('membre.index_admin', ["personnes_concernees" => $personnes_concernees->get(), "roles"=>$roles]);
+		return view('membre.index_admin', [
+			"personnes_concernees" => $personnes_concernees->get(),
+			"roles" => $roles
+		]);
 	}
 }

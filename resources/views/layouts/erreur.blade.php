@@ -5,11 +5,25 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Erreur @yield('code_erreur') - HypAIR</title>
-		<link rel="stylesheet" href="/css/app.css" type="text/css" >
+		
+		@include('pwa.meta')
+
+		<link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" >
 	</head>
 	
 	<style>
-		#wrapper {padding-left:inherit;}
+		#wrapper {
+			padding-left:inherit;
+			min-width: 100vw;
+			min-height: 100vh;
+			box-sizing: border-box;
+			padding: 0 5vw;
+			
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
 	</style>
 	
 	<body class="dark-theme">

@@ -4,8 +4,8 @@
 
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-<link rel="stylesheet" href="/css/simpleMDE.css">
+<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}" type="text/css">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <div id="wrapper">
@@ -23,7 +23,7 @@
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<span>Cette avancée sera accessible via : <span id="lien_doc"></span></span>
 				<label class="input_groupe">
 					<p class="titre">* Titre :</p>

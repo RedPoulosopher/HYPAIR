@@ -1,0 +1,55 @@
+#select-popup {
+
+    #popup-content {
+        padding: 30px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        max-width: min(90vw, 800px);
+
+        h2 {
+            text-align: center;
+            margin: 0;
+        }
+
+        #liste-campus,
+        #liste-promos {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 15px 10px;
+
+            a {
+                display: inline-block;
+                background-color: var(--dark-grey);
+                width: max(10vw, 140px);
+                padding: max(2vw, 25px) 0;
+                text-align: center;
+                border-radius: 15px;
+                box-sizing: border-box;
+                transition: background-color 150ms ease-in-out;
+
+                &:hover {
+                    background-color: var(--light-grey);
+                }
+            }
+        }
+
+        #liste-promos {
+            a {
+                font-weight: var(--fw-bold);
+                font-size: 22px;
+            }
+        }
+
+        #liste-campus {
+            // display: none;
+
+            a {
+                font-weight: var(--fw-medium);
+            }
+        }
+
+    }
+}

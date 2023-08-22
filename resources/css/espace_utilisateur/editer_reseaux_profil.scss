@@ -1,0 +1,25 @@
+#choix_role {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+
+td span.role {
+    font-size: 0.95em;
+    color: var(--couleur_police_secondaire);
+    background: var(--light-grey);
+    padding: 4px 15px 5px 15px;
+    border-radius: 50px;
+    text-transform: capitalize;
+}
+
+td.lien {
+    text-align: left;
+}
+
+td a.icon-edit-2,
+td a.icon-trash {
+    cursor: pointer;
+}

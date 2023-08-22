@@ -1,0 +1,61 @@
+:root {
+    //Default = dark theme
+    --grey: #2e2e33;
+    --dark-grey: #212227;
+    --light-grey: #4b4b52;
+    --background-color: #17191b;
+    --couleur_accentuation_air: #cc3345;
+    --couleur_accentuation_air_light: #cc5966;
+    --couleur_accentuation: #cc3345;
+    --couleur_police_accentuation_air: #ffffff;
+    --couleur_police_accentuation: #ffffff;
+    --couleur_police_primaire: #ffffff;
+    --couleur_police_secondaire: #888;
+
+    --popup-background-color: rgba(0, 0, 0, .85);
+
+    --error-color: #ff2020;
+    --warning-color: #f9c85e;
+    --confidentiel-color: #ab7c3e;
+
+    --link-color: #0090c9;
+
+    // Shadows
+    --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.4);
+    --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+    --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.2) inset;
+    --ombre-card: 0px 6px 10px 0px rgba(0, 0, 0, 0.2);
+
+    // Font weights
+    --fw-thin: 100;
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+
+    --scrollbar-width: 0.5em;
+}
+
+body.light-theme {
+    --grey: #fff;
+    --dark-grey: #dfdfdf;
+    --background-color: #f5f5f5;
+    --light-grey: #dfdede;
+    --couleur_accentuation_air: #c5283b;
+    --couleur_accentuation_air_light: #d74c5c;
+    --couleur_accentuation: #c6152a;
+    --couleur_police_accentuation_air: #ffffff;
+    --couleur_police_accentuation: #ffffff;
+    --couleur_police_primaire: #292929;
+    --couleur_police_secondaire: #898989;
+
+
+    --confidentiel-color: #eda33f;
+
+    --ombre-grande: 0px 13px 26px 0px rgba(0, 0, 0, 0.2);
+    --ombre-petite: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+    --ombre-inset: 0px 2px 5px 1px rgb(0, 0, 0, 0.1) inset;
+    --ombre-card: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+}

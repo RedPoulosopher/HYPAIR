@@ -1,35 +1,35 @@
 @extends('layouts.app')
 @section('titre', 'Associations')
 @pushonce('styles')
-    <link rel="stylesheet" href="/css/entite.index.css" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/entite/entite.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ mix('/css/components/entite.css') }}" type="text/css">
 @endpushonce
 @section('content')
     <main id="main-content">
-        <div id="contenu" class="grand">
-            <a href="/" class="bouton retour">
-                < retour au choix du site</a>
-                    @foreach ($bureaux as $bureau)
-                        <h1>Entités du {{ $bureau->nom }}</h1>
-                        <div class="liste_comite_club">
-                            <x-entite :asso="$bureau" />
-                        </div>
+        <x-switch-campus :campus="$site" />
+        <section>
+            @foreach ($bureaux as $bureau)
+                <h1>Entités du {{ $bureau->nom }}</h1>
+                <div class="liste_comite_club">
+                    <x-entite :asso="$bureau" :destination="$bureau->lien_relatif()" />
+                </div>
 
-                        <div class="liste_comite_club">
-                            @foreach ($comites_clubs_dependants[$bureau->ratachement->value] as $comite_club)
-                                <x-entite :asso="$comite_club" />
-                            @endforeach
-                        </div>
+                <div class="liste_comite_club">
+                    @foreach ($comites_clubs_dependants[$bureau->ratachement->value] as $comite_club)
+                        <x-entite :asso="$comite_club" :destination="$comite_club->lien_relatif()" />
                     @endforeach
+                </div>
+            @endforeach
 
-                    @if (count($entites_independantes ?? []) > 0)
-                        <h1>Entites indépendantes</h1>
-                        <div class="liste_comite_club">
-                            @foreach ($entites_independantes as $entite_independante)
-                                <x-entite :asso="$entite_independante" />
-                            @endforeach
-                        </div>
-                    @endif
-        </div>
+            @if (count($entites_independantes ?? []) > 0)
+                <h1>Entites indépendantes</h1>
+                <div class="liste_comite_club">
+                    @foreach ($entites_independantes as $entite_independante)
+                        <x-entite :asso="$entite_independante" :destination="$entite_independante->lien_relatif()" />
+                    @endforeach
+                </div>
+            @endif
+        </section>
     </main>
 
     <script>

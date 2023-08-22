@@ -1,17 +1,5 @@
-/* Variables contenant les codes hexadécimaux des principales couleurs */
-@import "./accueil/variables";
-
-/* Style général de la page */
-@import "./importants/general";
-@import "./importants/scrollbar";
-@import "./importants/layout";
-
 /* Style des différents composants de la page */
-@import "./accueil/bouton-se-connecter";
 @import "./accueil/main-content";
-
-@import "./components/event.scss";
-
 /* Anciens imports : 
 @import './accueil/entity-list';
 @import './accueil/intro';
@@ -20,3 +8,9 @@
 
 // Pour le carousel des logos (utilisés sur la page des associations)
 //@import './accueil/carousel';
+
+@media (max-width: 615px) {
+    #main-content section {
+        margin-top: 50px;
+    }
+}

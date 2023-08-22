@@ -1,0 +1,39 @@
+section {
+    width: 100%;
+
+    .table-container {
+        width: 100%;
+    }
+}
+
+.fa-plus {
+    margin-right: 8px;
+}
+
+.create-btn-container {
+    margin: 0 0 40px;
+}
+
+.bouton_action {
+    min-width: 0;
+    max-width: 80px;
+    font-size: 0.8em;
+    padding: 5px;
+    text-align: start;
+    cursor: pointer;
+
+    &.warning i {
+        color: var(--couleur_accentuation);
+    }
+}
+
+table {
+    border-spacing: 5px 25px;
+    width: 100%;
+}
+
+@media screen and (max-width: 710px) {
+    .create-btn-container {
+        margin-bottom: 25px;
+    }
+}

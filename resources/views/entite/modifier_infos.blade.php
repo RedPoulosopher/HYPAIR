@@ -1,6 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.app-without-sidebar')
 
 @section('titre', $creation==1 ? "Créer" : "Modifier" . ' une entité')
+
+@pushonce('styles')
+<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/entite/modifier_infos.css') }}" type="text/css" >
+@endpushonce
 
 @section('content')
 
@@ -9,14 +15,8 @@ use Carbon\Carbon;
 $annee_actuelle = Carbon::now()->format("Y");
 @endphp
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
-
-<style id="style_clair"></style>
-<style id="style_sombre"></style>
-
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> {{$creation==1 ? "Créer" : "Modifier"}} une entite</h1>
 		@if(Session::has('success'))
 			<p class="explication">L'entite a été modifiée correctement !</p>
@@ -30,7 +30,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe flex">
 					<p class="titre">* Privée ?</p>
 					<input type="checkbox" name="privee" class="input" {{old('privee') ?? $documentation->privee ?? '' ? "checked" : ""}}/>
@@ -53,7 +53,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 				</label>
 			</div>
 
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">Courriel :</p>
 					<p class="description">Certaines entites possèdent un compte courriel fourni par la DISI.</p>
@@ -75,30 +75,6 @@ $annee_actuelle = Carbon::now()->format("Y");
 				<button type="submit" class="bouton primaire"><span>{{$creation==1 ? "SUIVANT" : "MODIFIER"}}</span></button>
 			</div>
 		</form>
-	</div>
-</div>
-
-<script>
-body = document.getElementsByTagName('body')[0]
-
-style_clair = document.getElementById('style_clair')
-el_couleur_claire = document.getElementById("couleur_claire")
-el_couleur_claire.addEventListener("change", function(){
-	body.classList.toggle('light-theme', true)
-	body.classList.toggle('dark-theme', false)
-	style_clair.innerHTML = 'body.light-theme{--couleur_accentuation:'+ this.value +'}'
-})
-style_sombre = document.getElementById('style_sombre')
-el_couleur_sombre = document.getElementById("couleur_sombre")
-el_couleur_sombre.addEventListener("change", function(){
-	body.classList.toggle('dark-theme', true)
-	body.classList.toggle('light-theme', false)
-	style_sombre.innerHTML = 'body.dark-theme{--couleur_accentuation:'+ this.value +'}'
-})
-
-document.querySelectorAll("select[select]").forEach(function(ceci){
-	to_select = ceci.getAttribute("select");
-	ceci.querySelector('[value="'+ to_select +'"]').setAttribute("selected","true")
-})
-</script>
+	</section>
+</main>
 @endsection

@@ -4,8 +4,8 @@
 
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-<link rel="stylesheet" href="/css/simpleMDE.css">
+<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <div id="wrapper">
@@ -23,7 +23,7 @@
 					@endforeach
 				</div>
 			@endif
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<span>Cette documentation sera accessible via : <span id="lien_doc"></span></span>
 				<label class="input_groupe">
 					<p class="titre">* Titre :</p>
@@ -49,7 +49,7 @@
 				</label>
 			</div>
 
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe">
 					<p class="titre">* Description de la documentation pour la recherche :</p>
 					<textarea name="description" pattern=".{30,250}" required title="au moins 30 caractères dans la description, et au plus 250" rows="5">{{old('description') ?? $documentation->description ?? ''}}</textarea>
@@ -73,7 +73,7 @@
 				</label>
 			</div>
 			
-			<div class="groupe ombre_petite">
+			<div class="groupe card">
 				<label class="input_groupe flex">
 					<p class="titre">Mettre en avant manuellement ?</p>
 					<input type="checkbox" name="mise_en_avant" class="input" {{old('mise_en_avant') ?? $documentation->mise_en_avant ?? '' ? "checked" : ""}}/>

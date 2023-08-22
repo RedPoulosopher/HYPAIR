@@ -1,60 +1,72 @@
-@extends('layouts.app')
+@extends('layouts.app-without-sidebar')
 
 @section('titre', 'Logotype')
 
 @section('content')
 
-<link rel="stylesheet" href="/css/formulaire.css" type="text/css" >
-<link rel="stylesheet" href="/css/documentation.css" type="text/css" >
+@pushonce('styles')
+<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
+<link rel="stylesheet" href="{{ mix('/css/entite/modifier_logotype.css') }}" type="text/css" >
+@endpushonce
 
-<style id="style_clair"></style>
-<style id="style_sombre"></style>
 
-<div id="wrapper">
-	<div id="contenu" class="petit">
+<main id="main-content">
+	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Ajouter un logotype</h1>
-		@if(Session::has('success'))
-			<p class="explication">Le logo a été modifié !</p>
-		@endif
-		<form method="POST" enctype="multipart/form-data">
-			@csrf
-			@if ($errors->any())
-				<div class="erreurs">
-					@foreach ($errors->all() as $error)
-						<div>{{ $error }}</div>
-					@endforeach
-				</div>
+
+		<div class="section-content">
+			@if(Session::has('success'))
+				<p class="explication">Le logo a été modifié !</p>
 			@endif
-			<div class="groupe ombre_petite">
-				<label class="input_groupe">
+			<form method="POST" enctype="multipart/form-data">
+				@csrf
+				@if ($errors->any())
+					<div class="erreurs">
+						@foreach ($errors->all() as $error)
+							<div>{{ $error }}</div>
+						@endforeach
+					</div>
+				@endif
+				<div class="groupe card">
+					<label class="input_groupe">
 					<p class="titre">* Logotype :</p>
 					<p class="description">Soit un svg de moins de 70ko, soit un png de ratio 1 et de plus de 512px.</p>
-					<input type="file" name="logo" class="input" {{$creation==1 ? "required" : ""}} accept=".png">
-				</label>
-			</div>
-				
-			<span>* les champs marqués d'une astérisque sont obligatoires</span>
-			<button type="submit" class="bouton primaire" style="float:right;"><span>{{$creation==1 ? "SUIVANT" : "MODIFIER"}}</span></button>
-		</form>
-	</div>
-</div>
+						<label id="file-upload">
+							<input type="file" name="logo" class="input" id="original_input" {{$creation==1 ? "required" : ""}} accept=".png">
+							Sélectionnez un fichier
+						</label>
+						<span id="filename">Aucun fichier sélectionné</span>
+					</label>
+				</div>
+					
+				<span>* les champs marqués d'une astérisque sont obligatoires</span>
+				<button type="submit" class="bouton primaire" style="float:right;"><span>{{$creation==1 ? "SUIVANT" : "MODIFIER"}}</span></button>
+			</form>
+		</div>
+	</section>
+</main>
 
 <script>
-body = document.getElementsByTagName('body')[0]
+	var input = document.getElementById('original_input');
+	var label = document.getElementById('filename');
 
-style_clair = document.getElementById('style_clair')
-el_couleur_claire = document.getElementById("couleur_claire")
-el_couleur_claire.addEventListener("change", function(){
-	body.classList.toggle('light-theme', true)
-	body.classList.toggle('dark-theme', false)
-	style_clair.innerHTML = 'body.light-theme{--couleur_accentuation:'+ this.value +'}'
-})
-style_sombre = document.getElementById('style_sombre')
-el_couleur_sombre = document.getElementById("couleur_sombre")
-el_couleur_sombre.addEventListener("change", function(){
-	body.classList.toggle('dark-theme', true)
-	body.classList.toggle('light-theme', false)
-	style_sombre.innerHTML = 'body.dark-theme{--couleur_accentuation:'+ this.value +'}'
-})
+	
+	input.addEventListener( 'change', function( e )
+	{
+		labelVal = label.innerHTML;
+		var fileName = '';
+		if( this.files && this.files.length > 1 )
+			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+		else
+			fileName = e.target.value.split( '\\' ).pop();
+
+		if( fileName )
+			label.innerHTML = "File name : " + fileName;
+		else
+			label.innerHTML = labelVal;
+	});
+
 </script>
+
 @endsection

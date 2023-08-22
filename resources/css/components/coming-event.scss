@@ -1,17 +1,24 @@
 .event-card {
     width: 100%;
-    background: var(--grey);
-    border-radius: 15px;
-    margin-top: 10px;
+
+    padding: 20px;
     margin-bottom: 10px;
-    padding-left: 20px;
-    box-shadow: var(--ombre-card);
+
+    h4 span {
+        font-weight: var(--fw-regular);
+        color: var(--couleur_police_secondaire);
+    }
+
+    &:not(:first-of-type) {
+        margin-top: 10px;
+    }
+
 
     h4 {
-        margin: 20px 0 10px;
+        margin: 0 0 10px;
     }
 
     p {
-        margin: 0 0 20px;
+        margin: 0;
     }
 }

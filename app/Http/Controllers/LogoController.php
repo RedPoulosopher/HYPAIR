@@ -48,7 +48,7 @@ class LogoController extends Controller
 		if($request->query('creation')){
 			return redirect()->route('modifier_couleur', ['entite_uid' => $entite->uid, 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
-			return redirect($entite->url());
+			return redirect($entite->lien_relatif());
 		}
     }
 
@@ -91,7 +91,7 @@ class LogoController extends Controller
 		if($request->query('creation')){
 			return redirect()->route('gestion_membres', ['entite_uid' => $entite->uid, 'type' => 'membres', 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
-			return redirect($entite->url());
+			return redirect($entite->lien_relatif());
 		}
     }
 

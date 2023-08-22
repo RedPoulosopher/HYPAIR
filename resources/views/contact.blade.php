@@ -42,7 +42,7 @@
 				<p id="mail">N’hésitez pas également à nous contacter sur notre adresse mail : <a href="mailto:air@imt-nord-europe.fr"><em>air@imt-nord-europe.fr</em></a></p>
 				<button type="submit" class="bouton primaire icon-after-mail ombre_petite" style="float:right;"><span>ENVOYER</span></button>
 			{!! Form::close() !!} --}}
-			<p id="mail">N’hésitez pas à nous contacter sur notre adresse mail pour toute demande : <a href="mailto:air@imt-nord-europe.fr"><em>air@imt-nord-europe.fr</em></a></p>
+			<p id="mail">N’hésitez pas à nous contacter sur notre adresse mail pour toute demande : <a href="mailto:air@etu.imt-nord-europe.fr"><em>air@etu.imt-nord-europe.fr</em></a></p>
 
 		</div>
 	</section>

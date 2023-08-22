@@ -1,7 +1,6 @@
-@media (max-width: 710px),
-//Only on desktop
-(pointer: fine),
-(pointer: none) {
+@media (max-width: 710px) and (pointer: fine) and (pointer: none) {
+
+  //Only on desktop
   :root {
     --scrollbar-width: 0px;
   }

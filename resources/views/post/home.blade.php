@@ -28,13 +28,11 @@
                 @endif
 
 
-                @if ($gerer_post)
                 <div class="create-btn-container">
                     <a href="post/formulaire" class="bouton tertiaire ombre_petite administrateur">
                         <span><i class="fa-solid fa-plus"></i>Créer un post</span>
                     </a>
                 </div>
-                @endif
 
                 <h2>Liste des posts :</h2>
 
@@ -43,17 +41,16 @@
                         @foreach ($posts as $post)
                             <li>
                                 <x-post :post="$post" :id="$post->id" />
-                                @if ($gerer_post)
-                                    <a href="post/modifier/<?= $post->id ?>" class="bouton_action"
-                                        style="color:black; border-color:black;">
-                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                    </a>
-                                    {{-- <a href="post/delete/{{ $post->id }}"></a> --}}
-                                
-                                    <span class="bouton_action warning suppression_post">
-                                        <i class="fa-solid fa-trash fa-lg"></i>
-                                    </span>
-                                @endif
+                                    
+                                <a href="post/modifier/<?= $post->id ?>" class="bouton_action"
+                                    style="color:black; border-color:black;">
+                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                </a>
+                                {{-- <a href="post/delete/{{ $post->id }}"></a> --}}
+                            
+                                <span class="bouton_action warning suppression_post">
+                                    <i class="fa-solid fa-trash fa-lg"></i>
+                                </span>
                             </li>
                         @endforeach
                     </ul>
@@ -109,9 +106,7 @@
             document.getElementById("gerer").innerHTML += `
             <form method="POST" action="post/suppression/${ posts[index_post]['id']}">
                 @csrf
-                @if ($gerer_post)
-                    <button type="submit" name="id" value=${posts[index_post]['id']} class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
-                @endif
+                <button type="submit" name="id" value=${posts[index_post]['id']} class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
             </form>`;
             document.getElementById("message").innerText += " Voulez-vous vraiment supprimer : « " + posts[
                 index_post]["titre"] + " » ?";

@@ -16,7 +16,6 @@
 	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Gestion des Membres</h1>
 
-        @if($gerer_membre)
         <div class="section-content">
             <h2>Ajouter un membre :</h2>
             <form method="POST">
@@ -44,7 +43,6 @@
                 </div>
             </form>
         </div>
-        @endif
 
             {{-- <div id="choix_role">
                 <a href="membres" class="bouton secondaire">Membres</a>

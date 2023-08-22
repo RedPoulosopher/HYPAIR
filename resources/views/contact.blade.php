@@ -19,7 +19,8 @@
 			@else
 				<p class="explication">Un problème ? Une question ? L'AIR peut sûrement vous aider !</p>
 			@endif
-			{!! Form::open() !!}
+			
+			{{-- {!! Form::open() !!}
 				<div class="champs_conteneur" for="courriel">
 					<label class="champs flex border">
 						<p class="titre">Adresse mail :</p>
@@ -40,7 +41,9 @@
 				</div>
 				<p id="mail">N’hésitez pas également à nous contacter sur notre adresse mail : <a href="mailto:air@imt-nord-europe.fr"><em>air@imt-nord-europe.fr</em></a></p>
 				<button type="submit" class="bouton primaire icon-after-mail ombre_petite" style="float:right;"><span>ENVOYER</span></button>
-			{!! Form::close() !!}
+			{!! Form::close() !!} --}}
+			<p id="mail">N’hésitez pas à nous contacter sur notre adresse mail pour toute demande : <a href="mailto:air@imt-nord-europe.fr"><em>air@imt-nord-europe.fr</em></a></p>
+
 		</div>
 	</section>
 </main>

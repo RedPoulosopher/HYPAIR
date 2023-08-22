@@ -28,14 +28,21 @@
                     </label>
                     <div class="input_groupe">
                         <p class="titre">Rôle du membre :</p>
-                        <input type="hidden" id="search_role_input_id" name="role_id">
-                        <input class="input" id="search_role_input" name="role_name">
-                        <div id="roles">
+                        {{-- <input type="hidden" id="search_role_input_id" name="role_id"> --}}
+                        {{-- <input class="input" id="search_role_input" name="role_name"> --}}
+                        <select class="input" id="role-input" name="role_id">                            
+                            @foreach ($roles as $role)
+                            <option value="{{$role->id}}">{{ ucfirst($role->label) }}</option>
+                            @endforeach
+                        </select>
+                        {{-- <div id="roles">
                             <p style="display:none">aucun rôle ne correspond à cette recherche. Contactez l'AIR pour le rajouter.</p>
                             @foreach ($roles as $role)
                                 <option value="{{$role->id}}">{{$role->label}}</option>
-                            @endforeach
-                        </div>
+                            @endforeach 
+                        </div> --}}
+                        <p id="droits-role">
+                        </p>
                     </div>
                     <div style="display:flex;justify-content: flex-end;">
                         <button type="submit" class="bouton primaire valider_role">VALIDER</span></button>
@@ -72,7 +79,7 @@
                                         role_id="{{ $membre["roles.id"] }}"
                                         user_uid="{{$membre["uid"]}}"
                                         class="icon-edit-2"
-                                        title="modifier"
+                                        title="Modifier"
                                         onclick="afficher_menu_membre(this)"></a>
                                     </td>
                                 </tr>
@@ -86,108 +93,123 @@
 </main>
 
 
-<script type="text/javascript" src="{{ mix('/js/elasticlunr.min.js') }}"></script>
+{{-- <script type="text/javascript" src="{{ mix('/js/elasticlunr.min.js') }}"></script> --}}
 <script>
-const input_role_nom = document.getElementById('search_role_input');
-const input_role_id = document.getElementById('search_role_input_id');
+var roles = {!! json_encode($roles) !!}
+var roleInput = document.getElementById('role-input');
+var droitDuRole = document.getElementById('droits-role');
 
+roleInput.addEventListener('change', (event) => {
+    var id = roleInput.value - 1;
 
-//génère l'index
-var index = elasticlunr(function () {
-    this.addField('nom_role');
-    this.setRef('index');
-});
-
-function remove_accent(str){
-    return str.normalize("NFD").replace(/\p{Diacritic}/gu, "")
-}
-
-//rentre les données dans l'index
-role_els = document.querySelectorAll('#roles option')
-for(var i = 0; i < role_els.length; i++){
-	role_id = role_els[i].value
-	nom_role = role_els[i].innerText
-    nom_role = remove_accent(nom_role)
-
-	index.addDoc({"index":i, "nom_role":nom_role, "index_role":role_id})
-
-    role_els[i].addEventListener('click', function(){
-        input_role_nom.value = this.innerText;
-        input_role_id.value = this.value;
-    })
-}
-
-input_role_nom.addEventListener("keyup", function(){
-	a_rechercher = this.value
-
-    if(a_rechercher==""){
-        for(i=0; i<role_els.length; i++){
-            role_els[i].style.display = "none"
-        }
-    } else {
-        a_rechercher = remove_accent(a_rechercher)
-        rechercher(a_rechercher)
-    }
+    var text = `${roles[id].gerer_post == 1 ? 'les posts, ' : ''}${roles[id].gerer_evenement == 1 ? 'les évènements, ' : ''}${roles[id].gerer_entite == 1 ? 'l\'entite, ' : ''}${roles[id].gerer_membre == 1 ? 'les membres, ' : ''}${roles[id].gerer_reseau == 1 ? 'les réseaux sociaux, ' : ''}`
+    console.log(roles[id].gerer_evenement == 1)
+    droitDuRole.innerText = (text.length > 0 ? "Peut gérer " : '') + text.slice(0, -2)//remove last comma
 })
 
-aucun_role = document.querySelector('#roles p')
-bouton_valider = document.querySelector('.bouton.primaire.valider_role')
-function rechercher(a_rechercher){
-	resultats = index.search(a_rechercher, {
-		expand: true
-	});
+
+
+
+
+// const input_role_nom = document.getElementById('search_role_input');
+// const input_role_id = document.getElementById('search_role_input_id');
+
+
+// //génère l'index
+// var index = elasticlunr(function () {
+//     this.addField('nom_role');
+//     this.setRef('index');
+// });
+
+// function remove_accent(str){
+//     return str.normalize("NFD").replace(/\p{Diacritic}/gu, "")
+// }
+
+// //rentre les données dans l'index
+// role_els = document.querySelectorAll('#roles option')
+// for(var i = 0; i < role_els.length; i++){
+// 	role_id = role_els[i].value
+// 	nom_role = role_els[i].innerText
+//     nom_role = remove_accent(nom_role)
+
+// 	index.addDoc({"index":i, "nom_role":nom_role, "index_role":role_id})
+
+//     role_els[i].addEventListener('click', function(){
+//         input_role_nom.value = this.innerText;
+//         input_role_id.value = this.value;
+//     })
+// }
+
+// input_role_nom.addEventListener("keyup", function(){
+// 	a_rechercher = this.value
+
+//     if(a_rechercher==""){
+//         for(i=0; i<role_els.length; i++){
+//             role_els[i].style.display = "none"
+//         }
+//     } else {
+//         a_rechercher = remove_accent(a_rechercher)
+//         rechercher(a_rechercher)
+//     }
+// })
+
+// aucun_role = document.querySelector('#roles p')
+// bouton_valider = document.querySelector('.bouton.primaire.valider_role')
+// function rechercher(a_rechercher){
+// 	resultats = index.search(a_rechercher, {
+// 		expand: true
+// 	});
     
-    trier_afficher_resultats(resultats)
+//     trier_afficher_resultats(resultats)
 
-    if(resultats.length==0){
-        aucun_role.style.display = "block"
-        bouton_valider.disabled = true
-    } else {
-        aucun_role.style.display = "none"
-        bouton_valider.disabled = false
-    }
-}
+//     if(resultats.length==0){
+//         aucun_role.style.display = "block"
+//         bouton_valider.disabled = true
+//     } else {
+//         aucun_role.style.display = "none"
+//         bouton_valider.disabled = false
+//     }
+// }
 
-//affiche les bons résultats pour la recherche
-function trier_afficher_resultats(resultats){
-	for(i=0; i<role_els.length; i++){
-		role_els[i].style.display = "none"
-	}
-    input_role_id.value = resultats[0]["doc"]["index_role"]
-	for(i=0; i<resultats.length; i++){
-		index_resultat = resultats[i]["ref"]
-		role_els[parseInt(index_resultat)].style.display = "block"
-		role_els[parseInt(index_resultat)].style.order = i+1
-	}
-}
-
-
+// //affiche les bons résultats pour la recherche
+// function trier_afficher_resultats(resultats){
+// 	for(i=0; i<role_els.length; i++){
+// 		role_els[i].style.display = "none"
+// 	}
+//     input_role_id.value = resultats[0]["doc"]["index_role"]
+// 	for(i=0; i<resultats.length; i++){
+// 		index_resultat = resultats[i]["ref"]
+// 		role_els[parseInt(index_resultat)].style.display = "block"
+// 		role_els[parseInt(index_resultat)].style.order = i+1
+// 	}
+// }
 
 
-datatable_options = {
-    "perPage" : 15,
-    "columns" : [{
-            select: [2],
-            sortable: false,
-            searchable: true,
-        },{
-            select: [3],
-            sortable: false,
-            searchable: false,
-        },
-    ]
-}
-new JSTable("#index", { ...datatable_options });
+
+
+// datatable_options = {
+//     "perPage" : 15,
+//     "columns" : [{
+//             select: [2],
+//             sortable: false,
+//             searchable: true,
+//         },{
+//             select: [3],
+//             sortable: false,
+//             searchable: false,
+//         },
+//     ]
+// }
+// new JSTable("#index", { ...datatable_options });
 
 el_user_uid = document.getElementById("user_uid")
-el_select_role = document.getElementById("select_role")
 function afficher_menu_membre(ceci){
     membre_id = ceci.getAttribute("membre_id")
     user_uid = ceci.getAttribute("user_uid")
     role_id = ceci.getAttribute("role_id")
 
     el_user_uid.value = user_uid
-    el_select_role.querySelector('[value="'+role_id+'"]').selected = true
+    roleInput.querySelector('[value="'+role_id+'"]').selected = true
 }
 </script>
 @endsection

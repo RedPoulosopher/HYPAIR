@@ -1,23 +1,29 @@
 article {
-    padding: 10px 20px 10px 20px;
+    padding: 20px;
 
     p {
-        font-size: 1.2rem;
+        // font-size: 1.2rem;
         text-align: justify;
+
+        &:not(:last-child) {
+            margin: 0 0 50px;
+        }
 
         a {
             color: var(--couleur_accentuation);
             transition: all 0.2s ease;
+            text-decoration: underline;
 
             &:hover {
                 color: var(--couleur_accentuation_air_light);
+                text-decoration: underline;
             }
         }
     }
 }
 
-@media (max-width: 615px) {
+@media (max-width: 710px) {
     article p {
-        font-size: 0.8rem;
+        font-size: 0.95em;
     }
 }

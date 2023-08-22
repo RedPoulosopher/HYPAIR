@@ -1,0 +1,21 @@
+article {
+    padding: 10px 20px 10px 20px;
+
+    p {
+        font-size: 1.2rem;
+
+        a {
+            color: var(--couleur_accentuation);
+
+            &:hover {
+                color: red;
+            }
+        }
+    }
+}
+
+@media (max-width: 615px) {
+    article p {
+        font-size: 0.8rem;
+    }
+}

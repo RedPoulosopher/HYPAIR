@@ -233,17 +233,13 @@ table {
     width: 100%;
 
     thead tr {
-        border-bottom: 1px solid var(--light-grey);
+        border-bottom: 2px solid var(--light-grey);
     }
 
     tr {
         text-align: center;
         color: var(--couleur_police);
         border-bottom: 1px transparent;
-    }
-
-    tbody tr:hover {
-        border-bottom: 1px solid var(--light-grey);
     }
 
     th {

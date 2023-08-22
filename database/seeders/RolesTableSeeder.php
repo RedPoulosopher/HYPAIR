@@ -22,8 +22,6 @@ class RolesTableSeeder extends Seeder
             [["gerer_entite" => 0,"gerer_documentation" => 0,"gerer_evenement" => 0,"gerer_membre" => 0,"gerer_projet" => 0,"gerer_ticket" => 1,"gerer_post" => 0,"gerer_reseau" => 0,],['niveau_admin' => 13],['responsable logistique','responsable pôle monde', 'responsable pôle Nord', 'responsable pôle MEUD', 'responsable bar', 'responsable spectacle', 'responsable soirée', 'responsable décoration', 'responsable restauration/hébergement', 'responsable sponsorisation', 'responsable animation', 'responsable WEI']],
             [["gerer_entite" => 0,"gerer_documentation" => 0,"gerer_evenement" => 0,"gerer_membre" => 0,"gerer_projet" => 0,"gerer_ticket" => 1,"gerer_post" => 0,"gerer_reseau" => 0,],['niveau_admin' => 8],['pôle communication','pôle logistique','pôle monde', 'pôle Nord', 'pôle MEUD', 'pôle bar', 'pôle spectacle', 'pôle soirée', 'pôle décoration', 'pôle restauration/hébergement', 'pôle sponsorisation', 'pôle animation', 'pôle wei',]],
             [["gerer_entite" => 0,"gerer_documentation" => 0,"gerer_evenement" => 0,"gerer_membre" => 0,"gerer_projet" => 0,"gerer_ticket" => 0,"gerer_post" => 0,"gerer_reseau" => 0,],['niveau_admin' => 5],['membre',]],
-            [["gerer_entite" => 0,"gerer_documentation" => 0,"gerer_evenement" => 0,"gerer_membre" => 0,"gerer_projet" => 0,"gerer_ticket" => 0,"gerer_post" => 0,"gerer_reseau" => 0,],['niveau_admin' => 2],['abonné·e',]],
-            [["gerer_entite" => 0,"gerer_documentation" => 0,"gerer_evenement" => 0,"gerer_membre" => 0,"gerer_projet" => 0,"gerer_ticket" => 0,"gerer_post" => 0,"gerer_reseau" => 0,],['niveau_admin' => 2],['public',]],
         );
 
         foreach($roles as $role){

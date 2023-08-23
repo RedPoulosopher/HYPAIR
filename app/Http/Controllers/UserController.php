@@ -68,13 +68,13 @@ class UserController extends Controller
 
       $validation = [
         /* lorsque le problème de la bibliothèque GD sera réglé remplacer la validation par le commentaire si dessous */
-  			'input-photo' => ['required','image','dimensions:min_width=256,min_height=256','max:2000']
+  			'input-photo' => ['required','image','dimensions:min_width=256,min_height=256','max:100000']
         /*'input-photo' => ['required','file','mimes:png,','dimensions:min_width=512,min_height=512','max:2000']*/
   		];
       $messages_custom = [
         'input-photo.dimensions' => 'L\'image doit faire au minimum 256px en largeur et en hauteur.',
-        'input-photo.max' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 2 méga-octets.',
-        'input-photo.uploaded' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 2 méga-octets.'
+        'input-photo.max' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 100 méga-octets.',
+        'input-photo.uploaded' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 100 méga-octets.'
       ];
   		$this->validate($request, $validation, $messages_custom);
       GestionPhotoDeProfil::stocker_photo_profil($request->file('input-photo'), $user);

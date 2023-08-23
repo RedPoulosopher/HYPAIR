@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/importants/layout-without-sidebar.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/components/select-promo-campus-popup.css') }}">
+    <link rel="stylesheet" href="{{ mix('/css/components/pwa-popup.css') }}">
     @stack('styles')
 </head>
 
@@ -21,6 +22,8 @@
 <body>
     @include('layouts.theme')
     @stack('start-scripts')
+    
+    <x-pwa-popup />
 
     @php
         // Code pour gérer le login utilisateur

@@ -67,9 +67,7 @@ class UserController extends Controller
       $user = Auth::user();
 
       $validation = [
-        /* lorsque le problème de la bibliothèque GD sera réglé remplacer la validation par le commentaire si dessous */
   			'input-photo' => ['required','image','dimensions:min_width=256,min_height=256','max:100000']
-        /*'input-photo' => ['required','file','mimes:png,','dimensions:min_width=512,min_height=512','max:2000']*/
   		];
       $messages_custom = [
         'input-photo.dimensions' => 'L\'image doit faire au minimum 256px en largeur et en hauteur.',

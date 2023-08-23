@@ -6,14 +6,6 @@
 
     display: none;
 
-    &.visible {
-        display: flex;
-
-        #pwa-popup-content {
-            animation: popup-anim 1s ease-in-out infinite;
-        }
-    }
-
     #pwa-popup-content {
         position: fixed;
         text-align: center;
@@ -45,6 +37,16 @@
         img {
             display: inline-block;
             width: 1em;
+        }
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #pwa-popup.visible {
+        display: flex;
+
+        #pwa-popup-content {
+            animation: popup-anim 1s ease-in-out infinite;
         }
     }
 }

@@ -18,7 +18,9 @@ const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.n
 
 // Checks if should display install popup notification:
 var pwaPopup = document.getElementById('pwa-popup')
-if (isIos() && !isInStandaloneMode()) {
+var userAlreadyClosedPopup = sessionStorage.getItem('pwaPopupClosed') || false
+
+if (isIos() && !isInStandaloneMode() && !userAlreadyClosedPopup) {
     pwaPopup.classList.add('visible')
 }
 
@@ -26,6 +28,7 @@ if (isIos() && !isInStandaloneMode()) {
 pwaPopup.addEventListener('click', (event) => {
     if(event.target.id == 'pwa-popup'){
         pwaPopup.classList.remove('visible')
+        sessionStorage.setItem('pwaPopupClosed', true)
     }
 })
 </script>

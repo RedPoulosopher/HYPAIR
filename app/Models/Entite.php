@@ -30,6 +30,7 @@ class Entite extends Model
         'description_md',
         'couleur_claire',
         'couleur_sombre',
+        'hidden'
     ];
 
     protected $casts = [

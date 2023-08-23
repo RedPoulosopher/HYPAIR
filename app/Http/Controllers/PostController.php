@@ -283,10 +283,26 @@ class PostController extends Controller
 			abort(403);
 		}
 
+        $canSeePost = false;
+		if (!$post->confidentiel) {
+			$canSeePost = true;
+		}
+		else {
+			if (Auth::check()) {
+				$user = Auth::user();
+				$campus = $post->campus;
+				foreach ($campus as $site)
+					if ($user->campus->contains($site)) {
+							$canSeePost = true;
+					}
+			}
+		}
+
 		return view('post.show-post', [
 			'post' => $post,
 			'entite' => $entite,
-			'gerer_post' => AutorisationGestion::gestion("gerer_post")
+			'gerer_post' => AutorisationGestion::gestion("gerer_post"),
+            'canSeePost' => $canSeePost
 		]);
 	}
 }

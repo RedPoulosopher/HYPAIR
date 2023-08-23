@@ -3,9 +3,9 @@
 @section('code_erreur', '503')
 
 @section('content')
-    <h1 style="font-family: 'GearsOfPeace';font-size:5em">503</h1>
+    <h1>503</h1>
 
-    <h1>Nous travaillons ici ! Tu pourras bientôt revenir</h1>
+    <h2>Le site est actuellement en maintenance ! Reviens plus tard</h2>
 
     <div>
         <style>
@@ -23,8 +23,37 @@
                 }
             }
             svg {
-                max-width:300px;
+                width:300px;
+                max-width: 60vw;
                 margin: 40px 0px;
+            }
+            h1{
+                font-size: 5em;
+                font-family: 'GearsOfPeace'
+            }
+            h2{
+                text-align: center;
+            }
+            p{
+                text-align: center;
+                max-width: 800px;
+                line-height: 1.5em;
+                color: var(--couleur_police_secondaire);
+            }
+            a{
+                font-weight: var(--fw-bold);
+                color: var(--couleur_police_primaire);
+            }
+
+            @media screen and (max-width: 710px){
+                h1{
+                    font-size: 3.5em;
+                }
+            }
+            @media screen and (min-width: 710px){
+                h2{                    
+                    font-size: 1.5em;
+                }
             }
         </style>
 
@@ -34,5 +63,5 @@
             </g>
         </svg>
     </div>
-    <p>Nos meilleurs ingénieurs travaillent sur une amélioration du site. Si tu veux vraiment nous parler, tu peux toujours nous contacter !</p>
+    <p>Nos meilleurs ingénieurs travaillent sur une amélioration du site. Si tu veux vraiment nous parler, tu peux toujours nous contacter sur l'adresse <a href="mailto:air@etu.imt-nord-europe.fr">air@etu.imt-nord-europe.fr</a></p>
 @endsection

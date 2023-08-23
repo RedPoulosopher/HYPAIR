@@ -142,10 +142,26 @@ class EvenementController extends Controller
 			abort(403);
 		}
 
+		$canSeeEvent = false;
+		if (!$evenement->confidentiel) {
+			$canSeeEvent = true;
+		}
+		else {
+			if (Auth::check()) {
+				$user = Auth::user();
+				$campus = $evenement->campus;
+				foreach ($campus as $site)
+					if ($user->campus->contains($site)) {
+							$canSeeEvent = true;
+					}
+			}
+		}
+
 		return view('evenements.show-evenement', [
 			'evenement' => $evenement,
 			'entite' => $entite,
-			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement")
+			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement"),
+			'canSeeEvent' => $canSeeEvent
 		]);
 	}
 

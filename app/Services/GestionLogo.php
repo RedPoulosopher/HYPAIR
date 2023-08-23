@@ -9,7 +9,15 @@ use Illuminate\Support\Facades\Validator;
 
 class GestionLogo {
     public static function validation_logo($image){
-        Validator::make(["logo" => $image], ['logo' => ['required','file','mimes:png','dimensions:min_width=512,min_height=512,ratio=1']])->validate();
+        $validation = [
+            'logo' => ['required','image','dimensions:min_width=512,min_height=512','max:100000']
+        ];
+        $messages_custom = [
+            'logo.dimensions' => 'L\'image doit faire au minimum 512px en largeur et en hauteur.',
+            'logo.max' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 100 méga-octets.',
+            'logo.uploaded' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 100 méga-octets.'
+        ];
+        Validator::make(["logo" => $image], $validation, $messages_custom)->validate();
     }
 
     static function stocker_fichier_logo($image, $chemin){
@@ -17,6 +25,13 @@ class GestionLogo {
         $image_chemin = $chemin . $image_nom;
 
         $image_rz = Image::make($image);
+
+        $hauteur = $image_rz->height();
+        $largeur = $image_rz->width();
+        $taille_carre = $hauteur > $largeur ? $largeur : $hauteur;
+        
+        $image_rz->crop($taille_carre,$taille_carre);
+        $image_rz->orientate();
 
         $image_rz->resize(512, 512);
         Storage::put($image_chemin ."-moyen.png", $image_rz->encode("png"));

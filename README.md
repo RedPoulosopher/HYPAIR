@@ -124,11 +124,13 @@ Vous pouvez alors faire `Ctrl + clic gauche` sur l'URL qui s'affiche dans la con
 - Si ce n'est pas déjà fait, changer le numéro de version des liens vers les fichiers CSS dans les layouts
 - Se connecter en SSH au serveur HackLab chez OVH
 - Se rendre dans le repository : `cd ../home/services/hypair/src`
+- Se connecter au terminal du container : `docker exec -it hypair_laravel sh`
+- Faire un `php artisan down` pour afficher une page de maintenance aux utilisateurs
 - Faire un pull de git : `git pull`
 - Si ce n'est pas déjà le cas, copier le sha-1 correspondant au dernier commit sur GitLab, puis entrer la commande : `git checkout <sha>`
-- Se connecter au terminal du container : `docker exec -it hypair_laravel sh`
 - Taper `composer install`
 - Taper `npm install` puis `npm run prod`
+- N'oubliez pas de faire un `php artisan up` pour enlever la page de maintenance
 
 Il n'y a plus qu'à prier et vérifier que tout fonctionne bien en se rendant sur le site ;)
 

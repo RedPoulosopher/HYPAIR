@@ -95,6 +95,7 @@ class GestionPhotoDeProfil {
       $taille_carre = $hauteur > $largeur ? $largeur : $hauteur;
       $photo_profil->crop($taille_carre,$taille_carre);
       $photo_profil->resize(512, 512);
+      $photo_profil->orientate();
       Storage::put($chemin .".png", $photo_profil->encode("png"));
       $photo_profil->destroy();
       return $chemin.".png";

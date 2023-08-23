@@ -17,12 +17,12 @@
 
     <main id="main-content">
         @if (Auth::check())
-        <x-calendrier-switch-campus :campus="$site"></x-calendrier-switch-campus>
+            <x-calendrier-switch-campus :campus="$site"></x-calendrier-switch-campus>
 
             <div id="boutons">
-                        <p id="fleche-gauche" class="icon-container"> <i class="fa-solid fa-arrow-left fa-xl"></i> </p>
-                        <h1 id="date" style="text-align:center;"></h1>
-                        <p id="fleche-droite" class="icon-container"> <i class="fa-solid fa-arrow-right fa-xl"></i> </p>
+                <p id="fleche-gauche" class="icon-container"> <i class="fa-solid fa-arrow-left fa-xl"></i> </p>
+                <h1 id="date" style="text-align:center;"></h1>
+                <p id="fleche-droite" class="icon-container"> <i class="fa-solid fa-arrow-right fa-xl"></i> </p>
             </div>
 
             {{-- <select>
@@ -53,19 +53,21 @@
                     <div class="documentation card">
                         {{-- <p class="bouton secondaire ombre_petite info_bouton retour">
                             < Retour</p> --}}
-                            <span id="retour" class='icon-close-square info_bouton' tabindex="0"></span>
+                        <span id="retour" class='info_bouton' tabindex="0">
+                            <i class="fa-solid fa-xmark fa-2xl"></i>
+                        </span>
 
-                                <div class="contenu_doc" id="contenu_doc">
-                                    <h1 id="titre"></h1>
-                                    <p id="organisateur"><em>Organisateur :</em> </p>
-                                    <p id="description"><em>Description :</em> </p>
-                                    <p id="lieu"><em>Lieu :</em> </p>
-                                    <p id="heure_debut"><em>Heure de début :</em> </p>
-                                    <p id="heure_fin"><em>Heure de fin :</em> </p>
-                                </div>
+                        <div class="contenu_doc" id="contenu_doc">
+                            <h1 id="titre"></h1>
+                            <p id="organisateur"><em>Organisateur :</em> </p>
+                            <p id="description"><em>Description :</em> </p>
+                            <p id="lieu"><em>Lieu :</em> </p>
+                            <p id="heure_debut"><em>Heure de début :</em> </p>
+                            <p id="heure_fin"><em>Heure de fin :</em> </p>
+                        </div>
 
-                                <div id="gerer" style="display:flex;">
-                                </div>
+                        <div id="gerer" style="display:flex;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,7 +98,8 @@
                         document.getElementById("today").style.cssText =
                             'border: 1px solid var(--couleur_accentuation); box-shadow: 0 0 7px; background-color:rgba(127,127,127,0.30)';
                     } else {
-                        el_calendrier.innerHTML += ("<div class='jour card'><div style='margin-left:10px; flex:1 1 auto;'>" +
+                        el_calendrier.innerHTML += (
+                            "<div class='jour card'><div style='margin-left:10px; flex:1 1 auto;'>" +
                             jours[(index_jour_debut + i - 1) % 7] + "<br>" + i +
                             "</div><div class='num_jour' num_jour='" + i + "''></div></div>");
 
@@ -129,8 +132,8 @@
                 }
 
                 // remplissage du calendrier apres la fin du mois
-                console.log(nbr_jours_dans_mois + " " + index_jour_debut );
-                for (var i = 0; i <  (70 - (nbr_jours_dans_mois + index_jour_debut)) % 7; i++) {
+                console.log(nbr_jours_dans_mois + " " + index_jour_debut);
+                for (var i = 0; i < (70 - (nbr_jours_dans_mois + index_jour_debut)) % 7; i++) {
                     el_calendrier.innerHTML += ("<div class='jour desactive'></div>");
                 }
             }
@@ -168,18 +171,20 @@
         //remplissage
         test_mois_courant()
         remplissage(annee, mois)
-        if(mois_courant){
+        if (mois_courant) {
             scrollToToday();
         }
 
-        function scrollToToday(){
-            const y = document.getElementById("today").getBoundingClientRect().top - el_calendrier.getBoundingClientRect().top - 15;
+        function scrollToToday() {
+            const y = document.getElementById("today").getBoundingClientRect().top - el_calendrier.getBoundingClientRect()
+                .top - 15;
             el_calendrier.scroll({
                 top: y,
                 behavior: 'smooth'
             });
         }
-        function scrollToTop(){
+
+        function scrollToTop() {
             el_calendrier.scroll({
                 top: 0,
                 behavior: 'smooth'
@@ -308,9 +313,9 @@
                 });
             }
 
-            if(mois_courant){
+            if (mois_courant) {
                 scrollToToday();
-            }else{
+            } else {
                 scrollToTop();
             }
         }

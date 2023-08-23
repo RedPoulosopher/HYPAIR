@@ -57,6 +57,11 @@
     }
 }
 
+.popup .card {
+    display: flex;
+    flex-direction: column;
+}
+
 .popup-cachee {
     display: none;
 }
@@ -100,12 +105,19 @@
 
 #retour {
     cursor: pointer;
-    font-size: 20px;
+    align-self: end;
+    padding: 5px;
+    i {
+        color: var(--couleur_accentuation);
+    }
+    &:hover {
+        i {
+            color: var(--couleur_accentuation_air_light);
+        }
+    }
 }
 
-
 @media (max-width: 768px) {
-
     /*FAIRE POPUP*/
     #calendrier {
         grid-template-columns: repeat(1, 1fr);
@@ -130,7 +142,7 @@
             padding: 5px 8px 5px 0;
             border: none;
 
-            &:nth-child(7n+1) {
+            &:nth-child(7n + 1) {
                 border: none;
             }
 

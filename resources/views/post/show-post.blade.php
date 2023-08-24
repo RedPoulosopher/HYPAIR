@@ -57,9 +57,9 @@
                     <div class="description">{!! Str::markdown(strip_tags($post->description ?? '')) !!}</div>
                 @else
                     @if (Auth::check())
-                        <p>Ce post est confidentiel. Vous ne pouvez pas le consulter.</p>
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel. Vous ne pouvez pas le consulter.</p>
                     @else
-                        <p>Ce post est confidentiel. Veuillez vous connecter.</p>
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel. Veuillez vous connecter.</p>
                     @endif
                 @endif
             </div>

@@ -6,3 +6,17 @@
         margin-right: 8px;
     }
 }
+
+p#confidentiel {
+    color: var(--confidentiel-color);
+    text-align: center;
+
+    i {
+        color: var(--confidentiel-color);
+        margin-right: 8px;
+    }
+}
+
+.documentation>p#confidentiel {
+    margin: 0;
+}

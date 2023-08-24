@@ -88,9 +88,9 @@
                     </div>
                 @else
                     @if (Auth::check())
-                        <p>Cet évènement est confidentiel. Vous ne pouvez pas le consulter.</p>
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement est confidentiel. Vous ne pouvez pas le consulter.</p>
                     @else
-                        <p>Cet évènement est confidentiel. Veuillez vous connecter.</p>
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement est confidentiel. Veuillez vous connecter.</p>
                     @endif
                 @endif
 

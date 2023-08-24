@@ -15,7 +15,8 @@ class Post extends Model
         'date_apparition',
         'date_expiration',
         'entite_id',
-        'confidentiel'
+        'confidentiel',
+        'photo_name'
     ];
 
     function event()

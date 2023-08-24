@@ -14,6 +14,7 @@ use DateTimeZone;
 use Illuminate\Support\Facades\Auth;
 
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -105,7 +106,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
         AutorisationGestion::protectionPage('gerer_post');
-        $postRequest = $this->formulaire_traitement($request);
+
+        $name = Storage::put('mon_post', $request->banniere);
+
+        $postRequest = $this->formulaire_traitement($request, $name);
+        dd($postRequest);
         $post = Post::create($postRequest);
 
         // TAGS
@@ -176,7 +181,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function formulaire_traitement(Request $request)
+    public function formulaire_traitement(Request $request, string $name = null)
     {
         $validated = $request->validate(
             [
@@ -195,7 +200,8 @@ class PostController extends Controller
             "date_apparition" => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
             "date_expiration" => $request->date_expiration,
             "event_id" => $request->event_id == 0 ? null : $request->event_id,
-            "confidentiel" => $request->confidentialite
+            "confidentiel" => $request->confidentialite,
+            "photo_name" => $name
         ];
 
         return $postRequest;

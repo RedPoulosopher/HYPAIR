@@ -30,10 +30,10 @@
 				@endif
 				<div class="groupe card">
 					<label class="input_groupe">
-					<p class="titre">* Logotype :</p>
-					<p class="description">Soit un svg de moins de 70ko, soit un png de ratio 1 et de plus de 512px.</p>
+					<p class="titre">* Logo :</p>
+					<p class="description">Soit un svg de moins de 70ko, soit une image de plus de 512px par côté.</p>
 						<label id="file-upload">
-							<input type="file" name="logo" class="input" id="original_input" {{$creation==1 ? "required" : ""}} accept=".png">
+							<input type="file" name="logo" class="input" id="original_input" {{$creation==1 ? "required" : ""}} accept="image/*">
 							Sélectionnez un fichier
 						</label>
 						<span id="filename">Aucun fichier sélectionné</span>

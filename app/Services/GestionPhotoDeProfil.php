@@ -11,35 +11,6 @@ class GestionPhotoDeProfil {
         Validator::make(["logo" => $image], ['logo' => ['required','file','mimes:png','dimensions:min_width=512,min_height=512,ratio=1']])->validate();
     }
 
-    static function stocker_fichier_logo($image, $chemin){
-        $image_nom = date("Y-m-d");
-        $image_chemin = $chemin . $image_nom;
-
-        $image_rz = Image::make($image);
-        $image_rz->resize(512, 512);
-        Storage::put($image_chemin ."-moyen.png", $image_rz->encode("png"));
-        Storage::put($chemin ."moyen", $image_rz->encode("png"));
-        $image_rz->resize(256, 256);
-        Storage::put($image_chemin ."-petit.png", $image_rz->encode("png"));
-        Storage::put($chemin ."petit", $image_rz->encode("png"));
-        $image_rz->resize(128, 128);
-        Storage::put($image_chemin ."-tres-petit.png", $image_rz->encode("png"));
-        Storage::put($chemin ."tres-petit", $image_rz->encode("png"));
-
-        return $image_nom;
-    }
-
-    public static function stocker_logo($image, $entite_id){
-        $entite = Entite::existe($entite_id);
-        $chemin = self::chemin_logos($entite->uid, $entite_id, $entite->type);
-
-        $image_nom = self::stocker_fichier_logo($image, $chemin);
-        $logo = new Logo;
-        $logo->entite_id = $entite_id;
-        $logo->nom = $image_nom;
-        $logo->save();
-    }
-
     public static function chemin_membre_photo($membre){
         if(!$membre->photo){
             return self::chemin_utilisateur_photo($membre->user()->first());
@@ -57,47 +28,68 @@ class GestionPhotoDeProfil {
     }
 
     static function chemin_utilisateur_photo($user){
-        $chemin = 'images/utilisateurs/'. $user->id .'/photo_de_profil';
-
+        
+        $chemin = 'images/utilisateurs/'. $user->id .'/';
+        
         if($user->photo==2){
             $prenom = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $user->prenom);
             $prenom = preg_replace("/[^a-zA-Z ]/m", "", $prenom);
             $prenom = preg_replace("/ /", "", $prenom);
-
+            
             $nom = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $user->nom);
             $nom = preg_replace("/[^a-zA-Z ]/m", "", $nom);
             $nom = preg_replace("/ /", "", $nom);
-
+            
             $svg = self::to_shape($prenom, $nom);
-
+            
             Storage::put($chemin.".svg", $svg);
-
+            
             $user->photo = 0;
             $user->save();
         }
+   
+        
+        
+        if($user->photo==1){//si l'utilisateur a upload une pp
+            if(Storage::exists($chemin)){
 
-        $chemin = Storage::url($chemin);
+                $image_name = $chemin . date('Y-m-d', Storage::lastModified($chemin)) . '.png';
 
-        if($user->photo==1){
-            return $chemin.'.png';
-        } else if($user->photo==0){
-            return $chemin.'.svg';
-        } else {
-            return $chemin;
+                if(Storage::exists($image_name))
+                    return Storage::url($image_name);//Récupère l'image avec la date la plus récente
+                else
+                    return Storage::url($chemin . 'photo_de_profil.png');
+            }
+
         }
+
+        //Par défaut, on retourne la photo de profil générée automatiquement si on n'en trouve pas d'autre
+        $chemin = Storage::url($chemin);
+        return $chemin . 'photo_de_profil.svg';
     }
 
     public static function stocker_photo_profil($file_photo_profil, $user) {
-      $chemin = 'images/utilisateurs/'. $user->id .'/photo_de_profil';
+      $chemin = 'images/utilisateurs/'. $user->id . '/';
+
+      $image_nom = date("Y-m-d");
+      $image_chemin = $chemin . $image_nom;
+
       $photo_profil = Image::make($file_photo_profil);
       $hauteur = $photo_profil->height();
       $largeur = $photo_profil->width();
       $taille_carre = $hauteur > $largeur ? $largeur : $hauteur;
       $photo_profil->crop($taille_carre,$taille_carre);
       $photo_profil->resize(512, 512);
-      Storage::put($chemin .".png", $photo_profil->encode("png"));
+      $photo_profil->orientate();
+
+      //remove previous images
+      Storage::deleteDirectory($chemin);
+
+      //add new image
+      Storage::put($image_chemin .".png", $photo_profil->encode("png"));
       $photo_profil->destroy();
-      return $chemin.".png";
+
+      return $image_chemin.".png";
     }
 
     public static function stocker_logo_depuis_url($url, $entite_id){

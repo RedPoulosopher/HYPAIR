@@ -108,9 +108,11 @@
     font-size: 20px;
     align-self: end;
     padding: 5px;
+
     i {
         color: var(--couleur_accentuation);
     }
+
     &:hover {
         i {
             color: var(--couleur_accentuation_air_light);
@@ -119,6 +121,7 @@
 }
 
 @media (max-width: 768px) {
+
     /*FAIRE POPUP*/
     #calendrier {
         grid-template-columns: repeat(1, 1fr);
@@ -172,7 +175,7 @@
     }
 }
 
-@media (max-width: 615px) {
+@media (max-width: 825px) {
     #main-content #boutons {
         margin-top: 50px;
     }

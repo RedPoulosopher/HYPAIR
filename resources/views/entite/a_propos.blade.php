@@ -54,7 +54,9 @@
             </div>
 
             <div id="modal_info_membre">
-                <span id="close_modal" class='icon-close-square' tabindex="0" onclick="fermer_info_membre()"></span>
+                <span id="close_modal" class='info_bouton' tabindex="0" onclick="fermer_info_membre()">
+                    <i class="fa-solid fa-xmark fa-xl"></i>
+                </span>
                 <div id="profil" class="card">
                     @foreach ($mandat as $mandat_user)
                         <div id="profil_{{ $mandat_user->id }}" class="profil">
@@ -62,19 +64,23 @@
                                 <img src="{{ $mandat_user->lien_photo_utilisateur }}" alt="Votre photo de profil" />
                             </div>
                             <div class="info_profil">
-                                <div id="user-info" style="{{$mandat_user->user_info->bio ? '' : 'align-items:center'}}">
+                                <div id="user-info" style="{{ $mandat_user->user_info->bio ? '' : 'align-items:center' }}">
                                     <div id="prenoms">
-                                      <h2>{{$mandat_user->user_info->prenom}} {{$mandat_user->user_info->nom}}</h2>
-                                      @if ($mandat_user->user_info->pronom !== '')
-                                        <div class="separator">•</div>
-                                        <h3 class="pronoms">{{$mandat_user->user_info->pronom}}</h3>
-                                      @endif
+                                        <h2>{{ $mandat_user->user_info->prenom }} {{ $mandat_user->user_info->nom }}</h2>
+                                        @if ($mandat_user->user_info->pronom !== '')
+                                            <div class="separator">•</div>
+                                            <h3 class="pronoms">{{ $mandat_user->user_info->pronom }}</h3>
+                                        @endif
                                     </div>
-                                    @if($mandat_user->user_info->promo && count($mandat_user->user_info->campus) > 0)
-                                    <div id="promo-campus">
-                                      <p><i class="fa-solid fa-graduation-cap"></i>{{$mandat_user->user_info->promo}}</p>
-                                      <p><i class="fa-solid fa-location-dot"></i>{{ ucwords(implode(', ', $mandat_user->user_info->campus->pluck('label')->toArray())) }}</p>
-                                    </div>
+                                    @if ($mandat_user->user_info->promo && count($mandat_user->user_info->campus) > 0)
+                                        <div id="promo-campus">
+                                            <p><i
+                                                    class="fa-solid fa-graduation-cap"></i>{{ $mandat_user->user_info->promo }}
+                                            </p>
+                                            <p><i
+                                                    class="fa-solid fa-location-dot"></i>{{ ucwords(implode(', ', $mandat_user->user_info->campus->pluck('label')->toArray())) }}
+                                            </p>
+                                        </div>
                                     @endif
                                 </div>
 

@@ -54,7 +54,7 @@
                         {{-- <p class="bouton secondaire ombre_petite info_bouton retour">
                             < Retour</p> --}}
                         <span id="retour" class='info_bouton' tabindex="0">
-                            <i class="fa-solid fa-xmark fa-2xl"></i>
+                            <i class="fa-solid fa-xmark fa-xl"></i>
                         </span>
 
                         <div class="contenu_doc" id="contenu_doc">

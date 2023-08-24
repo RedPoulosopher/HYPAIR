@@ -20,7 +20,7 @@
     gap: 10px;
 }
 
-.categories>span {
+.categories > span {
     background: var(--grey);
     padding: 4px 15px 5px 15px;
     border-radius: 50px;
@@ -47,18 +47,15 @@
         color: var(--link-color);
         font-weight: var(--fw-medium);
         text-decoration: underline;
-
-
     }
 
     p img {
         width: 80%;
         padding: 0 auto;
     }
-
 }
 
-.membres>div {
+.membres > div {
     position: relative;
     cursor: pointer;
 }
@@ -86,7 +83,7 @@
 }
 
 @media (max-width: 767.98px) {
-    .membres>div {
+    .membres > div {
         margin: 15px;
     }
 
@@ -97,7 +94,7 @@
 }
 
 @media (min-width: 768px) {
-    .membres>div {
+    .membres > div {
         margin: 20px;
     }
 
@@ -137,12 +134,19 @@
 #close_modal {
     position: absolute;
     padding: 5px;
-    font-size: 1.2em;
-    top: 20px;
+    font-size: 1.5em;
+    top: 30px;
     right: 20px;
-    background: var(--couleur_fond);
-    border-radius: 5px;
     cursor: pointer;
+    padding: 5px;
+    i {
+        color: var(--couleur_accentuation);
+    }
+    &:hover {
+        i {
+            color: var(--couleur_accentuation_air_light);
+        }
+    }
 }
 
 .profil {
@@ -206,7 +210,6 @@
         }
     }
 
-
     #promo-campus {
         grid-row: 2;
         grid-column: 1 / span 3;
@@ -223,13 +226,11 @@
 
             i {
                 color: var(--couleur_police_secondaire);
-                font-size: .7rem;
+                font-size: 0.7rem;
                 margin-right: 8px;
-
             }
         }
     }
-
 }
 
 .prenoms h2 {
@@ -253,7 +254,7 @@
     gap: 12px;
 }
 
-.reseaux_sociaux_profil>a {
+.reseaux_sociaux_profil > a {
     padding: 10px 18px;
     border-radius: 50px;
 }

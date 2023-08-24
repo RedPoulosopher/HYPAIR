@@ -1,6 +1,6 @@
 @extends('layouts.app-without-sidebar')
 
-@section('titre', 'Évènement')
+@section('titre', 'Post')
 
 @pushonce('styles')
     <link rel="stylesheet" href="{{ mix('/css/post/home-post.css') }}" type="text/css">
@@ -36,18 +36,18 @@
 
                 <h2>Liste des posts :</h2>
 
-                @if(count($posts) > 0)
+                @if (count($posts) > 0)
                     <ul id="posts-list">
                         @foreach ($posts as $post)
                             <li>
                                 <x-post :post="$post" :id="$post->id" />
-                                    
+
                                 <a href="post/modifier/<?= $post->id ?>" class="bouton_action"
                                     style="color:black; border-color:black;">
                                     <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                 </a>
                                 {{-- <a href="post/delete/{{ $post->id }}"></a> --}}
-                            
+
                                 <span class="bouton_action warning suppression_post">
                                     <i class="fa-solid fa-trash fa-lg"></i>
                                 </span>
@@ -75,9 +75,9 @@
                 </div>
     </main>
 
-        <script> 
+    <script>
         posts = {!! json_encode($posts) !!}
-        
+
         const listener_click_retour = document.querySelectorAll('.info_bouton');
 
         listener_click_retour.forEach((listener_click_retour, index) => {

@@ -51,15 +51,21 @@ class GestionPhotoDeProfil {
         
         
         if($user->photo==1){//si l'utilisateur a upload une pp
-            if(Storage::exists($chemin))
-                return Storage::url($chemin . date('Y-m-d', Storage::lastModified($chemin)) . '.png');//Récupère l'image avec la date la plus récente
-            else
-                return Storage::url($chemin . '.png' );//Tant pis, si l'image existe pas on va pas l'inventer
+            if(Storage::exists($chemin)){
 
-        } else{
-            $chemin = Storage::url($chemin);
-            return $chemin . 'photo_de_profil.svg';
+                $image_name = $chemin . date('Y-m-d', Storage::lastModified($chemin)) . '.png';
+
+                if(Storage::exists($image_name))
+                    return Storage::url($image_name);//Récupère l'image avec la date la plus récente
+                else
+                    return Storage::url($chemin . 'photo_de_profil.png');
+            }
+
         }
+
+        //Par défaut, on retourne la photo de profil générée automatiquement si on n'en trouve pas d'autre
+        $chemin = Storage::url($chemin);
+        return $chemin . 'photo_de_profil.svg';
     }
 
     public static function stocker_photo_profil($file_photo_profil, $user) {

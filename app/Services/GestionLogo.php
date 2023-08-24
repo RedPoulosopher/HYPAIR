@@ -33,15 +33,13 @@ class GestionLogo {
         $image_rz->crop($taille_carre,$taille_carre);
         $image_rz->orientate();
 
+        //add new image in all sizes
         $image_rz->resize(512, 512);
         Storage::put($image_chemin ."-moyen.png", $image_rz->encode("png"));
-        Storage::copy($image_chemin ."-moyen.png", $chemin ."moyen");
         $image_rz->resize(256, 256);
         Storage::put($image_chemin ."-petit.png", $image_rz->encode("png"));
-        Storage::copy($image_chemin ."-petit.png", $chemin ."petit");
         $image_rz->resize(128, 128);
         Storage::put($image_chemin ."-tres-petit.png", $image_rz->encode("png"));
-        Storage::copy($image_chemin ."-tres-petit.png", $chemin ."tres-petit");
 
         return $image_nom;
     }
@@ -57,7 +55,7 @@ class GestionLogo {
         $logo->save();
     }
 
-    static function chemin_logos($uid, $id, $type, $storage=true){
+    static function chemin_logos($uid, $id, $type, $storage=true, $taille="petit"){
         if($type->value == 'liste'){
             $type = 'listes';
         } else {
@@ -65,7 +63,12 @@ class GestionLogo {
         }
         $chemin = 'images/'. $type .'/'. $uid .'-'. $id .'/logos/';
 
-        if($storage){return Storage::url($chemin);}
+        if($storage){
+            if(Storage::exists($chemin))
+                return Storage::url($chemin . date('Y-m-d', Storage::lastModified($chemin)) . '-' . $taille . '.png');//Récupère l'image avec la date la plus récente
+            else
+                return $chemin;//Tant pis, si l'image existe pas on va pas l'inventer
+        }
         return $chemin;
     }
 

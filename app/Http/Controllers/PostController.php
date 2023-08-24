@@ -107,10 +107,11 @@ class PostController extends Controller
     {
         AutorisationGestion::protectionPage('gerer_post');
 
-        $name = Storage::put('mon_post', $request->banniere);
-
-        $postRequest = $this->formulaire_traitement($request, $name);
+        $filename = time() . '.' . $request->banniere->extension();
+        $request->file('banniere')->storeAs('images/posts/mon_post', $filename);
+        $postRequest = $this->formulaire_traitement($request, $filename);
         dd($postRequest);
+        
         $post = Post::create($postRequest);
 
         // TAGS

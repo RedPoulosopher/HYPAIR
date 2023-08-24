@@ -76,6 +76,8 @@ class GestionPhotoDeProfil {
       $photo_profil->resize(512, 512);
       $photo_profil->orientate();
 
+      //remove previous images
+      Storage::deleteDirectory($chemin);
 
       //add new image
       Storage::put($image_chemin .".png", $photo_profil->encode("png"));

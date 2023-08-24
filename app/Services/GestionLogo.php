@@ -33,6 +33,9 @@ class GestionLogo {
         $image_rz->crop($taille_carre,$taille_carre);
         $image_rz->orientate();
 
+        //remove previous images
+        Storage::deleteDirectory($chemin);
+
         //add new image in all sizes
         $image_rz->resize(512, 512);
         Storage::put($image_chemin ."-moyen.png", $image_rz->encode("png"));

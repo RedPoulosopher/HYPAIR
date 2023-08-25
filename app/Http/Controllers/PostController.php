@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banniere;
 use App\Models\Post;
 use App\Models\Evenement;
+use App\Services\BanniereService;
 use Illuminate\Http\Request;
 use \App\Services\AutorisationGestion;
 use App\Models\Site;
@@ -107,12 +109,19 @@ class PostController extends Controller
     {
         AutorisationGestion::protectionPage('gerer_post');
 
-        $filename = time() . '.' . $request->banniere->extension();
-        $request->file('banniere')->storeAs('images/posts/mon_post', $filename);
-        $postRequest = $this->formulaire_traitement($request, $filename);
-        dd($postRequest);
+        $postRequest = $this->formulaire_traitement($request);
         
         $post = Post::create($postRequest);
+
+        for($i = 0; $i < count($request->banniere); $i++) {
+            $file = $request->banniere[$i];
+            // $filename = $i . '_' . time() . '.' . $request->banniere[$i]->extension();
+            // $path = $file->storeAs('images/posts/'.$post->id, $filename);
+            $path = BanniereService::stockerBanniere($file, $post, $i);
+            $banniere = new Banniere();
+            $banniere->path = $path;
+            $post->bannieres()->save($banniere);
+        }
 
         // TAGS
         if (!empty($request->tags)) {
@@ -182,7 +191,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function formulaire_traitement(Request $request, string $name = null)
+    public function formulaire_traitement(Request $request)
     {
         $validated = $request->validate(
             [
@@ -202,7 +211,6 @@ class PostController extends Controller
             "date_expiration" => $request->date_expiration,
             "event_id" => $request->event_id == 0 ? null : $request->event_id,
             "confidentiel" => $request->confidentialite,
-            "photo_name" => $name
         ];
 
         return $postRequest;

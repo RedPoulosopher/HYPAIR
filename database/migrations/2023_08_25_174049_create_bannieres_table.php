@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function(Blueprint $table) {
-            $table->string('photo_name')->nullable();
+        Schema::create('bannieres', function (Blueprint $table) {
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+            $table->id();
+            $table->foreignId('post_id')->constrained('posts')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('path');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('posts_images');
     }
 };

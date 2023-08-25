@@ -1,33 +1,37 @@
 {{-- COMPONENT des évènements de la page d'accueil --}}
 
 @php
-use App\Http\Controllers\PostController;
+    use App\Http\Controllers\PostController;
 @endphp
 
-<article class="post card" post_id="{{$post->id}}" entite_uid="{{$post->entite->uid}}">
+<article class="post card" post_id="{{ $post->id }}" entite_uid="{{ $post->entite->uid }}">
 
-    <div class="header" style="{{count($post->tags) > 0 ? '' : 'grid-template-rows: 1fr; row-gap: 0;'}}">
+    <div class="header" style="{{ count($post->tags) > 0 ? '' : 'grid-template-rows: 1fr; row-gap: 0;' }}">
 
         <a href="{{ $post->entite->lien_relatif() }}" class="thumbnail">
-            <img src="{{$post->entite->logo_url("petit")}}" alt="Logo {{$post->entite->nom}}">
+            <img src="{{ $post->entite->logo_url('petit') }}" alt="Logo {{ $post->entite->nom }}">
         </a>
         <div class="details">
-            <a href="/{{ $post->entite->uid }}/entite/post/{{ $post->id }}"><h2>{{ $post->titre }}</h2></a>
-            <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>Il y a {{ PostController::date_apparition_to_duration($post->date_apparition)}}</p>
-            @if($post->confidentiel != 0)
-                <p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager" class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>
+            <a href="/{{ $post->entite->uid }}/entite/post/{{ $post->id }}">
+                <h2>{{ $post->titre }}</h2>
+            </a>
+            <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>Il y a
+                {{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
+            @if ($post->confidentiel != 0)
+                <p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager"
+                    class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>
             @endif
         </div>
 
         <div class="tags">
-            @foreach($post->tags as $tag)
-                <div class="tag" style="background-color: {{$tag->couleur}};">{{$tag->name}}</div>
+            @foreach ($post->tags as $tag)
+                <div class="tag" style="background-color: {{ $tag->couleur }};">{{ $tag->name }}</div>
             @endforeach
         </div>
-        
+
         <div class="arrow-display">
             {{-- Flèche rouge pour dérouler la description --}}
-            <svg class="arrow" post_id="{{$post->id}}" width="42" height="24" viewBox="0 0 42 24"
+            <svg class="arrow" post_id="{{ $post->id }}" width="42" height="24" viewBox="0 0 42 24"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 3L21 21L39 3" stroke="#CC3345" stroke-width="6" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -36,7 +40,32 @@ use App\Http\Controllers\PostController;
 
     </div>
 
-    <div class="description" id="description-{{$post->id}}">
+
+
+    <div class="description" id="description-{{ $post->id }}">
+        @if (count($post->bannieres) > 0)
+            <div class="slideshow-container">
+                @for ($i = 0; $i < count($post->bannieres); $i++)
+                    <div class="mySlides fade">
+                        <div class="numbertext">{{ $i + 1 }} / {{ count($post->bannieres) }}</div>
+                        <img src={{ Storage::url($post->bannieres[$i]->path) }} style="width:100%">
+                        <div class="text">Caption Text</div>
+                    </div>
+                @endfor
+
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <br>
+
+            <!-- The dots/circles -->
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        @endif
         {!! Str::markdown(strip_tags($post->description ?? '')) !!}
     </div>
 
@@ -44,67 +73,100 @@ use App\Http\Controllers\PostController;
 
 
 @pushonce('end-scripts')
-<script>
-    // Ce script commande l'affichage des descriptions des posts
+    <script>
+        // Ce script commande l'affichage des descriptions des posts
 
-    // Ajouter un EventListener sur chaque flèche rouge
-    arrows = document.getElementsByClassName("arrow")
+        // Ajouter un EventListener sur chaque flèche rouge
+        arrows = document.getElementsByClassName("arrow")
 
-    // Commander l'affichage des descriptions
-    descriptions = document.getElementsByClassName("description")
-    for (let i = 0; i < arrows.length; i++) {
-        arrows[i].addEventListener("click", (event) => {
+        // Commander l'affichage des descriptions
+        descriptions = document.getElementsByClassName("description")
+        for (let i = 0; i < arrows.length; i++) {
+            arrows[i].addEventListener("click", (event) => {
 
-            postId = event.currentTarget.getAttribute("post_id")
-            descriptionName = "description"
-
-            if (postId) {
-                descriptionName = descriptionName + '-' + postId
-
-                //Toggle description
-                description = document.getElementById(descriptionName)
-                description.classList.toggle("visible");
-                if (description.style.maxHeight) {
-                    description.style.maxHeight = null;
-                } else {
-                    description.style.maxHeight = description.scrollHeight + "px"; //On utilise max-height pour animer l'affichage de la description
-                }
-                //Rotation de la flèche
-                event.currentTarget.classList.toggle("visible");
-            }
-
-        })
-    }
-
-
-    var mobileResponsive = window.matchMedia('(max-width: 710px)')
-
-    window.addEventListener('resize', function(event) {
-        if(mobileResponsive.matches){
-            for (let i = 0; i < descriptions.length; i++) {
-                description.style.maxHeight = null;
-                descriptions[i].classList.remove("visible");
-            }
-            for (let i = 0; i < arrows.length; i++) {
-                arrows[i].classList.remove("visible");
-            }
-        }
-    }, true);
-
-
-    //Commander l'affichage des détails lorsque l'on clique sur un event
-    posts = document.getElementsByClassName("post")
-    for (let i = 0; i < arrows.length; i++) {
-        posts[i].addEventListener("click", (event) => {
-
-            if(mobileResponsive.matches){
                 postId = event.currentTarget.getAttribute("post_id")
-                entiteUid = event.currentTarget.getAttribute("entite_uid")
+                descriptionName = "description"
 
-                window.location.href = "/" + entiteUid + "/entite/post/" + postId;
+                if (postId) {
+                    descriptionName = descriptionName + '-' + postId
+
+                    //Toggle description
+                    description = document.getElementById(descriptionName)
+                    description.classList.toggle("visible");
+                    if (description.style.maxHeight) {
+                        description.style.maxHeight = null;
+                    } else {
+                        description.style.maxHeight = description.scrollHeight +
+                            "px"; //On utilise max-height pour animer l'affichage de la description
+                    }
+                    //Rotation de la flèche
+                    event.currentTarget.classList.toggle("visible");
+                }
+
+            })
+        }
+
+
+        var mobileResponsive = window.matchMedia('(max-width: 710px)')
+
+        window.addEventListener('resize', function(event) {
+            if (mobileResponsive.matches) {
+                for (let i = 0; i < descriptions.length; i++) {
+                    description.style.maxHeight = null;
+                    descriptions[i].classList.remove("visible");
+                }
+                for (let i = 0; i < arrows.length; i++) {
+                    arrows[i].classList.remove("visible");
+                }
             }
-        })
-    }
+        }, true);
 
-</script>
+
+        //Commander l'affichage des détails lorsque l'on clique sur un event
+        posts = document.getElementsByClassName("post")
+        for (let i = 0; i < arrows.length; i++) {
+            posts[i].addEventListener("click", (event) => {
+
+                if (mobileResponsive.matches) {
+                    postId = event.currentTarget.getAttribute("post_id")
+                    entiteUid = event.currentTarget.getAttribute("entite_uid")
+
+                    window.location.href = "/" + entiteUid + "/entite/post/" + postId;
+                }
+            })
+        }
+
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = slides.length
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+    </script>
 @endpushonce

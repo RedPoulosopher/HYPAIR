@@ -35,4 +35,7 @@ class Post extends Model
     {
         return $this->belongsToMany(Site::class, 'sites_posts');
     }
+    function bannieres() {
+        return $this->hasMany(Banniere::class);
+    }
 }

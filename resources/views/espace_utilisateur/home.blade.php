@@ -36,6 +36,12 @@
             @endif
           </div>
           <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>
+          <ul id="menu_meatballs" class="ombre_grande">
+              <li><a id="menu_modifier_photo_profil" tabindex="2" href="/editer_photo_profil">Modifier la photo de profil</a></li>
+              <li><a id="menu_modifier_info" tabindex="2" href="/editer_infos_profil">Modifier les infos</a></li>
+              <li><a id="menu_modifier_reseaux" tabindex="2" href="/editer_reseaux_profil">Gérer les réseaux sociaux</a></li>
+              <li><a id="menu_deconnexion" tabindex="2" href="/deconnexion">Se déconnecter</a></li>
+          </ul>
         </div>
         
         @if($user->bio)
@@ -51,12 +57,6 @@
           </div>
         @endif
       </div>
-      <ul id="menu_meatballs" class="ombre_grande">
-          <li><a id="menu_modifier_photo_profil" tabindex="2" href="/editer_photo_profil">Modifier la photo de profil</a></li>
-          <li><a id="menu_modifier_info" tabindex="2" href="/editer_infos_profil">Modifier les infos</a></li>
-          <li><a id="menu_modifier_reseaux" tabindex="2" href="/editer_reseaux_profil">Gérer les réseaux sociaux</a></li>
-          <li><a id="menu_deconnexion" tabindex="2" href="/deconnexion">Se déconnecter</a></li>
-      </ul>
     </div>
   </section>
 
@@ -130,6 +130,13 @@ function menu_meatballs(){
     ouvert = true
   }
 };
+//close when click outside
+document.body.addEventListener('click', (event)=>{
+  if(event.target.id != "menu_meatballs" && event.target.id != "reglages"){
+    el_menu_meatballs.style.display = "none";
+    ouvert = false
+  }
+})
 </script>
 
 @endsection

@@ -58,7 +58,7 @@
 
                     <div class="description">{!! Str::markdown(strip_tags($post->description ?? '')) !!}</div>
                 @elseif (!$postIsVisible)
-                <p class="no-content"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post n'est pas disponible</p>
+                <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post n'est pas disponible</p>
                 @else
                     @if (Auth::check())
                         <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel. Vous ne pouvez pas le consulter.</p>

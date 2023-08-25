@@ -12,6 +12,10 @@ use \App\Models\Membre;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
+
+use DateTime;
+use DateTimeZone;
+
 class CalendrierController extends Controller
 {
     public static function calendrier_asso()
@@ -21,18 +25,22 @@ class CalendrierController extends Controller
         $mois = date('m');
         //$evenements= Evenement::index($annee, $mois);
 
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+
 
         $evenements_publics_array = array();
         if (session('entite_uid') == 'bde') {
             $evenements_publics = Evenement::index($annee, $mois)
-                ->where('confidentialite', '=', 0);
+                ->where('confidentialite', '=', 0)
+                ->where('date_apparition', '<', $now);
             foreach ($evenements_publics as $evenement_pub) {
                 $evenements_publics_array[] = $evenement_pub;
             }
         } else {
             $evenements_publics = Evenement::index($annee, $mois)
                 ->where('entite_id', '=', session('entite_id'))
-                ->where('confidentialite', '=', 0);
+                ->where('confidentialite', '=', 0)
+                ->where('date_apparition', '<', $now);
             foreach ($evenements_publics as $evenement_pub) {
                 $evenements_publics_array[] = $evenement_pub;
             }
@@ -55,7 +63,8 @@ class CalendrierController extends Controller
         $evenements_prives = Evenement::index($annee, $mois)
             ->where('confidentialite', '>', 0)
             ->where('confidentialite', '<=', $confidentialite)
-            ->where('entite_id', '=', session('entite_id'));
+            ->where('entite_id', '=', session('entite_id'))
+            ->where('date_apparition', '<', $now);
         $evenements_prives_array = array();
         foreach ($evenements_prives as $evenement_priv) {
             $evenements_prives_array[] = $evenement_priv;
@@ -81,6 +90,10 @@ class CalendrierController extends Controller
         //on doit recuperer l annee et le mois courant. ca sera l affichage par defaut
         $annee = date('Y');
         $mois = date('m');
+
+        
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+
 
         if (!isset($site)) {
             if (Auth::check()) {
@@ -112,11 +125,13 @@ class CalendrierController extends Controller
             $evenements_publics = Evenement::index($annee, $mois)
                 ->where('confidentialite', '=', 0)
                 ->where('validation', '=', 1)
+                ->where('date_apparition', '<', $now)
                 ->intersect($campus->evenements);
         } else {
             $evenements_publics = Evenement::index($annee, $mois)
                 ->where('confidentialite', '=', 0)
                 ->where('validation', '=', 1)
+                ->where('date_apparition', '<', $now)
                 ->intersect($campus->evenements->where('confidentiel', 0));
         }
 
@@ -137,7 +152,8 @@ class CalendrierController extends Controller
                 ->select('entites.uid', 'entites.nom', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', 'evenements.slug', 'evenements.validation', 'evenements.id', 'evenements.confidentialite', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
                 ->where('users.id', '=', $user['id'])
                 ->whereMonth("temps_debut", $mois)
-                ->whereYear("temps_debut", $annee)
+                ->whereYear("temps_debut", $annee)                
+                ->where('date_apparition', '<', $now)
                 ->get();
 
             $evenements_prive_array = json_decode(json_encode($evenements_prive), true);
@@ -173,6 +189,9 @@ class CalendrierController extends Controller
         $annee = $request["annee"];
         $mois = $request["mois"] + 1;
 
+        
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+
         //$evenements= Evenement::index($annee, $mois);
 
         $niveau_administration = AutorisationGestion::niveau_administration();
@@ -193,14 +212,16 @@ class CalendrierController extends Controller
         $evenements_publics_array = array();
         if (session('entite_uid') == 'bde') {
             $evenements_publics = Evenement::index($annee, $mois)
-                ->where('confidentialite', '=', 0);
+                ->where('confidentialite', '=', 0)
+                ->where('date_apparition', '<', $now);
             foreach ($evenements_publics as $evenement_pub) {
                 $evenements_publics_array[] = $evenement_pub;
             }
         } else {
             $evenements_publics = Evenement::index($annee, $mois)
                 ->where('entite_id', '=', session('entite_id'))
-                ->where('confidentialite', '=', 0);
+                ->where('confidentialite', '=', 0)
+                ->where('date_apparition', '<', $now);
             foreach ($evenements_publics as $evenement_pub) {
                 $evenements_publics_array[] = $evenement_pub;
             }
@@ -219,6 +240,7 @@ class CalendrierController extends Controller
                 ->where('entites.uid', '=', session('entite_uid'))
                 ->whereMonth("temps_debut", $mois)
                 ->whereYear("temps_debut", $annee)
+                ->where('date_apparition', '<', $now)
                 ->get();
 
             $evenements_prive_array = json_decode(json_encode($evenements_prive), true);
@@ -248,6 +270,8 @@ class CalendrierController extends Controller
         $annee = $request["annee"];
         $mois = $request["mois"] + 1;
         $site = $request["site"];
+        
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
 
         if (!isset($site)) {
             if (Auth::check()) {
@@ -282,11 +306,13 @@ class CalendrierController extends Controller
             $evenements_publics = Evenement::index($annee, $mois)
                 ->where('confidentialite', '=', 0)
                 ->where('validation', '=', 1)
+                ->where('date_apparition', '<', $now)
                 ->intersect($campus->evenements);
         } else {
             $evenements_publics = Evenement::index($annee, $mois)
                 ->where('confidentialite', '=', 0)
                 ->where('validation', '=', 1)
+                ->where('date_apparition', '<', $now)
                 ->intersect($campus->evenements->where('confidentiel', 0));
         }
 
@@ -309,6 +335,7 @@ class CalendrierController extends Controller
                 ->where('users.id', '=', $user['id'])
                 ->whereMonth("temps_debut", $mois)
                 ->whereYear("temps_debut", $annee)
+                ->where('date_apparition', '<', $now)
                 ->get();
 
             $evenements_prive_array = json_decode(json_encode($evenements_prive), true);

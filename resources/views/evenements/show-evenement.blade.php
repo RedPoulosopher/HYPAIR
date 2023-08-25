@@ -31,7 +31,7 @@
             </div>
 
             <div class="documentation card">
-                @if ($canSeeEvent)
+                @if ($eventIsVisible && $canSeeEvent)
                     <i id="share-btn" class="fa-solid fa-arrow-up-right-from-square"></i>
 
                     @php
@@ -86,6 +86,8 @@
                         <p><em>Campus concerné{{ count($evenement->campus) > 0 ? 's' : '' }} :</em>
                             {{ ucwords(implode(', ', $evenement->campus->pluck('label')->toArray())) }}</p>
                     </div>
+                @elseif (!$eventIsVisible)
+                    <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement n'est pas disponible</p>
                 @else
                     @if (Auth::check())
                         <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement est confidentiel. Vous ne pouvez pas le consulter.</p>

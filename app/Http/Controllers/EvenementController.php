@@ -131,6 +131,8 @@ class EvenementController extends Controller
 			abort(403);
 		}
 
+
+
 		$entite = Entite::where('id', $evenement->entite_id);
 
         if (!$entite->exists()) {
@@ -157,11 +159,16 @@ class EvenementController extends Controller
 			}
 		}
 
+		
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+        $eventIsVisible = $now > $evenement->date_apparition;
+
 		return view('evenements.show-evenement', [
 			'evenement' => $evenement,
 			'entite' => $entite,
 			'gerer_evenement' => AutorisationGestion::gestion("gerer_evenement"),
-			'canSeeEvent' => $canSeeEvent
+			'canSeeEvent' => $canSeeEvent,
+			'eventIsVisible' => $eventIsVisible
 		]);
 	}
 

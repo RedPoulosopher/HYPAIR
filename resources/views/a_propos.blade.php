@@ -12,20 +12,15 @@
         <section>
             <h1>À propos de HypAIR</h1>
             <article>
-                <p>HypAIR est un site qui se veut être un complément à la vie associative en
-                    ajoutant des fonctionnalités et des services qui amélioreront la vie étudiante (calendrier,
-                    évènements, posts...) et centraliseront les infromations des comités et des associations de l'école.
-                    Nous voulons être présents à
-                    Lille comme à Douai, et à l'avenir, on l'espère, sur tous les campus !</p>
-                <p>Le développement d'HypAIR a débuté il y a 3 ans, mais il reste
-                     encore beaucoup d'améliorations à apporter. Donc n'hésitez
+                <p>HypAIR c'est LE site associatif de l'IMT Nord Europe. Tu y trouveras les infos sur chaque comité,
+                    breau, évènement à venir...
+                    Nous voulons être présents à Lille comme à Douai, et à l'avenir, on l'espère, sur tous les campus !</p>
+                <p>Le développement d'HypAIR a débuté il y a 3 ans, mais il reste encore beaucoup d'améliorations à apporter. Donc n'hésitez
                     pas à nous faire des retours sur votre ressenti et sur les nouveautés que vous aimeriez voir !</p>
-                <p>D'ailleurs si quelqu'un est chaud en dessin, on cherche désespérement un vrai logo pour le site. Si une
-                    bienveillante personne propose un magnifique logo pour HypAIR, il aura son nom plaqué or pendant une
-                    semaine
-                    sur la page d'accueil :)</p>
-                <p>Si vous voulez nous aider à développer notre site tout au long de l'année, vous pouvez nous le faire
-                    savoir et rejoindre nos réseaux : <a href="/air">https://hypair.imt-ne.fr/air</a></p>
+                <p>Si vous êtes chauds en dessin et souhaitez nous aider, n'hésitez pas à tenter de créer un logo pour HypAIR.
+                    Si nous le sélectionons, tu auras le droit à ton nom plaqué or pendant une semaine sur la page d'accueil :)</p>
+                <p>Si vous voulez nous aider à développer le site tout au long de l'année ainsi que participer à de nombreux autres
+                    projets, faites le nous savoir et rejoignez nos réseaux : <a href="/air">https://hypair.imt-ne.fr/air</a></p>
             </article>
         </section>
     </main>

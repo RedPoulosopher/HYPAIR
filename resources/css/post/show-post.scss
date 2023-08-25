@@ -59,7 +59,24 @@ section {
             }
 
 
+            #rattachement {
+                opacity: .5;
+                background-color: var(--dark-grey);
+                color: var(--couleur_police_primaire);
+                border-radius: 5px;
+                display: flex;
+                padding: 10px;
+                align-items: center;
+                justify-content: center;
+                margin: 15px 0 0;
+                font-weight: var(--fw-light);
+                font-size: .95em;
 
+                i {
+                    color: var(--couleur_police_primaire);
+                    margin-right: 10px;
+                }
+            }
 
 
             .tags {

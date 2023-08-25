@@ -37,6 +37,10 @@ use App\Http\Controllers\PostController;
     </div>
 
     <div class="description" id="description-{{$post->id}}">
+        @if($post->event)
+        <a id="rattachement" href="/{{ $post->entite->uid }}/entite/evenement/{{ $post->event->slug }}"><i class="fa-solid fa-link"></i>Ce post est rattaché à l'évènement "{{ $post->event->titre }}"</a>
+        @endif
+        <div class="line"></div>
         {!! Str::markdown(strip_tags($post->description ?? '')) !!}
     </div>
 

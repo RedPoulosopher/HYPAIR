@@ -268,6 +268,7 @@ class EvenementController extends Controller
 	static function comingEvents(){
 		if(Auth::check()){
             $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d');
+			$nowFullDate = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
             $dateInSevenDays =  date('Y-m-d', strtotime("+7 day", strtotime($now)));
 
 			$user = Auth::user();
@@ -279,6 +280,7 @@ class EvenementController extends Controller
             return Evenement::select('evenements.titre', 'evenements.slug', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.id', 'entites.nom as entite_nom', 'entites.uid', 'sites_evenements.site_id')
                 ->where('temps_debut',  '<', $dateInSevenDays)
                 ->where('temps_fin', '>', $now)
+				->where('date_apparition', '<', $nowFullDate)
 				->whereIn('sites_evenements.site_id', $user_site_ids)//Filtre pour ne garder que les évènements du/des campus de l'utilisateur
 				->groupBy('evenements.id')//S'assure qu'il n'y a pas de duplicata
                 ->orderBy('temps_debut', 'asc')//Dans l'ordre chronologique	

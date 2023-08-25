@@ -48,7 +48,13 @@ class PostController extends Controller
         } else {
             $campus = Site::where('label', $site)->first();
         }
-        $posts = $campus->posts->where('date_apparition', '<', $now)->where('date_expiration', '>', $now)->sortByDesc('date_apparition');
+        $posts = $campus->posts->where('date_apparition', '<', $now)
+                               ->filter(function($post){
+                                    $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+                                    if(!$post->date_expiration || $post->date_expiration > $now)
+                                        return $post;
+                                })
+                               ->sortByDesc('date_apparition');
 
         $canSeeConfidentiel = false;
         if (Auth::check()) {

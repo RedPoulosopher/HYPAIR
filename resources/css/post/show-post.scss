@@ -149,8 +149,20 @@ p#confidentiel {
 
     i {
         color: var(--confidentiel-color);
-        margin-right: 8px;
     }
+}
+
+p.no-content {
+    margin: 0;
+
+    i {
+        color: var(--couleur_police_secondaire);
+    }
+}
+
+i.fa-lock {
+    margin-right: 8px;
+
 }
 
 .documentation>p#confidentiel {

@@ -48,7 +48,7 @@ class PostController extends Controller
         } else {
             $campus = Site::where('label', $site)->first();
         }
-        $posts = $campus->posts->sortByDesc('date_apparition');
+        $posts = $campus->posts->where('date_apparition', '<', $now)->where('date_expiration', '>', $now)->sortByDesc('date_apparition');
 
         $canSeeConfidentiel = false;
         if (Auth::check()) {
@@ -298,11 +298,15 @@ class PostController extends Controller
 			}
 		}
 
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+        $postIsVisible = $now > $post->date_apparition && $now < $post->date_expiration;
+
 		return view('post.show-post', [
 			'post' => $post,
 			'entite' => $entite,
 			'gerer_post' => AutorisationGestion::gestion("gerer_post"),
-            'canSeePost' => $canSeePost
+            'canSeePost' => $canSeePost,
+            'postIsVisible' => $postIsVisible
 		]);
 	}
 }

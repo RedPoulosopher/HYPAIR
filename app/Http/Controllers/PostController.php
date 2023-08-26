@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banniere;
 use App\Models\Post;
 use App\Models\Evenement;
+use App\Services\BanniereService;
 use Illuminate\Http\Request;
 use \App\Services\AutorisationGestion;
 use App\Models\Site;
@@ -14,6 +16,7 @@ use DateTimeZone;
 use Illuminate\Support\Facades\Auth;
 
 use DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -111,8 +114,21 @@ class PostController extends Controller
     public function store(Request $request)
     {
         AutorisationGestion::protectionPage('gerer_post');
+
         $postRequest = $this->formulaire_traitement($request);
+        
         $post = Post::create($postRequest);
+
+        for($i = 0; $i < count($request->banniere); $i++) {
+            $file = $request->banniere[$i];
+            // $filename = $i . '_' . time() . '.' . $request->banniere[$i]->extension();
+            // $path = $file->storeAs('images/posts/'.$post->id, $filename);
+            $path = BanniereService::stockerBanniere($file, $post, $i);
+            $banniere = new Banniere();
+            $banniere->path = $path;
+            // voir la méthode saveMany pour améliorer le code
+            $post->bannieres()->save($banniere);
+        }
 
         // TAGS
         if (!empty($request->tags)) {
@@ -201,7 +217,7 @@ class PostController extends Controller
             "date_apparition" => $request->date_apparition ? $request->date_apparition : new DateTime('now', new DateTimeZone('Europe/Paris')),
             "date_expiration" => $request->date_expiration,
             "event_id" => $request->event_id == 0 ? null : $request->event_id,
-            "confidentiel" => $request->confidentialite
+            "confidentiel" => $request->confidentialite,
         ];
 
         return $postRequest;
@@ -213,6 +229,20 @@ class PostController extends Controller
         $traitement = $this->formulaire_traitement($request);
         $post = Post::find($post_id);
         $post->update($traitement);
+
+        foreach($post->bannieres as $banniere) {
+            Storage::delete($banniere->path);
+            $banniere->delete();
+        }
+
+        for($i = 0; $i < count($request->banniere); $i++) {
+            $file = $request->banniere[$i];
+            $path = BanniereService::stockerBanniere($file, $post, $i);
+            $banniere = new Banniere();
+            $banniere->path = $path;
+            // voir la méthode saveMany pour améliorer le code
+            $post->bannieres()->save($banniere);
+        }
 
         // TAGS
         //Detach previous tags
@@ -259,7 +289,12 @@ class PostController extends Controller
     {
         $post_id = $request->route('id');
         AutorisationGestion::protectionPage("gerer_post");
-        $post = Post::find($post_id)->delete();
+        $post = Post::find($post_id);
+        foreach($post->bannieres as $banniere) {
+            Storage::delete($banniere->path);
+            $banniere->delete();
+        }
+        $post->delete();
         return redirect(session('entite_uid') . "/entite/post");
     }
 

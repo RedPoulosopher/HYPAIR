@@ -71,9 +71,9 @@
                     </summary>
 
                     <div class="groupe card">
-                        <label for="input_groupe">
+                        <label class="input_groupe">
                             <p class="titre">Bannière :</p>
-                            <input type="file" id="banniere" name="banniere[]" accept="image/*">
+                            <input type="file" id="banniere" class="input" name="banniere[]" accept="image/*">
                         </label>
                         {{-- <label for="input_groupe">
                             <p class="titre">Bannière 2 :</p>
@@ -88,7 +88,7 @@
                     </div>
 
                     <div class="groupe card">
-                        <label for="input_groupe">
+                        <label class="input_groupe">
                             <p class="labels">Tags :</p>
                             <p class="description">Séparez les tags par des virgules (e.g. important, soirée, info)</p>
                             @isset($post)

@@ -65,11 +65,11 @@
 
                 <div class="groupe card">
                     <label for="input_groupe">
-                        <p class="titre">Bannière 1 :</p>
+                        <p class="titre">Bannière :</p>
                         <p class="description">Choisissez une image pour votre post</p>
-                        <input type="file" id="banniere_1" name="banniere[]" accept="image/*">
+                        <input type="file" id="banniere" name="banniere[]" accept="image/*">
                     </label>
-                    <label for="input_groupe">
+                    {{-- <label for="input_groupe">
                         <p class="titre">Bannière 2 :</p>
                         <p class="description">Choisissez une image pour votre post</p>
                         <input type="file" id="banniere_2" name="banniere[]" accept="image/*">
@@ -78,7 +78,7 @@
                         <p class="titre">Bannière 3 :</p>
                         <p class="description">Choisissez une image pour votre post</p>
                         <input type="file" id="banniere_3" name="banniere[]" accept="image/*">
-                    </label>
+                    </label> --}}
                 </div>
 
                 <details>

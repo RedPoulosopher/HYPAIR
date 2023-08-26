@@ -11,7 +11,6 @@ section {
             cursor: pointer;
         }
 
-
         .header {
             .thumbnail {
                 display: flex;
@@ -32,7 +31,7 @@ section {
                 }
             }
 
-            &>p {
+            & > p {
                 font-weight: var(--fw-light);
                 color: var(--couleur_police_secondaire);
                 font-size: 1em;
@@ -66,10 +65,6 @@ section {
                 }
             }
 
-
-
-
-
             .tags {
                 display: flex;
                 flex-wrap: wrap;
@@ -81,7 +76,6 @@ section {
                 grid-row: 2;
                 grid-column: 2;
 
-
                 .tag {
                     display: inline-block;
                     color: var(--couleur_police_accentuation);
@@ -90,22 +84,24 @@ section {
                     font-size: 13px;
 
                     padding: 6px 12px;
-
                 }
             }
         }
 
-
-
-
         .description {
             padding: 0 15px;
+
+            .img-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
 
             &.visible {
                 display: block;
             }
 
-            &> :first-child {
+            & > :first-child {
                 margin-top: 15px;
                 padding-top: 15px;
                 border-top: 1px solid var(--light-grey);

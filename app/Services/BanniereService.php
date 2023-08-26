@@ -13,9 +13,10 @@ class BanniereService {
     $banniereImage = Image::make($banniereFile);
     $hauteur = $banniereImage->height();
     $largeur = $banniereImage->width();
-    $taille_carre = $hauteur > $largeur ? $largeur : $hauteur;
-    $banniereImage->crop($taille_carre,$taille_carre);
-    $banniereImage->resize(512, 512);
+    $ratio = $largeur / $hauteur;
+    $new_hauteur = $hauteur < 512 ? $hauteur : 512;
+    $new_largeur = $new_hauteur * $ratio;
+    $banniereImage->resize($new_largeur, $new_hauteur);
     $path = 'images/posts/'.$post->id . '/' . $filename;
     Storage::put($path, $banniereImage->encode('png'));
     $banniereImage->destroy();

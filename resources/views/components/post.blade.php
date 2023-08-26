@@ -41,12 +41,16 @@
     </div>
 
     <div class="description" id="description-{{ $post->id }}">
-
+        <div class="img-container">
+            @foreach ($post->bannieres as $banniere)
+                <img src="{{ Storage::url($banniere->path) }} " alt="bannière">
+            @endforeach
+        </div>
         {{-- CAROUSEL --}}
-        @if (count($post->bannieres) > 0)
-            <div class="slideshow-container" onclick="afficher_banniere()">
+        {{-- @if (count($post->bannieres) > 0)
+            <div class="slideshow-container">
                 @for ($i = 0; $i < count($post->bannieres); $i++)
-                    <div class="mySlides fade">
+                    <div id="slider_{{ $post->id }}" class="mySlides fade">
                         <div class="numbertext">{{ $i + 1 }} / {{ count($post->bannieres) }}</div>
                         <img src={{ Storage::url($post->bannieres[$i]->path) }} style="width:100%">
                     </div>
@@ -62,7 +66,7 @@
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
             </div>
-        @endif
+        @endif --}}
 
         {{-- DESCRIPTION --}}
         {!! Str::markdown(strip_tags($post->description ?? '')) !!}
@@ -70,41 +74,11 @@
 
 </article>
 
-{{-- POPUP CAROUSEL --}}
-<div id="popup_banniere" class="popup">
-    <div class="petit">
-        <div class="documentation card">
-            <span id="retour" class='info_bouton' tabindex="0" onclick="fermer_banniere()">
-                <i class="fa-solid fa-xmark fa-2xl"></i>
-            </span>
-
-            <div class="slideshow-container">
-                @for ($i = 0; $i < count($post->bannieres); $i++)
-                    <div class="mySlides fade">
-                        <div class="numbertext">{{ $i + 1 }} / {{ count($post->bannieres) }}</div>
-                        <img src={{ Storage::url($post->bannieres[$i]->path) }} style="width:100%">
-                    </div>
-                @endfor
-
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </div>
-            <br>
-
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 @pushonce('end-scripts')
     <script>
         // Ce script commande l'affichage des descriptions des posts
-
+        postId = {{ $post->id }};
         // Ajouter un EventListener sur chaque flèche rouge
         arrows = document.getElementsByClassName("arrow")
 
@@ -166,51 +140,35 @@
         }
 
         // CAROUSEL
-        let slideIndex = 1;
-        showSlides(slideIndex);
+        // let slideIndex = 1;
+        // showSlides(slideIndex);
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
+        // function plusSlides(n) {
+        //     showSlides(slideIndex += n);
+        // }
 
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
+        // function currentSlide(n) {
+        //     showSlides(slideIndex = n);
+        // }
 
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            let dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {
-                slideIndex = 1
-            }
-            if (n < 1) {
-                slideIndex = slides.length
-            }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active";
-        }
-
-        var popupBanniere;
-        window.onload = init;
-
-        function init() {
-            popupBanniere = document.getElementById("popup_banniere");
-        };
-
-        function afficher_banniere() {
-            console.log("yo");
-            // popupBanniere.display = "block";
-        };
-
-        function fermer_banniere() {
-            popupBanniere.display = "none";
-        }
+        // function showSlides(n) {
+        //     let i;
+        //     let slides = document.getElementById("slider_" + postId);
+        //     let dots = document.getElementsByClassName("dot");
+        //     if (n > slides.length) {
+        //         slideIndex = 1
+        //     }
+        //     if (n < 1) {
+        //         slideIndex = slides.length
+        //     }
+        //     for (i = 0; i < slides.length; i++) {
+        //         slides[i].style.display = "none";
+        //     }
+        //     for (i = 0; i < dots.length; i++) {
+        //         dots[i].className = dots[i].className.replace(" active", "");
+        //     }
+        //     slides[slideIndex - 1].style.display = "block";
+        //     dots[slideIndex - 1].className += " active";
+        // }
     </script>
 @endpushonce

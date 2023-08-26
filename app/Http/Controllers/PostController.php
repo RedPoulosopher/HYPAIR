@@ -305,7 +305,11 @@ class PostController extends Controller
 		}
 
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
-        $postIsVisible = $now > $post->date_apparition && $now < $post->date_expiration;
+        if($post->date_expiration) {
+            $postIsVisible = $now > $post->date_apparition && $now < $post->date_expiration;
+        } else {
+            $postIsVisible = $now > $post->date_apparition;
+        }
 
 		return view('post.show-post', [
 			'post' => $post,

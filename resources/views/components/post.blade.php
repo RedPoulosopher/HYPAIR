@@ -40,36 +40,65 @@
 
     </div>
 
-
-
     <div class="description" id="description-{{ $post->id }}">
+
+        {{-- CAROUSEL --}}
         @if (count($post->bannieres) > 0)
-            <div class="slideshow-container">
+            <div class="slideshow-container" onclick="afficher_banniere()">
                 @for ($i = 0; $i < count($post->bannieres); $i++)
                     <div class="mySlides fade">
                         <div class="numbertext">{{ $i + 1 }} / {{ count($post->bannieres) }}</div>
                         <img src={{ Storage::url($post->bannieres[$i]->path) }} style="width:100%">
-                        <div class="text">Caption Text</div>
                     </div>
                 @endfor
 
-                <!-- Next and previous buttons -->
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
             <br>
 
-            <!-- The dots/circles -->
             <div style="text-align:center">
                 <span class="dot" onclick="currentSlide(1)"></span>
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
             </div>
         @endif
+
+        {{-- DESCRIPTION --}}
         {!! Str::markdown(strip_tags($post->description ?? '')) !!}
     </div>
 
 </article>
+
+{{-- POPUP CAROUSEL --}}
+<div id="popup_banniere" class="popup">
+    <div class="petit">
+        <div class="documentation card">
+            <span id="retour" class='info_bouton' tabindex="0" onclick="fermer_banniere()">
+                <i class="fa-solid fa-xmark fa-2xl"></i>
+            </span>
+
+            <div class="slideshow-container">
+                @for ($i = 0; $i < count($post->bannieres); $i++)
+                    <div class="mySlides fade">
+                        <div class="numbertext">{{ $i + 1 }} / {{ count($post->bannieres) }}</div>
+                        <img src={{ Storage::url($post->bannieres[$i]->path) }} style="width:100%">
+                    </div>
+                @endfor
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <br>
+
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @pushonce('end-scripts')
@@ -136,15 +165,14 @@
             })
         }
 
+        // CAROUSEL
         let slideIndex = 1;
         showSlides(slideIndex);
 
-        // Next/previous controls
         function plusSlides(n) {
             showSlides(slideIndex += n);
         }
 
-        // Thumbnail image controls
         function currentSlide(n) {
             showSlides(slideIndex = n);
         }
@@ -167,6 +195,22 @@
             }
             slides[slideIndex - 1].style.display = "block";
             dots[slideIndex - 1].className += " active";
+        }
+
+        var popupBanniere;
+        window.onload = init;
+
+        function init() {
+            popupBanniere = document.getElementById("popup_banniere");
+        };
+
+        function afficher_banniere() {
+            console.log("yo");
+            // popupBanniere.display = "block";
+        };
+
+        function fermer_banniere() {
+            popupBanniere.display = "none";
         }
     </script>
 @endpushonce

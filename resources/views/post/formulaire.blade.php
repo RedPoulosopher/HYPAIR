@@ -63,23 +63,7 @@
                     </label>
                 </div>
 
-                <div class="groupe card">
-                    <label for="input_groupe">
-                        <p class="titre">Bannière :</p>
-                        <p class="description">Choisissez une image pour votre post</p>
-                        <input type="file" id="banniere" name="banniere[]" accept="image/*">
-                    </label>
-                    {{-- <label for="input_groupe">
-                        <p class="titre">Bannière 2 :</p>
-                        <p class="description">Choisissez une image pour votre post</p>
-                        <input type="file" id="banniere_2" name="banniere[]" accept="image/*">
-                    </label>
-                    <label for="input_groupe">
-                        <p class="titre">Bannière 3 :</p>
-                        <p class="description">Choisissez une image pour votre post</p>
-                        <input type="file" id="banniere_3" name="banniere[]" accept="image/*">
-                    </label> --}}
-                </div>
+
 
                 <details>
                     <summary>
@@ -87,7 +71,24 @@
                     </summary>
 
                     <div class="groupe card">
-                        <label class="input_groupe">
+                        <label for="input_groupe">
+                            <p class="titre">Bannière :</p>
+                            <input type="file" id="banniere" name="banniere[]" accept="image/*">
+                        </label>
+                        {{-- <label for="input_groupe">
+                            <p class="titre">Bannière 2 :</p>
+                            <p class="description">Choisissez une image pour votre post</p>
+                            <input type="file" id="banniere_2" name="banniere[]" accept="image/*">
+                        </label>
+                        <label for="input_groupe">
+                            <p class="titre">Bannière 3 :</p>
+                            <p class="description">Choisissez une image pour votre post</p>
+                            <input type="file" id="banniere_3" name="banniere[]" accept="image/*">
+                        </label> --}}
+                    </div>
+
+                    <div class="groupe card">
+                        <label for="input_groupe">
                             <p class="labels">Tags :</p>
                             <p class="description">Séparez les tags par des virgules (e.g. important, soirée, info)</p>
                             @isset($post)

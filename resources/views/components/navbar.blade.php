@@ -44,6 +44,9 @@
                 logo="{{ mix('/images/peertube.png') }}"></x-service>
             <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
                 logo="{{ mix('/images/gitlab.png') }}"></x-service>
+            <x-service nom="Tutoriels HypAIR" destination='https://drive.google.com/drive/folders/1rT5waUh6R_q1ydip7CkxVAwxRNXkTU8i?usp=drive_link' color=#4c4372
+                logo="{{ mix('/images/tutorial.png') }}">
+            </x-service>
         </div>
     </div>
 

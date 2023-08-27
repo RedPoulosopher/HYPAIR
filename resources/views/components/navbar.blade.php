@@ -37,9 +37,11 @@
             @endif
         </ul>
         <div id="services">
+            @if(Auth::check() && Auth::user()->campus->pluck("label")->contains("douai"))
             <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
                 logo="{{ mix('/images/piwigo.png') }}">
             </x-service>
+            @endif
             <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
                 logo="{{ mix('/images/peertube.png') }}"></x-service>
             <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329

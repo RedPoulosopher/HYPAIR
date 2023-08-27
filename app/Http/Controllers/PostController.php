@@ -119,15 +119,17 @@ class PostController extends Controller
         
         $post = Post::create($postRequest);
 
-        for($i = 0; $i < count($request->banniere); $i++) {
-            $file = $request->banniere[$i];
-            // $filename = $i . '_' . time() . '.' . $request->banniere[$i]->extension();
-            // $path = $file->storeAs('images/posts/'.$post->id, $filename);
-            $path = BanniereService::stockerBanniere($file, $post, $i);
-            $banniere = new Banniere();
-            $banniere->path = $path;
-            // voir la méthode saveMany pour améliorer le code
-            $post->bannieres()->save($banniere);
+        if($request->banniere) {
+            for($i = 0; $i < count($request->banniere); $i++) {
+                $file = $request->banniere[$i];
+                // $filename = $i . '_' . time() . '.' . $request->banniere[$i]->extension();
+                // $path = $file->storeAs('images/posts/'.$post->id, $filename);
+                $path = BanniereService::stockerBanniere($file, $post, $i);
+                $banniere = new Banniere();
+                $banniere->path = $path;
+                // voir la méthode saveMany pour améliorer le code
+                $post->bannieres()->save($banniere);
+            }
         }
 
         // TAGS
@@ -235,13 +237,15 @@ class PostController extends Controller
             $banniere->delete();
         }
 
-        for($i = 0; $i < count($request->banniere); $i++) {
-            $file = $request->banniere[$i];
-            $path = BanniereService::stockerBanniere($file, $post, $i);
-            $banniere = new Banniere();
-            $banniere->path = $path;
-            // voir la méthode saveMany pour améliorer le code
-            $post->bannieres()->save($banniere);
+        if($request->banniere) {
+            for($i = 0; $i < count($request->banniere); $i++) {
+                $file = $request->banniere[$i];
+                $path = BanniereService::stockerBanniere($file, $post, $i);
+                $banniere = new Banniere();
+                $banniere->path = $path;
+                // voir la méthode saveMany pour améliorer le code
+                $post->bannieres()->save($banniere);
+        }
         }
 
         // TAGS

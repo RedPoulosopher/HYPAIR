@@ -24,10 +24,10 @@
 
 
                         <!--
-                   @if ($gerer_post)
+                       @if ($gerer_post)
     <a href="/post/modifier/{{ $post->id }}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
     @endif
-                -->
+                    -->
             </div>
 
             <div class="documentation card">
@@ -59,12 +59,12 @@
                         @endif
                     </div>
 
+                    <div class="img-container">
+                        @foreach ($post->bannieres as $banniere)
+                            <img src="{{ Storage::url($banniere->path) }} " alt="bannière">
+                        @endforeach
+                    </div>
                     <div class="description">
-                        <div class="img-container">
-                            @foreach ($post->bannieres as $banniere)
-                                <img src="{{ Storage::url($banniere->path) }} " alt="bannière">
-                            @endforeach
-                        </div>
                         {!! Str::markdown(strip_tags($post->description ?? '')) !!}
                     </div>
                 @elseif (!$postIsVisible)

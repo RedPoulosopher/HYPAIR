@@ -98,14 +98,18 @@ section {
             }
         }
 
+        .img-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
         .description {
             padding: 0 15px;
-
-            .img-container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
 
             &.visible {
                 display: block;

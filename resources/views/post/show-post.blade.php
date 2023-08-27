@@ -24,10 +24,10 @@
 
 
                         <!--
-       @if ($gerer_post)
+                       @if ($gerer_post)
     <a href="/post/modifier/{{ $post->id }}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
     @endif
-    -->
+                    -->
             </div>
 
             <div class="documentation card">
@@ -51,19 +51,32 @@
                                 <div class="tag" style="background-color: {{ $tag->couleur }};">{{ $tag->name }}</div>
                             @endforeach
                         </div>
-                        @if($post->event)
-                            <a id="rattachement" href="/{{ $post->entite->uid }}/entite/evenement/{{ $post->event->slug }}"><i class="fa-solid fa-link"></i>Ce post est rattaché à l'évènement "{{ $post->event->titre }}"</a>
+                        @if ($post->event)
+                            <a id="rattachement"
+                                href="/{{ $post->entite->uid }}/entite/evenement/{{ $post->event->slug }}"><i
+                                    class="fa-solid fa-link"></i>Ce post est rattaché à l'évènement
+                                "{{ $post->event->titre }}"</a>
                         @endif
                     </div>
 
-                    <div class="description">{!! Str::markdown(strip_tags($post->description ?? '')) !!}</div>
+                    <div class="img-container">
+                        @foreach ($post->bannieres as $banniere)
+                            <img src="{{ Storage::url($banniere->path) }} " alt="bannière">
+                        @endforeach
+                    </div>
+                    <div class="description">
+                        {!! Str::markdown(strip_tags($post->description ?? '')) !!}
+                    </div>
                 @elseif (!$postIsVisible)
-                <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post n'est pas disponible</p>
+                    <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post n'est pas disponible
+                    </p>
                 @else
                     @if (Auth::check())
-                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel. Vous ne pouvez pas le consulter.</p>
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est
+                            confidentiel. Vous ne pouvez pas le consulter.</p>
                     @else
-                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel. Veuillez vous connecter.</p>
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est
+                            confidentiel. Veuillez vous connecter.</p>
                     @endif
                 @endif
             </div>

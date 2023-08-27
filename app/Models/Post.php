@@ -15,7 +15,8 @@ class Post extends Model
         'date_apparition',
         'date_expiration',
         'entite_id',
-        'confidentiel'
+        'confidentiel',
+        'photo_name'
     ];
 
     function event()
@@ -33,5 +34,8 @@ class Post extends Model
     function campus()
     {
         return $this->belongsToMany(Site::class, 'sites_posts');
+    }
+    function bannieres() {
+        return $this->hasMany(Banniere::class);
     }
 }

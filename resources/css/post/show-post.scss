@@ -11,7 +11,6 @@ section {
             cursor: pointer;
         }
 
-
         .header {
             .thumbnail {
                 display: flex;
@@ -32,7 +31,7 @@ section {
                 }
             }
 
-            &>p {
+            & > p {
                 font-weight: var(--fw-light);
                 color: var(--couleur_police_secondaire);
                 font-size: 1em;
@@ -50,7 +49,6 @@ section {
                     text-align: center;
                 }
 
-
                 i {
                     color: var(--couleur_police_secondaire);
                     font-size: 13px;
@@ -58,9 +56,8 @@ section {
                 }
             }
 
-
             #rattachement {
-                opacity: .5;
+                opacity: 0.5;
                 background-color: var(--dark-grey);
                 color: var(--couleur_police_primaire);
                 border-radius: 5px;
@@ -70,14 +67,13 @@ section {
                 justify-content: center;
                 margin: 15px 0 0;
                 font-weight: var(--fw-light);
-                font-size: .95em;
+                font-size: 0.95em;
 
                 i {
                     color: var(--couleur_police_primaire);
                     margin-right: 10px;
                 }
             }
-
 
             .tags {
                 display: flex;
@@ -90,7 +86,6 @@ section {
                 grid-row: 2;
                 grid-column: 2;
 
-
                 .tag {
                     display: inline-block;
                     color: var(--couleur_police_accentuation);
@@ -99,13 +94,19 @@ section {
                     font-size: 13px;
 
                     padding: 6px 12px;
-
                 }
             }
         }
 
+        .img-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-
+            img {
+                max-width: 100%;
+            }
+        }
 
         .description {
             padding: 0 15px;
@@ -114,7 +115,7 @@ section {
                 display: block;
             }
 
-            &> :first-child {
+            & > :first-child {
                 margin-top: 15px;
                 padding-top: 15px;
                 border-top: 1px solid var(--light-grey);
@@ -153,7 +154,6 @@ p#confidentiel {
     }
 }
 
-
-.documentation>p#confidentiel {
+.documentation > p#confidentiel {
     margin: 0;
 }

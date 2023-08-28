@@ -24,6 +24,17 @@ class AutorisationGestion {
         return $role[$gestion];
     }
 
+    public static function gestion_entite($entite){
+        $role = self::recuperer_role_dans_entite($entite);
+        
+        if($role == "non authentifié") return false;
+        else if($role == "non membre") return false;
+        
+        return $role["gerer_post"]  || $role["gerer_entite"] || $role["gerer_evenement"] || $role["gerer_membre"] || $role["gerer_reseau"];
+        // TODO : Ajouter les autres droits lorsque les boutons pour la docu, les tickets et les projets seront faits
+    }
+
+
     public static function protectionPage($gestion){
         $role = self::recuperer_role();
         if ($role == "non authentifié") abort(403);

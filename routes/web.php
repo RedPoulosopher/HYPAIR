@@ -160,9 +160,9 @@ $routes_bureaux = function () {
     Route::controller(EntiteController::class)->group(function () {
         Route::get('/entites', 'index_bureau');
 
+        
         Route::middleware('protection.autorisation:gerer_entite')->group(function () {
             Route::get('/entites/gestion', 'index_admin');
-
             Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos');
             Route::post('/entite/{entite_id}/modifier/informations', 'maj_infos');
             Route::get('/entite/{entite_id}/modifier/description', 'modifier_description');
@@ -216,8 +216,10 @@ $routes_entites = function () {
         Route::get('/accueil', 'show');
         Route::get('/', 'show')
             ->name('entite');
+
+        Route::get('/entite/gestion', 'gestion');
+        
         Route::middleware('protection.autorisation:gerer_entite')->group(function () {
-            Route::get('/entite/gestion', 'gestion');
             Route::get('/entite/description/', 'modifier_description');
             Route::post('/entite/description/', 'maj_description');
         });
@@ -248,7 +250,7 @@ $routes_entites = function () {
 
 
     Route::controller(ReseauSocialController::class)->group(function () {
-        Route::middleware('protection.autorisation:gerer_entite')->group(function () {
+        Route::middleware('protection.autorisation:gerer_reseau')->group(function () {
             Route::get('/entite/reseau_social', 'create');
             Route::post('/entite/reseau_social', 'store');
             Route::delete('/entite/reseau_social', 'delete');

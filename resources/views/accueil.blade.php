@@ -22,10 +22,11 @@
             <h1>Services</h1>
 
             <div class="services-wrapper">
-
+                @if(Auth::check() && Auth::user()->campus->pluck("label")->contains("douai"))
                 <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
                     logo="{{ mix('/images/piwigo.png') }}">
                 </x-service>
+                @endif
 
                 <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
                     logo="{{ mix('/images/peertube.png') }}">
@@ -33,6 +34,10 @@
 
                 <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
                     logo="{{ mix('/images/gitlab.png') }}">
+                </x-service>
+
+                <x-service nom="Tutoriels HypAIR" destination='https://drive.google.com/drive/folders/1rT5waUh6R_q1ydip7CkxVAwxRNXkTU8i?usp=drive_link' color=#4c4372
+                    logo="{{ mix('/images/tutorial.png') }}">
                 </x-service>
 
             </div>

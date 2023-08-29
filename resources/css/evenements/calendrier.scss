@@ -91,6 +91,12 @@
     user-select: none;
     position: relative;
     z-index: 1;
+    border-radius: 5px;
+    margin: 0 5px;
+
+    &:not(:last-child){
+        margin-bottom: 5px;
+    }
 }
 
 .evenement:hover {

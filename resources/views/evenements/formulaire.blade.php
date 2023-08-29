@@ -3,8 +3,13 @@
 @section('titre', 'Évènements')
 
 @pushonce('styles')
+    <link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ mix('/css/evenements/formulaire.css') }}" type="text/css">
+@endpushonce
+
+@pushonce('start-scripts')
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 @endpushonce
 
 @section('content')
@@ -42,12 +47,18 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Description de l'évènement :</p>
+                        <p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur"
+                                href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le
+                                markdown</a> !</p>
+                        <p class="description">Pour insérer des emojis, tapez sur Windows + ";" (Windows) ou Contrôle +
+                            Commande + Espace (Mac)
+                        </p>
                         @isset($event)
-                            <textarea name="description" pattern=".{30,250}" required
+                            <textarea name="description_md" id="description_md" class="input"
                                 title="Au moins 30 caractères dans la description, et au plus 250" rows="5">{{ $event->description }}</textarea>
                         @endisset
                         @empty($event)
-                            <textarea name="description" pattern=".{30,250}" required
+                            <textarea name="description_md" id="description_md" class="input"
                                 title="Au moins 30 caractères dans la description, et au plus 250" rows="5">{{ old('description') ?? ($evenement->description ?? '') }}</textarea>
                         @endempty
                     </label>
@@ -203,3 +214,15 @@
     </main>
 
 @endsection
+
+@pushonce('end-scripts')
+    <script>
+        var simplemde = new SimpleMDE({
+            element: document.getElementById("description_md"),
+            toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link",
+                "image", "|", "table", "horizontal-rule", "|", "preview"
+            ],
+            spellChecker: false,
+        });
+    </script>
+@endpushonce

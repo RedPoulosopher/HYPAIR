@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Str;
 
 class CalendrierController extends Controller
 {
@@ -173,8 +174,9 @@ class CalendrierController extends Controller
             ///->where('membres.role_id', '<=', 'evenements.confidentialite')
         }
 
-        // dd($evenements_publics_array);
-        // dd($evenements_user);
+        for($i = 0; $i < count($evenements_publics_array); $i++) {
+            $evenements_publics_array[$i]["description"] = Str::markdown($evenements_publics_array[$i]["description"]);
+        }
 
         return
             view("evenements.calendrier", [
@@ -353,6 +355,9 @@ class CalendrierController extends Controller
             }
         }
 
+        for($i = 0; $i < count($evenements_publics_array); $i++) {
+            $evenements_publics_array[$i]["description"] = Str::markdown($evenements_publics_array[$i]["description"]);
+        }
 
         return [
             "events" => $evenements_publics_array,

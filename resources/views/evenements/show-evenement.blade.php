@@ -24,10 +24,10 @@
 
 
                         <!--
-                           @if ($gerer_evenement)
+                                               @if ($gerer_evenement)
     <a href="/evenement/modifier/{{ $evenement->id }}" class="bouton tertiaire ombre_petite administrateur" style="margin:15px;">Modifier</a>
     @endif
-                        -->
+                                            -->
             </div>
 
             <div class="documentation card">
@@ -63,36 +63,28 @@
                         <p><i class="fa-solid fa-location-dot"></i>{{ $evenement->lieu }}</p>
                     </div>
 
-                    {{-- <p><em>Nom de l'évènement :</em> {{$evenement->titre}}</p> --}}
-
-
                     <div class="description">
 
-                        <p><em>Description :</em> {{ $evenement->description }}</p>
-                        <p><em>Nombre de personnes max :</em> {{ $evenement->max_participation }}</p>
-                        {{-- <p><em>Confidentialité :</em> 
-					@if ($evenement['confidentialite'] == 0)                          
-					Public
-					@elseif ($evenement['confidentialite'] == 1)
-					Membres de l'assos
-					@elseif ($evenement['confidentialite'] == 2)
-					Responsables & bureau
-					@elseif ($evenement['confidentialite'] == 3)
-					Bureau
-					@elseif ($evenement['confidentialite'] == 4)
-					Prez & vice-prez
-					@endif
-				</p> --}}
+                        <div class="description">
+                            {!! Str::markdown(strip_tags($evenement->description ?? '')) !!}
+                        </div>
+                        @if ($evenement->max_participation)
+                            <p><em>Nombre de personnes max :</em> {{ $evenement->max_participation }}</p>
+                        @endif
+
                         <p><em>Campus concerné{{ count($evenement->campus) > 0 ? 's' : '' }} :</em>
                             {{ ucwords(implode(', ', $evenement->campus->pluck('label')->toArray())) }}</p>
                     </div>
                 @elseif (!$eventIsVisible)
-                    <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement n'est pas disponible</p>
+                    <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement n'est pas
+                        disponible</p>
                 @else
                     @if (Auth::check())
-                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement est confidentiel. Vous ne pouvez pas le consulter.</p>
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement est
+                            confidentiel. Vous ne pouvez pas le consulter.</p>
                     @else
-                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement est confidentiel. Veuillez vous connecter.</p>
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Cet évènement est
+                            confidentiel. Veuillez vous connecter.</p>
                     @endif
                 @endif
 

@@ -38,11 +38,6 @@ class EvenementController extends Controller
 	public function store(Request $request)
 	{
 		AutorisationGestion::protectionPage("gerer_evenement");
-		// if ($request['confidentialite'] != 0) {
-		// 	$request['validation'] = 1;
-		// } else {
-		// 	$request['validation'] = 0;
-		// }
 		$eventRequest = $this->formulaire_traitement($request);
 		$event = Evenement::create($eventRequest);
 
@@ -235,7 +230,7 @@ class EvenementController extends Controller
 		$validated = $request->validate(
 			[
 				'titre' => 'required|max:128',
-				'description' => 'required|min:30|max:250',
+				'description_md' => 'required|min:30|max:250',
 				'temps_debut' => 'required',
 				'temps_fin' => 'required',
 				'lieu' => 'nullable|max:128',
@@ -250,7 +245,7 @@ class EvenementController extends Controller
 		$eventRequest = [
 			'entite_id' => session("entite_id"),
 			"titre" => $request->titre,
-			"description" => $request->description,
+			"description" => $request->description_md,
 			"slug" => Str::slug($request->titre, '-'),
 			'temps_debut' => $request->temps_debut,
 			'temps_fin' => $request->temps_fin,

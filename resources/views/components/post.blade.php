@@ -15,8 +15,7 @@
             <a href="/{{ $post->entite->uid }}/entite/post/{{ $post->id }}">
                 <h2>{{ $post->titre }}</h2>
             </a>
-            <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>Il y a
-                {{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
+            <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>{{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
             @if ($post->confidentiel != 0)
                 <p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager"
                     class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>

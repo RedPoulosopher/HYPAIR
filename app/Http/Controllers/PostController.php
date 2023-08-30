@@ -74,10 +74,22 @@ class PostController extends Controller
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
         $nbSeconds = strtotime($now) - strtotime($date_apparition);
 
-        if($nbSeconds < 60) return $nbSeconds . "s";
-        else if($nbSeconds/60 < 60) return floor($nbSeconds/60) . "min";
-        else if($nbSeconds/(60*60) < 24) return floor($nbSeconds/(60*60)) . "h";
-        else return floor($nbSeconds/(60*60*24)) . "j";
+        $result = "";
+
+        //Prefix
+        if ($nbSeconds > 0) $result = "Il y a ";
+        else if ($nbSeconds < 0) $result = "Apparaitra dans ";
+        else return "A l'instant";
+
+        $nbSeconds = abs($nbSeconds);
+
+        //Number
+        if($nbSeconds < 60) $result = $result . $nbSeconds . "s";
+        else if($nbSeconds/60 < 60)  $result = $result . floor($nbSeconds/60) . "min";
+        else if($nbSeconds/(60*60) < 24)  $result = $result . floor($nbSeconds/(60*60)) . "h";
+        else $result = $result .  floor($nbSeconds/(60*60*24)) . "j";
+
+        return $result;
     }
 
     public function home()

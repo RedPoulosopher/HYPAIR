@@ -25,42 +25,22 @@
                 <p id="fleche-droite" class="icon-container"> <i class="fa-solid fa-arrow-right fa-xl"></i> </p>
             </div>
 
-            {{-- <select>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-        </select>
-        <select>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-        </select> --}}
             <div id="calendrier">
             </div>
-
 
             <div id="info" class="popup">
                 <div class="petit">
                     <div class="documentation card">
-                        {{-- <p class="bouton secondaire ombre_petite info_bouton retour">
-                            < Retour</p> --}}
                         <span id="retour" class='info_bouton' tabindex="0">
                             <i class="fa-solid fa-xmark fa-xl"></i>
                         </span>
 
                         <div class="contenu_doc" id="contenu_doc">
                             <h1 id="titre"></h1>
+                            <div id="description">
+                                {!! Str::markdown(strip_tags($evenement->description ?? '')) !!}
+                            </div>
                             <p id="organisateur"><em>Organisateur :</em> </p>
-                            <p id="description"><em>Description :</em> </p>
                             <p id="lieu"><em>Lieu :</em> </p>
                             <p id="heure_debut"><em>Heure de début :</em> </p>
                             <p id="heure_fin"><em>Heure de fin :</em> </p>

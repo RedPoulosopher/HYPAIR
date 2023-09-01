@@ -20,3 +20,12 @@ p#confidentiel {
 .documentation>p#confidentiel {
     margin: 0;
 }
+
+.description {
+    border-bottom: 1px solid var(--light-grey);
+}
+
+.infos>* {
+    padding-left: 15px;
+    padding-right: 15px;
+}

@@ -65,7 +65,7 @@
                         @endif
                     </div>
 
-                    <div class="description">
+                    <div class="infos">
 
                         <div class="description">
                             {!! Str::markdown(strip_tags($evenement->description ?? '')) !!}

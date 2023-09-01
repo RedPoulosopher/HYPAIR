@@ -407,7 +407,12 @@
             document.getElementById("titre").innerHTML += evenements[index_evenement]["titre"];
             document.getElementById("organisateur").innerHTML += evenements[index_evenement]["nom"];
             document.getElementById("description").innerHTML += evenements[index_evenement]["description"];
-            document.getElementById("lieu").innerHTML += evenements[index_evenement]["lieu"];
+            if(evenements[index_evenement]["lieu"]){
+                document.getElementById("lieu").innerHTML += evenements[index_evenement]["lieu"];
+                document.getElementById("lieu").style.display = "block";
+            }else{
+                document.getElementById("lieu").style.display = "none";
+            }
             document.getElementById("heure_debut").innerHTML += evenements[index_evenement]["temps_debut"].substring(10,
                 16);
             document.getElementById("heure_fin").innerHTML += evenements[index_evenement]["temps_fin"].substring(10, 16);

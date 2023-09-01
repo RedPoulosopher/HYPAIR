@@ -60,7 +60,9 @@
                                     class="fa-regular fa-calendar-xmark"></i>{{ str_replace('X', 'à', ucwords(utf8_encode(strftime('%A %d %B X %H:%M', strtotime($evenement->temps_fin))))) }}
                             </p>
                         @endif
-                        <p><i class="fa-solid fa-location-dot"></i>{{ $evenement->lieu }}</p>
+                        @if($evenement->lieu)
+                            <p><i class="fa-solid fa-location-dot"></i>{{ $evenement->lieu }}</p>
+                        @endif
                     </div>
 
                     <div class="description">

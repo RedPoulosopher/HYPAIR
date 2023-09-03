@@ -61,7 +61,7 @@ class EntiteController extends Controller
 	public function store(Request $request) //réservé à l'AIR
 	{
 		$this->validate($request, [
-			'sites' => ['filled', 'array', Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes'])],
+			'sites' => ['filled', 'array', Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes', 'alençon'])],
 			'nom' => ['filled', 'max:120'],
 			'uid' => ['filled', 'max:30'],
 			'ratachement' => ['filled', new Enum(RatachementEnum::class)],

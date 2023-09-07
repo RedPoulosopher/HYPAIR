@@ -104,4 +104,12 @@ class AuthController extends Controller
 
         return redirect('/');
     }
+
+    public function admin() {
+        dd(Hash::make('hypairadmin'));
+    }
+
+    public function connexion_admin() {
+        dd('connexion admin yes');
+    }
 }

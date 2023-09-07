@@ -77,6 +77,16 @@ class UsersTableSeeder extends Seeder
                 'bio' => NULL,
                 'promo' => NULL
             ],
+            [
+                'nom' => 'Admin',
+                'prenom' => 'Admin',
+                'uid' => 'admin.admin',
+                'password' => Hash::make("test"),
+                'langue_pref' => 'fr',
+                'pronom' => 'Il/Lui',
+                'bio' => NULL,
+                'promo' => "CI3"
+            ],
         ]);
     }
 }

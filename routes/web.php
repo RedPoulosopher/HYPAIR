@@ -39,6 +39,9 @@ Route::get('/offline', function () {
     return view('pwa.offline');
 });
 
+Route::get('/admin', [AuthController::class, 'admin']);
+Route::post('/admin', [AuthController::class, 'connexion_admin']);
+
 Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });

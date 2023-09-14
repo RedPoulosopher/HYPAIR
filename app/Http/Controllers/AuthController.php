@@ -104,4 +104,19 @@ class AuthController extends Controller
 
         return redirect('/');
     }
+
+    public function admin() {
+        // dd(Hash::make('hypairadmin'));
+        return view('admin');
+    }
+
+    public function connexion_admin(Request $request) {
+        if(Hash::check($request->mdp, getenv('ADMIN_PASSWORD'))) {
+            $user = User::where('uid', 'admin.admin')->get()->first();
+            Auth::login($user);
+            return redirect()->route('accueil');
+        } else {
+            return redirect()->route('admin');
+        }
+    }
 }

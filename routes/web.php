@@ -39,6 +39,9 @@ Route::get('/offline', function () {
     return view('pwa.offline');
 });
 
+Route::get('/admin', [AuthController::class, 'admin'])->name('admin');
+Route::post('/admin', [AuthController::class, 'connexion_admin']);
+
 Route::get('/add-media', function () {
     Avancee::create()->addMedia(storage_path('images/logo_air.png')->toMediaCollection());
 });
@@ -49,7 +52,7 @@ Route::get('/a-propos', function () {
 
 // Route::get('/', [PostController::class, 'accueil']);
 // Attention à l'orthographe des campus (uid)
-Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']);
+Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon'])->name('accueil');
 
 Route::get('/entites', function () {
     // return view('entite.choix_site'); 

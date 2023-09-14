@@ -43,14 +43,26 @@ class SitesUsersSeeder extends Seeder
                 "site_id" => 5,
                 "user_id" => 4
             ],
-            // [
-            //     "site_id" => 1,
-            //     "user_id" => 5
-            // ],
-            // [
-            //     "site_id" => 3,
-            //     "user_id" => 5
-            // ],
+            [
+                "site_id" => 1,
+                "user_id" => 7
+            ],
+            [
+                "site_id" => 2,
+                "user_id" => 7
+            ],
+            [
+                "site_id" => 3,
+                "user_id" => 7
+            ],
+            [
+                "site_id" => 4,
+                "user_id" => 7
+            ],
+            [
+                "site_id" => 5,
+                "user_id" => 7
+            ],
         ]
         );
     }

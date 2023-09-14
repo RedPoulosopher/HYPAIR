@@ -1,26 +1,26 @@
 @extends('layouts.app')
 
-@section('titre','Nous contacter')
+@section('titre', 'Nous contacter')
 
 @pushonce('styles')
-<link rel="stylesheet" href="{{ mix('css/contact.css') }}" type="text/css"/>
+    <link rel="stylesheet" href="{{ mix('css/contact.css') }}" type="text/css" />
 @endpushonce
 
 @section('content')
 
-<main id="main-content" class="moyen">
-	<section>
+    <main id="main-content" class="moyen">
+        <section>
 
-		<h1>Nous contacter</h1>
-		
-		<div class="section-content">
-			@if(Session::has('success'))
-				<p class="explication">Votre problème va être résolu ! A bientôt.</p>
-			@else
-				<p class="explication">Un problème ? Une question ? L'AIR peut sûrement vous aider !</p>
-			@endif
-			
-			{{-- {!! Form::open() !!}
+            <h1>Nous contacter</h1>
+
+            <div class="section-content">
+                @if (Session::has('success'))
+                    <p class="explication">Votre problème va être résolu ! A bientôt.</p>
+                @else
+                    <p class="explication">Un problème ? Une question ? L'AIR peut sûrement vous aider !</p>
+                @endif
+
+                {{-- {!! Form::open() !!}
 				<div class="champs_conteneur" for="courriel">
 					<label class="champs flex border">
 						<p class="titre">Adresse mail :</p>
@@ -42,11 +42,17 @@
 				<p id="mail">N’hésitez pas également à nous contacter sur notre adresse mail : <a href="mailto:air@imt-nord-europe.fr"><em>air@imt-nord-europe.fr</em></a></p>
 				<button type="submit" class="bouton primaire icon-after-mail ombre_petite" style="float:right;"><span>ENVOYER</span></button>
 			{!! Form::close() !!} --}}
-			<p id="mail">N’hésitez pas à nous contacter sur notre adresse mail pour toute demande : <a href="mailto:air@etu.imt-nord-europe.fr"><em>air@etu.imt-nord-europe.fr</em></a></p>
-
-		</div>
-	</section>
-</main>
+                @if (Auth::check())
+                    <p id="mail">N’hésitez pas à nous contacter sur notre adresse mail pour toute demande : <a
+                            href="mailto:air@etu.imt-nord-europe.fr"><em>air@etu.imt-nord-europe.fr</em></a></p>
+                @else
+                    <p class="should-be-connected no-content">Vous devez être connecté pour pouvoir consulter notre adresse
+                        mail.
+                    </p>
+                @endif
+            </div>
+        </section>
+    </main>
 
 
 @endsection

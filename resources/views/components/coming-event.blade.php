@@ -2,15 +2,20 @@
   <h4>{{ $title }} <span>• {{ $entite }}</span></h4>
 
   @php
+  use Carbon\Carbon;
   setlocale(LC_TIME, 'fr_FR', 'fra'); 
   //ucwords pour avoir les majuscules au début des mots
   //utf_8 sinon le mois avec des accents (fevrier, aout, decembre) passent pas
   //strftime pour garder uniquement la date (et pas le time)
   $end_date   = ucwords(utf8_encode(strftime("%A %d %B", strtotime($end))));
   $start_date = ucwords(utf8_encode(strftime("%A %d %B", strtotime($start))));
+
+  $nb_jours = Carbon::parse($end)->diffInDays(Carbon::parse($start));
+  $end_time = date('H:i', strtotime($end));
+  $end_time_max = date('H:i', strtotime("08:00:00"));
   @endphp
 
-  @if($start_date == $end_date)
+  @if($start_date == $end_date ||( $nb_jours == 1 && $end_time < $end_time_max))
     <p>{{ $start_date }}</p>
   @else
     <p>Du {{ $start_date }}<br>

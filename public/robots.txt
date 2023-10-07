@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /matrix
+Disallow: /ecriture
+Disallow: /localauth
+Allow: /

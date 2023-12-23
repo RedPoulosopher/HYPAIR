@@ -41,6 +41,10 @@ class EvenementController extends Controller
 		$eventRequest = $this->formulaire_traitement($request);
 		$event = Evenement::create($eventRequest);
 
+		//Add 'id' to the slug to make it unique
+		$event->slug = $event->slug . '-' . $event->id;
+		$event->save();
+
 		// Peut-être besoin de gérer le cas où aucun campus n'est entré
 		if (!empty($request->campus_id)) {
 			foreach ($request->campus_id as $id) {
@@ -93,6 +97,10 @@ class EvenementController extends Controller
 		$traitement = $this->formulaire_traitement($request);
 		$event = Evenement::find($event_id);
 		$event->update($traitement);
+
+		//Add 'id' to the slug to make it unique
+		$event->slug = $event->slug . '-' . $event_id;
+		$event->save();
 
 		$campus_array = Site::all();
 		// Attention : on considère que les id des campus se suivent (pas de trou)

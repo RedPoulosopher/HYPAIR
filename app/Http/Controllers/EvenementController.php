@@ -42,7 +42,7 @@ class EvenementController extends Controller
 		$event = Evenement::create($eventRequest);
 
 		//Add 'id' to the slug to make it unique
-		$event->slug = $event->slug . '-' . $event->id;
+		$event->slug = $event->id . '-' . $event->slug ;
 		$event->save();
 
 		// Peut-être besoin de gérer le cas où aucun campus n'est entré
@@ -99,7 +99,7 @@ class EvenementController extends Controller
 		$event->update($traitement);
 
 		//Add 'id' to the slug to make it unique
-		$event->slug = $event->slug . '-' . $event_id;
+		$event->slug =  $event_id . '-' . $event->slug;
 		$event->save();
 
 		$campus_array = Site::all();

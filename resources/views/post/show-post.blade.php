@@ -38,8 +38,7 @@
                         <div class="thumbnail"><img src="{{ session('entite_logo_petit') }}" alt="Logo {{ $entite->nom }}">
                         </div>
                         <h1 class="title">{{ $post->titre }}</h1>
-                        <p>Posté par {{ $entite->nom }}<span class="separator">•</span>Il y a
-                            {{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
+                        <p>Posté par {{ $entite->nom }}<span class="separator">•</span>{{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
                         @if ($post->confidentiel != 0)
                             <p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager"
                                 class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est

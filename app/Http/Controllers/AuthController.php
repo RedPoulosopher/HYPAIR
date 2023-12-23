@@ -87,7 +87,7 @@ class AuthController extends Controller
                 ]);
             }
 
-            Auth::login($user);
+            Auth::login($user, $remember = true);
             $request->session()->regenerate();
 
             return redirect()->intended();

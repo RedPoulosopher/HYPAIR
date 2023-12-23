@@ -152,7 +152,7 @@ class PostController extends Controller
                 if($tag_name != ""){
                     
                     //Collate pour ne pas prendre en compte les majuscules et les accents
-                    $tag = Tag::whereRaw("lower(name) like '%$tag_name%' collate utf8mb4_unicode_ci");
+                    $tag = Tag::whereRaw("lower(name) like '$tag_name' collate utf8mb4_unicode_ci");
     
                     if (!$tag->exists()) {//Si le tag n'existe pas, on le créé
                         $tag = Tag::create([                        
@@ -271,7 +271,7 @@ class PostController extends Controller
                 if($tag_name != ""){
                     
                     //Collate pour ne pas prendre en compte les majuscules et les accents
-                    $tag = Tag::whereRaw("lower(name) like '%$tag_name%' collate utf8mb4_unicode_ci");
+                    $tag = Tag::whereRaw("lower(name) like '$tag_name' collate utf8mb4_unicode_ci");
     
                     if (!$tag->exists()) {//Si le tag n'existe pas, on le créé
                         $tag = Tag::create([                        

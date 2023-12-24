@@ -12,17 +12,30 @@
                 @foreach ($bureaux as $bureau)
                     @if (!$bureau->hidden)
                         <h1>Entités du {{ $bureau->nom }}</h1>
+                        {{-- Bureau --}}
                         <div class="liste_comite_club">
                             <x-entite :asso="$bureau" :destination="$bureau->lien_relatif()" />
                         </div>
-
-                        <div class="liste_comite_club">
-                            @foreach ($comites_clubs_dependants[$bureau->ratachement->value] as $comite_club)
-                                @if (!$comite_club->hidden)
-                                    <x-entite :asso="$comite_club" :destination="$comite_club->lien_relatif()" />
-                                @endif
-                            @endforeach
-                        </div>
+                        {{-- Listes associées --}}
+                        @if(count($listes_dependantes[$bureau->ratachement->value]) > 0)
+                            <div class="liste_comite_club listes card">
+                                @foreach ($listes_dependantes[$bureau->ratachement->value] as $liste)
+                                    @if (!$liste->hidden)
+                                        <x-entite :asso="$liste" :destination="$liste->lien_relatif()" />
+                                    @endif
+                                @endforeach
+                            </div>
+                        @endif
+                        {{-- Comités du bureau --}}
+                        @if(count($comites_clubs_dependants[$bureau->ratachement->value]) > 0)
+                            <div class="liste_comite_club">
+                                @foreach ($comites_clubs_dependants[$bureau->ratachement->value] as $comite_club)
+                                    @if (!$comite_club->hidden)
+                                        <x-entite :asso="$comite_club" :destination="$comite_club->lien_relatif()" />
+                                    @endif
+                                @endforeach
+                            </div>
+                        @endif
                     @endif
                 @endforeach
 

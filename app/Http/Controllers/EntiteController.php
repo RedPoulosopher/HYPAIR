@@ -177,9 +177,13 @@ class EntiteController extends Controller
 		$bureaux = Entite::bureaux_site($site)->get();
 
 		$comites_clubs_dependants = array();
+		$listes_dependantes = array();
 		foreach ($bureaux as $bureau) {
 			$bureau_ratachement = $bureau->ratachement->value;
+			//Comités
 			$comites_clubs_dependants[$bureau_ratachement] = $bureau->comites_clubs_dependants()->get();
+			//Listes
+			$listes_dependantes[$bureau_ratachement] = $bureau->listes_dependantes()->get();
 		}
 
 		return view(
@@ -188,6 +192,7 @@ class EntiteController extends Controller
 				"site" => $site,
 				"bureaux" => $bureaux,
 				"comites_clubs_dependants" => $comites_clubs_dependants,
+				"listes_dependantes" => $listes_dependantes,
 				"entites_independantes" => $entites_independantes
 			]
 		);

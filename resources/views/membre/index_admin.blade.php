@@ -242,11 +242,11 @@
         //Suppresion
         function demander_suppression_membre(membre) {
             document.getElementById("gerer").innerHTML = `
-            <form method="POST" action="membres/suppression/${membre.getAttribute('membre_id')}">
+            <form method="POST" action="membres/suppression/">
                 @csrf
                 <button type="submit" name="id" value=${membre.getAttribute('membre_id')} class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
             </form>`;
-            document.getElementById("message").innerText = " Voulez-vous vraiment supprimer le rôle : « " + membre.getAttribute('membre_label') + " » à " + membre.getAttribute('membre_nom_complet') + " ?";
+            document.getElementById("message").innerText = " Voulez-vous vraiment retirer le rôle « " + membre.getAttribute('membre_label') + " » à " + membre.getAttribute('membre_nom_complet') + " ?";
 
             document.getElementById("info").classList.add("visible");
         }

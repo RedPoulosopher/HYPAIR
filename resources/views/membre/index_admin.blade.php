@@ -5,6 +5,7 @@
 @pushonce('styles')
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/jstable.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/formulaire.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ mix('/css/documentation-popup.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('/css/membre/index_admin.css') }}">
 @endpushonce
 
@@ -37,6 +38,7 @@
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}">{{ ucfirst($role->label) }}</option>
                                 @endforeach
+                                <option value="">Aucun</option>
                             </select>
                             {{-- <div id="roles">
                             <p style="display:none">aucun rôle ne correspond à cette recherche. Contactez l'AIR pour le rajouter.</p>
@@ -77,9 +79,17 @@
                                         <td>{{ $membre['prenom'] }}</td>
                                         <td>{{ $membre['nom'] }}</td>
                                         <td><span class="role">{{ $membre['label'] }}</span></td>
-                                        <td><a membre_id="{{ $membre['id'] }}" role_id="{{ $membre['roles.id'] }}"
-                                                user_uid="{{ $membre['uid'] }}" class="icon-edit-2" title="Modifier"
-                                                onclick="afficher_menu_membre(this)"></a>
+                                        <td class="icons">
+                                            <a class="fa-solid fa-pen-to-square fa-lg" title="Modifier"
+                                                membre_id="{{ $membre['id'] }}" role_id="{{ $membre['roles.id'] }}"
+                                                user_uid="{{ $membre['uid'] }}"
+                                                onclick="afficher_menu_membre(this)">
+                                            </a>
+                                            <a class="warning fa-solid fa-trash fa-lg" title="Supprimer"
+                                                membre_id="{{ $membre['id'] }}" membre_label="{{ $membre['label'] }}"
+                                                membre_nom_complet="{{ $membre['prenom'] . ' ' . $membre['nom']}}"
+                                                onclick="demander_suppression_membre(this)">
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -87,6 +97,22 @@
                         </table>
                     </div>
                 @endif
+            </div>
+
+            <div id="info" class="popup">
+                <div class="documentation card">
+                    <div class="contenu_doc" id="contenu_doc">
+                        <h2>Attention !</h2>
+                        <p id="message">Vous êtes sur le point de supprimer un évènement. </p>
+                        <p style='font-style:italic;'>Cette action est irréversible.</p>
+                    </div>
+
+                    <div style="display:flex;">
+                        <div id="gerer"></div>
+                        <p class="bouton secondaire info_bouton ombre_petite" style="margin:15px;" onclick="retour()">Annuler</p>
+                    </div>
+
+                </div>
             </div>
         </section>
     </main>
@@ -211,6 +237,22 @@
 
             el_user_uid.value = user_uid
             roleInput.querySelector('[value="' + role_id + '"]').selected = true
+        }
+
+        //Suppresion
+        function demander_suppression_membre(membre) {
+            document.getElementById("gerer").innerHTML = `
+            <form method="POST" action="membres/suppression/${membre.getAttribute('membre_id')}">
+                @csrf
+                <button type="submit" name="id" value=${membre.getAttribute('membre_id')} class="bouton ombre_petite administrateur" style="margin:15px;">Valider</button>
+            </form>`;
+            document.getElementById("message").innerText = " Voulez-vous vraiment supprimer le rôle : « " + membre.getAttribute('membre_label') + " » à " + membre.getAttribute('membre_nom_complet') + " ?";
+
+            document.getElementById("info").classList.add("visible");
+        }
+
+        function retour(){
+            document.getElementById("info").classList.remove("visible");
         }
     </script>
 @endsection

@@ -12,14 +12,27 @@ td span.role {
     padding: 4px 15px 5px 15px;
     border-radius: 50px;
     text-transform: capitalize;
+    display: block;
 }
 
 td.type {
     text-transform: capitalize;
 }
 
-td a.icon-edit-2 {
-    cursor: pointer;
+
+td.icons {
+    a{
+        font-size: 15px;
+        cursor: pointer;
+
+        &:first-child{
+            margin-right: 10px;
+        }
+    
+        &.warning{
+            color: var(--couleur_accentuation);
+        }
+    }
 }
 
 #roles {

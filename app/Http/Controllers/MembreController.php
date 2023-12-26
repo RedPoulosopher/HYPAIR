@@ -24,14 +24,34 @@ class MembreController extends Controller
 			return back()->withErrors(["msg"=>"L'uid fourni ne correspond à aucun utilisateur."]);
 		}
 
-		$membre_model = new Membre;
-		$membre_model->entite_id = $entite_id;
-		$membre_model->user_id =  $user->id;
-		$membre_model->role_id =  $membre_role_id;
-		$membre_model->changer_role();
+		// if($membre_role_id){//Si on donne un id de membre, on créé le membre
+			$membre_model = new Membre;
+			$membre_model->entite_id = $entite_id;
+			$membre_model->user_id =  $user->id;
+			$membre_model->role_id =  $membre_role_id;
+			$membre_model->changer_role();
+		// }else{//Si le rôle sélectionné est "Aucun", on supprime le membre
+		// 	$user->membres()->with('entite_id', $entite_id)->delete();
+		// }
 
 		return back();
     }
+
+	public function suppression_membre(Request $request){
+		//on vérifie que l'entite existe
+		$entite_id = $request->route('entite_id') ?? session('entite_id');
+		$entite = Entite::existe($entite_id);
+		
+		$membre_id = $request['membre_id'];
+		$membre = Membre::existe($membre_id);
+		if(!$membre){
+			return back()->withErrors(["msg"=>"L'id de membre n'existe pas"]);
+		}
+
+		//Suppression du membre
+		$membre->delete();
+		return back();
+	}
 
 	public function mandat(){
 		$entite = Entite::existe(session('entite_id'));

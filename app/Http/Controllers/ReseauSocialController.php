@@ -19,7 +19,7 @@ class ReseauSocialController extends Controller
 
         $reseaux_sociaux_existants = ReseauSocialListe::get();
 
-        $model = self::reseau_sociable_model();
+        $model = self::reseau_social_model();
         $reseaux_sociaux = $model->reseaux_sociaux()->get();
 
         return view('reseaux_sociaux.index_gestion', [
@@ -32,15 +32,15 @@ class ReseauSocialController extends Controller
     {
         $reseau_social_model = new ReseauSocial();
         $reseau_social_model->reseaux_sociaux_liste_id = $request["reseaux_sociaux_liste_id"];
-        $reseau_social_model->cle = $request["cle"];
+        $reseau_social_model->lien = $request["lien"];
 
-        $model = self::reseau_sociable_model();
+        $model = self::reseau_social_model();
         ReseauSocial::changer_reseau_social($model, $reseau_social_model);
 
         return back()->with('success');
     }
 
-    public function reseau_sociable_model()
+    public function reseau_social_model()
     {
         if (str_contains($_SERVER["REQUEST_URI"], "entite")) { //si une entite ajoute un réseau social
             $entite_id = request()->route('entite_id') ?? session('entite_id');

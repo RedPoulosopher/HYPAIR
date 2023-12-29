@@ -28,7 +28,7 @@
                         <select name="reseaux_sociaux_liste_id" id="reseaux_sociaux_liste" class="input" spellcheck="false" required select="{{old('reseaux_sociaux_liste_id') ?? ''}}">
                             <option selected disabled></option>
                             @foreach ($reseaux_sociaux_existants as $reseau_social)
-                                <option value="{{ $reseau_social->id }}" pre_url="{{ $reseau_social->pre_url }}">{{ $reseau_social->nom }}</option>
+                                <option value="{{ $reseau_social->id }}" placeholder="{{ $reseau_social->placeholder_entite }}">{{ $reseau_social->nom }}</option>
                             @endforeach
                         </select>
                     </label>
@@ -36,8 +36,7 @@
                     <label class="input_groupe">
                         <p class="titre">* Lien :</p>
                         <div style="display:flex; align-items:center;">
-                            <span class="pre_url"></span>
-                            <input type="text" name="cle" id="cle" class="input" value="{{old('cle') ?? ''}}"/>
+                            <input type="text" name="lien" id="lien" class="input" value="{{old('lien') ?? ''}}"/>
                         </div>
                     </label>
                     <div style="display:flex;justify-content: flex-end;margin-top:10px;">
@@ -64,8 +63,8 @@
                         @foreach ($reseaux_sociaux as $reseau_social)
                             <tr class="ligne_membre">
                                 <td>{{$reseau_social->liste->nom}}</td>
-                                <td class="lien"><a class="couleur" href="{{$reseau_social->liste->pre_url.$reseau_social->cle}}">{{$reseau_social->liste->pre_url.$reseau_social->cle}}</a></td>
-                                <td><a class="modifier_reseau_social icon-edit-2" reseau_social_liste_id="{{ $reseau_social->liste->id }}" cle="{{ $reseau_social->cle }}" title="modifier"></a></td>
+                                <td class="lien"><a class="couleur" href="{{$reseau_social->lien}}">{{$reseau_social->lien}}</a></td>
+                                <td><a class="modifier_reseau_social icon-edit-2" reseau_social_liste_id="{{ $reseau_social->liste->id }}" lien="{{ $reseau_social->lien }}" title="modifier"></a></td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -86,27 +85,26 @@ possible_supprimer = false
 
 el_bouton_formulaire = document.querySelector("form button")
 el_reseau_social = document.getElementById("reseaux_sociaux_liste")
-el_pre_url = document.querySelector(".pre_url")
-el_cle = document.getElementById("cle")
+el_lien = document.getElementById("lien")
 
 el_reseau_social.addEventListener("change", function(){
-    el_pre_url.innerText = this.options[this.selectedIndex].getAttribute('pre_url');
+    el_lien.placeholder = this.options[this.selectedIndex].getAttribute('placeholder');
     reseau_social_liste_id = this.options[this.selectedIndex].value;
 
     if(reseau_social_liste_id in liste_reseau_social_liste_id){
         el_bouton_formulaire.innerText = "Modifier"
         el_bouton_formulaire.setAttribute("texte_bouton", "Modifier")
-        el_cle.value = liste_reseau_social_liste_id[reseau_social_liste_id]
+        el_lien.value = liste_reseau_social_liste_id[reseau_social_liste_id]
         possible_supprimer = true
     } else {
         el_bouton_formulaire.innerText = "Ajouter"
         el_bouton_formulaire.setAttribute("texte_bouton", "Ajouter")
-        el_cle.value = ""
+        el_lien.value = ""
         possible_supprimer = false
     }
 })
 
-el_cle.addEventListener("keyup", function(){
+el_lien.addEventListener("keyup", function(){
     if(possible_supprimer){
         if(this.value == ""){
             el_bouton_formulaire.innerText = "Supprimer"
@@ -119,17 +117,17 @@ el_cle.addEventListener("keyup", function(){
 document.querySelectorAll(".modifier_reseau_social").forEach(element => {
 
     element.addEventListener("click", function(){
-        cle = this.getAttribute("cle")
+        lien = this.getAttribute("lien")
         reseau_social_id = this.getAttribute("reseau_social_liste_id")
 
-        el_cle.value = cle
+        el_lien.value = lien
         el_reseau_social.querySelector('[value="'+reseau_social_id+'"]').selected = true
         el_reseau_social.dispatchEvent(new Event('change'));
     })
 
-    cle = element.getAttribute("cle")
+    lien = element.getAttribute("lien")
     reseau_social_liste_id = element.getAttribute("reseau_social_liste_id")
-    liste_reseau_social_liste_id[reseau_social_liste_id] = cle
+    liste_reseau_social_liste_id[reseau_social_liste_id] = lien
 });
 </script>
 @endsection

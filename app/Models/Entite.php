@@ -60,7 +60,7 @@ class Entite extends Model
 
     public function reseaux_sociaux()
     {
-        return $this->morphMany(ReseauSocial::class, 'reseau_sociable');
+        return $this->morphMany(ReseauSocial::class, 'reseau_social');
     }
 
     public function sites()

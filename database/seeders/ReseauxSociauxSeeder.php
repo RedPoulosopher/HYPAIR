@@ -17,34 +17,34 @@ class ReseauxSociauxSeeder extends Seeder
     {
         DB::table('reseaux_sociaux')->insert([
             [
-                'reseau_sociable_id' => 1,
-                'reseau_sociable_type' => 'App\Models\User',
+                'reseau_social_id' => 1,
+                'reseau_social_type' => 'App\Models\User',
                 'reseaux_sociaux_liste_id' => 1,
-                'cle' => 'test',
+                'lien' => 'https://discord.gg/test',
             ],
             [
-                'reseau_sociable_id' => 1,
-                'reseau_sociable_type' => 'App\Models\User',
+                'reseau_social_id' => 1,
+                'reseau_social_type' => 'App\Models\User',
                 'reseaux_sociaux_liste_id' => 7,
-                'cle' => 'test',
+                'lien' => 'https://www.instagram.com/test',
             ],
             [
-                'reseau_sociable_id' => 1,
-                'reseau_sociable_type' => 'App\Models\Entite',
+                'reseau_social_id' => 1,
+                'reseau_social_type' => 'App\Models\Entite',
                 'reseaux_sociaux_liste_id' => 1,
-                'cle' => 'QScNktyb3j',
+                'lien' => 'https://discord.gg/QScNktyb3j',
             ],
             [
-                'reseau_sociable_id' => 1,
-                'reseau_sociable_type' => 'App\Models\Entite',
+                'reseau_social_id' => 1,
+                'reseau_social_type' => 'App\Models\Entite',
                 'reseaux_sociaux_liste_id' => 2,
-                'cle' => 'AIR.IMT.NE',
+                'lien' => 'https://www.facebook.com/AIR.IMT.NE',
             ],
             [
-                'reseau_sociable_id' => 1,
-                'reseau_sociable_type' => 'App\Models\Entite',
+                'reseau_social_id' => 1,
+                'reseau_social_type' => 'App\Models\Entite',
                 'reseaux_sociaux_liste_id' => 3,
-                'cle' => 'company/air-imt',
+                'lien' => 'https://www.linkedin.com/in/company/air-imt',
             ],
         ]);
     }

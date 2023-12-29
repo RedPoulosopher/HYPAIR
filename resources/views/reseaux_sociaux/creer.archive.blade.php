@@ -32,7 +32,7 @@
 					<select name="reseaux_sociaux_liste_id" id="reseau_social" class="input" spellcheck="false" required select="{{old('reseaux_sociaux_liste_id') ?? ''}}">
                         <option selected disabled></option>
                         @foreach ($reseaux_sociaux_existants as $reseau_social)
-							<option value="{{ $reseau_social->id }}" pre_url="{{ $reseau_social->pre_url }}">{{ $reseau_social->nom }}</option>
+							<option value="{{ $reseau_social->id }}" placeholder="{{ $reseau_social->placeholder_entite }}">{{ $reseau_social->nom }}</option>
 						@endforeach
                     </select>
 				</label>
@@ -40,8 +40,7 @@
 				<label class="input_groupe">
 					<p class="titre">* Lien :</p>
                     <div style="display:flex;">
-					    <span class="pre_url"></span>
-                        <input type="text" name="cle" class="input" required value="{{old('cle') ?? ''}}"/>
+                        <input type="text" name="lien" class="input" required value="{{old('lien') ?? ''}}"/>
                     </div>
 				</label>
 			</div>
@@ -55,9 +54,9 @@
 <script>
     
 el_reseau_social = document.getElementById("reseau_social")
-el_pre_url = document.querySelector(".pre_url")
+el_input = document.querySelector(".input")
 el_reseau_social.addEventListener("change", function(){
-    el_pre_url.innerText = this.options[this.selectedIndex].getAttribute('pre_url');
+    el_input.placeholder = this.options[this.selectedIndex].getAttribute('placeholder');
 })
 
 </script>

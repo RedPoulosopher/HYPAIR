@@ -101,14 +101,8 @@
         shareBtn = document.getElementById("share-btn")
 
         function copierLien() {
-            navigator.permissions.query({
-                name: "clipboard-write"
-            }).then((result) => {
-                if (result.state === "granted" || result.state === "prompt") {
-                    navigator.clipboard.writeText(window.location.href);
-                    alert("Lien copié dans le presse-papier ")
-                }
-            });
+            navigator.clipboard.writeText(window.location.href);
+            alert("Lien copié dans le presse-papier ")
         }
 
         shareBtn.addEventListener('click', () => {

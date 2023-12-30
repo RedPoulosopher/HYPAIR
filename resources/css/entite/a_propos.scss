@@ -63,6 +63,7 @@
 .membres .photo {
     position: relative;
     width: fit-content;
+    margin-bottom: 10px;
 }
 
 .membres .photo img {
@@ -84,7 +85,7 @@
 
 @media (max-width: 767.98px) {
     .membres > div {
-        margin: 15px;
+        margin: 0 15px 20px;
     }
 
     .membres .photo img {
@@ -95,7 +96,7 @@
 
 @media (min-width: 768px) {
     .membres > div {
-        margin: 20px;
+        margin: 0 20px 30px;
     }
 
     .membres .photo img {
@@ -106,7 +107,7 @@
 
 .reseaux_sociaux {
     gap: 12px;
-    margin-bottom: 25px;
+    margin: 20px 0 45px;
 }
 
 #modal_info_membre {
@@ -160,8 +161,8 @@
 }
 
 .photo_profil {
-    max-width: 260px;
-    max-height: 260px;
+    width: 240px;
+    height: 240px;
     margin-left: auto;
     margin-right: auto;
 }

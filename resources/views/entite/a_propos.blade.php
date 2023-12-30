@@ -36,7 +36,7 @@
             <div class="membres grille-enfants">
                 @foreach ($mandat as $mandat_user)
                     <div>
-                        <div class="photo centre-element" title="Voir le profil" tabindex="0"
+                        <div class="photo centre-element" title="Voir le profil"
                             onclick="afficher_info_membre({{ $mandat_user->id }})">
                             <div class="cercle"></div>
                             <img class="ombre_petite" src="{{ $mandat_user->lien_photo }}"
@@ -54,7 +54,7 @@
             </div>
 
             <div id="modal_info_membre">
-                <span id="close_modal" class='info_bouton' tabindex="0" onclick="fermer_info_membre()">
+                <span id="close_modal" class='info_bouton' onclick="fermer_info_membre()">
                     <i class="fa-solid fa-xmark fa-xl"></i>
                 </span>
                 <div id="profil" class="card">

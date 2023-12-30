@@ -29,7 +29,7 @@ class PostsTableSeeder extends Seeder
                     'event_id' => 2,
                     'titre' => 'Soirée BDE',
                     'description' => "# Soirée BDE  \nAu programme :  \n* Stand de tir à l\'arc  \n* Stand photo  \n* Bar ouvert  \n* Cocktails et biscuits maison  \n* et plein d\'autres surprises !  \n\nn\'hésite pas à nous rejoindre le **29 Août** à **18h** !",
-                    'date_apparition' => '2023-07-31 08:00:00',
+                    'date_apparition' => '2024-01-31 08:00:00',
                     'date_expiration' => '2025-08-30 08:00:00',
                     'entite_id' => 13,
                     "confidentiel" => "0"
@@ -38,7 +38,7 @@ class PostsTableSeeder extends Seeder
                     'event_id' => null,
                     'titre' => 'Photos soirées',
                     'description' => "Les photos de la soirée sont là alors n'hésitez pas à aller les voir !  \n\n[elles sont ici](https://www.google.com)",
-                    'date_apparition' => '2023-08-12 15:00:00',
+                    'date_apparition' => '2024-01-12 15:00:00',
                     'date_expiration' => null,
                     'entite_id' => 17,
                     "confidentiel" => "1"
@@ -47,7 +47,7 @@ class PostsTableSeeder extends Seeder
                     'event_id' => 3,
                     'titre' => 'Distribution Caméléon',
                     'description' => "# Le nouveau numéro du Caméléon sort le 30 Août !  \nN'oubliez pas votre numéro avant de manger !  \n\nÀ la une : les Coulisses de l'Intégration !",
-                    'date_apparition' => '2023-08-17 15:00:00',
+                    'date_apparition' => '2024-01-17 15:00:00',
                     'date_expiration' => '2025-08-31 20:00:00',
                     'entite_id' => 8,
                     "confidentiel" => "0"
@@ -56,16 +56,16 @@ class PostsTableSeeder extends Seeder
                     'event_id' => 6,
                     'titre' => 'Aprem Jeux',
                     'description' => "# Aprem Jeux avec le BDE de Lille !  \nProfitez d'un cadre calme pour vous détendre avec notre aprem  \n\nJeux de société et jeux vidéos seront au rendez-vous !",
-                    'date_apparition' => '2023-08-17 15:00:00',
+                    'date_apparition' => '2024-01-17 15:00:00',
                     'date_expiration' => '2025-08-31 20:00:00',
-                    'entite_id' => 10,
+                    'entite_id' => 14,
                     "confidentiel" => "0"
                 ],
                 [
                     'event_id' => null,
                     'titre' => '[INTEGRATION 2023] Accueil le 25 août',
                     'description' => "# Planning Intégration 2023  \nBonjour à tous les fillots, on vous attend avec impatience pour cette rentrée 2023.  \n\n![](https://capa.etu.imt-nord-europe.fr/images/equipe_v2.jpg)  \n\nN'hésitez pas à vous abonner à notre [compte Instagram](http://https://www.instagram.com/capa2023imtne/?hl=fr)  \n\nCAPA'KISS <3",
-                    'date_apparition' => '2023-08-17 19:00:00',
+                    'date_apparition' => '2024-01-17 19:00:00',
                     'date_expiration' => '2025-08-31 20:00:00',
                     'entite_id' => 13,
                     "confidentiel" => "0"

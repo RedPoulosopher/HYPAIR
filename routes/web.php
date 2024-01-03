@@ -176,6 +176,7 @@ $routes_bureaux = function () {
         Route::controller(MembreController::class)->group(function () {
             Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type' => 'membres|abonnes']);
             Route::post('/entite/{entite_id}/{type}', 'ajout_membre')->where(['type' => 'membres|abonnes']);
+            Route::post('/entite/{entite_id}/{type}/suppression', 'suppression_membre')->where(['type' => 'membres|abonnes']);
         });
     });
 };

@@ -36,6 +36,7 @@ class LogoController extends Controller
 			'couleur_sombre' => ['filled'],
 		]);
 
+        $entite_uid =  $request->route('entite_uid') ?? session('entite_uid');
         $entite_id =  $request->route('entite_id') ?? session('entite_id');
         $entite = Entite::existe($entite_id);
 
@@ -46,7 +47,7 @@ class LogoController extends Controller
 		}
 
 		if($request->query('creation')){
-			return redirect()->route('modifier_couleur', ['entite_uid' => $entite->uid, 'entite_id' => $entite->id, 'creation' => true]);
+			return redirect()->route('modifier_couleur', ['entite_uid' => $entite_uid, 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect($entite->lien_relatif());
 		}
@@ -78,6 +79,7 @@ class LogoController extends Controller
 		]);
 
         //comme l'air peut modif les couleurs, l'entite id vient de la route et ne peut pas venir de la session
+        $entite_uid =  $request->route('entite_uid') ?? session('entite_uid');
         $entite_id =  $request->route('entite_id') ?? session('entite_id');
         $entite = Entite::existe($entite_id);
 
@@ -89,7 +91,7 @@ class LogoController extends Controller
 		$entite->save();
 
 		if($request->query('creation')){
-			return redirect()->route('gestion_membres', ['entite_uid' => $entite->uid, 'type' => 'membres', 'entite_id' => $entite->id, 'creation' => true]);
+			return redirect()->route('gestion_membres', ['entite_uid' => $entite_uid, 'type' => 'membres', 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect($entite->lien_relatif());
 		}

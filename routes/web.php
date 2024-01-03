@@ -146,6 +146,7 @@ $routes_AIR = function () {
         Route::controller(MembreController::class)->group(function () {
             Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type' => 'membres|abonnes'])->name('gestion_membres');
             Route::post('/entite/{entite_id}/{type}', 'ajout_membre')->where(['type' => 'membres|abonnes']);
+            Route::post('/entite/{entite_id}/{type}/suppression', 'suppression_membre')->where(['type' => 'membres|abonnes']);
         });
 
         Route::controller(ReseauSocialController::class)->group(function () {
@@ -280,7 +281,7 @@ $routes_entites = function () {
     Route::controller(MembreController::class)->group(function () {
         Route::get('/entite/{type}', 'index_admin')->where(['type' => 'membres|abonnes']);
         Route::post('/entite/{type}', 'ajout_membre')->where(['type' => 'membres|abonnes']);
-        Route::post('/entite/{type}/suppression/{membre_id}', 'suppression_membre')->where(['type' => 'membres|abonnes']);
+        Route::post('/entite/{type}/suppression', 'suppression_membre')->where(['type' => 'membres|abonnes']);
 
     });
 };

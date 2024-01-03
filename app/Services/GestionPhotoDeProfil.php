@@ -31,6 +31,7 @@ class GestionPhotoDeProfil {
         
         $chemin = 'images/utilisateurs/'. $user->id .'/';
         
+        //Si l'utilisateur vient de se connecter pour la première fois, il n'a aucune photo donc on en génère une
         if($user->photo==2){
             $prenom = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $user->prenom);
             $prenom = preg_replace("/[^a-zA-Z ]/m", "", $prenom);
@@ -42,7 +43,7 @@ class GestionPhotoDeProfil {
             
             $svg = self::to_shape($prenom, $nom);
             
-            Storage::put($chemin.".svg", $svg);
+            Storage::put($chemin . "photo_de_profil.svg", $svg);
             
             $user->photo = 0;
             $user->save();

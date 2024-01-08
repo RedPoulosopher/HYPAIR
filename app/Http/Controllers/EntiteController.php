@@ -237,4 +237,22 @@ class EntiteController extends Controller
 
 		return view('entite.index_admin')->with('est_bureau', $asso_gerante->type == EntiteTypeEnum::Bureau)->with('entites_dependantes', $entites_dependantes);
 	}
+
+	public function campagnes(Request $request) // réservé aux bureaux
+	{
+		$bureaux = Entite::bureaux_site('douai')->get();
+		$listes = array();
+		foreach ($bureaux as $bureau) {
+			$bureau_ratachement = $bureau->ratachement->value;
+			$listes[$bureau_ratachement] = $bureau->listes_dependantes('2023')->get();
+		}
+
+		return view(
+			'entite.campagnes',
+			[
+				"bureaux" => $bureaux,
+				"listes" => $listes
+			]
+		);
+	}
 }

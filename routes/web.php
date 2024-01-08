@@ -50,6 +50,8 @@ Route::get('/a-propos', function () {
     return view('a_propos');
 });
 
+Route::get('/campagnes', [EntiteController::class, 'campagnes'])->name('campagnes');
+
 // Route::get('/', [PostController::class, 'accueil']);
 // Attention à l'orthographe des campus (uid)
 Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon'])->name('accueil');

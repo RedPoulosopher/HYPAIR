@@ -156,7 +156,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => "Absolu'mant",
                 'uid' => 'absolumant',
-                'ratachement' => "bda",
+                'ratachement' => "bdh",
                 'annee_creation' => '2023',
                 'annee_fin' => '2024',
                 'type' => 'liste',
@@ -182,7 +182,7 @@ class EntitesTableSeeder extends Seeder
             [
                 'nom' => "Préservat'imt",
                 'uid' => 'preservatimt',
-                'ratachement' => "bdh",
+                'ratachement' => "bde",
                 'annee_creation' => '2023',
                 'annee_fin' => '2024',
                 'type' => 'liste',
@@ -190,7 +190,7 @@ class EntitesTableSeeder extends Seeder
                 'couleur_sombre' => '#146712',
                 'description_courte' => 'Liste BDE 2024 avec capotes gratuites',
                 'description_md' => null,
-                'score' => '69.0'
+                'score' => null
             ],
             [
                 'nom' => "Sour'imt",
@@ -203,7 +203,7 @@ class EntitesTableSeeder extends Seeder
                 'couleur_sombre' => '#561764',
                 'description_courte' => 'Liste BDE 2024 avec souris gratuites',
                 'description_md' => null,
-                'score' => '15.4'
+                'score' => null
             ],
             [
                 'nom' => "Carte Kiw'imt",
@@ -216,21 +216,21 @@ class EntitesTableSeeder extends Seeder
                 'couleur_sombre' => '#963147',
                 'description_courte' => 'Liste BDE 2024 avec cartes kiwi gratuites',
                 'description_md' => null,
-                'score' => 14.6
+                'score' => null
             ],
-            [
-                'nom' => "Lim'As",
-                'uid' => 'limas',
-                'ratachement' => "bds",
-                'annee_creation' => '2023',
-                'annee_fin' => '2024',
-                'type' => 'liste',
-                'couleur_claire' => '#456654',
-                'couleur_sombre' => '#789925',
-                'description_courte' => 'Liste BDS 2024 fan de limaces',
-                'description_md' => null,
-                'score' => '100.0'
-            ],
+            // [
+            //     'nom' => "Lim'As",
+            //     'uid' => 'limas',
+            //     'ratachement' => "bds",
+            //     'annee_creation' => '2023',
+            //     'annee_fin' => '2024',
+            //     'type' => 'liste',
+            //     'couleur_claire' => '#456654',
+            //     'couleur_sombre' => '#789925',
+            //     'description_courte' => 'Liste BDS 2024 fan de limaces',
+            //     'description_md' => null,
+            //     'score' => '100.0'
+            // ],
         ];
 
         $asso_bde = [

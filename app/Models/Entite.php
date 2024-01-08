@@ -179,10 +179,7 @@ class Entite extends Model
         if ($this->type == EntiteTypeEnum::Bureau) {
             $sites_bureau = $this->sites()->get()->pluck('label')->toArray();
 
-            $listes_dependantes = Entite::where('ratachement', $this->ratachement)
-                ->whereHas('sites', function ($query) use ($sites_bureau) {
-                    $query->whereIn('label', $sites_bureau);
-                });;
+            $listes_dependantes = Entite::where('ratachement', $this->ratachement);
         } else { // l'ai récup toutes les listes
             $listes_dependantes = new Entite;
         }

@@ -1,6 +1,6 @@
 {{-- Component de la barre de navigation principale (celle du haut) --}}
 
-<nav id="navbar">
+<nav id="navbar" class="campagnes">
 
     <div id="logo">
         <a href="/" id="logo-img">

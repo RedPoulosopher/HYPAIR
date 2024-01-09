@@ -11,44 +11,6 @@
     }
 }
 
-.liste_comite_club.listes{
-    padding: 18px 5px 10px;
-    margin: 20px 0 35px;
-    background-color: var(--grey);
-    position: relative;
-
-    .entite{
-        margin: 0;
-
-        *{
-            box-shadow: none;
-        }
-    }
-
-    &::before{
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 20px;
-        height: 20px;
-        transform: translate(-50%, -50%) rotate(45deg);
-        background-color: var(--grey);
-        border-top-left-radius: 2px;
-    }
-
-    .entite{
-        // margin: 0;
-    }
-}
-
-@media (max-width: 600px) {
-    .listes{    
-        padding: 12px 5px 6px;
-        margin: 15px 0 25px;
-    }
-}
-
 @media (max-width: 615px) {
     .liste_comite_club {
         gap: 10px 10px;

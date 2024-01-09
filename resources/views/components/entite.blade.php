@@ -7,7 +7,7 @@
         <p class="nom">{{ $asso->nom }}</p>
         @if ($asso->type->value == 'liste')
             @if ($asso->score != null)
-                <p>({{ $asso->score }}%)</p>
+                <p class="score">({{ $asso->score }}%)</p>
             @endif
         @endif
     </div>

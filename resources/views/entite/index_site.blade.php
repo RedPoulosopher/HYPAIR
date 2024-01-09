@@ -16,16 +16,6 @@
                         <div class="liste_comite_club">
                             <x-entite :asso="$bureau" :destination="$bureau->lien_relatif()" />
                         </div>
-                        {{-- Listes associées --}}
-                        @if(count($listes_dependantes[$bureau->ratachement->value]) > 0)
-                            <div class="liste_comite_club listes card">
-                                @foreach ($listes_dependantes[$bureau->ratachement->value] as $liste)
-                                    @if (!$liste->hidden)
-                                        <x-entite :asso="$liste" :destination="$liste->lien_relatif()" />
-                                    @endif
-                                @endforeach
-                            </div>
-                        @endif
                         {{-- Comités du bureau --}}
                         @if(count($comites_clubs_dependants[$bureau->ratachement->value]) > 0)
                             <div class="liste_comite_club">

@@ -77,7 +77,9 @@ class MembreController extends Controller
 
 		return view('membre.index_admin', [
 			"personnes_concernees" => $personnes_concernees->get(),
-			"roles" => $roles
+			"roles" => $roles,
+			"entite_lien_relatif" => $entite->lien_relatif(),
+			"creation" => $request->query('creation')
 		]);
 	}
 }

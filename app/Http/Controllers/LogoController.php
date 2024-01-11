@@ -7,6 +7,7 @@ use \App\Models\Entite;
 
 use \App\Services\AutorisationGestion;
 use \App\Services\GestionLogo;
+use App\Enums\EntiteTypeEnum;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -47,7 +48,10 @@ class LogoController extends Controller
 		}
 
 		if($request->query('creation')){
-			return redirect()->route('modifier_couleur', ['entite_uid' => $entite_uid, 'entite_id' => $entite->id, 'creation' => true]);
+			$asso_gerante = Entite::existe(session('entite_id'));
+			$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
+
+			return redirect()->route($route_name_prefix . 'modifier_couleur', ['entite_uid' => $entite_uid, 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect($entite->lien_relatif());
 		}
@@ -91,7 +95,10 @@ class LogoController extends Controller
 		$entite->save();
 
 		if($request->query('creation')){
-			return redirect()->route('gestion_membres', ['entite_uid' => $entite_uid, 'type' => 'membres', 'entite_id' => $entite->id, 'creation' => true]);
+			$asso_gerante = Entite::existe(session('entite_id'));
+			$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
+
+			return redirect()->route($route_name_prefix . 'gestion_membres', ['entite_uid' => $entite_uid, 'type' => 'membres', 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect($entite->lien_relatif());
 		}

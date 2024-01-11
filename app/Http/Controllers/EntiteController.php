@@ -52,14 +52,27 @@ class EntiteController extends Controller
 			->with('entite', $entite);
 	}
 
-	public function create() //réservé à l'AIR
+	public function create() //réservé à l'AIR et aux bureaux
 	{
 		$sites = Site::all();
-		return view('entite.creer')->with('sites', $sites);
+
+		$asso_gerante = Entite::existe(session('entite_id'));
+
+		return view('entite.creer')->with([
+			'sites' => $sites,
+			'est_bureau' => $asso_gerante->type == EntiteTypeEnum::Bureau
+		]);
 	}
 
-	public function store(Request $request) //réservé à l'AIR
+	public function store(Request $request) //réservé à l'AIR et aux bureaux
 	{
+		$asso_gerante = Entite::existe(session('entite_id'));
+		
+		//Si c'est un bureau qui créé une entité, elle lui est automatiquement rattachée
+		if($asso_gerante->type == EntiteTypeEnum::Bureau){
+			$request['ratachement'] = $asso_gerante->uid;
+		}
+
 		$this->validate($request, [
 			'sites' => ['filled', 'array', Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes', 'alençon'])],
 			'nom' => ['filled', 'max:120'],
@@ -75,19 +88,21 @@ class EntiteController extends Controller
 			$entite = $entite->first();
 		} else {
 			$entite = new Entite;
-			$entite->nom = $request->nom;
-			$entite->uid = $request->uid;
-			$entite->ratachement = $request->ratachement;
-			$entite->type = $request->type;
-			$entite->save();
-
-			$entite->ajout_sites($request->sites);
 		}
+		$entite->nom = $request->nom;
+		$entite->uid = $request->uid;
+		$entite->ratachement = $request->ratachement;
+		$entite->type = $request->type;
+		$entite->save();
 
-		return redirect()->route('modifier_infos', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+		$entite->ajout_sites($request->sites);
+
+		$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
+		
+		return redirect()->route($route_name_prefix . 'modifier_infos', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 	}
 
-	public function modifier_infos(Request $request) //réservé à l'AIR
+	public function modifier_infos(Request $request) //réservé à l'AIR et aux bureaux
 	{
 		$entite = Entite::existe($request->route('entite_id'));
 
@@ -98,7 +113,7 @@ class EntiteController extends Controller
 		]);
 	}
 
-	public function maj_infos(Request $request) //réservé à l'AIR
+	public function maj_infos(Request $request) //réservé à l'AIR et aux bureaux
 	{
 		$entite = Entite::existe($request->route('entite_id'));
 
@@ -124,7 +139,10 @@ class EntiteController extends Controller
 		$entite->save();
 
 		if ($request->query('creation')) {
-			return redirect()->route('modifier_description', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			$asso_gerante = Entite::existe(session('entite_id'));
+			$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
+
+			return redirect()->route($route_name_prefix . 'modifier_description', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect($entite->lien_relatif());
 		}
@@ -163,7 +181,11 @@ class EntiteController extends Controller
 		$entite->ajout_categories($request->categories);
 
 		if ($request->query('creation')) {
-			return redirect()->route('modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			$asso_gerante = Entite::existe(session('entite_id'));
+
+			$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
+
+			return redirect()->route($route_name_prefix . 'modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
 			return redirect()->route('a_propos', ['entite_uid' => $entite->uid]);
 		}
@@ -213,7 +235,7 @@ class EntiteController extends Controller
 		);
 	}
 
-	public function index_admin(Request $request) //réservé à l'AIR
+	public function index_admin(Request $request) //réservé à l'AIR et aux bureaux
 	{
 		$asso_gerante = Entite::existe(session('entite_id'));
 

@@ -97,6 +97,10 @@
                         </table>
                     </div>
                 @endif
+
+                @if($creation)
+                    <a href="{{ $entite_lien_relatif}}" class="bouton secondaire" style="float:right; margin: 20px 0 0">Terminer la création</a>
+                @endif
             </div>
 
             <div id="info" class="popup">

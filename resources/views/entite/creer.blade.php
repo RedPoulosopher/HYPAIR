@@ -39,6 +39,7 @@
                                 value="{{ old('uid') ?? ($entite->uid ?? '') }}" />
                         </label>
 
+                        @if(!$est_bureau)
                         <label class="input_groupe">
                             <p class="titre">* Ratachement :</p>
                             <select name="ratachement" class="input" spellcheck="false" required
@@ -51,16 +52,19 @@
                                 <option value="independant">Independant</option>
                             </select>
                         </label>
+                        @endif
 
                         <label class="input_groupe">
                             <p class="titre">* Type :</p>
                             <select name="type" class="input" spellcheck="false" required
                                 select="{{ old('type') ?? ($entite->type ?? '') }}">
                                 <option selected disabled="disabled"></option>
-                                <option value="association">Association</option>
-                                <option value="bureau">Bureau</option>
+                                @if(!$est_bureau)
+                                    <option value="association">Association</option>
+                                    <option value="bureau">Bureau</option>
+                                @endif
                                 <option value="comité">Comité</option>
-                                <option value="fakeliste">Fausse liste</option>
+                                <option value="fakeliste">Fake liste</option>
                                 <option value="liste">Liste</option>
                             </select>
                         </label>

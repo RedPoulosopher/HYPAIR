@@ -238,7 +238,7 @@ class EvenementController extends Controller
 		$validated = $request->validate(
 			[
 				'titre' => 'required|max:128',
-				'description_md' => 'required|min:30|max:250',
+				'description_md' => 'required|min:30|max:500',
 				'temps_debut' => 'required',
 				'temps_fin' => 'required',
 				'lieu' => 'nullable|max:128',

@@ -236,8 +236,6 @@ $routes_entites = function () {
         Route::get('/projet/{slug}/avancee/{slug_avancee}', 'show')->name('avancee_afficher');
     });
     Route::controller(EntiteController::class)->group(function () {
-        Route::get('/a_propos', 'show')->name('a_propos');
-        Route::get('/accueil', 'show');
         Route::get('/', 'show')
             ->name('entite');
 

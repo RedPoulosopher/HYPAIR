@@ -186,7 +186,7 @@ class EntiteController extends Controller
 
 			return redirect()->route($route_name_prefix . 'modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 		} else {
-			return redirect()->route('a_propos', ['entite_uid' => $entite->uid]);
+			return redirect($entite->lien_relatif());
 		}
 	}
 

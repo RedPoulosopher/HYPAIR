@@ -167,8 +167,7 @@ class EntiteController extends Controller
 
 		$request->categories = array_map('strtolower', array_map('trim', explode(",", $request->categories)));
 		$this->validate($request, [
-			'description_courte' => ['filled', 'max:300'],
-			'description_md' => ['filled', 'min:300'],
+			'description_courte' => ['filled', 'max:255'],
 			'categories' => ['filled', 'distinct'],
 		]);
 

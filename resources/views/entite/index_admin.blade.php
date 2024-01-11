@@ -62,7 +62,11 @@
                     <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/logotype">Modifier le logo</a></li>
                     <li><a id="menu_modifier_logo" href="" url="../entite/{entite_id}/couleur">Modifier la couleur</a></li>
                     <li><a id="menu_membres" href="" url="../entite/{entite_id}/membres">Gérer les membres</a></li>
-                    <li><a id="menu_membres" href="" url="../entite/{entite_id}/evenement">Gérer les évènements</a></li>
+                    {{-- TODO: Ajouter les routes pour que ça marche --}}
+                    @if(!$est_bureau){{-- On affiche uniquement la gestion des posts/events pour l'AIR --}}
+                        <li><a id="menu_membres" href="" url="../entite/{entite_id}/evenements">Gérer les évènements</a></li>
+                        <li><a id="menu_membres" href="" url="../entite/{entite_id}/posts">Gérer les posts</a></li>
+                    @endif
                 </ul>
             @endif
         </div>

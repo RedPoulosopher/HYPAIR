@@ -14,9 +14,9 @@
 	<section>
 		<h1><span class="icon-security-safe" title="page accessible aux administrateurs"></span> Entites</h1>
 
-        @if (!$est_bureau)
+        {{-- @if (!$est_bureau) --}}
 		    <a href="../entite/nouvelle" class="bouton tertiaire icon-security-safe" id="bouton-creer">Créer une entite</a>
-        @endif
+        {{-- @endif --}}
 
         <div class="section-content">
 

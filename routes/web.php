@@ -128,7 +128,6 @@ $routes_AIR = function () {
 
         Route::controller(EntiteController::class)->group(function () {
             Route::get('/entites/admin', 'index_admin');
-            Route::get('/entites/index/json', 'index_admin_json');
 
             Route::get('/entite/nouvelle', 'create');
             Route::post('/entite/nouvelle', 'store');
@@ -163,12 +162,19 @@ $routes_AIR = function () {
 //les routes réservées aux différents bureaux
 //===========================================
 $routes_bureaux = function () {
-    Route::controller(EntiteController::class)->group(function () {
-        Route::get('/entites', 'index_bureau');
+    // Route::controller(EntiteController::class)->group(function () {
+        // Route::get('/entites', 'index_bureau'); //Not working
+    // });
 
+    Route::middleware('protection.autorisation:gerer_entite')->group(function () {
         
-        Route::middleware('protection.autorisation:gerer_entite')->group(function () {
+        
+        Route::controller(EntiteController::class)->group(function () {
             Route::get('/entites/gestion', 'index_admin');
+
+            Route::get('/entite/nouvelle', 'create');
+            Route::post('/entite/nouvelle', 'store');
+
             Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos');
             Route::post('/entite/{entite_id}/modifier/informations', 'maj_infos');
             Route::get('/entite/{entite_id}/modifier/description', 'modifier_description');
@@ -313,8 +319,11 @@ Route::prefix('{entite_uid}') //pour toutes les autres entités
 
 Route::prefix('{entite_uid}') //pour les bureaux
     ->middleware('existence.entite:bureau')
+    ->where(['entite_uid' => '^((?!air).)*$']) #where entite_uid!='air'
     ->group($routes_bureaux);
-
-Route::prefix('{entite_uid}') //pour l'AIR
+    
+//Les routes de l'air stockent le prefix dans la variable 'air_uid' (pour être sûr de ne pas écraser les routes identiques des bureaux)
+Route::prefix('{air_uid}') //pour l'AIR
+    ->where(['air_uid' => 'air'])
     ->middleware('existence.entite:air')
     ->group($routes_AIR);

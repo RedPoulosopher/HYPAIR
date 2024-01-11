@@ -9,7 +9,6 @@
 @endpushonce
 
 @section('content')
-
     <main id="main-content">
         <section>
             <h1><span class="icon-security-safe" title="page réservée aux administrateurs"></span> Créer une nouvelle entite

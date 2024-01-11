@@ -12,6 +12,7 @@
 
         @php
         use \App\Services\AutorisationGestion;
+        use \App\Enums\EntiteTypeEnum;
         @endphp
 
         <section>
@@ -39,9 +40,12 @@
                         <a class="modif_option card" href="logotype"><i class="fa-solid fa-eye"></i>Modifier le logo</a>
                         <a class="modif_option card" href="couleur"><i class="fa-solid fa-palette"></i>Modifier les couleurs</a>
                     @endif
-                    @if ($entite['type'] == 'bureau' || $entite['uid'] == 'air')
-                        <a class="modif_option card" href="../entites/admin"><i class="fa-solid fa-crown"></i>Gérer les
-                            entités</a>
+                    
+                    @if ($entite['type'] == EntiteTypeEnum::Bureau && AutorisationGestion::gestion('gerer_entite'))
+                        <a class="modif_option card" href="../entites/gestion"><i class="fa-solid fa-crown"></i>Gérer les entités</a>
+                    @endif
+                    @if ($entite['uid'] == 'air' && AutorisationGestion::gestion('gerer_entite'))
+                        <a class="modif_option card" href="../entites/admin"><i class="fa-solid fa-crown"></i>Gérer les entités</a>
                     @endif
                 @else
                     <p class="no-content">Vous n'avez aucun droit sur cette entité</p>

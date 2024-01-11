@@ -25,7 +25,9 @@ class ExistenceEntite
      */
     public function handle(Request $request, Closure $next, $type)
     {
-        $entite_uid = $request->route('entite_uid');
+        $entite_uid = $request->route('entite_uid') ?? $request->route('air_uid');//(voir explication dans web.php)
+        //Set 'entite_uid' parameter in the request object to $entite_uid (in case it is air_uid was passed in route)
+        $request->request->add(['entite_uid' => $entite_uid]);
 
         $entites_model = Entite::where('uid', $entite_uid);
 
@@ -34,17 +36,18 @@ class ExistenceEntite
 
         $entite = $entites_model->first();
 
-
+        
         if($entite["type"] == EntiteTypeEnum::Liste && $type != "liste"){ //essaye d'acceder a une liste via {liste}.imt-ne.fr/
-            abort(405);
-        }
-        else if($type == "bureau" && $entite["type"] != EntiteTypeEnum::Bureau){ //les routes réservées aux bureaux
-            abort(403);
-        }
-        else if($type == "air" && $entite["uid"] != "air"){ //les routes réservées à l'AIR
-            abort(403);
-        }
-
+        abort(405);
+    }
+    else if($type == "bureau" && $entite["type"] != EntiteTypeEnum::Bureau){ //les routes réservées aux bureaux
+        // dd("couicoui"); 
+        abort(403);
+    }
+    else if($type == "air" && $entite["uid"] != "air"){ //les routes réservées à l'AIR
+        abort(403);
+    }
+    
         session([
             "entite_uid" => $entite["uid"],
             "entite_id" => $entite["id"],
@@ -77,11 +80,10 @@ class ExistenceEntite
             } else {
                 session([
                     "membre_id" => false,
-                    "role_id" => Role::role_id('public'), //il n'est pas membre de l'entite
+                    "role_id" => Role::role_id('public'), //iel n'est pas membre de l'entite
                 ]);
             }
         }
-
         return $next($request);
     }
 }

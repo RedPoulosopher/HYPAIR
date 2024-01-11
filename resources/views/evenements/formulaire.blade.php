@@ -101,7 +101,14 @@
                         <p class="description">Evènement seulement ouvert aux cotisants ?</p>
                         <select name="pour_cotisant" class="input" spellcheck="false" required
                             select="{{ old('pour_cotisant') ?? ($evenement->pour_cotisant ?? '') }}">
-                            @if ((isset($event) && $event->pour_cotisant) || !isset($event))
+                            
+
+                            @php
+                            use \App\Enums\EntiteTypeEnum;
+                            @endphp
+
+                            @if ((isset($event) && $event->pour_cotisant) # Si on modifie l'event et qu'il était pour les cotisants
+                                || (!isset($event) && ($entite->type == EntiteTypeEnum::Liste || $entite->type == EntiteTypeEnum::Fakeliste))) {{-- OU si on créé un event, on met par défaut pour les cotisants uniquement s'il s'agit de listes --}}
                                 <option value="1" selected>Oui</option>
                                 <option value="0">Non</option>
                             @else

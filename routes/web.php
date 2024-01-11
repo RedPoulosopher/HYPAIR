@@ -131,6 +131,7 @@ $routes_AIR = function () {
 
             Route::get('/entite/nouvelle', 'create');
             Route::post('/entite/nouvelle', 'store');
+
             Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos')->name('modifier_infos');
             Route::post('/entite/{entite_id}/modifier/informations', 'maj_infos');
             Route::get('/entite/{entite_id}/modifier/description', 'modifier_description')->name('modifier_description');
@@ -140,6 +141,7 @@ $routes_AIR = function () {
         Route::controller(LogoController::class)->group(function () {
             Route::get('/entite/{entite_id}/logotype', 'modifier_logo')->name('modifier_logotype');
             Route::post('/entite/{entite_id}/logotype', 'maj_logo');
+            
             Route::get('/entite/{entite_id}/couleur', 'modifier_couleur')->name('modifier_couleur');
             Route::post('/entite/{entite_id}/couleur', 'maj_couleur');
         });
@@ -186,6 +188,15 @@ $routes_bureaux = function () {
             Route::post('/entite/{entite_id}/{type}', 'ajout_membre')->where(['type' => 'membres|abonnes']);
             Route::post('/entite/{entite_id}/{type}/suppression', 'suppression_membre')->where(['type' => 'membres|abonnes']);
         });
+
+        Route::controller(LogoController::class)->group(function () {
+            Route::get('/entite/{entite_id}/logotype', 'modifier_logo')->name('modifier_logotype');
+            Route::post('/entite/{entite_id}/logotype', 'maj_logo');
+            
+            Route::get('/entite/{entite_id}/couleur', 'modifier_couleur')->name('modifier_couleur');
+            Route::post('/entite/{entite_id}/couleur', 'maj_couleur');
+        });
+
     });
 };
 

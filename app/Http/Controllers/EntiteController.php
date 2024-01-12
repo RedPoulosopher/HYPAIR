@@ -97,9 +97,12 @@ class EntiteController extends Controller
 
 		$entite->ajout_sites($request->sites);
 
-		$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
-		
-		return redirect()->route($route_name_prefix . 'modifier_infos', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+		if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
+			return redirect()->route('bdx_modifier_infos', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+		} else {
+			return redirect()->route('air_modifier_infos', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+		}
+		// $route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
 	}
 
 	public function modifier_infos(Request $request) //réservé à l'AIR et aux bureaux
@@ -140,9 +143,11 @@ class EntiteController extends Controller
 
 		if ($request->query('creation')) {
 			$asso_gerante = Entite::existe(session('entite_id'));
-			$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
-
-			return redirect()->route($route_name_prefix . 'modifier_description', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
+				return redirect()->route('bdx_modifier_description', ['bdx_uid' => $request->route('bdx_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			} else {
+				return redirect()->route('air_modifier_description', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			}
 		} else {
 			return redirect($entite->lien_relatif());
 		}
@@ -182,9 +187,11 @@ class EntiteController extends Controller
 		if ($request->query('creation')) {
 			$asso_gerante = Entite::existe(session('entite_id'));
 
-			$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
-
-			return redirect()->route($route_name_prefix . 'modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
+				return redirect()->route('bdx_modifier_logotype', ['bdx_uid' => $request->route('bdx_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			} else {
+				return redirect()->route('air_modifier_logotype', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			}
 		} else {
 			return redirect($entite->lien_relatif());
 		}
@@ -262,7 +269,7 @@ class EntiteController extends Controller
 		$listes = array();
 		foreach ($bureaux as $bureau) {
 			$bureau_ratachement = $bureau->ratachement->value;
-			$listes[$bureau_ratachement] = $bureau->listes_dependantes('2023')->get();
+			$listes[$bureau_ratachement] = $bureau->listes_dependantes('2024')->get();
 		}
 
 		return view(

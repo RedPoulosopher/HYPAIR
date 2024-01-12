@@ -126,11 +126,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
         AutorisationGestion::protectionPage('gerer_post');
-
+        
         $postRequest = $this->formulaire_traitement($request);
         
         $post = Post::create($postRequest);
-
+        
         if($request->banniere) {
             for($i = 0; $i < count($request->banniere); $i++) {
                 $file = $request->banniere[$i];
@@ -143,7 +143,7 @@ class PostController extends Controller
                 $post->bannieres()->save($banniere);
             }
         }
-
+        
         // TAGS
         if (!empty($request->tags)) {
             $tag_names = array_map('trim', explode(',', $request->tags)); //On sépare par les virgules et on enlève les espaces devant et derrière chaque string
@@ -169,13 +169,12 @@ class PostController extends Controller
 
             }
         }
-
+        
         if (!empty($request->campus_id)) {
             foreach ($request->campus_id as $id) {
                 $post->campus()->attach($id);
             }
         }
-
         return redirect(session('entite_uid') . '/entite/post');
     }
     function stripAccents($str) {

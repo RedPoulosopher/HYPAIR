@@ -202,11 +202,12 @@ class Entite extends Model
 
     public function lien_relatif()
     {
-        if ($this->type->value == "liste") {
-            return "/" . $this->uid . '-' . $this->id;
-        } else {
-            return "/" . $this->uid;
-        }
+        // if ($this->type->value == "liste") {
+        //     return "/" . $this->uid . '-' . $this->id;
+        // } else {
+        //     return "/" . $this->uid;
+        // }
+        return "/" . $this->uid;
     }
 
     public function lien_gestion_relatif()

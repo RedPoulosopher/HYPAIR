@@ -49,10 +49,12 @@ class LogoController extends Controller
 
 		if($request->query('creation')){
 			$asso_gerante = Entite::existe(session('entite_id'));
-			$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
-
-			return redirect()->route($route_name_prefix . 'modifier_couleur', ['entite_uid' => $entite_uid, 'entite_id' => $entite->id, 'creation' => true]);
-		} else {
+            if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
+                return redirect()->route('bdx_modifier_couleur', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+            } else {
+                return redirect()->route('air_modifier_couleur', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+		}
+        }else {
 			return redirect($entite->lien_relatif());
 		}
     }
@@ -96,9 +98,11 @@ class LogoController extends Controller
 
 		if($request->query('creation')){
 			$asso_gerante = Entite::existe(session('entite_id'));
-			$route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
-
-			return redirect()->route($route_name_prefix . 'gestion_membres', ['entite_uid' => $entite_uid, 'type' => 'membres', 'entite_id' => $entite->id, 'creation' => true]);
+            if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
+                return redirect()->route('bdx_gestion_membres', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'type' => 'membres', 'creation' => true]);
+            } else {
+                return redirect()->route('air_gestion_membres', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'type' => 'membres', 'creation' => true]);
+		}
 		} else {
 			return redirect($entite->lien_relatif());
 		}

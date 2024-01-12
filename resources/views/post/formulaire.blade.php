@@ -58,7 +58,7 @@
                         @endisset
                         @empty($post)
                             <textarea name="description_md" id="description_md" class="input"
-                                title="Au moins 30 caractères dans la description, et au plus 250" rows="12">{{ old('description') ?? ($post->description ?? '') }}</textarea>
+                                title="Au moins 30 caractères dans la description, et au plus 250" rows="12">{{ old('description_md') ?? ($post->description ?? '') }}</textarea>
                         @endempty
                     </label>
 
@@ -141,7 +141,7 @@
                             @endisset
                             @empty($post)
                                 <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
-                                    max="12-31-2099" value="{{ old('temps_debut') ?? ($post->date_apparition ?? '') }}" />
+                                    max="12-31-2099" value="{{ old('date_apparition') ?? ($post->date_apparition ?? '') }}" />
                             @endempty
                         </label>
                         <label class="input_groupe">
@@ -152,7 +152,7 @@
                             @endisset
                             @empty($post)
                                 <input type="datetime-local" name="date_expiration" class="input"
-                                    value="{{ old('temps_fin') ?? ($post->date_expiration ?? '') }}" min="2000-01-01"
+                                    value="{{ old('date_expiration') ?? ($post->date_expiration ?? '') }}" min="2000-01-01"
                                     max="2100-12-31" />
                             @endempty
                         </label>
@@ -167,7 +167,8 @@
                                 @foreach ($campus as $campus)
                                     <li><input type="checkbox" name="campus_id[]" value="{{ $campus->id }}"
                                             id="campus_id_{{ $campus->id }}"
-                                            @checked((isset($post) && in_array($campus->id, $all_post_campus_id)) || (!isset($post) && $campus->id == 1))>{{ Str::ucfirst($campus->label) }}</li>
+                                            @checked((isset($post) && in_array($campus->id, $all_post_campus_id))
+                                                || (!isset($post) && (old('campus_id') ? in_array($campus->id, old('campus_id')) : ($campus->id == 1))))>{{ Str::ucfirst($campus->label) }}</li>
                                 @endforeach
                             </ul>
                         </label>
@@ -177,11 +178,16 @@
                         <label class="input_groupe">
                             <p class="titre">Confidentialité</p>
                             <p class="description">Ce post doit-il être caché pour les campus non concernés ?</p>
+
+                            @php
+                            $isChecked = (isset($post) && $post->confidentiel == '1') || (empty($post) && old('confidentialite'));
+                            @endphp
+
                             <input type="radio" id="yes" name="confidentialite" value="1"
-                                @checked(isset($post) && $post->confidentiel == '1')>
+                                @checked($isChecked)>
                             <label for="yes">OUI</label><br>
                             <input type="radio" id="no" name="confidentialite" value="0"
-                                @checked(!(isset($post) && $post->confidentiel == '1'))>
+                                @checked(!$isChecked)>
                             <label for="no">NON</label>
                         </label>
                     </div>

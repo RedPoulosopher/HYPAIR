@@ -50,6 +50,8 @@ Route::get('/a-propos', function () {
     return view('a_propos');
 });
 
+Route::get('/campagnes', [EntiteController::class, 'campagnes'])->name('campagnes');
+
 // Route::get('/', [PostController::class, 'accueil']);
 // Attention à l'orthographe des campus (uid)
 Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon'])->name('accueil');
@@ -126,26 +128,28 @@ $routes_AIR = function () {
 
         Route::controller(EntiteController::class)->group(function () {
             Route::get('/entites/admin', 'index_admin');
-            Route::get('/entites/index/json', 'index_admin_json');
 
             Route::get('/entite/nouvelle', 'create');
             Route::post('/entite/nouvelle', 'store');
-            Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos')->name('modifier_infos');
+
+            Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos')->name('air_modifier_infos');
             Route::post('/entite/{entite_id}/modifier/informations', 'maj_infos');
-            Route::get('/entite/{entite_id}/modifier/description', 'modifier_description')->name('modifier_description');
+            Route::get('/entite/{entite_id}/modifier/description', 'modifier_description')->name('air_modifier_description');
             Route::post('/entite/{entite_id}/modifier/description', 'maj_description');
         });
 
         Route::controller(LogoController::class)->group(function () {
-            Route::get('/entite/{entite_id}/logotype', 'modifier_logo')->name('modifier_logotype');
+            Route::get('/entite/{entite_id}/logotype', 'modifier_logo')->name('air_modifier_logotype');
             Route::post('/entite/{entite_id}/logotype', 'maj_logo');
-            Route::get('/entite/{entite_id}/couleur', 'modifier_couleur')->name('modifier_couleur');
+            
+            Route::get('/entite/{entite_id}/couleur', 'modifier_couleur')->name('air_modifier_couleur');
             Route::post('/entite/{entite_id}/couleur', 'maj_couleur');
         });
 
         Route::controller(MembreController::class)->group(function () {
-            Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type' => 'membres|abonnes'])->name('gestion_membres');
+            Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type' => 'membres|abonnes'])->name('air_gestion_membres');
             Route::post('/entite/{entite_id}/{type}', 'ajout_membre')->where(['type' => 'membres|abonnes']);
+            Route::post('/entite/{entite_id}/{type}/suppression', 'suppression_membre')->where(['type' => 'membres|abonnes']);
         });
 
         Route::controller(ReseauSocialController::class)->group(function () {
@@ -160,22 +164,39 @@ $routes_AIR = function () {
 //les routes réservées aux différents bureaux
 //===========================================
 $routes_bureaux = function () {
-    Route::controller(EntiteController::class)->group(function () {
-        Route::get('/entites', 'index_bureau');
+    // Route::controller(EntiteController::class)->group(function () {
+        // Route::get('/entites', 'index_bureau'); //Not working
+    // });
 
+    Route::middleware('protection.autorisation:gerer_entite')->group(function () {
         
-        Route::middleware('protection.autorisation:gerer_entite')->group(function () {
+        
+        Route::controller(EntiteController::class)->group(function () {
             Route::get('/entites/gestion', 'index_admin');
-            Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos');
+
+            Route::get('/entite/nouvelle', 'create');
+            Route::post('/entite/nouvelle', 'store');
+
+            Route::get('/entite/{entite_id}/modifier/informations', 'modifier_infos')->name('bdx_modifier_infos');
             Route::post('/entite/{entite_id}/modifier/informations', 'maj_infos');
-            Route::get('/entite/{entite_id}/modifier/description', 'modifier_description');
+            Route::get('/entite/{entite_id}/modifier/description', 'modifier_description')->name('bdx_modifier_description');
             Route::post('/entite/{entite_id}/modifier/description', 'maj_description');
         });
 
         Route::controller(MembreController::class)->group(function () {
-            Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type' => 'membres|abonnes']);
+            Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type' => 'membres|abonnes'])->name('bdx_gestion_membres');
             Route::post('/entite/{entite_id}/{type}', 'ajout_membre')->where(['type' => 'membres|abonnes']);
+            Route::post('/entite/{entite_id}/{type}/suppression', 'suppression_membre')->where(['type' => 'membres|abonnes']);
         });
+
+        Route::controller(LogoController::class)->group(function () {
+            Route::get('/entite/{entite_id}/logotype', 'modifier_logo')->name('bdx_modifier_logotype');
+            Route::post('/entite/{entite_id}/logotype', 'maj_logo');
+            
+            Route::get('/entite/{entite_id}/couleur', 'modifier_couleur')->name('bdx_modifier_couleur');
+            Route::post('/entite/{entite_id}/couleur', 'maj_couleur');
+        });
+
     });
 };
 
@@ -215,8 +236,6 @@ $routes_entites = function () {
         Route::get('/projet/{slug}/avancee/{slug_avancee}', 'show')->name('avancee_afficher');
     });
     Route::controller(EntiteController::class)->group(function () {
-        Route::get('/a_propos', 'show')->name('a_propos');
-        Route::get('/accueil', 'show');
         Route::get('/', 'show')
             ->name('entite');
 
@@ -280,6 +299,8 @@ $routes_entites = function () {
     Route::controller(MembreController::class)->group(function () {
         Route::get('/entite/{type}', 'index_admin')->where(['type' => 'membres|abonnes']);
         Route::post('/entite/{type}', 'ajout_membre')->where(['type' => 'membres|abonnes']);
+        Route::post('/entite/{type}/suppression', 'suppression_membre')->where(['type' => 'membres|abonnes']);
+
     });
 };
 
@@ -307,8 +328,11 @@ Route::prefix('{entite_uid}') //pour toutes les autres entités
 
 Route::prefix('{entite_uid}') //pour les bureaux
     ->middleware('existence.entite:bureau')
+    ->where(['entite_uid' => '^((?!air).)*$']) #where entite_uid!='air'
     ->group($routes_bureaux);
-
-Route::prefix('{entite_uid}') //pour l'AIR
+    
+//Les routes de l'air stockent le prefix dans la variable 'air_uid' (pour être sûr de ne pas écraser les routes identiques des bureaux)
+Route::prefix('{air_uid}') //pour l'AIR
+    ->where(['air_uid' => 'air'])
     ->middleware('existence.entite:air')
     ->group($routes_AIR);

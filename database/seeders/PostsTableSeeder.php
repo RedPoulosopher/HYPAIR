@@ -58,7 +58,7 @@ class PostsTableSeeder extends Seeder
                     'description' => "# Aprem Jeux avec le BDE de Lille !  \nProfitez d'un cadre calme pour vous détendre avec notre aprem  \n\nJeux de société et jeux vidéos seront au rendez-vous !",
                     'date_apparition' => '2023-08-17 15:00:00',
                     'date_expiration' => '2025-08-31 20:00:00',
-                    'entite_id' => 10,
+                    'entite_id' => 14,
                     "confidentiel" => "0"
                 ],
                 [

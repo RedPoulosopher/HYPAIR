@@ -87,7 +87,7 @@ class CalendrierController extends Controller
     public static function calendrier_general($site = null)
     {
         // --- FONCTION À SIMPLIFIER ---
-
+        
         //on doit recuperer l annee et le mois courant. ca sera l affichage par defaut
         $annee = date('Y');
         $mois = date('m');
@@ -189,7 +189,7 @@ class CalendrierController extends Controller
     public static function calendrier_index_json(Request $request)
     {
         $annee = $request["annee"];
-        $mois = $request["mois"] + 1;
+        $mois = $request["mois"] + 1;//Conversion de l'indice du mois de 0-11 vers 1-12
 
         
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
@@ -270,7 +270,7 @@ class CalendrierController extends Controller
     public static function calendrier_index_json_general(Request $request)
     {
         $annee = $request["annee"];
-        $mois = $request["mois"] + 1;
+        $mois = $request["mois"] + 1;//Conversion de l'indice du mois de 0-11 vers 1-12
         $site = $request["site"];
         
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');

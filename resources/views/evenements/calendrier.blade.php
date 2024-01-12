@@ -195,14 +195,17 @@
                 heure_jour_fin = date_temps_fin.getHours()
 
                 id_mois_affiche = mois + annee * 12
-                if (id_mois(date_temps_debut) < id_mois_affiche) {
+                //Si l'évènement commence avant le début du mois et finit après la fin du mois affiché, on l'affiche sur tout le mois
+                if (id_mois(date_temps_debut) < id_mois_affiche && id_mois(date_temps_fin) > id_mois_affiche) {
+                    tableau = range(1, nbr_jours_dans_mois)
+                } else if (id_mois(date_temps_debut) < id_mois_affiche) {//Si l'èvènement commence avant le début du mois affiché, on l'affiche à partir du 1
                     tableau = range(1, jour_fin)
                     if (heure_jour_fin < 8) {
                         tableau.pop()
                     }
-                } else if (id_mois(date_temps_fin) > id_mois_affiche) {
+                } else if (id_mois(date_temps_fin) > id_mois_affiche) {//Si l'évènement termine après la fin du mois affiché, on l'affiche jusqu'à la fin du mois
                     tableau = range(jour_debut, nbr_jours_dans_mois)
-                } else if (jour_debut < jour_fin) {
+                } else if (jour_debut < jour_fin) {//Si l'évènement n'est pas à cheval sur plusieurs mois
                     tableau = range(jour_debut, jour_fin)
                     if (heure_jour_fin < 8) {
                         tableau.pop()
@@ -212,7 +215,7 @@
                 }
 
                 for (var j = 0; j < tableau.length; j++) {
-                    placer_evenement_dans_jour(tableau[j], i, evenements);
+                    placer_evenement_dans_jour(tableau[j], evenements[i]);
                 }
             }
         }
@@ -221,15 +224,15 @@
             return date.getMonth() + date.getFullYear() * 12
         }
 
-        function placer_evenement_dans_jour(jour, index_evenement, evenements) {
+        function placer_evenement_dans_jour(jour, evenement) {
             el_jour = document.querySelector('[num_jour="' + jour + '"]');
-            if (evenements[index_evenement]["validation"] == 0) {
-                el_jour.innerHTML += "<div id=" + evenements[index_evenement]["slug"] + " class='evenement non_valide' >" +
-                    evenements[index_evenement]["titre"] + "</div>"
+            if (evenement["validation"] == 0) {
+                el_jour.innerHTML += "<div id=" + evenement["slug"] + " class='evenement non_valide' >" +
+                    evenement["titre"] + "</div>"
             } else {
-                el_jour.innerHTML += "<div id=" + evenements[index_evenement]["slug"] +
-                    " class='evenement' style='background-color:" + evenements[index_evenement]["couleur_claire"] + "'>" +
-                    evenements[index_evenement]["titre"] + "</div>"
+                el_jour.innerHTML += "<div id=" + evenement["slug"] +
+                    " class='evenement' style='background-color:" + evenement["couleur_claire"] + "'>" +
+                    evenement["titre"] + "</div>"
             }
         }
 
@@ -239,14 +242,24 @@
 
         // GERER CHANGEMENT MOIS
         document.getElementById("fleche-gauche").addEventListener("click", function() {
-            mois -= 1;
+            if(mois > 0){
+                mois --;
+            }else{//Si on est en janvier, on passe en décembre de l'année précédente
+                mois = 11;
+                annee--;
+            }
             test_mois_courant()
             remplissage(annee, mois);
             event_choix_calendrier();
         })
 
         document.getElementById("fleche-droite").addEventListener("click", function() {
-            mois += 1;
+            if(mois < 11){
+                mois++;
+            }else{
+                mois = 0;//si on est en décembre, on passe en janvier de l'année suivante
+                annee++;
+            }
             test_mois_courant()
             remplissage(annee, mois);
 

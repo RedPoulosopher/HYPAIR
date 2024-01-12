@@ -31,7 +31,8 @@ $annee_actuelle = Carbon::now()->format("Y");
 				</div>
 			@endif
 			<div class="groupe card">
-				<label class="input_groupe flex">
+				{{-- Masqué car plus d'intérêt depuis HypAIR V2 --}}
+				{{-- <label class="input_groupe flex">
 					<p class="titre">* Privée ?</p>
 					<input type="checkbox" name="privee" class="input" {{old('privee') ?? $documentation->privee ?? '' ? "checked" : ""}}/>
 				</label>
@@ -40,7 +41,7 @@ $annee_actuelle = Carbon::now()->format("Y");
 					<p class="titre">* Ouverte aux membres ?</p>
 					<input type="checkbox" name="ouvert" class="input" {{old('ouvert') ?? $documentation->ouvert ?? '' ? "" : "checked"}}/>
 					<p class="description">Certaines entites, listes ou bureaux peuvent ne pas accepter qu'un utilisateur puisse se déclarer membre.</p>
-				</label>
+				</label> --}}
 
 				<label class="input_groupe">
 					<p class="titre">* Année de création :</p>
@@ -69,9 +70,6 @@ $annee_actuelle = Carbon::now()->format("Y");
 				
 			<span>* les champs marqués d'une astérisque sont obligatoires</span>
 			<div style="float:right; display:flex;gap:10px;">
-				@if ($creation==0)
-				<a class="bouton secondaire" href="../../logotype"><span>Changer le logotype</span></a>
-				@endif
 				<button type="submit" class="bouton primaire"><span>{{$creation==1 ? "SUIVANT" : "MODIFIER"}}</span></button>
 			</div>
 		</form>

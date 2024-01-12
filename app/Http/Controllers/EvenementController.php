@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use \App\Models\Evenement;
 use \App\Models\Entite;
 use \App\Models\Membre;
-use App\Models\Site;
+use \App\Models\Site;
 use \App\Services\AutorisationGestion;
 use DateTime;
 use DateTimeZone;
@@ -27,10 +27,14 @@ class EvenementController extends Controller
 
 		$sites = Site::all();
 
+		$entite = Entite::existe(session('entite_id'));
+
+
 		return view('evenements.formulaire', [
 			'titre' => 'Créer un évènement',
 			'evenements_existants' => $evenements_existants,
-			'campus' => $sites
+			'campus' => $sites,
+			'entite' => $entite
 		]);
 	}
 
@@ -238,7 +242,7 @@ class EvenementController extends Controller
 		$validated = $request->validate(
 			[
 				'titre' => 'required|max:128',
-				'description_md' => 'required|min:30|max:250',
+				'description_md' => 'required|min:30|max:500',
 				'temps_debut' => 'required',
 				'temps_fin' => 'required',
 				'lieu' => 'nullable|max:128',

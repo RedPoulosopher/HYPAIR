@@ -71,6 +71,13 @@ class MembresTableSeeder extends Seeder
                 'fin_mandat' => "2024-05-01",
                 'created_at' => "2023-03-01",
             ],
+            [
+                'entite_id' => '21',
+                'user_id' => '5',
+                'role_id' => '1',
+                'fin_mandat' => "2024-05-01",
+                'created_at' => "2023-03-01",
+            ],
         ]);
     }
 }

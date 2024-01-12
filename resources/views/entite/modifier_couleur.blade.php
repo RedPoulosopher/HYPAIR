@@ -43,7 +43,7 @@
 						<input type="color" name="couleur_sombre" class="input" required id="couleur_sombre" value="{{old('couleur_sombre') ?? $entite->couleur_sombre ?? ''}}">
 					</label>
 	
-					<details style="margin-top:2em;">
+					{{-- <details style="margin-top:2em;">
 						<summary>Afficher les tests de couleurs.</summary>
 						<p>La couleur de la police sera déterminée automatiquement entre le blanc et le noir en fonction du meilleur contraste.</p>
 						<h1>CECI EST TEST</h1>
@@ -61,7 +61,7 @@
 						</a>
 						<div class="bouton primaire" style="float:right;">COUCOU</div>
 						<div class="bouton secondaire" style="float:right;margin-right:1em;">Coucou ?</div>
-					</details>
+					</details> --}}
 				</div>
 					
 				<span>* les champs marqués d'une astérisque sont obligatoires</span>

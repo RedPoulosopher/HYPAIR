@@ -4,7 +4,11 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    margin-bottom: 1.4em;
+    position: relative;
+
+    & + h1{
+        margin-top: 1.4em;
+    }
 }
 
 @media (max-width: 615px) {

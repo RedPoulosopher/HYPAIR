@@ -44,15 +44,18 @@ class Evenement extends Model
 
     public static function index($annee, $mois)
     {
+        $mois_padding = str_pad($mois,2,'0',STR_PAD_LEFT);
         //ca doit retourner tous les evenements de l annee et du mois demandes. Faudra regarder la doc sur eloquent
         $evenements_mois_courant =
             self::select('evenements.*', 'entites.uid', 'entites.nom', 'entites.couleur_claire', 'entites.couleur_sombre')
-            ->whereMonth("temps_debut", $mois)
-            ->whereYear("temps_debut", $annee)
-            ->orWhere(function ($query) use ($annee, $mois) {
-                $query->whereMonth("temps_fin", $mois)
-                    ->whereYear("temps_fin", $annee);
-            })
+            // ->whereMonth("temps_debut", $mois)
+            // ->whereYear("temps_debut", $annee)
+            // ->orWhere(function ($query) use ($annee, $mois) {
+            //     $query->whereMonth("temps_fin", $mois)
+            //         ->whereYear("temps_fin", $annee);
+            // })
+            ->where("temps_debut", "<=", $annee . '-' .  $mois_padding . "-31 23:59:59")
+            ->where("temps_fin", ">=", $annee . '-' . $mois_padding . "-01 00:00:00")
             ->join('entites', 'entites.id', '=', 'evenements.entite_id');
         return $evenements_mois_courant->get();
     }

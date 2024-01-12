@@ -19,6 +19,9 @@
             border-radius: 500px;
         }
 
+        & .span {
+        }
+
         &:hover .cercle {
             border: 5px solid;
         }
@@ -37,12 +40,19 @@
     }
 
     & .info {
-        & .nom {
+        & p.nom {
             font-size: 1.2em;
 
             line-height: 1.2em;
             margin: 0.5em 0 0.3em;
             text-transform: capitalize;
+        }
+        & p.score{
+            color: var(--couleur_police_secondaire);   
+            
+            font-size: .9em;
+            margin: 0.5em 0 0.3em;
+            line-height: 1em;    
         }
 
         .categories {

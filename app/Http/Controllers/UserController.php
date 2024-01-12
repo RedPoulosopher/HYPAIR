@@ -126,7 +126,7 @@ class UserController extends Controller
     if (Auth::check()) {
       $reseau_social = new ReseauSocial();
       $reseau_social->reseaux_sociaux_liste_id = $request["reseaux_sociaux_liste_id"];
-      $reseau_social->cle = $request["cle"];
+      $reseau_social->lien = $request["lien"];
 
       $user = Auth::user();
       ReseauSocial::changer_reseau_social($user, $reseau_social);

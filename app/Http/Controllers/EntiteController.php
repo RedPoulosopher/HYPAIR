@@ -52,14 +52,27 @@ class EntiteController extends Controller
 			->with('entite', $entite);
 	}
 
-	public function create() //réservé à l'AIR
+	public function create() //réservé à l'AIR et aux bureaux
 	{
 		$sites = Site::all();
-		return view('entite.creer')->with('sites', $sites);
+
+		$asso_gerante = Entite::existe(session('entite_id'));
+
+		return view('entite.creer')->with([
+			'sites' => $sites,
+			'est_bureau' => $asso_gerante->type == EntiteTypeEnum::Bureau
+		]);
 	}
 
-	public function store(Request $request) //réservé à l'AIR
+	public function store(Request $request) //réservé à l'AIR et aux bureaux
 	{
+		$asso_gerante = Entite::existe(session('entite_id'));
+		
+		//Si c'est un bureau qui créé une entité, elle lui est automatiquement rattachée
+		if($asso_gerante->type == EntiteTypeEnum::Bureau){
+			$request['ratachement'] = $asso_gerante->uid;
+		}
+
 		$this->validate($request, [
 			'sites' => ['filled', 'array', Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes', 'alençon'])],
 			'nom' => ['filled', 'max:120'],
@@ -75,19 +88,24 @@ class EntiteController extends Controller
 			$entite = $entite->first();
 		} else {
 			$entite = new Entite;
-			$entite->nom = $request->nom;
-			$entite->uid = $request->uid;
-			$entite->ratachement = $request->ratachement;
-			$entite->type = $request->type;
-			$entite->save();
-
-			$entite->ajout_sites($request->sites);
 		}
+		$entite->nom = $request->nom;
+		$entite->uid = $request->uid;
+		$entite->ratachement = $request->ratachement;
+		$entite->type = $request->type;
+		$entite->save();
 
-		return redirect()->route('modifier_infos', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+		$entite->ajout_sites($request->sites);
+
+		if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
+			return redirect()->route('bdx_modifier_infos', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+		} else {
+			return redirect()->route('air_modifier_infos', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+		}
+		// $route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
 	}
 
-	public function modifier_infos(Request $request) //réservé à l'AIR
+	public function modifier_infos(Request $request) //réservé à l'AIR et aux bureaux
 	{
 		$entite = Entite::existe($request->route('entite_id'));
 
@@ -98,7 +116,7 @@ class EntiteController extends Controller
 		]);
 	}
 
-	public function maj_infos(Request $request) //réservé à l'AIR
+	public function maj_infos(Request $request) //réservé à l'AIR et aux bureaux
 	{
 		$entite = Entite::existe($request->route('entite_id'));
 
@@ -124,7 +142,12 @@ class EntiteController extends Controller
 		$entite->save();
 
 		if ($request->query('creation')) {
-			return redirect()->route('modifier_description', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			$asso_gerante = Entite::existe(session('entite_id'));
+			if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
+				return redirect()->route('bdx_modifier_description', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			} else {
+				return redirect()->route('air_modifier_description', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			}
 		} else {
 			return redirect($entite->lien_relatif());
 		}
@@ -149,8 +172,7 @@ class EntiteController extends Controller
 
 		$request->categories = array_map('strtolower', array_map('trim', explode(",", $request->categories)));
 		$this->validate($request, [
-			'description_courte' => ['filled', 'max:300'],
-			'description_md' => ['filled', 'min:300'],
+			'description_courte' => ['filled', 'max:255'],
 			'categories' => ['filled', 'distinct'],
 		]);
 
@@ -163,9 +185,15 @@ class EntiteController extends Controller
 		$entite->ajout_categories($request->categories);
 
 		if ($request->query('creation')) {
-			return redirect()->route('modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			$asso_gerante = Entite::existe(session('entite_id'));
+
+			if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
+				return redirect()->route('bdx_modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			} else {
+				return redirect()->route('air_modifier_logotype', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+			}
 		} else {
-			return redirect()->route('a_propos', ['entite_uid' => $entite->uid]);
+			return redirect($entite->lien_relatif());
 		}
 	}
 
@@ -177,8 +205,10 @@ class EntiteController extends Controller
 		$bureaux = Entite::bureaux_site($site)->get();
 
 		$comites_clubs_dependants = array();
+		$listes_dependantes = array();
 		foreach ($bureaux as $bureau) {
 			$bureau_ratachement = $bureau->ratachement->value;
+			//Comités
 			$comites_clubs_dependants[$bureau_ratachement] = $bureau->comites_clubs_dependants()->get();
 		}
 
@@ -211,7 +241,7 @@ class EntiteController extends Controller
 		);
 	}
 
-	public function index_admin(Request $request) //réservé à l'AIR
+	public function index_admin(Request $request) //réservé à l'AIR et aux bureaux
 	{
 		$asso_gerante = Entite::existe(session('entite_id'));
 
@@ -231,5 +261,23 @@ class EntiteController extends Controller
 		}
 
 		return view('entite.index_admin')->with('est_bureau', $asso_gerante->type == EntiteTypeEnum::Bureau)->with('entites_dependantes', $entites_dependantes);
+	}
+
+	public function campagnes(Request $request) // réservé aux bureaux
+	{
+		$bureaux = Entite::bureaux_site('douai')->get();
+		$listes = array();
+		foreach ($bureaux as $bureau) {
+			$bureau_ratachement = $bureau->ratachement->value;
+			$listes[$bureau_ratachement] = $bureau->listes_dependantes('2024')->get();
+		}
+
+		return view(
+			'entite.campagnes',
+			[
+				"bureaux" => $bureaux,
+				"listes" => $listes
+			]
+		);
 	}
 }

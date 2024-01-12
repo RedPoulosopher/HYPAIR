@@ -1,6 +1,6 @@
 {{-- Component de la barre de navigation principale (celle du haut) --}}
 
-<nav id="navbar">
+<nav id="navbar" class="campagnes">
 
     <div id="logo">
         <a href="/" id="logo-img">
@@ -23,6 +23,8 @@
             {{-- <li
                 class="menu-button {{ (request()->is('mes-entites') ? 'active' : '') . (request()->is('*entite/*') ? 'active' : '') }}">
                 <a href="/mes-entites">Gestion</a></li> --}}
+            <li class="menu-button {{ request()->is('campagnes') ? 'active' : '' }}"><a href="/campagnes">Campagnes</a>
+            </li>
             <li class="menu-button {{ request()->is('contact') ? 'active' : '' }}"><a href="/contact">Contact</a></li>
 
             @if ($isConnected)
@@ -37,17 +39,19 @@
             @endif
         </ul>
         <div id="services">
-            @if(Auth::check() && Auth::user()->campus->pluck("label")->contains("douai"))
-            <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
-                logo="{{ mix('/images/piwigo.png') }}">
-            </x-service>
+            @if (Auth::check() &&
+                    Auth::user()->campus->pluck('label')->contains('douai'))
+                <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
+                    logo="{{ mix('/images/piwigo.png') }}">
+                </x-service>
             @endif
             <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
                 logo="{{ mix('/images/peertube.png') }}"></x-service>
             <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
                 logo="{{ mix('/images/gitlab.png') }}"></x-service>
-            <x-service nom="Tutoriels HypAIR" destination='https://drive.google.com/drive/folders/1rT5waUh6R_q1ydip7CkxVAwxRNXkTU8i?usp=drive_link' color=#4c4372
-                logo="{{ mix('/images/tutorial.png') }}">
+            <x-service nom="Tutoriels HypAIR"
+                destination='https://drive.google.com/drive/folders/1rT5waUh6R_q1ydip7CkxVAwxRNXkTU8i?usp=drive_link'
+                color=#4c4372 logo="{{ mix('/images/tutorial.png') }}">
             </x-service>
         </div>
     </div>

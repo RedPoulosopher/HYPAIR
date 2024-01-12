@@ -60,7 +60,7 @@ class Entite extends Model
 
     public function reseaux_sociaux()
     {
-        return $this->morphMany(ReseauSocial::class, 'reseau_sociable');
+        return $this->morphMany(ReseauSocial::class, 'reseau_social');
     }
 
     public function sites()
@@ -179,10 +179,7 @@ class Entite extends Model
         if ($this->type == EntiteTypeEnum::Bureau) {
             $sites_bureau = $this->sites()->get()->pluck('label')->toArray();
 
-            $listes_dependantes = Entite::where('ratachement', $this->ratachement)
-                ->whereHas('sites', function ($query) use ($sites_bureau) {
-                    $query->whereIn('label', $sites_bureau);
-                });;
+            $listes_dependantes = Entite::where('ratachement', $this->ratachement);
         } else { // l'ai récup toutes les listes
             $listes_dependantes = new Entite;
         }
@@ -205,11 +202,12 @@ class Entite extends Model
 
     public function lien_relatif()
     {
-        if ($this->type->value == "liste") {
-            return "/" . $this->uid . '-' . $this->id;
-        } else {
-            return "/" . $this->uid;
-        }
+        // if ($this->type->value == "liste") {
+        //     return "/" . $this->uid . '-' . $this->id;
+        // } else {
+        //     return "/" . $this->uid;
+        // }
+        return "/" . $this->uid;
     }
 
     public function lien_gestion_relatif()

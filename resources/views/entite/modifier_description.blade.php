@@ -37,7 +37,7 @@
 				</label>
 
 				<label class="input_groupe">
-					<p class="titre">* Description :</p>
+					<p class="titre">Description :</p>
 					<p class="description">Pour mettre en forme la description, <a target="_blank" class="couleur" href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">utilisez le markdown</a> !</p>
 					<textarea name="description_md" id="description_md" class="input" rows="12">{{old('description_md') ?? $entite->description_md ?? ''}}</textarea>
 				</label>

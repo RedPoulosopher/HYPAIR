@@ -144,7 +144,7 @@ class EntiteController extends Controller
 		if ($request->query('creation')) {
 			$asso_gerante = Entite::existe(session('entite_id'));
 			if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
-				return redirect()->route('bdx_modifier_description', ['bdx_uid' => $request->route('bdx_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+				return redirect()->route('bdx_modifier_description', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 			} else {
 				return redirect()->route('air_modifier_description', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 			}
@@ -188,7 +188,7 @@ class EntiteController extends Controller
 			$asso_gerante = Entite::existe(session('entite_id'));
 
 			if ($asso_gerante->type == EntiteTypeEnum::Bureau) {
-				return redirect()->route('bdx_modifier_logotype', ['bdx_uid' => $request->route('bdx_uid'), 'entite_id' => $entite->id, 'creation' => true]);
+				return redirect()->route('bdx_modifier_logotype', ['entite_uid' => $request->route('entite_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 			} else {
 				return redirect()->route('air_modifier_logotype', ['air_uid' => $request->route('air_uid'), 'entite_id' => $entite->id, 'creation' => true]);
 			}

@@ -190,6 +190,7 @@ class Entite extends Model
 
         $listes_dependantes = $listes_dependantes
             ->whereIn('type', array(EntiteTypeEnum::Liste, EntiteTypeEnum::Fakeliste))
+            ->orderBy('type', 'desc')
             ->orderBy('nom');
 
         return $listes_dependantes;

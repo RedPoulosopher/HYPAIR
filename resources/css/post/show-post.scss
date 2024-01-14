@@ -111,6 +111,7 @@ section {
 
         .description {
             padding: 0 15px;
+            overflow-wrap: anywhere;//Evite l'agrandissement d'un component post quand on a un très long mot
 
             &.visible {
                 display: block;

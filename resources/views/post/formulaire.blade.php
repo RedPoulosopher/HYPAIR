@@ -64,16 +64,34 @@
 
                 </div>
 
+
                 <div class="groupe card">
+                    @if (!(empty($post)) && count($post->bannieres) > 0)
+                    <div id="div_checkbox_banniere">
                     <label class="input_groupe">
+                        <input type="checkbox" id="checkbox_banniere" name="checkbox_banniere">
+                        <label for="checkbox_banniere">Supprimer ou remplacer les bannières existantes</label>
+                    </label>
+                    </div>
+                    @else
+                    <div id="div_checkbox_banniere" style="display: none;">
+                    <label class="input_groupe">
+                        <input type="checkbox" id="checkbox_banniere" name="checkbox_banniere" checked>
+                        <label for="checkbox_banniere">Supprimer ou remplacer les bannières existantes</label>
+                    </label>
+                    </div>
+                    @endif
+                    <label class="input_groupe" id="div_file_banniere">
                         <p class="titre">Bannière :</p>
                         <input type="file" id="banniere" class="input" name="banniere[]" accept="image/*">
+                        <p class="description">Si vous ne souhaitez pas mettre de bannière, laissez ce champ vide.</p>
                     </label>
                     {{-- <label for="input_groupe">
                         <p class="titre">Bannière 2 :</p>
                         <p class="description">Choisissez une image pour votre post</p>
                         <input type="file" id="banniere_2" name="banniere[]" accept="image/*">
                     </label>
+                    <!-- Les bannières 2 et 3 doivent être ajoutée dans le script qui cache l'input file de la bannière 1 si elles sont utilisée un jour -->
                     <label for="input_groupe">
                         <p class="titre">Bannière 3 :</p>
                         <p class="description">Choisissez une image pour votre post</p>
@@ -216,6 +234,22 @@
             </form>
         </section>
     </main>
+
+    <script>
+
+        const divFileBanniere = document.getElementById("div_file_banniere");
+        const checkboxBanniere = document.getElementById("checkbox_banniere");
+        
+        @if (!(empty($post)) && count($post->bannieres) > 0)
+        divFileBanniere.style.display = "none";
+        @endif
+
+        checkboxBanniere.addEventListener('change', function() {
+            if (this.checked) divFileBanniere.style.display = "block";
+            else divFileBanniere.style.display = "none";
+        });
+
+    </script>
 
 @endsection
 

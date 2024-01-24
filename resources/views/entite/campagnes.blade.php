@@ -87,7 +87,7 @@
                         @endif
                     </div>
                     <h1>Listes BDS</h1>
-                    <h2>Du 12/03 au 22/01</h2>
+                    <h2>Du 12/03 au 22/03</h2>
                     <div class="liste_comite_club">
                         @if (count($listes['bds']) > 0)
                             @foreach ($listes['bds'] as $liste)

@@ -243,20 +243,23 @@ class PostController extends Controller
         $post = Post::find($post_id);
         $post->update($traitement);
 
-        foreach($post->bannieres as $banniere) {
-            Storage::delete($banniere->path);
-            $banniere->delete();
-        }
 
-        if($request->banniere) {
-            for($i = 0; $i < count($request->banniere); $i++) {
-                $file = $request->banniere[$i];
-                $path = BanniereService::stockerBanniere($file, $post, $i);
-                $banniere = new Banniere();
-                $banniere->path = $path;
-                // voir la méthode saveMany pour améliorer le code
-                $post->bannieres()->save($banniere);
-        }
+        if ($request->checkbox_banniere) {
+            foreach($post->bannieres as $banniere) {
+                Storage::delete($banniere->path);
+                $banniere->delete();
+            }
+
+            if($request->banniere) {
+                for($i = 0; $i < count($request->banniere); $i++) {
+                    $file = $request->banniere[$i];
+                    $path = BanniereService::stockerBanniere($file, $post, $i);
+                    $banniere = new Banniere();
+                    $banniere->path = $path;
+                    // voir la méthode saveMany pour améliorer le code
+                    $post->bannieres()->save($banniere);
+                }
+            }
         }
 
         // TAGS

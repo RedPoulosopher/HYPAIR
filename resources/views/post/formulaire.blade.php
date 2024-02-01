@@ -64,16 +64,32 @@
 
                 </div>
 
+
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">Bannière :</p>
-                        <input type="file" id="banniere" class="input" name="banniere[]" accept="image/*">
+                        @if (!empty($post) && count($post->bannieres) > 0)
+                            <div id="div_checkbox_banniere">
+                                <input type="checkbox" id="checkbox_banniere" name="checkbox_banniere">
+                                <label for="checkbox_banniere">Supprimer ou remplacer les bannières existantes</label>
+                            </div>
+                        @else
+                            <div id="div_checkbox_banniere" style="display: none;">
+                                <input type="checkbox" id="checkbox_banniere" name="checkbox_banniere" checked>
+                                <label for="checkbox_banniere">Supprimer ou remplacer les bannières existantes</label>
+                            </div>
+                        @endif
+                        <div id="div_file_banniere">
+                            <input type="file" id="banniere" class="input" name="banniere[]" accept="image/*">
+                            <p class="description">Si vous ne souhaitez pas mettre de bannière, laissez ce champ vide.</p>
+                        </div>
                     </label>
                     {{-- <label for="input_groupe">
                         <p class="titre">Bannière 2 :</p>
                         <p class="description">Choisissez une image pour votre post</p>
                         <input type="file" id="banniere_2" name="banniere[]" accept="image/*">
                     </label>
+                    <!-- Les bannières 2 et 3 doivent être ajoutée dans le script qui cache l'input file de la bannière 1 si elles sont utilisée un jour -->
                     <label for="input_groupe">
                         <p class="titre">Bannière 3 :</p>
                         <p class="description">Choisissez une image pour votre post</p>
@@ -91,7 +107,7 @@
 
                     <div class="groupe card">
                         <label class="input_groupe">
-                            <p class="labels">Tags :</p>
+                            <p class="titre">Tags :</p>
                             <p class="description">Séparez les tags par des virgules (e.g. important, soirée, info)</p>
                             @isset($post)
                                 <input type="text" name="tags" class="input" id="tags_doc"
@@ -141,7 +157,8 @@
                             @endisset
                             @empty($post)
                                 <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
-                                    max="12-31-2099" value="{{ old('date_apparition') ?? ($post->date_apparition ?? '') }}" />
+                                    max="12-31-2099"
+                                    value="{{ old('date_apparition') ?? ($post->date_apparition ?? '') }}" />
                             @endempty
                         </label>
                         <label class="input_groupe">
@@ -167,8 +184,9 @@
                                 @foreach ($campus as $campus)
                                     <li><input type="checkbox" name="campus_id[]" value="{{ $campus->id }}"
                                             id="campus_id_{{ $campus->id }}"
-                                            @checked((isset($post) && in_array($campus->id, $all_post_campus_id))
-                                                || (!isset($post) && (old('campus_id') ? in_array($campus->id, old('campus_id')) : ($campus->id == 1))))>{{ Str::ucfirst($campus->label) }}</li>
+                                            @checked(
+                                                (isset($post) && in_array($campus->id, $all_post_campus_id)) ||
+                                                    (!isset($post) && (old('campus_id') ? in_array($campus->id, old('campus_id')) : $campus->id == 1)))>{{ Str::ucfirst($campus->label) }}</li>
                                 @endforeach
                             </ul>
                         </label>
@@ -180,7 +198,7 @@
                             <p class="description">Ce post doit-il être caché pour les campus non concernés ?</p>
 
                             @php
-                            $isChecked = (isset($post) && $post->confidentiel == '1') || (empty($post) && old('confidentialite'));
+                                $isChecked = (isset($post) && $post->confidentiel == '1') || (empty($post) && old('confidentialite'));
                             @endphp
 
                             <input type="radio" id="yes" name="confidentialite" value="1"
@@ -216,6 +234,20 @@
             </form>
         </section>
     </main>
+
+    <script>
+        const divFileBanniere = document.getElementById("div_file_banniere");
+        const checkboxBanniere = document.getElementById("checkbox_banniere");
+
+        @if (!empty($post) && count($post->bannieres) > 0)
+            divFileBanniere.style.display = "none";
+        @endif
+
+        checkboxBanniere.addEventListener('change', function() {
+            if (this.checked) divFileBanniere.style.display = "block";
+            else divFileBanniere.style.display = "none";
+        });
+    </script>
 
 @endsection
 

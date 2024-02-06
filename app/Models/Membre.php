@@ -51,10 +51,6 @@ class Membre extends Model
 		);
     }
 
-    function date_fin_mandat($annee=null){
-
-    }
-
     public static function existe($membre_id)
     {
         $membre = self::where('id', $membre_id);

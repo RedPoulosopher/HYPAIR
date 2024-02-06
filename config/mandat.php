@@ -18,6 +18,10 @@ return [
     'mois_debut_passation' => 2, //1er fevrier
     'mois_fin_passation' => 12, //1er décembre
 
+    // Les listes peuvent ajouter des membres pour le "mandat" actuel même après le 1er févrirer
+    'mois_debut_passation_liste' => 4, //1er avril
+
+
     /*
     |--------------------------------------------------------------------------
     | Mandat

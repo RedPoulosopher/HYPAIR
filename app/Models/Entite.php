@@ -230,9 +230,16 @@ class Entite extends Model
             $annee_scolaire++;
         } //en avril, on change le mandat pour afficher le nouveau
 
+        // Distinction des dates du prochain mandat pour les listes
+        $date_debut_passations = config('mandat.mois_debut_passation') . "-01";
+        if($this->type == EntiteTypeEnum::Liste || $this->type == EntiteTypeEnum::Liste){
+            $date_debut_passations = config('mandat.mois_debut_passation_liste') . "-01";
+        }
+
+
         return $this::membres()
             ->select('membres.id', 'membres.user_id', 'membres.entite_id', 'membres.created_at', 'membres.fin_mandat', 'membres.photo', 'roles.label', 'roles.niveau_admin', 'users.uid', 'users.nom', 'users.prenom')
-            ->whereBetween('membres.created_at', [($annee_scolaire - 1) . "-03-01", $annee_scolaire . "-02-01"])
+            ->whereBetween('membres.created_at', [($annee_scolaire - 1) . "-" . $date_debut_passations, $annee_scolaire . "-" . $date_debut_passations])
             ->join('roles', 'roles.id', '=', 'membres.role_id')
             ->join('users', 'users.id', '=', 'membres.user_id')
             ->orderBy('niveau_admin', 'desc')

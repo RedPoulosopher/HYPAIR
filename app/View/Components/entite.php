@@ -10,11 +10,10 @@ class entite extends Component
     public $destination;
     public $scoreVisible;
 
-    public function __construct($asso, $destination, $scoreVisible = false)
+    public function __construct($asso, $destination)
     {
         $this->asso = $asso;
         $this->destination = $destination;
-        $this->scoreVisible = $scoreVisible;
     }
 
     /**

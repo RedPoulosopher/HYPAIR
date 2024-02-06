@@ -7,7 +7,7 @@
 @section('content')
     <main id="main-content">
         <section>
-            @if(Auth::check())
+            @if (Auth::check())
                 @if (count($bureaux) > 0)
                     {{-- La boucle foreach marche, mais on fait manuellement pour contrôler l'ordre des bdx sur la page --}}
                     {{-- @foreach ($bureaux as $bureau)
@@ -32,7 +32,7 @@
                         @if (count($listes['bda']) > 0)
                             @foreach ($listes['bda'] as $liste)
                                 @if (!$liste->hidden)
-                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" scoreVisible />
+                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" />
                                 @endif
                             @endforeach
                         @else
@@ -52,7 +52,7 @@
                         @if (count($listes['bdh']) > 0)
                             @foreach ($listes['bdh'] as $liste)
                                 @if (!$liste->hidden)
-                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" scoreVisible />
+                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" />
                                 @endif
                             @endforeach
                         @else
@@ -72,7 +72,7 @@
                         @if (count($listes['bde']) > 0)
                             @foreach ($listes['bde'] as $liste)
                                 @if (!$liste->hidden)
-                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" scoreVisible />
+                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" />
                                 @endif
                             @endforeach
                         @else
@@ -92,7 +92,7 @@
                         @if (count($listes['bds']) > 0)
                             @foreach ($listes['bds'] as $liste)
                                 @if (!$liste->hidden)
-                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" scoreVisible />
+                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" />
                                 @endif
                             @endforeach
                         @else
@@ -109,7 +109,6 @@
                 @else
                     <p class="should-be-connected no-content">Les campagnes arriveront plus tard</p>
                 @endif
-
             @else
                 <p class="should-be-connected no-content">Vous devez être connecté pour voir les listes</p>
             @endif

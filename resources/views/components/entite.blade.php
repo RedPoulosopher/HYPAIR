@@ -5,12 +5,10 @@
     </div>
     <div class="info" style="text-align:center;">
         <p class="nom">{{ $asso->nom }}</p>
-        @if ($asso->type->value == 'liste')
-            @isset($scoreVisible)
-                @if ($asso->score != null)
-                    <p class="score">({{ $asso->score }}%)</p>
-                @endif
-            @endisset
+        @if ($asso->type->value == 'liste' && isset($scoreVisible) && $scoreVisible)
+            @if ($asso->score != null)
+                <p class="score">({{ $asso->score }}%)</p>
+            @endif
         @endif
     </div>
 </a>

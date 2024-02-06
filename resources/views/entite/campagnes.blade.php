@@ -17,7 +17,7 @@
                                 <div class="liste_comite_club">
                                     @foreach ($listes[$bureau->ratachement->value] as $liste)
                                         @if (!$liste->hidden)
-                                            <x-entite :asso="$liste" :destination="$liste->lien_relatif()" scoreIsVisible />
+                                            <x-entite :asso="$liste" :destination="$liste->lien_relatif()" score-visible />
                                         @endif
                                     @endforeach
                                 </div>
@@ -32,7 +32,7 @@
                         @if (count($listes['bda']) > 0)
                             @foreach ($listes['bda'] as $liste)
                                 @if (!$liste->hidden)
-                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" scoreIsVisible />
+                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" score-visible />
                                 @endif
                             @endforeach
                         @else
@@ -52,7 +52,7 @@
                         @if (count($listes['bdh']) > 0)
                             @foreach ($listes['bdh'] as $liste)
                                 @if (!$liste->hidden)
-                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" scoreIsVisible />
+                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" score-visible />
                                 @endif
                             @endforeach
                         @else
@@ -72,7 +72,7 @@
                         @if (count($listes['bde']) > 0)
                             @foreach ($listes['bde'] as $liste)
                                 @if (!$liste->hidden)
-                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" scoreIsVisible />
+                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" score-visible />
                                 @endif
                             @endforeach
                         @else
@@ -92,7 +92,7 @@
                         @if (count($listes['bds']) > 0)
                             @foreach ($listes['bds'] as $liste)
                                 @if (!$liste->hidden)
-                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" scoreIsVisible />
+                                    <x-entite :asso="$liste" :destination="$liste->lien_relatif()" score-visible />
                                 @endif
                             @endforeach
                         @else

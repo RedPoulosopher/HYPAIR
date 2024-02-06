@@ -10,11 +10,13 @@ class entite extends Component
     public $destination;
     public $scoreVisible;
 
-    public function __construct($asso, $destination)
+    public function __construct($asso, $destination, $scoreVisible = False)
     {
         $this->asso = $asso;
         $this->destination = $destination;
+        $this->scoreVisible = $scoreVisible;
     }
+
 
     /**
      * Get the view / contents that represent the component.

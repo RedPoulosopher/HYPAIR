@@ -2,6 +2,20 @@
 
 @section('titre', $post->titre)
 
+@pushonce('opengraph')
+    <meta property="og:title" content="{{ $entite->nom }} - {{ $post->titre }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{Request::url()}}" />
+    @if(count($post->bannieres) > 0)
+    <meta property="og:image" content="{{ Storage::url($post->bannieres[0]->path) }}" />
+    @endif
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name " content="HypAIR" />
+    @isset($post->description)
+    <meta property="og:description" content="{!! Str::limit(strip_tags(Str::markdown(strip_tags($post->description ?? ''))), 60, '...') !!}" />
+    @endisset
+@endpushonce
+
 @pushonce('styles')
     {{-- <link rel="stylesheet" href="{{ mix('/css/evenements/show-evenement.css') }}" type="text/css" > --}}
     <link rel="stylesheet" href="{{ mix('/css/post/show-post.css') }}" type="text/css">

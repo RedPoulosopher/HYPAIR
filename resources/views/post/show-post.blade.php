@@ -7,7 +7,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{Request::url()}}" />
     @if(count($post->bannieres) > 0)
-    <meta property="og:image" content="{{ Storage::url($post->bannieres[0]->path) }}" />
+    <meta property="og:image" content="{{ url(Storage::url($post->bannieres[0]->path)) }}" />
     @endif
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name " content="HypAIR" />

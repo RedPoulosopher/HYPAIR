@@ -119,7 +119,7 @@
         window.addEventListener('resize', function(event) {
             if (mobileResponsive.matches) {
                 for (let i = 0; i < descriptions.length; i++) {
-                    description.style.maxHeight = null;
+                    descriptions[i].style.maxHeight = null;
                     descriptions[i].classList.remove("visible");
                 }
                 for (let i = 0; i < arrows.length; i++) {

@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('titre', 'Accueil')
-
 @pushonce('styles')
     <link rel="stylesheet" href="{{ mix('/css/accueil.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ mix('/css/components/service.css') }}" type="text/css" />

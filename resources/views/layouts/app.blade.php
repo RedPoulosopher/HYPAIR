@@ -7,7 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
         content="HypAIR est le site associatif de l'IMT Nord Europe développé par l'AIR. Il regroupe l'ensemble des informations dont vous avez besoin en tant qu'étudiant !" />
-    <title>@yield('titre', 'Site Web') - HypAIR</title>
+    {{-- <title>@yield('titre', 'Site Web') - HypAIR</title> --}}
+    @if ($__env->yieldContent('titre'))
+        <title>HypAIR - @yield('titre')</title>
+    @else
+        <title>HypAIR</title>
+    @endif
 
     @include('pwa.meta')
 

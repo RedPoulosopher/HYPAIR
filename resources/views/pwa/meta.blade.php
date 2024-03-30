@@ -60,8 +60,9 @@
 <!-- Others -->
 <link href="/images/icons/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
+<script src="{{ mix('/js/fcm.js') }}"></script>
 <script type="text/javascript">
-    // Initialize the service worker
+    // Initialize the PWA service worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register("{{ mix('/sw.js') }}", {
             scope: '/'
@@ -73,30 +74,5 @@
             console.log('HypAIR PWA: ServiceWorker registration failed: ', err);
         });
     }
-
-
-    //Request permission for notifications
-    function requestPermission() {
-        Notification.requestPermission().then((permission) => {
-            if (permission === 'granted'){
-                // Get service worker
-                navigator.serviceWorker.ready.then((sw) => {
-
-                    // Souscription aux notifications
-                    sw.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: {{ env('PUSH_PUBLIC_KEY') }}
-                    }).then((subscription) => {
-                        //Stockage dans la DB
-                        fetch("/api/souscrire-notifs", {
-                            method: 'post',
-                            body: JSON.stringify(subscription)
-                        }).then( alert("Souscription aux notifications réussie") )
-                    })
-                })
-            }
-        })
-    }
-    requestPermission()
 </script>
 @endif

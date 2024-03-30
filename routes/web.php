@@ -34,6 +34,8 @@ use App\Http\Controllers\PushNotificationController;
 //     return redirect('/entites/douai');
 // });
 
+Route::get('/notif', [PushNotificationController::class, 'testPushNotification']);
+
 // Offline page for PWA
 Route::get('/offline', function () {
 
@@ -337,6 +339,3 @@ Route::prefix('{air_uid}') //pour l'AIR
     ->where(['air_uid' => 'air'])
     ->middleware('existence.entite:air')
     ->group($routes_AIR);
-
-
-Route::get('/send-notification', [PushNotificationController::class, 'testPushNotification']);

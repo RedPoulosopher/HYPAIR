@@ -20,6 +20,7 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
-        "asciidoctor": "^2.2.5"
+        "asciidoctor": "^2.2.5",
+        "firebase": "^10.9.0"
     }
 }

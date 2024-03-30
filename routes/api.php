@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PushNotificationController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,7 +21,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-// Notifications
-Route::post("souscrire-notifs", function(Request $request){
-    
-});
+// ----------------------------------------- NOTIFICATIONS ----------------------------------------- //
+
+Route::post('/souscrire', [PushNotificationController::class, 'souscrireTopic']);
+Route::post('/test-notif', [PushNotificationController::class, 'testPushNotification']);
+
+// ------------------------------------------------------------------------------------------------ //

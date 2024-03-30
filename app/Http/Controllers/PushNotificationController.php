@@ -4,33 +4,58 @@ namespace App\Http\Controllers;
  
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
+use Illuminate\Http\Request;
  
 class PushNotificationController extends Controller
 {
-    public function sendPushNotification($topic, $title, $body)
-    {
+    public function connectToFirebase(){
         //Connect to Firebase with the API Key
         $firebase = (new Factory)
-            ->withServiceAccount(__DIR__.'/../../../config/firebase_credentials.json');
- 
+        ->withServiceAccount(__DIR__.'/../../../config/firebase_credentials.json');
+    
         $messaging = $firebase->createMessaging();
+
+        return $messaging;
+    }
+    public function sendPushNotification($topic, $title, $body, $url="/")
+    {
+        $messaging = $this->connectToFirebase();
  
         //Create message object
         $message = CloudMessage::fromArray([
+            'topic' => $topic,
             'notification' => [
                 'title' => $title,
                 'body' => $body
             ],
-            'topic' => $topic
+            'data' => [
+                'url' => $url
+            ],
         ]);
  
-        //Send message
-        $messaging->send($message);
+        //Send message to all users subscribed to the topic
+        return $messaging->send($message);
     }
 
     public function testPushNotification(){
-        $this->sendPushNotification('global', 'Hello from Firebase!', 'This is a test notification.');
+        $result = $this->sendPushNotification('posts', 'Notifcation test', 'Ceci est une notification de test');
         
-        return "Push notification sent successfully";
+        return response()->json($result);
     }
+
+    public function souscrireTopic(Request $request)
+	{
+        $requestBody = json_decode($request->getContent(), true);
+		$topic = $requestBody['topic'];
+        $fcmRegistrationToken = $requestBody['token'];
+        
+        $messaging = $this->connectToFirebase();
+
+        // Subscribe the user to the topic
+        $result = $messaging->subscribeToTopic($topic, $fcmRegistrationToken);
+
+        return response()->json($result);
+    }
+
+
 }

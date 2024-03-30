@@ -35,11 +35,18 @@ function urlBase64ToUint8Array(base64String) {
 
 getToken(messaging, {vapidKey: "BGrucQeibNcJBs0BBB5pIUc-sjoOMS_CWS743c41mCL5LAswoHTn62OoFSIUuYyrGUukY2Y58D1UTo2Z5udHvcY" }).then((currentToken) => {
     if (currentToken) {
+      console.log(currentToken)
       // Send the token to your server and update the UI if necessary
-      fetch("/api/souscrire-notifs", {
-        method: 'post',
-        body: JSON.stringify(currentToken)
-      }).then( console.log("Souscription aux notifications réussie") )
+      fetch("/api/souscrire", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          topic: 'posts',
+          token: currentToken
+        })
+      }).then( console.log("Souscription au topic 'posts' réussie") )
     } else {
       // Show permission request UI
       console.log('No registration token available. Request permission to generate one.');

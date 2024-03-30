@@ -1,20 +1,18 @@
 // Notifications
 self.addEventListener('push', function (event) {
-    notification = event.data.json()
+    const notification = event.data.json()
+    
+    const notifContent = notification.notification
+    const notifData = notification.data
+
     console.log(notification)
 
-    // 'notification' => [
-    //     'title' => $title,
-    //     'body' => $body
-    // ],
-    // 'topic' => $topic
-
-    event.waitUntil(self.registration.showNotification(notification.title, {
-        body: notification.body,
+    event.waitUntil(self.registration.showNotification(notifContent.title, {
+        body: notifContent.body,
         icon: "logo_air.png",
-        // data: {
-        //     notifUrl: notification.url // url quand on clique
-        // }
+        data: {
+            notifUrl: notifData.url // url quand on clique
+        }
     }))
 })
 

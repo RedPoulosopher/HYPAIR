@@ -67,6 +67,8 @@ Pour vérifier que PHP est reconnu, ouvrez un terminal de commande, et tapez `ph
 
 Sinon, le fait de redémarrer l'ordinateur suffit parfois à régler le problème...
 
+**Remarque :** Pour tester les notifs sur PC, il faut suivre le [tuto suivant](https://gist.github.com/nhatnx/7ac83423f7d4e51b713f4dfde03f38c5) pour ajouter un certificat SSL à votre php
+
 ### • Composer
 Rendez-vous sur le [site de Composer](https://getcomposer.org/download/), et cliquez sur `Composer-Setup.exe` pour télécharger **Composer**.
 Lancez l'installation, et veillez à ce que la version que vous avez dans votre Path soit bien renseignée, pour que Composer puisse l'utiliser.

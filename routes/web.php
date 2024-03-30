@@ -34,7 +34,12 @@ use App\Http\Controllers\PushNotificationController;
 //     return redirect('/entites/douai');
 // });
 
-Route::get('/notif', [PushNotificationController::class, 'testPushNotification']);
+// ----------------------------------------- NOTIFICATIONS ----------------------------------------- //
+
+// Route::post('/souscrire', [PushNotificationController::class, 'souscrireTopic']);
+// Route::post('/test-notif', [PushNotificationController::class, 'testPushNotification']);
+
+// ------------------------------------------------------------------------------------------------ //
 
 // Offline page for PWA
 Route::get('/offline', function () {

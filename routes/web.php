@@ -17,6 +17,7 @@ use App\Http\Controllers\AvanceeController;
 use App\Http\Controllers\LocalAuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PushNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -336,3 +337,6 @@ Route::prefix('{air_uid}') //pour l'AIR
     ->where(['air_uid' => 'air'])
     ->middleware('existence.entite:air')
     ->group($routes_AIR);
+
+
+Route::get('/send-notification', [PushNotificationController::class, 'testPushNotification']);

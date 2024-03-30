@@ -11,7 +11,7 @@ class PushNotificationController extends Controller
     {
         //Connect to Firebase with the API Key
         $firebase = (new Factory)
-            ->withServiceAccount(__DIR__.'/../../config/firebase_credentials.json');
+            ->withServiceAccount(__DIR__.'/../../../config/firebase_credentials.json');
  
         $messaging = $firebase->createMessaging();
  
@@ -29,8 +29,8 @@ class PushNotificationController extends Controller
     }
 
     public function testPushNotification(){
-        sendPushNotification('global', 'Hello from Firebase!', 'This is a test notification.');
+        $this->sendPushNotification('global', 'Hello from Firebase!', 'This is a test notification.');
         
-        return response()->json(['message' => 'Push notification sent successfully']);
+        return "Push notification sent successfully";
     }
 }

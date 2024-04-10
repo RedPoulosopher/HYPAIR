@@ -12,7 +12,7 @@ class PushNotificationController extends Controller
     public function connectToFirebase(){
         //Connect to Firebase with the API Key
         $firebase = (new Factory)
-        ->withServiceAccount(__DIR__.'/../../../config/firebase_credentials.json');
+        ->withServiceAccount(__DIR__.'/../../../resources/notifications/firebase_credentials.json');
     
         $messaging = $firebase->createMessaging();
 

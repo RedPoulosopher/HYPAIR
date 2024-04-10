@@ -122,6 +122,40 @@ Vous pouvez alors faire `Ctrl + clic gauche` sur l'URL qui s'affiche dans la con
 
 *Remarque* : Si la PWA ne fonctionne pas, essayez `php artisan view:clear`.
 
+## Notifications
+
+Pour pouvoir envoyer des notifications aux utilisateurs, nous sommes obligés de passer par un tiers, qui est [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging?hl=fr).
+
+### Fonctionnement général
+
+1. L'utilisateur (client web) envoie une requête à FCM pour obtenir un `registrationToken` *(identifiant unique qui correspond à sa machine)*.
+2. Lorsqu'il le reçoit, il envoie une requête à notre serveur, avec son `registrationToken`, pour qu'on puisse le sauvegarder.
+3. Le serveur s'occupe alors de **souscrire** l'utilisateur à certains **topics** *(ex: `posts`, `events`...)* auprès de FCM. 
+> Les topics permettent d'envoyer une notification à tous les utilisateurs souscris à un topic. Pour l'instant, on souscrit par défaut aux topics `posts` et `events`. A terme, on pourra faire un topic par asso et notifier que ceux qui sont abonnés à l'asso qui poste.
+
+### Console Firebase
+
+Puisqu'on utilise un serveur tiers, il est nécessaire de s'y connecter avec des **identifiants**.
+
+Sur la [console Firebase](https://console.firebase.google.com/), avec le compte Google de l'AIR [air.imtne@gmail.com](mailto:air.imtne@gmail.com) *(voir avec le bureau pour le mdp si nécessaire)*, **2 applications** ont été crées :
+- `hypair-imt` : qui correspond à l'application **EN PRODUCTION** *(uniquement sur [hypair.imt-ne.fr](https://hypair.imt-ne.fr))*
+- `hypair-dev` : qui correspond à l'application **EN DEV** *(sur [dev-hypair.imt-ne.fr](https://dev-hypair.imt-ne.fr) mais aussi en **local** sur vos machines)*
+
+
+C'est là dessus que vous pourrez récupérer les identifiants de connexions, clés d'API...
+
+### Mise en place sur une machine
+
+Pour setup les notifications sur une machine, il faudra donc :
+- Activer les notifications avec la variable d'environnement suivante : `NOTIFICATIONS_ENABLED=true`
+- Définir les variables suivantes `FCM_VAPID_PUBLIC_KEY` et `FCM_VAPID_PRIVATE_KEY` **correspondant à la bonne application**
+- Récupérer les fichiers `firebase_credentials.json` et `firebase_config.js` **correspondant à la bonne application** et les placer dans le dossier `resources/notifications`
+
+> ⚠️ **ATTENTION A NE PAS UTILISER LES IDENTIFIANTS DE L'APPLICATION DE PROD EN LOCAL** ⚠️  
+> Sinon, toutes les notifications qui seront générées sur vos machines locales (posts de tests...) seront envoyées à **TOUS** les utilisateurs
+
+Pour obtenir ces fichiers, demandez au bureau.
+
 # Comment mettre à jour la version en production ?
 - Si ce n'est pas déjà fait, changer le numéro de version des liens vers les fichiers CSS dans les layouts
 - Se connecter en SSH au serveur HackLab chez OVH
@@ -197,8 +231,3 @@ On a configuré le charset de mysql à `utf8mb4` et le collation à `utf8mb4_bin
 Comme l'encodage UTF-8 classique est préférable pour les textes simples, il faut rajouter ces deux lignes à chaque création de chaque table, dans la fonction `Schema::create(...)` :
 - `$table->charset = 'utf8';`
 - `$table->collation = 'utf8_unicode_ci';`
-
-# Fonctionnalités futures
-- Système d'actualités 
-- Page d'accueil qui s'adapte à l'utilisateur 
-- Conversion en PWA

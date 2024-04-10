@@ -60,7 +60,14 @@
 <!-- Others -->
 <link href="/images/icons/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
+
+<!-- Notifications -->
+<script>
+    //On sauvegarde la variable d'environnement pour la passer à fcm.js
+    window.FCM_VAPID_PUBLIC_KEY = "{{ env('FCM_VAPID_PUBLIC_KEY') }}";
+</script>
 <script src="{{ mix('/js/fcm.js') }}"></script>
+
 <script type="text/javascript">
     // Initialize the PWA service worker
     if ('serviceWorker' in navigator) {

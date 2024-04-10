@@ -17,25 +17,12 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Cloud Messaging and get a reference to the service
 const messaging = getMessaging(app);
 
-function urlBase64ToUint8Array(base64String) {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
-    const base64 = (base64String + padding)
-        .replace(/-/g, '+')
-        .replace(/_/g, '/');
-    
-    const rawData = window.atob(base64);
-    const outputArray = new Uint8Array(rawData.length);
-    
-    for (let i = 0; i < rawData.length; ++i) {
-        outputArray[i] = rawData.charCodeAt(i);
-    }
-    return outputArray;
-}
 
-
-getToken(messaging, {vapidKey: "BGrucQeibNcJBs0BBB5pIUc-sjoOMS_CWS743c41mCL5LAswoHTn62OoFSIUuYyrGUukY2Y58D1UTo2Z5udHvcY" }).then((currentToken) => {
+//On récupère la variable d'environnement stockée dans la window
+const FCM_VAPID_PUBLIC_KEY = window.FCM_VAPID_PUBLIC_KEY
+getToken(messaging, {vapidKey: FCM_VAPID_PUBLIC_KEY }).then((currentToken) => {  
     if (currentToken) {
-      console.log(currentToken)
+      console.log("Current token : " + currentToken)
       // Send the token to your server and update the UI if necessary
       fetch("/api/souscrire", {
         method: 'POST',

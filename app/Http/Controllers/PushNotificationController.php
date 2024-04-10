@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
  
 class PushNotificationController extends Controller
 {
@@ -43,18 +44,30 @@ class PushNotificationController extends Controller
         return response()->json($result);
     }
 
-    public function souscrireTopic(Request $request)
+    public function souscrireNotifications(Request $request)
 	{
+        //On récupère les paramètres de la requête
         $requestBody = json_decode($request->getContent(), true);
-		$topic = $requestBody['topic'];
+		$topics = $requestBody['topics'];
         $fcmRegistrationToken = $requestBody['token'];
+
+        if (Auth::check()) {
+            
+            // On sauvegarde le token de notification
+            $user = Auth::user();
+            $user->notification_token = $fcmRegistrationToken;
+            $user->save();
         
-        $messaging = $this->connectToFirebase();
-
-        // Subscribe the user to the topic
-        $result = $messaging->subscribeToTopic($topic, $fcmRegistrationToken);
-
-        return response()->json($result);
+            // On se connecte à FCM
+            $messaging = $this->connectToFirebase();
+            
+            // On souscrit l'utilisateur aux topics demandés
+            $result = $messaging->subscribeToTopics($topics, $fcmRegistrationToken);
+    
+            return response()->json($result);
+        }
+        
+        abort(403);        
     }
 
 

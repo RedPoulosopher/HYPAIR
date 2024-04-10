@@ -22,7 +22,8 @@ class User extends Authenticatable
         'password',
         'prenom',
         'nom',
-        'uid'
+        'uid',
+        'notification_token'
     ];
 
     /**

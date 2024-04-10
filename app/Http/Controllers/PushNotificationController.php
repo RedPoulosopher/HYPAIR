@@ -20,6 +20,10 @@ class PushNotificationController extends Controller
     }
     public function sendPushNotification($topic, $title, $body, $url="/")
     {
+        if(env('NOTIFICATIONS_ENABLED') == false){
+            return 'Les notifications sont désactivées sur ce serveur';
+        }
+
         $messaging = $this->connectToFirebase();
  
         //Create message object
@@ -46,6 +50,11 @@ class PushNotificationController extends Controller
 
     public function souscrireNotifications(Request $request)
 	{
+        if(env('NOTIFICATIONS_ENABLED') == false){
+            abort(403, "Les notifications sont désactivées sur ce serveur");
+        }
+
+
         //On récupère les paramètres de la requête
         $requestBody = json_decode($request->getContent(), true);
 		$topics = $requestBody['topics'];
@@ -67,7 +76,7 @@ class PushNotificationController extends Controller
             return response()->json($result);
         }
         
-        abort(403);        
+        abort(403, "L'utilisateur n'est pas connecté");        
     }
 
 

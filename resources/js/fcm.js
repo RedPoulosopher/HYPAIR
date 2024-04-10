@@ -24,16 +24,17 @@ getToken(messaging, {vapidKey: FCM_VAPID_PUBLIC_KEY }).then((currentToken) => {
     if (currentToken) {
       console.log("Current token : " + currentToken)
       // Send the token to your server and update the UI if necessary
-      fetch("/api/souscrire", {
+      fetch("/souscrire", {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf_token"]').content
         },
         body: JSON.stringify({
-          topic: 'posts',
+          topics: ['posts', 'events'],
           token: currentToken
         })
-      }).then( console.log("Souscription au topic 'posts' réussie") )
+      }).then( console.log("Souscription aux notifications réussie") )
     } else {
       // Show permission request UI
       console.log('No registration token available. Request permission to generate one.');

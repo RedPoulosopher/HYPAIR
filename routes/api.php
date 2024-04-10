@@ -23,7 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // ----------------------------------------- NOTIFICATIONS ----------------------------------------- //
 
-Route::post('/souscrire', [PushNotificationController::class, 'souscrireTopic']);
 Route::post('/test-notif', [PushNotificationController::class, 'testPushNotification']);
 
 // ------------------------------------------------------------------------------------------------ //

@@ -36,8 +36,7 @@ use App\Http\Controllers\PushNotificationController;
 
 // ----------------------------------------- NOTIFICATIONS ----------------------------------------- //
 
-// Route::post('/souscrire', [PushNotificationController::class, 'souscrireTopic']);
-// Route::post('/test-notif', [PushNotificationController::class, 'testPushNotification']);
+Route::post('/souscrire', [PushNotificationController::class, 'souscrireNotifications']);
 
 // ------------------------------------------------------------------------------------------------ //
 

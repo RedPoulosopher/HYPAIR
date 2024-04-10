@@ -1,15 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, getToken } from "firebase/messaging";
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAten68jj8okyj9dh28AdcQtvcARaFobxE",
-    authDomain: "hypair-imt.firebaseapp.com",
-    projectId: "hypair-imt",
-    storageBucket: "hypair-imt.appspot.com",
-    messagingSenderId: "660536529270",
-    appId: "1:660536529270:web:ee417a724f84eca627aa57"
-};
+import { firebaseConfig } from './firebase_config.js'
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

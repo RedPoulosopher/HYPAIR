@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 use DB;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\PushNotificationController;
 
 class PostController extends Controller
 {
@@ -140,9 +141,12 @@ class PostController extends Controller
                 $banniere = new Banniere();
                 $banniere->path = $path;
                 // voir la méthode saveMany pour améliorer le code
-                $post->bannieres()->save($banniere);
+                $post->bannieres()->save($banniere);      
             }
+
         }
+
+        
         
         // TAGS
         if (!empty($request->tags)) {
@@ -175,6 +179,10 @@ class PostController extends Controller
                 $post->campus()->attach($id);
             }
         }
+
+        // Envoi de la notification
+        PushNotificationController::sendPushNotification('posts', 'Nouveau post de ' . $post->entite()->first()->nom, $post->titre, $post->url());
+        
         return redirect(session('entite_uid') . '/entite/post');
     }
     function stripAccents($str) {

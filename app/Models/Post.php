@@ -38,4 +38,8 @@ class Post extends Model
     function bannieres() {
         return $this->hasMany(Banniere::class);
     }
+
+    function url(){
+        return '/' . $this->entite()->first()->uid . '/entite/post/' . $this->id;
+    }
 }

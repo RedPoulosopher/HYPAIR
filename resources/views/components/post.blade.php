@@ -12,7 +12,7 @@
             <img src="{{ $post->entite->logo_url('petit') }}" alt="Logo {{ $post->entite->nom }}">
         </a>
         <div class="details">
-            <a href="/{{ $post->entite->uid }}/entite/post/{{ $post->id }}">
+            <a href="{{ $post->url() }}">
                 <h2>{{ $post->titre }}</h2>
             </a>
             <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>{{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>

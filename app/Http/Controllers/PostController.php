@@ -179,9 +179,6 @@ class PostController extends Controller
                 $post->campus()->attach($id);
             }
         }
-
-        // Envoi de la notification
-        PushNotificationController::sendPushNotification('posts', 'Nouveau post de ' . $post->entite()->first()->nom, $post->titre, $post->url());
         
         return redirect(session('entite_uid') . '/entite/post');
     }

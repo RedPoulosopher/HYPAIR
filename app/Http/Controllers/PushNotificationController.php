@@ -6,6 +6,10 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Post;
+
+use DateTime;
+use DateTimeZone;
  
 class PushNotificationController extends Controller
 {
@@ -84,6 +88,36 @@ class PushNotificationController extends Controller
         }
         
         abort(403, "L'utilisateur n'est pas connecté");        
+    }
+
+    static function sendPostNotification($post){
+        // Envoi de la notification
+        $result = PushNotificationController::sendPushNotification('posts', 'Nouveau post de ' . $post->entite()->first()->nom, $post->titre, $post->url());
+
+        // Sauvegarde du fait que la notification a été envoyée
+        $post->notification_sent = true;
+        $post->save();
+    }
+
+    //Cette fonction est run par un scheduler toutes les 15 minutes
+    static function sendLatestNotifications(){        
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+        $start_date =  date('Y-m-d H:i:s', strtotime("-20 minutes", strtotime($now)));
+
+        //On récupère les posts des 20 dernières minutes qui n'ont pas été envoyés
+        $posts = Post::where('date_apparition','>=',$start_date)
+                     ->where('date_apparition','<=', $now)
+                     ->where('notification_sent', false)
+                     ->orderBy('date_apparition', 'asc')
+                     ->get();
+
+
+        //Pour chacun des posts on envoie une notification
+        foreach($posts as $post){
+            PushNotificationController::sendPostNotification($post);
+        }
+
+        return;
     }
 
 

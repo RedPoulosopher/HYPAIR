@@ -148,6 +148,7 @@ C'est là dessus que vous pourrez récupérer les identifiants de connexions, cl
 
 Pour setup les notifications sur une machine, il faudra donc :
 - Activer les notifications avec la variable d'environnement suivante : `NOTIFICATIONS_ENABLED=true`
+- Changer le driver de cache : `CACHE_DRIVER=database`
 - Définir les variables suivantes `FCM_VAPID_PUBLIC_KEY` et `FCM_VAPID_PRIVATE_KEY` **correspondant à la bonne application**
 - Récupérer les fichiers `firebase_credentials.json` et `firebase_config.js` **correspondant à la bonne application** et les placer dans le dossier `resources/notifications`
 
@@ -155,6 +156,14 @@ Pour setup les notifications sur une machine, il faudra donc :
 > Sinon, toutes les notifications qui seront générées sur vos machines locales (posts de tests...) seront envoyées à **TOUS** les utilisateurs
 
 Pour obtenir ces fichiers, demandez au bureau.
+
+Finalement, pour lancer le **scheduler** qui s'occupe d'envoyer les notifications tous les quarts d'heure, lancez la commande
+
+```bash
+php artisan schedule:work
+```
+
+> Sur le serveur, il faudra utiliser `cron` : voir la [documentation](https://laravel.com/docs/9.x/scheduling#running-the-scheduler)
 
 # Comment mettre à jour la version en production ?
 - Si ce n'est pas déjà fait, changer le numéro de version des liens vers les fichiers CSS dans les layouts

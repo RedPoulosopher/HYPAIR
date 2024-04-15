@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Auth;
 
 use DB;
 use Illuminate\Support\Facades\Storage;
-use App\Http\Controllers\PushNotificationController;
 
 class PostController extends Controller
 {

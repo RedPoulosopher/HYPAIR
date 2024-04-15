@@ -7,6 +7,8 @@ use Kreait\Firebase\Messaging\CloudMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\NotificationToken;
 
 use DateTime;
 use DateTimeZone;
@@ -22,7 +24,8 @@ class PushNotificationController extends Controller
 
         return $messaging;
     }
-    static function sendPushNotification($topic, $title, $body, $url="/")
+
+    static function sendPushNotificationToTopic($topic, $title, $body, $url="/")
     {
         if(env('NOTIFICATIONS_ENABLED') == false){
             return 'Les notifications sont désactivées sur ce serveur';
@@ -46,9 +49,31 @@ class PushNotificationController extends Controller
         return $messaging->send($message);
     }
 
+    static function sendPushNotificationToTokens($tokens, $title, $body, $url="/")
+    {
+        if(env('NOTIFICATIONS_ENABLED') == false){
+            return 'Les notifications sont désactivées sur ce serveur';
+        }
+
+        $messaging = PushNotificationController::connectToFirebase();
+ 
+        //Create message object
+        $message = CloudMessage::fromArray([
+            'notification' => [
+                'title' => $title,
+                'body' => $body
+            ],
+            'data' => [
+                'url' => $url
+            ],
+        ]);
+ 
+        //Send message to all users subscribed to the topic
+        return $messaging->sendMulticast($message, $tokens);
+    }
+
     public function testPushNotification(){
-        $result = $this->sendPushNotification('posts', 'Notifcation test', 'Ceci est une notification de test');
-        
+        $result = $this->sendPostNotification(Post::first());
         return response()->json($result);
     }
 
@@ -69,10 +94,13 @@ class PushNotificationController extends Controller
             $user = Auth::user();
             
             // On vérifie qu'il s'agit d'un nouveau token de notification
-            if($user->notification_token != $fcmRegistrationToken){
+            $savedToken = $user->notificationTokens()->where('token', '=', $fcmRegistrationToken)->first();
+            if($savedToken == null){
                 //On sauvegarde le nouveau token
-                $user->notification_token = $fcmRegistrationToken;
-                $user->save();
+                $notif_token = new NotificationToken;
+                $notif_token->user_id =  $user->id;
+                $notif_token->token = $fcmRegistrationToken;
+                $notif_token->save();
 
                 // On se connecte à FCM
                 $messaging = $this->connectToFirebase();
@@ -91,8 +119,16 @@ class PushNotificationController extends Controller
     }
 
     static function sendPostNotification($post){
+        // On récupère la liste des utilisateurs à notifier
+        $users = $post->campus->flatMap->users;
+        $tokens = $users->flatMap->notificationTokens->pluck('token')->unique()->toArray();
+
+        if(empty($tokens)){
+            return;
+        }
+
         // Envoi de la notification
-        $result = PushNotificationController::sendPushNotification('posts', 'Nouveau post de ' . $post->entite()->first()->nom, $post->titre, $post->url());
+        $result = PushNotificationController::sendPushNotificationToTokens($tokens, 'Nouveau post de ' . $post->entite()->first()->nom, $post->titre, $post->url());
 
         // Sauvegarde du fait que la notification a été envoyée
         $post->notification_sent = true;

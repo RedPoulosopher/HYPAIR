@@ -100,4 +100,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Site::class, 'sites_users');
     }
+
+    function notificationTokens()
+    {
+        return $this->hasMany(NotificationToken::class);
+    }
 }

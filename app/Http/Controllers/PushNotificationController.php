@@ -129,10 +129,18 @@ class PushNotificationController extends Controller
 
         // Envoi de la notification
         $result = PushNotificationController::sendPushNotificationToTokens($tokens, 'Nouveau post de ' . $post->entite()->first()->nom, $post->titre, $post->url());
+        
+        // Suppression des tokens périmés / incorrects
+        $unknownTokens = $result->unknownTokens();
+        $invalidTokens = $result->invalidTokens();
+        $tokensToDelete = array_merge($unknownTokens, $invalidTokens);
+        NotificationToken::whereIn('token', $tokensToDelete)->delete();
 
         // Sauvegarde du fait que la notification a été envoyée
         $post->notification_sent = true;
         $post->save();
+
+        return $result;
     }
 
     //Cette fonction est run par un scheduler toutes les 15 minutes

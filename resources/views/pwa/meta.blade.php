@@ -63,10 +63,6 @@
 @if(env('NOTIFICATIONS_ENABLED') && Auth::check())
     <!-- Notifications -->
     <meta name="csrf_token" content="{{ csrf_token() }}">
-    <script>
-        //On sauvegarde la variable d'environnement pour la passer à fcm.js
-        window.FCM_VAPID_PUBLIC_KEY = "{{ env('FCM_VAPID_PUBLIC_KEY') }}";
-    </script>
     <script src="{{ mix('/js/fcm.js') }}"></script>
 @endif
 

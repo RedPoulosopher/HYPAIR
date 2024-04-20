@@ -9,8 +9,8 @@ const messaging = getMessaging(app);
 
 
 //On récupère la variable d'environnement stockée dans la window
-const FCM_VAPID_PUBLIC_KEY = window.FCM_VAPID_PUBLIC_KEY
-getToken(messaging, {vapidKey: FCM_VAPID_PUBLIC_KEY }).then((currentToken) => {  
+function setupNotifications(FCM_VAPID_PUBLIC_KEY){
+  getToken(messaging, {vapidKey: FCM_VAPID_PUBLIC_KEY }).then((currentToken) => {  
     if (currentToken) {
       console.log("Current token : " + currentToken)
       // Send the token to your server and update the UI if necessary
@@ -34,3 +34,6 @@ getToken(messaging, {vapidKey: FCM_VAPID_PUBLIC_KEY }).then((currentToken) => {
     console.log('An error occurred while retrieving token. ', err);
     // ...
   });
+}
+
+window.setupNotifications = setupNotifications

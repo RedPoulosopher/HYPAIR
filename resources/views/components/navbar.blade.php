@@ -46,10 +46,10 @@
                 </x-service>
             @endif
             
-            {{-- <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
-                logo="{{ mix('/images/peertube.png') }}"></x-service> --}}
-            <x-service nom="AIRplace" destination='https://airplace.etu.imt-nord-europe.fr' color=#cc3345
-                logo="{{ mix('/images/airplace.png') }}"></x-service>
+            <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
+                logo="{{ mix('/images/peertube.png') }}"></x-service>
+            {{-- <x-service nom="AIRplace" destination='https://airplace.etu.imt-nord-europe.fr' color=#cc3345
+                logo="{{ mix('/images/airplace.png') }}"></x-service> --}}
 
             <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
                 logo="{{ mix('/images/gitlab.png') }}"></x-service>

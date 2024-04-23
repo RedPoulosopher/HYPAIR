@@ -12,6 +12,11 @@ La légende raconte que si vous oubliez de le faire, vous recevrez des mails d'i
 
 ## PHP
 
+Installation de PHP et les librairies nécessaires :
+```
+sudo apt install php...
+```
+
 ## MySQL
 
 **MySQL** va vous permettre de mettre en place une base de données en local.
@@ -24,6 +29,12 @@ On veille à ce que le service soit bien démarré :
 ```
 sudo mysql...
 ```
+
+On gère les permissions relatives à MySQL :
+```
+sudo mysql...
+```
+... (répondre aux questions)
 
 ### MySQL Workbench
 

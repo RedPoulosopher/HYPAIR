@@ -47,7 +47,19 @@ Création de la base de données :
 ```
 CREATE DATABASE hypair_db;
 ```
+Création d'un utilisateur (l'application qui sera l'application HypAIR) :
+```
+CREATE USER 'travellist_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+On donne à cette utilisateur toutes les permissions pour interagir avec la base de données :
+```
+GRANT ALL ON travellist.* TO 'travellist_user'@'%';
+```
+Vous pouvez à présent sortir de l'invite de commandes *MySQL* en tapant ```exit```.
 
+Vous pouvez vérifier que tout s'est bien passé, en vous connectant sous cet utilisateur avec ```mysql -u hypair_user -p <motDePassePourL_utilisateurHypair>```, puis en regardant que cet utilisateur voit bien la bonne base de données avec ```SHOW DATABASES;```.
+
+Les tables de cette base de données seront créées plus tard, grâce aux *migrations* de Laravel.
 
 ### MySQL Workbench
 

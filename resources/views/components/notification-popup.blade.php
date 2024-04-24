@@ -1,5 +1,5 @@
-<div id="select-popup" class="popup">
-    <div id="popup-content" class="card">
+<div class="select-popup" class="popup">
+    <div class="popup-content" class="card">
 
         <h2>Autoriser les notifications ?</h2>
         <div id="liste-choix">
@@ -14,8 +14,10 @@
 
 var popup = document.getElementById("select-popup")
 
-// If first time, show popup
-if(localStorage.getItem("notifications-authorized") == null){
+// If first time seing popup and browser supports notifications, show popup
+var supportsNotifications = 'Notification' in window
+var popupAlreadySeen = localStorage.getItem("notifications-authorized") != null
+if(supportsNotifications && !popupAlreadySeen){
     popup.classList.add("visible")
 }
 

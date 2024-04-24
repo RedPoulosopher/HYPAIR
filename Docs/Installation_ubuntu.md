@@ -1,7 +1,7 @@
 # Installation de l'environnement de développement sous Ubuntu
 
 Il s'agit ici d'installer ce qu'on appelle une pile *LEMP* (Linux, Nginx, MySQL, PHP).
-Le but est de mettre en place un environnement de développement pour faire tourner HypAIR en local sous Ubuntu.
+Le but est de mettre en place un environnement de développement pour faire tourner HypAIR en local sous Ubuntu (ici, **22.04**).
 Nous ne passerons donc pas par un logiciel qui contient déjà la pile tout faite, comme Wamp sous Windows. Nous ferons la configuration nous-mêmes.
 
 Avant de commencer à installer des packages avec *apt*, comme le veut la tradition, veillez bien à faire un :
@@ -14,7 +14,9 @@ La légende raconte que si vous oubliez de le faire, vous recevrez des mails d'i
 
 Installation de PHP et les librairies nécessaires :
 ```
+sudo apt install php8.1-fpm php-mysql
 sudo apt install php...
+sudo apt install php-cli unzip
 ```
 
 ## MySQL
@@ -32,9 +34,20 @@ sudo mysql...
 
 On gère les permissions relatives à MySQL :
 ```
-sudo mysql...
+sudo mysql_secure_installation
 ```
-... (répondre aux questions)
+Puis répondez à toutes les questions par ```y```, et tapez ```2``` lorsque l'on vous demande la force du mot de passe exigée, pour plus de sécurité.
+
+Créez vous un mot de passe pour l'utilisateur *root* **que vous noterez quelque part** pour ne pas l'oublier :
+```
+...
+```
+
+Création de la base de données :
+```
+CREATE DATABASE hypair_db;
+```
+
 
 ### MySQL Workbench
 
@@ -57,4 +70,32 @@ Il faut ensuite créer une liaison entre *MySQL Workbench* et la base de donnée
 
 ## Laravel
 
+Téléchargement de l'installeur de **composer** :
+```
+cd ~
+curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+```
+
+### Vérification de l'installeur
+Pour plus de sûreté, il vaut mieux vérifier que l'installeur n'est pas corrompu :
+```
+HASH=`curl -sS https://composer.github.io/installer.sig`
+```
+```
+php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+```
+Si vous obtenez le message ```Installer verified```, vous pouvez passer à la suite. Sinon, vérifiez que vous avez bien téléchargé le bon script.
+
+Installation de **composer** sur le système global :
+```
+sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
+```
+Pour vérifier que l'installation s'est bien passée, tapez la commande ```composer```, et admirez la jolie écriture.
+
+
 ## Nginx
+
+Installation de Ngnix :
+```
+sudo apt install nginx
+```

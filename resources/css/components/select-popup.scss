@@ -1,4 +1,4 @@
-.select-popup {
+#select-popup {
     
     .popup-content {
         padding: 30px 20px;
@@ -8,6 +8,11 @@
         max-width: min(90vw, 800px);
 
         h2 {
+            text-align: center;
+            margin: 0;
+        }
+
+        p {
             text-align: center;
             margin: 0;
         }

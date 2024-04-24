@@ -204,6 +204,10 @@ p.explication {
     }
 }
 
+.hidden{
+    display: none !important;
+}
+
 body.dark-theme {
     & .ombre_grande {
         box-shadow: var(--ombre-grande);

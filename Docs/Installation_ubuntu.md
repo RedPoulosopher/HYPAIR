@@ -80,7 +80,7 @@ Il faut ensuite créer une liaison entre *MySQL Workbench* et la base de donnée
 ... 
 
 
-## Laravel
+## Composer
 
 Téléchargement de l'installeur de **composer** :
 ```
@@ -103,6 +103,12 @@ Installation de **composer** sur le système global :
 sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 ```
 Pour vérifier que l'installation s'est bien passée, tapez la commande ```composer```, et admirez la jolie écriture.
+
+## Clone d'HypAIR
+- git clone
+- cd
+- composer install
+- php artisan pour check
 
 
 ## Nginx

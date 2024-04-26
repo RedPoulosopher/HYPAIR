@@ -105,11 +105,23 @@ sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=compose
 Pour vérifier que l'installation s'est bien passée, tapez la commande ```composer```, et admirez la jolie écriture.
 
 ## Clone d'HypAIR
-- git clone
-- cd
-- composer install
-- php artisan pour check
 
+Clonage du repository (si ce n'est pas encore fait) :
+Placez vous dans le dossier où vous voulez installer le projet, et tapez :
+```
+git clone https://gitlab.etu.imt-nord-europe.fr/associatif/air/site-air.git
+```
+
+Installation des dépendances :
+```
+cd site-air
+composer install
+```
+
+Vérifiez que tout s'est bien passé en tapant simplement :
+```
+php artisan
+```
 
 ## Nginx
 

@@ -153,7 +153,7 @@ gedit .env
 Et on complète ou modifie les champs suivants :
 ```
 DB_CONNECTION=mysql
-DB_HOST=localhost
+DB_HOST=http://localhost
 DB_PORT=<numeroPortMySQL>
 DB_DATABASE=hypair_db
 DB_USERNAME=hypair_user
@@ -182,6 +182,18 @@ Puis compilez les fichiers :
 ```
 npm run dev
 ```
+On génère une clé pour l'application :
+```
+php artisan key:generate
+```
+On crée les tables, en lançant les migrations :
+```
+php artisan migrate:fresh
+```
+Pour finir, on remplit la base de données grâces aux seeders :
+```
+php artisan db:seed
+```
 
 ## Nginx
 
@@ -189,3 +201,59 @@ Installation de Ngnix :
 ```
 sudo apt install nginx
 ```
+On donne au serveur web les droits d'écriture aux dossiers nécessaires :
+```
+sudo chown -R www-data.www-data /var/www/site-air/storage
+sudo chown -R www-data.www-data /var/www/site-air/bootstrap/cache/
+```
+Créez une configuration pour le site ainsi :
+```
+sudo gedit /etc/nginx/sites-available/hypair
+```
+Et copiez le contenu ci-dessous dans ce fichier, puis enregistrez-le :
+```
+server {
+    listen 80;
+    server_name localhost;
+    root /var/www/site-air/public;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+
+    index index.html index.htm index.php;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+}
+```
+De retour dans le terminal, on créer un lien symbolique :
+```
+sudo ln -s /etc/nginx/sites-available/hypair /etc/nginx/sites-enabled/hypair
+```
+Pour être sûr qu'il n'y a pas eu d'erreurs, vous pouvez taper ```sudo nginx -t```.
+Pour appliquer les changements, redémarrez le service *nginx* :
+```
+sudo systemctl reload nginx
+```
+
+Maintenant, si tout s'est bien passé, et que ouvrez un navigateur, vous devriez atterrir sur HypAIR en tant l'URL : ```http://localhost```.

@@ -47,9 +47,9 @@ Création de la base de données :
 ```
 CREATE DATABASE hypair_db;
 ```
-Création d'un utilisateur (l'application qui sera l'application HypAIR) :
+Création d'un utilisateur (l'application qui sera l'application HypAIR). Il faut que vous définissiez son mot de passe. pour ne pas vous embrouiller, vous pouvez mettre le même que juste avant, celui du compte *root* :
 ```
-CREATE USER 'travellist_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+CREATE USER 'travellist_user'@'%' IDENTIFIED WITH mysql_native_password BY '<motDePasse>';
 ```
 On donne à cette utilisateur toutes les permissions pour interagir avec la base de données :
 ```
@@ -57,9 +57,17 @@ GRANT ALL ON travellist.* TO 'travellist_user'@'%';
 ```
 Vous pouvez à présent sortir de l'invite de commandes *MySQL* en tapant ```exit```.
 
-Vous pouvez vérifier que tout s'est bien passé, en vous connectant sous cet utilisateur avec ```mysql -u hypair_user -p <motDePassePourL_utilisateurHypair>```, puis en regardant que cet utilisateur voit bien la bonne base de données avec ```SHOW DATABASES;```.
+Vous pouvez vérifier que tout s'est bien passé, en vous connectant sous cet utilisateur avec ```mysql -u hypair_user -p <motDePasse>```, puis en regardant que cet utilisateur voit bien la bonne base de données avec ```SHOW DATABASES;```.
 
 Les tables de cette base de données seront créées plus tard, grâce aux *migrations* de Laravel.
+
+Pendant que vous y êtes, vérifiez quel est le port MySQL :
+```
+SHOW GLOBAL VARIABLES LIKE 'PORT';
+```
+Vous verrez un tableau s'afficher dans la console, avec un **numéro de port** noté à droite de ```port```, généralement **3306**. Notez-le quelque part, nous en aurons besoin par la suite.
+
+Pour sortir de l'invite de commandes en tapant ```exit```.
 
 ### MySQL Workbench
 
@@ -104,6 +112,22 @@ sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=compose
 ```
 Pour vérifier que l'installation s'est bien passée, tapez la commande ```composer```, et admirez la jolie écriture.
 
+## NodeJS
+
+Installation de **nvm** (*Node Version Manager*):
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+```
+Puis fermez, et rouvrez votre terminal. Vérifiez que **nvm** est bien installé avec :
+```
+nvm --version
+```
+Pour le moment, nous utilisons **node 16** pour HypAIR. Tapez donc :
+```
+nvm install 16
+```
+Puis vérifiez bien que vous utiliser actuellement node 16 en tapant ```node -v```. Si ce n'est pas le cas, faites ```nvm use 16```.
+
 ## Clone d'HypAIR
 
 Clonage du repository (si ce n'est pas encore fait) :
@@ -111,16 +135,52 @@ Placez vous dans le dossier où vous voulez installer le projet, et tapez :
 ```
 git clone https://gitlab.etu.imt-nord-europe.fr/associatif/air/site-air.git
 ```
+Vous devrez probablement rentrer vos identifiants d'utilisateur.
+Le username est généralement ```prenom.nom```, et votre mot de passe est celui de MyServices.
+
+On se déplace à la racine du projet :
+```
+cd site-air
+```
+On duplique le fichier ```.env.exemple``` :
+```
+cp .env.exemple .env
+```
+Puis on modifie ce fichier ```.env```:
+```
+gedit .env
+```
+Et on complète ou modifie les champs suivants :
+```
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=<numeroPortMySQL>
+DB_DATABASE=hypair_db
+DB_USERNAME=hypair_user
+DB_PASSWORD=<motDePasseMySQL>
+```
+Enregistrez puis fermez ce fichier.
+
+Déplacement du projet dans le dossier approprié :
+```
+cd ..
+sudo mv ./site-air /var/www/site-air
+```
 
 Installation des dépendances :
 ```
-cd site-air
+cd /var/www/site-air
 composer install
+npm install
 ```
 
 Vérifiez que tout s'est bien passé en tapant simplement :
 ```
 php artisan
+```
+Puis compilez les fichiers :
+```
+npm run dev
 ```
 
 ## Nginx

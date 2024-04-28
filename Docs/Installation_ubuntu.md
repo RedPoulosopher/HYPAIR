@@ -259,3 +259,24 @@ sudo systemctl reload nginx
 Maintenant, si tout s'est bien passé, et que ouvrez un navigateur, vous devriez atterrir sur HypAIR en tant l'URL : ```http://localhost```.
 
 ## X-Debug
+
+**XDebug** est un debugger pour PHP. Cette étape est facultative, mais vous facilitera le développement. 
+
+Pour l'utiliser, il faut l'ajouter à la configuration du PHP utilisé, ajouter une extension à votre navigateur, et configurer votre IDE.
+
+Ici, l'exemple se fera avec l'IDE **PhpStorm**, et Firefox.
+
+## Configuration de PHP
+
+Téléchargez XDebug :
+```
+sudo apt install php8.1-xdebug
+```
+
+Ouvrez le fichier de configuration de **php** :
+```
+
+```
+
+
+--- sudo system php8.1-fpm restart

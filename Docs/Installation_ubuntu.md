@@ -275,8 +275,26 @@ sudo apt install php8.1-xdebug
 
 Ouvrez le fichier de configuration de **php** :
 ```
-
+sudo gedit /etc/php/8.1/cli/conf.d/???
 ```
 
+Ajoutez les lignes suivantes à la suite dans ce fichier :
+```
+???
+```
 
+Redémarrez PHP :
+```
 --- sudo system php8.1-fpm restart
+```
+
+## Extension du navigateur
+
+Trouvez une extension que vous pouvez utiliser avec votre navigateur préféré. Vous pouvez les voir dans le tableau récapitulatif sur [cette page](https://www.jetbrains.com/help/phpstorm/browser-debugging-extensions.html)
+
+Ici, pour **Firefox**, nous allons utiliser[XDebug helper](???)
+
+Téléchargez l'extension, et lorsque vous êtes sur la page d'HypAIR, cliquez sur l'insecte à droite de la barre de recherche, et cliquer sur **Debug**. Lorsque l'insecte est colorié, le debugger est activé.
+
+Vous aurez peut-être besoin de relancer votre naviagteur, et rouvrir la page d'HypAIR, pour que l'insecte s'affiche.
+

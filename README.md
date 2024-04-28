@@ -34,6 +34,8 @@ Pour faire fonctionner le site sur votre propre ordinateur, il vous faut au pré
 ## Installation des prérequis sous Windows
 Cette section explique de manière détaillée comment se munir de tous les éléments cités précédemment. Plusieurs solutions sont par ailleurs possibles. En voici une, utilisant une **Pile WAMP** (Windows - Apache - MySQL - PHP), en partant de zéro.
 
+Voir le lien vers la doc spécifique à Windows [ici](/Docs/installation_windows.md).
+
 ### • VS Code
 **VS Code** est un éditeur de texte, qui peut être transformé en IDE via des extensions permettant de compiler des fichiers sources.
 Le logiciel peut être télécharger sur le [site officiel](https://code.visualstudio.com/).

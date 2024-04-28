@@ -275,26 +275,42 @@ sudo apt install php8.1-xdebug
 
 Ouvrez le fichier de configuration de **php** :
 ```
-sudo gedit /etc/php/8.1/cli/conf.d/???
+sudo gedit /etc/php/8.1/cli/conf.d/20-xdebug.ini
 ```
 
 Ajoutez les lignes suivantes à la suite dans ce fichier :
 ```
-???
+xdebug.mode=debug
+xdebug.client_host=127.0.0.1
+xdebug.client_port=9003
 ```
 
-Redémarrez PHP :
+Sauvegardez le fichier, puis fermez, et redémarrez PHP :
 ```
---- sudo system php8.1-fpm restart
+sudo service php8.1-fpm restart
 ```
 
 ## Extension du navigateur
 
 Trouvez une extension que vous pouvez utiliser avec votre navigateur préféré. Vous pouvez les voir dans le tableau récapitulatif sur [cette page](https://www.jetbrains.com/help/phpstorm/browser-debugging-extensions.html)
 
-Ici, pour **Firefox**, nous allons utiliser[XDebug helper](???)
+Ici, pour **Firefox**, nous allons utiliser[XDebug helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search)
 
 Téléchargez l'extension, et lorsque vous êtes sur la page d'HypAIR, cliquez sur l'insecte à droite de la barre de recherche, et cliquer sur **Debug**. Lorsque l'insecte est colorié, le debugger est activé.
 
-Vous aurez peut-être besoin de relancer votre naviagteur, et rouvrir la page d'HypAIR, pour que l'insecte s'affiche.
+Vous aurez peut-être besoin de relancer votre navigateur et rouvrir la page d'HypAIR, pour que l'insecte s'affiche.
 
+## Configuration de l'IDE
+
+Il faut lier le numéro de port utilisé par XDebug renseigné plus haut dans la configuration de PHP, et celui de la configuration de débuggage de votre IDE. Ici, ce sera fait avec **PhpStorm**.
+
+Allez dans `Settings` > `PHP`, et veillez à ce que le chemin de PHP soit bien celui que vous voulez utilisez pour le projet (celui où vous avez installé **XDebug**).
+
+En allant dans `Settings` > `PHP` > `Debug`, vous pouvez vérifier que l'IDE est bien lié au port de **XDebug** (9003 ici).
+
+Fermez les paramètres, et appuyez sur le bouton **Start listening for PHP Debug connections**.
+
+Mettez des breakpoints à des endroits pertinents de fichiers **.php**, en cliquant sur le numéro d'une ligne de code. Par exemple, pour que le programme fasse une fasse lors du chargement de la page d'accueil d'HypAIR, vous mettre un breakpoint à la ligne `$now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');` (ligne 34) du fichier `app/Http/Controllers/PostController.php`.
+
+Puis rechargez la page sur votre navigateur. Si vous êtes redirigé vers une pop-up de votre IDE, cliquez sur **Accepter**.
+Si tout s'est bien passé, l'exécution devrait s'être arrêtée au niveau de la ligne comportant le breakpoint, en attendant vos ordres. C'est pas magnifique ???

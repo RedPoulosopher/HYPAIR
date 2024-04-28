@@ -213,7 +213,7 @@ sudo gedit /etc/nginx/sites-available/hypair
 Et copiez le contenu ci-dessous dans ce fichier, puis enregistrez-le :
 ```
 server {
-    listen 80;
+    listen 8080;
     server_name localhost;
     root /var/www/site-air/public;
 
@@ -257,3 +257,5 @@ sudo systemctl reload nginx
 ```
 
 Maintenant, si tout s'est bien passé, et que ouvrez un navigateur, vous devriez atterrir sur HypAIR en tant l'URL : ```http://localhost```.
+
+## X-Debug

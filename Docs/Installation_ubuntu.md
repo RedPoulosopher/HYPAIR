@@ -4,6 +4,8 @@ Il s'agit ici d'installer ce qu'on appelle une pile *LEMP* (Linux, Nginx, MySQL,
 Le but est de mettre en place un environnement de développement pour faire tourner HypAIR en local sous Ubuntu (ici, **22.04**).
 Nous ne passerons donc pas par un logiciel qui contient déjà la pile tout faite, comme Wamp sous Windows. Nous ferons la configuration nous-mêmes.
 
+Un des avantages est qu'aussitôt l'ordinateur allumé, le site est déjà disponible, car le serveur web tourne en permanence. Pas de besoin par exemple de ```php artisan serve``` ou de lancer un logiciel tel que *WampServer*.
+
 Avant de commencer à installer des packages avec *apt*, comme le veut la tradition, veillez bien à faire un :
 ```
 sudo apt update
@@ -15,7 +17,7 @@ La légende raconte que si vous oubliez de le faire, vous recevrez des mails d'i
 Installation de PHP et les librairies nécessaires :
 ```
 sudo apt install php8.1-fpm php-mysql
-sudo apt install php...
+sudo apt install php-mbstring php-xml php-bcmath php-curl
 sudo apt install php-cli unzip
 ```
 
@@ -29,7 +31,7 @@ sudo apt install mysql-server
 ```
 On veille à ce que le service soit bien démarré :
 ```
-sudo mysql...
+sudo systemctl start mysql.service
 ```
 
 On gère les permissions relatives à MySQL :
@@ -38,9 +40,17 @@ sudo mysql_secure_installation
 ```
 Puis répondez à toutes les questions par ```y```, et tapez ```2``` lorsque l'on vous demande la force du mot de passe exigée, pour plus de sécurité.
 
-Créez vous un mot de passe pour l'utilisateur *root* **que vous noterez quelque part** pour ne pas l'oublier :
+**N.A.** : Les paragraphes suivants suivants, je ne suis pas sûr. Testez en fonction des erreurs que vous avez chez vous ^^
+
+Pour entrer dans l'invite de commandes MySQL, tapez `sudo mysql` ou `mysql -u root -p` si le mot de passe **root** a été défini ou non.
+
+Si besoin, créez-vous un mot de passe pour l'utilisateur *root* **que vous noterez quelque part** pour ne pas l'oublier, dans l'invite de commande de MySQL :
 ```
-...
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<motDePasse>';
+```
+Si vous souhaitez vous passer de ce mot de passer, et simplement vous connecter en passant par `sudo mysql`, tapez ceci :
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
 ```
 
 Création de la base de données :
@@ -85,7 +95,11 @@ sudo snap install mysql-workbench
 ```
 
 Il faut ensuite créer une liaison entre *MySQL Workbench* et la base de données. Ici, on va créer une laision qui nous permettra de nous placer en tant que ```hypair_user```, c'est à dire l'application elle-même :
-... 
+- Créer une nouvelle connexion
+- Entrez le *username* : `hypair_user`
+- Entrez le mot de passe que vous avez défini précédemment pour cet utilisateur de MySQL.
+- Donnez un nom à cette liaison (par exemple *hypair*)
+- Et c'est tipar !
 
 
 ## Composer
@@ -266,7 +280,7 @@ Pour l'utiliser, il faut l'ajouter à la configuration du PHP utilisé, ajouter 
 
 Ici, l'exemple se fera avec l'IDE **PhpStorm**, et Firefox.
 
-## Configuration de PHP
+### Configuration de PHP
 
 Téléchargez XDebug :
 ```
@@ -290,7 +304,7 @@ Sauvegardez le fichier, puis fermez, et redémarrez PHP :
 sudo service php8.1-fpm restart
 ```
 
-## Extension du navigateur
+### Extension du navigateur
 
 Trouvez une extension que vous pouvez utiliser avec votre navigateur préféré. Vous pouvez les voir dans le tableau récapitulatif sur [cette page](https://www.jetbrains.com/help/phpstorm/browser-debugging-extensions.html)
 
@@ -300,7 +314,7 @@ Téléchargez l'extension, et lorsque vous êtes sur la page d'HypAIR, cliquez s
 
 Vous aurez peut-être besoin de relancer votre navigateur et rouvrir la page d'HypAIR, pour que l'insecte s'affiche.
 
-## Configuration de l'IDE
+### Configuration de l'IDE
 
 Il faut lier le numéro de port utilisé par XDebug renseigné plus haut dans la configuration de PHP, et celui de la configuration de débuggage de votre IDE. Ici, ce sera fait avec **PhpStorm**.
 

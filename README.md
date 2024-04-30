@@ -1,35 +1,37 @@
 # Le Projet HypAIR
 
-HypAIR est un site qui se veut être un complément (voir un indispensable à l'avenir) à la vie associative en ajoutant des fonctionnalités et des services qui serviront et amélioreront la vie étudiante (calendrier personnel, événement) et aussi la pérennité des comités et des associations en centralisant les informations et en les sauvegardant pour les années à venir (documentations, projets etc.). Nous voulons être présents sur tous les campus et disponibles sur ordinateur et sur mobile.
+Voici le projet de l'application HypAIR, Wouhou !! 🥳
 
-Le projet HypAIR en est encore à ses débuts. Cela veut donc dire que le site est encore loin d'être fini. Il y a encore beaucoup d'améliorations à apporter et de fonctionnalités que nous avons en tête. Donc n'hésitez pas à nous faire des retours sur votre ressenti et sur les nouveautés que vous aimeriez voir ;)
+- Lien du site en production : https://hypair.imt-ne.fr/
 
-N'hésitez pas à jeter un coup d'oeil au site : https://hypair.imt-ne.fr/
+- Lien du site en développement : https://dev-hypair.imt-ne.fr
 
-Si vous voulez nous aider à développer notre site tout au long de l'année vous pouvez nous le faire savoir et rejoindre nos réseaux, depuis la [page de notre comité sur le site HypAIR](https://hypair.imt-ne.fr/air).
+## Contacts
 
-## Responsables du projet en 2023-2024
-- Arthur Mata, Président de l'AIR (mandat 2023-2024)
-- Antoine Joncheray, Membre de l'AIR
+Voici une liste de contacts si vous voulez des renseignements venant d'anciens de l'AIR :
+
+- **Arthur Mata** : Le projet HypAIR en général
+- **Lucas Naury** : PWA, Docker
+- **Mathilde Pascal** : Framework Laravel
 
 ## Hébergement du site
-HypAIR est hébergé sur un serveur Kimsufi chez **OVH**, ce qui lui permet d'être accessible depuis n'importe quel réseau.
+HypAIR est hébergé sur un serveur externe chez **OVH**, et tourne dans un container Docker.
 
 ## Technologies utilisées
 
 - Concernant le *backend*, HypAIR est développé avec le framework PHP **Laravel** (version 9). La documentation est disponible sur le [site officiel de Laravel](https://laravel.com/docs/9.x).
 - Le *frontend* est fait à l'aide de **Blade**, fourni avec Laravel. Voir la documentation de Blade [ici](https://laravel.com/docs/9.x/frontend#php-and-blade).
-- HypAIR fait également appel à **CerbAIR**, plateforme d'*authentification* s'appuyant sur la base de données de la DISI.
+- HypAIR fait également appel à **CerbAIR**, plateforme d'authentification liée au LDAP de l'école.
 
 # Prérequis
 Pour faire fonctionner le site sur votre propre ordinateur, il vous faut au préalable :
 - Un IDE (par exemple VS Code ou PHP Storm)
-- PHP (version 8.0 au minimum)
+- PHP (version 8.1 au minimum)
 - Composer
 - NodeJS
 - Une base de données MySQL
 - Git
-- Un serveur web (comme Nginx) avec un VHost paramétré qui a comme racine le dossier `site-air/public`
+- Un serveur web (Apache ou Nginx)
 
 ## Installation des prérequis sous Windows
 Cette section explique de manière détaillée comment se munir de tous les éléments cités précédemment. Plusieurs solutions sont par ailleurs possibles. En voici une, utilisant une **Pile WAMP** (Windows - Apache - MySQL - PHP), en partant de zéro.

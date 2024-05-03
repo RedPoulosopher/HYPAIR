@@ -40,9 +40,12 @@ var popupAlreadySeen = localStorage.getItem("notifications-authorized") != null
 if(!popupAlreadySeen){
     popup.classList.add("visible")
 }
-const isIos = true
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+}
 // If browser doesn't support notifications, change popup text to tell user to change browser / install PWA
-var supportsNotifications = false
+var supportsNotifications = 'Notification' in window
 if(!supportsNotifications && !popupAlreadySeen){
     if(isIos){
         unsupportedTextIOS.classList.remove("hidden")

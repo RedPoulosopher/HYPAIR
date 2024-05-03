@@ -1,5 +1,5 @@
 <div id="pwa-popup">
-    <div id="pwa-popup-content">Pour installer HypAIR, cliquez sur l'icône <img src="{{ mix('/images/pwa/ios-share-icon.png') }}" alt="Share"> puis <em>"Sur la page d'accueil"</em></div>
+    <div id="pwa-popup-content">Pour installer HypAIR, cliquez sur l'icône <img src="{{ mix('/images/pwa/ios-share-icon.png') }}" alt="Share"> puis <em>"Sur l'écran d'accueil"</em></div>
 </div>
 
 

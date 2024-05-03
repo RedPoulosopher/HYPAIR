@@ -17,6 +17,15 @@
             <a href="" onclick="choixNotifs(event, false)">OK</a>
         </div>
     </div>
+
+    <div class="popup-content card hidden" id="info-iOS">
+        <h2>Les notifications ne sont pas autorisées dans le navigateur :(</h2>
+        <p>Installez l'application pour pouvoir les activer (<a href="https://partage.imt.fr/index.php/s/bH7fpPMqdCmGtAX?path=%2FTutos%20HypAIR">voir tuto</a>)</p>
+        
+        <div id="liste-choix">
+            <a href="" onclick="choixNotifs(event, false)">OK</a>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -24,16 +33,22 @@
 var popup = document.getElementById("select-popup")
 var listeChoix = document.getElementById("choix")
 var unsupportedText = document.getElementById("info")
+var unsupportedTextIOS = document.getElementById("info-iOS")
 
 // If first time seing popup, show popup
 var popupAlreadySeen = localStorage.getItem("notifications-authorized") != null
 if(!popupAlreadySeen){
     popup.classList.add("visible")
 }
-// If browser doesn't support notifications, change popup text to tell user to change browser
-var supportsNotifications = 'Notification' in window
+const isIos = true
+// If browser doesn't support notifications, change popup text to tell user to change browser / install PWA
+var supportsNotifications = false
 if(!supportsNotifications && !popupAlreadySeen){
-    unsupportedText.classList.remove("hidden")
+    if(isIos){
+        unsupportedTextIOS.classList.remove("hidden")
+    }else{
+        unsupportedText.classList.remove("hidden")
+    }
     listeChoix.classList.add("hidden")
 }
 

@@ -47,7 +47,7 @@ if(!popupAlreadySeen){
 
 
 // If browser doesn't support notifications, change popup text to tell user to change browser / install PWA
-const isIos = () => {
+const browserIsIos = () => {
   const userAgent = window.navigator.userAgent.toLowerCase();
   return /iphone|ipad|ipod/.test( userAgent );
 }
@@ -61,7 +61,7 @@ if(!supportsNotifications && !popupAlreadySeen){
     notSupportedContent.classList.remove("hidden")
 
     //Change error
-    if(isIos){
+    if(browserIsIos){
         if(iosVersion >= 16.4){
             // Tell the user that notifications are only possible in the PWA
             notSupportedTextIos.classList.remove("hidden")

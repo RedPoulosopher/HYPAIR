@@ -6,3 +6,6 @@
 
 Voici un guide pour mettre en place un environnement de développement pour HypAIR, en utilisant **Laravel Sail**.
 
+Liens doc :
+- https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04
+- https://blog.logrocket.com/laravel-and-docker-a-guide-to-using-laravel-sail/

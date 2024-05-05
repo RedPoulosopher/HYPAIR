@@ -10,6 +10,7 @@ self.addEventListener('push', function (event) {
     event.waitUntil(self.registration.showNotification(notifContent.title, {
         body: notifContent.body,
         icon: "images/logo_air.png",
+        badge: "images/logo_air.png",
         data: {
             notifUrl: notifData.url // url quand on clique
         }

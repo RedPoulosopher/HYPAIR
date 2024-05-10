@@ -58,6 +58,10 @@
         @endif
       </div>
     </div>
+
+    <a id="bouton-notifs" class="card" onclick="autoriserNotifs(event)">
+      <p><i class="fa-solid fa-bell"></i>Autoriser les notifications</p>
+    </a>
   </section>
 
 
@@ -121,22 +125,48 @@
   };
   
   /*meatball*/
-function menu_meatballs(){
-  if (ouvert) {
-    el_menu_meatballs.style.display = "none";
-    ouvert = false;
-  } else {
-    el_menu_meatballs.style.display = "block";
-    ouvert = true
+  function menu_meatballs(){
+    if (ouvert) {
+      el_menu_meatballs.style.display = "none";
+      ouvert = false;
+    } else {
+      el_menu_meatballs.style.display = "block";
+      ouvert = true
+    }
+  };
+  //close when click outside
+  document.body.addEventListener('click', (event)=>{
+    if(event.target.id != "menu_meatballs" && event.target.id != "reglages"){
+      el_menu_meatballs.style.display = "none";
+      ouvert = false
+    }
+  })
+
+
+  // ---------------------------- Notifications button -------------------------------- //
+
+  var notificationsButton = document.getElementById('bouton-notifs')
+  var notificationsEnabled = localStorage.getItem("notifications-authorized") == "true"
+
+  // Only show btn if previously pressed "No" on the custom notification popup
+  if(notificationsEnabled){
+    notificationsButton.classList.add("hidden")
   }
-};
-//close when click outside
-document.body.addEventListener('click', (event)=>{
-  if(event.target.id != "menu_meatballs" && event.target.id != "reglages"){
-    el_menu_meatballs.style.display = "none";
-    ouvert = false
+
+  function autoriserNotifs(event) {
+    // Prevent link action
+    event.preventDefault()
+
+    // Store choice to not show popup again
+    localStorage.setItem("notifications-authorized", true);
+
+    // Hide button
+    notificationsButton.classList.add("hidden")
+
+    // Ask for notifications
+    window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}")
   }
-})
+
 </script>
 
 @endsection

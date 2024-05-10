@@ -1,3 +1,7 @@
+self.addEventListener("install", event => {
+    skipWaiting();
+});
+
 // Notifications
 self.addEventListener('push', function (event) {
     const notification = event.data.json()

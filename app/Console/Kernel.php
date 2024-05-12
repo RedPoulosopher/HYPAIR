@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             PushNotificationController::sendLatestNotifications();
         })
-        ->cron('0,15,30,45 * * * *')//Tous les quart d'heures, à partir de 0
+        // ->cron('0,15,30,45 * * * *')//Tous les quart d'heures, à partir de 0
+        ->everyMinute() // Toutes les minutes
         ->when(env('NOTIFICATIONS_ENABLED'));
     }
 

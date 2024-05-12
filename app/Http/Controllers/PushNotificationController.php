@@ -143,10 +143,10 @@ class PushNotificationController extends Controller
         return $result;
     }
 
-    //Cette fonction est run par un scheduler toutes les 15 minutes
+    //Cette fonction est run par un scheduler toutes les minutes
     static function sendLatestNotifications(){        
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
-        $start_date =  date('Y-m-d H:i:s', strtotime("-20 minutes", strtotime($now)));
+        $start_date =  date('Y-m-d H:i:s', strtotime("-2 minutes", strtotime($now)));
 
         //On récupère les posts des 20 dernières minutes qui n'ont pas été envoyés
         $posts = Post::where('date_apparition','>=',$start_date)

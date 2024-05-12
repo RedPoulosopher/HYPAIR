@@ -6,9 +6,11 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\NotificationToken;
+use App\Models\Entite;
 
 use DateTime;
 use DateTimeZone;
@@ -72,9 +74,41 @@ class PushNotificationController extends Controller
         return $messaging->sendMulticast($message, $tokens);
     }
 
-    public function testPushNotification(){
-        $result = $this->sendPostNotification(Post::first());
-        return response()->json($result);
+    public function testPushNotification(Request $request){
+
+        // In production env, send test notifications only to AIR members
+        if (App::environment('production')) {
+            // Check if correct password
+            $requestBody = $request->all();
+            if(!isset($requestBody['password']) || $requestBody['password'] != "AIR_2024_TEST_NOTIFS"){
+                abort(403, "Mauvais mot de passe");
+            }
+
+            // Get all notification tokens of AIR members
+            $air_tokens = Entite::where('uid', 'air')
+                            ->first()
+                            ->membres
+                            ->flatMap(function ($membre) {
+                                return $membre->user->notificationTokens->pluck('token');
+                            })
+                            ->unique()
+                            ->toArray();
+
+                            
+            // Send test notification only to AIR members
+            $result = $this->sendPushNotificationToTokens(
+                $air_tokens,
+                "Notification test AIR",
+                "Cette notification n'est reçue que par les membres de l'AIR",
+                "/air"
+            );
+            return response()->json($result);
+            
+        // In dev and local env, send test notifications to every subscriber
+        } else {
+            $result = $this->sendPostNotification(Post::first());
+            return response()->json($result);
+        }
     }
 
     public function souscrireNotifications(Request $request)

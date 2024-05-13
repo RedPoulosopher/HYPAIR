@@ -51,7 +51,7 @@ class PushNotificationController extends Controller
         return $messaging->send($message);
     }
 
-    static function sendPushNotificationToTokens($tokens, $title, $body, $url="/")
+    static function sendPushNotificationToTokens($tokens, $title, $body, $url="/", $tag, $tagData=[])
     {
         if(env('NOTIFICATIONS_ENABLED') == false){
             return 'Les notifications sont désactivées sur ce serveur';
@@ -59,15 +59,18 @@ class PushNotificationController extends Controller
 
         $messaging = PushNotificationController::connectToFirebase();
  
+        $data = array_merge([
+            'url' => $url,
+            'tag' => $tag
+        ], $tagData);
+
         //Create message object
         $message = CloudMessage::fromArray([
             'notification' => [
                 'title' => $title,
                 'body' => $body
             ],
-            'data' => [
-                'url' => $url
-            ],
+            'data' => $data
         ]);
  
         //Send message to all users subscribed to the topic
@@ -106,7 +109,8 @@ class PushNotificationController extends Controller
             
         // In dev and local env, send test notifications to every subscriber
         } else {
-            $result = $this->sendPostNotification(Post::first());
+            $randomPost = Post::all()->random(1)->first();
+            $result = $this->sendPostNotification($randomPost);
             return response()->json($result);
         }
     }
@@ -162,7 +166,16 @@ class PushNotificationController extends Controller
         }
 
         // Envoi de la notification
-        $result = PushNotificationController::sendPushNotificationToTokens($tokens, 'Nouveau post de ' . $post->entite()->first()->nom, $post->titre, $post->url());
+        $result = PushNotificationController::sendPushNotificationToTokens(
+            $tokens,
+            'Nouveau post de ' . $post->entite()->first()->nom,
+            $post->titre,
+            $post->url(),
+            "POST",
+            [
+                'entite' => $post->entite()->first()->nom
+            ]
+        );
         
         // Suppression des tokens périmés / incorrects
         $unknownTokens = $result->unknownTokens();

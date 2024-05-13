@@ -3,7 +3,7 @@ self.addEventListener("install", event => {
 });
 
 // Notifications
-self.addEventListener('push', async (event) => {
+self.addEventListener('push', (event) => {
     const payload = event.data.json()
     
     const notifContent = payload.notification
@@ -22,19 +22,22 @@ self.addEventListener('push', async (event) => {
         }
     };
 
-    if(notifData.tag == "POST"){
-        // On ajoute à la notifications les infos de tag
-        notificationOptions.tag = notifData.tag //Permet d'écraser les précédentes notifications ayant le même tag sans renotifier l'utilisateur
-    
-        // On stocke des données dans la notification client afin de pouvoir les récupérer par exemple si on veut fusionner 2 notifications par la suite
-        notificationOptions.data.NB_POSTS = 1                 // Le nombre de posts s'il y en a plusieurs
-        notificationOptions.data.ENTITES = [notifData.entite] // La liste des entités qui ont posté
+    if(notifData.tag != "POST"){
+        //Envoi de la notif de base
+        return registration.showNotification(notificationTitle,notificationOptions);
+    }
+
+    // ------------------------ NOTIFICATION AVEC TAG ------------------------ //
+    // On ajoute à la notifications les infos de tag
+    notificationOptions.tag = notifData.tag //Permet d'écraser les précédentes notifications ayant le même tag sans renotifier l'utilisateur
+
+    // On stocke des données dans la notification client afin de pouvoir les récupérer par exemple si on veut fusionner 2 notifications par la suite
+    notificationOptions.data.NB_POSTS = 1                 // Le nombre de posts s'il y en a plusieurs
+    notificationOptions.data.ENTITES = [notifData.entite] // La liste des entités qui ont posté
 
 
-
-
-        // On regarde s'il y a déjà une notification avec ce tag
-        const currentNotification = await getCurrentNotifWithTag(notifData.tag) //On vérifie si une notification n'est pas déjà présente pour les fusionner
+    // On regarde s'il y a déjà une notification avec ce tag
+    getCurrentNotifWithTag(notifData.tag).then(currentNotification => {
         // S'il y a déjà une notification avec le tag "POST", on les fusionne
         if(currentNotification){
             // On indique qu'il y a un post supplémentaire
@@ -59,11 +62,13 @@ self.addEventListener('push', async (event) => {
             }else{
                 notificationOptions.body = "De " + notificationOptions.data.ENTITES.join(", ")
             }
-        }
-    }
 
-    //Envoi de la notif fusionnée
-    return registration.showNotification(notificationTitle,notificationOptions);
+            
+        }
+        
+        //Envoi de la notif fusionnée
+        return registration.showNotification(notificationTitle,notificationOptions);
+    })
 
 })
 

@@ -4,18 +4,18 @@ self.addEventListener("install", event => {
 
 // Notifications
 self.addEventListener('push', async (event) => {
-    const notification = event.data.json()
+    const payload = event.data.json()
     
-    const notifContent = notification.notification
-    const notifData = notification.data
+    const notifContent = payload.notification
+    const notifData = payload.data
 
-    console.log(notification)
+    console.log(payload)
 
     // Create notification objects
     let notificationTitle = notifContent.title || "Nouvelle notification";
     let notificationOptions = {
         body: notifContent.body,
-        icon: "images/notifications/logo_air_carre.png",
+        icon: notifData.icon ?? "images/notifications/logo_air_carre.png",
         badge: "images/notifications/badge.png",
         data: {
             notifUrl: notifData.url, // url quand on clique
@@ -45,6 +45,10 @@ self.addEventListener('push', async (event) => {
     
             // On change le lien pour rediriger vers la page d'accueil
             notificationOptions.data.notifUrl = "/"
+            // Quand il y a plusieurs posts d'entités différentes, l'image est le logo de l'air
+            if(notificationOptions.data.ENTITES.length > 1){
+                notificationOptions.icon = "images/notifications/logo_air_carre.png"
+            }
             
             // On change le titre
             notificationTitle = notificationOptions.data.NB_POSTS + " nouveaux posts"

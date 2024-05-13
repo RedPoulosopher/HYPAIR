@@ -7,6 +7,7 @@ use Kreait\Firebase\Messaging\CloudMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\NotificationToken;
@@ -51,7 +52,7 @@ class PushNotificationController extends Controller
         return $messaging->send($message);
     }
 
-    static function sendPushNotificationToTokens($tokens, $title, $body, $url="/", $tag, $tagData=[])
+    static function sendPushNotificationToTokens($tokens, $title, $body, $icon=null, $url="/", $tag=null, $tagData=[])
     {
         if(env('NOTIFICATIONS_ENABLED') == false){
             return 'Les notifications sont désactivées sur ce serveur';
@@ -63,6 +64,10 @@ class PushNotificationController extends Controller
             'url' => $url,
             'tag' => $tag
         ], $tagData);
+
+        if($icon){
+            $data = array_merge($data, ['icon' => $icon]);
+        }
 
         //Create message object
         $message = CloudMessage::fromArray([
@@ -165,14 +170,18 @@ class PushNotificationController extends Controller
             return;
         }
 
+        $icon_url = $post->entite()->first()->logo_url("tres-petit");
+        $icon_url = Str::endsWith($icon_url, ".png") ? $icon_url : null;
+
         // Envoi de la notification
         $result = PushNotificationController::sendPushNotificationToTokens(
             $tokens,
             'Nouveau post de ' . $post->entite()->first()->nom,
             $post->titre,
-            $post->url(),
-            "POST",
-            [
+            icon: $icon_url,
+            url: $post->url(),
+            tag: "POST",
+            tagData: [
                 'entite' => $post->entite()->first()->nom
             ]
         );

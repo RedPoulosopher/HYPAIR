@@ -3,4 +3,5 @@ Disallow: /admin
 Disallow: /matrix
 Disallow: /ecriture
 Disallow: /localauth
+Disallow: /debug/notifications
 Allow: /

@@ -13,6 +13,7 @@ function setupNotifications(FCM_VAPID_PUBLIC_KEY){
   getToken(messaging, {vapidKey: FCM_VAPID_PUBLIC_KEY }).then((currentToken) => {  
     if (currentToken) {
       console.log("Current token : " + currentToken)
+
       // Send the token to your server and update the UI if necessary
       fetch("/souscrire", {
         method: 'POST',
@@ -37,3 +38,5 @@ function setupNotifications(FCM_VAPID_PUBLIC_KEY){
 }
 
 window.setupNotifications = setupNotifications
+
+window.getNotifToken = async (FCM_VAPID_PUBLIC_KEY) => await getToken(messaging, {vapidKey: FCM_VAPID_PUBLIC_KEY })

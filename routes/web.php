@@ -105,6 +105,12 @@ Route::get('/{erreur}', function ($erreur) {
     return abort($erreur);
 })->where(['erreur' => '401|403|404|405|419|429|500|503']);
 
+// Debug
+//====================
+Route::get('/debug/notifications', function () {
+    return view('notifications.debug');
+});
+
 // Fenêtres contextuelles
 //====================
 Route::get('/fenetre_contextuelle/cookies', function () {

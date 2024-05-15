@@ -10,7 +10,7 @@
 
     <main id="main-content">
         <section>
-            <h1>À propos de HypAIR</h1>
+            <h1><a href="/debug/notifications">À propos de HypAIR</a></h1>
             <article>
                 <p>HypAIR c'est LE site associatif de l'IMT Nord Europe. Tu y trouveras les infos sur chaque comité,
                     breau, évènement à venir...

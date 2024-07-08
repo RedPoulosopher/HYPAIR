@@ -108,7 +108,7 @@ class PushNotificationController extends Controller
                 $air_tokens,
                 "Notification test AIR",
                 "Cette notification n'est reçue que par les membres de l'AIR",
-                "/air"
+                url: "/air"
             );
             return response()->json($result);
             

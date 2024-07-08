@@ -16,7 +16,8 @@ class Post extends Model
         'date_expiration',
         'entite_id',
         'confidentiel',
-        'photo_name'
+        'photo_name',
+        'notification_sent'
     ];
 
     function event()
@@ -37,5 +38,9 @@ class Post extends Model
     }
     function bannieres() {
         return $this->hasMany(Banniere::class);
+    }
+
+    function url(){
+        return '/' . $this->entite()->first()->uid . '/entite/post/' . $this->id;
     }
 }

@@ -44,8 +44,14 @@ files.forEach(function (filepath) {
 getFiles("resources/js/").forEach(function (filepath) {
     mix.js("resources/js/" + filepath, "public/js");
 });
-//Service worker
+
+//Service workers
 mix.copy("resources/pwa/sw.js", "public");
+mix.copy("resources/pwa/firebase-messaging-sw.js", "public");
+
+//Notifications
+mix.js("resources/notifications/fcm.js", "public/js");
+// mix.copy("resources/notifications/firebase_config.js", "public/js");
 
 
 // -----------------------------------------------------------IMAGES------------------------------------------------------

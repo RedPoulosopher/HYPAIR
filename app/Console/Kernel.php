@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Http\Controllers\PushNotificationController;
 
 class Kernel extends ConsoleKernel
 {
@@ -23,8 +24,14 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {
-        // $schedule->command('inspire')->hourly();
+    {     
+        // Envoi des notifications
+        $schedule->call(function () {
+            PushNotificationController::sendLatestNotifications();
+        })
+        // ->cron('0,15,30,45 * * * *')//Tous les quart d'heures, à partir de 0
+        ->everyMinute() // Toutes les minutes
+        ->when(env('NOTIFICATIONS_ENABLED'));
     }
 
     /**

@@ -17,6 +17,7 @@ use App\Http\Controllers\AvanceeController;
 use App\Http\Controllers\LocalAuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PushNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,12 @@ use App\Http\Controllers\UserController;
 // Route::get('/', function () {
 //     return redirect('/entites/douai');
 // });
+
+// ----------------------------------------- NOTIFICATIONS ----------------------------------------- //
+
+Route::post('/souscrire', [PushNotificationController::class, 'souscrireNotifications']);
+
+// ------------------------------------------------------------------------------------------------ //
 
 // Offline page for PWA
 Route::get('/offline', function () {
@@ -97,6 +104,12 @@ Route::get('/cookies', function () {
 Route::get('/{erreur}', function ($erreur) {
     return abort($erreur);
 })->where(['erreur' => '401|403|404|405|419|429|500|503']);
+
+// Debug
+//====================
+Route::get('/debug/notifications', function () {
+    return view('notifications.debug');
+});
 
 // Fenêtres contextuelles
 //====================

@@ -140,9 +140,12 @@ class PostController extends Controller
                 $banniere = new Banniere();
                 $banniere->path = $path;
                 // voir la méthode saveMany pour améliorer le code
-                $post->bannieres()->save($banniere);
+                $post->bannieres()->save($banniere);      
             }
+
         }
+
+        
         
         // TAGS
         if (!empty($request->tags)) {
@@ -175,6 +178,7 @@ class PostController extends Controller
                 $post->campus()->attach($id);
             }
         }
+        
         return redirect(session('entite_uid') . '/entite/post');
     }
     function stripAccents($str) {

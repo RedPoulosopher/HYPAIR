@@ -7,7 +7,8 @@
 !public/images/offline.svg
 !public/images/icons/
 /public/js
-public/sw.js
+/public/sw.js
+/public/firebase-messaging-sw.js
 public/mix-manifest.json
 /storage/*.key
 .env.backup
@@ -23,3 +24,7 @@ composer.lock
 
 questions.md
 *.lnk
+
+
+resources/notifications/firebase_config.js
+resources/notifications/firebase_credentials.json

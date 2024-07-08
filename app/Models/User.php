@@ -22,7 +22,8 @@ class User extends Authenticatable
         'password',
         'prenom',
         'nom',
-        'uid'
+        'uid',
+        'notification_token'
     ];
 
     /**
@@ -98,5 +99,10 @@ class User extends Authenticatable
     function campus()
     {
         return $this->belongsToMany(Site::class, 'sites_users');
+    }
+
+    function notificationTokens()
+    {
+        return $this->hasMany(NotificationToken::class);
     }
 }

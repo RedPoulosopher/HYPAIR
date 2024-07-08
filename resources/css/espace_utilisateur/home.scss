@@ -165,6 +165,18 @@
     align-content: center;
 }
 
+
+
+
+#bouton-notifs{
+    margin-top: 25px;
+    padding: 0 16px;
+    i{
+        margin-right: 13px;
+        font-size: 13px;
+    }
+}
+
 @media screen and (max-width: 680px) {
     #profil {
         padding: 20px 30px;
@@ -201,5 +213,16 @@
 
     #promo-campus {
         justify-content: center;
+    }
+
+    #bouton-notifs{
+        padding: 0 15px;
+        i{
+            margin-right: 12px;
+            font-size: 12px;
+        }
+        p{
+            font-size: 14px;
+        }
     }
 }

@@ -60,18 +60,39 @@
 <!-- Others -->
 <link href="/images/icons/favicon.ico" rel="shortcut icon" type="image/x-icon">
 
+@if(env('NOTIFICATIONS_ENABLED') && Auth::check())
+    <!-- Notifications -->
+    <meta name="csrf_token" content="{{ csrf_token() }}">
+    <script src="{{ mix('/js/fcm.js') }}"></script>
+@endif
+
+<!-- PWA SW -->
 <script type="text/javascript">
-    // Initialize the service worker
+    // Initialize the PWA service workers
+    const serviceWorkers = [
+        {
+            name: "HypAIR PWA",
+            url: "{{ mix('/sw.js') }}",
+            scope: "/"
+        },{
+            name: "Notifications SW",
+            url: "{{ mix('/firebase-messaging-sw.js') }}",
+            scope: "/firebase-cloud-messaging-push-scope"
+        }
+    ]
+    
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("{{ mix('/sw.js') }}", {
-            scope: '/'
-        }).then(function (registration) {
-            // Registration was successful
-            console.log('HypAIR PWA: ServiceWorker registration successful with scope: ', registration.scope);
-        }, function (err) {
-            // registration failed :(
-            console.log('HypAIR PWA: ServiceWorker registration failed: ', err);
-        });
+        for(let i=0; i<serviceWorkers.length; i++){
+            navigator.serviceWorker.register(serviceWorkers[i].url, {
+                scope: serviceWorkers[i].scope
+            }).then(function (registration) {
+                // Registration was successful
+                console.log(serviceWorkers[i].name + ': ServiceWorker registration successful with scope: ', registration.scope);
+            }, function (err) {
+                // registration failed :(
+                console.log(serviceWorkers[i].name + ': ServiceWorker registration failed: ', err);
+            });
+        }
     }
 </script>
 @endif

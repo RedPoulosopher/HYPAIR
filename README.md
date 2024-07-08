@@ -49,14 +49,125 @@ Une fois installé, depuis l'interface de VS Code, vous pouvez télécharger les
 - Prettier - Code formatter : pour l'esthétique du code
 - Color Highlight : pour visualiser les couleurs *RGB* directement dans votre code
 
-## Commandes utiles
+### • WampServer
+**WampServer** est un logiciel gratuit fournissant une bonne partie des outils nécessaires pour faire fonctionner un projet Laravel sous Windows.
 
-- `npm run watch` pour que lla compilation des fichiers s'effectue automatiquement dès que vous sauvegardez un fichier (Ctrl+S)
+En vous rendant sur le [site officiel](https://www.wampserver.com/), vous pouvez télécharger la dernière version pour *Windows 64 bits*, puis l'installer. Si vous ne voulez pas remplir le formulaire qui apparaît sur le site, il y a un petit bouton *passer au téléchargement direct*.
+
+Lors de l'installation, vous pouvez laisser le chemin par défaut (à la racine de votre disque). Vérifiez qu'il y a bien PHP 8.1 dans les paramètres d'installations. Vous pouvez laisser tout le reste par défaut.
+
+Une fois l'installation terminée, si ce n'est pas déjà fait, lancez WampServer 64. Ensuite, il faut désactiver MySQL, pour seulement laisser MariaDB (qui est un équivalent). Pour cela, sur l'icône verte de Wamp dans votre barre des tâches, faites clic droit > `paramètres wamp` > décocher `autoriser MySQL`.
+
+Pour accéder à votre base de données (comme en cours de SGBD), faites un clic gauche sur l'icône, puis lancez **PhpMyAdmin**. Puis connectez-vous avec le login `root` et sans mot de passe.
+
+### • PHP
+PHP est déjà fourni avec WampServer, et contient toutes les extensions PHP nécessaires. Cependant, il faut modifier vos variables d'environnement pour que la commande `php` soit reconnue dans votre terminal.
+
+Pour cela, via l'explorateur de fichiers, allez dans votre dossier `wamp64` (celui indiqué lors de l'installation). Dans le dossier `wamp64/bin/php`, vous trouverez plusieurs versions de PHP. Ouvrez un dossier dont la version de php commence par 8.1, par exemple `php8.1.0`. Copiez le chemin de ce dossier en cliquant dans la barre du haut.
+
+Ensuite, tapez "variables" dans votre barre de recherche, et cliquez sur `Modifier les variables d'environnement système`. Puis cliquez sur `variables d'environnement` en bas de la fenêtre. Cliquez sur `Path` puis `Modifier`. Faites `Nouveau`, et collez le chemin que vous avez copié précédemment. Si jamais un chemin similaire est présent dans cette liste, et qu'il mène vers une version antérieure de PHP, supprimez-le. Vous pouvez ensuite valider et fermer toutes ces fenêtres.
+
+Pour vérifier que PHP est reconnu, ouvrez un terminal de commande, et tapez `php -v`. S'il n'y a pas d'erreur, cela a fonctionné :)
+
+Sinon, le fait de redémarrer l'ordinateur suffit parfois à régler le problème...
+
+**Remarque :** Pour tester les notifs sur PC, il faut suivre le [tuto suivant](https://gist.github.com/nhatnx/7ac83423f7d4e51b713f4dfde03f38c5) pour ajouter un certificat SSL à votre php
+
+### • Composer
+Rendez-vous sur le [site de Composer](https://getcomposer.org/download/), et cliquez sur `Composer-Setup.exe` pour télécharger **Composer**.
+Lancez l'installation, et veillez à ce que la version que vous avez dans votre Path soit bien renseignée, pour que Composer puisse l'utiliser.
+
+Pour vérifier le bon fonctionnement de Composer, ouvrez un terminal et tapez `composer`.
+
+### • NodeJS
+HypAIR ne semble pas aprécier les versions récentes de NodeJS. Il faut donc installer la *version 16*.
+
+Pour cela, rendez-vous sur la [page GitHub de nvm](https://github.com/coreybutler/nvm-windows/releases) (qui est un gestionnaire de versions de Node). Télécharger le fichier `nvm-setup.exe`, un peu plus bas sur la page. Terminez l'installation.
+
+Dans un terminal, tapez `nvm install 16`. Une fois l'installation de Node terminée, tapez `nvm use 16`pour utiliser cette version de manière permanente.
+
+### • Git
+Rendez-vous sur le [site de Git](https://git-scm.com/) et téléchargez-le. Laissez tous les paramètres par défaut lors de l'installation.
+
+## Clonage du repository
+
+Cliquez sur le bouton `clone`sur GitLab (en haut à droite), et copiez le lien en-dessous de `clone with https`. Puis, ouvrez **Git Bash** à l'endroit où voulez importer le projet sur votre ordinateur, et tapez `git clone <lien>`, en remplissant **<lien>** par ce que vous venez de copier.
+Vous n'avez plus qu'à ouvrir le projet sur votre IDE, taper `git pull` dans le terminal et vérifier que votre *branche main*  est à jour :)
+
+## Mise en place
+Dupliquez le fichier `.env.example`, et appelez-le `.env`.
+
+Modifiez les lignes suivantes (si nécessaire)
+- `APP_ENV=local`
+- `APP_DEBUG=true`
+- `DB_HOST=localhost`
+- `DB_PORT=3307` : le port de MySQL est visible en ouvrant PhpMyAdmin (il est possible qu'il soit different de 3307)
+- `DB_DATABASE=HypAIR` : le nom de votre base de données 
+- `DB_USERNAME=root` : l'identifiant pour vous connecter à PhpMyAdmin
+
+Ensuite, tapez les commandes suivantes :
+- `npm install`
+- `composer install`
+- `php artisan key:generate`
+- `php artisan storage:link`
+- `php artisan migrate:fresh`
+- `php artisan db:seed`
+
+Pour finir, et **ce qui suit est valable chaque fois que vous voudrez faire fonctionner HypAIR sur votre machine**, tapez :
+- `npm run dev` pour compiler les fichiers liés aux dépendances de Node (notamment les feuilles de style *sass*)
+
+**OU**
+- `npm run watch` pour que la compilation des fichiers s'effectue automatiquement dès que vous sauvegardez un fichier (Ctrl+S)
+
+**PUIS**
 - `php artisan serve` pour lancer le serveur local
 
 Vous pouvez alors faire `Ctrl + clic gauche` sur l'URL qui s'affiche dans la console pour vous rendre sur HypAIR !!!
 
 *Remarque* : Si la PWA ne fonctionne pas, essayez `php artisan view:clear`.
+
+## Notifications
+
+Pour pouvoir envoyer des notifications aux utilisateurs, nous sommes obligés de passer par un tiers, qui est [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging?hl=fr).
+
+### Fonctionnement général
+
+1. L'utilisateur (client web) envoie une requête à FCM pour obtenir un `registrationToken` *(identifiant unique qui correspond à sa machine)*.
+2. Lorsqu'il le reçoit, il envoie une requête à notre serveur, avec son `registrationToken`, pour qu'on puisse le sauvegarder.
+3. Le serveur s'occupe alors de **souscrire** l'utilisateur à certains **topics** *(ex: `posts`, `events`...)* auprès de FCM. 
+> Les topics permettent d'envoyer une notification à tous les utilisateurs souscris à un topic. Pour l'instant, on souscrit par défaut aux topics `posts` et `events`. A terme, on pourra faire un topic par asso et notifier que ceux qui sont abonnés à l'asso qui poste.
+
+### Console Firebase
+
+Puisqu'on utilise un serveur tiers, il est nécessaire de s'y connecter avec des **identifiants**.
+
+Sur la [console Firebase](https://console.firebase.google.com/), avec le compte Google de l'AIR [air.imtne@gmail.com](mailto:air.imtne@gmail.com) *(voir avec le bureau pour le mdp si nécessaire)*, **2 applications** ont été crées :
+- `hypair-imt` : qui correspond à l'application **EN PRODUCTION** *(uniquement sur [hypair.imt-ne.fr](https://hypair.imt-ne.fr))*
+- `hypair-dev` : qui correspond à l'application **EN DEV** *(sur [dev-hypair.imt-ne.fr](https://dev-hypair.imt-ne.fr) mais aussi en **local** sur vos machines)*
+
+
+C'est là dessus que vous pourrez récupérer les identifiants de connexions, clés d'API...
+
+### Mise en place sur une machine
+
+Pour setup les notifications sur une machine, il faudra donc :
+- Activer les notifications avec la variable d'environnement suivante : `NOTIFICATIONS_ENABLED=true`
+- Changer le driver de cache : `CACHE_DRIVER=database`
+- Définir les variables suivantes `FCM_VAPID_PUBLIC_KEY` et `FCM_VAPID_PRIVATE_KEY` **correspondant à la bonne application**
+- Récupérer les fichiers `firebase_credentials.json` et `firebase_config.js` **correspondant à la bonne application** et les placer dans le dossier `resources/notifications`
+
+> ⚠️ **ATTENTION A NE PAS UTILISER LES IDENTIFIANTS DE L'APPLICATION DE PROD EN LOCAL** ⚠️  
+> Sinon, toutes les notifications qui seront générées sur vos machines locales (posts de tests...) seront envoyées à **TOUS** les utilisateurs
+
+Pour obtenir ces fichiers, demandez au bureau.
+
+Finalement, pour lancer le **scheduler** qui s'occupe d'envoyer les notifications tous les quarts d'heure, lancez la commande
+
+```bash
+php artisan schedule:work
+```
+
+> Sur le serveur, il faudra utiliser `cron` : voir la [documentation](https://laravel.com/docs/9.x/scheduling#running-the-scheduler)
 
 # Comment mettre à jour la version en production ?
 - Si ce n'est pas déjà fait, changer le numéro de version des liens vers les fichiers CSS dans les layouts
@@ -133,8 +244,3 @@ On a configuré le charset de mysql à `utf8mb4` et le collation à `utf8mb4_bin
 Comme l'encodage UTF-8 classique est préférable pour les textes simples, il faut rajouter ces deux lignes à chaque création de chaque table, dans la fonction `Schema::create(...)` :
 - `$table->charset = 'utf8';`
 - `$table->collation = 'utf8_unicode_ci';`
-
-# Fonctionnalités futures
-- Système d'actualités 
-- Page d'accueil qui s'adapte à l'utilisateur 
-- Conversion en PWA

@@ -1,6 +1,6 @@
 {{-- Component de la barre de navigation principale (celle du haut) --}}
 
-<nav id="navbar" class="campagnes">
+<nav id="navbar" {{-- class="campagnes" --}}>
 
     <div id="logo">
         <a href="/" id="logo-img">
@@ -16,15 +16,13 @@
         <x-toggle-theme-btn />
         <ul id="links">
             <li class="menu-button {{ request()->is('/') ? 'active' : '' }}"><a href="/">Accueil</a></li>
-            <li class="menu-button {{ request()->is('calendrier') ? 'active' : '' }}"><a
-                    href="/calendrier">Calendrier</a></li>
-            <li class="menu-button {{ request()->is('entites*') ? 'active' : '' }}"><a href="/entites">Associations</a>
-            </li>
-            {{-- <li
-                class="menu-button {{ (request()->is('mes-entites') ? 'active' : '') . (request()->is('*entite/*') ? 'active' : '') }}">
-                <a href="/mes-entites">Gestion</a></li> --}}
-            <li class="menu-button {{ request()->is('campagnes') ? 'active' : '' }}"><a href="/campagnes">Campagnes</a>
-            </li>
+            <li class="menu-button {{ request()->is('calendrier') ? 'active' : '' }}"><a href="/calendrier">Calendrier</a></li>
+            <li class="menu-button {{ request()->is('entites*') ? 'active' : '' }}"><a href="/entites">Associations</a></li>
+
+            {{-- A afficher que pendant les campagnes --}}
+            {{-- <li class="menu-button {{ request()->is('campagnes') ? 'active' : '' }}"><a href="/campagnes">Campagnes</a></li> --}}
+
+
             <li class="menu-button {{ request()->is('contact') ? 'active' : '' }}"><a href="/contact">Contact</a></li>
 
             @if ($isConnected)

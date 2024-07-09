@@ -30,6 +30,7 @@
 
     <div class="popup-content card hidden" id="loading">
         <h2>Veuillez patienter...</h2>
+        <x-loading/>
         <p>Mise en place des notifications en cours</p>
     </div>
 

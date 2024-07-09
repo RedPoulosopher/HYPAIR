@@ -32,6 +32,7 @@ function setupNotifications(FCM_VAPID_PUBLIC_KEY){
           console.log("Souscription aux notifications réussie") 
           resolve()
         })
+        .catch(reject)
       } else {
         // Show permission request UI
         console.log('No registration token available. Request permission to generate one.');

@@ -34,6 +34,16 @@
         <p>Mise en place des notifications en cours</p>
     </div>
 
+    <div class="popup-content card hidden" id="success">
+        <h2>Succès</h2>
+        <p>Les notifications ont été activées avec succès</p>
+    </div>
+    
+    <div class="popup-content card hidden" id="failed">
+        <h2>Echec</h2>
+        <p>Les notifications n'ont pas été activées</p>
+    </div>
+
 </div>
 
 <script>
@@ -45,6 +55,8 @@ var notSupportedTextAndroid = document.getElementById("not-supported-android")
 var notSupportedTextIos = document.getElementById("not-supported-iOS")
 var tooOldtextIos = document.getElementById("too-old-iOS")
 var loadingContent = document.getElementById("loading")
+var successContent = document.getElementById("success")
+var failedContent = document.getElementById("failed")
 
 // If first time seing popup, show popup
 var popupAlreadySeen = localStorage.getItem("notifications-authorized") != null
@@ -112,8 +124,18 @@ function choixNotifs(event, choix) {
 
         // Wait for user authorization
         window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}").then(()=>{
-            // Hide popup
-            popup.classList.remove("visible")
+            // Show success message
+            loadingContent.classList.add("hidden")
+            successContent.classList.remove("hidden")            
+        }).catch(e => {
+            // Show failed message
+            loadingContent.classList.add("hidden")
+            failedContent.classList.remove("hidden")  
+        }).finally(()=>{
+            // Hide popup after 3s
+            setTimeout(() => {
+                popup.classList.remove("visible")
+            }, 3000);
         })
 
     }else{

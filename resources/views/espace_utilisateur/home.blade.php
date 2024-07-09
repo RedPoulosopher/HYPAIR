@@ -164,7 +164,7 @@
     notificationsButton.classList.add("hidden")
 
     // Ask for notifications
-    // await window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}")
+    forceNotificationsPopup()
   }
 
 </script>

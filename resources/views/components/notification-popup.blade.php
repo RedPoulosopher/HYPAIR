@@ -61,7 +61,7 @@ const browserIsIos = () => {
 const iosVersion = /iP(hone|ad|od) OS ([1-9]*_[1-9]*)/i.exec(window.navigator.userAgent)?.[2].replace('_','.') || NaN
 
 var supportsNotifications = 'Notification' in window
-if(!supportsNotifications && !popupAlreadySeen){
+if(!supportsNotifications){
     // Hide default authorization text
     supportedContent.classList.add("hidden")
     // Show error
@@ -83,9 +83,23 @@ if(!supportsNotifications && !popupAlreadySeen){
 }
 
 
+// Force mode (don't ask user)
+function forceNotificationsPopup(){
+    // Show popup
+    popup.classList.add("visible")
+
+    // Ask browser for notifications authorization if supported
+    if(supportsNotifications){
+        choixNotifs(null, true)
+    }
+
+}
+
+
+
 function choixNotifs(event, choix) {
     // Prevent link action
-    event.preventDefault()
+    if(event) event.preventDefault()
 
     // Store selected choice to not show popup again
     localStorage.setItem("notifications-authorized", choix);
@@ -98,7 +112,6 @@ function choixNotifs(event, choix) {
 
         // Wait for user authorization
         window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}").then(()=>{
-            console.log("COUCOU")
             // Hide popup
             popup.classList.remove("visible")
         })

@@ -153,7 +153,7 @@
     notificationsButton.classList.add("hidden")
   }
 
-  function autoriserNotifs(event) {
+  async function autoriserNotifs(event) {
     // Prevent link action
     event.preventDefault()
 
@@ -164,7 +164,7 @@
     notificationsButton.classList.add("hidden")
 
     // Ask for notifications
-    window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}")
+    // await window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}")
   }
 
 </script>

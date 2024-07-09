@@ -28,6 +28,11 @@
         </div>
     </div>
 
+    <div class="popup-content card hidden" id="loading">
+        <h2>Veuillez patienter...</h2>
+        <p>Mise en place des notifications en cours</p>
+    </div>
+
 </div>
 
 <script>
@@ -38,6 +43,7 @@ var notSupportedContent = document.getElementById("not-supported")
 var notSupportedTextAndroid = document.getElementById("not-supported-android")
 var notSupportedTextIos = document.getElementById("not-supported-iOS")
 var tooOldtextIos = document.getElementById("too-old-iOS")
+var loadingContent = document.getElementById("loading")
 
 // If first time seing popup, show popup
 var popupAlreadySeen = localStorage.getItem("notifications-authorized") != null
@@ -83,11 +89,23 @@ function choixNotifs(event, choix) {
     // Store selected choice to not show popup again
     localStorage.setItem("notifications-authorized", choix);
 
-    // Hide popup
-    popup.classList.remove("visible")
-
+    
     if(choix == true){
-        window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}")
+        // Change popup text to loading
+        supportedContent.classList.add("hidden")
+        loadingContent.classList.remove("hidden")
+
+        // Wait for user authorization
+        window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}").then(()=>{
+            console.log("COUCOU")
+            // Hide popup
+            popup.classList.remove("visible")
+        })
+
+    }else{
+        // Hide popup
+        popup.classList.remove("visible")
+
     }
 }
     

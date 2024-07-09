@@ -90,5 +90,9 @@ const getCurrentNotifWithTag = async (tag)=>{
 }
 
 self.addEventListener('notificationclick', (event) => {
+    // Remove notification
+    event.notification.close();
+
+    // Open link
     event.waitUntil(clients.openWindow(event.notification.data.notifUrl));
 })

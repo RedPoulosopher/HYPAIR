@@ -88,7 +88,8 @@ class PushNotificationController extends Controller
         if (App::environment('production')) {
             // Check if correct password
             $requestBody = $request->all();
-            if(!isset($requestBody['password']) || $requestBody['password'] != "AIR_2024_TEST_NOTIFS"){
+            
+            if(!isset($requestBody['password']) || $requestBody['password'] != getenv('TEST_NOTIFS_PASSWORD')){
                 abort(403, "Mauvais mot de passe");
             }
 

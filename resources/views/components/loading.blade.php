@@ -8,7 +8,6 @@
     #loading-icon{
         display: block;
         border-radius: 100%;
-        margin: 4px
         border: 2px solid var(--couleur_accentuation_air);
         border-left-color: transparent;
         border-bottom-color: transparent;

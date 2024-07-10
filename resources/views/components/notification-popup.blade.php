@@ -113,10 +113,7 @@ function choixNotifs(event, choix) {
     // Prevent link action
     if(event) event.preventDefault()
 
-    // Store selected choice to not show popup again
-    localStorage.setItem("notifications-authorized", choix);
-
-    
+ 
     if(choix == true){
         // Change popup text to loading
         supportedContent.classList.add("hidden")
@@ -126,7 +123,11 @@ function choixNotifs(event, choix) {
         window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}").then(()=>{
             // Show success message
             loadingContent.classList.add("hidden")
-            successContent.classList.remove("hidden")            
+            successContent.classList.remove("hidden")        
+            
+            // Store selected choice to not show popup again
+            localStorage.setItem("notifications-authorized", choix);
+            
         }).catch(e => {
             // Show failed message
             loadingContent.classList.add("hidden")
@@ -139,6 +140,9 @@ function choixNotifs(event, choix) {
         })
 
     }else{
+        // Store selected choice to not show popup again
+        localStorage.setItem("notifications-authorized", choix);
+
         // Hide popup
         popup.classList.remove("visible")
 

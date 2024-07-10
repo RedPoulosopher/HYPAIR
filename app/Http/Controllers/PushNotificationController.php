@@ -84,16 +84,47 @@ class PushNotificationController extends Controller
 
     public function testPushNotification(Request $request){
 
-        // In production env, send test notifications only to AIR members
+        // In production env, send test notifications only to specific users
         if (App::environment('production')) {
-            // Check if correct password
             $requestBody = $request->all();
             
+            // Check if correct password
             if(!isset($requestBody['password']) || $requestBody['password'] != getenv('TEST_NOTIFS_PASSWORD')){
                 abort(403, "Mauvais mot de passe");
             }
 
-            // Get all notification tokens of AIR members
+            // Notification by user uid
+            if(isset($requestBody['user'])){
+
+                // We check that the user exists
+                if(!User::existe($requestBody['user'])){
+                    return "Cet utilisateur n'est pas dans la base de données";
+                }
+
+                $user_tokens = User::where('uid', $requestBody['user'])
+                                ->first()
+                                ->notificationTokens
+                                ->pluck('token')
+                                ->unique()
+                                ->toArray();
+
+                // We check that the user has at least one notification token
+                if(count($user_tokens) == 0){
+                    return "Cet utilisateur n'a pas de token enregistré";
+                }
+
+                // Send test notification only to this user
+                $result = $this->sendPushNotificationToTokens(
+                    $user_tokens,
+                    "Notification test AIR",
+                    "Ceci est une notification de test envoyée par l'AIR à " . $requestBody['user'],
+                    url: "/air"
+                );
+
+                return response()->json($result);
+            }
+
+            // By default, get all notification tokens of AIR members
             $air_tokens = Entite::where('uid', 'air')
                             ->first()
                             ->membres

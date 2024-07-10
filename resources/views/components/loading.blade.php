@@ -1,11 +1,14 @@
-<div id="loading-icon" style="width:{{$size}}px; height:{{$size}}px">
-   
-</div>
+@props([
+    'size' => 24
+])
+
+<div id="loading-icon" style="width:{{$size}}px; height:{{$size}}px; margin: {{$size/3}}px;"></div>
 
 <style>
     #loading-icon{
         display: block;
         border-radius: 100%;
+        margin: 4px
         border: 2px solid var(--couleur_accentuation_air);
         border-left-color: transparent;
         border-bottom-color: transparent;

@@ -12,7 +12,7 @@ class loading extends Component
      *
      * @return void
      */
-    public function __construct($size=24)
+    public function __construct($size)
     {
         $this->size = $size;
     }

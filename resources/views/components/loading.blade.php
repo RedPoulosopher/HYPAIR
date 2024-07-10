@@ -1,7 +1,3 @@
-@props([
-    'size' => 24
-])
-
 <div id="loading-icon" style="width:{{$size}}px; height:{{$size}}px; margin: {{$size/3}}px;"></div>
 
 <style>

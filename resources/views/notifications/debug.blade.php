@@ -7,6 +7,11 @@
     <section>
         <h1>Infos notifications</h1>
         <div class="article-wrapper">
+            @if(Auth::check())
+                <h2>UID</h2>
+                <p>{{ Auth::user()->uid }}</p>
+            @endif
+
             <h2>UserAgent</h2>
             <p id="user-agent"></p>
             

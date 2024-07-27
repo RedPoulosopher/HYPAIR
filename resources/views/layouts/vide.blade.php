@@ -8,7 +8,7 @@
 		
 		@include('pwa.meta')
 
-		<link rel="stylesheet" href="{{ mix('/css/app.css') }}" type="text/css" >
+		@vite('resources/css/app.scss')
 	</head>
 	
 	<style>

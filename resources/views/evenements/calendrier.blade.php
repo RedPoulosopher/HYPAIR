@@ -3,9 +3,11 @@
 @section('titre', 'Calendrier')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/evenements/calendrier.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/components/switch-campus.css') }}" type="text/css" />
+    @vite([
+        'resources/css/evenements/calendrier.scss',
+        'resources/css/documentation-popup.scss',
+        'resources/css/components/switch-campus.scss',
+    ])
 @endpushonce
 
 @section('content')

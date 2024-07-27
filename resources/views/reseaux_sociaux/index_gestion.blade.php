@@ -3,9 +3,11 @@
 @section('titre', 'Réseaux Sociaux')
 
 @pushonce('styles')
-<link rel="stylesheet" type="text/css" href="{{ mix('/css/entite/index_gestion.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ mix('/css/jstable.css') }}">
-<link rel="stylesheet" type="text/css" href="{{ mix('/css/formulaire.css') }}">
+    @vite([
+        'resources/css/entite/index_gestion.scss',
+        'resources/css/jstable.scss',
+        'resources/css/formulaire.scss',
+    ])
 @endpushonce
 
 @section('content')

@@ -3,9 +3,11 @@
 @section('titre', $evenement->titre)
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/post/show-post.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ mix('/css/evenements/show-evenement.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
+    @vite([
+        'resources/css/post/show-post.scss',
+        'resources/css/evenements/show-evenement.scss',
+        'resources/css/documentation-popup.scss',
+    ])
 @endpushonce
 
 @section('content')

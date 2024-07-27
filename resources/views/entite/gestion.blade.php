@@ -3,7 +3,7 @@
 @section('titre', 'Gestion de l\'entité')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/entite/gestion.css') }}" type="text/css" />
+    @vite('resources/css/entite/gestion.scss')
 @endpushonce
 
 @section('content')

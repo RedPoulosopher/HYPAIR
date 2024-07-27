@@ -3,10 +3,12 @@
 @section('titre', 'Modifier la description')
 
 @pushonce('styles')
-<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
-<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
-<link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}" type="text/css">
-<link rel="stylesheet" href="{{ mix('/css/entite/modifier_description.css') }}" type="text/css">
+	@vite([
+		'resources/css/formulaire.scss',
+		'resources/css/documentation.scss',
+		'resources/css/simpleMDE.scss',
+		'resources/css/entite/modifier_description.scss',
+	])
 @endpushonce
 
 @pushonce('start-scripts')

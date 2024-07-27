@@ -3,14 +3,16 @@
 @section('titre', 'Membres')
 
 @pushonce('styles')
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/jstable.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/formulaire.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/documentation-popup.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/membre/index_admin.css') }}">
+    @vite([
+        'resources/css/jstable.scss',
+        'resources/css/formulaire.scss',
+        'resources/css/documentation-popup.scss',
+        'resources/css/membre/index_admin.scss',
+    ])
 @endpushonce
 
 @section('content')
-    <script type="text/javascript" src="{{ mix('/js/jstable.min.js') }}"></script>
+    @vite('resources/js/jstable.min.js')
 
 
     <main id="main-content">
@@ -121,8 +123,7 @@
         </section>
     </main>
 
-
-    {{-- <script type="text/javascript" src="{{ mix('/js/elasticlunr.min.js') }}"></script> --}}
+    {{-- @vite('resources/js/elasticlunr.min.js') --}}
     <script>
         var roles = {!! json_encode($roles) !!}
         var roleInput = document.getElementById('role-input');

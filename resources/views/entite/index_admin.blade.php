@@ -3,12 +3,14 @@
 @section('titre', 'Entités')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/entite/index_admin.css') }}" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/jstable.css') }}">
+    @vite([
+        'resources/css/entite/index_admin.scss',
+        'resources/css/jstable.scss',
+    ])
 @endpushonce
 
 @section('content')
-<script type="text/javascript" src="{{ mix('/js/jstable.min.js') }}"></script>
+@vite('resources/js/jstable.min.js')
 
 <main id="main-content">
 	<section>

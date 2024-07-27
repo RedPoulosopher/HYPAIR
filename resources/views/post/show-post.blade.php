@@ -17,9 +17,10 @@
 @endpushonce
 
 @pushonce('styles')
-    {{-- <link rel="stylesheet" href="{{ mix('/css/evenements/show-evenement.css') }}" type="text/css" > --}}
-    <link rel="stylesheet" href="{{ mix('/css/post/show-post.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
+    @vite([
+        'resources/css/post/show-post.sss',
+        'resources/css/documentation-popup.sss',
+    ])
 @endpushonce
 
 @section('content')

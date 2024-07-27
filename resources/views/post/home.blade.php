@@ -3,10 +3,12 @@
 @section('titre', 'Post')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/post/home-post.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ mix('/css/components/service.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/components/post.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
+    @vite([
+        'resources/css/post/home-post.scss',
+        'resources/css/components/service.scss',
+        'resources/css/components/post.scss',
+        'resources/css/documentation-popup.scss',
+    ])
 @endpushonce
 
 @section('content')

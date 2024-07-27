@@ -4,8 +4,10 @@
 
 @section('content')
 
-<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
-<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
+@vite([
+	'resources/css/formulaire.scss',
+	'resources/css/documentation.scss',
+])
 
 <style id="style_clair"></style>
 <style id="style_sombre"></style>

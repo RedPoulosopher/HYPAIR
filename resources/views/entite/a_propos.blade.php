@@ -3,10 +3,12 @@
 @section('titre', $entite->nom)
 
 @pushonce('styles')
+    @vite([
+        'resources/css/entite/a_propos.scss',  
+        'resources/css/components/entite.scss',  
+        'resources/css/components/reseau-social.scss',  
+    ])
 @endpushonce
-<link rel="stylesheet" href="{{ mix('/css/entite/a_propos.css') }}">
-<link rel="stylesheet" href="{{ mix('/css/components/entite.css') }}">
-<link rel="stylesheet" href="{{ mix('/css/components/reseau-social.css') }}">
 @section('content')
 
     <main id="main-content">

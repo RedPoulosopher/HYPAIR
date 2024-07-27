@@ -4,7 +4,7 @@
 
 @section('content')
 
-<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
+@vite('resources/css/documentation.scss')
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
@@ -34,7 +34,7 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="{{ mix('/js/elasticlunr.min.js') }}"></script>
+@vite('resources/js/elasticlunr.min.js')
 <script>
 const champ_recherche = document.getElementById('search_input');
 const placeholder = champ_recherche.getAttribute('placeholder');

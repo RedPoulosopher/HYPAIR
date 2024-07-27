@@ -3,9 +3,11 @@
 @section('titre', 'Post')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ mix('/css/post/formulaire.css') }}" type="text/css">
+    @vite([
+        'resources/css/simpleMDE.scss',
+        'resources/css/formulaire.scss',
+        'resources/css/post/formulaire.scss',
+    ])
 @endpushonce
 
 @pushonce('start-scripts')

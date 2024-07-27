@@ -3,7 +3,7 @@
 @section('titre','Connexion')
 
 @section('content')
-<link rel="stylesheet" href="{{ mix('/css/connexion.css') }}" type="text/css" >
+@vite('resources/css/connexion.scss')
 
 <div class="panneau ombre_grande">
 

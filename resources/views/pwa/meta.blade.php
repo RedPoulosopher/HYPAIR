@@ -63,7 +63,7 @@
 @if(env('NOTIFICATIONS_ENABLED') && Auth::check())
     <!-- Notifications -->
     <meta name="csrf_token" content="{{ csrf_token() }}">
-    <script src="{{ mix('/js/fcm.js') }}"></script>
+    @vite('resources/notifications/fcm.js')
 @endif
 
 <!-- PWA SW -->
@@ -72,11 +72,11 @@
     const serviceWorkers = [
         {
             name: "HypAIR PWA",
-            url: "{{ mix('/sw.js') }}",
+            url: "/sw.js",
             scope: "/"
         },{
             name: "Notifications SW",
-            url: "{{ mix('/firebase-messaging-sw.js') }}",
+            url: "/firebase-messaging-sw.js",
             scope: "/firebase-cloud-messaging-push-scope"
         }
     ]

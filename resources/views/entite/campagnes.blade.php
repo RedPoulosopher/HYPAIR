@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('titre', 'Campagnes')
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/entite/entite.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ mix('/css/components/entite.css') }}" type="text/css">
+    @vite([
+        'resources/css/entite/entite.scss',
+        'resources/css/components/entite.scss',
+    ])
 @endpushonce
 @section('content')
     <main id="main-content">
@@ -40,7 +42,7 @@
                                 <div class="entite">
                                     <div class="logo ombre_petite">
                                         <div class="cercle" style="border-color: var(--couleur_police_secondaire)"></div>
-                                        <img src="{{ mix('/images/interrogation.png') }}" />
+                                        <img src="{{ Vite::Image('interrogation.png') }}" />
                                     </div>
                                 </div>
                             @endfor
@@ -60,7 +62,7 @@
                                 <div class="entite">
                                     <div class="logo ombre_petite">
                                         <div class="cercle" style="border-color: var(--couleur_police_secondaire)"></div>
-                                        <img src="{{ mix('/images/interrogation.png') }}" />
+                                        <img src="{{ Vite::Image('interrogation.png') }}" />
                                     </div>
                                 </div>
                             @endfor
@@ -80,7 +82,7 @@
                                 <div class="entite">
                                     <div class="logo ombre_petite">
                                         <div class="cercle" style="border-color: var(--couleur_police_secondaire)"></div>
-                                        <img src="{{ mix('/images/interrogation.png') }}" />
+                                        <img src="{{ Vite::Image('interrogation.png') }}" />
                                     </div>
                                 </div>
                             @endfor
@@ -100,7 +102,7 @@
                                 <div class="entite">
                                     <div class="logo ombre_petite">
                                         <div class="cercle" style="border-color: var(--couleur_police_secondaire)"></div>
-                                        <img src="{{ mix('/images/interrogation.png') }}" />
+                                        <img src="{{ Vite::Image('interrogation.png') }}" />
                                     </div>
                                 </div>
                             @endfor

@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import fs from 'fs';
+import { resolve } from 'path'
+import { rm } from 'node:fs/promises'
 
 let files = [];
 let getFilesInSubdirectories = function (dir) {
@@ -37,8 +39,8 @@ var changePath = [
     {input : 'firebase-messaging-sw.js', output: '/firebase-messaging-sw.js'},
     
     // Base CSS
-    {input : 'default.css', output: '/css/default.css'},
-    {input : 'offline.css', output: '/css/offline.css'},
+    {input : 'default.css', output: '/assets/css/default.css'},
+    {input : 'offline.css', output: '/assets/css/offline.css'},
 ]
 
 function generateOutputPath(chunkInfo, ext){
@@ -80,25 +82,33 @@ function generateOutputPath(chunkInfo, ext){
 // -------------------------------- VITE CONFIG -------------------------------- //
 
 export default defineConfig({
-    base: '/',
-    plugins: [
-        laravel({
-            buildDirectory: '.',
-            input: files,
-            refresh: true,
-        }),
-    ],
-    build: {        
-        manifest: 'vite-manifest.json',
-        emptyOutDir: false,
-        rollupOptions: {
-            output: {
-                // Change file output
-                entryFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
-                chunkFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
-                assetFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, '[ext]'))
+        base: '/',
+        plugins: [
+            laravel({
+                buildDirectory: '.',
+                input: files,
+                refresh: true,
+            }),
+
+            // Plugin to clear the assets folder on build
+            // (instead of the whole public folder when emptyOutDir is true)
+            {
+                name: "Cleaning assets folder",
+                async buildStart() {
+                  await rm(resolve(__dirname, 'public/assets'), { recursive: true, force: true });
+                }
             }
-        }
-    },
-    // output: {}
+        ],
+        build: {        
+            manifest: 'vite-manifest.json',
+            emptyOutDir: false,
+            rollupOptions: {
+                output: {
+                    // Change file output
+                    entryFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
+                    chunkFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
+                    assetFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, '[ext]'))
+                }
+            }
+        },
 });

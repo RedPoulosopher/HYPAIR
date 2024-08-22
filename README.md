@@ -185,6 +185,14 @@ Il n'y a plus qu'à prier et vérifier que tout fonctionne bien en se rendant su
 
 *Remarque* : il faut parfois recharger la page complètement en vidant le cache, avec `Ctrl + F5`.
 
+## Reset des campus & promotions
+
+Chaque année il faudra supprimer la promotion et les campus des utilisateurs, pour les forcer à choisir à nouveau (en cas de changement par rapport à l'année précédente). Pour ce faire, éxécutez les requêtes SQL suivantes (sauvegarder la DB avant au cas où) :
+```sql
+UPDATE `users` SET `promo` = NULL; 
+DELETE FROM sites_users;
+```
+
 # Comment utiliser Git dans le projet ?
 Git est un outil qui va faciliter le travail à plusieurs sur un même projet et permettre de charger une version antérieure si besoin.
 

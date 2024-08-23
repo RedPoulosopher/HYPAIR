@@ -57,7 +57,8 @@ class PostController extends Controller
                                     if(!$post->date_expiration || $post->date_expiration > $now)
                                         return $post;
                                 })
-                               ->sortByDesc('date_apparition');
+                               ->sortByDesc('date_apparition')
+                               ->take(10);
 
         $canSeeConfidentiel = false;
         if (Auth::check()) {

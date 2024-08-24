@@ -56,6 +56,10 @@
                             <x-post :post="$post" />
                         @endif
                     @endforeach
+
+                    @if(!$allPostsVisible)
+                        <a href="/posts" id="voir-plus">Voir plus</a>
+                    @endif
                 @elseif (Auth::check())
                     <p class="should-be-connected no-content">Aucun post pour le moment</p>
                 @else

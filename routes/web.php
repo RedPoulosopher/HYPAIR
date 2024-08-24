@@ -63,6 +63,8 @@ Route::get('/campagnes', [EntiteController::class, 'campagnes'])->name('campagne
 // Attention à l'orthographe des campus (uid)
 Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon'])->name('accueil');
 
+Route::get('/posts/{site?}', [PostController::class, 'posts'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon'])->name('posts');
+
 Route::get('/entites', function () {
     // return view('entite.choix_site'); 
     

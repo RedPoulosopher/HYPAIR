@@ -30,9 +30,7 @@ class PostController extends Controller
         return '#' . $color;
     }
 
-    public function accueil($site = null)
-    {        
-        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+    public static function getCampusFromSite($site = null){
         if (!isset($site)) {
             if (Auth::check()) {
                 $user = Auth::user();
@@ -51,15 +49,34 @@ class PostController extends Controller
         } else {
             $campus = Site::where('label', $site)->first();
         }
+
+        return $campus;
+    }
+
+    public static function getVisiblePostsByCampus($campus){
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+        
         $posts = $campus->posts->where('date_apparition', '<', $now)
                                ->filter(function($post){
                                     $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
                                     if(!$post->date_expiration || $post->date_expiration > $now)
                                         return $post;
                                 })
-                               ->sortByDesc('date_apparition')
-                               ->take(10);
+                               ->sortByDesc('date_apparition');
 
+        return $posts;
+    }
+
+    public function accueil($site = null)
+    {
+        $campus = PostController::getCampusFromSite($site);
+
+        // On récupère seulement les 10 derniers posts du site
+        $posts = PostController::getVisiblePostsByCampus($campus);
+        $allPostsVisible = count($posts) <= 10;
+        $posts = $posts->take(10);
+        
+        // On regarde si l'utilisateur à ce site en tant que campus
         $canSeeConfidentiel = false;
         if (Auth::check()) {
             $user = Auth::user();
@@ -68,7 +85,29 @@ class PostController extends Controller
             }
         }
 
-        return view('accueil')->with('posts', $posts)->with('site', $site)->with('canSeeConfidentiel', $canSeeConfidentiel);
+        return view('accueil')
+                ->with('posts', $posts)
+                ->with('site', $campus->label)
+                ->with('allPostsVisible', $allPostsVisible)
+                ->with('canSeeConfidentiel', $canSeeConfidentiel);
+    }
+
+    public function posts($site = null)
+    {
+        $campus = PostController::getCampusFromSite($site);
+        // On récupère seulement les 10 derniers posts du site
+        $posts = PostController::getVisiblePostsByCampus($campus);
+        
+        // On regarde si l'utilisateur à ce site en tant que campus
+        $canSeeConfidentiel = false;
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->campus->contains($campus)) {
+                $canSeeConfidentiel = true;
+            }
+        }
+
+        return view('post.posts')->with('posts', $posts)->with('site', $campus->label)->with('canSeeConfidentiel', $canSeeConfidentiel);
     }
 
     static function date_apparition_to_duration($date_apparition){

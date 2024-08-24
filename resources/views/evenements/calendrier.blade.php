@@ -17,7 +17,7 @@
 
     <main id="main-content">
         @if (Auth::check())
-            <x-calendrier-switch-campus :campus="$site"></x-calendrier-switch-campus>
+            <x-switch-campus :campus="$site"></x-switch-campus>
 
             <div id="boutons">
                 <p id="fleche-gauche" class="icon-container"> <i class="fa-solid fa-arrow-left fa-xl"></i> </p>

@@ -36,17 +36,17 @@
             c.addEventListener("click", function(e) {
                 /* When an item is clicked, update the original select box,
                 and the selected item: */
-                var y, i, k, s, h, sl, yl;
+                var y, s, h, i;
                 s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-                sl = s.length;
                 h = this.parentNode.previousSibling;
-                for (i = 0; i < sl; i++) {
+
+                for (i = 0; i < s.length; i++) {
                     if (s.options[i].innerHTML == this.innerHTML) {
                         s.selectedIndex = i;
                         h.innerHTML = this.innerHTML;
                         y = this.parentNode.getElementsByClassName("same-as-selected");
-                        yl = y.length;
-                        for (k = 0; k < yl; k++) {
+
+                        for (var k = 0; k < y.length; k++) {
                             y[k].removeAttribute("class");
                         }
                         this.setAttribute("class", "same-as-selected");
@@ -54,11 +54,16 @@
                     }
                 }
                 h.click();
-                if (i == 0) {
-                    location.replace("/entites/" + campus[i]);
-                } else {
-                    location.replace("/entites/" + campus[i - 1]);
+                
+                // Get link to selected page
+                var targetCampus = i == 0 ? campus[i] : campus[i - 1]
+                var currentLinkWithoutCampus = window.location.pathname
+                for(var j=0; j<campus.length; j++){
+                    currentLinkWithoutCampus = currentLinkWithoutCampus.replace('/'+campus[j], '')//Remove all campus from link
                 }
+                
+                // Open selected page
+                location.replace(pathJoin([currentLinkWithoutCampus, targetCampus]))
             });
             b.appendChild(c);
         }
@@ -93,6 +98,12 @@
                 x[i].classList.add("select-hide");
             }
         }
+    }
+
+    function pathJoin(parts){
+        var separator = '/';
+        var replace   = new RegExp(separator+'{1,}', 'g');
+        return parts.join(separator).replace(replace, separator);
     }
 
     /* If the user clicks anywhere outside the select box,

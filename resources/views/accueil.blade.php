@@ -13,7 +13,7 @@
     <main id="main-content">
 
         @if (Auth::check())
-            <x-post-switch-campus :campus="$site"></x-post-switch-campus>
+            <x-switch-campus :campus="$site"></x-switch-campus>
         @endif
 
         <section id="section-services">

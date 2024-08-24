@@ -30,29 +30,6 @@ class PostController extends Controller
         return '#' . $color;
     }
 
-    public static function getCampusFromSite($site = null){
-        if (!isset($site)) {
-            if (Auth::check()) {
-                $user = Auth::user();
-                if (count($user->campus)>0) {
-                    $campus = $user->campus->first();
-                } else {
-                    // if user has no campus saved, show Douai posts by default
-                    $campus = Site::all()->first();
-                }
-            }
-            else {
-                // if user not connected, show Douai posts by default
-                $campus = Site::all()->first();
-            }
-            $site = $campus->label;
-        } else {
-            $campus = Site::where('label', $site)->first();
-        }
-
-        return $campus;
-    }
-
     public static function getVisiblePostsByCampus($campus){
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
         
@@ -69,7 +46,7 @@ class PostController extends Controller
 
     public function accueil($site = null)
     {
-        $campus = PostController::getCampusFromSite($site);
+        $campus = Site::getFromLabel($site);
 
         // On récupère seulement les 10 derniers posts du site
         $posts = PostController::getVisiblePostsByCampus($campus);
@@ -94,7 +71,7 @@ class PostController extends Controller
 
     public function posts($site = null)
     {
-        $campus = PostController::getCampusFromSite($site);
+        $campus = Site::getFromLabel($site);
         // On récupère seulement les 10 derniers posts du site
         $posts = PostController::getVisiblePostsByCampus($campus);
         

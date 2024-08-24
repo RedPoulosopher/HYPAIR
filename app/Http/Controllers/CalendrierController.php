@@ -88,32 +88,15 @@ class CalendrierController extends Controller
     {
         // --- FONCTION À SIMPLIFIER ---
         
-        //on doit recuperer l annee et le mois courant. ca sera l affichage par defaut
+        // In doit recuperer l annee et le mois courant. ca sera l affichage par defaut
         $annee = date('Y');
         $mois = date('m');
 
         
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
 
-
-        if (!isset($site)) {
-            if (Auth::check()) {
-                $user = Auth::user();
-                if (count($user->campus)>0) {
-                    $campus = $user->campus->first();
-                } else {
-                    // if user has no campus saved, show Douai posts by default
-                    $campus = Site::all()->first();
-                }
-            }
-            else {
-                // if user not connected, show Douai posts by default
-                $campus = Site::all()->first();
-            }
-            $site = $campus->label;
-        } else {
-            $campus = Site::where('label', $site)->first();
-        }
+        // On récupère le campus
+        $campus = Site::getFromLabel($site);
         
         $canSeeConfidentiel = false;
         if (Auth::check()) {
@@ -183,7 +166,7 @@ class CalendrierController extends Controller
                 'events' => $evenements_publics_array,
                 'evenements_prives' => $evenements_user,
                 'entite' => "",
-                'site' => $site
+                'site' => $campus->label
             ]);
     }
     public static function calendrier_index_json(Request $request)

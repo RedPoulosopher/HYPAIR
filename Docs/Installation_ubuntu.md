@@ -91,7 +91,7 @@ sudo apt install mysql-workbench
 ```
 Sous Pop OS, il faut passer par *snap*. Si *snap* n'est pas déjà installé : ```sudo apt install snapd```. Puis :
 ```
-sudo snap install mysql-workbench
+sudo snap install mysql-workbench-community
 ```
 
 Il faut ensuite créer une liaison entre *MySQL Workbench* et la base de données. Ici, on va créer une laision qui nous permettra de nous placer en tant que ```hypair_user```, c'est à dire l'application elle-même :

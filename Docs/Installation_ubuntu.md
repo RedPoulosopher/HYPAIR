@@ -67,7 +67,7 @@ GRANT ALL ON hypair_db.* TO 'hypair_user'@'%';
 ```
 Vous pouvez à présent sortir de l'invite de commandes *MySQL* en tapant ```exit```.
 
-Vous pouvez vérifier que tout s'est bien passé, en vous connectant sous cet utilisateur avec ```mysql -u hypair_user -p <motDePasse>```, puis en regardant que cet utilisateur voit bien la bonne base de données avec ```SHOW DATABASES;```.
+Vous pouvez vérifier que tout s'est bien passé, en vous connectant sous cet utilisateur avec ```mysql -u hypair_user -p```, puis en regardant que cet utilisateur voit bien la bonne base de données avec ```SHOW DATABASES;```.
 
 Les tables de cette base de données seront créées plus tard, grâce aux *migrations* de Laravel.
 

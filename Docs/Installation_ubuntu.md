@@ -59,11 +59,11 @@ CREATE DATABASE hypair_db;
 ```
 Création d'un utilisateur (l'application qui sera l'application HypAIR). Il faut que vous définissiez son mot de passe. pour ne pas vous embrouiller, vous pouvez mettre le même que juste avant, celui du compte *root* :
 ```
-CREATE USER 'travellist_user'@'%' IDENTIFIED WITH mysql_native_password BY '<motDePasse>';
+CREATE USER 'hypair_user'@'%' IDENTIFIED WITH mysql_native_password BY '<motDePasse>';
 ```
 On donne à cette utilisateur toutes les permissions pour interagir avec la base de données :
 ```
-GRANT ALL ON travellist.* TO 'travellist_user'@'%';
+GRANT ALL ON hypair_db.* TO 'hypair_user'@'%';
 ```
 Vous pouvez à présent sortir de l'invite de commandes *MySQL* en tapant ```exit```.
 

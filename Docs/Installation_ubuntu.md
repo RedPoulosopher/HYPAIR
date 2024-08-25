@@ -42,13 +42,13 @@ Puis répondez à toutes les questions par ```y```, et tapez ```2``` lorsque l'o
 
 **N.A.** : Les paragraphes suivants suivants, je ne suis pas sûr. Testez en fonction des erreurs que vous avez chez vous ^^
 
-Pour entrer dans l'invite de commandes MySQL, tapez `sudo mysql` ou `mysql -u root -p` si le mot de passe **root** a été défini ou non.
+Pour entrer dans l'invite de commandes MySQL, tapez `sudo mysql`.
 
-Si besoin, créez-vous un mot de passe pour l'utilisateur *root* **que vous noterez quelque part** pour ne pas l'oublier, dans l'invite de commande de MySQL :
+Créez-vous un mot de passe pour l'utilisateur *root* **que vous noterez quelque part** pour ne pas l'oublier, dans l'invite de commande de MySQL :
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<motDePasse>';
 ```
-Si vous souhaitez vous passer de ce mot de passer, et simplement vous connecter en passant par `sudo mysql`, tapez ceci :
+Si vous souhaitez vous passer de ce mot de passe, et simplement vous connecter en passant par `sudo mysql`, tapez ceci :
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED WITH auth_socket;
 ```

@@ -175,6 +175,11 @@ DB_PASSWORD=<motDePasseMySQL>
 ```
 Enregistrez puis fermez ce fichier.
 
+Si vous n'avez pas encore de dossier `www`, creez-le :
+```
+sudo mkdir /var/www
+```
+
 Déplacement du projet dans le dossier approprié :
 ```
 cd ..

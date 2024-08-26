@@ -275,7 +275,7 @@ Pour appliquer les changements, redémarrez le service *nginx* :
 sudo systemctl reload nginx
 ```
 
-Maintenant, si tout s'est bien passé, et que ouvrez un navigateur, vous devriez atterrir sur HypAIR en tant l'URL : ```http://localhost```.
+Maintenant, si tout s'est bien passé, et que ouvrez un navigateur, vous devriez atterrir sur HypAIR en tapant l'URL : ```http://localhost:8080```.
 
 ## X-Debug
 

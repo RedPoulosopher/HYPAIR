@@ -311,9 +311,9 @@ sudo service php8.1-fpm restart
 
 ### Extension du navigateur
 
-Trouvez une extension que vous pouvez utiliser avec votre navigateur préféré. Vous pouvez les voir dans le tableau récapitulatif sur [cette page](https://www.jetbrains.com/help/phpstorm/browser-debugging-extensions.html)
+Trouvez une extension que vous pouvez utiliser avec votre navigateur préféré. Vous pouvez les voir dans le tableau récapitulatif sur [cette page](https://www.jetbrains.com/help/phpstorm/browser-debugging-extensions.html).
 
-Ici, pour **Firefox**, nous allons utiliser[XDebug helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search)
+Ici, pour **Firefox**, nous allons utiliser [XDebug helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search).
 
 Téléchargez l'extension, et lorsque vous êtes sur la page d'HypAIR, cliquez sur l'insecte à droite de la barre de recherche, et cliquer sur **Debug**. Lorsque l'insecte est colorié, le debugger est activé.
 

@@ -329,7 +329,7 @@ En allant dans `Settings` > `PHP` > `Debug`, vous pouvez vérifier que l'IDE est
 
 Fermez les paramètres, et appuyez sur le bouton **Start listening for PHP Debug connections**.
 
-Mettez des breakpoints à des endroits pertinents de fichiers **.php**, en cliquant sur le numéro d'une ligne de code. Par exemple, pour que le programme fasse une fasse lors du chargement de la page d'accueil d'HypAIR, vous mettre un breakpoint à la ligne `$now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');` (ligne 34) du fichier `app/Http/Controllers/PostController.php`.
+Mettez des breakpoints à des endroits pertinents de fichiers **.php**, en cliquant sur le numéro d'une ligne de code. Par exemple, pour que le programme fasse une pause lors du chargement de la page d'accueil d'HypAIR, mettez un breakpoint à la ligne `$now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');` (ligne 34) du fichier `app/Http/Controllers/PostController.php`.
 
 Puis rechargez la page sur votre navigateur. Si vous êtes redirigé vers une pop-up de votre IDE, cliquez sur **Accepter**.
 Si tout s'est bien passé, l'exécution devrait s'être arrêtée au niveau de la ligne comportant le breakpoint, en attendant vos ordres. C'est pas magnifique ???

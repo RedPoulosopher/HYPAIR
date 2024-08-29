@@ -9,9 +9,22 @@ use Illuminate\Support\Facades\Auth;
 
 class LocalAuthController extends Controller
 {
+    function previous_url(Route|string $fallback = null): Route|string
+    {
+        $url = url()->previous($fallback);
+        if ($url == url()->current()) {
+            return $fallback;
+        }
+
+        return $url;
+    }
+
     public function index()
     {
         if (App::environment('local')) {
+            //Save current URL, because redirect()->intended() doesn't work with custom localauth page
+            session(['pre_login_url' => $this->previous_url()]);
+
             $users = User::all();
             return view('dev.authentification')->with('users', $users);
         } else {
@@ -24,8 +37,16 @@ class LocalAuthController extends Controller
         $user = User::find($request->utilisateur);
         Auth::login($user);
 
+        $url = '/';
+        if ( session()->has('pre_login_url') )
+		{
+            // Get and delete url
+			$url = session()->pull('pre_login_url', '/');
+		}
+
         $request->session()->regenerate();
 
-        return redirect()->intended();
+        return redirect($url);
+
     }
 }

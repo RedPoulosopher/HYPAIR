@@ -17,6 +17,16 @@ class AuthController extends Controller
         return 'uid';
     }
 
+    function previous_url(Route|string $fallback = null): Route|string
+    {
+        $url = url()->previous($fallback);
+        if ($url == url()->current()) {
+            return $fallback;
+        }
+
+        return $url;
+    }
+
     public function connexion(Request $request){
 
         $req = $request->validate([
@@ -31,6 +41,10 @@ class AuthController extends Controller
                 . '&redirect_uri='. config('auth.oauth2.redirect_uri')
                 . '&scope=profile email'
                 . '&state=' . hash('sha1', session_id());
+
+            // Store previous url for redirect when response from cerbair
+            session(['pre_login_url' => $this->previous_url()]);
+
 
             return redirect($url);
         } else {
@@ -87,10 +101,19 @@ class AuthController extends Controller
                 ]);
             }
 
+            // Get saved previous url
+            $url = '/';
+            if ( session()->has('pre_login_url') )
+            {
+                // Get and delete url
+                $url = session()->pull('pre_login_url', '/');
+            }
+
+
             Auth::login($user, $remember = true);
             $request->session()->regenerate();
 
-            return redirect()->intended();
+            return redirect($url);
         }
 
     }

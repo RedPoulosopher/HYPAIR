@@ -59,7 +59,7 @@
     <script>
         events = {!! json_encode($events) !!}
         evenements_prives = {!! json_encode($evenements_prives) !!}
-        site = {!! json_encode($site) !!}
+        site = {!! json_encode($site, JSON_UNESCAPED_UNICODE) !!}
         el_calendrier = document.getElementById("calendrier");
 
         function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {

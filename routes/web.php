@@ -325,7 +325,7 @@ Route::controller(CalendrierController::class)->group(function () {
     Route::post('/calendrier/validation', 'validation');
     Route::post('/calendrier/invalidation', 'invalidation');
     Route::post('/calendrier/suppression', 'suppression');
-    Route::get('/calendrier/index_mois_json_general/{annee}-{mois}/{site?}', 'calendrier_index_json_general')->where(['site' => 'douai|lille|valenciennes|dunkerque|alencon']);
+    Route::get('/calendrier/index_mois_json_general/{annee}-{mois}/{site?}', 'calendrier_index_json_general')->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']);
 });
 
 Route::controller(LocalAuthController::class)->group(function () {

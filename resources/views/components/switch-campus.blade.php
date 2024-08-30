@@ -57,10 +57,12 @@
                 
                 // Get link to selected page
                 var targetCampus = i == 0 ? campus[i] : campus[i - 1]
-                var currentLinkWithoutCampus = window.location.pathname
+                var currentLinkWithoutCampus = window.location.pathname.replace('%C3%A7','ç')
+                
                 for(var j=0; j<campus.length; j++){
                     currentLinkWithoutCampus = currentLinkWithoutCampus.replace('/'+campus[j], '')//Remove all campus from link
                 }
+                console.log(currentLinkWithoutCampus)
                 
                 // Open selected page
                 location.replace(pathJoin([currentLinkWithoutCampus, targetCampus]))

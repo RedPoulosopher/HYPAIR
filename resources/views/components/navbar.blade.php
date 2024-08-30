@@ -25,15 +25,17 @@
 
             <li class="menu-button {{ request()->is('contact') ? 'active' : '' }}"><a href="/contact">Contact</a></li>
 
-            @if ($isConnected)
+            @if (Auth::check())
                 <li id="profile-button" class="menu-button">
                     <a href="/home">
                         <p>Profil</p>
                         <img id="photo_lien_profil" src="{{ $user->chemin_photo_de_profil }}" />
                     </a>
                 </li>
+            @elseif(App::environment('local'))
+                <li id="connect-button" class="menu-button"><a href="/localauth">Se connecter</a></li>
             @else
-                <li id="connect-button" class="menu-button"><a href="/home">Se connecter</a></li>
+                <li id="connect-button" class="menu-button"><a href="/connexion">Se connecter</a></li>
             @endif
         </ul>
         <div id="services">

@@ -29,7 +29,7 @@
                 <li id="profile-button" class="menu-button">
                     <a href="/home">
                         <p>Profil</p>
-                        <img id="photo_lien_profil" src="{{ $user->chemin_photo_de_profil }}" />
+                        <img id="photo_lien_profil" src="{{ Auth::user()->chemin_photo_de_profil }}" />
                     </a>
                 </li>
             @elseif(App::environment('local'))

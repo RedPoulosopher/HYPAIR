@@ -6,20 +6,14 @@ use Illuminate\View\Component;
 
 class navbar extends Component
 {
-    /** @var boolean*/
-    public $isConnected;
-
-    public $user;
-
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($isConnected, $user)
+    public function __construct()
     {
-        $this->isConnected = $isConnected;
-        $this->user = $user;
+        
     }
 
     /**

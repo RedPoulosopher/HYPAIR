@@ -31,7 +31,7 @@ section {
                 }
             }
 
-            & > p {
+            &>p {
                 font-weight: var(--fw-light);
                 color: var(--couleur_police_secondaire);
                 font-size: 1em;
@@ -111,13 +111,13 @@ section {
 
         .description {
             padding: 0 15px;
-            overflow-wrap: anywhere;//Evite l'agrandissement d'un component post quand on a un très long mot
+            overflow-wrap: anywhere; //Evite l'agrandissement d'un component post quand on a un très long mot
 
             &.visible {
                 display: block;
             }
 
-            & > :first-child {
+            &> :first-child {
                 margin-top: 15px;
                 padding-top: 15px;
                 border-top: 1px solid var(--light-grey);
@@ -156,6 +156,15 @@ p#confidentiel {
     }
 }
 
-.documentation > p#confidentiel {
+.documentation>p#confidentiel {
     margin: 0;
+}
+
+#connect {
+    display: flex;
+    justify-content: center;
+
+    .bouton {
+        margin-top: 20px;
+    }
 }

@@ -44,55 +44,58 @@
                     -->
             </div>
 
-            <div class="documentation card">
-                @if ($postIsVisible && $canSeePost)
-                    <i id="share-btn" class="fa-solid fa-arrow-up-right-from-square"></i>
+            @if (Auth::check())
+                <div class="documentation card">
+                    @if ($postIsVisible && $canSeePost)
+                        <i id="share-btn" class="fa-solid fa-arrow-up-right-from-square"></i>
 
-                    <div class="header">
-                        <div class="thumbnail"><img src="{{ session('entite_logo_petit') }}" alt="Logo {{ $entite->nom }}">
+                        <div class="header">
+                            <div class="thumbnail"><img src="{{ session('entite_logo_petit') }}" alt="Logo {{ $entite->nom }}">
+                            </div>
+                            <h1 class="title">{{ $post->titre }}</h1>
+                            <p>Posté par {{ $entite->nom }}<span class="separator">•</span>{{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
+                            @if ($post->confidentiel != 0)
+                                <p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager"
+                                    class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est
+                                    confidentiel</p>
+                            @endif
+
+                            <div class="tags">
+                                @foreach ($post->tags as $tag)
+                                    <div class="tag" style="background-color: {{ $tag->couleur }};">{{ $tag->name }}</div>
+                                @endforeach
+                            </div>
+                            @if ($post->event)
+                                <a id="rattachement"
+                                    href="/{{ $post->entite->uid }}/entite/evenement/{{ $post->event->slug }}"><i
+                                        class="fa-solid fa-link"></i>Ce post est rattaché à l'évènement
+                                    "{{ $post->event->titre }}"</a>
+                            @endif
                         </div>
-                        <h1 class="title">{{ $post->titre }}</h1>
-                        <p>Posté par {{ $entite->nom }}<span class="separator">•</span>{{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
-                        @if ($post->confidentiel != 0)
-                            <p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager"
-                                class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est
-                                confidentiel</p>
-                        @endif
 
-                        <div class="tags">
-                            @foreach ($post->tags as $tag)
-                                <div class="tag" style="background-color: {{ $tag->couleur }};">{{ $tag->name }}</div>
+                        <div class="img-container">
+                            @foreach ($post->bannieres as $banniere)
+                                <img src="{{ Storage::url($banniere->path) }} " alt="bannière">
                             @endforeach
                         </div>
-                        @if ($post->event)
-                            <a id="rattachement"
-                                href="/{{ $post->entite->uid }}/entite/evenement/{{ $post->event->slug }}"><i
-                                    class="fa-solid fa-link"></i>Ce post est rattaché à l'évènement
-                                "{{ $post->event->titre }}"</a>
-                        @endif
-                    </div>
-
-                    <div class="img-container">
-                        @foreach ($post->bannieres as $banniere)
-                            <img src="{{ Storage::url($banniere->path) }} " alt="bannière">
-                        @endforeach
-                    </div>
-                    <div class="description">
-                        {!! Str::markdown(strip_tags($post->description ?? '')) !!}
-                    </div>
-                @elseif (!$postIsVisible)
-                    <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post n'est pas disponible
-                    </p>
-                @else
-                    @if (Auth::check())
-                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est
-                            confidentiel. Vous ne pouvez pas le consulter.</p>
+                        <div class="description">
+                            {!! Str::markdown(strip_tags($post->description ?? '')) !!}
+                        </div>
+                    @elseif (!$postIsVisible)
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post n'est pas disponible
+                        </p>
                     @else
-                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est
-                            confidentiel. Veuillez vous connecter.</p>
+                        <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel. Vous ne pouvez pas le consulter.</p>
                     @endif
-                @endif
-            </div>
+                </div>
+            @else
+                <div class="documentation card">
+                    <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Veuillez vous connecter pour voir le post.</p>
+                    <div id="connect">
+                        <a href="/home" class="bouton primaire ombre_petite">Se connecter</a>
+                    </div>
+                </div>
+            @endif
         </section>
     </main>
 

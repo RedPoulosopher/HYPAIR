@@ -41,10 +41,6 @@ class UserController extends Controller
       return view('espace_utilisateur.home', ['user'=>$user, 'reseaux_sociaux'=>$reseaux_sociaux, 'entites_admin'=>$entites_admin ,'entites_membre'=>$entites_membre]);
     }
 
-    if (App::environment('local')) {
-      return redirect('/localauth');
-    }
-
     return redirect('/connexion');
   }
 

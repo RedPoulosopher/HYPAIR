@@ -92,7 +92,7 @@
                 <div class="documentation card">
                     <p id="confidentiel"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Veuillez vous connecter pour voir le post.</p>
                     <div id="connect">
-                        <a href="/home" class="bouton primaire ombre_petite">Se connecter</a>
+                        <a href="/connexion" class="bouton primaire ombre_petite">Se connecter</a>
                     </div>
                 </div>
             @endif

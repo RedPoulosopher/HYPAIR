@@ -32,8 +32,6 @@
                         <img id="photo_lien_profil" src="{{ Auth::user()->chemin_photo_de_profil }}" />
                     </a>
                 </li>
-            @elseif(App::environment('local'))
-                <li id="connect-button" class="menu-button"><a href="/localauth">Se connecter</a></li>
             @else
                 <li id="connect-button" class="menu-button"><a href="/connexion">Se connecter</a></li>
             @endif

@@ -22,9 +22,6 @@ class LocalAuthController extends Controller
     public function index()
     {
         if (App::environment('local')) {
-            //Save current URL, because redirect()->intended() doesn't work with custom localauth page
-            session(['pre_login_url' => $this->previous_url()]);
-
             $users = User::all();
             return view('dev.authentification')->with('users', $users);
         } else {

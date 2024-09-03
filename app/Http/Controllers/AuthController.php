@@ -29,15 +29,22 @@ class AuthController extends Controller
     }
 
     public function connexion(Request $request){
+        
+        $req = $request->validate([
+            'code' => ['nullable'],
+            'state' => ['nullable']
+        ]);
+
+
+        // Store previous url for redirect when response from cerbair/localauth
+        if(!isset($req['code'])) {
+            session(['pre_login_url' => $this->previous_url()]);
+        }
 
         if (App::environment('local')) {
             return redirect('/localauth');
         }
 
-        $req = $request->validate([
-            'code' => ['nullable'],
-            'state' => ['nullable']
-        ]);
 
         if(!isset($req['code'])) {
             $url = config('auth.oauth2.authorize_url')
@@ -46,9 +53,6 @@ class AuthController extends Controller
                 . '&redirect_uri='. config('auth.oauth2.redirect_uri')
                 . '&scope=profile email'
                 . '&state=' . hash('sha1', session_id());
-
-            // Store previous url for redirect when response from cerbair
-            session(['pre_login_url' => $this->previous_url()]);
 
 
             return redirect($url);

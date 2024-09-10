@@ -286,7 +286,7 @@ class EvenementController extends Controller
 			
             return Evenement::select('evenements.titre', 'evenements.slug', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.id', 'entites.nom as entite_nom', 'entites.uid', 'sites_evenements.site_id')
                 ->where('temps_debut',  '<', $dateInSevenDays)
-                ->where('temps_fin', '>', $now)
+                ->where('temps_fin', '>=', $now)
 				->where('date_apparition', '<', $nowFullDate)
 				->whereIn('sites_evenements.site_id', $user_site_ids)//Filtre pour ne garder que les évènements du/des campus de l'utilisateur
 				->groupBy('evenements.id')//S'assure qu'il n'y a pas de duplicata

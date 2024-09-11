@@ -10,7 +10,6 @@
 
 @pushonce('styles')
     @vite([
-        'resources/css/jstable.scss',
         'resources/css/formulaire.scss',
         'resources/css/espace_utilisateur/editer_reseaux_profil.scss',
     ])

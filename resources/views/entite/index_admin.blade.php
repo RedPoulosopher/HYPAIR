@@ -75,9 +75,11 @@
     </section>
 </main>
 
-<script>
+<script type="module">
+
+import "{{ Vite::asset('resources/js/jstable.min.js') }}" 
     
-datatable_options = {
+const datatable_options = {
     "perPage" : 15,
     "columns" : [{
             select: [1,2],
@@ -92,18 +94,20 @@ datatable_options = {
 }
 new JSTable("#index", { ...datatable_options });
 
-dernier_appuie = null;
-el_menu_meatballs = document.getElementById("menu_meatballs")
-taille_x_menu_meatballs = el_menu_meatballs.getBoundingClientRect().width
-taille_x_meatballs = document.querySelector(".meatballs").getBoundingClientRect().width
+var dernier_appui = null;
+var el_menu_meatballs = document.getElementById("menu_meatballs")
+const taille_x_menu_meatballs = el_menu_meatballs.getBoundingClientRect().width
+const taille_x_meatballs = document.querySelector(".meatballs").getBoundingClientRect().width
+
 el_menu_meatballs.style.display = "none"
+
 function menu_meatballs(ceci){
-    if(dernier_appuie == ceci){
+    if(dernier_appui == ceci){
         el_menu_meatballs.style.display = "none"
-        dernier_appuie = null
+        dernier_appui = null
     } else {
         el_menu_meatballs.style.display = "block"
-        dernier_appuie = ceci
+        dernier_appui = ceci
     }
     left = ceci.getBoundingClientRect().x
     topp = ceci.getBoundingClientRect().y

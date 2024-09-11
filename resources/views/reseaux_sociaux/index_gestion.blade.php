@@ -5,7 +5,6 @@
 @pushonce('styles')
     @vite([
         'resources/css/entite/index_gestion.scss',
-        'resources/css/jstable.scss',
         'resources/css/formulaire.scss',
     ])
 @endpushonce

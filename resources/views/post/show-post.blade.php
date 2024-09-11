@@ -18,8 +18,8 @@
 
 @pushonce('styles')
     @vite([
-        'resources/css/post/show-post.sss',
-        'resources/css/documentation-popup.sss',
+        'resources/css/post/show-post.scss',
+        'resources/css/documentation-popup.scss',
     ])
 @endpushonce
 

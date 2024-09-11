@@ -93,13 +93,19 @@ const datatable_options = {
     ]
 }
 new JSTable("#index", { ...datatable_options });
+</script>
 
+<script>
 var dernier_appui = null;
 var el_menu_meatballs = document.getElementById("menu_meatballs")
-const taille_x_menu_meatballs = el_menu_meatballs.getBoundingClientRect().width
-const taille_x_meatballs = document.querySelector(".meatballs").getBoundingClientRect().width
+var el_meatballs = document.querySelector(".meatballs")
 
-el_menu_meatballs.style.display = "none"
+
+const taille_x_menu_meatballs = el_menu_meatballs ? el_menu_meatballs.getBoundingClientRect().width : 0
+const taille_x_meatballs = el_meatballs ? el_meatballs.getBoundingClientRect().width : 0
+
+if(el_menu_meatballs)
+    el_menu_meatballs.style.display = "none"
 
 function menu_meatballs(ceci){
     if(dernier_appui == ceci){

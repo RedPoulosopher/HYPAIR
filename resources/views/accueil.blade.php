@@ -39,7 +39,7 @@
                     logo="{{ mix('/images/gitlab.png') }}">
                 </x-service>
 
-                <x-service nom="Tutoriels HypAIR" destination='https://partage.imt.fr/index.php/s/bH7fpPMqdCmGtAX'
+                <x-service nom="Tutoriels HypAIR" destination='https://partage.imt.fr'
                     color=#4c4372 logo="{{ mix('/images/tutorial.png') }}">
                 </x-service>
 

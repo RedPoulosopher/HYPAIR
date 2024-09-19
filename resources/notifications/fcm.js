@@ -9,7 +9,7 @@ const messaging = getMessaging(app);
 
 
 //On récupère la variable d'environnement stockée dans la window
-function setupNotifications(FCM_VAPID_PUBLIC_KEY){
+export function setupNotifications(FCM_VAPID_PUBLIC_KEY){
 
   return new Promise((resolve, reject) => {
 
@@ -50,6 +50,6 @@ function setupNotifications(FCM_VAPID_PUBLIC_KEY){
   
 }
 
-window.setupNotifications = setupNotifications
-
-window.getNotifToken = async (FCM_VAPID_PUBLIC_KEY) => await getToken(messaging, {vapidKey: FCM_VAPID_PUBLIC_KEY })
+export async function getNotifToken (FCM_VAPID_PUBLIC_KEY) {
+  return await getToken(messaging, {vapidKey: FCM_VAPID_PUBLIC_KEY })
+}

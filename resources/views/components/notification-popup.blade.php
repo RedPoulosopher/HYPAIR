@@ -46,6 +46,16 @@
 
 </div>
 
+@pushonce('end-scripts')
+<script type="module">
+    import { setupNotifications } from "{{ Vite::asset('resources/notifications/fcm.js') }}"
+    console.log(setupNotifications)
+
+
+    
+    // window.setupNotifications = setupNotifications
+</script>
+
 <script>
 
 var popup = document.getElementById("select-popup")
@@ -152,3 +162,4 @@ function choixNotifs(event, choix) {
     
     
 </script>
+@endpushonce

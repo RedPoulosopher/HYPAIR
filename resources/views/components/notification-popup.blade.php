@@ -3,8 +3,8 @@
 
         <h2>Autoriser les notifications ?</h2>
         <div id="liste-choix">
-            <a href="" onclick="choixNotifs(event, true)">Oui</a>
-            <a href="" onclick="choixNotifs(event, false)">Non</a>
+            <a href="" id="oui">Oui</a>
+            <a href="" id="non">Non</a>
         </div>
     
     </div>
@@ -48,15 +48,9 @@
 
 @pushonce('end-scripts')
 <script type="module">
-    import { setupNotifications } from "{{ Vite::asset('resources/notifications/fcm.js') }}"
-    console.log(setupNotifications)
 
-
+import { setupNotifications } from "{{ Vite::asset('resources/notifications/fcm.js') }}"
     
-    // window.setupNotifications = setupNotifications
-</script>
-
-<script>
 
 var popup = document.getElementById("select-popup")
 var supportedContent = document.getElementById("supported")
@@ -117,6 +111,16 @@ function forceNotificationsPopup(){
 
 }
 
+// Bouton de choix des notifications
+var oui = document.getElementById("oui")
+var non = document.getElementById("non")
+
+oui.addEventListener('click', (event)=>{
+    choixNotifs(event, true)
+})
+non.addEventListener('click', (event)=>{
+    choixNotifs(event, false)
+})
 
 
 function choixNotifs(event, choix) {
@@ -130,7 +134,7 @@ function choixNotifs(event, choix) {
         loadingContent.classList.remove("hidden")
 
         // Wait for user authorization
-        window.setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}").then(()=>{
+        setupNotifications("{{ env('FCM_VAPID_PUBLIC_KEY') }}").then(()=>{
             // Show success message
             loadingContent.classList.add("hidden")
             successContent.classList.remove("hidden")        

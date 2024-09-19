@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import fs from 'fs';
+import path from 'node:path';
 import { resolve } from 'path'
 import { rm } from 'node:fs/promises'
 
@@ -108,7 +109,10 @@ export default defineConfig({
                     entryFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
                     chunkFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
                     assetFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, '[ext]'))
-                }
+                },
+                
+                // Nécessaire sinon les 'export' JS ne sont pas compilés par Vite (cf. https://github.com/vitejs/vite/discussions/14454)
+                preserveEntrySignatures: "allow-extension"
             }
         },
 });

@@ -36,8 +36,6 @@
 <script type="module">
 
     import { getNotifToken } from "{{ Vite::asset('resources/notifications/fcm.js') }}";
-
-    console.log(getNotifToken)
     
     // Check if user logged in
     var loggedIn = {!! json_encode(Auth::check()) !!}

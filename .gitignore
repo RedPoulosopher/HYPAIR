@@ -23,5 +23,5 @@ questions.md
 *.lnk
 
 
-resources/notifications/firebase_config.js
-resources/notifications/firebase_credentials.json
+resources/js/notifications/firebase_config.js
+resources/js/notifications/firebase_credentials.json

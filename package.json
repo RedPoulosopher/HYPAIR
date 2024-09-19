@@ -1,9 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "watch": "vite",
-        "prod": "npm run production",
-        "production": "vite build"
+        "dev": "vite",
+        "build": "vite build"
     },
     "devDependencies": {
         "cross-env": "^7.0.3",

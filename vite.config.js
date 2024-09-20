@@ -1,36 +1,28 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import fs from 'fs';
-import path from 'node:path';
 import { resolve } from 'path'
 import { rm } from 'node:fs/promises'
+import { globSync } from 'glob'
 
-let files = [];
-let getFilesInSubdirectories = function (dir) {
-    fs.readdirSync(dir).forEach(filename => {
-        const absolute = `${dir}/${filename}`;
-        if (fs.statSync(absolute).isDirectory()) return getFilesInSubdirectories(absolute);
-        else if (!filename.startsWith('_')) return files.push(absolute);
-    });
+function getFilesInSubdirectories (pattern) {
+    // Get all files with pattern, but excludes those that start with "_"
+    return globSync([pattern, "!**/_*"], { nodir: true });
 }
 
-// -------------------- Fonts -------------------- //
-getFilesInSubdirectories('resources/fonts/');
-files = files.filter(path => /\.(ttf)$/.test(path))
+// Get all files to be built by Vite
+const paths = [
+    "resources/fonts/**/*.ttf",       // Fonts
+    "resources/css/**/*.scss",        // CSS
+    "resources/js/**/*.js",           // JS
+    "resources/pwa/**/*sw.js",       // PWA Service workers
+    "resources/notifications/fcm.js", // FCM module
+    "resources/images/**/*",          // Images
+]
 
-// --------------------- CSS --------------------- //
-getFilesInSubdirectories('resources/css/');
-
-// --------------------- JS ---------------------- //
-getFilesInSubdirectories('resources/js');
-// PWA
-files.push("resources/pwa/sw.js")
-files.push("resources/pwa/firebase-messaging-sw.js")
-// Notifications
-files.push("resources/notifications/fcm.js")
-
-// -------------------- Images ------------------- //
-getFilesInSubdirectories('resources/images/');
+let files = [];
+paths.forEach(p => {
+    files.push(...getFilesInSubdirectories(p))
+})
 
 
 var excludeFromVersioning = ['sw.js', 'firebase-messaging-sw.js', 'default.css', 'offline.css']
@@ -50,31 +42,24 @@ function generateOutputPath(chunkInfo, ext){
 
     var filename = chunkInfo.facadeModuleId != undefined ?
                         chunkInfo.facadeModuleId.split('\\').pop()
-                        : `${chunkInfo.name}.${ext}`.replace('.[ext]','')
+                        : `${chunkInfo.name}.${ext}`.replace('.[ext]','')           
 
-    // Remove hash
-    for(var i=0; i<excludeFromVersioning.length; i++){
-        var str = excludeFromVersioning[i];
-        
-        if(filename == str){
-            //Remove hash
-            path = path.replace('-[hash]', '')
-            break
-        }
+
+    // If should be excluded from versioning
+    if(excludeFromVersioning.includes(filename)){
+        // Remove hash
+        path = path.replace('-[hash]', '')
     }
+    
+    // If should be moved to another folder than assets
+    var i = changePath.findIndex( (e) => e.input == filename )
+    if(i >= 0){
+        console.log(filename)
+        var input = changePath[i].input
+        var newPrefix = changePath[i].output.replace(input,'').substring(1);
 
-    // Move to another folder than assets
-    for(var i=0; i<changePath.length; i++){
-        var str = changePath[i].input;
-
-        
-        if(filename == str){
-            var newPrefix = changePath[i].output.replace(str,'').substring(1);
-
-            //Replace assets prefix with new one
-            path = path.replace('assets/', newPrefix)
-            break
-        }
+        // Replace assets prefix with new one
+        path = path.replace('assets/', newPrefix)
     }
 
     return path
@@ -83,36 +68,36 @@ function generateOutputPath(chunkInfo, ext){
 // -------------------------------- VITE CONFIG -------------------------------- //
 
 export default defineConfig({
-        base: '/',
-        plugins: [
-            laravel({
-                buildDirectory: '.',
-                input: files,
-                refresh: true,
-            }),
+    base: '/',
+    plugins: [
+        laravel({
+            buildDirectory: '.',
+            input: files,
+            refresh: true,
+        }),
 
-            // Plugin to clear the assets folder on build
-            // (instead of the whole public folder when emptyOutDir is true)
-            {
-                name: "Cleaning assets folder",
-                async buildStart() {
-                  await rm(resolve(__dirname, 'public/assets'), { recursive: true, force: true });
-                }
+        // Plugin to clear the assets folder on build
+        // (instead of the whole public folder when emptyOutDir is true)
+        {
+            name: "Cleaning assets folder",
+            async buildStart() {
+                await rm(resolve(__dirname, 'public/assets'), { recursive: true, force: true });
             }
-        ],
-        build: {        
-            manifest: 'vite-manifest.json',
-            emptyOutDir: false,
-            rollupOptions: {
-                output: {
-                    // Change file output
-                    entryFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
-                    chunkFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
-                    assetFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, '[ext]'))
-                },
-                
-                // Nécessaire sinon les 'export' JS ne sont pas compilés par Vite (cf. https://github.com/vitejs/vite/discussions/14454)
-                preserveEntrySignatures: "allow-extension"
-            }
-        },
+        }
+    ],
+    build: {        
+        manifest: 'vite-manifest.json',
+        emptyOutDir: false,
+        rollupOptions: {
+            output: {
+                // Change file output
+                entryFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
+                chunkFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, 'js')),
+                assetFileNames: ((chunkInfo) => generateOutputPath(chunkInfo, '[ext]'))
+            },
+            
+            // Nécessaire sinon les 'export' JS ne sont pas compilés par Vite (cf. https://github.com/vitejs/vite/discussions/14454)
+            preserveEntrySignatures: "allow-extension"
+        }
+    },
 });

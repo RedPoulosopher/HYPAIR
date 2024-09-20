@@ -54,7 +54,6 @@ function generateOutputPath(chunkInfo, ext){
     // If should be moved to another folder than assets
     var i = changePath.findIndex( (e) => e.input == filename )
     if(i >= 0){
-        console.log(filename)
         var input = changePath[i].input
         var newPrefix = changePath[i].output.replace(input,'').substring(1);
 

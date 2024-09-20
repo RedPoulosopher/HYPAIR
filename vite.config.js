@@ -99,4 +99,11 @@ export default defineConfig({
             preserveEntrySignatures: "allow-extension"
         }
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler',
+            }
+        }
+    }
 });

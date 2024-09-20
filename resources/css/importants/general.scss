@@ -165,13 +165,13 @@ p.explication {
     }
 
     &.primaire {
-        * {
-            color: var(--couleur_police_accentuation);
-        }
-
         background-color: var(--couleur_accentuation);
         border: none;
         text-transform: uppercase;
+
+        * {
+            color: var(--couleur_police_accentuation);
+        }
     }
 
     &.secondaire {

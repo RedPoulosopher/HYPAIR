@@ -38,8 +38,10 @@
 </style>
 @endpushonce
 
-@pushonce('end-scripts')
-<script>
+<script type="module">
+
+    import { getNotifToken } from "{{ Vite::asset('resources/notifications/fcm.js') }}";
+    
     // Check if user logged in
     var loggedIn = {!! json_encode(Auth::check()) !!}
 
@@ -65,7 +67,7 @@
     var notificationToken = document.getElementById("notification-token")
     if(Notification.permission == "granted" && loggedIn){
         notificationToken.innerHTML = "Chargement..."
-        window.getNotifToken("{{ env('FCM_VAPID_PUBLIC_KEY') }}").then(token => {
+        getNotifToken("{{ env('FCM_VAPID_PUBLIC_KEY') }}").then(token => {
             notificationToken.innerHTML = token
         })
     }else{
@@ -78,4 +80,3 @@
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 </script>
-@endpushonce

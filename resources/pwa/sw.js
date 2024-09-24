@@ -3,8 +3,8 @@ const VERSION = 1;
 var CURRENT_CACHE = "pwa-v" + new Date().getTime();
 var filesToCache = [
     '/offline',
-    '/css/default.css',
-    '/css/offline.css',
+    '/assets/css/default.css',
+    '/assets/css/offline.css',
     '/images/offline.svg',
     '/images/icons/icon-48x48.png',
     '/images/icons/icon-72x72.png',

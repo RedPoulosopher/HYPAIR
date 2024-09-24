@@ -9,9 +9,10 @@
 @section('titre', 'Gérer les réseaux sociaux')
 
 @pushonce('styles')
-<link rel="stylesheet" href="{{ mix('/css/jstable.css') }}" type="text/css">
-<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
-<link rel="stylesheet" href="{{ mix('/css/espace_utilisateur/editer_reseaux_profil.css') }}" type="text/css">
+    @vite([
+        'resources/css/formulaire.scss',
+        'resources/css/espace_utilisateur/editer_reseaux_profil.scss',
+    ])
 @endpushonce
 
 @section('content')

@@ -5,7 +5,7 @@
     lien="{{ $reseau->lien }}"
     style="background-color: {{ $reseau->liste->couleur }}; background: linear-gradient(to right, {{ $reseau->liste->couleur }}); color:{{ $reseau->liste->couleur_police }};"
 >
-    <img src="{{ mix('/images/logo_reseaux/' . strtolower($reseau->liste->nom) . '.svg') }}">
+    <img src="{{ Vite::Image('logo_reseaux/' . strtolower($reseau->liste->nom) . '.svg') }}">
     <p style="color: {{$reseau->liste->couleur_police}}"> {{ $reseau->liste->nom }}</p>       
 </a>
 

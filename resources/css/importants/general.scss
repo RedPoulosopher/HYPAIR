@@ -51,7 +51,7 @@ em {
 
 @font-face {
     font-family: "GearsOfPeace";
-    src: url("../../fonts/GearsOfPeace.ttf") format("truetype");
+    src: url("/resources/fonts/GearsOfPeace.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -165,13 +165,13 @@ p.explication {
     }
 
     &.primaire {
-        * {
-            color: var(--couleur_police_accentuation);
-        }
-
         background-color: var(--couleur_accentuation);
         border: none;
         text-transform: uppercase;
+
+        * {
+            color: var(--couleur_police_accentuation);
+        }
     }
 
     &.secondaire {

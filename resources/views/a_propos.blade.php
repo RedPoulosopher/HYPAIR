@@ -5,7 +5,7 @@
 @section('content')
 
     @pushonce('styles')
-        <link rel="stylesheet" href="{{ mix('/css/a-propos.css') }}">
+        @vite(['resources/css/a-propos.scss'])
     @endpushonce
 
     <main id="main-content">

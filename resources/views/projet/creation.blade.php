@@ -2,11 +2,19 @@
 
 @section('titre', $titre)
 
-@section('content')
+@pushonce('styles')
+	@vite([
+		'resources/css/formulaire.scss',
+		'resources/css/simpleMDE.scss',
+	])
+@endpushonce
 
-<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
-<link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}">
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+@pushonce('start-scripts')
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+@endpushonce
+
+
+@section('content')
 
 <div id="wrapper">
 	<div id="contenu" class="moyen">

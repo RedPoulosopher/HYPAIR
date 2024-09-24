@@ -3,9 +3,11 @@
 @section('titre', 'Évènements')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ mix('/css/evenements/formulaire.css') }}" type="text/css">
+    @vite([
+        'resources/css/simpleMDE.scss',
+        'resources/css/formulaire.scss',
+        'resources/css/evenements/formulaire.scss',
+    ])
 @endpushonce
 
 @pushonce('start-scripts')

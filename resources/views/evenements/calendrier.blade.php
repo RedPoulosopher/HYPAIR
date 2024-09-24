@@ -3,17 +3,18 @@
 @section('titre', 'Calendrier')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/evenements/calendrier.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/documentation-popup.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/components/switch-campus.css') }}" type="text/css" />
+    @vite([
+        'resources/css/evenements/calendrier.scss',
+        'resources/css/documentation-popup.scss',
+        'resources/css/components/switch-campus.scss',
+    ])
+@endpushonce
+
+@pushonce('start-scripts')
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 @endpushonce
 
 @section('content')
-
-
-    <head>
-        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    </head>
 
     <main id="main-content">
         @if (Auth::check())

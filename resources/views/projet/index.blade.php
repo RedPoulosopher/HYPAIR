@@ -34,8 +34,10 @@
 	</div>
 </div>
 
-@vite('resources/js/elasticlunr.min.js')
-<script>
+<script type="module">
+// Import not tested
+import { elasticlunr } from "{{ Vite::asset('resources/js/elasticlunr.min.js') }}"
+
 const champ_recherche = document.getElementById('search_input');
 const placeholder = champ_recherche.getAttribute('placeholder');
 

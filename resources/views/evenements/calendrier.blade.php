@@ -10,12 +10,11 @@
     ])
 @endpushonce
 
+@pushonce('start-scripts')
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+@endpushonce
+
 @section('content')
-
-
-    <head>
-        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    </head>
 
     <main id="main-content">
         @if (Auth::check())

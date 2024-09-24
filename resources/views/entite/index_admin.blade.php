@@ -10,7 +10,6 @@
 @endpushonce
 
 @section('content')
-@vite('resources/js/jstable.min.js')
 
 <main id="main-content">
 	<section>

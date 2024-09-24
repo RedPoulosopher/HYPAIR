@@ -12,8 +12,6 @@
 @endpushonce
 
 @section('content')
-    @vite('resources/js/jstable.min.js')
-
 
     <main id="main-content">
         <section>
@@ -123,7 +121,7 @@
         </section>
     </main>
 
-    {{-- @vite('resources/js/elasticlunr.min.js') --}}
+    
     <script type="module">
         // Affichage des droits du rôle
         var roles = {!! json_encode($roles) !!}

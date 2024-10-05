@@ -4,7 +4,7 @@
 
 @section('content')
 
-<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
+@vite('resources/css/documentation.scss')
 
 <div id="wrapper">
 	<div id="contenu" class="petit">
@@ -34,8 +34,10 @@
 	</div>
 </div>
 
-<script type="text/javascript" src="{{ mix('/js/elasticlunr.min.js') }}"></script>
-<script>
+<script type="module">
+// Import not tested
+import { elasticlunr } from "{{ Vite::asset('resources/js/elasticlunr.min.js') }}"
+
 const champ_recherche = document.getElementById('search_input');
 const placeholder = champ_recherche.getAttribute('placeholder');
 

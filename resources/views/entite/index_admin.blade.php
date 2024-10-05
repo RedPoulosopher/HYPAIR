@@ -3,12 +3,13 @@
 @section('titre', 'Entités')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/entite/index_admin.css') }}" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/jstable.css') }}">
+    @vite([
+        'resources/css/entite/index_admin.scss',
+        'resources/css/jstable.scss',
+    ])
 @endpushonce
 
 @section('content')
-<script type="text/javascript" src="{{ mix('/js/jstable.min.js') }}"></script>
 
 <main id="main-content">
 	<section>
@@ -73,9 +74,11 @@
     </section>
 </main>
 
-<script>
+<script type="module">
+
+import "{{ Vite::asset('resources/js/jstable.min.js') }}" 
     
-datatable_options = {
+const datatable_options = {
     "perPage" : 15,
     "columns" : [{
             select: [1,2],
@@ -89,19 +92,27 @@ datatable_options = {
     ]
 }
 new JSTable("#index", { ...datatable_options });
+</script>
 
-dernier_appuie = null;
-el_menu_meatballs = document.getElementById("menu_meatballs")
-taille_x_menu_meatballs = el_menu_meatballs.getBoundingClientRect().width
-taille_x_meatballs = document.querySelector(".meatballs").getBoundingClientRect().width
-el_menu_meatballs.style.display = "none"
+<script>
+var dernier_appui = null;
+var el_menu_meatballs = document.getElementById("menu_meatballs")
+var el_meatballs = document.querySelector(".meatballs")
+
+
+const taille_x_menu_meatballs = el_menu_meatballs ? el_menu_meatballs.getBoundingClientRect().width : 0
+const taille_x_meatballs = el_meatballs ? el_meatballs.getBoundingClientRect().width : 0
+
+if(el_menu_meatballs)
+    el_menu_meatballs.style.display = "none"
+
 function menu_meatballs(ceci){
-    if(dernier_appuie == ceci){
+    if(dernier_appui == ceci){
         el_menu_meatballs.style.display = "none"
-        dernier_appuie = null
+        dernier_appui = null
     } else {
         el_menu_meatballs.style.display = "block"
-        dernier_appuie = ceci
+        dernier_appui = ceci
     }
     left = ceci.getBoundingClientRect().x
     topp = ceci.getBoundingClientRect().y

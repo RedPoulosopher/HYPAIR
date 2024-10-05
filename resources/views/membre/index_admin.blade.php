@@ -3,15 +3,15 @@
 @section('titre', 'Membres')
 
 @pushonce('styles')
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/jstable.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/formulaire.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/documentation-popup.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ mix('/css/membre/index_admin.css') }}">
+    @vite([
+        'resources/css/jstable.scss',
+        'resources/css/formulaire.scss',
+        'resources/css/documentation-popup.scss',
+        'resources/css/membre/index_admin.scss',
+    ])
 @endpushonce
 
 @section('content')
-    <script type="text/javascript" src="{{ mix('/js/jstable.min.js') }}"></script>
-
 
     <main id="main-content">
         <section>
@@ -121,9 +121,9 @@
         </section>
     </main>
 
-
-    {{-- <script type="text/javascript" src="{{ mix('/js/elasticlunr.min.js') }}"></script> --}}
-    <script>
+    
+    <script type="module">
+        // Affichage des droits du rôle
         var roles = {!! json_encode($roles) !!}
         var roleInput = document.getElementById('role-input');
         var droitDuRole = document.getElementById('droits-role');
@@ -139,100 +139,8 @@
 
 
 
-
-
-        // const input_role_nom = document.getElementById('search_role_input');
-        // const input_role_id = document.getElementById('search_role_input_id');
-
-
-        // //génère l'index
-        // var index = elasticlunr(function () {
-        //     this.addField('nom_role');
-        //     this.setRef('index');
-        // });
-
-        // function remove_accent(str){
-        //     return str.normalize("NFD").replace(/\p{Diacritic}/gu, "")
-        // }
-
-        // //rentre les données dans l'index
-        // role_els = document.querySelectorAll('#roles option')
-        // for(var i = 0; i < role_els.length; i++){
-        // 	role_id = role_els[i].value
-        // 	nom_role = role_els[i].innerText
-        //     nom_role = remove_accent(nom_role)
-
-        // 	index.addDoc({"index":i, "nom_role":nom_role, "index_role":role_id})
-
-        //     role_els[i].addEventListener('click', function(){
-        //         input_role_nom.value = this.innerText;
-        //         input_role_id.value = this.value;
-        //     })
-        // }
-
-        // input_role_nom.addEventListener("keyup", function(){
-        // 	a_rechercher = this.value
-
-        //     if(a_rechercher==""){
-        //         for(i=0; i<role_els.length; i++){
-        //             role_els[i].style.display = "none"
-        //         }
-        //     } else {
-        //         a_rechercher = remove_accent(a_rechercher)
-        //         rechercher(a_rechercher)
-        //     }
-        // })
-
-        // aucun_role = document.querySelector('#roles p')
-        // bouton_valider = document.querySelector('.bouton.primaire.valider_role')
-        // function rechercher(a_rechercher){
-        // 	resultats = index.search(a_rechercher, {
-        // 		expand: true
-        // 	});
-
-        //     trier_afficher_resultats(resultats)
-
-        //     if(resultats.length==0){
-        //         aucun_role.style.display = "block"
-        //         bouton_valider.disabled = true
-        //     } else {
-        //         aucun_role.style.display = "none"
-        //         bouton_valider.disabled = false
-        //     }
-        // }
-
-        // //affiche les bons résultats pour la recherche
-        // function trier_afficher_resultats(resultats){
-        // 	for(i=0; i<role_els.length; i++){
-        // 		role_els[i].style.display = "none"
-        // 	}
-        //     input_role_id.value = resultats[0]["doc"]["index_role"]
-        // 	for(i=0; i<resultats.length; i++){
-        // 		index_resultat = resultats[i]["ref"]
-        // 		role_els[parseInt(index_resultat)].style.display = "block"
-        // 		role_els[parseInt(index_resultat)].style.order = i+1
-        // 	}
-        // }
-
-
-
-
-        // datatable_options = {
-        //     "perPage" : 15,
-        //     "columns" : [{
-        //             select: [2],
-        //             sortable: false,
-        //             searchable: true,
-        //         },{
-        //             select: [3],
-        //             sortable: false,
-        //             searchable: false,
-        //         },
-        //     ]
-        // }
-        // new JSTable("#index", { ...datatable_options });
-
-        el_user_uid = document.getElementById("user_uid")
+        // Bouton modifier
+        var el_user_uid = document.getElementById("user_uid")
 
         function afficher_menu_membre(ceci) {
             membre_id = ceci.getAttribute("membre_id")
@@ -243,7 +151,7 @@
             roleInput.querySelector('[value="' + role_id + '"]').selected = true
         }
 
-        //Suppresion
+        // Bouton suppresion
         function demander_suppression_membre(membre) {
             document.getElementById("gerer").innerHTML = `
             <form method="POST" action="membres/suppression/">

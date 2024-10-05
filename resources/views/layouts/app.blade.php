@@ -18,11 +18,12 @@
 
     @stack('opengraph')
 
-    <link rel="stylesheet" href="{{ mix('/css/default.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/importants/layout-without-sidebar.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/importants/layout.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/components/select-popup.css') }}">
-    <link rel="stylesheet" href="{{ mix('/css/components/pwa-popup.css') }}">
+    @vite(['resources/css/default.scss',
+    'resources/css/importants/layout-without-sidebar.scss',
+    'resources/css/importants/layout.scss',
+    'resources/css/components/select-popup.scss',
+    'resources/css/components/pwa-popup.scss'])
+
     @stack('styles')
 </head>
 

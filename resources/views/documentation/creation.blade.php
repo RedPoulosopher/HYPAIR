@@ -4,8 +4,11 @@
 
 @section('content')
 
-<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
-<link rel="stylesheet" href="{{ mix('/css/simpleMDE.css') }}">
+@vite([
+	'resources/css/formulaire.scss',
+	'resources/css/simpleMDE.css'
+])
+
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <div id="wrapper">

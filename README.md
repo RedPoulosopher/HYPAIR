@@ -11,7 +11,7 @@ Voici le projet de l'application HypAIR, Wouhou !! 🥳
 Voici une liste de contacts si vous voulez des renseignements venant d'anciens de l'AIR :
 
 - **Arthur Mata** : Le projet HypAIR en général
-- **Lucas Naury** : PWA, Docker
+- **Lucas Naury** : PWA, Docker, Notifications
 - **Mathilde Pascal** : Framework Laravel
 
 ## Hébergement du site
@@ -80,11 +80,10 @@ Lancez l'installation, et veillez à ce que la version que vous avez dans votre 
 Pour vérifier le bon fonctionnement de Composer, ouvrez un terminal et tapez `composer`.
 
 ### • NodeJS
-HypAIR ne semble pas aprécier les versions récentes de NodeJS. Il faut donc installer la *version 16*.
 
-Pour cela, rendez-vous sur la [page GitHub de nvm](https://github.com/coreybutler/nvm-windows/releases) (qui est un gestionnaire de versions de Node). Télécharger le fichier `nvm-setup.exe`, un peu plus bas sur la page. Terminez l'installation.
+Pour installer NodeJS, rendez-vous sur la [page GitHub de nvm](https://github.com/coreybutler/nvm-windows/releases) (qui est un gestionnaire de versions de Node). Télécharger le fichier `nvm-setup.exe`, un peu plus bas sur la page. Terminez l'installation.
 
-Dans un terminal, tapez `nvm install 16`. Une fois l'installation de Node terminée, tapez `nvm use 16`pour utiliser cette version de manière permanente.
+Dans un terminal, tapez `nvm install 22`. Une fois l'installation de Node terminée, tapez `nvm use 22` pour utiliser cette version de manière permanente.
 
 ### • Git
 Rendez-vous sur le [site de Git](https://git-scm.com/) et téléchargez-le. Laissez tous les paramètres par défaut lors de l'installation.
@@ -114,7 +113,7 @@ Ensuite, tapez les commandes suivantes :
 - `php artisan db:seed`
 
 Pour finir, et **ce qui suit est valable chaque fois que vous voudrez faire fonctionner HypAIR sur votre machine**, tapez :
-- `npm run dev` pour compiler les fichiers liés aux dépendances de Node (notamment les feuilles de style *sass*)
+- `npm run prod` pour compiler les fichiers liés aux dépendances de Node (notamment les feuilles de style *sass*)
 
 **OU**
 - `npm run watch` pour que la compilation des fichiers s'effectue automatiquement dès que vous sauvegardez un fichier (Ctrl+S)

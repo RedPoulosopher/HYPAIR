@@ -3,9 +3,11 @@
 @section('titre', 'Logotype')
 
 @pushonce('styles')
-<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
-<link rel="stylesheet" href="{{ mix('/css/documentation.css') }}" type="text/css" >
-<link rel="stylesheet" href="{{ mix('/css/entite/modifier_couleur.css') }}" type="text/css" >
+	@vite([
+		'resources/css/formulaire.scss',
+		'resources/css/documentation.scss',
+		'resources/css/entite/modifier_couleur.scss',
+	])
 @endpushonce
 
 @section('content')

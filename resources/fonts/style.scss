@@ -1,9 +1,9 @@
 @import "variables";
 
 @font-face {
-  font-family: '#{$icomoon-font-family}';
+  font-family: 'icosax';
   src:
-    url('#{$icomoon-font-family}.ttf?bbpw53') format('truetype');
+    url('/resources/fonts/icosax.ttf?bbpw53') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -11,7 +11,7 @@
 
 [class^="icon-"]:before, [class*=" icon-"]:before {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: '#{$icomoon-font-family}' !important;
+  font-family: 'icosax' !important;
   speak: never;
   font-style: normal;
   font-weight: normal;

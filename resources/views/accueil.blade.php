@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('/css/accueil.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/components/service.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/components/post.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ mix('/css/components/switch-campus.css') }}" type="text/css" />
+    @vite([
+        'resources/css/accueil.scss',
+        'resources/css/components/service.scss',
+        'resources/css/components/post.scss',
+        'resources/css/components/switch-campus.scss',
+    ])
 @endpushonce
 
 @section('content')
@@ -23,24 +25,25 @@
                 @if (Auth::check() &&
                         Auth::user()->campus->pluck('label')->contains('douai'))
                     <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
-                        logo="{{ mix('/images/piwigo.png') }}">
+                        logo="{{ Vite::Image('piwigo.png')}} ">
                     </x-service>
                 @endif
 
+
                 <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
-                    logo="{{ mix('/images/peertube.png') }}">
+                    logo="{{ Vite::Image('peertube.png') }}">
                 </x-service>
 
                 {{-- <x-service nom="AIRplace" destination='https://airplace.etu.imt-nord-europe.fr' color=#cc3345
-                    logo="{{ mix('/images/airplace.png') }}">
+                    logo="{{ Vite::Image('airplace.png') }}">
                 </x-service> --}}
 
                 <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
-                    logo="{{ mix('/images/gitlab.png') }}">
+                    logo="{{ Vite::Image('gitlab.png') }}">
                 </x-service>
 
                 <x-service nom="Tutoriels HypAIR" destination='https://partage.imt.fr'
-                    color=#4c4372 logo="{{ mix('/images/tutorial.png') }}">
+                    color=#4c4372 logo="{{ Vite::Image('tutorial.png') }}">
                 </x-service>
 
             </div>

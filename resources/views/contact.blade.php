@@ -3,7 +3,7 @@
 @section('titre', 'Nous contacter')
 
 @pushonce('styles')
-    <link rel="stylesheet" href="{{ mix('css/contact.css') }}" type="text/css" />
+    @vite('resources/css/contact.scss')
 @endpushonce
 
 @section('content')

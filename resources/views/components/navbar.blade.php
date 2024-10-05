@@ -4,7 +4,7 @@
 
     <div id="logo">
         <a href="/" id="logo-img">
-            <img src="{{ mix('/images/logo_air.png') }}" alt="Une création originale de l'AIR">
+            <img src="{{ Vite::Image('logo_air.png') }}" alt="Une création originale de l'AIR">
         </a>
         <a href="/" id="logo-text">
             <h1>Hyp<span>AIR</span></h1>
@@ -40,20 +40,20 @@
             @if (Auth::check() &&
                     Auth::user()->campus->pluck('label')->contains('douai'))
                 <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
-                    logo="{{ mix('/images/piwigo.png') }}">
+                    logo="{{ Vite::Image('piwigo.png') }}">
                 </x-service>
             @endif
             
             <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
-                logo="{{ mix('/images/peertube.png') }}"></x-service>
+                logo="{{ Vite::Image('peertube.png') }}"></x-service>
             {{-- <x-service nom="AIRplace" destination='https://airplace.etu.imt-nord-europe.fr' color=#cc3345
-                logo="{{ mix('/images/airplace.png') }}"></x-service> --}}
+                logo="{{ Vite::Image('airplace.png') }}"></x-service> --}}
 
             <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
-                logo="{{ mix('/images/gitlab.png') }}"></x-service>
+                logo="{{ Vite::Image('gitlab.png') }}"></x-service>
             <x-service nom="Tutoriels HypAIR"
                 destination='https://partage.imt.fr'
-                color=#4c4372 logo="{{ mix('/images/tutorial.png') }}">
+                color=#4c4372 logo="{{ Vite::Image('tutorial.png') }}">
             </x-service>
         </div>
     </div>

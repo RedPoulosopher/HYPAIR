@@ -4,8 +4,10 @@
 
 @section('content')
 @pushonce('styles')
-<link rel="stylesheet" href="{{ mix('/css/authentification.css') }}" type="text/css" />
-<link rel="stylesheet" href="{{ mix('/css/formulaire.css') }}" type="text/css" >
+    @vite([
+        'resources/css/authentification.scss',
+        'resources/css/formulaire.scss'
+    ])
 @endpushonce
 
 

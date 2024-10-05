@@ -70,7 +70,7 @@ class GestionLogo {
             if(Storage::exists($chemin))
                 return Storage::url($chemin . date('Y-m-d', Storage::lastModified($chemin)) . '-' . $taille . '.png');//Récupère l'image avec la date la plus récente
             else
-                return $chemin;//Tant pis, si l'image existe pas on va pas l'inventer
+                return '/images/default-profile.svg'; // On retourne le chemin d'une image par défaut
         }
         return $chemin;
     }

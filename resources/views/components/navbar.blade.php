@@ -52,7 +52,7 @@
             <x-service nom="GitLab" destination='https://gitlab.etu.imt-nord-europe.fr' color=#E24329
                 logo="{{ Vite::Image('gitlab.png') }}"></x-service>
             <x-service nom="Tutoriels HypAIR"
-                destination='https://partage.imt.fr'
+                destination='https://drive.google.com/drive/folders/1rT5waUh6R_q1ydip7CkxVAwxRNXkTU8i?usp=drive_link'
                 color=#4c4372 logo="{{ Vite::Image('tutorial.png') }}">
             </x-service>
         </div>

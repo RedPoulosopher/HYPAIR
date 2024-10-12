@@ -24,7 +24,7 @@
         </div>
         
         <div id="liste-choix">
-            <a href="" onclick="choixNotifs(event, false)">OK</a>
+            <a href="" id="ok">OK</a>
         </div>
     </div>
 
@@ -114,11 +114,16 @@ function forceNotificationsPopup(){
 // Bouton de choix des notifications
 var oui = document.getElementById("oui")
 var non = document.getElementById("non")
+var ok  = document.getElementById("ok")
 
 oui.addEventListener('click', (event)=>{
     choixNotifs(event, true)
 })
 non.addEventListener('click', (event)=>{
+    choixNotifs(event, false)
+})
+
+ok.addEventListener('click', (event)=>{
     choixNotifs(event, false)
 })
 

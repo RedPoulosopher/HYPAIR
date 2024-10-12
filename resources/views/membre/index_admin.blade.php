@@ -38,14 +38,7 @@
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}">{{ ucfirst($role->label) }}</option>
                                 @endforeach
-                                <option value="">Aucun</option>
                             </select>
-                            {{-- <div id="roles">
-                            <p style="display:none">aucun rôle ne correspond à cette recherche. Contactez l'AIR pour le rajouter.</p>
-                            @foreach ($roles as $role)
-                                <option value="{{$role->id}}">{{$role->label}}</option>
-                            @endforeach 
-                        </div> --}}
                             <p id="droits-role">
                             </p>
                         </div>
@@ -56,10 +49,7 @@
                 </form>
             </div>
 
-            {{-- <div id="choix_role">
-                <a href="membres" class="bouton secondaire">Membres</a>
-                <a href="abonnes" class="bouton secondaire">Abonnés</a>
-            </div> --}}
+
             <div class="section-content">
                 <h2>Membres actuels :</h2>
                 @if (!is_null($personnes_concernees) && count($personnes_concernees) > 0)
@@ -122,7 +112,7 @@
     </main>
 
     
-    <script type="module">
+    <script>
         // Affichage des droits du rôle
         var roles = {!! json_encode($roles) !!}
         var roleInput = document.getElementById('role-input');

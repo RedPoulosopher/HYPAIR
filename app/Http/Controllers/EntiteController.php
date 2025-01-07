@@ -269,7 +269,7 @@ class EntiteController extends Controller
 		$listes = array();
 		foreach ($bureaux as $bureau) {
 			$bureau_ratachement = $bureau->ratachement->value;
-			$listes[$bureau_ratachement] = $bureau->listes_dependantes('2024')->get();
+			$listes[$bureau_ratachement] = $bureau->listes_dependantes('2025')->get();
 		}
 
 		return view(

@@ -29,7 +29,7 @@
                         @endif
                         @endforeach --}}
                     <h1>Listes BDA</h1>
-                    <h2>Du 12/01 au 25/01</h2>
+                    <h2>Du 09/01 au 19/01</h2>
                     <div class="liste_comite_club">
                         @if (count($listes['bda']) > 0)
                             @foreach ($listes['bda'] as $liste)
@@ -49,7 +49,7 @@
                         @endif
                     </div>
                     <h1>Listes BDH</h1>
-                    <h2>Du 05/02 au 11/02</h2>
+                    <h2>Du 06/02 au 13/02</h2>
                     <div class="liste_comite_club">
                         @if (count($listes['bdh']) > 0)
                             @foreach ($listes['bdh'] as $liste)
@@ -69,7 +69,7 @@
                         @endif
                     </div>
                     <h1>Listes BDE</h1>
-                    <h2>Du 13/02 au 25/02</h2>
+                    <h2>Du 24/02 au 03/03</h2>
                     <div class="liste_comite_club">
                         @if (count($listes['bde']) > 0)
                             @foreach ($listes['bde'] as $liste)
@@ -89,7 +89,7 @@
                         @endif
                     </div>
                     <h1>Listes BDS</h1>
-                    <h2>Du 12/03 au 22/03</h2>
+                    <h2>Du 04/03 au 11/03</h2>
                     <div class="liste_comite_club">
                         @if (count($listes['bds']) > 0)
                             @foreach ($listes['bds'] as $liste)

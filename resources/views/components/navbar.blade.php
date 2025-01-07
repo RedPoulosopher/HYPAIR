@@ -20,7 +20,7 @@
             <li class="menu-button {{ request()->is('entites*') ? 'active' : '' }}"><a href="/entites">Associations</a></li>
 
             {{-- A afficher que pendant les campagnes --}}
-            {{-- <li class="menu-button {{ request()->is('campagnes') ? 'active' : '' }}"><a href="/campagnes">Campagnes</a></li> --}}
+            <li class="menu-button {{ request()->is('campagnes') ? 'active' : '' }}"><a href="/campagnes">Campagnes</a></li>
 
 
             <li class="menu-button {{ request()->is('contact') ? 'active' : '' }}"><a href="/contact">Contact</a></li>

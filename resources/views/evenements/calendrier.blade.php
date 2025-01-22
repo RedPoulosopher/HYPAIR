@@ -63,8 +63,9 @@
         site = {!! json_encode($site, JSON_UNESCAPED_UNICODE) !!}
         el_calendrier = document.getElementById("calendrier");
 
+        const jours = ["Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam.", "Dim."]
+
         function creation_calendrier(index_jour_debut, nbr_jours_dans_mois) {
-            jours = ["Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam.", "Dim."]
 
             // remplissage
             if (responsive.matches) { // max-width: 768px (for phone)
@@ -122,10 +123,19 @@
         var nbr_jours_dans_mois = 0
         var index_jour_debut = 0
 
+        function capitalizeFirstLetter(val) {
+            return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+        }
+
         function remplissage(annee, mois) { //mois : 0=>11
             el_calendrier.innerHTML = "";
             nbr_jours_dans_mois = new Date(annee, mois + 1, 0).getDate();
-            index_jour_debut = new Date(annee, mois, 1).getUTCDay();
+
+            
+            // Fix: fonctionne même à l'étranger
+            // index_jour_debut = new Date(annee, mois, 1).getUTCDay();
+            texte_jour_debut = capitalizeFirstLetter(new Date(Date.UTC(annee,mois,1)).toLocaleString('fr',{weekday: 'short', timeZone: 'UTC'}))
+            index_jour_debut = jours.findIndex(e => e == texte_jour_debut); //0:Lundi -> 6:Dimanche
 
             creation_calendrier(index_jour_debut, nbr_jours_dans_mois);
         }

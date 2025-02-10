@@ -218,7 +218,7 @@ class Entite extends Model
 
     public function logo_url($taille)
     {
-        $chemin = GestionLogo::chemin_logos($this->uid, $this->id, $this->type, $taille);
+        $chemin = GestionLogo::chemin_logos($this->uid, $this->id, $this->type,true, $taille);
 
         return $chemin;
     }

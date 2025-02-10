@@ -1,4 +1,7 @@
 .entites-wrapper {
     display: flex;
     gap: 30px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    position: relative;
 }

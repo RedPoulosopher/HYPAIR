@@ -16,7 +16,7 @@
 
             <h1>à propos de {{ $entite->nom }}</h1>
             <div class="logo">
-                <img src="{{ session('entite_logo_petit') }}" alt="logo" />
+                <img src="{{ session('entite_logo_moyen') }}" alt="logo" />
             </div>
             @if (!is_null($entite->categories))
                 <div class="categories">

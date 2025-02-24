@@ -132,11 +132,13 @@ class PostController extends Controller
         $events = Evenement::where('entite_id', session('entite_id'))
                             ->where('temps_fin', '>', $oneMonthAgo)->get();//On ne montre que les events qui ne sont pas fini ou on terminé il y a moins d'un mois
         $sites = Site::all();
+        $entites = Entite::where('id','!=',session('entite_id'))->get();//On récupére toutes les assos sauf celles dont on crée le post
 
         return view('post.formulaire', [
             'titre' => 'Créer un post',
             'events' => $events,
-            'campus' => $sites
+            'campus' => $sites,
+            'entites' => $entites
         ]);
     }
 
@@ -217,6 +219,7 @@ class PostController extends Controller
                             ->where('temps_fin', '>', $oneMonthAgo)->get();//On ne montre que les events qui ne sont pas fini ou on terminé il y a moins d'un mois
         $sites = Site::all();
         $post = Post::find($post_id);
+        $entites = Entite::where('id','!=',session('entite_id'))->get();//On récupére toutes les assos sauf celles dont on crée le post
 
         $all_post_campus_id = [];
         foreach($post->campus as $campus) {
@@ -228,7 +231,8 @@ class PostController extends Controller
             'events' => $events,
             'campus' => $sites,
             'post' => $post,
-            'all_post_campus_id' => $all_post_campus_id
+            'all_post_campus_id' => $all_post_campus_id,
+            'entites' => $entites
         ]);
     }
 
@@ -241,6 +245,7 @@ class PostController extends Controller
                 'event_id' => 'nullable',
                 'date_apparition' => 'nullable',
                 'date_expiration' => 'nullable',
+                'entite_collab_id' => 'nullable',
             ]
         );
 
@@ -252,6 +257,7 @@ class PostController extends Controller
             "date_expiration" => $request->date_expiration,
             "event_id" => $request->event_id == 0 ? null : $request->event_id,
             "confidentiel" => $request->confidentialite,
+            "entite_collab_id" => $request-> entite_collab_id == 0 ? null : $request->entite_collab_id,
         ];
 
         return $postRequest;

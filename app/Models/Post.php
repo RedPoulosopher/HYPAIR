@@ -17,7 +17,8 @@ class Post extends Model
         'entite_id',
         'confidentiel',
         'photo_name',
-        'notification_sent'
+        'notification_sent',
+        'entite_collab_id'
     ];
 
     function event()
@@ -39,6 +40,10 @@ class Post extends Model
     function bannieres() {
         return $this->hasMany(Banniere::class);
     }
+    function entite_collab()
+    {
+        return $this->belongsTo(Entite::class);
+    }    
 
     function url(){
         return '/' . $this->entite()->first()->uid . '/entite/post/' . $this->id;

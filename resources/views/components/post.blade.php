@@ -16,6 +16,9 @@
                 <h2>{{ $post->titre }}</h2>
             </a>
             <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>{{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
+            @if ($post->entite_collab)
+                <p> En compagnie de {{ $post->entite_collab->nom}}</p>
+            @endif
             @if ($post->confidentiel != 0)
                 <p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager"
                     class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>

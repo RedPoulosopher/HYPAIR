@@ -152,7 +152,7 @@
 
                     <div class="groupe card">
                         <label class="input_groupe">
-                            <p class="titre"> Avec quelle autre asso :</p>
+                            <p class="titre"> En collaboration avec quelle autre association :</p>
                             <select name="entite_collab_id" class="input" spellcheck="false">
                                 @isset($post)
                                     @if (empty($post->entite_collab_id))

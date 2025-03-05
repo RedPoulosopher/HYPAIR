@@ -18,7 +18,6 @@ class Post extends Model
         'confidentiel',
         'photo_name',
         'notification_sent',
-        'entite_collab_id'
     ];
 
     function event()
@@ -42,7 +41,7 @@ class Post extends Model
     }
     function entite_collab()
     {
-        return $this->belongsTo(Entite::class);
+        return $this->belongsToMany(Entite::class,'post_collabs');
     }    
 
     function url(){

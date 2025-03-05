@@ -16,8 +16,11 @@
                 <h2>{{ $post->titre }}</h2>
             </a>
             <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>{{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
-            @if ($post->entite_collab)
-                <p> En compagnie de {{ $post->entite_collab->nom}}</p>
+            @if( (count($post->entite_collab) > 0))
+                <p> En compagnie de : </p>
+                @foreach ($post->entite_collab as $collab)
+                <p> {{$collab->nom}}</p>
+                @endforeach
             @endif
             @if ($post->confidentiel != 0)
                 <p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager"

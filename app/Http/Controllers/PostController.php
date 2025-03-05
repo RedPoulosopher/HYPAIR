@@ -11,6 +11,7 @@ use \App\Services\AutorisationGestion;
 use App\Models\Site;
 use App\Models\Entite;
 use App\Models\Tag;
+use App\Models\PostCollab;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Support\Facades\Auth;
@@ -145,7 +146,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         AutorisationGestion::protectionPage('gerer_post');
-        
+                
         $postRequest = $this->formulaire_traitement($request);
         
         $post = Post::create($postRequest);
@@ -163,7 +164,14 @@ class PostController extends Controller
             }
 
         }
-
+        //Detach previous collabs
+        $post->entite_collab()->detach();
+        //Attach new ones
+        if (!empty($request->entite_collab_id)) {
+			foreach ($request->entite_collab_id as $id) {
+				$post->entite_collab()->attach($id);
+			}
+		}
         
         
         // TAGS
@@ -245,7 +253,7 @@ class PostController extends Controller
                 'event_id' => 'nullable',
                 'date_apparition' => 'nullable',
                 'date_expiration' => 'nullable',
-                'entite_collab_id' => 'nullable',
+                // 'entite_collab_id' => 'nullable',
             ]
         );
 
@@ -257,7 +265,7 @@ class PostController extends Controller
             "date_expiration" => $request->date_expiration,
             "event_id" => $request->event_id == 0 ? null : $request->event_id,
             "confidentiel" => $request->confidentialite,
-            "entite_collab_id" => $request-> entite_collab_id == 0 ? null : $request->entite_collab_id,
+            // "entite_collab_id" => $request-> entite_collab_id == 0 ? null : $request->entite_collab_id,
         ];
 
         return $postRequest;
@@ -317,6 +325,15 @@ class PostController extends Controller
 
             }
         }
+        
+        //Detach previous collabs
+        $post->entite_collab()->detach();
+        //Attach new ones
+        if (!empty($request->entite_collab_id)) {
+			foreach ($request->entite_collab_id as $id) {
+				$post->entite_collab()->attach($id);
+			}
+		}
 
         //Detach previous campus
         $post->campus()->detach();

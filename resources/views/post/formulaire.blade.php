@@ -153,28 +153,26 @@
                     <div class="groupe card">
                         <label class="input_groupe">
                             <p class="titre"> En collaboration avec quelle autre association :</p>
-                            <select name="entite_collab_id" class="input" spellcheck="false">
+                            <div name="entite_collab_id[]" class="input" spellcheck="false" multiple>
                                 @isset($post)
-                                    @if (empty($post->entite_collab_id))
-                                        <option value="0" selected>Aucun</option>
-                                    @else
-                                        <option value="0">Aucun</option>
-                                    @endif
                                     @foreach ($entites as $entite)
-                                        @if (!empty($post->entite_collab_id) && $post->entite_collab_id == $entite->id)
-                                            <option value="{{ $entite->id }}" selected>{{ $entite->nom}}</option>
+                                    <label>
+                                        @if ($post->entite_collab()->get()->pluck('id')->contains($entite->id))
+                                            <input type="checkbox" class="input_groupe" name="entite_collab_id[]" value="{{ $entite->id }}" checked>{{ $entite->nom}}</option>
                                         @else
-                                            <option value="{{ $entite->id }}">{{ $entite->nom }}</option>
+                                            <input type="checkbox" class="input_groupe" name="entite_collab_id[]" value="{{ $entite->id }}">{{ $entite->nom }}</option>
                                         @endif
+                                    </label>
                                     @endforeach
                                 @endisset
                                 @empty($post)
-                                    <option value="0" selected>Aucun</option>
                                     @foreach ($entites as $entite)
-                                        <option value="{{ $entite->id }}">{{ $entite->nom }}</option>
+                                    <label>
+                                        <input type="checkbox" class="input_groupe" name="entite_collab_id[]" value="{{ $entite->id }}">{{ $entite->nom }}</option>
+                                    </label>
                                     @endforeach
                                 @endempty
-                            </select>
+                            </div>
                         </label>
                     </div>
 
@@ -276,7 +274,8 @@
         checkboxBanniere.addEventListener('change', function() {
             if (this.checked) divFileBanniere.style.display = "block";
             else divFileBanniere.style.display = "none";
-        });
+        });    
+        
     </script>
 
 @endsection

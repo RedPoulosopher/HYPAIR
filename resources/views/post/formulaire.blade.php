@@ -152,6 +152,23 @@
 
                     <div class="groupe card">
                         <label class="input_groupe">
+                            <p class="titre"> Collaboration </p>
+                            <p class="description"> En collaboration avec quelle autre association ?</p>                        
+                               <ul name="entite_collab_id[]" spellcheck="false">
+                                    @foreach ($entites as $entite)                                    
+                                    <label>    
+                                    <input type="checkbox" name="entite_collab_id[]" value="{{ $entite->id }}"
+                                            @checked(
+                                                (isset($post) && $post->entite_collab()->get()->pluck('id')->contains($entite->id)))>
+                                                {{$entite->nom }}
+                                            </label>                                            
+                                    @endforeach
+                                </ul>
+                        </label>
+                    </div>
+
+                    <div class="groupe card">
+                        <label class="input_groupe">
                             <p class="titre">Date de publication :</p>
                             @isset($post)
                                 <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
@@ -248,7 +265,8 @@
         checkboxBanniere.addEventListener('change', function() {
             if (this.checked) divFileBanniere.style.display = "block";
             else divFileBanniere.style.display = "none";
-        });
+        });    
+        
     </script>
 
 @endsection

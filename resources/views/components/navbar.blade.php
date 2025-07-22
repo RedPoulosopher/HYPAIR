@@ -20,7 +20,7 @@
             <li class="menu-button {{ request()->is('entites*') ? 'active' : '' }}"><a href="/entites">Associations</a></li>
 
             {{-- A afficher que pendant les campagnes --}}
-            <li class="menu-button {{ request()->is('campagnes') ? 'active' : '' }}"><a href="/campagnes">Campagnes</a></li>
+            {{-- <li class="menu-button {{ request()->is('campagnes') ? 'active' : '' }}"><a href="/campagnes">Campagnes</a></li> --}}
 
 
             <li class="menu-button {{ request()->is('contact') ? 'active' : '' }}"><a href="/contact">Contact</a></li>
@@ -43,7 +43,7 @@
                     logo="{{ Vite::Image('piwigo.png') }}">
                 </x-service>
             @endif
-            
+
             <x-service nom="PeerTube" destination='https://peertube.imt-ne.fr' color=#727272
                 logo="{{ Vite::Image('peertube.png') }}"></x-service>
             {{-- <x-service nom="AIRplace" destination='https://airplace.etu.imt-nord-europe.fr' color=#cc3345

@@ -51,6 +51,7 @@
                                 <option value="bde">BDE</option>
                                 <option value="bdh">BDH</option>
                                 <option value="bds">BDS</option>
+                                <option value="bde_lille">BDE Lille</option>
                                 <option value="independant">Independant</option>
                             </select>
                         </label>

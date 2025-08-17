@@ -196,6 +196,7 @@ $routes_bureaux = function () {
             Route::post('/entite/{entite_id}/modifier/informations', 'maj_infos');
             Route::get('/entite/{entite_id}/modifier/description', 'modifier_description')->name('bdx_modifier_description');
             Route::post('/entite/{entite_id}/modifier/description', 'maj_description');
+            Route::get('/entite/{entite_id}/delete', 'delete');
         });
 
         Route::controller(MembreController::class)->group(function () {

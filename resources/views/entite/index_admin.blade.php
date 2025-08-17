@@ -67,13 +67,14 @@
                     @if(!$est_bureau){{-- On affiche uniquement la gestion des posts/events pour l'AIR --}}
                         <li><a id="menu_membres" href="" url="../entite/{entite_id}/evenements">Gérer les évènements</a></li>
                         <li><a id="menu_membres" href="" url="../entite/{entite_id}/posts">Gérer les posts</a></li>
+                    @else
+                        <li><a id="menu_supprimer" nom="{{ $entite["uid"] }}" url="../entite/{entite_id}/delete" style="color: red;">Supprimer</a></li>
                     @endif
                 </ul>
             @endif
         </div>
     </section>
 </main>
-
 <script type="module">
 
 import "{{ Vite::asset('resources/js/jstable.min.js') }}" 
@@ -120,8 +121,19 @@ function menu_meatballs(ceci){
 
     entite_id = ceci.getAttribute("entite_id")
     for(let element of el_menu_meatballs.querySelectorAll("a")){
-        url = element.getAttribute("url")
-        element.href = url.replace('{entite_id}', entite_id)
+        if(element.id!="menu_supprimer"){
+            url = element.getAttribute("url")
+            element.href = url.replace('{entite_id}', entite_id)
+        }else{
+            url = element.getAttribute("url")
+            element.setAttribute("url2", url.replace('{entite_id}', entite_id))
+            element.addEventListener("click",e=>{
+                let rep = prompt("Voulez-vous vraiment supprimer " + element.getAttribute("nom") + " ? Ecrire 'OUI' pour valider.")
+                if(rep=="OUI"){
+                    window.location.href=element.getAttribute("url2")
+                }
+            })
+        }
     };
 
     el_menu_meatballs.style.top = topp + 10 + document.documentElement.scrollTop + "px";

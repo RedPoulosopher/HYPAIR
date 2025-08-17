@@ -197,6 +197,33 @@ class EntiteController extends Controller
 		}
 	}
 
+
+	public function delete(Request $request) //réservé à l'AIR et aux bureaux
+	{
+		$asso_gerante = Entite::existe(session('entite_id'));
+		$entite_id = $request->route('entite_id') ?? session('entite_id');
+		//Si c'est un bureau qui créé une entité, elle lui est automatiquement rattachée
+		if($asso_gerante->type == EntiteTypeEnum::Bureau){
+			$request['ratachement'] = $asso_gerante->uid;
+		
+			$entite = Entite::where('id',"=", $entite_id);//->where('type', '=', EntiteTypeEnum::Liste);
+
+			if ($entite->exists()) {
+				$entite = $entite->first();
+
+				$entite->evenements()->delete();
+				$entite->documentations()->delete();
+				$entite->logos()->delete();
+				$entite->membres()->delete();
+				$entite->categories()->delete();
+				$entite->posts()->delete();
+
+				$entite->delete();
+			}
+		}
+		return redirect()->back();
+	}
+
 	public function index_site(Request $request) // réservé aux bureaux
 	{
 		$site = $request["site"];

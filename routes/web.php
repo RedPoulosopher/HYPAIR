@@ -18,6 +18,7 @@ use App\Http\Controllers\LocalAuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PushNotificationController;
+use App\Models\Site;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,9 +67,8 @@ Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'do
 Route::get('/posts/{site?}', [PostController::class, 'posts'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon'])->name('posts');
 
 Route::get('/entites', function () {
-    // return view('entite.choix_site'); 
-    
-    return redirect('entites/douai');
+    // return view('entite.choix_site');
+    return redirect('entites/'.Site::getFromLabel(null)->toArray()['label']);
 })->name('racine');
 
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']); // liste de toutes les entités d'un site de l'école (e.g. Douai)

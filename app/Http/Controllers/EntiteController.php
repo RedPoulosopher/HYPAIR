@@ -18,6 +18,7 @@ use \App\Services\AutorisationGestion;
 use App\Services\GestionPhotoDeProfil;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class EntiteController extends Controller
 {
@@ -73,13 +74,41 @@ class EntiteController extends Controller
 			$request['ratachement'] = $asso_gerante->uid;
 		}
 
-		$this->validate($request, [
+		$validator = Validator::make($request->all(), [
 			'sites' => ['filled', 'array', Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes', 'alençon'])],
 			'nom' => ['filled', 'max:120'],
-			'uid' => ['filled', 'max:30'],
+			'uid' => ['filled', 'max:30',Rule::notIn(Entite::pluck('uid')->toArray())],
 			'ratachement' => ['filled', new Enum(RatachementEnum::class)],
 			'type' => ['filled', new Enum(EntiteTypeEnum::class)],
+		], [
+			// Sites
+			'sites.filled' => 'Veuillez sélectionner au moins un site.',
+			'sites.array'  => 'Le champ sites doit être un tableau.',
+			'sites.in'     => 'Le site choisi est invalide.',
+
+			// Nom
+			'nom.filled'   => 'Le champ nom est obligatoire.',
+			'nom.max'      => 'Le nom ne doit pas dépasser 120 caractères.',
+
+			// UID
+			'uid.filled'   => 'Le champ UID est obligatoire.',
+			'uid.max'      => 'L’UID ne doit pas dépasser 30 caractères.',
+			'uid.not_in'   => 'Cet UID est déjà utilisé par une autre entité.',
+
+			// Ratachement
+			'ratachement.filled' => 'Le rattachement est obligatoire.',
+			'ratachement.enum'   => 'Le rattachement fourni n’est pas valide.',
+
+			// Type
+			'type.filled' => 'Le type est obligatoire.',
+			'type.enum'   => 'Le type fourni n’est pas valide.',
 		]);
+		if ($validator->fails()) {
+			return redirect()
+				->back()
+				->withErrors($validator->messages());
+		}
+
 
 		//on se moque d'avoir des doublons d'uid pour les listes
 		$entite = Entite::where('uid', $request->uid)->where('type', '!=', EntiteTypeEnum::Liste);

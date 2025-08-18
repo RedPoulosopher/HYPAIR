@@ -153,12 +153,12 @@ class Entite extends Model
         }
 
         if ($this->type == EntiteTypeEnum::Bureau) {
-            $sites_bureau = $this->sites()->get()->pluck('label')->toArray();
+            //$sites_bureau = $this->sites()->get()->pluck('label')->toArray();
 
             $comites_clubs_dependants = Entite::where('ratachement', $this->ratachement)
-                ->whereHas('sites', function ($query) use ($sites_bureau) {
+                /*->whereHas('sites', function ($query) use ($sites_bureau) {
                     $query->whereIn('label', $sites_bureau);
-                });;
+                })*/;
         } else { // l'AIR récup toutes les entités
             $comites_clubs_dependants = new Entite;
         }

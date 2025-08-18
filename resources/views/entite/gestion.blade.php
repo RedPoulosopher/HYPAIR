@@ -36,6 +36,7 @@
                         <a class="modif_option card" href="reseau_social"><i class="fa-solid fa-globe"></i>Gérer les réseaux sociaux</a>
                     @endif
                     @if(AutorisationGestion::gestion('gerer_entite'))
+                        <a class="modif_option card" href="informations"><i class="fa-solid fa-circle-info"></i>Modifier les informations</a>
                         <a class="modif_option card" href="description"><i class="fa-solid fa-pen-to-square"></i>Modifier les descriptions et labels</a>
                         <a class="modif_option card" href="logotype"><i class="fa-solid fa-eye"></i>Modifier le logo</a>
                         <a class="modif_option card" href="couleur"><i class="fa-solid fa-palette"></i>Modifier les couleurs</a>

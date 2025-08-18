@@ -54,6 +54,24 @@ $annee_actuelle = Carbon::now()->format("Y");
 					<p class="titre">Année de fin :</p>
 					<input type="number" name="annee_fin" class="input" min="1980" max="{{ $annee_actuelle }}" value="{{old('annee_fin') ?? $entite->annee_fin ?? ''}}"/>
 				</label>
+				
+				@if (request()->get('creation')!=1)
+				@php
+					$selectedSites = old('sites', $entite->sites()->pluck('label')->toArray() ?? []);
+				@endphp
+					<label class="input_groupe">
+						<p class="titre">* Sites :</p>
+						<p class="description">Les sites sur lesquels l'entite est présente. Ctrl + clic pour
+							sélectionner plusieurs sites.</p>
+						<select name="sites[]" class="input" spellcheck="false" multiple required style="overflow-y: auto;">
+							<option value="douai" {{ in_array('douai', $selectedSites) ? 'selected' : '' }}>Douai</option>
+							<option value="dunkerque" {{ in_array('dunkerque', $selectedSites) ? 'selected' : '' }}>Dunkerque</option>
+							<option value="lille" {{ in_array('lille', $selectedSites) ? 'selected' : '' }}>Lille</option>
+							<option value="valenciennes" {{ in_array('valenciennes', $selectedSites) ? 'selected' : '' }}>Valenciennes</option>
+							<option value="alençon" {{ in_array('alençon', $selectedSites) ? 'selected' : '' }}>Alençon</option>
+						</select>
+					</label>
+				@endif
 			</div>
 
 			<div class="groupe card">

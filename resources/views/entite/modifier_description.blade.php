@@ -33,6 +33,13 @@
 				</div>
 			@endif
 			<div class="groupe card">
+				@if (request()->get('creation')!=1)
+					<label class="input_groupe">
+						<p class="titre">* Nom :</p>
+						<input type="text" name="nom" class="input" required value="{{old('nom') ?? $entite->nom ?? ''}}"/>
+					</label>
+				@endif
+
 				<label class="input_groupe">
 					<p class="titre">* Description courte :</p>
 					<textarea name="description_courte" class="input" required rows="6">{{old('description_courte') ?? $entite->description_courte ?? ''}}</textarea>

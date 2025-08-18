@@ -258,6 +258,9 @@ $routes_entites = function () {
         Route::get('/entite/gestion', 'gestion');
         
         Route::middleware('protection.autorisation:gerer_entite')->group(function () {
+            Route::get('/entite/informations/', 'modifier_infos');
+            Route::post('/entite/informations/', 'maj_infos');
+
             Route::get('/entite/description/', 'modifier_description');
             Route::post('/entite/description/', 'maj_description');
         });

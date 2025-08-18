@@ -105,20 +105,25 @@ class EntiteController extends Controller
 		// $route_name_prefix = $asso_gerante->type == EntiteTypeEnum::Bureau ? 'bdx_' : 'air_';//La route est différente selon si c'est un bureau ou l'air qui créé
 	}
 
-	public function modifier_infos(Request $request) //réservé à l'AIR et aux bureaux
+	public function modifier_infos(Request $request) 
 	{
-		$entite = Entite::existe($request->route('entite_id'));
+		$entite_id = $request->route('entite_id') ?? session('entite_id');
+		$entite = Entite::existe($entite_id);
+
+		$sites = Site::all();
 
 		return view('entite.modifier_infos', [
 			'entite' => $entite,
+			'sites' => $sites,
 			'titre' => "Modifier une entite",
 			'creation' => $request->query('creation', 0),
 		]);
 	}
 
-	public function maj_infos(Request $request) //réservé à l'AIR et aux bureaux
+	public function maj_infos(Request $request) 
 	{
-		$entite = Entite::existe($request->route('entite_id'));
+		$entite_id = $request->route('entite_id') ?? session('entite_id');
+		$entite = Entite::existe($entite_id);
 
 		$request->categories = array_map('strtolower', array_map('trim', explode(",", $request->categories)));
 		sort($request->categories);
@@ -129,6 +134,12 @@ class EntiteController extends Controller
 			'alias' => ['nullable', 'max:191', 'email:rfc'],
 		];
 		$this->validate($request, $validation);
+		if(!$request->query('creation')){
+			$this->validate($request, [
+				'sites' => ['filled', 'array', Rule::in(['douai', 'dunkerque', 'lille', 'valenciennes', 'alençon'])],
+			]);
+			$entite->ajout_sites($request->sites);
+		}
 
 		$request->has('privee') ? $privee = true : $privee = false;
 		$request->has('ouvert') ? $ouvert = true : $ouvert = false;
@@ -175,6 +186,12 @@ class EntiteController extends Controller
 			'description_courte' => ['filled', 'max:255'],
 			'categories' => ['filled', 'distinct'],
 		]);
+		if (!$request->query('creation')) {
+			$this->validate($request, [
+				'name' => ['filled', 'max:120'],
+			]);
+			$entite->nom = $request->nom;
+		}
 
 		$entite->description_courte = $request->description_courte;
 		$entite->description_md = $request->description_md;
@@ -202,23 +219,22 @@ class EntiteController extends Controller
 	{
 		$asso_gerante = Entite::existe(session('entite_id'));
 		$entite_id = $request->route('entite_id') ?? session('entite_id');
-		//Si c'est un bureau qui créé une entité, elle lui est automatiquement rattachée
-		if($asso_gerante->type == EntiteTypeEnum::Bureau){
-			$request['ratachement'] = $asso_gerante->uid;
 		
-			$entite = Entite::where('id',"=", $entite_id);//->where('type', '=', EntiteTypeEnum::Liste);
-
+		$entite = Entite::where('id',"=", $entite_id);
+		
+		if($asso_gerante->type == EntiteTypeEnum::Bureau){
 			if ($entite->exists()) {
 				$entite = $entite->first();
+				if($asso_gerante->uid == $entite->ratachement->value){
+					$entite->evenements()->delete();
+					$entite->documentations()->delete();
+					$entite->logos()->delete();
+					$entite->membres()->delete();
+					$entite->categories()->delete();
+					$entite->posts()->delete();
 
-				$entite->evenements()->delete();
-				$entite->documentations()->delete();
-				$entite->logos()->delete();
-				$entite->membres()->delete();
-				$entite->categories()->delete();
-				$entite->posts()->delete();
-
-				$entite->delete();
+					$entite->delete();	
+				}
 			}
 		}
 		return redirect()->back();

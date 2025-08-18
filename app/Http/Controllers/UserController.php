@@ -152,14 +152,26 @@ class UserController extends Controller
     if (Auth::check()) {
       $user = Auth::user();
       $site_label_list =  explode("-", $request->route('campus'));
-
+      $site_id_list = [];
       foreach($site_label_list as $site_label){
         $site_id = Site::select('id')->where('label', $site_label)->first()->id;
-        $user->sites()->attach($site_id);
+        array_push($site_id_list,$site_id);
       }
+      $user->sites()->sync($site_id_list);
     }
 
     return back();
   }
 
+  public function reset_choix_promo_campus(Request $request){
+    // Prévoir un reset à un moment !
+    if (Auth::check()) {
+      $user = Auth::user();
+      $user->sites()->sync([]);
+      $user->promo = null;
+      $user->save();
+    }
+
+    return back();
+  }
 }

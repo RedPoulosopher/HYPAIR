@@ -39,6 +39,7 @@
           </div>
           <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>
           <ul id="menu_meatballs" class="ombre_grande">
+              <li><a id="menu_modifier_promo_campus" tabindex="2" href="/reset_choix">Modifier le campus ou ma promo</a></li>
               <li><a id="menu_modifier_photo_profil" tabindex="2" href="/editer_photo_profil">Modifier la photo de profil</a></li>
               <li><a id="menu_modifier_info" tabindex="2" href="/editer_infos_profil">Modifier les infos</a></li>
               <li><a id="menu_modifier_reseaux" tabindex="2" href="/editer_reseaux_profil">Gérer les réseaux sociaux</a></li>

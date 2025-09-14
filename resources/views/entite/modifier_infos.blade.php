@@ -78,13 +78,13 @@ $annee_actuelle = Carbon::now()->format("Y");
 				<label class="input_groupe">
 					<p class="titre">Courriel :</p>
 					<p class="description">Certaines entites possèdent un compte courriel fourni par la DISI.</p>
-					<input type="text" name="courriel" class="input" value="{{old('courriel') ?? $entite->courriel ?? ''}}"/>
+					<input autocomplete="off" type="text" name="courriel" class="input" value="{{old('courriel') ?? $entite->courriel ?? ''}}"/>
 				</label>
 
 				<label class="input_groupe">
 					<p class="titre">Alias :</p>
 					<p class="description">Certaines entites ont un alias, qui rédirige les courriels vers les membres indiqués à la DISI.</p>
-					<input type="text" name="alias" class="input" value="{{old('alias') ?? $entite->alias ?? ''}}"/>
+					<input autocomplete="off" type="text" name="alias" class="input" value="{{old('alias') ?? $entite->alias ?? ''}}"/>
 				</label>
 			</div>
 				

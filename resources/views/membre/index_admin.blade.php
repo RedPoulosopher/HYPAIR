@@ -28,7 +28,12 @@
                             <p class="description">Rentrer l'identifiant de la personne. C'est le début de son adresse mail,
                                 souvent "prenom.nom".</p>
                             <input id="user_uid" type="text" name="user_uid" required class="input"
-                                value="{{ old('user_uid') ?? '' }}" />
+                                value="{{ old('user_uid') ?? '' }}" list="users-list" autocomplete="off" />
+                            <datalist id="users-list">
+                                @foreach($listUsers as $user)
+                                    <option value="{{ $user }}">{{ $user }}</option>
+                                @endforeach
+                            </datalist>
                         </label>
                         <div class="input_groupe">
                             <p class="titre">Rôle du membre :</p>

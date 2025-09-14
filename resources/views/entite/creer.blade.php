@@ -33,12 +33,12 @@
                         <label class="input_groupe">
                             <p class="titre">* Nom :</p>
                             <input type="text" name="nom" class="input" required
-                                value="{{ old('nom') ?? ($entite->nom ?? '') }}" />
+                                value="{{ old('nom') ?? ($entite->nom ?? '') }}" autocomplete="off"/>
                         </label>
                         <label class="input_groupe">
                             <p class="titre">* Uid :</p>
                             <input type="text" name="uid" class="input" required
-                                value="{{ old('uid') ?? ($entite->uid ?? '') }}" />
+                                value="{{ old('uid') ?? ($entite->uid ?? '') }}" autocomplete="off"/>
                         </label>
 
                         @if(!$est_bureau)

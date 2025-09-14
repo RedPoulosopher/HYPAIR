@@ -75,9 +75,12 @@ class MembreController extends Controller
 			$personnes_concernees = $entite->abonnes();
 		}
 
+		$listUsers = User::pluck('uid')->toArray();
+
 		return view('membre.index_admin', [
 			"personnes_concernees" => $personnes_concernees->get(),
 			"roles" => $roles,
+			"listUsers" => $listUsers,
 			"entite_lien_relatif" => $entite->lien_relatif(),
 			"creation" => $request->query('creation')
 		]);

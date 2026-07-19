@@ -4,39 +4,34 @@
     use App\Http\Controllers\PostController;
 @endphp
 
-<article class="post card" post_id="{{ $post->id }}" entite_uid="{{ $post->entite->uid }}">
+<article class="post card" post_id="{{ $post->uid }}" entite_uid="{{ $post->entite->uid }}">
 
-    <div class="header" style="{{ count($post->tags) > 0 ? '' : 'grid-template-rows: 1fr; row-gap: 0;' }}">
-
+    <div class="header" style="{{ $post->tags!="" ? '' : 'grid-template-rows: 1fr; row-gap: 0;' }}">
         <a href="{{ $post->entite->lien_relatif() }}" class="thumbnail">
-            <img src="{{ $post->entite->logo_url('petit') }}" alt="Logo {{ $post->entite->nom }}">
+            <img src="{{ $post->entite->getLogo?->url() }}" alt="Logo {{ $post->entite->nom }}">
         </a>
         <div class="details">
             <a href="{{ $post->url() }}">
-                <h2>{{ $post->titre }}</h2>
+                <h2>{{ $post->title }}</h2>
             </a>
-            <p>Posté par {{ $post->entite->nom }}<span class="separator">•</span>{{ PostController::date_apparition_to_duration($post->date_apparition) }}</p>
-            @if( (count($post->entite_collab) > 0))
-                <p> En compagnie de : </p>
-                @foreach ($post->entite_collab as $collab)
-                <p> {{$collab->nom}}</p>
+            <p>Posté par {{ $post->entite->name }}<span class="separator">•</span>
+                @foreach ($post->entite_collab as $entite)
+                    {{ $entite->name }}
                 @endforeach
-            @endif
-            @if ($post->confidentiel != 0)
-                <p id="confidentiel" title="Ce post n'est visible que pour votre campus. Ne pas partager"
-                    class="tooltip"><i class="fa-solid fa-lock" id="confidentiel-icon"></i>Ce post est confidentiel</p>
-            @endif
+            </p>
         </div>
 
         <div class="tags">
-            @foreach ($post->tags as $tag)
-                <div class="tag" style="background-color: {{ $tag->couleur }};">{{ $tag->name }}</div>
-            @endforeach
+            @if ($post->tags!="")
+                @foreach (explode(",",$post->tags) as $tag)
+                    <div class="tag" style="background-color: #cc3345;">{{ $tag }}</div>
+                @endforeach
+            @endif
         </div>
 
         <div class="arrow-display">
             {{-- Flèche rouge pour dérouler la description --}}
-            <svg class="arrow" post_id="{{ $post->id }}" width="42" height="24" viewBox="0 0 42 24"
+            <svg class="arrow" post_id="{{ $post->uid }}" width="42" height="24" viewBox="0 0 42 24"
                 fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M3 3L21 21L39 3" stroke="#CC3345" stroke-width="6" stroke-linecap="round"
                     stroke-linejoin="round" />
@@ -45,41 +40,23 @@
 
     </div>
 
-    <div class="description" id="description-{{ $post->id }}">
-        <div class="img-container">
-            @foreach ($post->bannieres as $banniere)
-                <img src="{{ Storage::url($banniere->path) }} " alt="bannière">
-            @endforeach
-        </div>
+    <div class="description" id="description-{{ $post->uid }}">
         {{-- CAROUSEL --}}
-        {{-- @if (count($post->bannieres) > 0)
+        @isset($post->banner)
             <div class="slideshow-container">
-                @for ($i = 0; $i < count($post->bannieres); $i++)
-                    <div id="slider_{{ $post->id }}" class="mySlides fade">
-                        <div class="numbertext">{{ $i + 1 }} / {{ count($post->bannieres) }}</div>
-                        <img src={{ Storage::url($post->bannieres[$i]->path) }} style="width:100%">
-                    </div>
-                @endfor
-
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <img src="{{ $post->banner?->url() }}"/>
             </div>
             <br>
+        @endisset
 
-            <div style="text-align:center">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
-        @endif --}}
         @if ($post->event)
             <a id="rattachement" href="/{{ $post->entite->uid }}/entite/evenement/{{ $post->event->slug }}"><i
-                    class="fa-solid fa-link"></i>Ce post est rattaché à l'évènement "{{ $post->event->titre }}"</a>
+                    class="fa-solid fa-link"></i>Ce post est rattaché à l'évènement "{{ $post->event->title }}"</a>
         @endif
         <div class="line"></div>
 
         {{-- DESCRIPTION --}}
-        {!! Str::markdown(strip_tags($post->description ?? '')) !!}
+        {!! Str::markdown(strip_tags($post->content ?? '')) !!}
     </div>
 
 </article>
@@ -88,7 +65,7 @@
 @pushonce('end-scripts')
     <script>
         // Ce script commande l'affichage des descriptions des posts
-        postId = {{ $post->id }};
+        postId = "{{ $post->uid }}";
         // Ajouter un EventListener sur chaque flèche rouge
         arrows = document.getElementsByClassName("arrow")
 

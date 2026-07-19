@@ -31,26 +31,17 @@
     
     <x-pwa-popup />
 
-    @php
-        // Code pour gérer le login utilisateur
-        use App\Services\GestionPhotoDeProfil;
-        if (Auth::check()) {
-            $user = Auth::user();
-            $user['chemin_photo_de_profil'] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
-        }
-    @endphp
 
     {{-- Barre de navigation --}}
     <x-navbar/>
 
-    @if (Auth::check())
+    {{-- @if (Auth::check())
         @if (Auth::user()->promo == null || count(Auth::user()->campus) == 0))
-            {{-- Si pas de promo ou pas de campus --}}
             <x-select-promo-campus-popup />
         @else
             <x-notification-popup></x-notification-popup>
         @endif
-    @endif
+    @endif --}}
 
     {{-- Contenu de la page --}}
     <div id="content">

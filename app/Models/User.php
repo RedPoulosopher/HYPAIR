@@ -2,34 +2,54 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\FilesRegistre;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
+    use HasUuids;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * Clé primaire UUID.
+     */
+    protected $primaryKey = 'uid';
+
+    /**
+     * La clé primaire n'est pas auto-incrémentée.
+     */
+    public $incrementing = false;
+
+    /**
+     * Type de la clé primaire.
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Champs assignables en masse.
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'prenom',
         'nom',
-        'uid',
-        'notification_token'
+        'prenom',
+        'prenoms',
+        'email',
+        'bio',
+        'num_tel',
+        'uid_carte_etu',
+        'lang_pref',
+        'date_naissance',
+        'certifier',
+        'RGPD',
+        'password',
+        'auth_mode',
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * Champs cachés.
      */
     protected $hidden = [
         'password',
@@ -37,72 +57,76 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
+     * Casts.
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    function membres()
+    protected function casts(): array
     {
-        return $this->hasMany(Membre::class);
+        return [
+            'email_verified_at' => 'datetime',
+            'date_naissance' => 'date',
+            'certifier' => 'boolean',
+            'RGPD' => 'boolean',
+            'password' => 'hashed',
+        ];
     }
 
-    function membres_actuel()
+    /**
+     * Nom complet.
+     */
+    public function getNomCompletAttribute(): string
     {
-        return $this->membres()
-            ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`");
-    }
-    function sites() {
-        return $this->belongsToMany(Site::class, 'sites_users');
-    }
-
-    public static function existe($user_uid)
-    {
-        $user = self::where('uid', $user_uid);
-
-        if (!$user->exists()) {
-            return false;
-        }
-
-        return $user->first();
-    }
-    public static function existe_id($user_id)
-    {
-        $user = self::where('id', $user_id);
-
-        if (!$user->exists()) {
-            return false;
-        }
-
-        return $user->first();
+        return trim(
+            implode(' ', array_filter([
+                $this->prenom,
+                $this->nom,
+            ]))
+        );
     }
 
-    public function reseaux_sociaux()
+    public function reseauxSociaux()
     {
-        return $this->morphMany(ReseauSocial::class, 'reseau_social');
+        return $this->belongsToMany(
+            ReseauSocial::class,
+            'user_reseaux_sociaux',
+            'user_uid',
+            'reseau_social_id'
+        )->withPivot('url');
     }
 
-    public function resume()
+    public function sites()
     {
-        $phrase = "";
-        foreach ($this->membres as $membre) {
-            $nom_role = Role::find($membre->role_id)['label'];
-            $nom_entite = Entite::find($membre->entite_id)['nom'];
-            $phrase .= " - " . $nom_entite . " (" . $nom_role . ")";
-        }
-        return $phrase;
+        return $this->belongsToMany(
+            Site::class,
+            'user_sites',
+            'user_uid',
+            'site_id'
+        );
     }
 
-    function campus()
+    public function profilePicture()
     {
-        return $this->belongsToMany(Site::class, 'sites_users');
+        return $this->belongsTo(
+            FilesRegistre::class,
+            'profile_picture',
+            'uid'
+        );
     }
 
-    function notificationTokens()
+    public function idPhoto()
     {
-        return $this->hasMany(NotificationToken::class);
+        return $this->belongsTo(
+            FilesRegistre::class,
+            'id_photo',
+            'uid'
+        );
+    }
+
+    public function organizerWithinEntities(){
+        return $this->belongsToMany(
+            Entite::class,
+            'roles',
+            'user_uid',
+            'entite_uid'
+        );
     }
 }

@@ -14,11 +14,14 @@
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 @endpushonce
 
+
+
+
 @section('content')
 
     <main id="main-content">
         <section>
-            <h1>{{ $titre ?? 'Créer un post' }}</h1>
+            <h1><span class="icon-security-safe" title="page réservée aux administrateurs"></span>{{ isset($post) ? 'Editer un post' : 'Créer un post' }}</h1>
             @if (Session::has('success'))
                 <p class="explication">Bienvenue ! Ici vous pourrez créer un post.</p>
             @endif
@@ -34,14 +37,8 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Titre :</p>
-                        @isset($post)
-                            <input type="text" name="titre" class="input" id="titre_doc" required
-                                value="{{ $post->titre }}" />
-                        @endisset
-                        @empty($post)
-                            <input type="text" name="titre" class="input" id="titre_doc" required
-                                value="{{ old('titre') ?? ($post->titre ?? '') }}" />
-                        @endempty
+                            <input type="text" autocomplete="off" name="title" class="input" id="titre_doc" required
+                                value="{{ old('title') ?? ($post->title ?? '') }}" />
                     </label>
                 </div>
 
@@ -54,51 +51,24 @@
                         <p class="description">Pour insérer des emojis, tapez sur Windows + ";" (Windows) ou Contrôle +
                             Commande + Espace (Mac)
                         </p>
-                        @isset($post)
+                        <p class="description">Au moins 10 caractères dans la description, et au plus 2500</p>
                             <textarea name="description_md" id="description_md" class="input"
-                                title="Au moins 30 caractères dans la description, et au plus 250" rows="12">{{ $post->description }}</textarea>
-                        @endisset
-                        @empty($post)
-                            <textarea name="description_md" id="description_md" class="input"
-                                title="Au moins 30 caractères dans la description, et au plus 250" rows="12">{{ old('description_md') ?? ($post->description ?? '') }}</textarea>
-                        @endempty
+                                rows="12">{{ old('description_md') ?? ($post->content ?? '') }}</textarea>
                     </label>
-
                 </div>
 
 
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">Bannière :</p>
-                        @if (!empty($post) && count($post->bannieres) > 0)
-                            <div id="div_checkbox_banniere">
-                                <input type="checkbox" id="checkbox_banniere" name="checkbox_banniere">
-                                <label for="checkbox_banniere">Supprimer ou remplacer les bannières existantes</label>
-                            </div>
-                        @else
-                            <div id="div_checkbox_banniere" style="display: none;">
-                                <input type="checkbox" id="checkbox_banniere" name="checkbox_banniere" checked>
-                                <label for="checkbox_banniere">Supprimer ou remplacer les bannières existantes</label>
-                            </div>
-                        @endif
-                        <div id="div_file_banniere">
-                            <input type="file" id="banniere" class="input" name="banniere[]" accept="image/*">
-                            <p class="description">Si vous ne souhaitez pas mettre de bannière, laissez ce champ vide.</p>
-                        </div>
+                        <p class="description"></p>
+                        <label id="file-upload">
+                            <input type="file" name="banniere" class="input" id="original_input" accept="image/*">
+                            Sélectionnez un fichier
+                        </label>
+                        <span id="filename">Aucun fichier sélectionné</span>
                     </label>
-                    {{-- <label for="input_groupe">
-                        <p class="titre">Bannière 2 :</p>
-                        <p class="description">Choisissez une image pour votre post</p>
-                        <input type="file" id="banniere_2" name="banniere[]" accept="image/*">
-                    </label>
-                    <!-- Les bannières 2 et 3 doivent être ajoutée dans le script qui cache l'input file de la bannière 1 si elles sont utilisée un jour -->
-                    <label for="input_groupe">
-                        <p class="titre">Bannière 3 :</p>
-                        <p class="description">Choisissez une image pour votre post</p>
-                        <input type="file" id="banniere_3" name="banniere[]" accept="image/*">
-                    </label> --}}
                 </div>
-
 
 
                 <details>
@@ -106,44 +76,37 @@
                         <h2>Options avancées</h2>
                     </summary>
 
-
                     <div class="groupe card">
                         <label class="input_groupe">
                             <p class="titre">Tags :</p>
                             <p class="description">Séparez les tags par des virgules (e.g. important, soirée, info)</p>
-                            @isset($post)
-                                <input type="text" name="tags" class="input" id="tags_doc"
-                                    value="{{ implode(', ', $post->tags->pluck('name')->toArray()) }}" />
-                            @endisset
-                            @empty($post)
-                                <input type="text" name="tags" class="input" id="tags_doc"
-                                    value="{{ old('tags') ?? '' }}" />
-                            @endempty
+                            <input type="text" name="tags" autocomplete="off" class="input" id="tags_doc"
+                                value="{{ old('tags') ?? ( $post->tags ?? '') }}" />
                         </label>
                     </div>
 
                     <div class="groupe card">
                         <label class="input_groupe">
                             <p class="titre">Rattaché à l'event :</p>
-                            <select name="event_id" class="input" spellcheck="false">
+                            <select name="event_uid" class="input" spellcheck="false">
                                 @isset($post)
-                                    @if (empty($post->event_id))
+                                    @if (empty($post->event_uid))
                                         <option value="0" selected>Aucun</option>
                                     @else
                                         <option value="0">Aucun</option>
                                     @endif
                                     @foreach ($events as $event)
-                                        @if (!empty($post->event_id) && $post->event_id == $event->id)
-                                            <option value="{{ $event->id }}" selected>{{ $event->titre }}</option>
+                                        @if (!empty($post->event_uid) && $post->event_uid == $event->uid)
+                                            <option value="{{ $event->uid }}" selected>{{ $event->title }}</option>
                                         @else
-                                            <option value="{{ $event->id }}">{{ $event->titre }}</option>
+                                            <option value="{{ $event->uid }}">{{ $event->title }}</option>
                                         @endif
                                     @endforeach
                                 @endisset
                                 @empty($post)
                                     <option value="0" selected>Aucun</option>
                                     @foreach ($events as $event)
-                                        <option value="{{ $event->id }}">{{ $event->titre }}</option>
+                                        <option value="{{ $event->uid }}">{{ $event->title }}</option>
                                     @endforeach
                                 @endempty
                             </select>
@@ -154,43 +117,30 @@
                         <label class="input_groupe">
                             <p class="titre"> Collaboration </p>
                             <p class="description"> En collaboration avec quelle autre association ?</p>                        
-                               <ul name="entite_collab_id[]" spellcheck="false">
-                                    @foreach ($entites as $entite)                                    
-                                    <label>    
-                                    <input type="checkbox" name="entite_collab_id[]" value="{{ $entite->id }}"
-                                            @checked(
-                                                (isset($post) && $post->entite_collab()->get()->pluck('id')->contains($entite->id)))>
-                                                {{$entite->nom }}
-                                            </label>                                            
-                                    @endforeach
-                                </ul>
+                            <ul name="entite_collab_id" spellcheck="false">
+                                @foreach ($entites as $entite)                                    
+                                <li>    
+                                    <input type="checkbox" name="entite_collab_id[]" value="{{ $entite->uid }}"
+                                    @checked((isset($post) && $post->entite_collab()->get()->pluck('uid')->contains($entite->uid)))>
+                                        {{$entite->name }}
+                                </li>                                            
+                                @endforeach
+                            </ul>
                         </label>
                     </div>
 
                     <div class="groupe card">
                         <label class="input_groupe">
                             <p class="titre">Date de publication :</p>
-                            @isset($post)
-                                <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
-                                    max="12-31-2099" value="{{ $post->date_apparition }}" />
-                            @endisset
-                            @empty($post)
-                                <input type="datetime-local" name="date_apparition" class="input" min="01-01-2023"
-                                    max="12-31-2099"
-                                    value="{{ old('date_apparition') ?? ($post->date_apparition ?? '') }}" />
-                            @endempty
+                            <input type="datetime-local" name="published_at" class="input" min="01-01-2023"
+                                max="12-31-2099"
+                                value="{{ old('published_at') ?? ($post->published_at ?? '') }}" />
                         </label>
                         <label class="input_groupe">
                             <p class="titre">Date d'expiration :</p>
-                            @isset($post)
-                                <input type="datetime-local" name="date_expiration" class="input"
-                                    value="{{ $post->date_expiration }}" min="2000-01-01" max="2100-12-31" />
-                            @endisset
-                            @empty($post)
-                                <input type="datetime-local" name="date_expiration" class="input"
-                                    value="{{ old('date_expiration') ?? ($post->date_expiration ?? '') }}" min="2000-01-01"
-                                    max="2100-12-31" />
-                            @endempty
+                            <input type="datetime-local" name="archived_at" class="input"
+                                value="{{ old('archived_at') ?? ($post->archived_at ?? '') }}" min="2000-01-01"
+                                max="2100-12-31" />
                         </label>
                     </div>
 
@@ -200,52 +150,18 @@
                             <p class="titre">Campus</p>
                             <p class="description">Post destiné aux étudiants de quel campus ?</p>
                             <ul id="campus_id">
-                                @foreach ($campus as $campus)
-                                    <li><input type="checkbox" name="campus_id[]" value="{{ $campus->id }}"
-                                            id="campus_id_{{ $campus->id }}"
-                                            @checked(
-                                                (isset($post) && in_array($campus->id, $all_post_campus_id)) ||
-                                                    (!isset($post) && (old('campus_id') ? in_array($campus->id, old('campus_id')) : $campus->id == 1)))>{{ Str::ucfirst($campus->label) }}</li>
+                                @foreach ($sites as $site)
+                                    <li>
+                                        <input type="checkbox" name="campus_id[]" value="{{ $site->id }}" id="campus_id_{{ $site->id }}"
+                                            @checked((isset($post) && in_array($site->id, array_column($post->json_data['acces_details']['sites'] ?? [],'id') ?? [])) ||
+                                            (!isset($post) && (old('campus_id') ? in_array($site->id, old('campus_id')) : in_array($site->id, ($my_entite->sites->pluck('id')->toArray() ?? [])) )))/>
+                                                    {{ Str::ucfirst($site->label) }}
+                                    </li>
                                 @endforeach
                             </ul>
                         </label>
                     </div>
-
-                    <div class="groupe card">
-                        <label class="input_groupe">
-                            <p class="titre">Confidentialité</p>
-                            <p class="description">Ce post doit-il être caché pour les campus non concernés ?</p>
-
-                            @php
-                                $isChecked = (isset($post) && $post->confidentiel == '1') || (empty($post) && old('confidentialite'));
-                            @endphp
-
-                            <input type="radio" id="yes" name="confidentialite" value="1"
-                                @checked($isChecked)>
-                            <label for="yes">OUI</label><br>
-                            <input type="radio" id="no" name="confidentialite" value="0"
-                                @checked(!$isChecked)>
-                            <label for="no">NON</label>
-                        </label>
-                    </div>
                 </details>
-
-
-
-
-
-                {{-- <label class="input_groupe">
-                    <p class="titre">* Confidentialité :</p>
-                    <select name="confidentialite" class="input" spellcheck="false" required
-                        select="{{ old('confidentialite') ?? ($evenement->confidentialite ?? '') }}">
-                        <option value="0" selected>Public</option>
-                        <option value="1">Membres de l'association</option>
-                        <option value="2">Responsables & bureau</option>
-                        <option value="3">Bureau</option>
-                        <option value="4">Président⸱e⸱s et vice-président⸱e</option>
-                    </select>
-                </label> --}}
-
 
                 <span>* Les champs marqués d'une astérisque sont obligatoires</span>
                 <button type="submit" class="bouton primaire ombre_petite"
@@ -253,21 +169,6 @@
             </form>
         </section>
     </main>
-
-    <script>
-        const divFileBanniere = document.getElementById("div_file_banniere");
-        const checkboxBanniere = document.getElementById("checkbox_banniere");
-
-        @if (!empty($post) && count($post->bannieres) > 0)
-            divFileBanniere.style.display = "none";
-        @endif
-
-        checkboxBanniere.addEventListener('change', function() {
-            if (this.checked) divFileBanniere.style.display = "block";
-            else divFileBanniere.style.display = "none";
-        });    
-        
-    </script>
 
 @endsection
 
@@ -279,6 +180,24 @@
                 "image", "|", "table", "horizontal-rule", "|", "preview"
             ],
             spellChecker: false,
+        });
+
+        var input = document.getElementById('original_input');
+        var label = document.getElementById('filename');
+
+        input.addEventListener( 'change', function( e )
+        {
+            labelVal = label.innerHTML;
+            var fileName = '';
+            if( this.files && this.files.length > 1 )
+                fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+            else
+                fileName = e.target.value.split( '\\' ).pop();
+
+            if( fileName )
+                label.innerHTML = "File name : " + fileName;
+            else
+                label.innerHTML = labelVal;
         });
     </script>
 @endpushonce

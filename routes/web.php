@@ -1,23 +1,117 @@
 <?php
 
-use App\Http\Controllers\AccueilController;
-use App\Http\Controllers\ReseauSocialController;
-use App\Models\Avancee;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DocumentationController;
-use App\Http\Controllers\ProjetController;
-use App\Http\Controllers\MesEntitesController;
-use App\Http\Controllers\EntiteController;
-use App\Http\Controllers\MembreController;
-use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\CalendrierController;
-use App\Http\Controllers\LogoController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AvanceeController;
-use App\Http\Controllers\LocalAuthController;
+use App\Http\Controllers\ReseauSocialController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EntiteController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PushNotificationController;
+use App\Models\Event;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+Route::get('/', function(){
+    return view('accueil');
+})->name('accueil');
+
+Route::get('/home',[UserController::class,'home']);
+
+Route::get('/login',[LoginController::class,'loginPage']);
+Route::get('/connexion',[LoginController::class,'loginPage']);
+Route::post('/login',[LoginController::class,'login']);
+Route::get('/register',[LoginController::class,'registerPage']);
+Route::post('/register',[LoginController::class,'register'])->name('register');
+
+
+Route::prefix('/entite/{entite_uid}/dashboard')->group(function(){
+    Route::get('', [EntiteController::class,'dashboard']);
+
+    Route::get('/personnalisation',[EntiteController::class,'edit']);
+    Route::post('/personnalisation',[EntiteController::class,'store']);
+
+    Route::get('/entites', [EntiteController::class,'index_manager_entites']);
+    Route::get('/entites/create',[EntiteController::class,'create']);
+    Route::post('/entites/create',[EntiteController::class,'store']);
+    Route::post('/entites/{supp_uid}/delete',[EntiteController::class,'delete']);
+    
+    Route::get('/reseau_social',[ReseauSocialController::class,'create']);
+    Route::post('/reseau_social',[ReseauSocialController::class,'store']);
+
+    Route::get('/post', [PostController::class,'index_entite']);
+    Route::get('/post/create', [PostController::class,'create']);
+    Route::post('/post/create', [PostController::class,'store']);
+    Route::get('/post/modifier/{post_uid}/', [PostController::class,'edit']);
+    Route::post('/post/modifier/{post_uid}/', [PostController::class,'store']);
+    Route::post('/post/suppression/{post_uid}/', [PostController::class,'delete']);
+
+    Route::get('/event', [EventController::class,'show_home']);
+    Route::get('/event/create', [EventController::class,'create']);
+    Route::post('/event/create', [EventController::class,'store']);
+    Route::get('/event/modifier/{event_uid}/', [EventController::class,'edit']);
+    Route::post('/event/modifier/{event_uid}/', [EventController::class,'store']);
+    Route::post('/event/suppression/{event_uid}/', [EventController::class,'delete']);
+
+    Route::get('/roles', [RoleController::class,'index']);
+    Route::post('/roles/user/role', [RoleController::class,'give_role_user']);
+    Route::post('/roles/user/perm', [RoleController::class,'edit_perm_user']);
+
+    Route::get('/roles/roles/create', [RoleController::class,'create_role']);
+    Route::post('/roles/roles/create', [RoleController::class,'store_role']);
+    Route::get('/roles/roles/modifier/{role_uid}', [RoleController::class,'edit_role']);
+    Route::post('/roles/roles/modifier/{role_uid}', [RoleController::class,'update_role']);
+    Route::post('/roles/roles/suppression/{role_uid}/', [RoleController::class,'delete_role']);
+
+    Route::get('/roles/poles/create', [RoleController::class,'create_pole']);
+    Route::post('/roles/poles/create', [RoleController::class,'store_pole']);
+    Route::get('/roles/poles/modifier/{pole_uid}', [RoleController::class,'edit_pole']);
+    Route::post('/roles/poles/modifier/{pole_uid}', [RoleController::class,'update_pole']);
+    Route::post('/roles/poles/suppression/{pole_uid}/', [RoleController::class,'delete_pole']);
+});
+
+Route::controller(CalendrierController::class)->prefix("/calendrier")->group(function () {
+    Route::get('/{site?}', 'calendrier_general');
+    Route::get('/index_mois_json_general/{annee}-{mois}/{site?}', 'calendrier_index_json_general');
+});
+
+
+Route::get('/entites/{site}', [EntiteController::class, 'index_site']);
+Route::get('/entites', function(){
+    return redirect("/entites/1");
+});
+
+
+Route::get("/entite/{entite_uid}/",[EntiteController::class,'show']);
+Route::get('/cookies', function () {
+    return view('cookies');
+});
+Route::get('/rgpd', function () {
+    return redirect('/air/documentation/rgpd');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get('/files/{disk}/{path}', function ($disk,$path) {
+
+    abort_unless(Auth::check(), 403);
+
+    $file = Storage::disk($disk)->path($path);
+
+    abort_unless(file_exists($file), 404);
+
+    return response()->file($file);
+})->where('path', '.*');
+
+
+
+// ----------------------------------------- NOTIFICATIONS ----------------------------------------- //
+
+//Route::post('/souscrire', [PushNotificationController::class, 'souscrireNotifications']);
+
+// ------------------------------------------------------------------------------------------------ //
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +130,7 @@ use App\Http\Controllers\PushNotificationController;
 
 // ----------------------------------------- NOTIFICATIONS ----------------------------------------- //
 
-Route::post('/souscrire', [PushNotificationController::class, 'souscrireNotifications']);
+/*Route::post('/souscrire', [PushNotificationController::class, 'souscrireNotifications']);
 
 // ------------------------------------------------------------------------------------------------ //
 
@@ -66,9 +160,8 @@ Route::get('/{site?}', [PostController::class, 'accueil'])->where(['site' => 'do
 Route::get('/posts/{site?}', [PostController::class, 'posts'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon'])->name('posts');
 
 Route::get('/entites', function () {
-    // return view('entite.choix_site'); 
-    
-    return redirect('entites/douai');
+    // return view('entite.choix_site');
+    return redirect('entites/'.Site::getFromLabel(null)->toArray()['label']);
 })->name('racine');
 
 Route::get('/entites/{site}', [EntiteController::class, 'index_site'])->where(['site' => 'douai|lille|valenciennes|dunkerque|alençon']); // liste de toutes les entités d'un site de l'école (e.g. Douai)
@@ -134,6 +227,7 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/editer_reseaux_profil', 'enregistrer_reseaux_profil');
     Route::get('/choix-promo/{promo}', 'choix_promo');
     Route::get('/choix-campus/{campus}', 'choix_campus');
+    Route::get('/reset_choix', 'reset_choix_promo_campus');
 });
 
 // les routes réservées à l'AIR
@@ -196,6 +290,7 @@ $routes_bureaux = function () {
             Route::post('/entite/{entite_id}/modifier/informations', 'maj_infos');
             Route::get('/entite/{entite_id}/modifier/description', 'modifier_description')->name('bdx_modifier_description');
             Route::post('/entite/{entite_id}/modifier/description', 'maj_description');
+            Route::get('/entite/{entite_id}/delete', 'delete');
         });
 
         Route::controller(MembreController::class)->group(function () {
@@ -257,6 +352,9 @@ $routes_entites = function () {
         Route::get('/entite/gestion', 'gestion');
         
         Route::middleware('protection.autorisation:gerer_entite')->group(function () {
+            Route::get('/entite/informations/', 'modifier_infos');
+            Route::post('/entite/informations/', 'maj_infos');
+
             Route::get('/entite/description/', 'modifier_description');
             Route::post('/entite/description/', 'maj_description');
         });
@@ -351,3 +449,4 @@ Route::prefix('{air_uid}') //pour l'AIR
     ->where(['air_uid' => 'air'])
     ->middleware('existence.entite:air')
     ->group($routes_AIR);
+*/

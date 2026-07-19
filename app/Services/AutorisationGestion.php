@@ -1,78 +1,200 @@
 <?php
+
 namespace App\Services;
 
-use \App\Models\Role;
+use App\Enums\Permisions;
+use App\Enums\PermisionsEntite;
+use App\Models\Entite;
+use App\Models\FilesRegistre;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
-class AutorisationGestion {
+class AutorisationGestion
+{
+    /**
+     * Vérifie une permission dans une entité
+     */
+    public static function can(int $perm, string $entite_uid): bool
+    {
+        $entitePerm = DB::table('entites_perms')
+            ->where('entite_uid', $entite_uid)
+            ->where('perm', 0)
+            ->exists();
+        //if(!$entitePerm) return False;
 
-    public static function gestion($gestion){
-        $role = self::recuperer_role();
         
-        if($role == "non authentifié") return false;
-        else if($role == "non membre") return false;
+        $user = Auth::user();
 
-        return $role[$gestion];
+        if (!$user) {
+            return false;
+        }
+
+        $user_uid = $user->uid;
+
+        /*
+        -------------------------------------------------
+        1. Perm Super User
+        -------------------------------------------------
+        */
+
+        $override = DB::table('user_perms')
+            ->where('user_uid', $user_uid)
+            ->where('perm','=', Permisions::SU)
+            ->first();
+
+        if ($override) {
+            if($override->add_or_remove === 'add'){
+                return true;
+            }
+        }else{
+            if(DB::table('roles')
+                ->join('perm_role_list', 'roles.role_uid', '=', 'perm_role_list.role_uid')
+                ->where('roles.user_uid', $user_uid)
+                ->where('perm_role_list.perm', Permisions::SU)
+                ->exists()){
+                return true;
+            }
+        }
+
+        /*
+        -------------------------------------------------
+        1. USER OVERRIDE (priorité absolue)
+        -------------------------------------------------
+        */
+
+        $override = DB::table('user_perms')
+            ->where('entite_uid', $entite_uid)
+            ->where('user_uid', $user_uid)
+            ->where('perm','=', $perm)
+            ->first();
+
+        if ($override) {
+            return $override->add_or_remove === 'add';
+        }
+
+        /*
+        -------------------------------------------------
+        2. ROLES DU USER
+        -------------------------------------------------
+        */
+
+        return DB::table('roles')
+            ->join('perm_role_list', 'roles.role_uid', '=', 'perm_role_list.role_uid')
+            ->where('roles.entite_uid', $entite_uid)
+            ->where('roles.user_uid', $user_uid)
+            ->where('perm_role_list.perm', $perm)
+            ->exists();
     }
 
-    public static function gestion_dans_entite($gestion, $entite){
-        $role = self::recuperer_role_dans_entite($entite);
-        
-        if($role == "non authentifié") return false;
-        else if($role == "non membre") return false;
+    /**
+     * Vérifie si l'utilisateur a AU MOINS une permission
+     */
+    public static function any(array $perms, string $entite_uid): bool
+    {
+        foreach ($perms as $perm) {
+            if (self::can($perm, $entite_uid)) {
+                return true;
+            }
+        }
 
-        return $role[$gestion];
+        return false;
     }
 
-    public static function gestion_entite($entite){
-        $role = self::recuperer_role_dans_entite($entite);
-        
-        if($role == "non authentifié") return false;
-        else if($role == "non membre") return false;
-        
-        return $role["gerer_post"]  || $role["gerer_entite"] || $role["gerer_evenement"] || $role["gerer_membre"] || $role["gerer_reseau"];
-        // TODO : Ajouter les autres droits lorsque les boutons pour la docu, les tickets et les projets seront faits
+    /**
+     * Protection de page (abort 403)
+     */
+    public static function require(int $perm, string $entite_uid): void
+    {
+        if (!self::can($perm, $entite_uid)) {
+            abort(403);
+        }
     }
 
+    public static function requireRole( string $entite_uid): void{
+        $entite = Entite::find($entite_uid)->exists();
+        if(!$entite) abort(403);
 
-    public static function protectionPage($gestion){
-        $role = self::recuperer_role();
-        if ($role == "non authentifié") abort(403);
-        else if($role == "non membre") abort(403);
-        else if( $role[$gestion] != 1) abort(403);
+        $user = Auth::user();
+
+        if (!$user) abort(403);
+
+        $user_uid = $user->uid;
+
+        /*
+        -------------------------------------------------
+        1. Perm Super User
+        -------------------------------------------------
+        */
+
+        $override = DB::table('user_perms')
+            ->where('user_uid', $user_uid)
+            ->where('perm','=', Permisions::SU)
+            ->first();
+
+        if ($override) {
+            if($override->add_or_remove === 'add'){
+                return;
+            }
+        }else{
+            if(DB::table('roles')
+                ->join('perm_role_list', 'roles.role_uid', '=', 'perm_role_list.role_uid')
+                ->where('roles.user_uid', $user_uid)
+                ->where('perm_role_list.perm', Permisions::SU)
+                ->exists()){
+                return;
+            }
+        }
+
+        /*
+        -------------------------------------------------
+        1. USER OVERRIDE (priorité absolue)
+        -------------------------------------------------
+        */
+
+        $override = DB::table('user_perms')
+            ->where('entite_uid', $entite_uid)
+            ->where('user_uid', $user_uid)
+            ->first();
+
+        if ($override && $override->add_or_remove === 'add') {
+            return;
+        }
+
+        /*
+        -------------------------------------------------
+        2. ROLES DU USER
+        -------------------------------------------------
+        */
+
+        if(DB::table('roles')
+            ->join('perm_role_list', 'roles.role_uid', '=', 'perm_role_list.role_uid')
+            ->where('roles.entite_uid', $entite_uid)
+            ->where('roles.user_uid', $user_uid)
+            ->exists())return;
+
+        abort(403);
     }
-    public static function recuperer_role(){
-        if( !Auth::check() ) return "non authentifié";
 
-        if( is_null(session("role_id")) ){ abort(500, "L'identifiant de votre rôle n'a pas été écrit correctement.");} //erreur serveur, l'id de la session n'a pas été écrit
-
-        if(session("role_id") === false){ return "non membre";}
-
-        return Role::find(session("role_id"));
+    public static function require_for_file(int $perm,string $path,string $disk = 'public'): void{
+        self::can_for_file($perm,$path,$disk);
     }
 
-    public static function niveau_administration(){
-        $role = self::recuperer_role();
-
-        if($role == "non authentifié") return 0;
-        else if($role == "non membre") return 0;
-
-        return $role["niveau_admin"];
-    }
-
-
-    public static function recuperer_role_dans_entite($entite){
-        if( !Auth::check() ) return "non authentifié";
-
-        $membre = Auth::user()->membres_actuel()->where("entite_id", $entite["id"]);
-        $role = $membre->first()->role();
-
-        $role_id = $role->get()->first()->id;
-
-        if( is_null($role_id) ){ abort(500, "L'identifiant de votre rôle n'a pas été écrit correctement.");} //erreur serveur, l'id de la session n'a pas été écrit
-
-        if($role_id === false){ return "non membre";}
-
-        return Role::find($role_id);
+    public static function can_for_file(int $perm,string $path,string $disk = 'public'): void{
+        if(FileService::exists($path,$disk)){
+            $file = FilesRegistre::where("path","=",$path)->firstOrFail();
+            $json = $file->json_data;
+            switch($json['acces']){
+                case 'public':
+                    return;
+                case 'certifier':
+                    break;
+                case 'imtne':
+                    break;
+                case 'private':
+                    break;
+                
+            }
+        }
+        abort(404);
     }
 }

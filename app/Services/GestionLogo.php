@@ -8,17 +8,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Validator;
 
 class GestionLogo {
-    public static function validation_logo($image){
-        $validation = [
-            'logo' => ['required','image','dimensions:min_width=512,min_height=512','max:100000']
-        ];
-        $messages_custom = [
-            'logo.dimensions' => 'L\'image doit faire au minimum 512px en largeur et en hauteur.',
-            'logo.max' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 100 méga-octets.',
-            'logo.uploaded' => 'L\'image est trop lourde, réessayez avec une image d\'une taille inférieure à 100 méga-octets.'
-        ];
-        Validator::make(["logo" => $image], $validation, $messages_custom)->validate();
-    }
+
 
     static function stocker_fichier_logo($image, $chemin){
         $image_nom = date("Y-m-d");

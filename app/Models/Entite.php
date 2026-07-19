@@ -2,111 +2,161 @@
 
 namespace App\Models;
 
-use App\Enums\RatachementEnum;
-use App\Enums\EntiteTypeEnum;
-use \App\Services\GestionLogo;
-
-use Carbon\Carbon;
-
+use App\Enums\EntiteType;
+use App\View\Components\entite as ComponentsEntite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Entite extends Model
 {
     use HasFactory;
+    use HasUuids;
+
+    /**
+     * Table associée
+     */
+    protected $table = 'entites';
+
+    /**
+     * Clé primaire UUID
+     */
+    protected $primaryKey = 'uid';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    /**
+     * Champs modifiables
+     */
     protected $fillable = [
-        'nom',
-        'uid',
-        'ratachement',
+        'name',
+        'parent_uid',
         'type',
-        'courriel',
+        'short_description',
+        'description',
+        'founded_year',
+        'visible',
+        'color_1',
+        'color_2',
+        'email',
         'alias',
-        'sites',
-        'categories',
-        'privee',
-        'annee_creation',
-        'annee_fin',
-        'description_courte',
-        'description_md',
-        'couleur_claire',
-        'couleur_sombre',
-        'hidden'
+        'logo',
     ];
 
-    protected $casts = [
-        'ratachement' => RatachementEnum::class,
-        'type' => EntiteTypeEnum::class,
-    ];
-
-    public function evenements()
+    /**
+     * Casts
+     */
+    protected function casts(): array
     {
-        return $this->hasMany(Evenement::class);
+        return [
+            'type' => EntiteType::class,
+            'visible' => 'boolean',
+            'founded_year' => 'integer',
+        ];
     }
 
-    public function documentations()
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS HIÉRARCHIQUES
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Parent (BDE, asso principale, etc.)
+     */
+    public function parent()
     {
-        return $this->hasMany(Documentation::class);
+        return $this->belongsTo(self::class, 'parent_uid', 'uid');
     }
 
-    public function logos()
+    /**
+     * Enfants (sous-assos, pôles, clubs)
+     */
+    public function children()
     {
-        return $this->hasMany(Logo::class);
+        return $this->hasMany(self::class, 'parent_uid', 'uid');
     }
 
-    public function membres()
+    /*
+    |--------------------------------------------------------------------------
+    | LOGO (FILE REGISTRE)
+    |--------------------------------------------------------------------------
+    */
+
+    public function getLogo()
     {
-        return $this->hasMany(Membre::class);
+        return $this->belongsTo(FilesRegistre::class, 'logo', 'uid');
     }
 
-    public function reseaux_sociaux()
+    /*
+    |--------------------------------------------------------------------------
+    | ACCESSORS
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Nom + type (utile UI)
+     */
+    public function getFullLabelAttribute(): string
     {
-        return $this->morphMany(ReseauSocial::class, 'reseau_social');
+        return "{$this->name} ({$this->type})";
+    }
+
+    /**
+     * Est une entité visible
+     */
+    public function isVisible(): bool
+    {
+        return (bool) $this->visible;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | HELPERS UI (PWA BDE)
+    |--------------------------------------------------------------------------
+    */
+
+    public function getTheme(): array
+    {
+        return [
+            'primary' => $this->color_1,
+            'secondary' => $this->color_2,
+        ];
+    }
+
+    public function reseauxSociaux()
+    {
+        return $this->belongsToMany(
+            ReseauSocial::class,
+            'entite_reseaux_sociaux',
+            'entite_uid',
+            'reseau_social_id'
+        )->withPivot('url');
     }
 
     public function sites()
     {
-        return $this->belongsToMany(Site::class, EntiteSite::class);
+        return $this->belongsToMany(
+            Site::class,
+            'entite_sites',
+            'entite_uid',
+            'site_id'
+        );
     }
 
-    public function categories()
+    public function lien_relatif()
     {
-        return $this->hasMany(Categorie::class);
+        return "/entite/" . $this->uid;
     }
 
-    public function ajout_sites($sites_labels)
+    public function lien_gestion_relatif()
     {
-        $sites_id = Site::whereIn('label', $sites_labels)->get()->pluck('id');
-        $this->sites()->sync($sites_id);
+        return $this->lien_relatif() . '/dashboard';
     }
 
-    public function posts()
+    public static function existe($entite_uid)
     {
-        return $this->hasMany(Post::class);
-    }
-
-    public function ajout_categories($labels)
-    {
-        // on supprime toutes les catégories existantes
-        $this->categories()->delete();
-
-        // on crée le tableau de catégories
-        $entite_id = $this->id;
-        $a = array_fill(0, count($labels), []);
-        for ($i = 0; $i < count($labels); $i++) {
-            $b = array();
-            $b['entite_id'] = $entite_id;
-            $b["label"] = $labels[$i];
-
-            $a[$i] = $b;
-        }
-
-        Categorie::insert($a);
-    }
-
-    public static function existe($entite_id)
-    {
-        $entite = Entite::find($entite_id);
-
+        $entite = Entite::find($entite_uid);
         if (is_null($entite)) {
             abort(405);
         }
@@ -114,169 +164,18 @@ class Entite extends Model
         return $entite;
     }
 
-    public static function bureaux_site($site)
-    {
-        $bureaux = Entite::where('type', EntiteTypeEnum::Bureau)
-            ->whereHas('sites', function ($query) use ($site) {
-                $query->where('label', $site);
-            });
 
-        return $bureaux;
+    public function setSites($sites_labels)
+    {
+        $sites_id = Site::whereIn('id', $sites_labels)->pluck('id')->toArray();
+        $this->sites()->sync($sites_id);
     }
 
-    public static function independants_site($site)
-    {
-        $entites_independantes = Entite::where('ratachement', RatachementEnum::Independant)
-            ->whereHas('sites', function ($query) use ($site) {
-                $query->where('label', $site);
-            });
-
-        return $entites_independantes;
+    public function getParent(){
+        return $this->belongsTo(self::class, 'parent_uid');
     }
 
-    public function bureaux()
-    {
-        if ($this->uid != "air") {
-            abort(403, "Hophophop, vous n'avez pas le droit de faire ça. C'est réservé à l'AIR");
-        }
-
-        $comites_clubs_dependants = Entite::where('type', EntiteTypeEnum::Bureau)
-            ->orderBy('nom');
-
-        return $comites_clubs_dependants;
-    }
-
-    public function comites_clubs_dependants()
-    {
-        if ($this->uid != "air" && $this->type != EntiteTypeEnum::Bureau) {
-            abort(500, "Vous essayez de récupérer les entités qui dépendent de quelque chose qui n'est pas un bureau.");
-        }
-
-        if ($this->type == EntiteTypeEnum::Bureau) {
-            $sites_bureau = $this->sites()->get()->pluck('label')->toArray();
-
-            $comites_clubs_dependants = Entite::where('ratachement', $this->ratachement)
-                ->whereHas('sites', function ($query) use ($sites_bureau) {
-                    $query->whereIn('label', $sites_bureau);
-                });;
-        } else { // l'AIR récup toutes les entités
-            $comites_clubs_dependants = new Entite;
-        }
-
-        $comites_clubs_dependants = $comites_clubs_dependants
-            ->whereIn('type', array(EntiteTypeEnum::Association, EntiteTypeEnum::Club, EntiteTypeEnum::Comite))
-            ->orderBy('nom');
-
-        return $comites_clubs_dependants;
-    }
-
-    public function listes_dependantes($annee = null)
-    {
-        if ($this->uid != "air" && $this->type != EntiteTypeEnum::Bureau) {
-            abort(500, "Vous essayez de récupérer les entités qui dépendent de quelque chose qui n'est pas un bureau.");
-        }
-
-        if ($this->type == EntiteTypeEnum::Bureau) {
-            $sites_bureau = $this->sites()->get()->pluck('label')->toArray();
-
-            $listes_dependantes = Entite::where('ratachement', $this->ratachement);
-        } else { // l'ai récup toutes les listes
-            $listes_dependantes = new Entite;
-        }
-
-        if ($annee !== null) {
-            $listes_dependantes->where('annee_creation', $annee);
-        }
-
-        $listes_dependantes = $listes_dependantes
-            ->whereIn('type', array(EntiteTypeEnum::Liste, EntiteTypeEnum::Fakeliste))
-            ->orderBy('type', 'desc')
-            ->orderBy('nom');
-
-        return $listes_dependantes;
-    }
-
-    public function url()
-    {
-        return "https://hypair.imt-ne.fr" . $this->lien_relatif();
-    }
-
-    public function lien_relatif()
-    {
-        // if ($this->type->value == "liste") {
-        //     return "/" . $this->uid . '-' . $this->id;
-        // } else {
-        //     return "/" . $this->uid;
-        // }
-        return "/" . $this->uid;
-    }
-
-    public function lien_gestion_relatif()
-    {
-        return $this->lien_relatif() . '/entite/gestion';
-    }
-
-    public function logo_url($taille)
-    {
-        $chemin = GestionLogo::chemin_logos($this->uid, $this->id, $this->type,true, $taille);
-
-        return $chemin;
-    }
-
-    public function mandat($annee = null)
-    {
-        $annee_scolaire = $annee ?? date('Y');
-        if (date('m') >= config('mandat.mois_affichage_nouveau_mandat')) {
-            $annee_scolaire++;
-        } //en avril, on change le mandat pour afficher le nouveau
-
-        // Distinction des dates du prochain mandat pour les listes
-        $date_debut_passations = config('mandat.mois_debut_passation') . "-01";
-        if($this->type == EntiteTypeEnum::Liste || $this->type == EntiteTypeEnum::Liste){
-            $date_debut_passations = config('mandat.mois_debut_passation_liste') . "-01";
-        }
-
-
-        return $this::membres()
-            ->select('membres.id', 'membres.user_id', 'membres.entite_id', 'membres.created_at', 'membres.fin_mandat', 'membres.photo', 'roles.label', 'roles.niveau_admin', 'users.uid', 'users.nom', 'users.prenom')
-            ->whereBetween('membres.created_at', [($annee_scolaire - 1) . "-" . $date_debut_passations, $annee_scolaire . "-" . $date_debut_passations])
-            ->join('roles', 'roles.id', '=', 'membres.role_id')
-            ->join('users', 'users.id', '=', 'membres.user_id')
-            ->orderBy('niveau_admin', 'desc')
-            ->orderBy('nom', 'asc')
-            ->where('roles.niveau_admin', '>=', '6');
-    }
-
-    public function personnes_a_responsabilites()
-    {
-        return $this::membres()
-            ->select('membres.id', 'membres.user_id', 'membres.created_at', 'membres.fin_mandat', 'roles.id as roles.id', 'roles.label', 'roles.niveau_admin', 'users.uid', 'users.nom', 'users.prenom')
-            ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`")
-            ->join('roles', 'roles.id', '=', 'membres.role_id')
-            ->join('users', 'users.id', '=', 'membres.user_id')
-            ->where('roles.niveau_admin', '>', '1')
-            ->orderBy('niveau_admin', 'desc')
-            ->orderBy('nom', 'asc')
-            ->orderBy('prenom');
-    }
-
-    public function abonnes()
-    {
-        return $this::membres()
-            ->select('membres.id', 'membres.user_id', 'membres.created_at', 'membres.fin_mandat', 'roles.id as roles.id', 'roles.label', 'roles.niveau_admin', 'users.uid', 'users.nom', 'users.prenom')
-            ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`")
-            ->join('roles', 'roles.id', '=', 'membres.role_id')
-            ->join('users', 'users.id', '=', 'membres.user_id')
-            ->where('roles.niveau_admin', '1')
-            ->orderBy('nom', 'asc');
-    }
-
-    public function nbr_abonnes()
-    {
-        return $this::membres()
-            ->count()
-            ->whereRAW("NOW() BETWEEN `membres`.`created_at` AND `fin_mandat`")
-            ->join('roles', 'roles.id', '=', 'membres.role_id')
-            ->where('roles.niveau_admin', '>=', '1');
+    public function getEntitesDependants(){
+        return $this->hasMany(self::class, 'parent_uid');
     }
 }

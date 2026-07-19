@@ -1,19 +1,25 @@
 {{-- À dynamiser plus tard en tant que component réutilisable ... --}}
+@php
+    use App\Models\Site;
+@endphp
 
 <div class="switch-campus" style="width:200px;">
-    <select>
-        <option value="0">{{ Str::ucfirst($campus) }}</option>
-        <option value="0">Douai</option>
-        <option value="1">Lille</option>
-        <option value="2">Valenciennes</option>
-        <option value="3">Dunkerque</option>
-        <option value="4">Alençon</option>
+    <select value="">
+        <option value="0">Aucun</option>
+        @foreach (Site::all() as $site)
+            <option value="{{ $site->id }}" @selected($campus->id == $site->id)>{{ $site->label }}</option>
+        @endforeach
     </select>
 </div>
 
 <script>
     var x, i, j, l, ll, selElmnt, a, b, c;
-    const campus = ['douai', 'lille', 'valenciennes', 'dunkerque', 'alençon'];
+    const campus = [
+        "0",
+        @foreach (Site::all() as $site)
+            '{{ $site->id }}',
+        @endforeach
+    ];
     /* Look for any elements with the class "custom-select": */
     x = document.getElementsByClassName("switch-campus");
     l = x.length;
@@ -56,13 +62,15 @@
                 h.click();
                 
                 // Get link to selected page
-                var targetCampus = i == 0 ? campus[i] : campus[i - 1]
-                var currentLinkWithoutCampus = window.location.pathname.replace('%C3%A7','ç')
+                var targetCampus = campus[i]
+                var currentLinkWithoutCampus = window.location.pathname
                 
                 for(var j=0; j<campus.length; j++){
-                    currentLinkWithoutCampus = currentLinkWithoutCampus.replace('/'+campus[j], '')//Remove all campus from link
+                    la_fin='/'+campus[j]
+                    if(currentLinkWithoutCampus.endsWith(la_fin)){
+                        currentLinkWithoutCampus = currentLinkWithoutCampus.substring(0, currentLinkWithoutCampus.length - la_fin.length)
+                    }
                 }
-                console.log(currentLinkWithoutCampus)
                 
                 // Open selected page
                 location.replace(pathJoin([currentLinkWithoutCampus, targetCampus]))

@@ -17,9 +17,10 @@
         @else
             <h2>Sélectionnez votre campus</h2>
             <div id="liste-campus">
-                @if(Auth::user()->promo != 'CP1' && Auth::user()->promo != 'CP2')
+                {{--@if(Auth::user()->promo != 'CP1' && Auth::user()->promo != 'CP2')
                     <a href="/choix-campus/lille-douai">Lille & Douai</a>
-                @endif
+                @endif--}}
+                <a href="/choix-campus/lille-douai">Lille & Douai</a>
                 @foreach($sites as $site)
                     <a href="/choix-campus/{{ $site->label }}">{{ ucwords($site->label) }}</a>
                 @endforeach

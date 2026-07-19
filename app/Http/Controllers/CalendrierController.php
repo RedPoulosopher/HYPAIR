@@ -2,24 +2,117 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ValidationStatusEvent;
 use App\Models\Site;
-use Illuminate\Http\Request;
-use \App\Models\Evenement;
-use \App\Services\AutorisationGestion;
-use \App\Models\Entite;
-use \App\Models\Membre;
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-
+use App\Models\Event;
 
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CalendrierController extends Controller
 {
-    public static function calendrier_asso()
+
+    public static function calendrier_general($site = null)
+    {
+        if(!isset($site)) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                if (count($user->sites)>0) {
+                    return redirect('/calendrier/' .$user->sites->first()->id);
+                }
+            }
+            return redirect('/calendrier/1');
+        }
+
+        // On récupère le campus
+        $campus=null;
+        if (isset($site)) {
+            $campus = Site::findOrFail($site);
+        }
+
+        return view("event.calendrier", [
+                'site' => $campus
+            ]);
+    }
+
+    public static function calendrier_index_json_general($annee, $mois, $site)
+    {
+        $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
+
+        if (!isset($site) || !isset($annee) || !isset($mois)) {
+            abort(404);
+        }
+        
+        $campus=Site::find($site);
+        
+        $evenements_publics = Event::index($annee, $mois)
+            ->where(function ($query) {
+                $query->where('validation_status', ValidationStatusEvent::VALIDE)
+                    ->orWhere('validation_status', ValidationStatusEvent::ORGANISE)
+                    ->orWhere('validation_status', ValidationStatusEvent::ANNULE);
+            })
+            ->where('published_at', '<', $now)
+            ->get();
+        
+        if($campus) {
+            $evenements_publics = $evenements_publics->intersect($campus->events);
+        }
+
+
+        $evenements_publics_array = array();
+        foreach ($evenements_publics as $evenement_pub) {
+            $evenement_pub["description"] = Str::markdown($evenement_pub["description"]);
+            $evenements_publics_array[] = $evenement_pub;
+        }
+
+        $evenements_user = array();
+        if (Auth::check()) {
+            $user = Auth::user();
+            /*$evenements_prive = DB::table('events')
+                ->join('entites', 'events.entite_uid', '=', 'entites.uid')
+                //->join('membres', 'membres.entite_uid', '=', 'entites.uid')
+                ->select(
+                    'entites.uid',
+                    'entites.name',
+                    'entites.color_1',
+                    'events.title',
+                    'events.validation_status',
+                    'events.uid',
+                    'events.description',
+                    'events.started_at',
+                    'events.ended_at',
+                    'events.lieu'
+                )
+                //->where('membres.user_uid', $user['uid'])
+                ->whereMonth('started_at', $mois)
+                ->whereYear('started_at', $annee)
+                ->where('published_at', '<', $now)
+                ->get();
+            $evenements_prive_array = json_decode(json_encode($evenements_prive), true);
+
+            for ($i = 0; $i < count($evenements_prive_array); $i++) {
+                if ($evenements_prive_array[$i]['confidentialite'] == 4 && $evenements_prive_array[$i]['role_id'] <= 2) {
+                    $evenements_user[] = $evenements_prive_array[$i];
+                } elseif ($evenements_prive_array[$i]['confidentialite'] == 3 && $evenements_prive_array[$i]['role_id'] <= 5) {
+                    $evenements_user[] = $evenements_prive_array[$i];
+                } elseif ($evenements_prive_array[$i]['confidentialite'] == 2 && $evenements_prive_array[$i]['role_id'] <= 17) {
+                    $evenements_user[] = $evenements_prive_array[$i];
+                } elseif ($evenements_prive_array[$i]['confidentialite'] == 1 && $evenements_prive_array[$i]['role_id'] <= 25) {
+                    $evenements_user[] = $evenements_prive_array[$i];
+                }
+            }*/
+        }
+
+        return [
+            "events" => $evenements_publics_array,
+            "evenements_prives" => $evenements_user
+        ];
+    }
+
+    /*public static function calendrier_asso()
     {
         //on doit recuperer l annee et le mois courant. ca sera l affichage par defaut
         $annee = date('Y');
@@ -133,7 +226,7 @@ class CalendrierController extends Controller
                 ->join('entites', 'evenements.entite_id', '=', 'entites.id')
                 ->join('membres', 'membres.entite_id', '=', 'entites.id')
                 ->join('users', 'users.id', '=', 'membres.user_id')
-                ->select('entites.uid', 'entites.nom', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', 'evenements.slug', 'evenements.validation', 'evenements.id', 'evenements.confidentialite', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
+                ->select('entites.uid', 'entites.name', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', 'evenements.slug', 'evenements.validation', 'evenements.id', 'evenements.confidentialite', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
                 ->where('users.id', '=', $user['id'])
                 ->whereMonth("temps_debut", $mois)
                 ->whereYear("temps_debut", $annee)                
@@ -220,7 +313,7 @@ class CalendrierController extends Controller
                 ->join('entites', 'evenements.entite_id', '=', 'entites.id')
                 ->join('membres', 'membres.entite_id', '=', 'entites.id')
                 ->join('users', 'users.id', '=', 'membres.user_id')
-                ->select('entites.uid', 'entites.nom', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', /*'evenements.slug', 'evenements.validation',*/ 'evenements.id', /*'evenements.confidentialite',*/ 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
+                ->select('entites.uid', 'entites.name', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', /*'evenements.slug', 'evenements.validation',*/ /*'evenements.id', 'evenements.confidentialite',*//* 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
                 ->where('users.id', '=', $user['id'])
                 ->where('entites.uid', '=', session('entite_uid'))
                 ->whereMonth("temps_debut", $mois)
@@ -316,7 +409,7 @@ class CalendrierController extends Controller
                 ->join('entites', 'evenements.entite_id', '=', 'entites.id')
                 ->join('membres', 'membres.entite_id', '=', 'entites.id')
                 ->join('users', 'users.id', '=', 'membres.user_id')
-                ->select('entites.uid', 'entites.nom', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', 'evenements.slug', 'evenements.validation', 'evenements.id', 'evenements.confidentialite', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
+                ->select('entites.uid', 'entites.name', 'membres.role_id', 'entites.couleur_claire', 'evenements.titre', 'evenements.slug', 'evenements.validation', 'evenements.id', 'evenements.confidentialite', 'evenements.description', 'evenements.temps_debut', 'evenements.temps_fin', 'evenements.lieu')
                 ->where('users.id', '=', $user['id'])
                 ->whereMonth("temps_debut", $mois)
                 ->whereYear("temps_debut", $annee)
@@ -379,5 +472,5 @@ class CalendrierController extends Controller
         $evenement = Evenement::find($request["id"])->delete();
 
         return redirect(session('entite_uid') . "/calendrier");
-    }
+    }*/
 }

@@ -2,54 +2,57 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class ReseauSocial extends Model
 {
-    use HasFactory;
-
     protected $table = 'reseaux_sociaux';
-    
+
     protected $fillable = [
-        'reseau_social_id',
-        'reseau_social_type',
-        'reseaux_sociaux_liste_id',
-        'lien',
+        'nom',
+        'color',
+        'font_color',
+        'placeholder_entite',
+        'placeholder_user',
     ];
 
-    
-    public function reseaux_sociaux(){
-        return $this->morphTo();
+    public $timestamps = false;
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    public function entites()
+    {
+        return $this->belongsToMany(
+            Entite::class,
+            'entite_reseaux_sociaux',
+            'reseau_social_id',
+            'entite_uid'
+        )->withPivot('url');
     }
 
-    public function liste(){
-        return $this->belongsTo(ReseauSocialListe::class, 'reseaux_sociaux_liste_id', 'id'); //pour une raison inconnue, ce que j'ai fait ne respecte pas la convention, donc je précise les colonnes de la relation
+    public function users()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_reseaux_sociaux',
+            'reseau_social_id',
+            'user_uid'
+        )->withPivot('url');
     }
 
-    public static function changer_reseau_social($model, $reseau_social_model){
-        $info = ['lien' => $reseau_social_model->lien];
-        $recherche = [
-			'reseau_social_id' => $model->id,
-			'reseau_social_type' => get_class($model),
-			'reseaux_sociaux_liste_id' => $reseau_social_model->reseaux_sociaux_liste_id,
-        ];
-
-        if($reseau_social_model->lien == ""){
-            return self::firstWhere($recherche)->delete();
-        }
-
-        return self::updateOrCreate($recherche,$info);
-    }
 
     public function type_de_lien(){
         $tel_regex = '/^([+]?\d{1,2}[-\s]?|)\d{3}[-\s]?\d{3}[-\s]?\d{4}$/';
         $url_regex = '/^((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[.\!\/\\w]*))?)/';
 
 
-        preg_match($tel_regex, $this->lien, $telMatch);
-        preg_match($url_regex, $this->lien, $urlMatch);
+        preg_match($tel_regex, $this->pivot->url, $telMatch);
+        preg_match($url_regex, $this->pivot->url, $urlMatch);
 
         $isTel = count($telMatch) > 0;
         $isUrl = count($urlMatch) > 0;
@@ -60,10 +63,9 @@ class ReseauSocial extends Model
         if($isTel && strtolower($this->liste->nom) == "whatsapp"){
             return "tel:";
         }
-
         //Si c'est une url, on force le protocole https si pas spécifié
         if($isUrl){
-            if(Str::startsWith($this->lien, 'http://') || Str::startsWith($this->lien, 'https://') ){
+            if(Str::startsWith($this->pivot->url, 'http://') || Str::startsWith($this->pivot->url, 'https://') ){
                 return "";
             }else{
                 return "https://";

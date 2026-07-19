@@ -1,6 +1,6 @@
 @extends('layouts.app-without-sidebar')
 
-@section('titre', $entite->nom)
+@section('titre', $entite->name)
 
 @pushonce('styles')
     @vite([
@@ -14,19 +14,19 @@
     <main id="main-content">
         <section>
 
-            <h1>à propos de {{ $entite->nom }}</h1>
+            <h1>à propos de {{ $entite->name }}</h1>
             <div class="logo">
-                <img src="{{ session('entite_logo_moyen') }}" alt="logo" />
+                <img src="{{ $entite->getLogo?->url() }}" alt="logo" />
             </div>
-            @if (!is_null($entite->categories))
+            @if (!is_null($entite->tags) && $entite->tags!="")
                 <div class="categories">
-                    @foreach ($categories as $categorie)
-                        <span>#{{ $categorie->label }}</span>
+                    @foreach (explode(',', $entite->tags) as $categorie)
+                        <span>#{{ $categorie }}</span>
                     @endforeach
                 </div>
             @endif
             <div class="description">
-                {!! Str::markdown($entite->description_md ?? ($entite->description_courte ?? '')) !!}
+                {!! Str::markdown($entite->description ?? ($entite->short_description ?? '')) !!}
             </div>
 
             @if(count($reseaux_sociaux) > 0)
@@ -37,7 +37,7 @@
                 </div>
             @endif
 
-            @if(count($mandat) > 0)
+            {{-- @if(count($mandat) > 0)
                 <h1 class="espace">Mandat</h1>
                 <div class="membres grille-enfants">
                     @foreach ($mandat as $mandat_user)
@@ -101,7 +101,7 @@
                         </div>
                     @endforeach
                 </div>
-            </div>
+            </div>--}}
         </section>
     </main>
 @endsection

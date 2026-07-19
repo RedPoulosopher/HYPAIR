@@ -14,7 +14,7 @@
     {{-- Contenu principal de la page --}}
     <main id="main-content">
 
-        @if (Auth::check())
+        @if (Auth::check() && False)
             <x-switch-campus :campus="$site"></x-switch-campus>
         @endif
 
@@ -22,7 +22,7 @@
             <h1>Services</h1>
 
             <div class="services-wrapper">
-                @if (Auth::check() &&
+                @if (Auth::check() && False &&
                         Auth::user()->campus->pluck('label')->contains('douai'))
                     <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
                         logo="{{ Vite::Image('piwigo.png')}} ">
@@ -53,7 +53,7 @@
             <h1>Actualités</h1>
 
             <div class="article-wrapper">
-                @if (Auth::check() && count($posts) > 0)
+                @if (Auth::check() && False && count($posts) > 0)
                     @foreach ($posts as $post)
                         @if (!$post->confidentiel || ($post->confidentiel && $canSeeConfidentiel))
                             <x-post :post="$post" />
@@ -63,7 +63,7 @@
                     @if(!$allPostsVisible)
                         <a href="/posts" id="voir-plus">Voir plus</a>
                     @endif
-                @elseif (Auth::check())
+                @elseif (Auth::check() && False)
                     <p class="should-be-connected no-content">Aucun post pour le moment</p>
                 @else
                     <p class="should-be-connected no-content">Vous devez être connecté pour voir les posts</p>

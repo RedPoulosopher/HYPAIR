@@ -2,28 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
 
-    public function membres(){
-        return $this->hasMany(Membre::class);
+    protected $table = 'roles';
+
+    protected $fillable = [
+        'entite_uid',
+        'user_uid',
+        'role_uid',
+        'ordre',
+    ];
+
+    public function entite()
+    {
+        return $this->belongsTo(Entite::class, 'entite_uid', 'uid');
     }
 
-    public static function role_id($role_label){
-        $role = self::where('label', $role_label);
-
-        if($role->exists()){
-            return $role->first()["id"];
-        }
-
-        throw new \ErrorException("Le rôle '".$role_label."' n'existe pas.");
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_uid', 'uid');
     }
 
-    public static function index(){
-        return self::orderBy('niveau_admin', 'desc')->orderBy('label')->where('niveau_admin','>','0')->get();
+    public function role()
+    {
+        return $this->belongsTo(RoleList::class, 'role_uid', 'uid');
     }
 }

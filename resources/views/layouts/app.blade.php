@@ -37,7 +37,7 @@
     @php
         // Code pour gérer le login utilisateur
         use App\Services\GestionPhotoDeProfil;
-        if (Auth::check()) {
+        if (Auth::check() && False) {
             $user = Auth::user();
             $user['chemin_photo_de_profil'] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
         }
@@ -46,7 +46,7 @@
     {{-- Barre de navigation --}}
     <x-navbar/>
 
-    @if (Auth::check())
+    @if (Auth::check() && False)
         @if (Auth::user()->promo == null || count(Auth::user()->campus) == 0))
             {{-- Si pas de promo ou pas de campus --}}
             <x-select-promo-campus-popup />
@@ -66,18 +66,18 @@
 
             <div id="calendrier-sidebar">
                 <h1>Cette semaine</h1>
-                @php
+                {{--@php
                     use App\Http\Controllers\EvenementController;
                     $comingEvents = EvenementController::comingEvents();
-                @endphp
+                @endphp--}}
 
-                @if (Auth::check() && count($comingEvents) > 0)
+                @if (Auth::check() && False && count($comingEvents) > 0)
                     @foreach ($comingEvents as $comingEvent)
                         <x-coming-event :title="$comingEvent->titre" :start="$comingEvent->temps_debut" :end="$comingEvent->temps_fin" :entite="$comingEvent->entite_nom"
                             :uid="$comingEvent->uid" :slug="$comingEvent->slug" />
                     @endforeach
                     <a id="voir-plus" href="/calendrier">Voir plus</a>
-                @elseif(Auth::check())
+                @elseif(Auth::check() && False)
                     <p>Aucun évènement dans les 7 prochains jours</p>
                 @else
                     <p class="should-be-connected no-content">Vous devez être connecté pour voir les événements</p>

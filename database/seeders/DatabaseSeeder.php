@@ -2,32 +2,28 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Seed the application's database.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $this->call(UsersTableSeeder::class);
-        $this->call(EntitesTableSeeder::class);
-        $this->call(DocumentationTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
-        $this->call(MembresTableSeeder::class);
-        $this->call(SitesSeeder::class);
-        $this->call(EntiteSitesSeeder::class);
-        $this->call(EvenementsTableSeeder::class);
-        $this->call(ReseauxSociauxListeSeeder::class);
-        $this->call(ReseauxSociauxSeeder::class);
-        $this->call(PostsTableSeeder::class);
-        $this->call(TagsTableSeeder::class);
-        $this->call(TagsPostsSeeder::class);
-        $this->call(SitesPostsSeeder::class);
-        $this->call(SitesEventsSeeder::class);
-        $this->call(SitesUsersSeeder::class);
+        User::factory()->create([
+            'nom' => 'Admin',
+            'email' => 'nathan.denut@gmail.com',
+            'password' => Hash::make('1234'),
+        ]);
+        $this->call([
+            ConstantesSeeder::class,
+            EntiteSeeder::class,
+        ]);
     }
 }

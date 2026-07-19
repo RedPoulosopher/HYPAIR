@@ -1,12 +1,12 @@
 <a 
     class="reseau-social {{ $reseau->type_de_lien() == 'COPY' ? 'copy' : '' }}"
     {{ ($reseau->type_de_lien() == 'tel:' ? '' : 'target=_blank') }}
-    href="{{ ($reseau->type_de_lien() == 'COPY' ? '' : $reseau->type_de_lien())  .  $reseau->lien }}"
-    lien="{{ $reseau->lien }}"
-    style="background-color: {{ $reseau->liste->couleur }}; background: linear-gradient(to right, {{ $reseau->liste->couleur }}); color:{{ $reseau->liste->couleur_police }};"
+    href="{{ ($reseau->type_de_lien() == 'COPY' ? '' : $reseau->type_de_lien())  .  $reseau->pivot->url }}"
+    lien="{{ $reseau->pivot->url }}"
+    style="background-color: {{ $reseau->color }}; background: linear-gradient(to right, {{ $reseau->color }}); color:{{ $reseau->font_color }};"
 >
-    <img src="{{ Vite::Image('logo_reseaux/' . strtolower($reseau->liste->nom) . '.svg') }}">
-    <p style="color: {{$reseau->liste->couleur_police}}"> {{ $reseau->liste->nom }}</p>       
+    <img src="{{ Vite::Image('logo_reseaux/' . strtolower($reseau->nom) . '.svg') }}">
+    <p style="color: {{$reseau->font_color}}"> {{ $reseau->nom }}</p>       
 </a>
 
 @pushonce('end-scripts')

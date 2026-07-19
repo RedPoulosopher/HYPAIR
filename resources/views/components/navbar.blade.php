@@ -16,7 +16,7 @@
         <x-toggle-theme-btn />
         <ul id="links">
             <li class="menu-button {{ request()->is('/') ? 'active' : '' }}"><a href="/">Accueil</a></li>
-            <li class="menu-button {{ request()->is('calendrier') ? 'active' : '' }}"><a href="/calendrier">Calendrier</a></li>
+            <li class="menu-button {{ request()->is('calendrier*') ? 'active' : '' }}"><a href="/calendrier">Calendrier</a></li>
             <li class="menu-button {{ request()->is('entites*') ? 'active' : '' }}"><a href="/entites">Associations</a></li>
 
             {{-- A afficher que pendant les campagnes --}}
@@ -37,7 +37,7 @@
             @endif
         </ul>
         <div id="services">
-            @if (Auth::check() &&
+            @if (Auth::check() && False &&
                     Auth::user()->campus->pluck('label')->contains('douai'))
                 <x-service nom="Piwigo" destination='https://photos.imt-ne.fr' color=#FF7800
                     logo="{{ Vite::Image('piwigo.png') }}">

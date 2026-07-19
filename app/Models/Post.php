@@ -2,49 +2,72 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 class Post extends Model
 {
-    use HasFactory;
+    use HasUuids;
+
+    protected $table = 'posts';
+
+    protected $primaryKey = 'uid';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
-        'event_id',
-        'titre',
-        'description',
-        'date_apparition',
-        'date_expiration',
-        'entite_id',
-        'confidentiel',
-        'photo_name',
-        'notification_sent',
+        'entite_uid',
+        'event_uid',
+        'title',
+        'content',
+        'banner_uid',
+        'published_at',
+        'archived_at',
+        'tags'
     ];
 
-    function event()
+    protected function casts(): array
     {
-        return $this->belongsTo(Evenement::class);
+        return [
+            'published_at' => 'datetime',
+            'archived_at' => 'datetime',
+            'json_data' => 'array',
+        ];
     }
-    function entite()
+
+    public function entite()
     {
-        return $this->belongsTo(Entite::class);
+        return $this->belongsTo(Entite::class, 'entite_uid', 'uid');
     }
-    function tags()
+
+    public function event()
     {
-        return $this->belongsToMany(Tag::class, 'tags_posts');
+        return $this->belongsTo(Event::class, 'event_uid', 'uid');
     }
-    function campus()
+
+    public function banner()
     {
-        return $this->belongsToMany(Site::class, 'sites_posts');
+        return $this->belongsTo(FilesRegistre::class, 'banner_uid', 'uid');
     }
-    function bannieres() {
-        return $this->hasMany(Banniere::class);
-    }
+
     function entite_collab()
     {
-        return $this->belongsToMany(Entite::class,'post_collabs');
-    }    
+        return $this->morphToMany(
+            Entite::class,
+            'object',
+            'com_collabs',
+            'object_uid',
+            'entite_uid',
+            'uid',
+            'uid'
+        );
+    }
 
     function url(){
-        return '/' . $this->entite()->first()->uid . '/entite/post/' . $this->id;
+        return '/entite/' . $this->entite()->first()->uid . '/post/' . $this->id;
     }
+
+
+    
 }

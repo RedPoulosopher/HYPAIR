@@ -27,48 +27,50 @@ Route::post('/register',[LoginController::class,'register'])->name('register');
 
 
 Route::prefix('/entite/{entite_uid}/dashboard')->group(function(){
-    Route::get('', [EntiteController::class,'dashboard']);
+    Route::get('', [EntiteController::class,'dashboard'])->name("dashboard");
 
-    Route::get('/personnalisation',[EntiteController::class,'edit']);
+    Route::get('/personnalisation',[EntiteController::class,'edit'])->name('personnalisation');
     Route::post('/personnalisation',[EntiteController::class,'store']);
 
-    Route::get('/entites', [EntiteController::class,'index_manager_entites']);
-    Route::get('/entites/create',[EntiteController::class,'create']);
+    Route::get('/entites', [EntiteController::class,'index_manager_entites'])->name('index_manager_entites');
+    Route::get('/entites/create',[EntiteController::class,'create'])->name('create_entite');
     Route::post('/entites/create',[EntiteController::class,'store']);
-    Route::post('/entites/{supp_uid}/delete',[EntiteController::class,'delete']);
-    
-    Route::get('/reseau_social',[ReseauSocialController::class,'create']);
+    Route::post('/entites/{supp_uid}/delete',[EntiteController::class,'delete'])->name('delete_entite');
+
+    Route::get('/reseau_social',[ReseauSocialController::class,'create'])->name('reseau_social_create');
     Route::post('/reseau_social',[ReseauSocialController::class,'store']);
 
-    Route::get('/post', [PostController::class,'index_entite']);
-    Route::get('/post/create', [PostController::class,'create']);
+    Route::get('/post', [PostController::class,'index_entite'])->name('index_entite_posts');
+    Route::get('/post/create', [PostController::class,'create'])->name('post_create');
     Route::post('/post/create', [PostController::class,'store']);
-    Route::get('/post/modifier/{post_uid}/', [PostController::class,'edit']);
+    Route::get('/post/modifier/{post_uid}/', [PostController::class,'edit'])->name('post_edit');
     Route::post('/post/modifier/{post_uid}/', [PostController::class,'store']);
-    Route::post('/post/suppression/{post_uid}/', [PostController::class,'delete']);
+    Route::post('/post/suppression/{post_uid}/', [PostController::class,'delete'])->name('post_delete');
 
-    Route::get('/event', [EventController::class,'show_home']);
-    Route::get('/event/create', [EventController::class,'create']);
+    Route::get('/event', [EventController::class,'show_home'])->name('event_home');
+    Route::get('/event/create', [EventController::class,'create'])->name('event_create');
     Route::post('/event/create', [EventController::class,'store']);
-    Route::get('/event/modifier/{event_uid}/', [EventController::class,'edit']);
+    Route::get('/event/modifier/{event_uid}/', [EventController::class,'edit'])->name('event_edit');
     Route::post('/event/modifier/{event_uid}/', [EventController::class,'store']);
-    Route::post('/event/suppression/{event_uid}/', [EventController::class,'delete']);
+    Route::post('/event/suppression/{event_uid}/', [EventController::class,'delete'])->name('event_delete');
 
-    Route::get('/roles', [RoleController::class,'index']);
-    Route::post('/roles/user/role', [RoleController::class,'give_role_user']);
-    Route::post('/roles/user/perm', [RoleController::class,'edit_perm_user']);
+    Route::get('/roles', [RoleController::class,'index'])->name('index_roles');
+    Route::post('/roles/user/role', [RoleController::class,'give_role_user'])->name('give_role_user');
+    Route::post('/roles/user/perm', [RoleController::class,'edit_perm_user'])->name('edit_perm_user');
 
-    Route::get('/roles/roles/create', [RoleController::class,'create_role']);
+    Route::get('/roles/roles', [RoleController::class,'index_role'])->name('index_role');
+    Route::get('/roles/roles/create', [RoleController::class,'create_role'])->name('create_role');
     Route::post('/roles/roles/create', [RoleController::class,'store_role']);
-    Route::get('/roles/roles/modifier/{role_uid}', [RoleController::class,'edit_role']);
+    Route::get('/roles/roles/modifier/{role_uid}', [RoleController::class,'edit_role'])->name('edit_role');
     Route::post('/roles/roles/modifier/{role_uid}', [RoleController::class,'update_role']);
-    Route::post('/roles/roles/suppression/{role_uid}/', [RoleController::class,'delete_role']);
+    Route::post('/roles/roles/suppression/', [RoleController::class,'delete_role'])->name('delete_role');
 
-    Route::get('/roles/poles/create', [RoleController::class,'create_pole']);
+    Route::get('/roles/poles', [RoleController::class,'index_pole'])->name('index_pole');
+    Route::get('/roles/poles/create', [RoleController::class,'create_pole'])->name('create_pole');
     Route::post('/roles/poles/create', [RoleController::class,'store_pole']);
-    Route::get('/roles/poles/modifier/{pole_uid}', [RoleController::class,'edit_pole']);
+    Route::get('/roles/poles/modifier/{pole_uid}', [RoleController::class,'edit_pole'])->name('edit_pole');
     Route::post('/roles/poles/modifier/{pole_uid}', [RoleController::class,'update_pole']);
-    Route::post('/roles/poles/suppression/{pole_uid}/', [RoleController::class,'delete_pole']);
+    Route::post('/roles/poles/suppression/', [RoleController::class,'delete_pole'])->name('delete_pole');
 });
 
 Route::controller(CalendrierController::class)->prefix("/calendrier")->group(function () {
@@ -84,16 +86,31 @@ Route::get('/entites', function(){
 
 
 Route::get("/entite/{entite_uid}/",[EntiteController::class,'show']);
+
 Route::get('/cookies', function () {
     return view('cookies');
-});
-Route::get('/rgpd', function () {
-    return redirect('/air/documentation/rgpd');
 });
 
 Route::get('/contact', function () {
     return view('contact');
 });
+
+// users profile
+//====================
+Route::controller(UserController::class)->group(function () {
+    Route::get('/home', 'home');
+    Route::get('/editer_photo_profil', 'editer_photo_profil');
+    Route::post('/editer_photo_profil', 'maj_photo_profil');
+    Route::get('/editer_infos_profil', 'editer_infos_profil');
+    Route::post('/editer_infos_profil', 'maj_infos_profil');
+    Route::get('/editer_reseaux_profil', 'editer_reseaux_profil');
+    Route::post('/editer_reseaux_profil', 'enregistrer_reseaux_profil');
+    Route::get('/choix-promo/{promo}', 'choix_promo');
+    Route::get('/choix-campus/{campus}', 'choix_campus');
+    Route::get('/reset_choix', 'reset_choix_promo_campus');
+});
+
+
 Route::get('/files/{disk}/{path}', function ($disk,$path) {
 
     abort_unless(Auth::check(), 403);
@@ -256,7 +273,7 @@ $routes_AIR = function () {
         });
 
         Route::controller(MembreController::class)->group(function () {
-            Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type' => 'membres|abonnes'])->name('air_gestion_membres');
+            Route::get('/entite/{entite_id}/{type}', 'index_admin')->where(['tRoute::get('/entite/{entite_id}/{type}', 'index_admin')->where(['type' => 'membres|abonnes'])->name('bdx_gestion_membrype' => 'membres|abonnes'])->name('air_gestion_membres');
             Route::post('/entite/{entite_id}/{type}', 'ajout_membre')->where(['type' => 'membres|abonnes']);
             Route::post('/entite/{entite_id}/{type}/suppression', 'suppression_membre')->where(['type' => 'membres|abonnes']);
         });

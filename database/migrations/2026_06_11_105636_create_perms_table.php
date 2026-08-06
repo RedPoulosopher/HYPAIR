@@ -38,7 +38,6 @@ return new class extends Migration
             $table->foreignUuid('entite_uid')->constrained('entites', 'uid')->onDelete('cascade');
             $table->foreignUuid('user_uid')->constrained('users', 'uid')->onDelete('cascade');
             $table->foreignUuid('role_uid')->constrained('roles_list', 'uid')->onDelete('cascade');
-            $table->integer('ordre')->default(0);
             $table->primary(['entite_uid','user_uid','role_uid']);
         });
         Schema::create('user_perms', function (Blueprint $table) {

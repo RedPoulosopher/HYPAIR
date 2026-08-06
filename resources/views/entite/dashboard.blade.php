@@ -22,27 +22,27 @@
             </a>
             <div class="conteneur_boutons">
 
-                <a class="modif_option card" href="dashboard/personnalisation">
+                <a class="modif_option card" href="{{ route('personnalisation',[$entite->uid]) }}">
                     <i class="fa-solid fa-palette"></i>Personnalisation
                 </a>
 
-                <a class="modif_option card" href="dashboard/reseau_social">
+                <a class="modif_option card" href="{{ route('reseau_social_create',[$entite->uid]) }}">
                     <i class="fa-solid fa-globe"></i>Réseaux sociaux
                 </a>
 
-                <a class="modif_option card" href="dashboard/post">
+                <a class="modif_option card" href="{{ route('index_entite_posts',[$entite->uid]) }}">
                     <i class="fa-solid fa-comment"></i>Posts
                 </a>
 
-                <a class="modif_option card" href="dashboard/event">
+                <a class="modif_option card" href="{{ route('event_home',[$entite->uid]) }}">
                     <i class="fa-regular fa-calendar"></i>Évènements
                 </a>
 
-                <a class="modif_option card" href="dashboard/entites">
+                <a class="modif_option card" href="{{ route('index_manager_entites',[$entite->uid]) }}">
                     <i class="fa-solid fa-crown"></i>Gérer les entités
                 </a>
 
-                <a class="modif_option card" href="dashboard/roles">
+                <a class="modif_option card" href="{{ route('index_roles',[$entite->uid]) }}">
                     <i class="fa-solid fa-user-shield"></i>Rôles & permissions
                 </a>
 
@@ -52,6 +52,18 @@
 
                 <a class="modif_option card" href="dashboard/groupes">
                     <i class="fa-solid fa-layer-group"></i>Groupes
+                </a>
+
+                <a class="modif_option card" href="dashboard/boutique">
+                    <i class="fa-solid fa-store"></i>Boutique
+                </a>
+
+                <a class="modif_option card" href="dashboard/paiements">
+                    <i class="fa-solid fa-credit-card"></i>Paiements
+                </a>
+
+                <a class="modif_option card" href="dashboard/comptabilite">
+                    <i class="fa-solid fa-calculator"></i>Comptabilité
                 </a>
 
                 <a class="modif_option card" href="dashboard/votes">
@@ -70,20 +82,8 @@
                     <i class="fa-solid fa-image"></i>Photos
                 </a>
 
-                <a class="modif_option card" href="dashboard/boutique">
-                    <i class="fa-solid fa-store"></i>Boutique
-                </a>
-
-                <a class="modif_option card" href="dashboard/paiements">
-                    <i class="fa-solid fa-credit-card"></i>Paiements
-                </a>
-
                 <a class="modif_option card" href="dashboard/inventaire">
                     <i class="fa-solid fa-boxes-stacked"></i>Inventaire & prêts
-                </a>
-
-                <a class="modif_option card" href="dashboard/comptabilite">
-                    <i class="fa-solid fa-calculator"></i>Comptabilité
                 </a>
 
                 <a class="modif_option card" href="dashboard/tournois">

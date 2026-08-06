@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Permisions;
+use App\Enums\Permission;
 use Illuminate\Http\Request;
 use \App\Models\User;
 use \App\Models\Entite;
@@ -21,7 +21,7 @@ class ReseauSocialController extends Controller
         $user = null;
         $reseaux_sociaux_models = DB::table('reseaux_sociaux')->get();
         if($entite){
-            AutorisationGestion::require(Permisions::RESEAU_MANAGE,$request['entite_uid']);
+            AutorisationGestion::require(Permission::NETWORK_MANAGE,$request['entite_uid']);
             $mes_reseaux_sociaux = $entite->reseauxSociaux;
             
             return view('reseaux_sociaux.index_gestion', [
@@ -42,7 +42,7 @@ class ReseauSocialController extends Controller
     {
         $entite = Entite::where('uid',$request['entite_uid'])->first();
         if($entite){
-            AutorisationGestion::require(Permisions::RESEAU_MANAGE,$request['entite_uid']);
+            AutorisationGestion::require(Permission::NETWORK_MANAGE,$request['entite_uid']);
             $entite->reseauxSociaux()->detach($request["reseaux_sociaux_liste_id"]);
             if($request["lien"]){
                 $entite->reseauxSociaux()->attach($request["reseaux_sociaux_liste_id"], [

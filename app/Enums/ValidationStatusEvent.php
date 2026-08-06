@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-enum ValidationStatusEvent
+enum ValidationStatusEvent:string
 {
-    public const PROPOSITION = "Proposition";
-    public const DEMANDE = "Déclaration déposée";
-    public const VALIDE = "Déclaration validée";
-    public const ORGANISE = "Soirée organisée";
-    public const ANNULE = "Annulé";
+    case PROPOSITION = "Proposition";
+    case DEMANDE = "Déclaration déposée";
+    case VALIDE = "Déclaration validée";
+    case ORGANISE = "Soirée organisée";
+    case ANNULE = "Annulé";
 }

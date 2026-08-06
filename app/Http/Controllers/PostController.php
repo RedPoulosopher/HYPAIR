@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Permisions;
+use App\Enums\Permission;
 use App\Models\Post;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
@@ -108,7 +108,7 @@ class PostController extends Controller
 
     public function index_entite(Request $request)
     {
-        AutorisationGestion::require(Permisions::POST_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::POST_MANAGE,$request['entite_uid']);
 
         $posts = Post::where('entite_uid', $request['entite_uid'])->orderBy('published_at', 'desc')->get();
 
@@ -118,7 +118,7 @@ class PostController extends Controller
     }
 
     public function create(Request $request){
-        AutorisationGestion::require(Permisions::POST_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::POST_MANAGE,$request['entite_uid']);
 
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
         $oneMonthAgo = date('Y-m-d', strtotime("-1 month", strtotime($now)));
@@ -138,7 +138,7 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
-        AutorisationGestion::require(Permisions::POST_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::POST_MANAGE,$request['entite_uid']);
                 
         $postRequest = $this->formulaire_traitement($request,$request['entite_uid']);
         
@@ -180,7 +180,7 @@ class PostController extends Controller
 
     public function edit($entite_uid, $post_uid)
     {
-        AutorisationGestion::require(Permisions::POST_MANAGE,$entite_uid);
+        AutorisationGestion::require(Permission::POST_MANAGE,$entite_uid);
         
         $now = (new DateTime(null, new DateTimeZone('Europe/Paris')))->format('Y-m-d H:i:s');
         $oneMonthAgo = date('Y-m-d', strtotime("-1 month", strtotime($now)));
@@ -203,7 +203,7 @@ class PostController extends Controller
 
     public function delete(Request $request)
     {
-        AutorisationGestion::require(Permisions::POST_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::POST_MANAGE,$request['entite_uid']);
         $post = Post::findOrFail($request['post_uid']);
         if($post->entite?->uid!=$request['entite_uid']){
             abort(403);

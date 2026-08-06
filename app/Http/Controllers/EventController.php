@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Permisions;
+use App\Enums\Permission;
 use App\Models\Entite;
 use App\Models\Event;
 use App\Models\Site;
@@ -74,7 +74,7 @@ class EventController extends Controller
 
 	public function show_home(Request $request)
 	{
-        AutorisationGestion::require(Permisions::EVENT_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::EVENT_MANAGE,$request['entite_uid']);
 
 		$evenements = Event::where('entite_uid', $request['entite_uid'])->get();
 
@@ -109,7 +109,7 @@ class EventController extends Controller
 
 	public function create(Request $request)
 	{
-        AutorisationGestion::require(Permisions::EVENT_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::EVENT_MANAGE,$request['entite_uid']);
 
 		$evenements_existants = Event::select('uid', 'title')->where('entite_uid', $request['entite_uid'])->get();
 
@@ -129,7 +129,7 @@ class EventController extends Controller
 
     public function store(Request $request)
 	{
-        AutorisationGestion::require(Permisions::EVENT_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::EVENT_MANAGE,$request['entite_uid']);
 		$eventRequest = $this->formulaire_traitement($request,$request['entite_uid']);
         if($request['event_uid']){
             $event = Event::findOrFail($request['event_uid']);
@@ -222,7 +222,7 @@ class EventController extends Controller
 
 
 	public function edit($entite_uid, $event_uid){
-        AutorisationGestion::require(Permisions::EVENT_MANAGE,$entite_uid);
+        AutorisationGestion::require(Permission::EVENT_MANAGE,$entite_uid);
 		$event = Event::findOrFail($event_uid);
 		$entite = Entite::findOrFail($entite_uid);
 		if($event->entite->uid != $entite_uid && !in_array($entite_uid, $event->entite_collab()->pluck("uid"))){
@@ -245,7 +245,7 @@ class EventController extends Controller
 
 	public static function delete($entite_uid,$event_uid)
 	{
-        AutorisationGestion::require(Permisions::EVENT_MANAGE,$entite_uid);
+        AutorisationGestion::require(Permission::EVENT_MANAGE,$entite_uid);
 		$event = Event::findOrFail($event_uid);
 		$event->delete();
 

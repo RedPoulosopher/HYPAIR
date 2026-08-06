@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\EntiteType;
-use App\Enums\Permisions;
+use App\Enums\Permission;
 use App\Models\Entite;
 use App\Models\Site;
 use App\Services\AutorisationGestion;
@@ -17,7 +17,7 @@ class EntiteController extends Controller
 {
     public function dashboard(Request $request)
 	{
-        AutorisationGestion::require(Permisions::POST_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::POST_MANAGE,$request['entite_uid']);
 		$entite = Entite::existe($request['entite_uid']);
 		$logo_path = $entite->getLogo?->url();
 		return view('entite.dashboard')->with('entite', $entite)->with('logo_path',$logo_path);
@@ -25,7 +25,7 @@ class EntiteController extends Controller
 
 
 	public function create(Request $request){
-        AutorisationGestion::require(Permisions::ENTITE_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::ENTITY_MANAGE,$request['entite_uid']);
 
 		$entite_courante = Entite::where('uid',$request['entite_uid'])->first();
 		$sites = Site::all();
@@ -185,7 +185,7 @@ class EntiteController extends Controller
 	}
 
 	public function edit(Request $request){
-        AutorisationGestion::require(Permisions::ENTITE_MANAGE,$request['entite_uid']);
+        AutorisationGestion::require(Permission::ENTITY_MANAGE,$request['entite_uid']);
 		$entite = Entite::where('uid',$request['entite_uid'])->first();
 
 		$sites = Site::all();

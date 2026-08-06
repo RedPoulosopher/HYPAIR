@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Enums\Permisions;
-use App\Enums\PermisionsEntite;
+use App\Enums\Permission;
+use App\Enums\PermissionEntite;
 use App\Models\Entite;
 use App\Models\FilesRegistre;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +14,7 @@ class AutorisationGestion
     /**
      * Vérifie une permission dans une entité
      */
-    public static function can(int $perm, string $entite_uid): bool
+    public static function can($perm, string $entite_uid): bool
     {
         $entitePerm = DB::table('entites_perms')
             ->where('entite_uid', $entite_uid)
@@ -39,7 +39,7 @@ class AutorisationGestion
 
         $override = DB::table('user_perms')
             ->where('user_uid', $user_uid)
-            ->where('perm','=', Permisions::SU)
+            ->where('perm','=', Permission::SUPER_ADMIN)
             ->first();
 
         if ($override) {
@@ -50,7 +50,7 @@ class AutorisationGestion
             if(DB::table('roles')
                 ->join('perm_role_list', 'roles.role_uid', '=', 'perm_role_list.role_uid')
                 ->where('roles.user_uid', $user_uid)
-                ->where('perm_role_list.perm', Permisions::SU)
+                ->where('perm_role_list.perm', Permission::SUPER_ADMIN)
                 ->exists()){
                 return true;
             }
@@ -65,7 +65,7 @@ class AutorisationGestion
         $override = DB::table('user_perms')
             ->where('entite_uid', $entite_uid)
             ->where('user_uid', $user_uid)
-            ->where('perm','=', $perm)
+            ->where('perm','=', $perm->value)
             ->first();
 
         if ($override) {
@@ -82,7 +82,7 @@ class AutorisationGestion
             ->join('perm_role_list', 'roles.role_uid', '=', 'perm_role_list.role_uid')
             ->where('roles.entite_uid', $entite_uid)
             ->where('roles.user_uid', $user_uid)
-            ->where('perm_role_list.perm', $perm)
+            ->where('perm_role_list.perm', $perm->value)
             ->exists();
     }
 
@@ -103,7 +103,7 @@ class AutorisationGestion
     /**
      * Protection de page (abort 403)
      */
-    public static function require(int $perm, string $entite_uid): void
+    public static function require($perm, string $entite_uid): void
     {
         if (!self::can($perm, $entite_uid)) {
             abort(403);
@@ -128,7 +128,7 @@ class AutorisationGestion
 
         $override = DB::table('user_perms')
             ->where('user_uid', $user_uid)
-            ->where('perm','=', Permisions::SU)
+            ->where('perm','=', Permission::SUPER_ADMIN)
             ->first();
 
         if ($override) {
@@ -139,7 +139,7 @@ class AutorisationGestion
             if(DB::table('roles')
                 ->join('perm_role_list', 'roles.role_uid', '=', 'perm_role_list.role_uid')
                 ->where('roles.user_uid', $user_uid)
-                ->where('perm_role_list.perm', Permisions::SU)
+                ->where('perm_role_list.perm', Permission::SUPER_ADMIN)
                 ->exists()){
                 return;
             }
@@ -175,11 +175,11 @@ class AutorisationGestion
         abort(403);
     }
 
-    public static function require_for_file(int $perm,string $path,string $disk = 'public'): void{
+    public static function require_for_file($perm,string $path,string $disk = 'public'): void{
         self::can_for_file($perm,$path,$disk);
     }
 
-    public static function can_for_file(int $perm,string $path,string $disk = 'public'): void{
+    public static function can_for_file($perm,string $path,string $disk = 'public'): void{
         if(FileService::exists($path,$disk)){
             $file = FilesRegistre::where("path","=",$path)->firstOrFail();
             $json = $file->json_data;

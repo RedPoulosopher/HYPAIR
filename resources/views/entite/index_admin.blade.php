@@ -60,7 +60,7 @@
                                     <td><a class="couleur" href="{{ $entite->lien_relatif() }}">{{ $entite["name"] }}</a></td>
                                     <td class="sites">
                                         @foreach ($entite->sites()->get()->pluck('label') as $site)
-                                            <span class="site">: {{ $site }}</span>
+                                            <span class="site">{{ $site }}</span>
                                         @endforeach
                                     </td>
                                     <td class="type">{{ $entite["type"]->value }}</td>

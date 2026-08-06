@@ -11,6 +11,7 @@ class Pole extends Model
 
     protected $table = 'poles_list';
 
+    public $timestamps = false;
     protected $primaryKey = 'uid';
     public $incrementing = false;
     protected $keyType = 'string';

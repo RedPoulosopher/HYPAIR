@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class RoleList extends Model
 {
     use HasUuids;
+    public $timestamps = false;
 
     protected $table = 'roles_list';
 

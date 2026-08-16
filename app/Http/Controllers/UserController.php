@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\NotificationToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use \App\Models\ReseauSocialListe;
@@ -202,4 +203,5 @@ class UserController extends Controller
 
     return back();
   }
+
 }

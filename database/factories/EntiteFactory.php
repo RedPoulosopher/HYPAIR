@@ -28,15 +28,10 @@ class EntiteFactory extends Factory
 
             'founded_year' => fake()->numberBetween(1950, now()->year),
 
-            'dissolved_year' => null,
-
             'visible' => true,
 
             'color_1' => fake()->hexColor(),
             'color_2' => fake()->hexColor(),
-
-            'font_color_1' => '#FFFFFF',
-            'font_color_2' => '#000000',
 
             'email' => fake()->companyEmail(),
 

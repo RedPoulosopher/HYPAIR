@@ -1,4 +1,6 @@
+
 <div id="select-popup" class="popup">
+    
     <div class="popup-content card" id="supported">
 
         <h2>Autoriser les notifications ?</h2>
@@ -45,10 +47,9 @@
     </div>
 
 </div>
-
+<meta name="csrf_token" content="{{ csrf_token() }}">
 @pushonce('end-scripts')
 <script type="module">
-
 import { setupNotifications } from "{{ Vite::asset('resources/notifications/fcm.js') }}"
     
 
@@ -149,6 +150,7 @@ function choixNotifs(event, choix) {
             
         }).catch(e => {
             // Show failed message
+            console.error(e)
             loadingContent.classList.add("hidden")
             failedContent.classList.remove("hidden")  
         }).finally(()=>{
@@ -167,8 +169,5 @@ function choixNotifs(event, choix) {
 
     }
 }
-    
-    
-    
 </script>
 @endpushonce

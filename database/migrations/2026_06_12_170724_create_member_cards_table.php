@@ -31,7 +31,7 @@ return new class extends Migration
 
         Schema::create('vote_user', function (Blueprint $table) {
             $table->foreignUuid('vote_uid')->constrained('votes', 'uid')->onDelete('cascade');
-            $table->foreignUuid('user_uid')->constrained('users', 'uid');
+            $table->foreignUuid('user_uid')->constrained('users', 'uid')->onDelete('cascade');
             $table->foreignUuid('option_uid')->constrained('vote_options', 'uid')->onDelete('cascade');
             $table->timestamps();
         });

@@ -129,4 +129,7 @@ class User extends Authenticatable
             'entite_uid'
         );
     }
+    public function notificationTokens(){
+        return $this->hasMany(NotificationToken::class);
+    }
 }

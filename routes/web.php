@@ -7,6 +7,7 @@ use App\Http\Controllers\EntiteController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\Event;
@@ -122,11 +123,13 @@ Route::get('/files/{disk}/{path}', function ($disk,$path) {
     return response()->file($file);
 })->where('path', '.*');
 
+// Offline page for PWA & NOTIFICATIONS 
+Route::get('/offline', function () {
 
+    return view('pwa.offline');
+});
 
-// ----------------------------------------- NOTIFICATIONS ----------------------------------------- //
-
-//Route::post('/souscrire', [PushNotificationController::class, 'souscrireNotifications']);
+Route::post('/souscrire', [PushNotificationController::class, 'souscrireNotifications']);
 
 // ------------------------------------------------------------------------------------------------ //
 
@@ -140,22 +143,8 @@ Route::get('/files/{disk}/{path}', function ($disk,$path) {
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*
 
-// Route::get('/', function () {
-//     return redirect('/entites/douai');
-// });
-
-// ----------------------------------------- NOTIFICATIONS ----------------------------------------- //
-
-/*Route::post('/souscrire', [PushNotificationController::class, 'souscrireNotifications']);
-
-// ------------------------------------------------------------------------------------------------ //
-
-// Offline page for PWA
-Route::get('/offline', function () {
-
-    return view('pwa.offline');
-});
 
 Route::get('/admin', [AuthController::class, 'admin'])->name('admin');
 Route::post('/admin', [AuthController::class, 'connexion_admin']);

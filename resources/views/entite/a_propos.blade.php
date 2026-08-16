@@ -37,7 +37,7 @@
                 </div>
             @endif
 
-            {{-- @if(count($mandat) > 0)
+            @if(count($mandat) > 0)
                 <h1 class="espace">Mandat</h1>
                 <div class="membres grille-enfants">
                     @foreach ($mandat as $mandat_user)
@@ -69,31 +69,31 @@
                                 <img src="{{ $mandat_user->lien_photo_utilisateur }}" alt="Votre photo de profil" />
                             </div>
                             <div class="info_profil">
-                                <div id="user-info" style="{{ $mandat_user->user_info->bio ? '' : 'align-items:center' }}">
+                                <div id="user-info" style="{{ $mandat_user->user->bio ? '' : 'align-items:center' }}">
                                     <div id="prenoms">
-                                        <h2>{{ $mandat_user->user_info->prenom }} {{ $mandat_user->user_info->nom }}</h2>
-                                        @if ($mandat_user->user_info->pronom !== '')
+                                        <h2>{{ $mandat_user->user->prenom }} {{ $mandat_user->user->nom }}</h2>
+                                        @if ($mandat_user->user->pronom !== '')
                                             <div class="separator">•</div>
-                                            <h3 class="pronoms">{{ $mandat_user->user_info->pronom }}</h3>
+                                            <h3 class="pronoms">{{ $mandat_user->user->pronom }}</h3>
                                         @endif
                                     </div>
-                                    @if ($mandat_user->user_info->promo && count($mandat_user->user_info->campus) > 0)
+                                    @if ($mandat_user->user->promo && count($mandat_user->user->campus) > 0)
                                         <div id="promo-campus">
                                             <p><i
-                                                    class="fa-solid fa-graduation-cap"></i>{{ $mandat_user->user_info->promo }}
+                                                    class="fa-solid fa-graduation-cap"></i>{{ $mandat_user->user->promo }}
                                             </p>
                                             <p><i
-                                                    class="fa-solid fa-location-dot"></i>{{ ucwords(implode(', ', $mandat_user->user_info->campus->pluck('label')->toArray())) }}
+                                                    class="fa-solid fa-location-dot"></i>{{ ucwords(implode(', ', $mandat_user->user->campus->pluck('label')->toArray())) }}
                                             </p>
                                         </div>
                                     @endif
                                 </div>
 
                                 <div class="bio">
-                                    {!! nl2br(strip_tags($mandat_user->user_info->bio)) !!}
+                                    {!! nl2br(strip_tags($mandat_user->user->bio)) !!}
                                 </div>
                                 <div class="reseaux_sociaux_profil grille-enfants">
-                                    @foreach ($mandat_user->reseaux_sociaux as $reseau_social_user)
+                                    @foreach ($mandat_user->user->reseauxSociaux as $reseau_social_user)
                                         <x-reseau-social :reseau="$reseau_social_user" />
                                     @endforeach
                                 </div>
@@ -101,7 +101,7 @@
                         </div>
                     @endforeach
                 </div>
-            </div>--}}
+            </div>
         </section>
     </main>
 @endsection

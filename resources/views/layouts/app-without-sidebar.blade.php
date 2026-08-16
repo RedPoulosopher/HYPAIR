@@ -35,13 +35,14 @@
     {{-- Barre de navigation --}}
     <x-navbar/>
 
-    {{-- @if (Auth::check())
-        @if (Auth::user()->promo == null || count(Auth::user()->campus) == 0))
+    @if (Auth::check())
+        @if (count(Auth::user()->sites) == 0)
+            {{-- Si pas de promo ou pas de campus --}}
             <x-select-promo-campus-popup />
         @else
-            <x-notification-popup></x-notification-popup>
+            <x-notification-popup/>
         @endif
-    @endif --}}
+    @endif
 
     {{-- Contenu de la page --}}
     <div id="content">

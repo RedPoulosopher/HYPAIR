@@ -258,18 +258,11 @@ class EntiteController extends Controller
 		$entite = Entite::existe($request["entite_uid"]);
 		$reseaux_sociaux = $entite->reseauxSociaux()->get();
 
-		/*$mandat = $entite->mandat()->get();
-
-		foreach ($mandat as &$mandat_user) {
-			$mandat_user["lien_photo"] = GestionPhotoDeProfil::chemin_membre_photo($mandat_user);
-			$mandat_user["user_info"] = $mandat_user->user()->first();
-			$mandat_user["lien_photo_utilisateur"] = GestionPhotoDeProfil::chemin_utilisateur_photo($mandat_user["user_info"]);
-			$mandat_user["reseaux_sociaux"] = $mandat_user["user_info"]->reseaux_sociaux()->get();
-		}*/
+		$mandat = $entite->mandat()->with(['user.profilePicture','user.reseauxSociaux', 'role.pole'])->get();
 
 		return view('entite.a_propos')
 			->with('entite', $entite)
-			//->with('mandat', $mandat)
+			->with('mandat', $mandat)
 			->with('reseaux_sociaux', $reseaux_sociaux);
 	}
 

@@ -5,7 +5,7 @@
         $sites = Site::select('*')->get();
         @endphp
 
-        @if(Auth::user()->promo == NULL)
+        @if(Auth::user()->promo == NULL && False)
             <h2>Sélectionnez votre promo</h2>
             <div id="liste-promos">
                 <a href="/choix-promo/CP1">CP1</a>
@@ -17,19 +17,12 @@
         @else
             <h2>Sélectionnez votre campus</h2>
             <div id="liste-campus">
-                {{--@if(Auth::user()->promo != 'CP1' && Auth::user()->promo != 'CP2')
-                    <a href="/choix-campus/lille-douai">Lille & Douai</a>
-                @endif--}}
-                <a href="/choix-campus/lille-douai">Lille & Douai</a>
                 @foreach($sites as $site)
-                    <a href="/choix-campus/{{ $site->label }}">{{ ucwords($site->label) }}</a>
+                    <a href="/choix-campus/{{ $site->id }}">{{ ucwords($site->label) }}</a>
                 @endforeach
+                <a href="/choix-campus/1-2">Douai &<br>Villeneuve-d'Ascq</a>
             </div>
         @endif
     
     </div>
 </div>
-
-<script>
-
-</script>

@@ -64,17 +64,15 @@ class Entite extends Model
     /**
      * Parent (BDE, asso principale, etc.)
      */
-    public function parent()
-    {
-        return $this->belongsTo(self::class, 'parent_uid', 'uid');
+    public function getParent(){
+        return $this->belongsTo(self::class, 'parent_uid');
     }
 
     /**
      * Enfants (sous-assos, pôles, clubs)
      */
-    public function children()
-    {
-        return $this->hasMany(self::class, 'parent_uid', 'uid');
+    public function getEntitesDependants(){
+        return $this->hasMany(self::class, 'parent_uid');
     }
 
     /*
@@ -171,11 +169,7 @@ class Entite extends Model
         $this->sites()->sync($sites_id);
     }
 
-    public function getParent(){
-        return $this->belongsTo(self::class, 'parent_uid');
-    }
-
-    public function getEntitesDependants(){
-        return $this->hasMany(self::class, 'parent_uid');
+    public function mandat(){
+        return $this->hasMany(Role::class, 'entite_uid', 'uid');
     }
 }

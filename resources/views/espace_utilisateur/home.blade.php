@@ -30,11 +30,11 @@
                 <h3 class="pronoms">{{$user->pronom}}</h3>
               @endif
             </div>
-            @if($user->promo && count($user->campus) > 0)
-            <div id="promo-campus">
-              <p><i class="fa-solid fa-graduation-cap"></i>{{$user->promo}}</p>
-              <p><i class="fa-solid fa-location-dot"></i>{{ ucwords(implode(', ', $user->campus->pluck('label')->toArray())) }}</p>
-            </div>
+            @if(count($user->sites) > 0)
+              <div id="promo-campus">
+                <!--<p><i class="fa-solid fa-graduation-cap"></i>{{$user->promo}}</p>-->
+                <p><i class="fa-solid fa-location-dot"></i>{{ ucwords(implode(', ', $user->sites->pluck('label')->toArray())) }}</p>
+              </div>
             @endif
           </div>
           <a id="reglages" tabindex="1" class="icon-setting-2" title="Réglages" onclick="javascript:menu_meatballs()"></a>

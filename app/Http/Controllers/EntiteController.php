@@ -9,6 +9,7 @@ use App\Models\Site;
 use App\Services\AutorisationGestion;
 use App\Services\FileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
@@ -218,6 +219,15 @@ class EntiteController extends Controller
 
 	public function index_site(Request $request) // réservé aux bureaux
 	{
+		if(!isset($request["site"])) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                if (count($user->sites)>0) {
+                    return redirect('/entites/' .$user->sites->first()->id);
+                }
+            }
+            return redirect('/entites/1');
+        }
 		$site = Site::where("id",$request["site"])->firstOrFail();
 		$entites_independantes = $site->entites->where("parent_uid","=",null)->where("parent_uid","!=",null)->where("visible","=",1);
 		$bureaux = Entite::where("type","=",EntiteType::Bureau->value)->get();

@@ -80,10 +80,7 @@ Route::controller(CalendrierController::class)->prefix("/calendrier")->group(fun
 });
 
 
-Route::get('/entites/{site}', [EntiteController::class, 'index_site']);
-Route::get('/entites', function(){
-    return redirect("/entites/1");
-});
+Route::get('/entites/{site?}', [EntiteController::class, 'index_site']);
 
 
 Route::get("/entite/{entite_uid}/",[EntiteController::class,'show']);

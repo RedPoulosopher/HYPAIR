@@ -19,22 +19,27 @@ class ReseauSocialController extends Controller
     {
         $entite = Entite::where('uid',$request['entite_uid'])->first();
         $user = null;
-        $reseaux_sociaux_models = DB::table('reseaux_sociaux')->get();
+        $reseaux_sociaux_models = ReseauSocial::all();
         if($entite){
             AutorisationGestion::require(Permission::NETWORK_MANAGE,$request['entite_uid']);
             $mes_reseaux_sociaux = $entite->reseauxSociaux;
             
             return view('reseaux_sociaux.index_gestion', [
                 'entite'=> $entite,
-                'user'=> $user,
                 'mes_reseaux_sociaux'=> $mes_reseaux_sociaux,
                 'reseaux_sociaux_models'=> $reseaux_sociaux_models
             ]);
         }else{
             if (Auth::check()) {
-                $user = Auth::user();
+            $user = Auth::user();
+            $mes_reseaux_sociaux = $user->reseauxSociaux;
+
+            return view('reseaux_sociaux.index_gestion', [
+                'user'=> $user,
+                'mes_reseaux_sociaux'=> $mes_reseaux_sociaux,
+                'reseaux_sociaux_models'=> $reseaux_sociaux_models  
+            ]);
             }
-            return view('reseaux_sociaux.index_gestion', []);
         }
     }
 
@@ -49,13 +54,19 @@ class ReseauSocialController extends Controller
                     'url' => $request["lien"]
                 ]);
             }
-            
+            return back()->with('success');
         }else{
             if (Auth::check()) {
                 $user = Auth::user();
+                $user->reseauxSociaux()->detach($request["reseaux_sociaux_liste_id"]);
+                if($request["lien"]){
+                    $user->reseauxSociaux()->attach($request["reseaux_sociaux_liste_id"], [
+                        'url' => $request["lien"]
+                    ]);
+                }
+                return back()->with('success');
             }
+            return redirect('/connexion');
         }
-
-        return back()->with('success');
     }
 }

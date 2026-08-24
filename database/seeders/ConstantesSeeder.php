@@ -117,7 +117,7 @@ class ConstantesSeeder extends Seeder
             [
                 'nom' => 'Telegram',
                 'color' => '#26A5E4',
-                'font_color' => '#FFFFFF',
+                'font_color' => '#000000',
                 'placeholder_entite' => 'https://t.me/{channel}',
                 'placeholder_user' => 'https://t.me/{username}',
             ],

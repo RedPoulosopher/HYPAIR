@@ -101,16 +101,25 @@
                             </label>
                         @endif
                     </div>
+
                     <div class="groupe card">
-						<label class="input_groupe">
+                        <label class="input_groupe">
 							<p class="titre">Logo :</p>
 							<p class="description">Soit un svg de moins de 70ko, soit une image de plus de 512px par côté.</p>
-							<label id="file-upload">
-								<input type="file" name="logo" class="input" id="original_input" accept="image/*">
+
+
+                            <div id="photo_profil">
+                                <img id="photo_profil_img" src="{{ $entite->getLogo?->url() }}"
+                                    alt="Preview votre photo de profil" />
+                            </div>
+                            <label id="file-upload">
+								<input type="file" name="logo" class="input" id="original_input" accept="image/*" onchange="affichage_photo_dynamique(event)">
 								Sélectionnez un fichier
 							</label>
 							<span id="filename">Aucun fichier sélectionné</span>
-						</label>
+                            <button id="bouton_submit" type="submit" tabindex="1" class="bouton primaire cacher" style="float:right;"
+                                onclick="validation()">VALIDER</button>
+                        </label>
 
 						<label class="input_groupe">
 							<p class="titre">Description courte :</p>
@@ -242,5 +251,49 @@
 		else
 			label.innerHTML = labelVal;
 	});
+</script>
+
+<script>
+    /*affichage dynamique*/
+    var bouton_submit;
+    var photo_profil;
+    /*accessibilité*/
+    var bouton_modifier;
+
+    window.onload = init;
+
+    function init() {
+        /*affichage dynamique*/
+        bouton_submit = document.getElementById('bouton_submit');
+        photo_profil = document.getElementById('photo_profil_img');
+        bouton_modifier = document.getElementById('bouton_modifier');
+        /*accessibilité*/
+        bouton_modifier.addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                bouton_modifier.click();
+            }
+        });
+    };
+
+    /*affichage dynamique*/
+    function affichage_photo_dynamique(event) {
+        if (event.target.files[0].size > 1024000000) {
+            alert(
+                "Cette image est sûrement très qualitative, mais on aimerait éviter qu'elle fasse brûler nos serveur. Réessaye avec une image plus legère ;)"
+                );
+            event.target.value = "";
+        } else {
+            bouton_submit.className = "bouton primaire afficher";
+            photo_profil.src = URL.createObjectURL(event.target.files[0]);
+            photo_profil.onload = function() {
+                URL.revokeObjectURL(photo_profil.src) // free memory
+            }
+        }
+    };
+
+    function validation() {
+        bouton_submit.innerText = "VALIDATION ...";
+    };
 </script>
 @endpushonce

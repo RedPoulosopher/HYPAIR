@@ -36,6 +36,7 @@ class User extends Authenticatable
         'nom',
         'prenom',
         'prenoms',
+        'pronoms',
         'email',
         'bio',
         'num_tel',

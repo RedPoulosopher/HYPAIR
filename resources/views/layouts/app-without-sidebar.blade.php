@@ -31,7 +31,13 @@
     
     <x-pwa-popup />
 
-
+    @php
+        // Code pour gérer le login utilisateur
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user['chemin_photo_de_profil'] = $user->profilePicture?->url();
+        }
+    @endphp
     {{-- Barre de navigation --}}
     <x-navbar/>
 

@@ -43,15 +43,15 @@
                     @foreach ($mandat as $mandat_user)
                         <div>
                             <div class="photo centre-element" title="Voir le profil"
-                                onclick="afficher_info_membre({{ $mandat_user->id }})">
+                                onclick="afficher_info_membre('{{ $mandat_user->user->uid }}')">
                                 <div class="cercle"></div>
-                                <img class="ombre_petite" src="{{ $mandat_user->lien_photo }}"
-                                    alt="Photo de profil de {{ $mandat_user->prenom . ' ' . $mandat_user->nom }}" />
+                                <img class="ombre_petite" src="{{ $mandat_user->user->profilePicture?->url() }}"
+                                    alt="Photo de profil de {{ $mandat_user->user->prenom . ' ' . $mandat_user->user->nom }}" />
                             </div>
                             <div class="info" style="text-align:center;">
-                                <span>{{ $mandat_user->prenom . ' ' . $mandat_user->nom }}</span>
+                                <span>{{ $mandat_user->user->prenom . ' ' . $mandat_user->user->nom }}</span>
                                 <br>
-                                <span>{{ $mandat_user->label }}</span>
+                                <span>{{ $mandat_user->user->label }}</span>
                             </div>
                         </div>
                     @endforeach
@@ -64,9 +64,9 @@
                 </span>
                 <div id="profil" class="card">
                     @foreach ($mandat as $mandat_user)
-                        <div id="profil_{{ $mandat_user->id }}" class="profil">
+                        <div id="profil_{{ $mandat_user->user->uid }}" class="profil">
                             <div class="photo_profil">
-                                <img src="{{ $mandat_user->lien_photo_utilisateur }}" alt="Votre photo de profil" />
+                                <img src="{{ $mandat_user->user->profilePicture?->url() }}" alt="Votre photo de profil" />
                             </div>
                             <div class="info_profil">
                                 <div id="user-info" style="{{ $mandat_user->user->bio ? '' : 'align-items:center' }}">

@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\NotificationToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use \App\Models\ReseauSocialListe;
 use \App\Models\ReseauSocial;
 use \App\Models\Site;
+use App\Services\FileService;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class UserController extends Controller
 {
     public function home() {
         if (Auth::check()) {
             $user = Auth::user();
-            $user["chemin_photo_de_profil"] = $user->profilePicture?->path;
+            $user["chemin_photo_de_profil"] = $user->profilePicture?->url();
             $reseaux_sociaux = $user->reseauxSociaux()->get();
             //Get entites
             $entites_admin = $user->organizerWithinEntities;
@@ -73,7 +74,7 @@ class UserController extends Controller
   public function editer_photo_profil() {
     if (Auth::check()) {
       $user = Auth::user();
-      $user["chemin_photo_de_profil"] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
+      $user["chemin_photo_de_profil"] = $user->profilePicture?->url();
       return view('espace_utilisateur.editer_photo_profil', ['user'=>$user]);
     }
     return redirect('/connexion');
@@ -83,8 +84,10 @@ class UserController extends Controller
     if (Auth::check()) {
 
       $user = Auth::user();
-
-      $validation = [
+			FileService::validation_img($request['input-photo']);
+			$user->profile_picture = FileService::upload($request['input-photo'],"profile_picture","public",["acces"=>'public']);
+			FileService::transformImagePathToSquare512('public',$user->profilePicture->path);
+      /*$validation = [
   			'input-photo' => ['required','image','dimensions:min_width=256,min_height=256','max:100000']
   		];
       $messages_custom = [
@@ -94,7 +97,7 @@ class UserController extends Controller
       ];
   		$this->validate($request, $validation, $messages_custom);
       GestionPhotoDeProfil::stocker_photo_profil($request->file('input-photo'), $user);
-      $user->photo = 1;
+      $user->photo = 1;*/
       $user->save();
 
       return redirect('/home');
@@ -114,17 +117,16 @@ class UserController extends Controller
 
       $user = Auth::user();
 
-      $validation = [
-  			'nom' => ['required','max:40'],
-  			'prenom' => ['required','max:40'],
-  			'pronoms' => ['max:20'],
-  			'bio' => ['max:400'],
-  		];
-  		$this->validate($request, $validation);
+      $request->validate([
+          'nom' => ['required', 'max:40'],
+          'prenom' => ['required', 'max:40'],
+          'pronoms' => ['nullable', 'max:20'],
+          'bio' => ['nullable', 'max:400'],
+      ]);
 
       $user->nom = $request->nom;
       $user->prenom = $request->prenom;
-      $user->pronom = $request->pronoms;
+      $user->pronoms = $request->pronoms;
       $user->bio = $request->bio;
       $user->save();
 
@@ -133,30 +135,7 @@ class UserController extends Controller
     return redirect('/connexion');
   }
 
-  public function editer_reseaux_profil() {
-    if (Auth::check()) {
-      $user = Auth::user();
-      $reseaux_sociaux_existants = ReseauSocialListe::get();
-      $reseaux_sociaux = $user->reseaux_sociaux()->get();
 
-      return view('espace_utilisateur.editer_reseaux_profil', ['user'=>$user, 'reseaux_sociaux_existants'=>$reseaux_sociaux_existants, 'reseaux_sociaux'=>$reseaux_sociaux]);
-    }
-    return redirect('/connexion');
-  }
-
-  public function enregistrer_reseaux_profil(Request $request) {
-    if (Auth::check()) {
-      $reseau_social = new ReseauSocial();
-      $reseau_social->reseaux_sociaux_liste_id = $request["reseaux_sociaux_liste_id"];
-      $reseau_social->lien = $request["lien"];
-
-      $user = Auth::user();
-      ReseauSocial::changer_reseau_social($user, $reseau_social);
-
-      return back()->with('success');
-    }
-    return redirect('/connexion');
-  }
 
   public function choix_campus(Request $request){
     // Prévoir un reset à un moment !

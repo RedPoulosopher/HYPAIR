@@ -42,7 +42,6 @@ class EntiteSeeder extends Seeder
             'entite_uid' => $entite->uid,
             'user_uid' => $user->uid,
             'role_uid' => $roleUid,
-            'ordre' => 0,
         ]);
 
         DB::table('perm_role_list')->insert([

@@ -36,10 +36,9 @@
         
     @php
         // Code pour gérer le login utilisateur
-        use App\Services\GestionPhotoDeProfil;
-        if (Auth::check() && False) {
+        if (Auth::check()) {
             $user = Auth::user();
-            $user['chemin_photo_de_profil'] = GestionPhotoDeProfil::chemin_utilisateur_photo($user);
+            $user['chemin_photo_de_profil'] = $user->profilePicture?->url();
         }
     @endphp
 

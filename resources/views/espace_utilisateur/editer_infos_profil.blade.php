@@ -38,7 +38,7 @@
 						</label>
 				<label class="input_groupe">
 							<p class="titre">Pronoms</p>
-							<input type="text" name="pronoms" class="input" style="max-width:20ch;" maxlength="20" value="{{$user->pronom}}"/>
+							<input type="text" name="pronoms" class="input" style="max-width:20ch;" maxlength="20" value="{{$user->pronoms}}"/>
 						</label>
 			</div>
 			<label class="input_groupe">

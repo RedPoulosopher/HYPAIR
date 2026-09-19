@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 class Entite extends Model
 {
     use HasFactory;
-    use HasUuids;
 
     /**
      * Table associée
@@ -21,6 +20,7 @@ class Entite extends Model
     /**
      * Clé primaire UUID
      */
+    use HasUuids;
     protected $primaryKey = 'uid';
     public $incrementing = false;
     protected $keyType = 'string';

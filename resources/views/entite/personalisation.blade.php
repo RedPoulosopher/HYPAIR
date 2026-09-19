@@ -117,8 +117,8 @@
 								Sélectionnez un fichier
 							</label>
 							<span id="filename">Aucun fichier sélectionné</span>
-                            <button id="bouton_submit" type="submit" tabindex="1" class="bouton primaire cacher" style="float:right;"
-                                onclick="validation()">VALIDER</button>
+                            <!--<button id="bouton_submit" type="submit" tabindex="1" class="bouton primaire cacher" style="float:right;"
+                                onclick="validation()">VALIDER</button>-->
                         </label>
 
 						<label class="input_groupe">

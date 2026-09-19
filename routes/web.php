@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CalendrierController;
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\ReseauSocialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntiteController;
@@ -72,6 +73,13 @@ Route::prefix('/entite/{entite_uid}/dashboard')->group(function(){
     Route::get('/roles/poles/modifier/{pole_uid}', [RoleController::class,'edit_pole'])->name('edit_pole');
     Route::post('/roles/poles/modifier/{pole_uid}', [RoleController::class,'update_pole']);
     Route::post('/roles/poles/suppression/', [RoleController::class,'delete_pole'])->name('delete_pole');
+
+    Route::get('/adherants',[CardController::class,'index_card'])->name('index_card');
+    Route::get('/adherants/create', [CardController::class,'create_card'])->name('create_card');
+    Route::post('/adherants/create', [CardController::class,'store_card']);
+    Route::get('/adherants/modifier/{card_uid}', [CardController::class,'edit_card'])->name('edit_card');
+    Route::post('/adherants/modifier/{card_uid}', [CardController::class,'update_card']);
+    Route::post('/adherants/suppression/', [CardController::class,'delete_card'])->name('delete_card');
 });
 
 Route::controller(CalendrierController::class)->prefix("/calendrier")->group(function () {

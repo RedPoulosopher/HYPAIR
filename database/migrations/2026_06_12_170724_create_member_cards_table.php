@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->uuid('uid')->primary();
             $table->string('name');
-            $table->foreignUuid('entity_uid')->constrained('entites', 'uid')->onDelete('cascade');
+            $table->foreignUuid('entite_uid')->constrained('entites', 'uid')->onDelete('cascade');
             $table->dateTime('start_at');
             $table->dateTime('end_at');
             $table->boolean('is_anonymous')->default(false);
@@ -38,6 +38,7 @@ return new class extends Migration
 
         Schema::create('cards_model', function (Blueprint $table) {
             $table->uuid('uid')->primary();
+            $table->foreignUuid('entite_uid')->constrained('entites', 'uid')->onDelete('cascade');
             $table->string('title');
             $table->text('subtitle');
             $table->foreignUuid('logo')->nullable()->constrained('files_registre', 'uid')->onDelete('set null');

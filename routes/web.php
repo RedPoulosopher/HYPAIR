@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CalendrierController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\ControllerAccesController;
 use App\Http\Controllers\ReseauSocialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntiteController;
@@ -27,6 +28,16 @@ Route::post('/login',[LoginController::class,'login']);
 Route::get('/register',[LoginController::class,'registerPage']);
 Route::post('/register',[LoginController::class,'register'])->name('register');
 
+Route::prefix('/admin_dashboard')->group(function(){
+    Route::get('/',[UserController::class,"index_su"])->name("index_SU");
+
+    Route::get('/acces',[ControllerAccesController::class,"index"])->name("controller-acces.index");
+    Route::get('/acces/create',[ControllerAccesController::class,"create"])->name("controller-acces.create");
+    Route::post('/acces/create',[ControllerAccesController::class,"store"]);
+    Route::get('/acces/edit/{controller}',[ControllerAccesController::class,"edit"])->name("controller-acces.edit");
+    Route::post('/acces/edit/{controller}',[ControllerAccesController::class,"update"]);
+    Route::post('/acces/delete/{controller}',[ControllerAccesController::class,"delete"])->name("controller-acces.delete");
+});
 
 Route::prefix('/entite/{entite_uid}/dashboard')->group(function(){
     Route::get('', [EntiteController::class,'dashboard'])->name("dashboard");
@@ -78,7 +89,7 @@ Route::prefix('/entite/{entite_uid}/dashboard')->group(function(){
     Route::get('/adherants/create', [CardController::class,'create_card'])->name('create_card');
     Route::post('/adherants/create', [CardController::class,'store_card']);
     Route::get('/adherants/modifier/{card_uid}', [CardController::class,'edit_card'])->name('edit_card');
-    Route::post('/adherants/modifier/{card_uid}', [CardController::class,'update_card']);
+    Route::post('/adherants/modifier/{card_uid}', [CardController::class,'store_card']);
     Route::post('/adherants/suppression/', [CardController::class,'delete_card'])->name('delete_card');
 });
 

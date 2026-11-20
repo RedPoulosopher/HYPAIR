@@ -175,9 +175,9 @@ class EntiteController extends Controller
 		$entite->color_1 = $request->color_1;
 		$entite->color_2 = $request->color_2;
 
-		if($request['creation'] || $request->has('logo')){
-			FileService::validation_img($request->logo);
-			$entite->logo = FileService::upload($request->logo,"logo_entites","public",["acces"=>'public']);
+		if($request['creation'] || $request->has('image_logo')){
+			FileService::validation_img($request->image_logo);
+			$entite->logo = FileService::upload($request->image_logo,"logo_entites","public",["acces"=>'public']);
 			FileService::transformImagePathToSquare512('public',$entite->getLogo->path);
 		}
 		$entite->save();

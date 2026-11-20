@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use \App\Models\ReseauSocialListe;
 use \App\Models\ReseauSocial;
 use \App\Models\Site;
+use App\Services\AutorisationGestion;
 use App\Services\FileService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class UserController extends Controller
 {
+    public function index_su(){
+        AutorisationGestion::isSU();
+        return view('admin.index');
+    }
     public function home() {
         if (Auth::check()) {
             $user = Auth::user();

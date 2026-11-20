@@ -39,4 +39,19 @@ class CardModel extends Model
     {
         return $this->hasMany(UserCard::class, 'card_model_uid', 'uid');
     }
+
+        /*
+    |--------------------------------------------------------------------------
+    | LOGO (FILE REGISTRE)
+    |--------------------------------------------------------------------------
+    */
+
+    public function getLogo()
+    {
+        return $this->belongsTo(FilesRegistre::class, 'logo', 'uid');
+    }
+    public function getBackGround()
+    {
+        return $this->belongsTo(FilesRegistre::class, 'background', 'uid');
+    }
 }

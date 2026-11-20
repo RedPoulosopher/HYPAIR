@@ -197,4 +197,42 @@ class AutorisationGestion
         }
         abort(404);
     }
+
+    public static function isSU(): bool
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return false;
+        }
+
+        $user_uid = $user->uid;
+
+        /*
+        -------------------------------------------------
+        1. Perm Super User
+        -------------------------------------------------
+        */
+
+        $override = DB::table('user_perms')
+            ->where('user_uid', $user_uid)
+            ->where('perm','=', Permission::SUPER_ADMIN)
+            ->first();
+
+        if ($override) {
+            if($override->add_or_remove === 'add'){
+                return true;
+            }
+        }else{
+            if(DB::table('roles')
+                ->join('perm_role_list', 'roles.role_uid', '=', 'perm_role_list.role_uid')
+                ->where('roles.user_uid', $user_uid)
+                ->where('perm_role_list.perm', Permission::SUPER_ADMIN)
+                ->exists()){
+                return true;
+            }
+        }
+
+        abort(403);
+    }
 }

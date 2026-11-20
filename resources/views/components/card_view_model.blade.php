@@ -1,0 +1,12 @@
+<x-card_view
+:cardviewlogo="$cardModel->getLogo?->url()"
+:cardviewtitle="$cardModel->title"
+:cardviewsubtitle="$cardModel->subtitle"
+:cardviewpp="''"
+:cardviewusername="$card_username"
+:cardviewcouleur1="$cardModel->color_1"
+:cardviewcouleur2="$cardModel->color_2"
+:cardviewtextcouleur1="$cardModel->font_color_1"
+:cardviewtextcouleur2="$cardModel->font_color_2"
+:cardviewbackground="$cardModel->getBackGround?->url()"
+/>

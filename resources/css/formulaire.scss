@@ -272,24 +272,20 @@ input[type="file"] {
     display: none !important;
 }
 
-#file-upload {
+
+
+.filename {
     display: block;
     margin-top: 15px;
     background-color: var(--dark-grey);
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
-}
-
-#filename {
-    display: block;
     color: var(--couleur_police_secondaire);
     font-style: italic;
-    margin-top: 8px;
 }
 
-
-#photo_profil {
+.photo_rond {
     width: 260px;
     height: 260px;
     margin-left: auto;
@@ -297,10 +293,41 @@ input[type="file"] {
     margin-bottom: 30px;
 }
 
-#photo_profil img {
+.photo_rond img {
     width: 100%;
     height: 100%;
     border-radius: 300px;
+    object-fit: cover;
+}
+
+.photo_rect {
+    height: 260px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.photo_rect img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: inline-block;
+}
+
+
+.photo_carre {
+    width: 260px;
+    height: 260px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+.photo_carre img {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
     object-fit: cover;
 }
 

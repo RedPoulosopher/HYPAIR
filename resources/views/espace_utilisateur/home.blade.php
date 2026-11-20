@@ -73,6 +73,10 @@
       <h1>Mes entités</h1>
 
       @if(count($entites_admin)>0)
+        <a href="{{ route('index_SU') }}">dashboard admin</a>
+      @endif
+
+      @if(count($entites_admin)>0)
         <h2>Admin</h2>        
         <div class="entites-wrapper">
                 @foreach ($entites_admin as $entite)

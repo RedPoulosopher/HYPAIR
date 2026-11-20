@@ -29,64 +29,12 @@ On voit le mail et le pseudo user associé sans pouvoir le changer. --}}
                             @endforeach
                         </div>
                     @endif
-                    <label class="input_groupe">
-                        <div id="photo_profil">
-                            <img id="photo_profil_img" src="{{ $user->chemin_photo_de_profil }}"
-                                alt="Preview votre photo de profil" />
-                        </div>
-                        <p id="bouton_modifier" class="bouton primaire" tabindex="1"
-                            style="margin-left: auto; margin-right: auto;">Modifier</p>
-                        <input name="input-photo" type="file" accept="image/*" required style="display: none;"
-                            onchange="affichage_photo_dynamique(event)" />
-                    </label>
+
+
+                    <x-image_file :nameGrpFile="'Photo de profile'" :alea="'photo'" :urlImg="$user->chemin_photo_de_profil ?? ''" :displayMode="0"/>
                 </div>
-                <button id="bouton_submit" type="submit" tabindex="1" class="bouton primaire cacher" style="float:right;"
-                    onclick="validation()">VALIDER</button>
+                <button id="bouton_submit" type="submit" tabindex="1" class="bouton primaire" style="float:right;">VALIDER</button>
             </form>
         </section>
     </main>
 @endsection
-
-<script>
-    /*affichage dynamique*/
-    var bouton_submit;
-    var photo_profil;
-    /*accessibilité*/
-    var bouton_modifier;
-
-    window.onload = init;
-
-    function init() {
-        /*affichage dynamique*/
-        bouton_submit = document.getElementById('bouton_submit');
-        photo_profil = document.getElementById('photo_profil_img');
-        bouton_modifier = document.getElementById('bouton_modifier');
-        /*accessibilité*/
-        bouton_modifier.addEventListener("keyup", function(event) {
-            event.preventDefault();
-            if (event.keyCode === 13) {
-                bouton_modifier.click();
-            }
-        });
-    };
-
-    /*affichage dynamique*/
-    function affichage_photo_dynamique(event) {
-        if (event.target.files[0].size > 1024000000) {
-            alert(
-                "Cette image est sûrement très qualitative, mais on aimerait éviter qu'elle fasse brûler nos serveur. Réessaye avec une image plus legère ;)"
-                );
-            event.target.value = "";
-        } else {
-            bouton_submit.className = "bouton primaire afficher";
-            photo_profil.src = URL.createObjectURL(event.target.files[0]);
-            photo_profil.onload = function() {
-                URL.revokeObjectURL(photo_profil.src) // free memory
-            }
-        }
-    };
-
-    function validation() {
-        bouton_submit.innerText = "VALIDATION ...";
-    };
-</script>

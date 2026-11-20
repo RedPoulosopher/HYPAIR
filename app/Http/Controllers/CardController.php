@@ -106,7 +106,17 @@ class CardController extends Controller
                 ["acces" => 'public']
             );
         } elseif (!$card->exists) {
-            $card->logo = $entite->getLogo?->uid;
+            //$card->logo = $entite->getLogo?->uid;
+            $logo = $entite->getLogo;
+
+            if ($logo) {
+                $card->logo = FileService::copy(
+                    $logo->uid,
+                    "logo_cards",
+                    "public",
+                    ["acces" => 'public']
+                );
+            }
         }
 
         // Image de fond

@@ -2,7 +2,7 @@
     <p class="titre">{{ $nameGrpFile }} :</p>
     <p class="description">Soit un svg de moins de 70ko, soit une image de plus de 512px par côté.</p>
 
-
+    <br>
     <div class="@if(isset($displayMode)) 
             @if($displayMode==2)
                 photo_carre

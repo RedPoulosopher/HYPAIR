@@ -1,39 +1,84 @@
-@vite(['resources/css/login.css'])
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connexion</title>
-  <link rel="icon" type="image/png" href="/logo.png">
-</head>
-<body>
-    <form action="/login" method="POST">
-        @csrf
-        <h1>OCANORD 590</h1>
-        <div>
-            <label for="email">Email :</label>
-            <input type="email" name="email" required>
-        </div>
-        <div>
-            <label for="password">Mot de passe :</label>
-            <input type="password" name="password" required>
-        </div>
+@extends('layouts.vide')
 
-        <div>
-            <button type="submit">
-                Se connecter
-            </button>
-        </div>
-        @auth()
-            <div>
-                <a href="/dashboard">
-                    {{ $user->email }}
+@section('titre', 'Se connecter')
+
+@pushonce('styles')
+    @vite([
+        'resources/css/formulaire.scss',
+    ])
+@endpushonce
+
+@section('content')
+
+    <main id="main-content">
+        <section>
+            <h1>Se connecter</h1>
+
+            <p class="explication">
+                Bienvenue ! Remplissez le formulaire ci-dessous pour accéder à votre compte.
+            </p>
+
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+
+                @if ($errors->any())
+                    <div class="erreurs">
+                        @foreach ($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
+
+                {{-- Identification --}}
+                <h2>Identification</h2>
+
+                <div class="groupe card">
+                    <label class="input_groupe">
+                        <p class="titre">Adresse e-mail :</p>
+                        <input
+                            type="email"
+                            name="email"
+                            class="input"
+                            required
+                            autofocus
+                            autocomplete="username"
+                            value="{{ old('email') }}"
+                        />
+                    </label>
+
+                    <label class="input_groupe">
+                        <p class="titre">Mot de passe :</p>
+                        <input
+                            type="password"
+                            name="password"
+                            class="input"
+                            required
+                            autocomplete="current-password"
+                        />
+                    </label>
+                </div>
+
+                <p>
+                    <a href="" class="couleur">
+                        Mot de passe oublié ?
+                    </a>
+                </p>
+
+                <button type="submit" class="bouton primaire ombre_petite"
+                    style="float:right;">
+                    <span>SE CONNECTER</span>
+                </button>
+
+            </form>
+
+            <p style="margin-top: 4rem;">
+                Vous n'avez pas encore de compte ?
+                <a href="{{ route('register') }}" class="couleur">
+                    Créer un compte
                 </a>
-            </div>
-        @endauth
-        <a href="/register">Register</a>
-    </form>
-</body>
-</html>
+            </p>
 
+        </section>
+    </main>
+
+@endsection

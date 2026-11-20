@@ -89,8 +89,8 @@ class UserController extends Controller
     if (Auth::check()) {
 
       $user = Auth::user();
-			FileService::validation_img($request['input-photo']);
-			$user->profile_picture = FileService::upload($request['input-photo'],"profile_picture","public",["acces"=>'public']);
+			FileService::validation_img($request['image_photo']);
+			$user->profile_picture = FileService::upload($request['image_photo'],"profile_picture","public",["acces"=>'public']);
 			FileService::transformImagePathToSquare512('public',$user->profilePicture->path);
       /*$validation = [
   			'input-photo' => ['required','image','dimensions:min_width=256,min_height=256','max:100000']

@@ -12,7 +12,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,11 +21,32 @@ Route::get('/', function(){
 
 Route::get('/home',[UserController::class,'home']);
 
-Route::get('/login',[LoginController::class,'loginPage']);
-Route::get('/connexion',[LoginController::class,'loginPage']);
-Route::post('/login',[LoginController::class,'login']);
-Route::get('/register',[LoginController::class,'registerPage']);
-Route::post('/register',[LoginController::class,'register'])->name('register');
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'loginPage')->name('login');
+    Route::get('/connexion', 'loginPage');
+    Route::post('/login', 'login');
+    Route::get('/register', 'registerPage');
+    Route::post('/register', 'register')->name('register');
+    Route::get('/deconnexion', 'deconnexion');
+});
+
+Route::get('/cgu', function () {
+    return response(
+        file_get_contents(resource_path('pdf/cgu.pdf')),
+        200,
+        ['Content-Type' => 'application/pdf; charset=UTF-8']
+    );
+})->name('cgu');
+
+Route::get('/confidentialite', function () {
+    return response(
+        file_get_contents(resource_path('pdf/confidentialite.pdf')),
+        200,
+        ['Content-Type' => 'application/pdf; charset=UTF-8']
+    );
+})->name('confidentialite');
+
+
 
 Route::prefix('/admin_dashboard')->group(function(){
     Route::get('/',[UserController::class,"index_su"])->name("index_SU");
@@ -104,9 +124,6 @@ Route::get('/entites/{site?}', [EntiteController::class, 'index_site']);
 
 Route::get("/entite/{entite_uid}/",[EntiteController::class,'show']);
 
-Route::get('/cookies', function () {
-    return view('cookies');
-});
 
 Route::get('/contact', function () {
     return view('contact');

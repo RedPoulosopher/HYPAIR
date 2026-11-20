@@ -21,11 +21,9 @@ return new class extends Migration
             $table->text('bio')->nullable();
             $table->string('num_tel')->nullable();
             $table->string('uid_carte_etu')->nullable();
-            $table->string('lang_pref')->nullable();
             $table->date('date_naissance')->nullable();
             $table->boolean('certifier')->nullable();
             $table->boolean('RGPD')->default(false);
-            //pp et id_photo
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();

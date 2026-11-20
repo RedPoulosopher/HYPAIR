@@ -61,19 +61,30 @@ class LoginController extends Controller
         Auth::logout();
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:2|confirmed',
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'prenoms' => 'nullable|string|max:255',
+            'pronoms' => 'nullable|string|max:100',
+            'date_naissance' => 'nullable|date',
+            'email' => 'required|string|email|max:255|unique:users,email|ends_with:@etu.imt-nord-europe.fr',
+            'num_tel' => 'nullable|string|max:20',
+            'password' => 'required|string|min:8|confirmed',
+            'accept_cgu' => 'required|accepted',
         ]);
 
-        // Create the user
+        // Création de l'utilisateur
         $user = User::create([
-            'nom' => $validated['name'],
+            'nom' => $validated['nom'],
+            'prenom' => $validated['prenom'],
+            'prenoms' => $validated['prenoms'] ?? null,
+            'pronoms' => $validated['pronoms'] ?? null,
+            'date_naissance' => $validated['date_naissance'] ?? null,
             'email' => $validated['email'],
+            'num_tel' => $validated['num_tel'] ?? null,
             'password' => Hash::make($validated['password']),
         ]);
 
-        // Log them in
+        // Connexion automatique
         Auth::login($user);
 
         return redirect('/');

@@ -7,8 +7,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
 
 class FileService
@@ -33,6 +33,47 @@ class FileService
             'size' => $file->getSize(),
             'mime_type' => $file->getMimeType(),
             'json_data' => $json
+        ]);
+
+        return $file->uid;
+    }
+
+    public static function copy(
+        string $uid,
+        string $directory = 'uploads',
+        string $disk = 'public',
+        array $json = ["acces" => "certifier"]
+    ): string {
+        $original = FilesRegistre::where('uid', $uid)->firstOrFail();
+
+        $sourceDisk = Storage::disk($original->disk);
+        $destinationDisk = Storage::disk($disk);
+
+        $extension = $original->extension;
+        $filename = Str::uuid() . '.' . $extension;
+        $path = $directory . '/' . $filename;
+
+        // Vérifier que le fichier source existe
+        if (!$sourceDisk->exists($original->path)) {
+            throw new \Exception("Le fichier source n'existe pas.");
+        }
+
+        // Copier physiquement le fichier
+        $destinationDisk->put(
+            $path,
+            $sourceDisk->get($original->path)
+        );
+
+        // Créer une nouvelle entrée dans le registre
+        $file = FilesRegistre::create([
+            'name' => $original->name,
+            'filename' => $filename,
+            'path' => $path,
+            'disk' => $disk,
+            'extension' => $original->extension,
+            'size' => $original->size,
+            'mime_type' => $original->mime_type,
+            'json_data' => $json,
         ]);
 
         return $file->uid;

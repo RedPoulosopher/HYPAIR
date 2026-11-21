@@ -41,7 +41,7 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials,true)) {
             $request->session()->regenerate();
             return redirect('/');
         }
@@ -85,7 +85,7 @@ class LoginController extends Controller
         ]);
 
         // Connexion automatique
-        Auth::login($user);
+        Auth::login($user, true);
 
         return redirect('/');
     }

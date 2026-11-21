@@ -73,6 +73,7 @@
                 <div class="groupe card">
                     <label class="input_groupe">
                         <p class="titre">* Adresse e-mail :</p>
+                        <p class="description">Seulement email en @etu.imt-nord-europe.fr</p>
                         <input type="email" name="email" class="input" required
                             autocomplete="email"
                             value="{{ old('email') }}" />

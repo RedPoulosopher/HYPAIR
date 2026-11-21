@@ -1,5 +1,5 @@
 {{-- créer un model de carte avec un form (entity_name,subtitle,color...,image_logo,image_background, check poste --}}
-@extends('layouts.app-without-sidebar')
+@extends('layouts.app')
 @section('titre', 'Créer une carte')
 @pushonce('styles')
     @vite('resources/css/entite/card/create_card.scss')

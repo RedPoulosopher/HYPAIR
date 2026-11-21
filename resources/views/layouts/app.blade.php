@@ -20,7 +20,6 @@
 
     @vite(['resources/css/default.scss',
     'resources/css/importants/layout-without-sidebar.scss',
-    'resources/css/importants/layout.scss',
     'resources/css/components/select-popup.scss',
     'resources/css/components/pwa-popup.scss'])
 
@@ -46,11 +45,10 @@
     <x-navbar/>
 
     @if (Auth::check())
-        @if (count(Auth::user()->sites) == 0)
-            {{-- Si pas de promo ou pas de campus --}}
+        @if (Auth::user()->sites->isEmpty())
             <x-select-promo-campus-popup />
         @else
-            <x-notification-popup/>
+            <x-notification-popup />
         @endif
     @endif
 
@@ -60,30 +58,6 @@
 
         @yield('content')
 
-        {{-- Side bar : planning de la semaine --}}
-        <aside id="side-bar">
-
-            <div id="calendrier-sidebar">
-                <h1>Cette semaine</h1>
-                {{--@php
-                    use App\Http\Controllers\EvenementController;
-                    $comingEvents = EvenementController::comingEvents();
-                @endphp--}}
-
-                @if (Auth::check() && False && count($comingEvents) > 0)
-                    @foreach ($comingEvents as $comingEvent)
-                        <x-coming-event :title="$comingEvent->titre" :start="$comingEvent->temps_debut" :end="$comingEvent->temps_fin" :entite="$comingEvent->entite_nom"
-                            :uid="$comingEvent->uid" :slug="$comingEvent->slug" />
-                    @endforeach
-                    <a id="voir-plus" href="/calendrier">Voir plus</a>
-                @elseif(Auth::check() && False)
-                    <p>Aucun évènement dans les 7 prochains jours</p>
-                @else
-                    <p class="should-be-connected no-content">Vous devez être connecté pour voir les événements</p>
-                @endif
-
-            </div>
-        </aside>
         <footer>
             <a href="/a-propos">Fait avec amour par l'AIR - Tous droits réservés</a>
         </footer>

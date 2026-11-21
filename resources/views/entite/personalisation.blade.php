@@ -1,4 +1,4 @@
-@extends('layouts.app-without-sidebar')
+@extends('layouts.app')
 
 @if ($creation)
     @section('titre', 'Créer une entité')

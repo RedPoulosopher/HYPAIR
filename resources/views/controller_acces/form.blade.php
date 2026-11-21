@@ -1,4 +1,4 @@
-@extends('layouts.app-without-sidebar')
+@extends('layouts.app')
 
 @section('titre', isset($controller) ? 'Modifier un contrôleur' : 'Ajouter un contrôleur')
 

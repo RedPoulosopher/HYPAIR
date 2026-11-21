@@ -117,4 +117,6 @@
         </section>
     </main>
 
+
+    <x-sidebar/>
 @endsection

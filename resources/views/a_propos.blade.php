@@ -2,11 +2,12 @@
 
 @section('titre', 'À propos')
 
-@section('content')
 
-    @pushonce('styles')
-        @vite(['resources/css/a-propos.scss'])
-    @endpushonce
+@pushonce('styles')
+    @vite(['resources/css/a-propos.scss'])
+@endpushonce
+
+@section('content')
 
     <main id="main-content">
         <section>
@@ -24,5 +25,7 @@
             </article>
         </section>
     </main>
+
+    <x-sidebar/>
 
 @endsection

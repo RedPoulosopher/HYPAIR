@@ -55,4 +55,5 @@
     </main>
 
 
+    <x-sidebar/>
 @endsection

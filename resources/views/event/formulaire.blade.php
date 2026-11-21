@@ -1,4 +1,4 @@
-@extends('layouts.app-without-sidebar')
+@extends('layouts.app')
 
 @section('titre', 'Évènements')
 

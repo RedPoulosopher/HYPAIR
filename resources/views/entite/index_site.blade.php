@@ -46,6 +46,9 @@
         </section>
     </main>
 
+
+    <x-sidebar/>
+
     <script>
         site = window.location.pathname.split('/').pop()
         localStorage.setItem('defaut_entites_index_site', site)

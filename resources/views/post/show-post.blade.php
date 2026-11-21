@@ -100,6 +100,7 @@
         </section>
     </main>
 
+    <x-sidebar/>
 @endsection
 
 @pushonce('end-scripts')

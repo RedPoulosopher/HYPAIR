@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ConstantesSeeder::class,
             EntiteSeeder::class,
+            TelethonSeeder::class
         ]);
     }
 }

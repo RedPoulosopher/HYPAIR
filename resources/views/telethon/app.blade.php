@@ -6,7 +6,7 @@
 </head>
 <body style="margin: 0;">
 
-    <div id="app"></div>
+    <div id="app" data-blade='@json(get_defined_vars())'></div>
 
 </body>
 </html>

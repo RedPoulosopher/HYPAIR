@@ -11,13 +11,28 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TelethonController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/', function(){
+
+
+
+
+
+
+
+Route::get('/telethon/tele', function () {
+    return view('telethon.app');
+});
+
+
+Route::get('/', [TelethonController::class,'index'])->name('accueil');
+
+Route::get('/accueil', function(){
     return view('accueil');
-})->name('accueil');
+});//->name('accueil');
 
 Route::get('/home',[UserController::class,'home']);
 
@@ -129,6 +144,7 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+
 // users profile
 //====================
 Route::controller(UserController::class)->group(function () {
@@ -156,7 +172,7 @@ Route::get('/files/{disk}/{path}', function ($disk,$path) {
     return response()->file($file);
 })->where('path', '.*');
 
-// Offline page for PWA & NOTIFICATIONS 
+// Offline page for PWA & NOTIFICATIONS
 Route::get('/offline', function () {
 
     return view('pwa.offline');
@@ -289,7 +305,7 @@ $routes_AIR = function () {
         Route::controller(LogoController::class)->group(function () {
             Route::get('/entite/{entite_id}/logotype', 'modifier_logo')->name('air_modifier_logotype');
             Route::post('/entite/{entite_id}/logotype', 'maj_logo');
-            
+
             Route::get('/entite/{entite_id}/couleur', 'modifier_couleur')->name('air_modifier_couleur');
             Route::post('/entite/{entite_id}/couleur', 'maj_couleur');
         });
@@ -317,8 +333,8 @@ $routes_bureaux = function () {
     // });
 
     Route::middleware('protection.autorisation:gerer_entite')->group(function () {
-        
-        
+
+
         Route::controller(EntiteController::class)->group(function () {
             Route::get('/entites/gestion', 'index_admin');
 
@@ -341,7 +357,7 @@ $routes_bureaux = function () {
         Route::controller(LogoController::class)->group(function () {
             Route::get('/entite/{entite_id}/logotype', 'modifier_logo')->name('bdx_modifier_logotype');
             Route::post('/entite/{entite_id}/logotype', 'maj_logo');
-            
+
             Route::get('/entite/{entite_id}/couleur', 'modifier_couleur')->name('bdx_modifier_couleur');
             Route::post('/entite/{entite_id}/couleur', 'maj_couleur');
         });
@@ -389,7 +405,7 @@ $routes_entites = function () {
             ->name('entite');
 
         Route::get('/entite/gestion', 'gestion');
-        
+
         Route::middleware('protection.autorisation:gerer_entite')->group(function () {
             Route::get('/entite/informations/', 'modifier_infos');
             Route::post('/entite/informations/', 'maj_infos');
@@ -482,7 +498,7 @@ Route::prefix('{entite_uid}') //pour les bureaux
     ->middleware('existence.entite:bureau')
     ->where(['entite_uid' => '^((?!air).)*$']) #where entite_uid!='air'
     ->group($routes_bureaux);
-    
+
 //Les routes de l'air stockent le prefix dans la variable 'air_uid' (pour être sûr de ne pas écraser les routes identiques des bureaux)
 Route::prefix('{air_uid}') //pour l'AIR
     ->where(['air_uid' => 'air'])

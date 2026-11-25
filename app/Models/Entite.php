@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\EntiteType;
-use App\View\Components\entite as ComponentsEntite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;

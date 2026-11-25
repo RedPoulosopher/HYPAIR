@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('uid')->primary();
             $table->string('label');
             $table->string('value');
+            $table->string('prix');
             $table->timestamps();
         });
 
@@ -33,11 +34,8 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('user_team', function (Blueprint $table) {
-            $table->uuid('uid')->primary();
-            $table->foreignUuid('user_uid')->constrained('users', 'uid')->onDelete('cascade');
-            $table->foreignUuid('team_uid')->constrained('teams', 'uid')->onDelete('cascade');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignUuid('team_uid')->nullable()->constrained('teams', 'uid')->onDelete('cascade');
         });
     }
 
@@ -46,7 +44,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_team');
         Schema::dropIfExists('points_telethon');
         Schema::dropIfExists('teams');
         Schema::dropIfExists('item_ventes');

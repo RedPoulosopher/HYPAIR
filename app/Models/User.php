@@ -133,4 +133,16 @@ class User extends Authenticatable
     public function notificationTokens(){
         return $this->hasMany(NotificationToken::class);
     }
+
+
+
+
+    public function team(){
+        return $this->belongsTo(Team::class, 'team_uid', 'uid');
+    }
+
+    public function pointsTelethon()
+    {
+        return $this->hasMany(points_telethon::class, 'user_uid', 'uid');
+    }
 }
